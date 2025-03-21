@@ -9,6 +9,7 @@ import csv
 import numpy as np
 from tqdm import tqdm
 import pandas as pd
+import time
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -27,7 +28,7 @@ def parse_args():
     parser.add_argument(
         "--names",
         nargs="+",
-        default=["person"],
+        default=[],
         help="List of class names to set for the model"
     )
     parser.add_argument(
@@ -53,6 +54,16 @@ def parse_args():
         default=False,
         help="Whether to save annotated frames with mask or not"
     )
+    parser.add_argument(
+        "--overwrite",
+        action='store_true',
+        default=False,
+        help="Whether to overwrite existing saved data"
+    )
+    parser.add_argument("--rank_id", type=int, default=0, 
+                        help="Rank ID for distributed running.")
+    parser.add_argument("--num_parallel", type=int, default=1, 
+                        help="Number of parallel processes.")
     return parser.parse_args()
 
 def get_file_list(source):
@@ -64,9 +75,13 @@ def get_file_list(source):
         file_list = [source]  # Single file case
     return file_list
 
+def get_fourth_number(s):
+    parts = s.split("_")
+    return parts[3] if len(parts) > 3 else s
+
 # Given a file list run the model on each file and save outputs
 def predict_images(model, file_list, args, custom_file_name=True, count=0, video_id=None, frame_id=None):
-    args.output.mkdir(parents=True, exist_ok=True)
+    Path(args.output).mkdir(parents=True, exist_ok=True)
     csv_file = Path(args.output) / "bounding_box_predictions.csv"
     # If the CSV file already exists, load it into a DataFrame
     if csv_file.exists():
@@ -74,16 +89,20 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
         existing_paths = set(df['original_frame_path'])  # Assuming 'input_path' is the column name in the CSV
     else:
         existing_paths = set()
-    for input_path in file_list:
+    print("Predicting frames")
+    for input_path in tqdm(file_list):
         if video_id is None:
-            video_id = Path(input_path).parent.name
+            video_id = Path(input_path).parent.name.removesuffix('_processed')
+            # pulling unique hashed id
+            # hashed_id = get_fourth_number(full_video_id)
         if frame_id is None:
             frame_id = Path(input_path).stem
+        timestamp = "T"+time.strftime("%H:%M:%S", time.gmtime(int(frame_id)))
         file_name = f"{Path(input_path).stem}_annotated{Path(input_path).suffix}"
         if custom_file_name:
             file_name = f"{Path(input_path).parent.name}_{file_name}"
         output_path = Path(f'{args.output}/{file_name}')
-        if Path(output_path).exists() or input_path in existing_paths:
+        if not args.overwrite and (Path(output_path).exists() or input_path in existing_paths):
             frame_id = None
             video_id = None
             continue
@@ -129,22 +148,47 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
             writer = csv.writer(f)
             # original frame path should be a uid for each frame, saved frame path is either empty if this frame isn't saved or the full path
             if f.tell() == 0:  # Write header only if the file is empty
-                writer.writerow(["video_id", "frame_number", "xmin", "ymin", "xmax", "ymax", "confidence", "class_name", "masked_pixel_count", "original_frame_path", "saved_frame_path"])
+                writer.writerow(["superseded_gcp_name_feb25", "time_in_extended_iso", "xmin", "ymin", "xmax", "ymax", "confidence", "class_name", "masked_pixel_count", "frame_number", "original_frame_path", "saved_frame_path"])
+            wrote_to_csv = False
             for bbox, confidence, class_name, masked_pixel_count in zip(detections.xyxy, detections.confidence, detections["class_name"], masked_pixel_counts):
-                writer.writerow([video_id, frame_id, *bbox.tolist(), confidence, class_name, masked_pixel_count, input_path, saved_path])
+                writer.writerow([video_id, timestamp, *bbox.tolist(), confidence, class_name, masked_pixel_count, frame_id, input_path, saved_path])
+                wrote_to_csv = True
+            if not wrote_to_csv:
+                writer.writerow([video_id, timestamp, "", "", "", "", "", "", "", frame_id, input_path, saved_path])
+                wrote_to_csv = True
         frame_id = None
         video_id = None
     return count
 
+def prompt_free_model():
+    unfused_model = YOLOE("yoloe-v8l.yaml")
+    unfused_model.load("pretrain/yoloe-v8l-seg.pt")
+    unfused_model.eval()
+    unfused_model.cuda()
+    with open('tools/ram_tag_list.txt', 'r') as f:
+        names = [x.strip() for x in f.readlines()]
+    vocab = unfused_model.get_vocab(names)
+    print(vocab)
+    model = YOLOE("pretrain/yoloe-11l-seg.pt")
+    model.set_vocab(vocab, names=names)
+    model.model.model[-1].is_fused = True
+    model.model.model[-1].conf = 0.001
+    model.model.model[-1].max_det = 1000
+    return model
+
+filename = "ultralytics/cfg/datasets/lvis.yaml"
 def main():
     args = parse_args()
     if not args.output:
         base = os.getcwd()
         args.output = Path(f"{base}/yoloe_outputs")
     main_output_folder = args.output
-    model = YOLOE(args.checkpoint)
+    if len(args.names) == 0:
+        model = prompt_free_model()
+    else:
+        model = YOLOE(args.checkpoint)
+        model.set_classes(args.names, model.get_text_pe(args.names))
     model.to(args.device)
-    model.set_classes(args.names, model.get_text_pe(args.names))
     file_list = get_file_list(source=args.source)
     count = 0
     if os.path.isdir(args.source):
@@ -152,8 +196,15 @@ def main():
         # If there are subdirectories assume that this means we want to save csv files at a video level/too much data to save a single CSV
         # Also ignoring parent directory level files, in the future could switch to using os.walk 
         if subdirs:
+            number_of_subdirs = len(subdirs)
+            group_size = number_of_subdirs // args.num_parallel
+            start_idx = args.rank_id * group_size
+            end_idx = start_idx + group_size
+            if args.rank_id == args.num_parallel - 1:
+                end_idx = number_of_subdirs
+            current_group_frames = subdirs[start_idx:end_idx]
             print("Processing videos")
-            for subdir in tqdm(subdirs):
+            for subdir in tqdm(current_group_frames):
                 subdir_path = Path(args.source) / subdir
                 args.output = Path(f'{main_output_folder}/{subdir}')
                 files_in_subdir = [str(file) for file in subdir_path.iterdir() 

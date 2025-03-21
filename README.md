@@ -1,0 +1,2 @@
+# Object detection
+Code to detect, recognize and label objects across BabyView videos using various models. More information about running YOLOE can be found in the README within that subdirectory. Currently, we run models on frames that have been previously extracted from the videos at a 1fps frame rate and use a set of words pulled from the child vocabulary MCDI survey (the list can be found in `yoloe/tools`) as a list of open vocabulary detection classes.
