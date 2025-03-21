@@ -13,13 +13,13 @@ with open(config_path, 'r') as config_file:
 output_folder = config_data.get("save_folder")
 cdi_output = f"{output_folder}/yoloe/cdi"
 vedi_output = f"{output_folder}/yoloe/vedi"
-frames_path = f"{output_folder}/1000_random_frames.txt"
+frames_path = f"{output_folder}/10000_random_frames.txt"
 
 # if word list is none, using VEDI by default
 def predict_frames(frames_path, output_path, word_list=None):
     if word_list is None:
         word_list = " ".join(pd.read_csv(Path(f"{os.getcwd()}/tools/vedi_words.csv"))['object'].astype(str))
-    command = (f"python predict_text_prompt.py  --source {frames_path} --output {output_path}  --checkpoint pretrain/yoloe-v8l-seg.pt   --names {word_list}    --device cuda:0")
+    command = (f"python predict_text_prompt.py  --source {frames_path} --output {output_path}  --checkpoint pretrain/yoloe-v8l-seg.pt   --names {word_list}    --device cuda")
     print(command)
     os.system(command)
 
@@ -44,6 +44,8 @@ def predict_with_cdi_list():
 
 def predict_with_vedi_list():
     predict_frames(frames_path=frames_path,
+                   word_list=None,
                    output_path=vedi_output)
 
-predict_with_cdi_list()
+#predict_with_cdi_list()
+predict_with_vedi_list()

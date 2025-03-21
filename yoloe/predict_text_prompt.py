@@ -6,6 +6,7 @@ import supervision as sv
 from ultralytics import YOLOE
 from pathlib import Path
 import csv
+import numpy as np
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -58,13 +59,23 @@ def main():
         file_list = [args.source]  # Single file case
     else:
         file_list = []
+    # Save bounding boxes to CSV
+    csv_file = Path(args.output) / "bounding_boxes.csv"
     for input_path in file_list:
         file_name = f"{Path(input_path).parent.name}_{Path(input_path).name}"
         output_path = Path(f'{args.output}/{file_name}')
+        
+        if Path(output_path).exists():
+            continue
         image = Image.open(input_path).convert("RGB")
         results = model.predict(image, verbose=False)
-        #print(results)
         detections = sv.Detections.from_ultralytics(results[0])
+        masked_pixel_counts = np.zeros(len(detections["class_name"]), dtype=int)
+        if detections.mask is not None:            
+            for i, mask in enumerate(detections.mask):
+                # Count the number of True values in the mask
+                masked_count = np.count_nonzero(mask)
+                masked_pixel_counts[i] = masked_count
         resolution_wh = image.size
         thickness = sv.calculate_optimal_line_thickness(resolution_wh=resolution_wh)
         text_scale = sv.calculate_optimal_text_scale(resolution_wh=resolution_wh)
@@ -86,17 +97,15 @@ def main():
             text_scale=text_scale,
             smart_position=True
         ).annotate(scene=annotated_image, detections=detections, labels=labels)
-
+    
         annotated_image.save(output_path)
         print(f"Annotated image saved to: {output_path}")
-        # Save bounding boxes to CSV
-        csv_file = Path(args.output) / "bounding_boxes.csv"
         with open(csv_file, mode="a", newline="") as f:
             writer = csv.writer(f)
             if f.tell() == 0:  # Write header only if the file is empty
-                writer.writerow(["filename", "xmin", "ymin", "xmax", "ymax", "confidence", "class_name"])
-            for bbox, confidence, class_name in zip(detections.xyxy, detections.confidence, detections["class_name"]):
-                writer.writerow([file_name, *bbox.tolist(), confidence, class_name])
+                writer.writerow(["filename", "xmin", "ymin", "xmax", "ymax", "confidence", "class_name", "masked_pixel_count"])
+            for bbox, confidence, class_name, masked_pixel_count in zip(detections.xyxy, detections.confidence, detections["class_name"], masked_pixel_counts):
+                writer.writerow([file_name, *bbox.tolist(), confidence, class_name, masked_pixel_count])
     print(f"Bounding boxes saved to: {csv_file}")
 
 if __name__ == "__main__":
