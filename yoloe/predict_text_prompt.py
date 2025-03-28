@@ -86,7 +86,7 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
     # If the CSV file already exists, load it into a DataFrame
     if csv_file.exists():
         df = pd.read_csv(csv_file)
-        existing_paths = set(df['original_frame_path'])  # Assuming 'input_path' is the column name in the CSV
+        existing_paths = set(df['original_frame_path'])  # Assuming 'original_frame_path' is the column name in the CSV
     else:
         existing_paths = set()
     print("Predicting frames")
@@ -97,15 +97,24 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
             # hashed_id = get_fourth_number(full_video_id)
         if frame_id is None:
             frame_id = Path(input_path).stem
-        timestamp = "T"+time.strftime("%H:%M:%S", time.gmtime(int(frame_id)))
+        try:
+            timestamp = "T"+time.strftime("%H:%M:%S", time.gmtime(int(frame_id)))
+        except(Exception):
+            timestamp = ""
         file_name = f"{Path(input_path).stem}_annotated{Path(input_path).suffix}"
         if custom_file_name:
             file_name = f"{Path(input_path).parent.name}_{file_name}"
         output_path = Path(f'{args.output}/{file_name}')
-        if not args.overwrite and (Path(output_path).exists() or input_path in existing_paths):
-            frame_id = None
-            video_id = None
-            continue
+        if (input_path in existing_paths):
+            if args.overwrite:
+                df = pd.read_csv(csv_file)
+                df = df[df['original_frame_path'] != input_path]
+                # Save the updated DataFrame back to the CSV
+                df.to_csv(csv_file, index=False)
+            else:
+                frame_id = None
+                video_id = None
+                continue
         image = Image.open(input_path).convert("RGB")
         results = model.predict(image, verbose=False)
         detections = sv.Detections.from_ultralytics(results[0])
@@ -146,6 +155,7 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
         count = count+1
         with open(csv_file, mode="a", newline="") as f:
             writer = csv.writer(f)
+            # TODO: different types of csvs -- one for the main pipeline and one for test runs that doesn't include gcp name etc. and a new one for when we switch off of superseded gcp names
             # original frame path should be a uid for each frame, saved frame path is either empty if this frame isn't saved or the full path
             if f.tell() == 0:  # Write header only if the file is empty
                 writer.writerow(["superseded_gcp_name_feb25", "time_in_extended_iso", "xmin", "ymin", "xmax", "ymax", "confidence", "class_name", "masked_pixel_count", "frame_number", "original_frame_path", "saved_frame_path"])
@@ -160,15 +170,14 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
         video_id = None
     return count
 
-def prompt_free_model():
+def prompt_free_model(prompt_free_list='tools/ram_tag_list.txt'):
     unfused_model = YOLOE("yoloe-v8l.yaml")
     unfused_model.load("pretrain/yoloe-v8l-seg.pt")
     unfused_model.eval()
     unfused_model.cuda()
-    with open('tools/ram_tag_list.txt', 'r') as f:
+    with open(prompt_free_list, 'r') as f:
         names = [x.strip() for x in f.readlines()]
     vocab = unfused_model.get_vocab(names)
-    print(vocab)
     model = YOLOE("pretrain/yoloe-11l-seg.pt")
     model.set_vocab(vocab, names=names)
     model.model.model[-1].is_fused = True
@@ -183,13 +192,13 @@ def main():
         base = os.getcwd()
         args.output = Path(f"{base}/yoloe_outputs")
     main_output_folder = args.output
-    if len(args.names) == 0:
+    print(args.names)
+    if len(args.names) <= 1:
         model = prompt_free_model()
     else:
         model = YOLOE(args.checkpoint)
         model.set_classes(args.names, model.get_text_pe(args.names))
     model.to(args.device)
-    file_list = get_file_list(source=args.source)
     count = 0
     if os.path.isdir(args.source):
         subdirs = [d for d in os.listdir(args.source) if os.path.isdir(os.path.join(args.source, d))]
@@ -215,7 +224,7 @@ def main():
                     print(f"Processed {count} images")
         else:
             file_list = [str(Path(f"{args.source}/{file}")) for file in os.listdir(args.source)] 
-            predict_images(model, file_list, args)
+            predict_images(model, file_list, args, custom_file_name=False)
     else:
         predict_images(model, get_file_list(args.source), args)
         
