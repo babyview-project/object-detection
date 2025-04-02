@@ -26,14 +26,14 @@ save_with_mask = False
 session_name = "test"
 
 # if word list is none, using VEDI by default
-def predict_frames_command(frames_path, output_path, rank_id, num_parallel, device_id, word_list=[], overwrite=False):
+def predict_frames_command(frames_path, output_path, rank_id, num_parallel, device_id, confidence, word_list=[], overwrite=False):
     if word_list is None:
         word_list = []
     command = (f"source ~/miniconda3/bin/activate;conda activate yoloe;export CUDA_VISIBLE_DEVICES={device_id}; "
                f"python predict_text_prompt.py  --source {frames_path} --output {output_path} " 
                f"--checkpoint pretrain/yoloe-v8l-seg.pt   --names {word_list}  --save_frame_every {save_frame_every} "
                f"{'--save_with_mask' if save_with_mask else ''} --device cuda --rank_id {rank_id} --num_parallel {num_parallel} "
-               f"{'--overwrite' if overwrite else ''}")
+               f"{'--overwrite' if overwrite else ''} --confidence {confidence}")
     return command
 
 def is_tmux_session_active(session_name):
@@ -65,7 +65,8 @@ def run_parallel_predictions(word_list, full_output_path, session_name, args):
         device_id = rank_device_dict[rank_id]
         command = predict_frames_command(frames_path=args.input_frames, word_list=word_list, 
                                          output_path=full_output_path, device_id=device_id, rank_id=rank_id, 
-                                         num_parallel=args.num_parallel, overwrite=args.overwrite)
+                                         confidence=args.confidence, num_parallel=args.num_parallel, 
+                                         overwrite=args.overwrite)
         os.system(f"tmux send-keys -t {session_name}.{rank_id} '{command}' Enter")
     print(f"Started {args.num_parallel} parallel processes in tmux session {session_name}")
     print(f"Use 'tmux attach -t {session_name}' to view progress")
@@ -154,6 +155,7 @@ def main():
     parser.add_argument("--text_prompts", type=str, default="cdi", help="Which list of possible detectable words to be used")
     parser.add_argument("--input_frames", type=str, default=frames_path, help="Text file or file path with the list of frames to be processed")
     parser.add_argument("--output_path", type=str, default=f"{output_folder}/yoloe", help="Path to store outputs at")
+    parser.add_argument("--confidence", type=float, default=0.1, help="Confidence threshold for frame annotations.")
     session_name_with_random_suffix = f"yoloe_predict_{os.urandom(4).hex()}"
     session_name = session_name_with_random_suffix
     parser.add_argument(

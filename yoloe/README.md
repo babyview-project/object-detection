@@ -10,7 +10,7 @@ python predict_frames.py --input_frames 1k --output_path yoloe
 To run a demo on our example video, you can run:
 
 ```
-python predict_frames.py --input_frames examples/example_clip.mp4 --output_path predict/example_clip --overwrite
+python predict_frames.py --input_frames examples/example_clip.mp4 --output_path predict/example_clip --confidence 0.5 --overwrite
 ```
 
 To run the full pipeline on all of the sampled frames, you can run:

@@ -64,6 +64,8 @@ def parse_args():
                         help="Rank ID for distributed running.")
     parser.add_argument("--num_parallel", type=int, default=1, 
                         help="Number of parallel processes.")
+    parser.add_argument("--confidence", type=float, default=0.1, 
+                        help="Confidence threshold for frame annotations.")
     return parser.parse_args()
 
 def get_file_list(source):
@@ -129,9 +131,11 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
         resolution_wh = image.size
         thickness = sv.calculate_optimal_line_thickness(resolution_wh=resolution_wh)
         text_scale = sv.calculate_optimal_text_scale(resolution_wh=resolution_wh)
-        labels = [
+        filtered_detections = detections[detections.confidence > args.confidence]
+        # Check how many detections were filtered
+        filtered_labels = [
             f"{class_name} {confidence:.2f}"
-            for class_name, confidence in zip(detections["class_name"], detections.confidence)
+            for class_name, confidence in zip(filtered_detections["class_name"], filtered_detections.confidence)
         ]
         saved_path = ""
         if (count % args.save_frame_every == 0):
@@ -140,16 +144,16 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
                 annotated_image = sv.MaskAnnotator(
                     color_lookup=sv.ColorLookup.INDEX,
                     opacity=0.4
-                ).annotate(scene=annotated_image, detections=detections)
+                ).annotate(scene=annotated_image, detections=filtered_detections)
             annotated_image = sv.BoxAnnotator(
                 color_lookup=sv.ColorLookup.INDEX,
                 thickness=thickness
-            ).annotate(scene=annotated_image, detections=detections)
+            ).annotate(scene=annotated_image, detections=filtered_detections)
             annotated_image = sv.LabelAnnotator(
                 color_lookup=sv.ColorLookup.INDEX,
                 text_scale=text_scale,
                 smart_position=True
-            ).annotate(scene=annotated_image, detections=detections, labels=labels)
+            ).annotate(scene=annotated_image, detections=filtered_detections, labels=filtered_labels)
             annotated_image.save(output_path)
             saved_path = output_path
         count = count+1
