@@ -1,0 +1,493 @@
+Most of the code here is borrowed from https://github.com/mikabr/aoa-prediction
+
+```{r libraries}
+library(tidyverse)
+library(here)
+library(knitr)
+library(cowplot)
+library(grid)
+library(ggthemes)
+library(lmerTest)
+library(mirt)
+library(grid)
+library(viridis)
+library(broom.mixed)
+#devtools::install_github("langcog/wordbankr")
+library(wordbankr)
+library(glue)
+library(broom)
+
+source("helpers.R")
+base_size_print=10
+label_size=3
+```
+
+# 1. Import object detection data
+```{r}
+object_counts <- read_csv(here("data/overall_category_distribution.csv"))
+object_counts_cleaned <- object_counts |>
+  distinct(class_name, .keep_all=TRUE) |>
+  # filtering out more spurious classes
+  filter(class_name != "person" & class_name != "picture") |>
+  mutate(proportion_cleaned = round(10000* proportion,5),
+         log_proportion = log(proportion),
+         visual_frequency = scale(log_proportion)) |>
+  rename(object=class_name)
+```
+
+```{r}
+ggplot(object_counts_cleaned, aes(x = AoA, y = log_proportion)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  #ggpubr::stat_cor() +
+  ylab("Log (proportion of frames with object detected)")
+```
+
+
+# 2. Load existing CHILDES measures
+```{r}
+# loaded from https://github.com/mikabr/aoa-prediction
+load(here("data/coef_data/uni_joined.Rdata"))
+eng_joined <- uni_joined |> filter(language == "English (American)")
+
+
+# based on this model just going to join on any row that contains the object even if that means matching with multiple words, since that's what it looks like is being done with MLU etc.
+longer_cdi_objects <- object_counts_cleaned |>
+  select(object, visual_frequency, log_proportion) |>
+  rowwise() |>
+  mutate(matching = list(
+    eng_joined |> filter(str_starts(uni_lemma, fixed(paste0(object, " ")))) |> filter(lexical_classes == "nouns")
+  )) |>
+  unnest(matching) |>
+  select(-object) |>
+  filter(uni_lemma != "ice cream") |>
+  rename(object=uni_lemma) |>
+  filter(!is.na(language))
+
+shorter_cdi_objects <- object_counts_cleaned |>
+  select(object, visual_frequency, log_proportion)  |>
+  left_join(eng_joined, by=c("object"="uni_lemma")) |>
+  # getting rid of words that do not have a match
+  filter(!is.na(language))
+  
+eng_vars <- bind_rows(longer_cdi_objects, shorter_cdi_objects) |>
+  # re-calculating visual frequency after getting rid of all of the CDI words that don't exist in the model
+  mutate(visual_frequency = scale(log_proportion))
+```
+
+```{r}
+nrow(eng_vars |> distinct(object))
+nrow(eng_joined |> distinct(uni_lemma))
+```
+
+# 3. Straightforward AoA predictor
+```{r}
+simple_effect <- lm(AoA ~ visual_frequency, data=object_counts_cleaned)
+
+summary(simple_effect)
+```
+Formats seen, frequency, total count and babiness all show separate positive predictivity which is encouraging.
+
+# 4. Implementing Mika's code
+Pulled code below from https://github.com/mikabr/aoa-prediction -- joined AoA data and predictor data.
+
+```{r load_data}
+#load("../saved_data/uni_joined.RData")
+
+predictors <- c("frequency", "MLU", "final_frequency", "solo_frequency",
+                "num_phons", "concreteness", "valence", "arousal", "babiness", "visual_frequency")
+.alpha <- 0.05
+set.seed(42)
+```
+
+## 4a. Impute and scale data for input into models.
+```{r uni_model_data}
+model_data <- eng_vars %>%
+  select(object, all_of(predictors)) %>%
+  distinct() 
+
+pred_sources <- list(
+  c("frequency", "MLU", "final_frequency", "solo_frequency"),
+  c("valence", "arousal"),
+  c("visual_frequency"),
+  "concreteness", "babiness", "num_phons"
+)
+
+fit_predictor <- function(pred, d) {
+   if (!"object" %in% colnames(d)) stop("Missing 'object' column in data")
+  xs <- predictors[predictors != pred]
+  if (length(xs) == 0) stop(glue("No valid predictors for {pred}"))
+  print(length(xs))
+  x_str <- xs %>% paste(collapse = " + ")
+  formula_str <- glue("{pred} ~ {x_str}")
+  print(glue("Fitting model: {formula_str}"))  # Debugging
+  lm(as.formula(glue("{pred} ~ {x_str}")), data = d) %>%
+    augment(newdata = d) %>%
+    select(object, .fitted)
+}
+
+max_steps <- 10
+iterate_predictors <- function(lang_data) {
+  missing <- lang_data %>%
+    pivot_longer(names_to="predictor", values_to="value", all_of(predictors)) %>%
+    mutate(missing = is.na(value)) %>%
+    select(-value) %>%
+    pivot_wider(names_from=predictor, values_from=missing)
+  predictor_order <- lang_data %>%
+    gather(predictor, value, all_of(predictors)) %>%
+    group_by(predictor) %>%
+    summarise(num_na = sum(is.na(value))) %>%
+    filter(num_na != 0) %>%
+    arrange(num_na) %>%
+    pull(predictor)
+  imputation_data <- lang_data %>%
+   mutate(across(all_of(predictors), ~ as.numeric(Hmisc::impute(., fun = "random"))))
+
+  for (i in 0:max_steps) {
+    pred <- predictor_order[(i %% length(predictor_order)) + 1]
+    imputation_fits <- fit_predictor(pred, imputation_data)
+    imputation_data <- missing %>%
+      select(object, !!pred) %>%
+      rename(missing = !!pred) %>%
+      right_join(imputation_data) %>%
+      left_join(imputation_fits) %>%
+      mutate(across(pred, ~ if_else(is.na(.), .fitted, .))) %>%
+      select(-.fitted, -missing)
+  }
+  return(imputation_data)
+}
+
+model_data_imputed <- iterate_predictors(model_data)
+
+uni_model_data <- model_data_imputed %>%
+  mutate(across(all_of(predictors), ~ as.numeric(scale(.)))) %>%  
+  right_join(
+    eng_vars %>% 
+      select(all_of(c("measure", "object", "age", "num_true", "num_false"
+                      )))
+  ) %>%
+  group_by(measure) %>%
+  mutate(
+    unscaled_age = age, age = scale(age),
+    total = as.double(num_true + num_false), 
+    prop = num_true / total
+)
+```
+## 4b. Fitting models
+```{r}
+create_formula <- function(response = "prop", interaction_prefix = "age", predictors_list, random_effect = "(age | object)") {
+  # Construct interaction terms for each list of predictors
+  effects <- paste(interaction_prefix, predictors_list, sep = " * ")
+  
+  # Combine terms into a full formula string
+  formula_str <- glue("{response} ~ {random_effect} + {paste(effects, collapse = ' + ')}")
+  
+  # Return as a formula object
+  return(as.formula(formula_str))
+}
+
+fit_group_model <- function(group_data, group_formula, contrasts = NULL) {
+  group <- unique(group_data$group)
+  message(glue("Fitting model for {group}..."))
+    glmer(formula = group_formula,
+      data = group_data,
+      family = binomial,
+      weights = total,
+      contrasts = contrasts)
+}
+
+
+by_measure_data <- uni_model_data %>%
+  mutate(group = paste(measure)) %>%
+  select(measure, group, object, prop,
+         total, age, !!predictors) %>%
+  group_by(measure) %>%
+  nest()
+
+effects_formula <- create_formula(predictors_list = predictors)
+
+  measure_models <- by_measure_data %>%
+  mutate(model = data %>%
+           map(~fit_group_model(.x, effects_formula)))
+  measure_fits <- measure_models %>%
+  mutate(results = map(model, tidy))
+
+measure_levels <- c("understands", "produces")
+
+measure_coefs <- measure_fits %>%
+  select(measure, results) %>%
+  unnest() %>%
+  rename(std_error = std.error,
+         #z_value = z.value,
+         p_value = p.value) %>%
+  separate(term, c("term", "effect"), sep = " & ", fill = "right") %>%
+ mutate(
+   effect = if_else(grepl(":", term), "interaction with age", effect),
+    effect = if_else(is.na(effect), "main effect", effect),
+    term = if_else(grepl(":", term),
+                   sub(".*:", "", term), term),
+    effect = fct_relevel(effect, "main effect", "interaction with age"),
+    measure = factor(measure, levels = measure_levels),
+         signif = p_value < .alpha) %>%
+  group_by(measure, term, effect) %>%
+  # TODO:added in this line?
+  filter(!is.na(std_error)) %>%
+  nest()
+```
+
+## 4c. Plotting model effects
+```{r}
+predictor_effects <- measure_coefs %>%
+  filter(effect == "main effect", term %in% predictors) %>%
+  rename(predictor_effect = data) %>%
+  select(-effect)
+mean_term_coefs <- measure_coefs %>%
+  unnest(cols = c(data)) %>%
+  filter(effect == "main effect") %>%
+  group_by(term) %>%
+  summarise(mean_estimate = mean(estimate),
+            n_sig = sum(signif==TRUE),
+            n_pos = sum(estimate > 0),
+            n_neg = sum(estimate < 0)) %>%
+  arrange(desc(abs(mean_estimate)))
+
+coef_order <- mean_term_coefs %>% pull(term)
+
+display_predictors <- function(predictors) {
+  predictors %>%
+    str_replace("num", "number") %>% str_replace("phons", "phonemes") %>%
+    map_chr(label_caps) %>% str_replace("MLU", "MLU-w")
+}
+
+label_caps <- function(value) {
+  if_else(toupper(value) == value, value,
+          paste0(toupper(substr(value, 1, 1)),
+                 tolower(substr(value, 2, nchar(value))))) %>%
+    str_replace_all("_", " ")
+}
+
+plt_fixed_coefs <- measure_coefs %>%
+  unnest() %>%
+  mutate(term = term %>% factor(levels = rev(coef_order)) %>%
+           fct_relabel(display_predictors),
+         signif = ifelse(signif, "significant", "non-significant") %>%
+           fct_rev(),
+         measure = fct_recode(measure, "comprehension" = "understands",
+                              "production" = "produces")) |>
+  filter(!(term %in% c("Age", "(intercept)")))
+
+```
+
+```{r refcoefs, fig.width=7, fig.height=4.5, fig.cap="Estimates of coefficients in predicting words' developmental trajectories for English comprehension and production data. Larger coefficient values indicate a greater effect of the predictor on acquisition: positive main effects indicate that words with higher values of the predictor tend to be understood/produced by more children, while negative main effects indicate that words with lower values of the predictor tend to be understood/produced by more children; positive age interactions indicate that the predictor's effect increases with age, while negative age interactions indicate the predictor's effect decreases with age. Line ranges indicates 95\\% confidence intervals; filled in points indicate coefficients for which $p < 0.05$."}
+ggplot(plt_fixed_coefs, aes(x = estimate, y = term)) +
+  facet_grid(measure ~ effect, scales = "free",
+             labeller = as_labeller(label_caps)) +
+  geom_pointrange(aes(colour = term, shape = signif,
+                      xmin = estimate - 1.96 * std_error,
+                      xmax = estimate + 1.96 * std_error)) +
+  geom_vline(xintercept = 0, color = "grey", linetype = "dotted") +
+  scale_colour_viridis(discrete = TRUE, guide = FALSE) +
+  scale_shape_manual(values = c(19, 21), guide = FALSE) +
+  labs(y = "", x = "Coefficient estimate", title="Word developmental trajectory predictors")
+```
+```{r}
+write.csv(plt_fixed_coefs, "fixed_coefs.csv", row.names = FALSE)
+```
+This isn't exactly what I expected so I'm going to try out different models quickly by collapsing our code into helper funcs
+## 4d. Testing out different models by collapsing into functions
+```{r}
+get_model_data <- function(eng_vars=eng_vars, curr_predictors=predictors) {
+  model_data <- eng_vars %>%
+  select(object, all_of(curr_predictors)) %>%
+  distinct() 
+
+fit_predictor <- function(pred, d) {
+   if (!"object" %in% colnames(d)) stop("Missing 'object' column in data")
+  xs <-xs <- curr_predictors[curr_predictors != pred]
+  if (length(xs) == 0) stop(glue("No valid predictors for {pred}"))
+  print(length(xs))
+  x_str <- xs %>% paste(collapse = " + ")
+  formula_str <- glue("{pred} ~ {x_str}")
+  print(glue("Fitting model: {formula_str}"))  # Debugging
+  lm(as.formula(glue("{pred} ~ {x_str}")), data = d) %>%
+    augment(newdata = d) %>%
+    select(object, .fitted)
+}
+
+max_steps <- 10
+iterate_predictors <- function(lang_data) {
+  missing <- lang_data %>%
+    pivot_longer(names_to="predictor", values_to="value", all_of(curr_predictors)) %>%
+    mutate(missing = is.na(value)) %>%
+    select(-value) %>%
+    pivot_wider(names_from=predictor, values_from=missing)
+  predictor_order <- lang_data %>%
+    gather(predictor, value, all_of(curr_predictors)) %>%
+    group_by(predictor) %>%
+    summarise(num_na = sum(is.na(value))) %>%
+    filter(num_na != 0) %>%
+    arrange(num_na) %>%
+    pull(predictor)
+  imputation_data <- lang_data %>%
+   mutate(across(all_of(curr_predictors), ~ as.numeric(Hmisc::impute(., fun = "random"))))
+
+  for (i in 0:max_steps) {
+    pred <- predictor_order[(i %% length(predictor_order)) + 1]
+    imputation_fits <- fit_predictor(pred, imputation_data)
+    imputation_data <- missing %>%
+      select(object, !!pred) %>%
+      rename(missing = !!pred) %>%
+      right_join(imputation_data) %>%
+      left_join(imputation_fits) %>%
+      mutate(across(pred, ~ if_else(is.na(.), .fitted, .))) %>%
+      select(-.fitted, -missing)
+  }
+  return(imputation_data)
+}
+
+model_data_imputed <- iterate_predictors(model_data)
+
+uni_model_data <- model_data_imputed %>%
+  mutate(across(all_of(curr_predictors), ~ as.numeric(scale(.)))) %>%  
+  right_join(
+    eng_vars %>% 
+      select(all_of(c("measure", "object", "age", "num_true", "num_false"
+                      )))
+  ) %>%
+  group_by(measure) %>%
+  mutate(
+    unscaled_age = age, age = scale(age),
+    total = as.double(num_true + num_false), 
+    prop = num_true / total
+)
+return(uni_model_data)
+}
+```
+
+```{r}
+get_measure_coefs <- function(formula,model_data=uni_model_data, curr_predictors=predictors) {
+   by_measure_data <- model_data %>%
+  mutate(group = paste(measure)) %>%
+  select(measure, group, object, prop,
+         total, age, !!curr_predictors) %>%
+  group_by(measure) %>%
+  nest()
+  
+measure_models <- by_measure_data %>%
+  mutate(model = data %>%
+           map(~fit_group_model(.x, formula)))
+  measure_fits <- measure_models %>%
+  mutate(results = map(model, tidy))
+
+measure_levels <- c("understands", "produces")
+
+measure_coefs <- measure_fits %>%
+  select(measure, results) %>%
+  unnest() %>%
+  rename(std_error = std.error,
+         #z_value = z.value,
+         p_value = p.value) %>%
+  separate(term, c("term", "effect"), sep = " & ", fill = "right") %>%
+ mutate(
+   effect = if_else(grepl(":", term), "interaction with age", effect),
+    effect = if_else(is.na(effect), "main effect", effect),
+    term = if_else(grepl(":", term),
+                   sub(".*:", "", term), term),
+    effect = fct_relevel(effect, "main effect", "interaction with age"),
+    measure = factor(measure, levels = measure_levels),
+         signif = p_value < .alpha) %>%
+  group_by(measure, term, effect) %>%
+  # TODO:added in this line?
+  filter(!is.na(std_error)) %>%
+  nest()
+return(measure_coefs)
+}
+
+plot_effects_data <- function(measure_coefs, plot_title="Word development item e", curr_predictors=predictors) {
+predictor_effects <- measure_coefs %>%
+  filter(effect == "main effect", term %in% curr_predictors) %>%
+  rename(predictor_effect = data) %>%
+  select(-effect)
+mean_term_coefs <- measure_coefs %>%
+  unnest(cols = c(data)) %>%
+  filter(effect == "main effect") %>%
+  group_by(term) %>%
+  summarise(mean_estimate = mean(estimate),
+            n_sig = sum(signif==TRUE),
+            n_pos = sum(estimate > 0),
+            n_neg = sum(estimate < 0)) %>%
+  arrange(desc(abs(mean_estimate)))
+
+coef_order <- mean_term_coefs %>% pull(term)
+plt_fixed_coefs <- measure_coefs %>%
+  unnest() %>%
+  mutate(term = term %>% factor(levels = rev(coef_order)) %>%
+           fct_relabel(display_predictors),
+         signif = ifelse(signif, "significant", "non-significant") %>%
+           fct_rev(),
+         measure = fct_recode(measure, "comprehension" = "understands",
+                              "production" = "produces"))
+ggplot(plt_fixed_coefs, aes(x = estimate, y = term)) +
+  facet_grid(measure ~ effect, scales = "free",
+             labeller = as_labeller(label_caps)) +
+  geom_pointrange(aes(colour = term, shape = signif,
+                      xmin = estimate - 1.96 * std_error,
+                      xmax = estimate + 1.96 * std_error)) +
+  geom_vline(xintercept = 0, color = "grey", linetype = "dotted") +
+  scale_colour_viridis(discrete = TRUE, guide = FALSE) +
+  scale_shape_manual(values = c(19, 21), guide = FALSE) +
+  labs(y = "", x = "Coefficient estimate", title=plot_title)
+
+}
+```
+
+```{r, echo=FALSE, fig.keep='all'}
+# Main model with fixed effects
+full_model_measure_coefs <- get_measure_coefs(effects_formula) 
+plot_effects_data(full_model_measure_coefs)
+```
+
+```{r}
+non_viz_predictors <- predictors[!grepl("visual", predictors)]
+non_viz_effects_formula <- create_formula(predictors_list = non_viz_predictors)
+non_viz_model_measure_coefs <- get_measure_coefs(non_viz_effects_formula) 
+plot_effects_data(non_viz_model_measure_coefs, plot_title="Non visual frequency effects")
+```
+
+```{r}
+original_predictors = predictors[!(predictors %in% c("visual_frequency"))]
+original_model_data <- get_model_data(eng_vars=eng_joined |> rename("object"="uni_lemma"), curr_predictors=original_predictors)
+original_model_measure_coefs <- get_measure_coefs(non_viz_effects_formula, model_data=original_model_data, curr_predictors=original_predictors) 
+plot_effects_data(original_model_measure_coefs, plot_title="Original model data", curr_predictors=original_predictors)
+```
+
+
+## 5. Correlation with other predictors
+```{r}
+# Compute correlation matrix
+
+# Compute correlation matrix
+cor_matrix <- cor(model_data |> select(-object, -num_phons, -valence, -arousal), use = "pairwise.complete.obs")
+
+# Convert correlation matrix to long format
+cor_melted <- reshape::melt(cor_matrix)
+
+# Reverse order of labels
+cor_melted$X1 <- factor(cor_melted$X1, levels = rev(unique(cor_melted$X1)))
+cor_melted$X2 <- factor(cor_melted$X2, levels = rev(unique(cor_melted$X2)))
+
+# Define color mapping for axis labels
+axis_label_colors <- ifelse(grepl("visual", levels(cor_melted$X1)), "red", "black")
+
+# Plot heatmap with updated label ordering and coloring
+ggplot(cor_melted, aes(X1, X2, fill = value)) +
+  geom_tile() +
+  scale_fill_viridis(option = "mako", direction = 1) + 
+  theme_minimal() +
+  geom_text(aes(label = round(value, 2)), color = "white", size = 3) +  # Label each square
+  labs(title = "Heatmap of Predictor Correlations",
+       fill = "Correlation") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, color = axis_label_colors),
+        axis.text.y = element_text(color = axis_label_colors))
+
+```
