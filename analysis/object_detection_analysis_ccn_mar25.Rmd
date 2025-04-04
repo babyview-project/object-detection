@@ -1,0 +1,1773 @@
+---
+title: "object_detection_analysis_ccn_mar25"
+author: "Jane Yang"
+date: "2025-03-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load the libraries
+library(tidyverse)
+library(babyviewr)
+library(lubridate)
+library(ggthemes)
+library(kableExtra)
+library(here)
+library(ggrepel)
+library(ggpubr)
+library(lme4)
+library(broom.mixed)
+library(effects)
+```
+
+# Load BV metadata from airtable
+```{r}
+# Load the data
+participants <- babyviewr::get_participant_data(include_demographics = TRUE)
+recordings <- babyviewr::get_main_recording_data(include_luna = TRUE)
+```
+
+```{r}
+d <- left_join(recordings, 
+                      participants |>
+                        filter(dataset %in% c("BV-main")) |>
+                        select(-dataset), by = "subject_id") |>
+  filter(dataset == "BV-main") |>
+  group_by(subject_id) |>
+  arrange(date_time) |>
+  mutate(age = date(date_time) - date_birth_rounded, 
+         cumulative_hrs = cumsum(duration_hrs), 
+         age_mo = floor(as.numeric(age)/30.3))
+
+
+ggplot(filter(d, dataset == "BV-main"), 
+       aes(x = age/30.3, y = cumulative_hrs, col = subject_id)) + 
+  geom_point(alpha= .1) + 
+  scale_color_discrete(guide = FALSE) + 
+  theme_few() + 
+  xlab("Age (months)") + 
+  ylab("Cumulative hours of data")
+```
+
+```{r}
+age_density <- d |>
+  group_by(age_mo, dataset) |>
+  summarise(n = n(), 
+            n_participants = n_distinct(subject_id), 
+            n_hours = sum(duration_hrs))
+
+ggplot(age_density, aes(x = age_mo, y = n_hours, fill = dataset)) + 
+  geom_bar(stat = "identity") + 
+  xlab("Age (months)") + 
+  ylab("Total hours of data") + 
+  scale_fill_solarized() +
+  theme_few()
+```
+
+# Load Object Detection Data (super large file!)
+```{r}
+objects <- read_csv(here::here("frame_data/allframes_1fps.csv")) 
+# objects_joined <- inner_join(objects, d, by = c("superseded_gcp_name_feb25"))
+
+# any(recordings$superseded_gcp_name_feb25 == "00510002_2024-08-12_2_dfc73374a", na.rm=TRUE)
+
+# objects$superseded_gcp_name_feb25[!(objects$superseded_gcp_name_feb25 %in% recordings$superseded_gcp_name_feb25)]
+
+colnames(objects)
+```
+
+# Merge the object detection file with the recording data
+```{r}
+objects_joined <- inner_join(objects, d, by = c("superseded_gcp_name_feb25"))
+head(objects_joined)
+```
+```{r}
+paste("Number of frames with detections:")
+nrow(objects_joined |> distinct(frame_id, superseded_gcp_name_feb25))
+```
+# Load CDI words
+```{r}
+cdi_words <- read_csv(here::here("cdi_words.csv"))
+```
+
+# Seperate the objects_joined dataframe into animated, small, and big objects
+```{r}
+# check what categories each CDI word belongs to
+cdi_categories <- cdi_words %>%
+  select(uni_lemma, is_animated, is_small_obj, is_big_obj)
+
+# join objects_joined with cdi categories based on class_name matching uni_lemma
+objects_joined_with_categories <- objects_joined %>%
+  left_join(cdi_categories, by = c("class_name" = "uni_lemma"))
+
+# separate into categories
+animated_objects <- objects_joined_with_categories %>%
+  filter(is_animated == 1) %>%
+  select(superseded_gcp_name_feb25, frame_id, time_in_extended_iso, class_name, 
+         subject_id, age_mo, confidence)
+
+small_objects <- objects_joined_with_categories %>%
+  filter(is_small_obj == 1) %>%
+  select(superseded_gcp_name_feb25, frame_id, time_in_extended_iso, class_name, 
+         subject_id, age_mo, confidence)
+
+big_objects <- objects_joined_with_categories %>%
+  filter(is_big_obj == 1) %>%
+  select(superseded_gcp_name_feb25, frame_id, time_in_extended_iso, class_name, 
+         subject_id, age_mo, confidence)
+```
+
+```{r}
+colnames(small_objects)
+# colnames(objects_joined)
+```
+
+```{r}
+# Define the plot_top_objects function
+plot_top_objects <- function(data, category_name, threshold) {
+  # Create plot for top 10 objects
+  p <- data %>%
+    head(10) %>%
+    ggplot(aes(x = reorder(class_name, -n_occurrences), 
+               y = n_occurrences, 
+               fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = sprintf("n=%d\nconf=%.2f", 
+                                 n_occurrences, 
+                                 mean_confidence)),
+              vjust = -0.5,
+              size = 3) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    theme_few() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    labs(x = "Class Name",
+         y = "Number of Unique Frame Occurrences",
+         title = sprintf("Top 10 %s Objects (Confidence ≥ %.1f)", 
+                        category_name, 
+                        threshold),
+         fill = "Mean\nConfidence")
+  
+  # Save the plot
+  ggsave(here::here(sprintf("analysis_plots/%s_objects_top10_conf%.1f.png", 
+                           tolower(category_name), 
+                           threshold)),
+         p,
+         width = 12,
+         height = 8)
+  
+  return(p)
+}
+```
+
+## Generate summary stats and plots for each confidence threshold
+```{r}
+confidence_thresholds <- c(0.3, 0.5, 0.7)
+
+# First, ensure frame_id is included in the initial selection
+objects_joined_with_categories <- objects_joined_with_categories %>%
+  select(superseded_gcp_name_feb25, frame_id, time_in_extended_iso, class_name, subject_id, age_mo, 
+         confidence, is_animated, is_small_obj, is_big_obj)
+
+# And modify the distinct statement in our functions to use both frame_id and time_in_extended_iso
+generate_summary_stats <- function(objects_df, threshold) {
+  # First deduplicate objects within the same frame
+  objects_filtered <- objects_df %>%
+    filter(confidence >= threshold) %>%
+    # Keep only one instance of each object per frame using both identifiers
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, .keep_all = TRUE)
+  
+  # Process each category separately to reduce memory usage
+  animated <- objects_filtered %>%
+    filter(is_animated == 1) %>%
+    group_by(class_name) %>%
+    summarise(
+      n_occurrences = n(),  # Now counts unique frame occurrences
+      n_participants = n_distinct(subject_id),
+      mean_confidence = mean(confidence)
+    ) %>%
+    arrange(desc(n_occurrences))
+  
+  small <- objects_filtered %>%
+    filter(is_small_obj == 1) %>%
+    group_by(class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      n_participants = n_distinct(subject_id),
+      mean_confidence = mean(confidence)
+    ) %>%
+    arrange(desc(n_occurrences))
+  
+  big <- objects_filtered %>%
+    filter(is_big_obj == 1) %>%
+    group_by(class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      n_participants = n_distinct(subject_id),
+      mean_confidence = mean(confidence)
+    ) %>%
+    arrange(desc(n_occurrences))
+  
+  list(
+    animated = animated,
+    small = small,
+    big = big
+  )
+}
+
+# Process one threshold at a time
+for (threshold in confidence_thresholds) {
+  cat(sprintf("\n=== Processing threshold %.1f ===\n", threshold))
+  
+  stats <- generate_summary_stats(objects_joined_with_categories, threshold)
+  
+  # Plot and save results for this threshold
+  plot_top_objects(stats$animated, "Animated", threshold)
+  plot_top_objects(stats$small, "Small", threshold)
+  plot_top_objects(stats$big, "Big", threshold)
+  
+  # Print summaries
+  cat(sprintf("\n=== Results for confidence threshold %.1f ===\n", threshold))
+  
+  cat("\nAnimated Objects (top 10):\n")
+  print(head(stats$animated, 10))
+  
+  cat("\nSmall Objects (top 10):\n")
+  print(head(stats$small, 10))
+  
+  cat("\nBig Objects (top 10):\n")
+  print(head(stats$big, 10))
+  
+  # Save the statistics to files
+  write_csv(stats$animated, 
+            here::here(sprintf("analysis_plots/animated_stats_conf%.1f.csv", threshold)))
+  write_csv(stats$small, 
+            here::here(sprintf("analysis_plots/small_stats_conf%.1f.csv", threshold)))
+  write_csv(stats$big, 
+            here::here(sprintf("analysis_plots/big_stats_conf%.1f.csv", threshold)))
+  
+  # Clear some memory
+  rm(stats)
+  gc()
+}
+
+# Modified comparison plot function to read from saved files
+plot_threshold_comparison <- function(category_type) {
+  # Read data for each threshold from saved files
+  comparison_data <- do.call(rbind, lapply(confidence_thresholds, function(threshold) {
+    stats <- read_csv(here::here(sprintf("analysis_plots/%s_stats_conf%.1f.csv", 
+                                       category_type, threshold)))
+    stats$threshold <- threshold
+    stats
+  }))
+  
+  # Get top 10 objects (based on highest threshold)
+  top_objects <- comparison_data %>%
+    filter(threshold == max(threshold)) %>%
+    arrange(desc(n_occurrences)) %>%
+    head(10) %>%
+    pull(class_name)
+  
+  # Create comparison plot
+  comparison_data %>%
+    filter(class_name %in% top_objects) %>%
+    ggplot(aes(x = threshold, y = n_occurrences, color = class_name)) +
+    geom_line() +
+    geom_point() +
+    theme_few() +
+    theme(legend.position = "right") +
+    xlab("Confidence Threshold") +
+    ylab("Number of Occurrences") +
+    ggtitle(sprintf("%s Objects: Occurrences vs Confidence Threshold", 
+                    str_to_title(category_type)))
+  
+  ggsave(here::here(sprintf("analysis_plots/%s_threshold_comparison.png", 
+                           category_type)), 
+         width = 12, 
+         height = 8)
+}
+
+# Generate comparison plots
+plot_threshold_comparison("animated")
+plot_threshold_comparison("small")
+plot_threshold_comparison("big")
+```
+# Check consistency and variability across age/participant
+
+# 1. Data Preparation: Create age bins and identify valid participants
+```{r data_prep}
+# Create age bins
+objects_joined_with_categories <- objects_joined_with_categories %>%
+  mutate(age_bin = case_when(
+    age_mo >= 6 & age_mo < 12 ~ "06-12 months",
+    age_mo >= 12 & age_mo < 18 ~ "12-18 months",
+    age_mo >= 18 ~ "18-24+ months",
+    TRUE ~ "Other"
+  ))
+
+# Function to get participants with sufficient data
+get_valid_participants <- function(data, min_frames = 1000) {
+  data %>%
+    group_by(subject_id) %>%
+    summarise(frame_count = n_distinct(frame_id)) %>%
+    filter(frame_count >= min_frames) %>%
+    pull(subject_id)
+}
+
+# Get list of valid participants
+valid_participants <- get_valid_participants(objects_joined_with_categories)
+```
+
+# 2. Define function for generating participant and age-specific statistics
+```{r stats_function}
+# Modified summary stats function to handle participant and age bin grouping
+generate_participant_age_stats <- function(objects_df, threshold, participant_id, age_bin_val) {
+  objects_filtered <- objects_df %>%
+    filter(confidence >= threshold,
+           subject_id == participant_id,
+           age_bin == age_bin_val) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, .keep_all = TRUE)
+  
+  # Process each category
+  list(
+    animated = objects_filtered %>%
+      filter(is_animated == 1) %>%
+      group_by(class_name) %>%
+      summarise(
+        n_occurrences = n(),
+        mean_confidence = mean(confidence)
+      ) %>%
+      arrange(desc(n_occurrences)),
+    
+    small = objects_filtered %>%
+      filter(is_small_obj == 1) %>%
+      group_by(class_name) %>%
+      summarise(
+        n_occurrences = n(),
+        mean_confidence = mean(confidence)
+      ) %>%
+      arrange(desc(n_occurrences)),
+    
+    big = objects_filtered %>%
+      filter(is_big_obj == 1) %>%
+      group_by(class_name) %>%
+      summarise(
+        n_occurrences = n(),
+        mean_confidence = mean(confidence)
+      ) %>%
+      arrange(desc(n_occurrences))
+  )
+}
+```
+
+# 3. Define plotting function for participant-specific visualizations
+```{r plot_function}
+# Modified plotting function to include participant and age bin information
+plot_top_objects_by_participant <- function(data, category_name, threshold, participant_id, age_bin_val) {
+  if (nrow(data) == 0) {
+    return(NULL)  # Return NULL if no data for this combination
+  }
+  
+  p <- data %>%
+    head(10) %>%
+    ggplot(aes(x = reorder(class_name, -n_occurrences), 
+               y = n_occurrences, 
+               fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = sprintf("n=%d\nconf=%.2f", 
+                                 n_occurrences, 
+                                 mean_confidence)),
+              vjust = -0.5,
+              size = 3) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    theme_few() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    labs(x = "Class Name",
+         y = "Number of Unique Frame Occurrences",
+         title = sprintf("Top 10 %s Objects\nParticipant: %s, Age: %s\n(Confidence ≥ %.1f)", 
+                        category_name,
+                        participant_id,
+                        age_bin_val,
+                        threshold),
+         fill = "Mean\nConfidence")
+  
+  # Save the plot
+  ggsave(here::here(sprintf("analysis_plots/by_participant/%s_objects_top10_conf%.1f_%s_%s.png", 
+                           tolower(category_name),
+                           threshold,
+                           participant_id,
+                           gsub(" ", "_", age_bin_val))),
+         p,
+         width = 12,
+         height = 8)
+  
+  return(p)
+}
+```
+
+# 4. Generate plots for each participant, age bin, and threshold
+```{r generate_plots}
+# Create directory for participant-specific plots
+dir.create(here::here("analysis_plots/by_participant"), showWarnings = FALSE)
+
+# Process data for each participant, age bin, and threshold
+for (participant in valid_participants) {
+  cat(sprintf("\nProcessing participant: %s\n", participant))
+  
+  for (age_bin in c("06-12 months", "12-18 months", "18-24+ months")) {
+    for (threshold in confidence_thresholds) {
+      stats <- generate_participant_age_stats(objects_joined_with_categories, 
+                                           threshold, 
+                                           participant, 
+                                           age_bin)
+      
+      # Generate plots if data exists
+      if (nrow(stats$animated) > 0) {
+        plot_top_objects_by_participant(stats$animated, "Animated", threshold, participant, age_bin)
+      }
+      if (nrow(stats$small) > 0) {
+        plot_top_objects_by_participant(stats$small, "Small", threshold, participant, age_bin)
+      }
+      if (nrow(stats$big) > 0) {
+        plot_top_objects_by_participant(stats$big, "Big", threshold, participant, age_bin)
+      }
+    }
+  }
+}
+```
+
+# 5. Generate summary statistics for data availability
+```{r data_summary}
+# Generate summary of data availability
+data_availability <- objects_joined_with_categories %>%
+  group_by(subject_id, age_bin) %>%
+  summarise(
+    n_frames = n_distinct(frame_id, superseded_gcp_name_feb25),
+    n_unique_objects = n_distinct(class_name),
+    mean_confidence = mean(confidence),
+    .groups = 'drop'  # Add this to avoid grouping warning
+  ) %>%
+  filter(subject_id %in% valid_participants)
+
+# Print data availability summary
+print(data_availability)
+
+# Create a heatmap of data availability
+ggplot(data_availability, 
+       aes(x = age_bin, y = subject_id, fill = n_frames)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "steelblue") +
+  theme_few() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Data Availability by Participant and Age",
+       x = "Age Bin",
+       y = "Participant ID",
+       fill = "Number of\nFrames")
+
+ggsave(here::here("analysis_plots/by_participant/data_availability_heatmap.png"),
+       width = 10,
+       height = 8)
+```
+
+# 6. Generate combined top 10 visualization across categories
+```{r combined_top10}
+# Function to get category type(s)
+get_category_types <- function(class_name, cdi_categories) {
+  types <- cdi_categories %>%
+    filter(uni_lemma == class_name) %>%
+    select(is_animated, is_small_obj, is_big_obj)
+  
+  # If no matching row found, return "Other"
+  if (nrow(types) == 0) return("Other")
+  
+  # Take the first row (should only be one match anyway)
+  types <- types[1,]
+  
+  category_types <- c()
+  if (types$is_animated[1] == 1) category_types <- c(category_types, "Animated")
+  if (types$is_small_obj[1] == 1) category_types <- c(category_types, "Small")
+  if (types$is_big_obj[1] == 1) category_types <- c(category_types, "Big")
+  
+  if (length(category_types) == 0) return("Other")
+  paste(category_types, collapse = " & ")
+}
+
+# Get overall top 10 objects for each confidence threshold
+generate_combined_top10 <- function(threshold) {
+  # Get all objects with their counts and confidence, excluding "person"
+  all_objects <- objects_joined_with_categories %>%
+    filter(confidence >= threshold,
+           class_name != "person") %>%  # Add exclusion for "person"
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, .keep_all = TRUE) %>%
+    group_by(class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(n_occurrences)) %>%
+    head(10)
+  
+  # Add category information
+  all_objects %>%
+    mutate(
+      category_type = sapply(class_name, get_category_types, cdi_categories),
+      class_name = reorder(class_name, n_occurrences)
+    )
+}
+
+# Generate and plot for each threshold
+for (threshold in confidence_thresholds) {
+  top10_data <- generate_combined_top10(threshold) %>%
+    # Ensure proper descending order
+    arrange(desc(n_occurrences)) %>%
+    mutate(class_name = factor(class_name, levels = class_name))
+  
+  p <- ggplot(top10_data, 
+              aes(x = class_name, 
+                  y = n_occurrences, 
+                  fill = category_type)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = sprintf("n=%d\nconf=%.2f", 
+                                 n_occurrences, 
+                                 mean_confidence)),
+              vjust = -0.1,
+              size = 3) +
+    scale_fill_brewer(palette = "Set2") +
+    theme_few() +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      legend.position = "right"
+    ) +
+    labs(
+      x = "Class Name",
+      y = "Number of Unique Frame Occurrences",
+      title = sprintf("Top 10 Objects by Category Type (Confidence ≥ %.1f)", threshold),
+      fill = "Category Type"
+    )
+  
+  # Save the plot
+  ggsave(here::here(sprintf("analysis_plots/combined_top10_conf%.1f.png", threshold)),
+         p,
+         width = 14,  # Increased width to accommodate legend
+         height = 8)
+  
+  # Print summary
+  cat(sprintf("\nCategory distribution for threshold %.1f:\n", threshold))
+  print(table(top10_data$category_type))
+}
+
+# Function to get top 10 objects across all subjects first
+get_overall_top10 <- function(data, threshold) {
+  data %>%
+    filter(confidence >= threshold,
+           class_name != "person") %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, .keep_all = TRUE) %>%
+    group_by(class_name) %>%
+    summarise(
+      total_occurrences = n(),
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(total_occurrences)) %>%
+    head(10) %>%
+    pull(class_name)
+}
+
+# Create faceted plot function for age bins
+plot_top10_by_age <- function(threshold) {
+  # Get overall top 10 objects
+  top10_objects <- get_overall_top10(objects_joined_with_categories, threshold)
+  
+  # Get per-age-bin counts for these objects
+  age_counts <- objects_joined_with_categories %>%
+    filter(confidence >= threshold,
+           class_name %in% top10_objects,
+           age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, age_bin, .keep_all = TRUE) %>%
+    group_by(age_bin, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      n_participants = n_distinct(subject_id),  # Added this to track participant counts
+      .groups = 'drop'
+    ) %>%
+    # Ensure all age bins have all top 10 objects (including 0 counts)
+    complete(age_bin, class_name, 
+            fill = list(n_occurrences = 0, 
+                       mean_confidence = 0, 
+                       n_participants = 0))
+  
+  # Create the faceted plot
+  p <- ggplot(age_counts, 
+              aes(x = reorder(class_name, -n_occurrences), 
+                  y = n_occurrences,
+                  fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = sprintf("n=%d\np=%d", 
+                                 n_occurrences,
+                                 n_participants)),  # Show both counts and number of participants
+              vjust = -0.5,
+              size = 3) +
+    facet_wrap(~age_bin) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    theme_few() +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      strip.text = element_text(size = 10),
+      plot.title = element_text(size = 12)
+    ) +
+    labs(
+      x = "Class Name",
+      y = "Number of Unique Frame Occurrences",
+      title = sprintf("Top 10 Objects Across Age Groups (Confidence ≥ %.1f)", threshold),
+      subtitle = "n = number of occurrences, p = number of participants",
+      fill = "Mean\nConfidence"
+    )
+  
+  # Save the plot
+  ggsave(here::here(sprintf("analysis_plots/top10_by_age_conf%.1f.png", threshold)),
+         p,
+         width = 15,
+         height = 8)
+  
+  return(p)
+}
+
+# Generate plots for each threshold
+for (threshold in confidence_thresholds) {
+  plot_top10_by_age(threshold)
+}
+```
+
+# Proportional analysis without person and picture
+# =============================================
+```{r}
+
+# Get overall top 10 objects first (excluding person and picture)
+get_overall_top10_prop <- function(data) {
+  data %>%
+    filter(!class_name %in% c("person", "picture")) %>%  # Exclude both person and picture
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, .keep_all = TRUE) %>%
+    group_by(class_name) %>%
+    summarise(
+      total_occurrences = n(),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(total_occurrences)) %>%
+    head(10) %>%
+    pull(class_name)
+}
+
+# 1. Overall top 10 plot (proportion of total frames)
+generate_combined_top10_prop <- function() {
+  # Get total number of frames
+  total_frames <- objects_joined_with_categories %>%
+    distinct(superseded_gcp_name_feb25, frame_id) %>%
+    nrow()
+  
+  # Get all objects with their proportions
+  all_objects <- objects_joined_with_categories %>%
+    filter(!class_name %in% c("person", "picture")) %>%  # Exclude both person and picture
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, subject_id, age_bin, .keep_all = TRUE) %>%
+    group_by(class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      proportion = n()/total_frames,
+      mean_confidence = mean(confidence),
+      n_participants = n_distinct(subject_id),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(proportion))
+  
+  # Add category information
+  all_objects %>%
+    mutate(
+      category_type = sapply(class_name, get_category_types, cdi_categories),
+      class_name = reorder(class_name, proportion)
+    )
+}
+
+# 2. Plot by subject (proportion of each subject's frames)
+plot_top10_by_subject_prop <- function() {
+  # Get overall top 10 objects
+  top10_objects <- get_overall_top10_prop(objects_joined_with_categories)
+  
+  # Get total frames per subject
+  subject_totals <- objects_joined_with_categories %>%
+    distinct(superseded_gcp_name_feb25, frame_id, subject_id) %>%
+    group_by(subject_id) %>%
+    summarise(total_frames = n())
+  
+  # Get per-subject proportions for these objects
+  subject_props <- objects_joined_with_categories %>%
+    filter(class_name %in% top10_objects) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, subject_id, .keep_all = TRUE) %>%
+    group_by(subject_id, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    ) %>%
+    left_join(subject_totals, by = "subject_id") %>%
+    mutate(proportion = n_occurrences/total_frames) %>%
+    complete(subject_id, class_name, 
+             fill = list(n_occurrences = 0, 
+                        mean_confidence = 0, 
+                        proportion = 0))
+  
+  p <- ggplot(subject_props, 
+              aes(x = reorder(class_name, proportion),
+                  y = proportion,
+                  fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~subject_id) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    scale_y_continuous(labels = scales::percent) +
+    coord_flip() +
+    theme_few() +
+    theme(
+      axis.text.y = element_text(hjust = 0),
+      strip.text = element_text(size = 8),
+      plot.title = element_text(size = 12)
+    ) +
+    labs(
+      y = "Proportion of Frames",
+      x = "Category",
+      title = "Top 10 Objects Across Subjects",
+      subtitle = "Percentage of frames containing each object",
+      fill = "Mean\nConfidence"
+    )
+  
+  ggsave(here::here("analysis_plots/top10_by_subject_proportions_nolabels.png"),
+         p,
+         width = 15,
+         height = 10)
+  
+  return(p)
+}
+
+# 3. Plot by age (proportion of frames in each age bin)
+plot_top10_by_age_prop <- function() {
+  # Get overall top 10 objects
+  top10_objects <- get_overall_top10_prop(objects_joined_with_categories)
+  
+  # Get total frames per age bin
+  age_totals <- objects_joined_with_categories %>%
+    filter(age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, age_bin) %>%
+    group_by(age_bin) %>%
+    summarise(total_frames = n())
+  
+  # Get per-age-bin proportions for these objects
+  age_props <- objects_joined_with_categories %>%
+    filter(class_name %in% top10_objects,
+           age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, age_bin, .keep_all = TRUE) %>%
+    group_by(age_bin, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      n_participants = n_distinct(subject_id),
+      .groups = 'drop'
+    ) %>%
+    left_join(age_totals, by = "age_bin") %>%
+    mutate(proportion = n_occurrences/total_frames) %>%
+    complete(age_bin, class_name, 
+             fill = list(n_occurrences = 0, 
+                        mean_confidence = 0, 
+                        n_participants = 0,
+                        proportion = 0))
+  
+  p <- ggplot(age_props, 
+              aes(x = reorder(class_name, proportion),
+                  y = proportion,
+                  fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~age_bin) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    scale_y_continuous(labels = scales::percent) +
+    coord_flip() +
+    theme_few() +
+    theme(
+      axis.text.y = element_text(hjust = 0),
+      strip.text = element_text(size = 10),
+      plot.title = element_text(size = 12)
+    ) +
+    labs(
+      y = "Proportion of Frames",
+      x = "Category",
+      title = "Top 10 Objects Across Age Groups",
+      subtitle = "Percentage of frames containing each object",
+      fill = "Mean\nConfidence"
+    )
+  
+  ggsave(here::here("analysis_plots/top10_by_age_proportions_nolabels.png"),
+         p,
+         width = 15,
+         height = 8)
+  
+  return(p)
+}
+
+# Generate all three plots
+top10_data_prop <- generate_combined_top10_prop()
+
+# Overall top 10 proportional plot
+p1_prop <- ggplot(top10_data_prop, 
+            aes(x = reorder(class_name, proportion),
+                y = proportion, 
+                fill = category_type)) +
+  geom_bar(stat = "identity") +
+  scale_fill_brewer(palette = "Set2") +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  theme_few() +
+  theme(
+    axis.text.y = element_text(hjust = 0),
+    legend.position = "right"
+  ) +
+  labs(
+    y = "Proportion of Frames",
+    x = "Category",
+    title = "Top 10 Objects by Category Type",
+    subtitle = "Percentage of frames containing each object",
+    fill = "Category Type"
+  )
+
+ggsave(here::here("analysis_plots/combined_top10_proportions_nolabels.png"),
+       p1_prop,
+       width = 14,
+       height = 8)
+
+# Generate by-subject proportional plot
+p2_prop <- plot_top10_by_subject_prop()
+
+# Generate by-age proportional plot
+p3_prop <- plot_top10_by_age_prop()
+
+# Print summary
+print("Category distribution in top 10 (proportional analysis):")
+print(table(top10_data_prop$category_type))
+```
+
+# New code block for Top 50 Analysis
+# =================================
+
+```{r}
+# Get overall top 50 objects
+get_overall_top50_prop <- function(data) {
+  data %>%
+    filter(!class_name %in% c("person", "picture")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, .keep_all = TRUE) %>%
+    group_by(class_name) %>%
+    summarise(
+      total_occurrences = n(),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(total_occurrences)) %>%
+    head(50) %>%
+    pull(class_name)
+}
+
+# 1. Overall top 50 plot (proportion of total frames)
+generate_combined_top50_prop <- function() {
+  total_frames <- objects_joined_with_categories %>%
+    distinct(superseded_gcp_name_feb25, frame_id) %>%
+    nrow()
+  
+  all_objects <- objects_joined_with_categories %>%
+    filter(!class_name %in% c("person", "picture")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, .keep_all = TRUE) %>%
+    group_by(class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      proportion = n()/total_frames,
+      mean_confidence = mean(confidence),
+      n_participants = n_distinct(subject_id),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(proportion)) %>%
+    head(50)
+  
+  all_objects %>%
+    mutate(
+      category_type = sapply(class_name, get_category_types, cdi_categories),
+      class_name = reorder(class_name, proportion)
+    )
+}
+
+# 2. Plot by subject (proportion of each subject's frames)
+plot_top50_by_subject_prop <- function() {
+  # Get overall top 50 objects
+  top50_objects <- get_overall_top50_prop(objects_joined_with_categories)
+  
+  # Get total frames per subject
+  subject_totals <- objects_joined_with_categories %>%
+    distinct(superseded_gcp_name_feb25, frame_id, subject_id) %>%
+    group_by(subject_id) %>%
+    summarise(total_frames = n())
+  
+  # Get per-subject proportions for these objects
+  subject_props <- objects_joined_with_categories %>%
+    filter(class_name %in% top50_objects) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, subject_id, .keep_all = TRUE) %>%
+    group_by(subject_id, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    ) %>%
+    left_join(subject_totals, by = "subject_id") %>%
+    mutate(proportion = n_occurrences/total_frames) %>%
+    complete(subject_id, class_name, 
+             fill = list(n_occurrences = 0, 
+                        mean_confidence = 0, 
+                        proportion = 0))
+  
+  p <- ggplot(subject_props, 
+              aes(x = reorder(class_name, proportion),
+                  y = proportion,
+                  fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~subject_id) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    scale_y_continuous(labels = scales::percent) +
+    coord_flip() +
+    theme_few() +
+    theme(
+      axis.text.y = element_text(hjust = 0, size = 7),  # Decreased to 7
+      axis.text.x = element_text(size = 7),  # Decreased to 7
+      strip.text = element_text(size = 10),
+      plot.title = element_text(size = 12)
+    ) +
+    labs(
+      y = "Proportion of Frames",
+      x = "Category",
+      title = "Top 50 Objects Across Subjects",
+      subtitle = "Percentage of frames containing each object",
+      fill = "Mean\nConfidence"
+    )
+  
+  ggsave(here::here("analysis_plots/top50_by_subject_proportions_nolabels.png"),
+         p,
+         width = 22,
+         height = 25)
+  
+  return(p)
+}
+
+# 3. Plot by age (proportion of frames in each age bin)
+plot_top50_by_age_prop <- function() {
+  top50_objects <- get_overall_top50_prop(objects_joined_with_categories)
+  
+  age_totals <- objects_joined_with_categories %>%
+    filter(age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, age_bin) %>%
+    group_by(age_bin) %>%
+    summarise(total_frames = n())
+  
+  age_props <- objects_joined_with_categories %>%
+    filter(class_name %in% top50_objects,
+           age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, age_bin, .keep_all = TRUE) %>%
+    group_by(age_bin, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      n_participants = n_distinct(subject_id),
+      .groups = 'drop'
+    ) %>%
+    left_join(age_totals, by = "age_bin") %>%
+    mutate(proportion = n_occurrences/total_frames) %>%
+    complete(age_bin, class_name, 
+             fill = list(n_occurrences = 0, 
+                        mean_confidence = 0, 
+                        n_participants = 0,
+                        proportion = 0))
+  
+  p <- ggplot(age_props, 
+              aes(x = reorder(class_name, proportion),
+                  y = proportion,
+                  fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~age_bin) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    scale_y_continuous(labels = scales::percent) +
+    coord_flip() +
+    theme_few() +
+    theme(
+      axis.text.y = element_text(hjust = 0, size = 14),
+      axis.text.x = element_text(size = 12),
+      strip.text = element_text(size = 12),
+      plot.title = element_text(size = 12)
+    ) +
+    labs(
+      y = "Proportion of Frames",
+      x = "Category",
+      title = "Top 50 Objects Across Age Groups",
+      subtitle = "Percentage of frames containing each object",
+      fill = "Mean\nConfidence"
+    )
+  
+  ggsave(here::here("analysis_plots/top50_by_age_proportions_nolabels.png"),
+         p,
+         width = 17,
+         height = 20)
+  
+  return(p)
+}
+
+# Generate all three proportional plots for top 50
+top50_data_prop <- generate_combined_top50_prop()
+
+# Overall top 50 proportional plot - BIGGER labels
+p1_prop_50 <- ggplot(top50_data_prop, 
+            aes(x = reorder(class_name, proportion),
+                y = proportion, 
+                fill = category_type)) +
+  geom_bar(stat = "identity") +
+  scale_fill_brewer(palette = "Set2") +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  theme_few() +
+  theme(
+    axis.text.y = element_text(hjust = 0, size = 14),
+    axis.text.x = element_text(size = 12),
+    legend.position = "right"
+  ) +
+  labs(
+    y = "Proportion of Frames",
+    x = "Category",
+    title = "Top 50 Objects by Category Type",
+    subtitle = "Percentage of frames containing each object",
+    fill = "Category Type"
+  )
+
+ggsave(here::here("analysis_plots/combined_top50_proportions_nolabels.png"),
+       p1_prop_50,
+       width = 16,
+       height = 20)
+
+# Plot by subject - SMALLER labels
+plot_top50_by_subject_prop <- function() {
+  # Get overall top 50 objects
+  top50_objects <- get_overall_top50_prop(objects_joined_with_categories)
+  
+  # Get total frames per subject
+  subject_totals <- objects_joined_with_categories %>%
+    distinct(superseded_gcp_name_feb25, frame_id, subject_id) %>%
+    group_by(subject_id) %>%
+    summarise(total_frames = n())
+  
+  # Get per-subject proportions for these objects
+  subject_props <- objects_joined_with_categories %>%
+    filter(class_name %in% top50_objects) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, subject_id, .keep_all = TRUE) %>%
+    group_by(subject_id, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    ) %>%
+    left_join(subject_totals, by = "subject_id") %>%
+    mutate(proportion = n_occurrences/total_frames) %>%
+    complete(subject_id, class_name, 
+             fill = list(n_occurrences = 0, 
+                        mean_confidence = 0, 
+                        proportion = 0))
+  
+  p <- ggplot(subject_props, 
+              aes(x = reorder(class_name, proportion),
+                  y = proportion,
+                  fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~subject_id) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    scale_y_continuous(labels = scales::percent) +
+    coord_flip() +
+    theme_few() +
+    theme(
+      axis.text.y = element_text(hjust = 0, size = 7),  # Decreased to 7
+      axis.text.x = element_text(size = 7),  # Decreased to 7
+      strip.text = element_text(size = 10),
+      plot.title = element_text(size = 12)
+    ) +
+    labs(
+      y = "Proportion of Frames",
+      x = "Category",
+      title = "Top 50 Objects Across Subjects",
+      subtitle = "Percentage of frames containing each object",
+      fill = "Mean\nConfidence"
+    )
+  
+  ggsave(here::here("analysis_plots/top50_by_subject_proportions_nolabels.png"),
+         p,
+         width = 22,
+         height = 25)
+  
+  return(p)
+}
+
+# Plot by age - BIGGER labels
+plot_top50_by_age_prop <- function() {
+  # Get overall top 50 objects
+  top50_objects <- get_overall_top50_prop(objects_joined_with_categories)
+  
+  # Get total frames per age bin
+  age_totals <- objects_joined_with_categories %>%
+    filter(age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, age_bin) %>%
+    group_by(age_bin) %>%
+    summarise(total_frames = n())
+  
+  # Get per-age-bin proportions for these objects
+  age_props <- objects_joined_with_categories %>%
+    filter(class_name %in% top50_objects,
+           age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, age_bin, .keep_all = TRUE) %>%
+    group_by(age_bin, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      n_participants = n_distinct(subject_id),
+      .groups = 'drop'
+    ) %>%
+    left_join(age_totals, by = "age_bin") %>%
+    mutate(proportion = n_occurrences/total_frames) %>%
+    complete(age_bin, class_name, 
+             fill = list(n_occurrences = 0, 
+                        mean_confidence = 0, 
+                        n_participants = 0,
+                        proportion = 0))
+  
+  p <- ggplot(age_props, 
+              aes(x = reorder(class_name, proportion),
+                  y = proportion,
+                  fill = mean_confidence)) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~age_bin) +
+    scale_fill_gradient(low = "lightblue", high = "darkblue") +
+    scale_y_continuous(labels = scales::percent) +
+    coord_flip() +
+    theme_few() +
+    theme(
+      axis.text.y = element_text(hjust = 0, size = 14),
+      axis.text.x = element_text(size = 12),
+      strip.text = element_text(size = 12),
+      plot.title = element_text(size = 12)
+    ) +
+    labs(
+      y = "Proportion of Frames",
+      x = "Category",
+      title = "Top 50 Objects Across Age Groups",
+      subtitle = "Percentage of frames containing each object",
+      fill = "Mean\nConfidence"
+    )
+  
+  ggsave(here::here("analysis_plots/top50_by_age_proportions_nolabels.png"),
+         p,
+         width = 17,
+         height = 20)
+  
+  return(p)
+}
+
+# Generate the plots
+p2_prop_50 <- plot_top50_by_subject_prop()
+p3_prop_50 <- plot_top50_by_age_prop()
+
+# Print summary
+print("Category distribution in top 50 (proportional analysis):")
+print(table(top50_data_prop$category_type))
+```
+
+
+# Load MCDI-AOA data
+```{r}
+mcdi_aoa <- read_csv(here::here("MCDI_items_with_AoA.csv"))
+```
+# Merge the AOA column from MCDI-AOA data with objects_joined_with_categories using uni_lemma column
+```{r}
+# Merge the AOA data with our objects
+objects_joined_with_categories_aoa <- objects_joined_with_categories %>%
+  left_join(mcdi_aoa %>% select(uni_lemma, AoA), 
+            by = c("class_name" = "uni_lemma"))
+
+# Check the matching
+matching_summary <- objects_joined_with_categories_aoa %>%
+  group_by(class_name) %>%
+  summarise(
+    n_occurrences = n(),
+    has_aoa = !all(is.na(AoA)),
+    aoa_value = first(na.omit(AoA))
+  ) %>%
+  arrange(desc(n_occurrences))
+
+# Print summary of matches
+print("Objects with AoA matches:")
+print(matching_summary %>% filter(has_aoa) %>% select(class_name, n_occurrences, aoa_value))
+
+print("\nObjects without AoA matches:")
+print(matching_summary %>% filter(!has_aoa) %>% select(class_name, n_occurrences))
+```
+
+# New analysis: Comprehensive object detection with AOA
+# ==================================================
+
+```{r}
+# Get proportions by subject and age bin with specific age ranges
+get_detailed_proportions_aoa <- function(data) {
+  # First ensure age bins are correctly categorized
+  data <- data %>%
+    mutate(age_bin = case_when(
+      age_mo >= 6 & age_mo < 12 ~ "06-12 months",
+      age_mo >= 12 & age_mo < 18 ~ "12-18 months",
+      age_mo >= 18 ~ "18-24+ months",
+      TRUE ~ "Other"
+    ))
+  
+  # Get total frames per subject-age combination (only for our age bins of interest)
+  totals <- data %>%
+    filter(age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, subject_id, age_bin) %>%
+    group_by(subject_id, age_bin) %>%
+    summarise(total_frames = n(), .groups = 'drop')
+  
+  # Get proportions for all objects by subject and age
+  detailed_props <- data %>%
+    filter(!class_name %in% c("person", "picture"),
+           age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, subject_id, age_bin, .keep_all = TRUE) %>%
+    group_by(subject_id, age_bin, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    ) %>%
+    left_join(totals, by = c("subject_id", "age_bin")) %>%
+    mutate(proportion = n_occurrences/total_frames)
+  
+  return(detailed_props)
+}
+
+# Get overall proportions for all categories
+get_all_object_proportions_aoa <- function(data) {
+  # Get total number of frames
+  total_frames <- data %>%
+    distinct(superseded_gcp_name_feb25, frame_id) %>%
+    nrow()
+  
+  # Get proportions for all objects
+  all_objects <- data %>%
+    filter(!class_name %in% c("person", "picture")) %>%
+    distinct(superseded_gcp_name_feb25, frame_id, class_name, subject_id, age_bin, .keep_all = TRUE) %>%
+    group_by(class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      proportion = n()/total_frames,
+      mean_confidence = mean(confidence),
+      n_participants = n_distinct(subject_id),
+      .groups = 'drop'
+    ) %>%
+    arrange(desc(proportion))
+  
+  return(all_objects)
+}
+
+# Create comprehensive dataframe with all information
+comprehensive_data_aoa <- get_detailed_proportions_aoa(objects_joined_with_categories) %>%
+  # Add overall proportions
+  left_join(
+    get_all_object_proportions_aoa(objects_joined_with_categories) %>%
+      select(class_name, overall_proportion = proportion),
+    by = "class_name"
+  ) %>%
+  # Add AoA information
+  left_join(
+    mcdi_aoa %>% select(uni_lemma, AoA),
+    by = c("class_name" = "uni_lemma")
+  )
+
+# Look at the data distribution across age bins
+print("Data distribution across age bins:")
+print(table(comprehensive_data_aoa$age_bin))
+
+# Basic summary by age bin
+summary_by_age_aoa <- comprehensive_data_aoa %>%
+  group_by(age_bin) %>%
+  summarise(
+    n_subjects = n_distinct(subject_id),
+    n_objects = n_distinct(class_name),
+    mean_prop = mean(proportion),
+    n_with_aoa = sum(!is.na(AoA))
+  )
+
+print("\nSummary by age bin:")
+print(summary_by_age_aoa)
+
+# Save the comprehensive data
+write_csv(comprehensive_data_aoa, 
+          here::here("analysis_plots/comprehensive_object_data_with_aoa.csv"))
+```
+
+## Clean up the dataframe with AoA
+```{r}
+# Remove rows where AoA is NA
+comprehensive_data_aoa <- comprehensive_data_aoa %>%
+  filter(!is.na(AoA))
+
+# When objects have multiple AoA values, keep the smallest AoA value
+comprehensive_data_aoa <- comprehensive_data_aoa %>%
+  group_by(class_name) %>%
+  mutate(AoA = min(AoA)) %>%
+  ungroup()
+```
+
+## Plot prop. of detected objects vs. AoA by age bin (without averaging)
+```{r}
+# Plot 6-12 months
+p1 <- comprehensive_data_aoa %>%
+  filter(age_bin == "06-12 months") %>%
+  ggplot(aes(x = AoA, y = proportion)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_few() +
+  labs(x = "AoA", y = "Proportion of detected objects")
+
+# Plot 12-18 months
+p2 <- comprehensive_data_aoa %>%
+  filter(age_bin == "12-18 months") %>%
+  ggplot(aes(x = AoA, y = proportion)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_few() +
+  labs(x = "AoA", y = "Proportion of detected objects")       
+
+# Plot 18-24+ months
+p3 <- comprehensive_data_aoa %>%
+  filter(age_bin == "18-24+ months") %>%
+  ggplot(aes(x = AoA, y = proportion)) +
+  geom_point() +
+  geom_smooth(method = "lm") +  
+  theme_few() +
+  labs(x = "AoA", y = "Proportion of detected objects")
+
+# Combine the plots
+combined_plot <- cowplot::plot_grid(p1, p2, p3, ncol = 3) 
+
+# Save the combined plot
+ggsave(here::here("analysis_plots/combined_plot_prop_aoa_by_age.png"), 
+       combined_plot, 
+       width = 15, 
+       height = 5)  
+``` 
+
+## Plot prop. of detected objects vs. AoA by age bin (with averaging)
+```{r}
+# First, calculate mean proportions per object and age bin
+age_bin_summary <- comprehensive_data_aoa %>%
+  group_by(class_name, age_bin) %>%
+  summarise(
+    mean_proportion = mean(proportion),
+    AoA = first(AoA),
+    n_subjects = n_distinct(subject_id),
+    .groups = 'drop'
+  ) %>%
+  filter(!is.na(AoA))  # Only keep objects with AOA values
+
+# Create labels for:
+# - Top 5 most frequent objects per age bin
+# - Top 5 earliest and latest acquired objects
+objects_to_label <- age_bin_summary %>%
+  group_by(age_bin) %>%
+  filter(
+    rank(-mean_proportion) <= 5 |  # most frequent
+    rank(AoA) <= 5 |              # earliest acquired
+    rank(-AoA) <= 5               # latest acquired
+  )
+
+# Calculate correlations for each age bin
+correlations <- age_bin_summary %>%
+  group_by(age_bin) %>%
+  summarise(
+    r = cor(mean_proportion, AoA, method = "pearson"),
+    p = cor.test(mean_proportion, AoA)$p.value,
+    label = sprintf("r = %.2f\np = %.3f", r, p),
+    .groups = 'drop'
+  )
+
+# Detailed correlation analysis
+detailed_correlations <- age_bin_summary %>%
+  group_by(age_bin) %>%
+  summarise(
+    n_objects = n(),
+    r = cor(mean_proportion, AoA, method = "pearson"),
+    p = cor.test(mean_proportion, AoA)$p.value,
+    mean_prop = mean(mean_proportion),
+    sd_prop = sd(mean_proportion),
+    mean_AOA = mean(AoA),
+    sd_AOA = sd(AoA)
+  )
+
+# Print detailed results
+print("Detailed correlation analysis by age bin:")
+print(detailed_correlations, n = Inf)
+
+# Create scatter plots with correlation info
+ggplot(age_bin_summary, 
+       aes(x = mean_proportion, y = AoA)) +
+  geom_smooth(method = "lm", 
+             color = "blue",
+             alpha = 0.2) +
+  geom_point(alpha = 0.5) +
+  geom_label_repel(
+    data = objects_to_label,
+    aes(label = class_name),
+    size = 3,
+    box.padding = 0.5,
+    point.padding = 0.3,
+    force = 10,
+    max.overlaps = 20,
+    direction = "both"
+  ) +
+  # Add detailed correlation text
+  geom_text(
+    data = detailed_correlations,
+    aes(label = sprintf(
+      "n = %d\nr = %.3f\np = %.3e\nmean prop = %.3f\nmean AOA = %.1f",
+      n_objects, r, p, mean_prop, mean_AOA
+    )),
+    x = 0.01,
+    y = 35,
+    hjust = 0,
+    vjust = 1
+  ) +
+  facet_wrap(~age_bin, ncol = 1) +
+  theme_few() +
+  scale_x_continuous(labels = scales::percent) +
+  labs(
+    x = "Proportion of Frames",
+    y = "Age of Acquisition (months)",
+    title = "Object Detection Frequency vs Age of Acquisition by Age Group",
+    subtitle = "Labels shown for most frequent and extreme AOA objects\nBlue line shows linear fit with 95% confidence interval"
+  ) +
+  theme(
+    strip.text = element_text(size = 12),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+
+ggsave(here::here("analysis_plots/aoa_vs_proportion_by_age_labeled_with_lm_detailed.png"),
+       width = 12,
+       height = 15)
+```
+
+```{r}
+# Calculate overall mean proportions per object
+overall_summary <- comprehensive_data_aoa %>%
+  group_by(class_name) %>%
+  summarise(
+    mean_proportion = mean(proportion),
+    AoA = first(AoA),
+    n_subjects = n_distinct(subject_id),
+    .groups = 'drop'
+  ) %>%
+  filter(!is.na(AoA))  # Only keep objects with AoA values
+
+# Identify objects to label (top frequent and extreme AoA)
+objects_to_label <- overall_summary %>%
+  filter(
+    rank(-mean_proportion) <= 5 |  # most frequent
+    rank(AoA) <= 5 |              # earliest acquired
+    rank(-AoA) <= 5               # latest acquired
+  )
+
+# Create the plot
+ggplot(overall_summary, 
+       aes(x = mean_proportion, y = AoA)) +
+  geom_smooth(method = "lm", 
+             color = "blue",
+             alpha = 0.2) +
+  geom_point(alpha = 0.5) +
+  geom_label_repel(
+    data = objects_to_label,
+    aes(label = class_name),
+    size = 3,
+    box.padding = 0.5,
+    point.padding = 0.3,
+    force = 10,
+    max.overlaps = 20,
+    direction = "both"
+  ) +
+  theme_few() +
+  scale_x_continuous(labels = scales::percent) +
+  labs(
+    x = "Mean Proportion of Frames",
+    y = "Age of Acquisition (months)",
+    title = "Object Detection Frequency vs Age of Acquisition",
+    subtitle = "Labels shown for most frequent and extreme AoA objects\nBlue line shows linear fit with 95% confidence interval"
+  )
+
+# Calculate and print correlation
+cor_test <- cor.test(overall_summary$mean_proportion, overall_summary$AoA)
+print(paste("Correlation:", round(cor_test$estimate, 3)))
+print(paste("P-value:", format.pval(cor_test$p.value, digits = 3)))
+
+ggsave(here::here("analysis_plots/aoa_vs_proportion_overall_vertical.png"),
+       width = 6,
+       height = 15)
+```
+
+# Check for zero detections
+```{r}
+# Find instances of zero detections
+zero_detections <- comprehensive_data_aoa %>%
+  filter(proportion == 0) %>%
+  select(class_name, subject_id, age_bin, proportion, AoA) %>%
+  arrange(class_name, subject_id)
+
+# Summary statistics of zero detections
+zero_summary <- zero_detections %>%
+  group_by(class_name) %>%
+  summarise(
+    n_zero_instances = n(),
+    n_subjects = n_distinct(subject_id),
+    age_bins = paste(unique(age_bin), collapse = ", "),
+    AoA = first(AoA)
+  ) %>%
+  arrange(desc(n_zero_instances))
+
+# Print summaries
+print("Summary of objects with zero detections:")
+print(zero_summary, n = Inf)
+
+print("\nNumber of zero detections by age bin:")
+print(table(zero_detections$age_bin))
+
+print("\nNumber of zero detections by subject:")
+print(table(zero_detections$subject_id))
+
+# Save detailed results to a file
+write.csv(zero_detections, 
+          here::here("analysis_plots/zero_detections_details.csv"), 
+          row.names = FALSE)
+
+write.csv(zero_summary, 
+          here::here("analysis_plots/zero_detections_summary.csv"), 
+          row.names = FALSE)
+```
+
+```{r}
+# Prepare scaled data
+model_data <- comprehensive_data_aoa %>%
+  mutate(
+    proportion_scaled = scale(proportion)[,1],
+    total_frames_scaled = scale(total_frames)[,1],
+    AoA_scaled = scale(AoA)[,1],
+    age_bin = factor(age_bin, levels = c("06-12 months", "12-18 months", "18-24+ months")),
+    age_numeric = as.numeric(age_bin)
+  )
+
+# First model: proportion as outcome -- does frequency change across age? across individual subjects?
+mixed_model_1 <- lmer(
+  proportion_scaled ~ scale(age_numeric) + total_frames_scaled + 
+    (age_numeric |subject_id) + (1|class_name), 
+  data = model_data,
+  control = lmerControl(optimizer = "bobyqa")
+)
+
+```
+
+```{r}
+model_data_averaged <- model_data %>%
+  group_by(class_name, subject_id, AoA_scaled) %>%
+  summarize(mean_proportion = mean(proportion_scaled), total_frames_by_sub = sum(total_frames))
+
+# Second model: AoA as outcome, does category frequency change across age?
+mixed_model_2 <- lmer(
+  AoA_scaled ~ mean_proportion  + scale(total_frames_by_sub)[,1] + 
+    (1|subject_id) + (1|class_name), 
+  data = model_data_averaged,
+  control = lmerControl(optimizer = "bobyqa")
+)
+
+# Print summaries
+cat("\nModel 1 (Proportion as outcome):\n")
+print(summary(mixed_model_1))
+
+cat("\nModel 2 (AoA as outcome):\n")
+print(summary(mixed_model_2))
+```
+
+```{r}
+# Get confidence intervals for both models
+cat("\nConfidence Intervals for Model 1:\n")
+print(confint(mixed_model_1, method = "boot", nsim = 1000))
+
+cat("\nConfidence Intervals for Model 2:\n")
+print(confint(mixed_model_2, method = "boot", nsim = 1000))
+
+# Create effects plots for both models
+library(effects)
+par(mfrow = c(2,1))
+plot(allEffects(mixed_model_1), main = "Model 1: Effects on Proportion")
+plot(allEffects(mixed_model_2), main = "Model 2: Effects on AoA")
+
+# Back-transform estimates to original scale for both models
+coef_summary_1 <- data.frame(summary(mixed_model_1)$coefficients)
+coef_summary_1$original_scale <- coef_summary_1$Estimate * sd(model_data$proportion) + mean(model_data$proportion)
+
+coef_summary_2 <- data.frame(summary(mixed_model_2)$coefficients)
+coef_summary_2$original_scale <- coef_summary_2$Estimate * sd(model_data$AoA) + mean(model_data$AoA)
+
+cat("\nModel 1 coefficients (back-transformed):\n")
+print(coef_summary_1)
+
+cat("\nModel 2 coefficients (back-transformed):\n")
+print(coef_summary_2)
+```
+
+```{r}
+get_detailed_proportions_by_month_aoa <- function() {
+  # Calculate total frames per subject-month combination
+  frames_per_subject_month <- objects_joined_with_categories %>%
+    distinct(frame_id, subject_id, age_mo) %>%
+    group_by(subject_id, age_mo) %>%
+    summarise(
+      total_frames = n(),
+      .groups = 'drop'
+    )
+  
+  # Get object occurrences by subject and month
+  object_occurrences <- objects_joined_with_categories %>%
+    filter(!class_name %in% c("person", "picture")) %>%
+    group_by(subject_id, age_mo, class_name) %>%
+    summarise(
+      n_occurrences = n(),
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    )
+  
+  # Join with total frames and calculate proportions
+  detailed_props <- object_occurrences %>%
+    left_join(frames_per_subject_month, by = c("subject_id", "age_mo")) %>%
+    mutate(proportion = n_occurrences / total_frames)
+  
+  # Get overall proportions across all subjects and months
+  overall_props <- get_all_object_proportions_aoa()
+  
+  # Join with AoA data
+  comprehensive_data <- detailed_props %>%
+    left_join(overall_props, by = "class_name") %>%
+    left_join(
+      mcdi_aoa %>% select(uni_lemma, AoA),
+      by = c("class_name" = "uni_lemma")
+    )
+  
+  # Print summary of data distribution
+  cat("\nData distribution across months:\n")
+  print(table(comprehensive_data$age_mo))
+  
+  # Print summary by month
+  month_summary <- comprehensive_data %>%
+    group_by(age_mo) %>%
+    summarise(
+      n_subjects = n_distinct(subject_id),
+      n_objects = n_distinct(class_name),
+      mean_prop = mean(proportion),
+      n_with_aoa = sum(!is.na(AoA))
+    )
+  
+  cat("\nSummary by month:\n")
+  print(month_summary)
+  
+  # Save to CSV
+  write.csv(
+    comprehensive_data,
+    here::here("analysis_plots/comprehensive_object_data_by_month.csv"),
+    row.names = FALSE
+  )
+  
+  return(comprehensive_data)
+}
+```
+
+```{r}
+# Calculate overall proportions for each category
+overall_category_distribution <- objects_joined_with_categories %>%
+  # First get total number of frame-video-subject-age combinations
+  ungroup() %>%
+  distinct(frame_id, superseded_gcp_name_feb25, subject_id, age_mo) %>%
+  summarise(total_frame_video_subject_age_combinations = n()) %>%
+  # Then join with object counts
+  cross_join(
+    objects_joined_with_categories %>%
+      # Count unique frame-video-subject-age combinations for each object
+      # Using distinct to count each object only once per frame
+      distinct(class_name, frame_id, superseded_gcp_name_feb25, subject_id, age_mo, .keep_all = TRUE) %>%
+      group_by(class_name) %>%
+      summarise(
+        n_frame_video_subject_age_detections = n(),
+        n_unique_videos = n_distinct(superseded_gcp_name_feb25),
+        n_subjects = n_distinct(subject_id),
+        n_ages = n_distinct(age_mo),
+        mean_confidence = mean(confidence)  # moved confidence calculation here
+      )
+  ) %>%
+  # Calculate proportion
+  mutate(
+    proportion = n_frame_video_subject_age_detections / total_frame_video_subject_age_combinations
+  ) %>%
+  # Join with AoA data
+  left_join(
+    mcdi_aoa %>% select(uni_lemma, AoA),
+    by = c("class_name" = "uni_lemma")
+  ) %>%
+  # Select and arrange columns in desired order
+  select(
+    class_name,
+    n_frame_video_subject_age_detections,   # Number of frame-video-subject-age combinations
+    n_unique_videos,                        # Number of unique videos
+    total_frame_video_subject_age_combinations,  # Total frame-video-subject-age combinations
+    proportion,                             # Proportion of frame-video-subject-age combinations
+    n_subjects,                             # Number of subjects
+    n_ages,                                 # Number of unique ages
+    mean_confidence,
+    AoA
+  ) %>%
+  # Arrange by proportion in descending order
+  arrange(desc(proportion))
+
+# Print summary
+print("Top 20 most frequently detected objects:")
+print(
+  overall_category_distribution %>%
+    select(class_name, n_frame_video_subject_age_detections,
+           n_unique_videos, total_frame_video_subject_age_combinations, 
+           proportion, n_subjects, n_ages, AoA) %>%
+    head(20)
+)
+
+# Save to CSV
+write.csv(
+  overall_category_distribution,
+  here::here("analysis_plots/overall_category_distribution.csv"),
+  row.names = FALSE
+)
+
+# Diagnostic counts
+cat("\nDiagnostic Counts:\n")
+cat("------------------\n")
+diagnostics <- objects_joined_with_categories %>%
+  summarise(
+    total_frames = n_distinct(frame_id),
+    total_videos = n_distinct(superseded_gcp_name_feb25),
+    total_subjects = n_distinct(subject_id),
+    total_ages = n_distinct(age_mo)
+  )
+print(diagnostics)
+```

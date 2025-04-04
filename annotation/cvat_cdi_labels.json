@@ -1,0 +1,1477 @@
+[
+  {
+    "name": "airplane",
+    "color": "#be48f2",
+    "attributes": []
+  },
+  {
+    "name": "alligator",
+    "color": "#58f248",
+    "attributes": []
+  },
+  {
+    "name": "animal",
+    "color": "#4878f2",
+    "attributes": []
+  },
+  {
+    "name": "ankle",
+    "color": "#c4f248",
+    "attributes": []
+  },
+  {
+    "name": "ant",
+    "color": "#f2484e",
+    "attributes": []
+  },
+  {
+    "name": "apple",
+    "color": "#f2df48",
+    "attributes": []
+  },
+  {
+    "name": "applesauce",
+    "color": "#4880f2",
+    "attributes": []
+  },
+  {
+    "name": "arm",
+    "color": "#f248f0",
+    "attributes": []
+  },
+  {
+    "name": "ball",
+    "color": "#f25248",
+    "attributes": []
+  },
+  {
+    "name": "balloon",
+    "color": "#48c8f2",
+    "attributes": []
+  },
+  {
+    "name": "banana",
+    "color": "#b948f2",
+    "attributes": []
+  },
+  {
+    "name": "basement",
+    "color": "#f28648",
+    "attributes": []
+  },
+  {
+    "name": "basket",
+    "color": "#d048f2",
+    "attributes": []
+  },
+  {
+    "name": "bat",
+    "color": "#f248a2",
+    "attributes": []
+  },
+  {
+    "name": "bathroom",
+    "color": "#4849f2",
+    "attributes": []
+  },
+  {
+    "name": "bathtub",
+    "color": "#48f2b7",
+    "attributes": []
+  },
+  {
+    "name": "beads",
+    "color": "#6748f2",
+    "attributes": []
+  },
+  {
+    "name": "beans",
+    "color": "#68f248",
+    "attributes": []
+  },
+  {
+    "name": "bear",
+    "color": "#488af2",
+    "attributes": []
+  },
+  {
+    "name": "bed",
+    "color": "#ba48f2",
+    "attributes": []
+  },
+  {
+    "name": "bedroom",
+    "color": "#f27b48",
+    "attributes": []
+  },
+  {
+    "name": "bee",
+    "color": "#a9f248",
+    "attributes": []
+  },
+  {
+    "name": "belt",
+    "color": "#48c6f2",
+    "attributes": []
+  },
+  {
+    "name": "bench",
+    "color": "#48f289",
+    "attributes": []
+  },
+  {
+    "name": "bib",
+    "color": "#48a0f2",
+    "attributes": []
+  },
+  {
+    "name": "bicycle",
+    "color": "#489bf2",
+    "attributes": []
+  },
+  {
+    "name": "bird",
+    "color": "#b3f248",
+    "attributes": []
+  },
+  {
+    "name": "blanket",
+    "color": "#9cf248",
+    "attributes": []
+  },
+  {
+    "name": "blocks",
+    "color": "#7d48f2",
+    "attributes": []
+  },
+  {
+    "name": "boat",
+    "color": "#f2d648",
+    "attributes": []
+  },
+  {
+    "name": "book",
+    "color": "#48f28c",
+    "attributes": []
+  },
+  {
+    "name": "boots",
+    "color": "#f2a648",
+    "attributes": []
+  },
+  {
+    "name": "bottle",
+    "color": "#485ff2",
+    "attributes": []
+  },
+  {
+    "name": "bowl",
+    "color": "#c348f2",
+    "attributes": []
+  },
+  {
+    "name": "box",
+    "color": "#f248cf",
+    "attributes": []
+  },
+  {
+    "name": "bread",
+    "color": "#5bf248",
+    "attributes": []
+  },
+  {
+    "name": "broom",
+    "color": "#9b48f2",
+    "attributes": []
+  },
+  {
+    "name": "brush",
+    "color": "#f2485c",
+    "attributes": []
+  },
+  {
+    "name": "bubbles",
+    "color": "#48e1f2",
+    "attributes": []
+  },
+  {
+    "name": "bucket",
+    "color": "#48f26e",
+    "attributes": []
+  },
+  {
+    "name": "bug",
+    "color": "#8048f2",
+    "attributes": []
+  },
+  {
+    "name": "bunny",
+    "color": "#f248ed",
+    "attributes": []
+  },
+  {
+    "name": "bus",
+    "color": "#48f29d",
+    "attributes": []
+  },
+  {
+    "name": "butt",
+    "color": "#ee48f2",
+    "attributes": []
+  },
+  {
+    "name": "butter",
+    "color": "#48f2ac",
+    "attributes": []
+  },
+  {
+    "name": "butterfly",
+    "color": "#f248cd",
+    "attributes": []
+  },
+  {
+    "name": "button",
+    "color": "#f24848",
+    "attributes": []
+  },
+  {
+    "name": "cake",
+    "color": "#48f294",
+    "attributes": []
+  },
+  {
+    "name": "camera",
+    "color": "#488ff2",
+    "attributes": []
+  },
+  {
+    "name": "can",
+    "color": "#f28348",
+    "attributes": []
+  },
+  {
+    "name": "candy",
+    "color": "#f248dd",
+    "attributes": []
+  },
+  {
+    "name": "car",
+    "color": "#9548f2",
+    "attributes": []
+  },
+  {
+    "name": "carrot",
+    "color": "#48f29f",
+    "attributes": []
+  },
+  {
+    "name": "cat",
+    "color": "#f248ba",
+    "attributes": []
+  },
+  {
+    "name": "cereal",
+    "color": "#9748f2",
+    "attributes": []
+  },
+  {
+    "name": "chair",
+    "color": "#48f2e5",
+    "attributes": []
+  },
+  {
+    "name": "chalk",
+    "color": "#f248c5",
+    "attributes": []
+  },
+  {
+    "name": "cheek",
+    "color": "#f26848",
+    "attributes": []
+  },
+  {
+    "name": "cheerios",
+    "color": "#f2d448",
+    "attributes": []
+  },
+  {
+    "name": "cheese",
+    "color": "#8d48f2",
+    "attributes": []
+  },
+  {
+    "name": "chicken",
+    "color": "#53f248",
+    "attributes": []
+  },
+  {
+    "name": "chin",
+    "color": "#f2c448",
+    "attributes": []
+  },
+  {
+    "name": "chips",
+    "color": "#48f25c",
+    "attributes": []
+  },
+  {
+    "name": "chocolate",
+    "color": "#f2c748",
+    "attributes": []
+  },
+  {
+    "name": "clock",
+    "color": "#48b2f2",
+    "attributes": []
+  },
+  {
+    "name": "closet",
+    "color": "#f24859",
+    "attributes": []
+  },
+  {
+    "name": "cloud",
+    "color": "#4885f2",
+    "attributes": []
+  },
+  {
+    "name": "coat",
+    "color": "#d6f248",
+    "attributes": []
+  },
+  {
+    "name": "coffee",
+    "color": "#f2b148",
+    "attributes": []
+  },
+  {
+    "name": "coke",
+    "color": "#48f2ca",
+    "attributes": []
+  },
+  {
+    "name": "comb",
+    "color": "#48a8f2",
+    "attributes": []
+  },
+  {
+    "name": "cookie",
+    "color": "#f24a48",
+    "attributes": []
+  },
+  {
+    "name": "corn",
+    "color": "#eff248",
+    "attributes": []
+  },
+  {
+    "name": "couch",
+    "color": "#f25b48",
+    "attributes": []
+  },
+  {
+    "name": "cow",
+    "color": "#c648f2",
+    "attributes": []
+  },
+  {
+    "name": "cracker",
+    "color": "#f24889",
+    "attributes": []
+  },
+  {
+    "name": "crayon",
+    "color": "#486af2",
+    "attributes": []
+  },
+  {
+    "name": "crib",
+    "color": "#8548f2",
+    "attributes": []
+  },
+  {
+    "name": "cup",
+    "color": "#88f248",
+    "attributes": []
+  },
+  {
+    "name": "deer",
+    "color": "#4875f2",
+    "attributes": []
+  },
+  {
+    "name": "diaper",
+    "color": "#5548f2",
+    "attributes": []
+  },
+  {
+    "name": "dish",
+    "color": "#48f264",
+    "attributes": []
+  },
+  {
+    "name": "dog",
+    "color": "#ecf248",
+    "attributes": []
+  },
+  {
+    "name": "doll",
+    "color": "#f248e3",
+    "attributes": []
+  },
+  {
+    "name": "donkey",
+    "color": "#9248f2",
+    "attributes": []
+  },
+  {
+    "name": "door",
+    "color": "#f24873",
+    "attributes": []
+  },
+  {
+    "name": "drawer",
+    "color": "#4c48f2",
+    "attributes": []
+  },
+  {
+    "name": "dress",
+    "color": "#f248db",
+    "attributes": []
+  },
+  {
+    "name": "drink",
+    "color": "#48f259",
+    "attributes": []
+  },
+  {
+    "name": "dryer",
+    "color": "#f24d48",
+    "attributes": []
+  },
+  {
+    "name": "duck",
+    "color": "#48f2ed",
+    "attributes": []
+  },
+  {
+    "name": "ear",
+    "color": "#48f2b4",
+    "attributes": []
+  },
+  {
+    "name": "egg",
+    "color": "#f27948",
+    "attributes": []
+  },
+  {
+    "name": "elephant",
+    "color": "#f29e48",
+    "attributes": []
+  },
+  {
+    "name": "eye",
+    "color": "#f27e48",
+    "attributes": []
+  },
+  {
+    "name": "face",
+    "color": "#48f29a",
+    "attributes": []
+  },
+  {
+    "name": "finger",
+    "color": "#f24854",
+    "attributes": []
+  },
+  {
+    "name": "firetruck",
+    "color": "#a6f248",
+    "attributes": []
+  },
+  {
+    "name": "fish",
+    "color": "#4882f2",
+    "attributes": []
+  },
+  {
+    "name": "flag",
+    "color": "#48f2d7",
+    "attributes": []
+  },
+  {
+    "name": "flower",
+    "color": "#6248f2",
+    "attributes": []
+  },
+  {
+    "name": "food",
+    "color": "#e648f2",
+    "attributes": []
+  },
+  {
+    "name": "foot",
+    "color": "#488df2",
+    "attributes": []
+  },
+  {
+    "name": "fork",
+    "color": "#f24850",
+    "attributes": []
+  },
+  {
+    "name": "frog",
+    "color": "#f24895",
+    "attributes": []
+  },
+  {
+    "name": "game",
+    "color": "#f27548",
+    "attributes": []
+  },
+  {
+    "name": "garage",
+    "color": "#abf248",
+    "attributes": []
+  },
+  {
+    "name": "garden",
+    "color": "#daf248",
+    "attributes": []
+  },
+  {
+    "name": "giraffe",
+    "color": "#48f24b",
+    "attributes": []
+  },
+  {
+    "name": "glass",
+    "color": "#48f276",
+    "attributes": []
+  },
+  {
+    "name": "glasses",
+    "color": "#48f2c5",
+    "attributes": []
+  },
+  {
+    "name": "glove",
+    "color": "#48f2e3",
+    "attributes": []
+  },
+  {
+    "name": "glue",
+    "color": "#48f2d2",
+    "attributes": []
+  },
+  {
+    "name": "goose",
+    "color": "#d848f2",
+    "attributes": []
+  },
+  {
+    "name": "grapes",
+    "color": "#f26048",
+    "attributes": []
+  },
+  {
+    "name": "grass",
+    "color": "#48cbf2",
+    "attributes": []
+  },
+  {
+    "name": "gum",
+    "color": "#f24877",
+    "attributes": []
+  },
+  {
+    "name": "hair",
+    "color": "#e948f2",
+    "attributes": []
+  },
+  {
+    "name": "hamburger",
+    "color": "#f24884",
+    "attributes": []
+  },
+  {
+    "name": "hammer",
+    "color": "#8248f2",
+    "attributes": []
+  },
+  {
+    "name": "hand",
+    "color": "#f28e48",
+    "attributes": []
+  },
+  {
+    "name": "hat",
+    "color": "#4ff248",
+    "attributes": []
+  },
+  {
+    "name": "head",
+    "color": "#f24897",
+    "attributes": []
+  },
+  {
+    "name": "helicopter",
+    "color": "#48adf2",
+    "attributes": []
+  },
+  {
+    "name": "hen",
+    "color": "#f29848",
+    "attributes": []
+  },
+  {
+    "name": "horse",
+    "color": "#5148f2",
+    "attributes": []
+  },
+  {
+    "name": "hose",
+    "color": "#48a3f2",
+    "attributes": []
+  },
+  {
+    "name": "ice",
+    "color": "#4898f2",
+    "attributes": []
+  },
+  {
+    "name": "jacket",
+    "color": "#48f2a2",
+    "attributes": []
+  },
+  {
+    "name": "jar",
+    "color": "#f2b348",
+    "attributes": []
+  },
+  {
+    "name": "jeans",
+    "color": "#f2a448",
+    "attributes": []
+  },
+  {
+    "name": "jello",
+    "color": "#d1f248",
+    "attributes": []
+  },
+  {
+    "name": "jelly",
+    "color": "#b548f2",
+    "attributes": []
+  },
+  {
+    "name": "juice",
+    "color": "#f2487c",
+    "attributes": []
+  },
+  {
+    "name": "key",
+    "color": "#48bef2",
+    "attributes": []
+  },
+  {
+    "name": "kitchen",
+    "color": "#f2ea48",
+    "attributes": []
+  },
+  {
+    "name": "kitty",
+    "color": "#7ef248",
+    "attributes": []
+  },
+  {
+    "name": "knee",
+    "color": "#6f48f2",
+    "attributes": []
+  },
+  {
+    "name": "knife",
+    "color": "#f2488c",
+    "attributes": []
+  },
+  {
+    "name": "ladder",
+    "color": "#f24866",
+    "attributes": []
+  },
+  {
+    "name": "lamb",
+    "color": "#486cf2",
+    "attributes": []
+  },
+  {
+    "name": "lamp",
+    "color": "#4892f2",
+    "attributes": []
+  },
+  {
+    "name": "leg",
+    "color": "#f29048",
+    "attributes": []
+  },
+  {
+    "name": "light",
+    "color": "#f148f2",
+    "attributes": []
+  },
+  {
+    "name": "lion",
+    "color": "#76f248",
+    "attributes": []
+  },
+  {
+    "name": "lip",
+    "color": "#a048f2",
+    "attributes": []
+  },
+  {
+    "name": "lollipop",
+    "color": "#48eef2",
+    "attributes": []
+  },
+  {
+    "name": "meat",
+    "color": "#4852f2",
+    "attributes": []
+  },
+  {
+    "name": "medicine",
+    "color": "#63f248",
+    "attributes": []
+  },
+  {
+    "name": "melon",
+    "color": "#48f266",
+    "attributes": []
+  },
+  {
+    "name": "milk",
+    "color": "#7bf248",
+    "attributes": []
+  },
+  {
+    "name": "mitten",
+    "color": "#f26b48",
+    "attributes": []
+  },
+  {
+    "name": "money",
+    "color": "#48dcf2",
+    "attributes": []
+  },
+  {
+    "name": "monkey",
+    "color": "#4df248",
+    "attributes": []
+  },
+  {
+    "name": "moon",
+    "color": "#a848f2",
+    "attributes": []
+  },
+  {
+    "name": "moose",
+    "color": "#48f27c",
+    "attributes": []
+  },
+  {
+    "name": "mop",
+    "color": "#65f248",
+    "attributes": []
+  },
+  {
+    "name": "motorcycle",
+    "color": "#48f2f0",
+    "attributes": []
+  },
+  {
+    "name": "mouse",
+    "color": "#cb48f2",
+    "attributes": []
+  },
+  {
+    "name": "mouth",
+    "color": "#48f2a7",
+    "attributes": []
+  },
+  {
+    "name": "muffin",
+    "color": "#48f2cf",
+    "attributes": []
+  },
+  {
+    "name": "nail",
+    "color": "#f248b8",
+    "attributes": []
+  },
+  {
+    "name": "napkin",
+    "color": "#ccf248",
+    "attributes": []
+  },
+  {
+    "name": "necklace",
+    "color": "#f2489f",
+    "attributes": []
+  },
+  {
+    "name": "nose",
+    "color": "#f25848",
+    "attributes": []
+  },
+  {
+    "name": "nut",
+    "color": "#f2486e",
+    "attributes": []
+  },
+  {
+    "name": "orange",
+    "color": "#6df248",
+    "attributes": []
+  },
+  {
+    "name": "oven",
+    "color": "#48f2d5",
+    "attributes": []
+  },
+  {
+    "name": "owie",
+    "color": "#485af2",
+    "attributes": []
+  },
+  {
+    "name": "owl",
+    "color": "#48a5f2",
+    "attributes": []
+  },
+  {
+    "name": "pajamas",
+    "color": "#f29348",
+    "attributes": []
+  },
+  {
+    "name": "pancake",
+    "color": "#5f48f2",
+    "attributes": []
+  },
+  {
+    "name": "pants",
+    "color": "#f2487f",
+    "attributes": []
+  },
+  {
+    "name": "paper",
+    "color": "#48f2c0",
+    "attributes": []
+  },
+  {
+    "name": "pasta",
+    "color": "#f2a148",
+    "attributes": []
+  },
+  {
+    "name": "pastry",
+    "color": "#aef248",
+    "attributes": []
+  },
+  {
+    "name": "peas",
+    "color": "#c1f248",
+    "attributes": []
+  },
+  {
+    "name": "pen",
+    "color": "#60f248",
+    "attributes": []
+  },
+  {
+    "name": "pencil",
+    "color": "#484cf2",
+    "attributes": []
+  },
+  {
+    "name": "penguin",
+    "color": "#86f248",
+    "attributes": []
+  },
+  {
+    "name": "penis",
+    "color": "#f2c948",
+    "attributes": []
+  },
+  {
+    "name": "penny",
+    "color": "#f2e248",
+    "attributes": []
+  },
+  {
+    "name": "person",
+    "color": "#4855f2",
+    "attributes": []
+  },
+  {
+    "name": "pickle",
+    "color": "#f248d2",
+    "attributes": []
+  },
+  {
+    "name": "picture",
+    "color": "#48f261",
+    "attributes": []
+  },
+  {
+    "name": "pig",
+    "color": "#48f2e8",
+    "attributes": []
+  },
+  {
+    "name": "pillow",
+    "color": "#48f2c2",
+    "attributes": []
+  },
+  {
+    "name": "pizza",
+    "color": "#8bf248",
+    "attributes": []
+  },
+  {
+    "name": "plant",
+    "color": "#ad48f2",
+    "attributes": []
+  },
+  {
+    "name": "plate",
+    "color": "#f26d48",
+    "attributes": []
+  },
+  {
+    "name": "pony",
+    "color": "#5a48f2",
+    "attributes": []
+  },
+  {
+    "name": "pool",
+    "color": "#f248e8",
+    "attributes": []
+  },
+  {
+    "name": "popcorn",
+    "color": "#f2cc48",
+    "attributes": []
+  },
+  {
+    "name": "popsicle",
+    "color": "#b7f248",
+    "attributes": []
+  },
+  {
+    "name": "porch",
+    "color": "#dc48f2",
+    "attributes": []
+  },
+  {
+    "name": "potato",
+    "color": "#48f2aa",
+    "attributes": []
+  },
+  {
+    "name": "potty",
+    "color": "#f24869",
+    "attributes": []
+  },
+  {
+    "name": "present",
+    "color": "#e148f2",
+    "attributes": []
+  },
+  {
+    "name": "pretzel",
+    "color": "#79f248",
+    "attributes": []
+  },
+  {
+    "name": "pudding",
+    "color": "#7848f2",
+    "attributes": []
+  },
+  {
+    "name": "pumpkin",
+    "color": "#48f284",
+    "attributes": []
+  },
+  {
+    "name": "puppy",
+    "color": "#48f2af",
+    "attributes": []
+  },
+  {
+    "name": "purse",
+    "color": "#b048f2",
+    "attributes": []
+  },
+  {
+    "name": "puzzle",
+    "color": "#f28b48",
+    "attributes": []
+  },
+  {
+    "name": "radio",
+    "color": "#487df2",
+    "attributes": []
+  },
+  {
+    "name": "rain",
+    "color": "#4857f2",
+    "attributes": []
+  },
+  {
+    "name": "raisin",
+    "color": "#de48f2",
+    "attributes": []
+  },
+  {
+    "name": "refrigerator",
+    "color": "#48f24e",
+    "attributes": []
+  },
+  {
+    "name": "rock",
+    "color": "#f248c2",
+    "attributes": []
+  },
+  {
+    "name": "roof",
+    "color": "#f2b648",
+    "attributes": []
+  },
+  {
+    "name": "room",
+    "color": "#48f27f",
+    "attributes": []
+  },
+  {
+    "name": "rooster",
+    "color": "#48def2",
+    "attributes": []
+  },
+  {
+    "name": "salt",
+    "color": "#486ff2",
+    "attributes": []
+  },
+  {
+    "name": "sandbox",
+    "color": "#f248aa",
+    "attributes": []
+  },
+  {
+    "name": "sandwich",
+    "color": "#48ebf2",
+    "attributes": []
+  },
+  {
+    "name": "sauce",
+    "color": "#48f2e0",
+    "attributes": []
+  },
+  {
+    "name": "scarf",
+    "color": "#8a48f2",
+    "attributes": []
+  },
+  {
+    "name": "scissors",
+    "color": "#a348f2",
+    "attributes": []
+  },
+  {
+    "name": "sheep",
+    "color": "#48f2cd",
+    "attributes": []
+  },
+  {
+    "name": "shirt",
+    "color": "#48bbf2",
+    "attributes": []
+  },
+  {
+    "name": "shoe",
+    "color": "#48f271",
+    "attributes": []
+  },
+  {
+    "name": "shorts",
+    "color": "#f248af",
+    "attributes": []
+  },
+  {
+    "name": "shoulder",
+    "color": "#48d3f2",
+    "attributes": []
+  },
+  {
+    "name": "shovel",
+    "color": "#f248ac",
+    "attributes": []
+  },
+  {
+    "name": "shower",
+    "color": "#f248d8",
+    "attributes": []
+  },
+  {
+    "name": "sidewalk",
+    "color": "#bcf248",
+    "attributes": []
+  },
+  {
+    "name": "sink",
+    "color": "#a548f2",
+    "attributes": []
+  },
+  {
+    "name": "sky",
+    "color": "#e2f248",
+    "attributes": []
+  },
+  {
+    "name": "sled",
+    "color": "#f248a7",
+    "attributes": []
+  },
+  {
+    "name": "slide",
+    "color": "#70f248",
+    "attributes": []
+  },
+  {
+    "name": "slipper",
+    "color": "#48f269",
+    "attributes": []
+  },
+  {
+    "name": "sneaker",
+    "color": "#bff248",
+    "attributes": []
+  },
+  {
+    "name": "snow",
+    "color": "#e4f248",
+    "attributes": []
+  },
+  {
+    "name": "snowman",
+    "color": "#f248b4",
+    "attributes": []
+  },
+  {
+    "name": "snowsuit",
+    "color": "#7448f2",
+    "attributes": []
+  },
+  {
+    "name": "soap",
+    "color": "#f25648",
+    "attributes": []
+  },
+  {
+    "name": "sock",
+    "color": "#48f250",
+    "attributes": []
+  },
+  {
+    "name": "soda",
+    "color": "#f24872",
+    "attributes": []
+  },
+  {
+    "name": "soup",
+    "color": "#83f248",
+    "attributes": []
+  },
+  {
+    "name": "spoon",
+    "color": "#48b6f2",
+    "attributes": []
+  },
+  {
+    "name": "sprinkler",
+    "color": "#48f2bd",
+    "attributes": []
+  },
+  {
+    "name": "squirrel",
+    "color": "#f248bd",
+    "attributes": []
+  },
+  {
+    "name": "stairs",
+    "color": "#48f273",
+    "attributes": []
+  },
+  {
+    "name": "star",
+    "color": "#6c48f2",
+    "attributes": []
+  },
+  {
+    "name": "stick",
+    "color": "#4af248",
+    "attributes": []
+  },
+  {
+    "name": "stone",
+    "color": "#f2e748",
+    "attributes": []
+  },
+  {
+    "name": "story",
+    "color": "#f24881",
+    "attributes": []
+  },
+  {
+    "name": "stove",
+    "color": "#4862f2",
+    "attributes": []
+  },
+  {
+    "name": "strawberry",
+    "color": "#c9f248",
+    "attributes": []
+  },
+  {
+    "name": "street",
+    "color": "#d348f2",
+    "attributes": []
+  },
+  {
+    "name": "stroller",
+    "color": "#f2ec48",
+    "attributes": []
+  },
+  {
+    "name": "sun",
+    "color": "#f24891",
+    "attributes": []
+  },
+  {
+    "name": "sweater",
+    "color": "#48d9f2",
+    "attributes": []
+  },
+  {
+    "name": "swing",
+    "color": "#48e6f2",
+    "attributes": []
+  },
+  {
+    "name": "table",
+    "color": "#f2484b",
+    "attributes": []
+  },
+  {
+    "name": "tape",
+    "color": "#48f287",
+    "attributes": []
+  },
+  {
+    "name": "teddybear",
+    "color": "#48f2db",
+    "attributes": []
+  },
+  {
+    "name": "telephone",
+    "color": "#48f291",
+    "attributes": []
+  },
+  {
+    "name": "tiger",
+    "color": "#90f248",
+    "attributes": []
+  },
+  {
+    "name": "tights",
+    "color": "#b1f248",
+    "attributes": []
+  },
+  {
+    "name": "tissue",
+    "color": "#f2d148",
+    "attributes": []
+  },
+  {
+    "name": "toast",
+    "color": "#7248f2",
+    "attributes": []
+  },
+  {
+    "name": "toe",
+    "color": "#f2d948",
+    "attributes": []
+  },
+  {
+    "name": "tongue",
+    "color": "#a1f248",
+    "attributes": []
+  },
+  {
+    "name": "tooth",
+    "color": "#f29c48",
+    "attributes": []
+  },
+  {
+    "name": "toothbrush",
+    "color": "#9ef248",
+    "attributes": []
+  },
+  {
+    "name": "towel",
+    "color": "#f27048",
+    "attributes": []
+  },
+  {
+    "name": "toy",
+    "color": "#f2489a",
+    "attributes": []
+  },
+  {
+    "name": "tractor",
+    "color": "#f2bc48",
+    "attributes": []
+  },
+  {
+    "name": "train",
+    "color": "#99f248",
+    "attributes": []
+  },
+  {
+    "name": "trash",
+    "color": "#48d0f2",
+    "attributes": []
+  },
+  {
+    "name": "tray",
+    "color": "#f248e0",
+    "attributes": []
+  },
+  {
+    "name": "tree",
+    "color": "#e7f248",
+    "attributes": []
+  },
+  {
+    "name": "tricycle",
+    "color": "#48f253",
+    "attributes": []
+  },
+  {
+    "name": "truck",
+    "color": "#48b0f2",
+    "attributes": []
+  },
+  {
+    "name": "tummy",
+    "color": "#48c3f2",
+    "attributes": []
+  },
+  {
+    "name": "tuna",
+    "color": "#6a48f2",
+    "attributes": []
+  },
+  {
+    "name": "turkey",
+    "color": "#f24861",
+    "attributes": []
+  },
+  {
+    "name": "turtle",
+    "color": "#48e9f2",
+    "attributes": []
+  },
+  {
+    "name": "tv",
+    "color": "#4948f2",
+    "attributes": []
+  },
+  {
+    "name": "underpants",
+    "color": "#f2a948",
+    "attributes": []
+  },
+  {
+    "name": "vacuum",
+    "color": "#94f248",
+    "attributes": []
+  },
+  {
+    "name": "vagina",
+    "color": "#d5f248",
+    "attributes": []
+  },
+  {
+    "name": "vanilla",
+    "color": "#5d48f2",
+    "attributes": []
+  },
+  {
+    "name": "vitamin",
+    "color": "#f248e5",
+    "attributes": []
+  },
+  {
+    "name": "walker",
+    "color": "#4867f2",
+    "attributes": []
+  },
+  {
+    "name": "watch",
+    "color": "#f26348",
+    "attributes": []
+  },
+  {
+    "name": "water",
+    "color": "#f2ae48",
+    "attributes": []
+  },
+  {
+    "name": "wind",
+    "color": "#f2bf48",
+    "attributes": []
+  },
+  {
+    "name": "window",
+    "color": "#f2ef48",
+    "attributes": []
+  },
+  {
+    "name": "wolf",
+    "color": "#dff248",
+    "attributes": []
+  },
+  {
+    "name": "yard",
+    "color": "#ce48f2",
+    "attributes": []
+  },
+  {
+    "name": "yogurt",
+    "color": "#f2485e",
+    "attributes": []
+  },
+  {
+    "name": "zebra",
+    "color": "#487af2",
+    "attributes": []
+  },
+  {
+    "name": "zipper",
+    "color": "#f248ca",
+    "attributes": []
+  }
+]

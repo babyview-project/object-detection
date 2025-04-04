@@ -1,0 +1,1133 @@
+Statistics generated on: 2025-03-25 15:38:40
+
+=== Overall Statistics (All Categories) ===
+Total Categories: 139
+Total Hits: 415
+Total Misses: 96
+Total False Alarms: 170
+Overall Precision: 0.709
+Overall Recall: 0.812
+Overall F-score: 0.757
+
+=== Overall Statistics (Categories with Non-zero Hits) ===
+Active Categories: 82
+Total Hits: 415
+Total Misses: 47
+Total False Alarms: 126
+Overall Precision: 0.767
+Overall Recall: 0.898
+Overall F-score: 0.828
+
+=== Per-label Statistics ===
+
+alligator:
+  Hits: 2
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+apple:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+arm:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+ball:
+  Hits: 3
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+balloon:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+banana:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+basement:
+  Hits: 2
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+basket:
+  Hits: 4
+  Misses: 1
+  False Alarms: 3
+  Precision: 0.571
+  Recall: 0.800
+  F-score: 0.667
+
+bathroom:
+  Hits: 2
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.667
+  Recall: 1.000
+  F-score: 0.800
+
+battery:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+beads:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+bed:
+  Hits: 7
+  Misses: 2
+  False Alarms: 1
+  Precision: 0.875
+  Recall: 0.778
+  F-score: 0.824
+
+bedroom:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+bench:
+  Hits: 1
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.333
+  Recall: 1.000
+  F-score: 0.500
+
+blanket:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+blocks:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+book:
+  Hits: 12
+  Misses: 4
+  False Alarms: 5
+  Precision: 0.706
+  Recall: 0.750
+  F-score: 0.727
+
+boots:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+bottle:
+  Hits: 11
+  Misses: 3
+  False Alarms: 5
+  Precision: 0.688
+  Recall: 0.786
+  F-score: 0.733
+
+bowl:
+  Hits: 8
+  Misses: 1
+  False Alarms: 3
+  Precision: 0.727
+  Recall: 0.889
+  F-score: 0.800
+
+box:
+  Hits: 6
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.750
+  Recall: 1.000
+  F-score: 0.857
+
+bread:
+  Hits: 0
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+broom:
+  Hits: 1
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+bucket:
+  Hits: 2
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+butter:
+  Hits: 1
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+button:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+cake:
+  Hits: 1
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+camera:
+  Hits: 0
+  Misses: 1
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+can:
+  Hits: 3
+  Misses: 0
+  False Alarms: 4
+  Precision: 0.429
+  Recall: 1.000
+  F-score: 0.600
+
+car:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+chair:
+  Hits: 31
+  Misses: 3
+  False Alarms: 2
+  Precision: 0.939
+  Recall: 0.912
+  F-score: 0.925
+
+chalkboard:
+  Hits: 0
+  Misses: 2
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+clock:
+  Hits: 1
+  Misses: 1
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 0.500
+  F-score: 0.500
+
+coat:
+  Hits: 1
+  Misses: 1
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 0.500
+  F-score: 0.667
+
+computer:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+corn:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+couch:
+  Hits: 8
+  Misses: 4
+  False Alarms: 1
+  Precision: 0.889
+  Recall: 0.667
+  F-score: 0.762
+
+cracker:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+crayon:
+  Hits: 1
+  Misses: 0
+  False Alarms: 16
+  Precision: 0.059
+  Recall: 1.000
+  F-score: 0.111
+
+crib:
+  Hits: 1
+  Misses: 2
+  False Alarms: 2
+  Precision: 0.333
+  Recall: 0.333
+  F-score: 0.333
+
+cup:
+  Hits: 13
+  Misses: 0
+  False Alarms: 3
+  Precision: 0.812
+  Recall: 1.000
+  F-score: 0.897
+
+diaper:
+  Hits: 1
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.333
+  Recall: 1.000
+  F-score: 0.500
+
+dog:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+doll:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+door:
+  Hits: 8
+  Misses: 2
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 0.800
+  F-score: 0.889
+
+drawer:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+egg:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+elephant:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+eraser:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+finger:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+fireplace:
+  Hits: 0
+  Misses: 4
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+fish:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+floor:
+  Hits: 0
+  Misses: 5
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+flower:
+  Hits: 3
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.750
+  Recall: 1.000
+  F-score: 0.857
+
+foot:
+  Hits: 1
+  Misses: 4
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 0.200
+  F-score: 0.333
+
+fork:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+frog:
+  Hits: 0
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+glass:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+glasses:
+  Hits: 9
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+grapes:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+gum:
+  Hits: 1
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+hair:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+hand:
+  Hits: 4
+  Misses: 1
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 0.800
+  F-score: 0.889
+
+hat:
+  Hits: 0
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+hose:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+ice:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+jeans:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+jelly:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+kitchen:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+knife:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+ladder:
+  Hits: 0
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+lamp:
+  Hits: 20
+  Misses: 0
+  False Alarms: 4
+  Precision: 0.833
+  Recall: 1.000
+  F-score: 0.909
+
+living room:
+  Hits: 0
+  Misses: 3
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+magnet:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+melon:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+mitten:
+  Hits: 0
+  Misses: 0
+  False Alarms: 3
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+moon:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+mop:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+mouse:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+nail:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+napkin:
+  Hits: 6
+  Misses: 1
+  False Alarms: 2
+  Precision: 0.750
+  Recall: 0.857
+  F-score: 0.800
+
+necklace:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+oven:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+pajamas:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+pants:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+paper:
+  Hits: 1
+  Misses: 1
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 0.500
+  F-score: 0.500
+
+peas:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+pen:
+  Hits: 1
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+pencil:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+person:
+  Hits: 60
+  Misses: 1
+  False Alarms: 4
+  Precision: 0.938
+  Recall: 0.984
+  F-score: 0.960
+
+piano:
+  Hits: 0
+  Misses: 2
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+picture:
+  Hits: 22
+  Misses: 1
+  False Alarms: 2
+  Precision: 0.917
+  Recall: 0.957
+  F-score: 0.936
+
+pillow:
+  Hits: 10
+  Misses: 0
+  False Alarms: 4
+  Precision: 0.714
+  Recall: 1.000
+  F-score: 0.833
+
+plant:
+  Hits: 3
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.750
+  Recall: 1.000
+  F-score: 0.857
+
+plate:
+  Hits: 10
+  Misses: 0
+  False Alarms: 3
+  Precision: 0.769
+  Recall: 1.000
+  F-score: 0.870
+
+potty:
+  Hits: 2
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+present:
+  Hits: 1
+  Misses: 0
+  False Alarms: 4
+  Precision: 0.200
+  Recall: 1.000
+  F-score: 0.333
+
+purse:
+  Hits: 2
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.667
+  Recall: 1.000
+  F-score: 0.800
+
+radio:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+refrigerator:
+  Hits: 4
+  Misses: 0
+  False Alarms: 2
+  Precision: 0.667
+  Recall: 1.000
+  F-score: 0.800
+
+remote:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+room:
+  Hits: 3
+  Misses: 1
+  False Alarms: 1
+  Precision: 0.750
+  Recall: 0.750
+  F-score: 0.750
+
+sandbox:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+scissors:
+  Hits: 0
+  Misses: 0
+  False Alarms: 3
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+shelf:
+  Hits: 0
+  Misses: 4
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+shirt:
+  Hits: 2
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+shoe:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+shorts:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+shovel:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+sink:
+  Hits: 2
+  Misses: 0
+  False Alarms: 4
+  Precision: 0.333
+  Recall: 1.000
+  F-score: 0.500
+
+sled:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+slide:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+slipper:
+  Hits: 2
+  Misses: 0
+  False Alarms: 4
+  Precision: 0.333
+  Recall: 1.000
+  F-score: 0.500
+
+snowman:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+sock:
+  Hits: 0
+  Misses: 1
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+spoon:
+  Hits: 4
+  Misses: 2
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 0.667
+  F-score: 0.800
+
+stairs:
+  Hits: 0
+  Misses: 1
+  False Alarms: 2
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+star:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+stroller:
+  Hits: 1
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+table:
+  Hits: 26
+  Misses: 1
+  False Alarms: 5
+  Precision: 0.839
+  Recall: 0.963
+  F-score: 0.897
+
+tablet:
+  Hits: 0
+  Misses: 3
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+teddybear:
+  Hits: 2
+  Misses: 0
+  False Alarms: 3
+  Precision: 0.400
+  Recall: 1.000
+  F-score: 0.571
+
+telephone:
+  Hits: 0
+  Misses: 2
+  False Alarms: 5
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+tent:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+tights:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+tissue:
+  Hits: 1
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+toe:
+  Hits: 2
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+towel:
+  Hits: 6
+  Misses: 2
+  False Alarms: 3
+  Precision: 0.667
+  Recall: 0.750
+  F-score: 0.706
+
+toy:
+  Hits: 24
+  Misses: 8
+  False Alarms: 1
+  Precision: 0.960
+  Recall: 0.750
+  F-score: 0.842
+
+train:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+tv:
+  Hits: 15
+  Misses: 0
+  False Alarms: 9
+  Precision: 0.625
+  Recall: 1.000
+  F-score: 0.769
+
+underpants:
+  Hits: 1
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.500
+  Recall: 1.000
+  F-score: 0.667
+
+vacuum:
+  Hits: 0
+  Misses: 1
+  False Alarms: 2
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+wall:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+watch:
+  Hits: 4
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.800
+  Recall: 1.000
+  F-score: 0.889
+
+water:
+  Hits: 0
+  Misses: 1
+  False Alarms: 0
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+window:
+  Hits: 6
+  Misses: 0
+  False Alarms: 0
+  Precision: 1.000
+  Recall: 1.000
+  F-score: 1.000
+
+wolf:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
+
+yard:
+  Hits: 0
+  Misses: 0
+  False Alarms: 1
+  Precision: 0.000
+  Recall: 0.000
+  F-score: 0.000
