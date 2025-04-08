@@ -2021,16 +2021,18 @@ cat("\nAge range:", min(subject_level_proportions$age_mo), "to",
 
 First let's runs mixed-effect mdoels
 
-First I'm going to get a random sample of 10% of the dataframe to test my code on
+
 ```{r}
-test_dataframe <-object_counts_expanded_dataframe %>%
-  sample_frac(.1)
+# First I'm going to get a random sample of 10% of the dataframe to test my code on -- was useful.
+
+# test_dataframe <-object_counts_expanded_dataframe %>%
+  # sample_frac(.1)
 
 # Wow it's still 3M rows, wow
 ```
 
 ```{R}
-total_frames <- test_dataframe %>%
+total_frames <- object_counts_expanded_dataframe %>%
   group_by(subject_id, age_mo) %>%
   summarize(num_total_frames = length(unique(frame_id)))
 ```
@@ -2039,7 +2041,7 @@ So I was wrong here -- I don't think you need to fill out non-detected categorie
 
 This now makes the data frame you need for the glmer
 ```{R}
-for_glmer <- test_dataframe %>%
+for_glmer <- object_counts_expanded_dataframe %>%
   mutate(class_present = count>0) %>% # make a new binary variable so that we only count each class once per frame
   distinct(subject_id, frame_id, class_name, class_present, age_mo) %>% # only want class present or not once per frame, this was causing errors in proportions -- the distinct
   group_by(subject_id, class_name, age_mo) %>% # now group by our main variables
@@ -2052,14 +2054,21 @@ for_glmer <- test_dataframe %>%
 Run your main age model, scaling for age, and with the maximal random effects structure justified by your data
 ```{r}
 age_model= glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (scale(age_mo) | subject_id) +   (scale(age_mo) | class_name), family='binomial')
+```
 
-summary(age_model)
+
+```{r}
+age_model_proportion= glmer(data=for_glmer %>% mutate(prop_detected = num_detected/num_total_frames), prop_detected ~ scale(age_mo) + (scale(age_mo) | subject_id) + (scale(age_mo) | class_name), weights =num_total_frames, family='binomial')
+
+summary(age_model_proportion)
 ```
 
 OK, this made me worried that we're overfitting here as the conditional r-squared is really high, I"m not convinced this is the right model anymore
 ```{R}
 library(MuMIn)
 r.squaredGLMM(age_model)
+
+r.squaredGLMM(age_model_proportion)
 ```
 I think we also want to test whether the shape of the distribution changes with age, not just the proportion detected....oof. OK, back to the drawing board, I think,.
 
@@ -2175,6 +2184,7 @@ avg_corr_by_age <- as.data.frame(cor_matrix_age) %>%
 Whew this looks kinda like the data density plot.
 ```{r}
 ggplot(data=avg_corr_by_age, aes(x=as.numeric(age_mo), y=avg_correlation, size=num_total_frames)) +
-  geom_point(alpha=.2)
+  geom_point(alpha=.2) + 
+  ylab('Average spearman correlation between age bins')
 ```
 
