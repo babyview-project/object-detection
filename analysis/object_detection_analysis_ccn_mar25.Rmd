@@ -31,6 +31,7 @@ participants <- babyviewr::get_participant_data(include_demographics = TRUE)
 recordings <- babyviewr::get_main_recording_data(include_luna = TRUE)
 ```
 
+# Filter to BV-main data only, plot cumulative number of hours per subject
 ```{r}
 d <- left_join(recordings, 
                       participants |>
@@ -53,6 +54,7 @@ ggplot(filter(d, dataset == "BV-main"),
   ylab("Cumulative hours of data")
 ```
 
+# Plot age density
 ```{r}
 age_density <- d |>
   group_by(age_mo, dataset) |>
@@ -71,12 +73,6 @@ ggplot(age_density, aes(x = age_mo, y = n_hours, fill = dataset)) +
 # Load Object Detection Data (super large file!)
 ```{r}
 objects <- read_csv(here::here("frame_data/allframes_1fps.csv")) 
-# objects_joined <- inner_join(objects, d, by = c("superseded_gcp_name_feb25"))
-
-# any(recordings$superseded_gcp_name_feb25 == "00510002_2024-08-12_2_dfc73374a", na.rm=TRUE)
-
-# objects$superseded_gcp_name_feb25[!(objects$superseded_gcp_name_feb25 %in% recordings$superseded_gcp_name_feb25)]
-
 colnames(objects)
 ```
 
@@ -85,13 +81,88 @@ colnames(objects)
 objects_joined <- inner_join(objects, d, by = c("superseded_gcp_name_feb25"))
 head(objects_joined)
 ```
+
+## Get the number of frames with detections across subjects
 ```{r}
 paste("Number of frames with detections:")
 nrow(objects_joined |> distinct(frame_id, superseded_gcp_name_feb25))
 ```
+
+## Add no-detection frame rows to the dataframe
+```{r}
+# object_counts_expanded_dataframe <- objects_joined %>%
+#   group_by(superseded_gcp_name_feb25, class_name, frame_id, time_in_extended_iso, subject_id, age_mo, confidence) %>%
+#   summarize(count = n()) %>%
+#   ungroup() %>%
+#   complete(superseded_gcp_name_feb25, class_name, fill = list(count = 0)) %>%
+#   mutate(class_present = count>0) %>%
+#   filter(!is.na(class_name)) # this comes from frames that had nothing, but doesn't need to be in list of objects
+
+  object_counts_expanded_dataframe <- objects_joined %>%
+    group_by(superseded_gcp_name_feb25, class_name, frame_id, time_in_extended_iso, subject_id, age_mo, confidence) %>%
+    summarize(count = n()) %>%
+    ungroup() %>%
+    # Complete missing combinations while preserving subject_id
+    complete(
+      nesting(superseded_gcp_name_feb25, subject_id, age_mo),
+      class_name,
+      fill = list(count = 0)
+    ) %>%
+    filter(!is.na(class_name))
+```
+
+
+```{R}
+object_freq <- object_counts_expanded_dataframe %>%
+  group_by(class_name) %>%
+  summarize(freq = mean(class_present)) %>%
+  arrange(freq)
+```
+
+# Plot top 50 objects in the ~4 million frame detections
+```{r}
+ggplot(data=object_freq %>% slice_max(n=50, order_by=freq), aes(x=fct_reorder(class_name, freq, .desc=FALSE), y=freq)) +
+  theme_few(base_size=6) +
+  geom_point(alpha=.8) +
+  coord_flip() +
+  xlab('Top 50 objects detected') +
+  ylab('# of detections in ~4 million frames')
+```
+
+# Load aoa data for specific items
+```{r}
+aoa = read_csv(here::here('data/MCDI_items_with_AoA.csv')) %>%
+  select(uni_lemma, AoA) %>%
+  rename(class_name = uni_lemma)
+```
+
+## Join with aoa data
+```{r}
+object_freq_with_aoa <- object_freq %>%
+  left_join(aoa) 
+```
+
+## Object detection proportion with aoa
+```{r}
+object_freq_with_aoa <- object_freq %>%
+  left_join(aoa) %>%
+  filter(!is.na(AoA)) # don't have some aoas
+```
+
+```{r}
+ggplot(data=object_freq_with_aoa, aes(x=freq, y=AoA, label=class_name)) +
+  geom_point(alpha=.4) +
+  xlab('Frequency of objects') +
+  ylab('AoA') +
+  ggrepel::geom_label_repel() +
+  geom_smooth(method='lm')  +
+  theme_few(base_size=10)  
+
+```
+
 # Load CDI words
 ```{r}
-cdi_words <- read_csv(here::here("cdi_words.csv"))
+cdi_words <- read_csv(here::here("data/cdi_words.csv"))
 ```
 
 # Seperate the objects_joined dataframe into animated, small, and big objects
@@ -101,7 +172,7 @@ cdi_categories <- cdi_words %>%
   select(uni_lemma, is_animated, is_small_obj, is_big_obj)
 
 # join objects_joined with cdi categories based on class_name matching uni_lemma
-objects_joined_with_categories <- objects_joined %>%
+objects_joined_with_categories <- object_counts_expanded_dataframe %>%
   left_join(cdi_categories, by = c("class_name" = "uni_lemma"))
 
 # separate into categories
@@ -1030,21 +1101,28 @@ p1_prop_50 <- ggplot(top50_data_prop,
                 y = proportion, 
                 fill = category_type)) +
   geom_bar(stat = "identity") +
-  scale_fill_brewer(palette = "Set2") +
-  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c(
+    "Animated" = "#9B6EDF",  # purple
+    "Small" = "#FFA500",     # orange
+    "Big" = "#4169E1",       # blue
+    "Other" = "#808080",     # gray for any other categories
+    "Animated & Small" = "#CD853F",
+    "Animated & Big" = "#2E8B57",
+    "Small & Big" = "#DAA520"
+  )) +
+  scale_y_continuous(labels = scales::percent,
+                    breaks = seq(0, max(top50_data_prop$proportion), length.out = 6)) +
   coord_flip() +
   theme_few() +
   theme(
-    axis.text.y = element_text(hjust = 0, size = 14),
-    axis.text.x = element_text(size = 12),
-    legend.position = "right"
+    axis.text.y = element_text(hjust = 0, size = 32),
+    axis.text.x = element_text(size = 24),
+    legend.position = "none",
+    axis.title.y = element_blank(),  # removed "Category" label
+    axis.title.x = element_text(size = 32)
   ) +
   labs(
-    y = "Proportion of Frames",
-    x = "Category",
-    title = "Top 50 Objects by Category Type",
-    subtitle = "Percentage of frames containing each object",
-    fill = "Category Type"
+    y = "Proportion of Frames"
   )
 
 ggsave(here::here("analysis_plots/combined_top50_proportions_nolabels.png"),
@@ -1101,7 +1179,8 @@ plot_top50_by_subject_prop <- function() {
       x = "Category",
       title = "Top 50 Objects Across Subjects",
       subtitle = "Percentage of frames containing each object",
-      fill = "Mean\nConfidence"
+      fill = "Mean\nConfidence",
+      size = 30
     )
   
   ggsave(here::here("analysis_plots/top50_by_subject_proportions_nolabels.png"),
@@ -1188,7 +1267,7 @@ print(table(top50_data_prop$category_type))
 
 # Load MCDI-AOA data
 ```{r}
-mcdi_aoa <- read_csv(here::here("MCDI_items_with_AoA.csv"))
+mcdi_aoa <- read_csv(here::here("data/MCDI_items_with_AoA.csv"))
 ```
 # Merge the AOA column from MCDI-AOA data with objects_joined_with_categories using uni_lemma column
 ```{r}
@@ -1561,6 +1640,18 @@ write.csv(zero_summary,
           row.names = FALSE)
 ```
 
+# Stats model: freq across age?
+```{r}
+# Generate detailed proportions by month with AoA data
+proportion_by_month_aoa <- get_detailed_proportions_by_month_aoa()
+
+# Let's examine the first few rows of the resulting dataframe
+head(proportion_by_month_aoa)
+
+# Get a summary of the data dimensions
+cat("\nDataframe dimensions:", dim(proportion_by_month_aoa))
+```
+
 ```{r}
 # Prepare scaled data
 model_data <- comprehensive_data_aoa %>%
@@ -1647,127 +1738,273 @@ get_detailed_proportions_by_month_aoa <- function() {
     filter(!class_name %in% c("person", "picture")) %>%
     group_by(subject_id, age_mo, class_name) %>%
     summarise(
-      n_occurrences = n(),
+      n_detections = n(),  # number of successful detections
       mean_confidence = mean(confidence),
       .groups = 'drop'
     )
   
-  # Join with total frames and calculate proportions
-  detailed_props <- object_occurrences %>%
+  # Join with total frames and calculate non-detections
+  model_data <- object_occurrences %>%
     left_join(frames_per_subject_month, by = c("subject_id", "age_mo")) %>%
-    mutate(proportion = n_occurrences / total_frames)
-  
-  # Get overall proportions across all subjects and months
-  overall_props <- get_all_object_proportions_aoa()
-  
-  # Join with AoA data
-  comprehensive_data <- detailed_props %>%
-    left_join(overall_props, by = "class_name") %>%
+    mutate(
+      n_non_detections = total_frames - n_detections,  # number of non-detections
+      age_mo_centered = age_mo - mean(age_mo, na.rm = TRUE)
+    ) %>%
+    # Join with AoA data
     left_join(
       mcdi_aoa %>% select(uni_lemma, AoA),
       by = c("class_name" = "uni_lemma")
     )
   
-  # Print summary of data distribution
-  cat("\nData distribution across months:\n")
-  print(table(comprehensive_data$age_mo))
+  # Print summary statistics
+  cat("Number of observations:", nrow(model_data), "\n")
+  cat("Number of subjects:", n_distinct(model_data$subject_id), "\n")
+  cat("Number of objects:", n_distinct(model_data$class_name), "\n")
+  cat("Age range:", min(model_data$age_mo, na.rm = TRUE), "to", 
+      max(model_data$age_mo, na.rm = TRUE), "months\n")
   
-  # Print summary by month
-  month_summary <- comprehensive_data %>%
-    group_by(age_mo) %>%
-    summarise(
-      n_subjects = n_distinct(subject_id),
-      n_objects = n_distinct(class_name),
-      mean_prop = mean(proportion),
-      n_with_aoa = sum(!is.na(AoA))
-    )
-  
-  cat("\nSummary by month:\n")
-  print(month_summary)
-  
-  # Save to CSV
-  write.csv(
-    comprehensive_data,
-    here::here("analysis_plots/comprehensive_object_data_by_month.csv"),
-    row.names = FALSE
-  )
-  
-  return(comprehensive_data)
+  return(model_data)
 }
 ```
 
 ```{r}
-# Calculate overall proportions for each category
-overall_category_distribution <- objects_joined_with_categories %>%
-  # First get total number of frame-video-subject-age combinations
-  ungroup() %>%
-  distinct(frame_id, superseded_gcp_name_feb25, subject_id, age_mo) %>%
-  summarise(total_frame_video_subject_age_combinations = n()) %>%
-  # Then join with object counts
-  cross_join(
-    objects_joined_with_categories %>%
-      # Count unique frame-video-subject-age combinations for each object
-      # Using distinct to count each object only once per frame
-      distinct(class_name, frame_id, superseded_gcp_name_feb25, subject_id, age_mo, .keep_all = TRUE) %>%
-      group_by(class_name) %>%
-      summarise(
-        n_frame_video_subject_age_detections = n(),
-        n_unique_videos = n_distinct(superseded_gcp_name_feb25),
-        n_subjects = n_distinct(subject_id),
-        n_ages = n_distinct(age_mo),
-        mean_confidence = mean(confidence)  # moved confidence calculation here
-      )
-  ) %>%
-  # Calculate proportion
-  mutate(
-    proportion = n_frame_video_subject_age_detections / total_frame_video_subject_age_combinations
-  ) %>%
-  # Join with AoA data
-  left_join(
-    mcdi_aoa %>% select(uni_lemma, AoA),
-    by = c("class_name" = "uni_lemma")
-  ) %>%
-  # Select and arrange columns in desired order
-  select(
-    class_name,
-    n_frame_video_subject_age_detections,   # Number of frame-video-subject-age combinations
-    n_unique_videos,                        # Number of unique videos
-    total_frame_video_subject_age_combinations,  # Total frame-video-subject-age combinations
-    proportion,                             # Proportion of frame-video-subject-age combinations
-    n_subjects,                             # Number of subjects
-    n_ages,                                 # Number of unique ages
-    mean_confidence,
-    AoA
-  ) %>%
-  # Arrange by proportion in descending order
-  arrange(desc(proportion))
+# Create a prepared dataframe for mixed effects modeling with age_mo
+prepare_model_dataframe <- function() {
+  # Calculate total frames per subject-month combination
+  frames_per_subject_month <- objects_joined_with_categories %>%
+    distinct(frame_id, subject_id, age_mo) %>%
+    group_by(subject_id, age_mo) %>%
+    summarise(
+      total_frames = n(),
+      .groups = 'drop'
+    )
+  
+  # Get object occurrences by subject and month
+  object_occurrences <- objects_joined_with_categories %>%
+    filter(!class_name %in% c("person", "picture")) %>%
+    group_by(subject_id, age_mo, class_name) %>%
+    summarise(
+      n_detections = n(),  # number of successful detections
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    )
+  
+  # Join with total frames and calculate non-detections
+  model_data <- object_occurrences %>%
+    left_join(frames_per_subject_month, by = c("subject_id", "age_mo")) %>%
+    mutate(
+      n_non_detections = total_frames - n_detections,  # number of non-detections
+      age_mo_centered = age_mo - mean(age_mo, na.rm = TRUE)
+    ) %>%
+    # Join with AoA data
+    left_join(
+      mcdi_aoa %>% select(uni_lemma, AoA),
+      by = c("class_name" = "uni_lemma")
+    )
+  
+  # Print summary statistics
+  cat("Number of observations:", nrow(model_data), "\n")
+  cat("Number of subjects:", n_distinct(model_data$subject_id), "\n")
+  cat("Number of objects:", n_distinct(model_data$class_name), "\n")
+  cat("Age range:", min(model_data$age_mo, na.rm = TRUE), "to", 
+      max(model_data$age_mo, na.rm = TRUE), "months\n")
+  
+  return(model_data)
+}
 
-# Print summary
-print("Top 20 most frequently detected objects:")
-print(
-  overall_category_distribution %>%
-    select(class_name, n_frame_video_subject_age_detections,
-           n_unique_videos, total_frame_video_subject_age_combinations, 
-           proportion, n_subjects, n_ages, AoA) %>%
-    head(20)
-)
+# Generate the model dataframe
+model_dataframe <- prepare_model_dataframe()
 
-# Save to CSV
+# Examine the first few rows
+head(model_dataframe)
+
+# Save the dataframe for future use
 write.csv(
-  overall_category_distribution,
-  here::here("analysis_plots/overall_category_distribution.csv"),
+  model_dataframe,
+  here::here("analysis_plots/model_dataframe_continuous_age.csv"),
   row.names = FALSE
 )
-
-# Diagnostic counts
-cat("\nDiagnostic Counts:\n")
-cat("------------------\n")
-diagnostics <- objects_joined_with_categories %>%
-  summarise(
-    total_frames = n_distinct(frame_id),
-    total_videos = n_distinct(superseded_gcp_name_feb25),
-    total_subjects = n_distinct(subject_id),
-    total_ages = n_distinct(age_mo)
-  )
-print(diagnostics)
 ```
+
+# Run the mixed effects model with continuous age
+```{r}
+model_continuous_age <- lmer(
+  log_proportion ~ age_mo_centered + 
+    (age_mo_centered | subject_id) + 
+    (age_mo_centered | class_name), 
+  data = model_dataframe,
+  control = lmerControl(optimizer = "bobyqa")
+)
+
+# View the model summary
+summary(model_continuous_age)
+```
+
+```{r}
+# Prepare data for binomial GLMM with proper count validation
+prepare_binomial_model_data <- function() {
+  # Calculate total frames per subject-month combination
+  frames_per_subject_month <- objects_joined_with_categories %>%
+    distinct(frame_id, subject_id, age_mo) %>%
+    group_by(subject_id, age_mo) %>%
+    summarise(
+      total_frames = n(),
+      .groups = 'drop'
+    )
+  
+  # Get object occurrences by subject and month
+  # Make sure to count unique frame occurrences for each object
+  object_occurrences <- objects_joined_with_categories %>%
+    filter(!class_name %in% c("person", "picture")) %>%
+    distinct(frame_id, subject_id, age_mo, class_name, .keep_all = TRUE) %>%  # Count each object only once per frame
+    group_by(subject_id, age_mo, class_name) %>%
+    summarise(
+      n_detections = n(),  # number of unique frame detections
+      mean_confidence = mean(confidence),
+      .groups = 'drop'
+    )
+  
+  # Join with total frames and calculate non-detections
+  model_data <- object_occurrences %>%
+    left_join(frames_per_subject_month, by = c("subject_id", "age_mo")) %>%
+    mutate(
+      # Ensure n_detections doesn't exceed total_frames
+      n_detections = pmin(n_detections, total_frames),
+      n_non_detections = total_frames - n_detections,
+      age_mo_centered = age_mo - mean(age_mo, na.rm = TRUE)
+    ) %>%
+    # Join with AoA data
+    left_join(
+      mcdi_aoa %>% select(uni_lemma, AoA),
+      by = c("class_name" = "uni_lemma")
+    ) %>%
+    # Remove any rows where we don't have AoA data
+    filter(!is.na(AoA))
+  
+  # Validate the data
+  stopifnot(
+    all(model_data$n_detections >= 0),
+    all(model_data$n_non_detections >= 0),
+    all(model_data$n_detections + model_data$n_non_detections == model_data$total_frames)
+  )
+  
+  # Print summary statistics
+  cat("Number of observations:", nrow(model_data), "\n")
+  cat("Number of subjects:", n_distinct(model_data$subject_id), "\n")
+  cat("Number of objects:", n_distinct(model_data$class_name), "\n")
+  cat("Age range:", min(model_data$age_mo, na.rm = TRUE), "to", 
+      max(model_data$age_mo, na.rm = TRUE), "months\n")
+  
+  return(model_data)
+}
+
+# Generate the model dataframe
+binomial_model_data <- prepare_binomial_model_data()
+
+# Run the binomial GLMM
+model_binomial <- glmer(
+  cbind(n_detections, n_non_detections) ~ age_mo_centered + AoA + 
+    (age_mo_centered | subject_id) + 
+    (age_mo_centered | class_name),
+  family = binomial,
+  data = binomial_model_data,
+  control = glmerControl(optimizer = "bobyqa")
+)
+
+# View the model summary
+summary(model_binomial)
+
+# Save the model data for future use
+write.csv(
+  binomial_model_data,
+  here::here("analysis_plots/binomial_model_data.csv"),
+  row.names = FALSE
+)
+```
+
+```{r}
+glmer(proportion_detected ~ age_mo + (age_mo | subject) + (age_mo | category) , family=binomial, weights=total_frames)
+```
+
+# C{reate subject-level detection proportions using frame_id
+```{r}
+subject_level_proportions_temp <- objects_joined_with_categories %>%
+  # First get total detected frames per subject-age-video combination
+  group_by(subject_id, age_mo, superseded_gcp_name_feb25) %>%
+  summarise(
+    total_detected_frames_per_video = n_distinct(frame_id[!is.na(frame_id)]),
+    .groups = 'drop'
+  ) %>%
+  # Get total detected frames per subject-age (combining all videos at that age)
+  group_by(subject_id, age_mo) %>%
+  summarise(
+    n_videos = n_distinct(superseded_gcp_name_feb25),
+    total_detected_frames = sum(total_detected_frames_per_video, na.rm=TRUE),
+    .groups = 'drop'
+  ) %>%
+  # Now get a complete set of all subject-age-object combinations
+  full_join(
+    # Get all unique objects and subjects
+    crossing(
+      subject_id = unique(objects_joined_with_categories$subject_id),
+      age_mo = unique(objects_joined_with_categories$age_mo),
+      class_name = unique(objects_joined_with_categories$class_name)
+    ),
+    by = c("subject_id", "age_mo")
+  ) 
+
+data_per_month_per_subject <- subject_level_proportions_temp %>%
+  distinct(subject_id, age_mo, total_detected_frames)
+```
+
+```{r}
+subject_level_proportions <- subject_level_proportions_temp %>%
+  # Now join with actual detections
+  left_join(
+    objects_joined_with_categories %>%
+      group_by(subject_id, age_mo, class_name) %>%
+      summarise(
+        n_detections = n_distinct(frame_id[!is.na(frame_id)]),  # count distinct frames where object was detected
+        mean_confidence = mean(confidence[!is.na(frame_id)], na.rm = TRUE),
+        .groups = 'drop'
+      ),
+    by = c("subject_id", "age_mo", "class_name")
+  ) %>%
+  # Calculate proportions and fill in NAs
+  mutate(
+    n_detections = replace_na(n_detections, 0),
+    mean_confidence = replace_na(mean_confidence, 0),
+    proportion = n_detections / total_detected_frames
+  ) %>%
+  # Add category information
+  left_join(
+    cdi_categories,
+    by = c("class_name" = "uni_lemma")
+  ) %>%
+  # Arrange the data
+  arrange(subject_id, age_mo, class_name)
+```
+
+```{r}
+# Add summary statistics per subject-age
+subject_age_summary <- subject_level_proportions %>%
+  group_by(subject_id, age_mo) %>%
+  summarise(
+    n_objects_detected = sum(n_detections > 0),
+    n_possible_objects = n(),
+    mean_proportion = mean(proportion),
+    mean_confidence = mean(mean_confidence),
+    .groups = 'drop'
+  )
+
+# Print some summary statistics
+cat("Summary of detection proportions:\n")
+print(summary(subject_level_proportions$proportion))
+
+cat("\nNumber of unique subjects:", n_distinct(subject_level_proportions$subject_id))
+cat("\nAge range:", min(subject_level_proportions$age_mo), "to", 
+    max(subject_level_proportions$age_mo), "months")
+
+
+```
+
