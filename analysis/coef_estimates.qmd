@@ -16,6 +16,8 @@ library(broom.mixed)
 library(wordbankr)
 library(glue)
 library(broom)
+library(MuMIn)
+
 
 source("helpers.R")
 base_size_print=10
@@ -25,47 +27,74 @@ label_size=3
 # 1. Import object detection data
 ```{r}
 object_counts <- read_csv(here("data/overall_category_distribution.csv"))
+aoa_values <- read_csv(here("data/coef_data/eng_aoas.csv")) %>%
+  mutate(
+    item_definition = case_when(
+      item_definition == "TV" ~ "tv",
+      item_definition %in% c("couch") ~ "couch, sofa",
+      item_definition %in% c("trash") ~ "garbage, trash",
+      item_definition %in% c("backyard") ~ "backyard, yard",
+      item_definition %in% c("noodles") ~ "noodles, spaghetti",
+      TRUE ~ item_definition
+    )
+  ) %>%
+  pivot_wider(
+    id_cols = "item_definition",
+    names_from = measure,
+    values_from = aoa,
+    names_prefix = "aoa_"
+  )
+
 object_counts_cleaned <- object_counts |>
   distinct(class_name, .keep_all=TRUE) |>
   # filtering out more spurious classes
   filter(class_name != "person" & class_name != "picture") |>
   mutate(proportion_cleaned = round(10000* proportion,5),
-         log_proportion = log(proportion),
+         percentage = 100*proportion,
+         log_proportion = log(percentage),
          visual_frequency = scale(log_proportion)) |>
   rename(object=class_name)
 ```
 
-```{r}
-ggplot(object_counts_cleaned, aes(x = AoA, y = log_proportion)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  #ggpubr::stat_cor() +
-  ylab("Log (proportion of frames with object detected)")
-```
 
 
-# 2. Load existing CHILDES measures
+# 2. Load existing word trajectory predictors
 ```{r}
 # loaded from https://github.com/mikabr/aoa-prediction
+original_uni_joined <- load(here("data/coef_data/original_uni_joined.RData"))
+original_uni_joined <- get(original_uni_joined)
 load(here("data/coef_data/uni_joined.Rdata"))
-eng_joined <- uni_joined |> filter(language == "English (American)")
+eng_joined <- uni_joined |> filter(language == "English (American)") |> left_join(aoa_values, by=c("words"="item_definition"))
+original_eng_joined <- original_uni_joined |> filter(language == "English (American)") |> left_join(aoa_values, by=c("words"="item_definition"))
+```
 
+Checking if the proportions from the new preprocessing code I incorporated correlates with the old ones pulled directly from Mika's code.
+```{r}
+added_coefs <- eng_joined |>
+  left_join(original_eng_joined |> rename(original_prop = prop, original_frequency = frequency) |> select(original_prop, uni_lemma, measure, original_frequency, age)) |>
+  filter(!is.na(original_prop) & !is.na(prop) & !is.na(original_prop) & !is.na(original_frequency))
 
+cor(added_coefs |> select(prop, original_prop, frequency, original_frequency))
+```
+Phew.
+
+```{r}
 # based on this model just going to join on any row that contains the object even if that means matching with multiple words, since that's what it looks like is being done with MLU etc.
 longer_cdi_objects <- object_counts_cleaned |>
-  select(object, visual_frequency, log_proportion) |>
+  select(object, visual_frequency, log_proportion, AoA) |>
   rowwise() |>
   mutate(matching = list(
     eng_joined |> filter(str_starts(uni_lemma, fixed(paste0(object, " ")))) |> filter(lexical_classes == "nouns")
   )) |>
   unnest(matching) |>
-  select(-object) |>
+  rename(original_object=object) |>
   filter(uni_lemma != "ice cream") |>
   rename(object=uni_lemma) |>
   filter(!is.na(language))
 
 shorter_cdi_objects <- object_counts_cleaned |>
-  select(object, visual_frequency, log_proportion)  |>
+  select(object, visual_frequency, log_proportion, AoA)  |>
+  mutate(original_object=object) |>
   left_join(eng_joined, by=c("object"="uni_lemma")) |>
   # getting rid of words that do not have a match
   filter(!is.na(language))
@@ -75,16 +104,87 @@ eng_vars <- bind_rows(longer_cdi_objects, shorter_cdi_objects) |>
   mutate(visual_frequency = scale(log_proportion))
 ```
 
+And now looking at whether we missed any objects that were detected:
+```{r}
+anti_join(object_counts_cleaned |> distinct(object), eng_vars |> distinct(original_object), by = c("object"="original_object"))
+```
+Right.
+
+Looking at whether any of our words don't have AoAs and adding in AoAs to the object counts
+```{r}
+eng_vars |> filter(is.na(aoa_produces) & is.na(aoa_understands)) |> distinct(words)
+object_counts_cleaned <- object_counts_cleaned |> left_join(eng_vars |> distinct(original_object, aoa_produces, aoa_understands),
+                                                            by = c("object"="original_object"))
+```
+
+Sanity checks:
 ```{r}
 nrow(eng_vars |> distinct(object))
+nrow(eng_vars |> distinct(original_object))
 nrow(eng_joined |> distinct(uni_lemma))
 ```
 
 # 3. Straightforward AoA predictor
 ```{r}
+object_counts_long <- object_counts_cleaned %>%
+  pivot_longer(
+    cols = c(aoa_produces, aoa_understands),
+    names_to = "aoa_type",
+    values_to = "aoa_value"
+  ) %>%
+  mutate(aoa_type = recode(aoa_type,
+                           "aoa_produces" = "AoA Production",
+                           "aoa_understands" = "AoA Comprehension"))
+
+# Create the faceted plot
+aoa_objects_plot <- ggplot(object_counts_long, aes(x = aoa_value, y = log_proportion)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~ aoa_type, scales = "free_x") +
+   ggrepel::geom_label_repel(
+    data = object_counts_long |> filter(object %in% c("book", "dog", "milk", "penny", "chair", "table")),
+    aes(label = object)
+  ) +
+  ylim(-10, 8) +  
+  ggpubr::stat_cor(vjust = 2) +  
+  ylab("Log (percentage of frames with object detected)") +
+  xlab("Age of Acquisition") +
+  theme_minimal()
+
+aoa_objects_plot
+ggsave(here("data/figures/aoa_plot.png"), aoa_objects_plot)
+```
+
+## 3a. Linear modeling
+```{r}
 simple_effect <- lm(AoA ~ visual_frequency, data=object_counts_cleaned)
 
 summary(simple_effect)
+
+all_effects <- lm(aoa_understands ~ visual_frequency + scale(MLU) + scale(frequency) + scale(babiness) + scale(concreteness) + scale(final_frequency) + scale(solo_freq) + scale(valence) + scale(arousal), data=eng_vars |> filter(!is.na(aoa_understands)))
+summary(all_effects)
+r.squaredGLMM(all_effects)
+car::vif(all_effects)
+#plot(all_effects)
+```
+
+The main models we're using for CCN:
+```{r}
+smaller_model_understands <- lm(aoa_understands ~ visual_frequency + scale(frequency) + scale(concreteness), data=eng_vars)
+summary(smaller_model_understands)
+smaller_model_produces <- lm(aoa_produces ~ visual_frequency + scale(frequency) + scale(concreteness), data=eng_vars)
+summary(smaller_model_produces)
+```
+Which words might be causing this disconnect
+```{r}
+anti_join(eng_vars |> distinct(object), eng_vars |> filter(!is.na(aoa_understands)) |> distinct(object))
+```
+
+just looking at correlations
+```{r}
+eng_vars_filtered <- eng_vars |> 
+  filter(!is.na(frequency) & !is.na(visual_frequency) & !is.na(concreteness))
+cor(eng_vars_filtered |> distinct(visual_frequency, frequency, final_frequency, concreteness, object) |> select(-object), use = "pairwise.complete.obs")
 ```
 Formats seen, frequency, total count and babiness all show separate positive predictivity which is encouraging.
 
@@ -92,7 +192,6 @@ Formats seen, frequency, total count and babiness all show separate positive pre
 Pulled code below from https://github.com/mikabr/aoa-prediction -- joined AoA data and predictor data.
 
 ```{r load_data}
-#load("../saved_data/uni_joined.RData")
 
 predictors <- c("frequency", "MLU", "final_frequency", "solo_frequency",
                 "num_phons", "concreteness", "valence", "arousal", "babiness", "visual_frequency")
@@ -419,6 +518,7 @@ mean_term_coefs <- measure_coefs %>%
   arrange(desc(abs(mean_estimate)))
 
 coef_order <- mean_term_coefs %>% pull(term)
+effects_colors <- viridisLite::viridis(length(coef_order), option = "D")[-1]
 plt_fixed_coefs <- measure_coefs %>%
   unnest() %>%
   mutate(term = term %>% factor(levels = rev(coef_order)) %>%
@@ -426,7 +526,8 @@ plt_fixed_coefs <- measure_coefs %>%
          signif = ifelse(signif, "significant", "non-significant") %>%
            fct_rev(),
          measure = fct_recode(measure, "comprehension" = "understands",
-                              "production" = "produces"))
+                              "production" = "produces")) |>
+  filter(!(term %in% c("Age", "(intercept)")))
 ggplot(plt_fixed_coefs, aes(x = estimate, y = term)) +
   facet_grid(measure ~ effect, scales = "free",
              labeller = as_labeller(label_caps)) +
@@ -434,7 +535,7 @@ ggplot(plt_fixed_coefs, aes(x = estimate, y = term)) +
                       xmin = estimate - 1.96 * std_error,
                       xmax = estimate + 1.96 * std_error)) +
   geom_vline(xintercept = 0, color = "grey", linetype = "dotted") +
-  scale_colour_viridis(discrete = TRUE, guide = FALSE) +
+  scale_colour_manual(values = effects_colors, guide = FALSE) +
   scale_shape_manual(values = c(19, 21), guide = FALSE) +
   labs(y = "", x = "Coefficient estimate", title=plot_title)
 
@@ -447,6 +548,7 @@ full_model_measure_coefs <- get_measure_coefs(effects_formula)
 plot_effects_data(full_model_measure_coefs)
 ```
 
+Just removing visual frequency and seeing what the effects look like for our set of items
 ```{r}
 non_viz_predictors <- predictors[!grepl("visual", predictors)]
 non_viz_effects_formula <- create_formula(predictors_list = non_viz_predictors)
@@ -454,6 +556,17 @@ non_viz_model_measure_coefs <- get_measure_coefs(non_viz_effects_formula)
 plot_effects_data(non_viz_model_measure_coefs, plot_title="Non visual frequency effects")
 ```
 
+The predictors we probably want for the CCN paper
+```{r}
+smaller_set_of_predictors <- c("visual_frequency", "frequency", "concreteness")
+input_model_data <- eng_vars
+smaller_effects_formula <- create_formula(predictors_list = smaller_set_of_predictors)
+smaller_model_data <- get_model_data(eng_vars=input_model_data, curr_predictors=smaller_set_of_predictors)
+smaller_model_measure_coefs <- get_measure_coefs(smaller_effects_formula, model_data=smaller_model_data, curr_predictors=smaller_set_of_predictors) 
+plot_effects_data(smaller_model_measure_coefs, plot_title="Word developmental trajectory predictors", curr_predictors=smaller_set_of_predictors)
+```
+
+Seeing how closely I can replicate the original Wordbank plot with the caveat that I'm not adding in lexical category as an additional predictor
 ```{r}
 original_predictors = predictors[!(predictors %in% c("visual_frequency"))]
 original_model_data <- get_model_data(eng_vars=eng_joined |> rename("object"="uni_lemma"), curr_predictors=original_predictors)
