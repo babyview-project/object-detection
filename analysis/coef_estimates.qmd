@@ -17,11 +17,12 @@ library(wordbankr)
 library(glue)
 library(broom)
 library(MuMIn)
+library(stringr)
 
 
 source("helpers.R")
 base_size_print=10
-label_size=3
+label_size=7
 ```
 
 # 1. Import object detection data
@@ -124,7 +125,7 @@ nrow(eng_vars |> distinct(original_object))
 nrow(eng_joined |> distinct(uni_lemma))
 ```
 
-# 3. Straightforward AoA predictor
+# 3. Straightforward AoA predictor/plot
 ```{r}
 object_counts_long <- object_counts_cleaned %>%
   pivot_longer(
@@ -151,17 +152,98 @@ aoa_objects_plot <- ggplot(object_counts_long, aes(x = aoa_value, y = log_propor
   xlab("Age of Acquisition") +
   theme_minimal()
 
-aoa_objects_plot
-ggsave(here("data/figures/aoa_plot.png"), aoa_objects_plot)
+ggsave(here("data/figures/aoa_plot_full.png"), aoa_objects_plot)
 ```
 
-## 3a. Linear modeling
+## 3a. Plot for CCN
 ```{r}
-simple_effect <- lm(AoA ~ visual_frequency, data=object_counts_cleaned)
+cdi_metadata <- read_csv(here("data/cdi_words.csv"))
 
+object_counts_plot <- object_counts_cleaned |> 
+  left_join(
+    cdi_metadata |> 
+      group_by(uni_lemma) |> 
+      slice_min(order_by = AoA, n = 1, with_ties = FALSE) |> 
+      ungroup() |> 
+      select(uni_lemma, category),
+    by = c("object" = "uni_lemma")
+  ) |>
+  #mutate(category=ifelse(category == "furniture_rooms", ifelse(object %in% c("basement", "bathroom", "bedroom", "kitchen",
+  #                                                                           "garage", "room"), "room", "furniture"), category)) |>
+  mutate(category = case_when(
+      category == "food_drink" ~ "food",
+      category == "body_parts" ~ "body parts",
+      category == "furniture_rooms" ~ "household",
+      TRUE ~ category)) |>
+  mutate(category = str_to_sentence(category)) |>
+  group_by(object) |>
+ reframe(
+     aoa_produces   = mean_na_or_na(aoa_produces),
+    aoa_understands = mean_na_or_na(aoa_understands),
+    across(everything(), ~ first(.x))  
+  ) |>
+  
+  ungroup()
+
+category_averages <- object_counts_plot |>
+  group_by(category) |>
+  summarize(avg_log_proportion = mean(log_proportion, na.rm = TRUE)) |>
+  arrange(avg_log_proportion)
+
+# Convert category to factor with ordered levels based on average log_proportion
+object_counts_plot <- object_counts_plot |>
+  mutate(category = factor(category, levels = category_averages$category))
+
+aoa_objects_plot_production <- ggplot(object_counts_plot, aes(x= aoa_produces, y=log_proportion)) +
+  geom_point(size=4, alpha=0.4, aes(color=category)) +
+  geom_smooth(method = "lm", color="#555") +
+ggrepel::geom_label_repel(
+  size=label_size,
+    data = object_counts_cleaned |> filter(object %in% c("book", "dog", "milk", "penny", "chair", "table", "porch", "plant", "hat", "crayon", "diaper", "bathroom", "tv", "toy", "truck", "hand", "ball", "face", "nose", "penguin", "juice", "cheese", "crib", "blanket", "bucket", "plate", "tray", "knee", "owie", "raisin", "puzzle", "drink", "zipper", "pasta", "turtle")), alpha=0.8,force=10,force_pull=0.1,nudge_y=-0.1,max.overlaps = 15,
+    aes(label = object)
+  ) +
+  ylim(-10, 6) +  
+  ylab("log (percentage of frames with object)") +
+  xlab("Estimated age-of-acquisition of word (in months)") +
+  theme_minimal() +
+ theme(
+    text = element_text(size=10),              # All text bold
+    # Increase space between x-axis and its title
+    axis.title.x = element_text(
+      #face = "bold", 
+      size = 20,
+      margin = margin(t = 10, r = 0, b = 0, l = 0),
+      hjust = 0.1
+    ),
+    
+    # Increase space between y-axis and its title
+    axis.title.y = element_text(
+      #face = "bold", 
+      size= 20,
+      margin = margin(t = 10, r = 5, b = 0, l = 0)
+    ), 
+    legend.title = element_text(size = 14),  # Small bold legend title
+    legend.text = element_text(size = 14),
+    axis.text = element_text(size=16)    # Small bold legend text
+  )+
+  scale_color_viridis(option="D",
+                        discrete=TRUE,
+                     end = 0.9,       # Avoids the light yellow at the end
+                     guide = guide_legend(reverse = TRUE),
+                     name="Object category") +
+ scale_x_continuous(breaks = seq(14, 34, by = 2)) +
+   coord_cartesian(xlim = c(14,34))
+aoa_objects_plot_production
+ggsave(here("data/figures/aoa_plot_afd.svg"),device="pdf", aoa_objects_plot_production, width=7.5,height=9,bg = "white")
+ggsave(here("data/figures/aoa_plot.svg"),aoa_objects_plot_production, width=7.5,height=9,bg = "white")
+```
+
+## 3b. Linear modeling
+```{r}
+simple_effect <- lm(aoa_produces ~ visual_frequency, data=object_counts_plot)
 summary(simple_effect)
 
-all_effects <- lm(aoa_understands ~ visual_frequency + scale(MLU) + scale(frequency) + scale(babiness) + scale(concreteness) + scale(final_frequency) + scale(solo_freq) + scale(valence) + scale(arousal), data=eng_vars |> filter(!is.na(aoa_understands)))
+all_effects <- lm(aoa_produces ~ visual_frequency + scale(MLU) + scale(frequency) + scale(babiness) + scale(concreteness) + scale(final_frequency) + scale(solo_freq) + scale(valence) + scale(arousal), data=eng_vars |> filter(!is.na(aoa_understands)) |> distinct(object, .keep_all=TRUE))
 summary(all_effects)
 r.squaredGLMM(all_effects)
 car::vif(all_effects)
@@ -170,9 +252,9 @@ car::vif(all_effects)
 
 The main models we're using for CCN:
 ```{r}
-smaller_model_understands <- lm(aoa_understands ~ visual_frequency + scale(frequency) + scale(concreteness), data=eng_vars)
+smaller_model_understands <- lm(aoa_understands ~ visual_frequency + scale(frequency) + scale(concreteness), data=eng_vars |> distinct(object, .keep_all=TRUE))
 summary(smaller_model_understands)
-smaller_model_produces <- lm(aoa_produces ~ visual_frequency + scale(frequency) + scale(concreteness), data=eng_vars)
+smaller_model_produces <- lm(aoa_produces ~ visual_frequency + scale(frequency) + scale(concreteness), data=eng_vars  |> distinct(object, .keep_all=TRUE))
 summary(smaller_model_produces)
 ```
 Which words might be causing this disconnect
@@ -180,11 +262,14 @@ Which words might be causing this disconnect
 anti_join(eng_vars |> distinct(object), eng_vars |> filter(!is.na(aoa_understands)) |> distinct(object))
 ```
 
-just looking at correlations
+## 3c. just looking at correlations
 ```{r}
 eng_vars_filtered <- eng_vars |> 
   filter(!is.na(frequency) & !is.na(visual_frequency) & !is.na(concreteness))
 cor(eng_vars_filtered |> distinct(visual_frequency, frequency, final_frequency, concreteness, object) |> select(-object), use = "pairwise.complete.obs")
+cor_test_eng_vars <- eng_vars_filtered |> distinct(visual_frequency, frequency, final_frequency, concreteness, object)
+cor.test(cor_test_eng_vars$visual_frequency, cor_test_eng_vars$frequency)
+cor.test(cor_test_eng_vars$visual_frequency, cor_test_eng_vars$concreteness)
 ```
 Formats seen, frequency, total count and babiness all show separate positive predictivity which is encouraging.
 
@@ -502,7 +587,7 @@ measure_coefs <- measure_fits %>%
 return(measure_coefs)
 }
 
-plot_effects_data <- function(measure_coefs, plot_title="Word development item e", curr_predictors=predictors) {
+plot_effects_data <- function(measure_coefs, plot_title="Word developmental trajectory predictors", curr_predictors=predictors) {
 predictor_effects <- measure_coefs %>%
   filter(effect == "main effect", term %in% curr_predictors) %>%
   rename(predictor_effect = data) %>%
@@ -538,10 +623,10 @@ ggplot(plt_fixed_coefs, aes(x = estimate, y = term)) +
   scale_colour_manual(values = effects_colors, guide = FALSE) +
   scale_shape_manual(values = c(19, 21), guide = FALSE) +
   labs(y = "", x = "Coefficient estimate", title=plot_title)
-
 }
 ```
 
+## 4e. Finally testing out different models
 ```{r, echo=FALSE, fig.keep='all'}
 # Main model with fixed effects
 full_model_measure_coefs <- get_measure_coefs(effects_formula) 
@@ -565,8 +650,15 @@ smaller_model_data <- get_model_data(eng_vars=input_model_data, curr_predictors=
 smaller_model_measure_coefs <- get_measure_coefs(smaller_effects_formula, model_data=smaller_model_data, curr_predictors=smaller_set_of_predictors) 
 plot_effects_data(smaller_model_measure_coefs, plot_title="Word developmental trajectory predictors", curr_predictors=smaller_set_of_predictors)
 ```
+Trying to get rid of low object detections to see if that makes a difference
+```{r}
+filtered_model_data <- eng_vars |> filter(log_proportion>-5) |> mutate(visual_frequency=scale(log_proportion))
+smaller_model_data <- get_model_data(eng_vars=filtered_model_data, curr_predictors=smaller_set_of_predictors)
+smaller_model_measure_coefs <- get_measure_coefs(smaller_effects_formula, model_data=smaller_model_data, curr_predictors=smaller_set_of_predictors) 
+plot_effects_data(smaller_model_measure_coefs, plot_title="Word developmental trajectory predictors", curr_predictors=smaller_set_of_predictors)
+```
 
-Seeing how closely I can replicate the original Wordbank plot with the caveat that I'm not adding in lexical category as an additional predictor
+Seeing how closely I can replicate the original Wordbank plot with the caveat that I'm not using lexical category as an additional predictor
 ```{r}
 original_predictors = predictors[!(predictors %in% c("visual_frequency"))]
 original_model_data <- get_model_data(eng_vars=eng_joined |> rename("object"="uni_lemma"), curr_predictors=original_predictors)
@@ -575,7 +667,7 @@ plot_effects_data(original_model_measure_coefs, plot_title="Original model data"
 ```
 
 
-## 5. Correlation with other predictors
+# 5. Correlation with other predictors
 ```{r}
 # Compute correlation matrix
 
@@ -602,5 +694,4 @@ ggplot(cor_melted, aes(X1, X2, fill = value)) +
        fill = "Correlation") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = axis_label_colors),
         axis.text.y = element_text(color = axis_label_colors))
-
 ```

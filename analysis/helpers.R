@@ -9,3 +9,7 @@ aoa_data <- function(language, form, input_measure) {
     filter(aoa == max(aoa, na.rm = TRUE,), .by=item)
   return(aoa)
 }
+
+mean_na_or_na <- function(x) {
+  if (all(is.na(x))) NA_real_ else mean(x, na.rm = TRUE)
+}
