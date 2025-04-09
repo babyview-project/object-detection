@@ -1,0 +1,222 @@
+---
+title: "object_detections_glmers_bll"
+author: "Bria Long"
+date: "2025-04-09"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load the libraries
+library(tidyverse)
+library(babyviewr)
+library(lubridate)
+library(ggthemes)
+library(kableExtra)
+library(here)
+library(ggrepel)
+library(ggpubr)
+library(lme4)
+library(broom.mixed)
+library(effects)
+```
+
+# Load intermediate dataframe
+This comes from the first few steps in
+```{r}
+read_csv(file=here::here('frame_data/preprocessed_object_detections.csv'))
+```
+
+
+# Bria tries things 4/7/25
+
+First let's runs mixed-effect mdoels
+
+
+```{r}
+# First I'm going to get a random sample of 10% of the dataframe to test my code on -- was useful.
+
+test_dataframe <-object_counts_expanded_dataframe %>%
+  sample_frac(.1)
+
+# Wow it's still 3M rows, wow
+```
+
+```{R}
+total_frames <- object_counts_expanded_dataframe %>%
+  group_by(subject_id, age_mo) %>%
+  summarize(num_total_frames = length(unique(frame_id)))
+
+classes_per_age_by_subject <- test_dataframe %>%
+  group_by(subject_id, age_mo) %>%
+  summarize(num_classes = length(unique(class_name)))
+
+```
+
+So I was wrong here -- I don't think you need to fill out non-detected categories for every frame -- glmer can handle the missing data, which is the whole point.
+
+This now makes the data frame you need for the glmer
+```{R}
+for_glmer <- object_counts_by_age %>%
+  mutate(num_not_detected = num_frames - num_detected) %>%
+  mutate(class_name = as.factor(class_name), subject_id = as.factor(subject_id)) # as factor for models
+```
+
+Run your main age model, scaling for age, and with the maximal random effects structure justified by your data
+```{r}
+age_model= glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (scale(age_mo) | subject_id) +   (scale(age_mo) | class_name), family='binomial')
+
+age_model_no_slopes = glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (scale(age_mo) | subject_id) +   (1 | class_name), family='binomial')
+
+anova(age_model, age_model_no_slopes)
+```
+
+
+```{r}
+age_model_proportion= glmer(data=for_glmer %>% mutate(prop_detected = num_detected/num_total_frames), prop_detected ~ scale(age_mo) + (scale(age_mo) | subject_id) + (scale(age_mo) | class_name), weights =num_total_frames, family='binomial')
+
+summary(age_model_proportion)
+```
+
+
+```{r}
+ranef_df <- as.data.frame(ranef(age_model))
+head(ranef_df)
+
+
+```
+
+```{r}
+
+positive_changes_across_age <- ranef_df %>%
+  filter(grpvar=='class_name') %>%
+  filter(term=='scale(age_mo)') %>%
+  slice_max(order_by=condval, n=10)
+
+neg_changes_across_age <- ranef_df %>%
+  filter(grpvar=='class_name') %>%
+  filter(term=='scale(age_mo)') %>%
+  slice_max(order_by=-condval, n=10)
+```
+
+
+```{R}
+library(MuMIn)
+r.squaredGLMM(age_model)
+
+r.squaredGLMM(age_model_proportion)
+```
+I think we also want to test whether the shape of the distribution changes with age, not just the proportion detected....oof. OK, back to the drawing board, I think,.
+
+# Bria tries something else 
+
+
+Now, let's just look at figuring out if we can correlate the distributions (we can try spearman rank correlations, which is better tha pearson's since it's non-linear data )
+
+
+
+Now, get counts of how often the objects appeared
+```{r}
+by_subject <- object_counts_by_age %>%
+  filter(age_mo<12) %>%
+  group_by(subject_id, class_name) %>% # now group by our main variables
+  summarize(num_detected = sum(num_detected), total_frames_by_sub = sum(num_frames))%>%
+  mutate(num_not_detected = total_frames_by_sub - num_detected) %>%
+  mutate(prop_detected = num_detected/total_frames_by_sub)
+
+by_subject_frames <- object_counts_by_age %>%
+  group_by(subject_id) %>% # now group by our main variables
+  summarize(total_frames_by_sub = sum(num_frames))
+
+frames_by_age <- object_counts_by_age %>%
+  group_by(age_mo) %>% # now group by our main variables
+  summarize(total_frames_by_age = sum(num_frames))
+  
+```
+
+Get classes where 2/3 of subjects don't have detections, we might want to exclude them to see how correlations change later...
+```{r}
+mostly_zeros <- by_subject %>%
+  filter(prop_detected==0) %>%
+  group_by(class_name) %>%
+  summarize(num_subs_zeros = length(unique(subject_id))) %>%
+  arrange(-num_subs_zeros) %>%
+  filter(num_subs_zeros>20)
+  
+```
+
+
+OK, get a wide dataframe so you can make correlations across subjects
+```{R}
+by_subject_wide <- by_subject |>
+  # filter(! class_name %in% mostly_zeros$class_name) %>%
+  select(subject_id, class_name, prop_detected) |>
+  pivot_wider(names_from = class_name, values_from = prop_detected, values_fill=0)
+
+cor_matrix <- by_subject_wide %>%
+  column_to_rownames("subject_id") %>%
+  t() %>%
+  cor(use = "pairwise.complete.obs", method='spearman')
+```
+
+Convert to tidy format and compute average correlation per subject
+```{r}
+avg_corr_by_subject <- as.data.frame(cor_matrix) %>%
+  rownames_to_column("subject_id") %>%
+  pivot_longer(-subject_id, names_to = "other_subject", values_to = "correlation") %>%
+  filter(subject_id != other_subject) %>%  # exclude self-correlation
+  group_by(subject_id) %>%
+  summarise(avg_correlation = mean(correlation, na.rm = TRUE), sd_correlation = sd(correlation)) %>%
+  arrange(desc(avg_correlation)) %>%
+  left_join(by_subject_frames)
+```
+
+OK, do subjects with more data just have higher correlations with each other?
+```{R}
+cor.test(avg_corr_by_subject$total_frames_by_sub, avg_corr_by_subject$avg_correlation)
+```
+
+To some extent, I think so?
+```{r}
+qplot(avg_corr_by_subject$total_frames_by_sub, avg_corr_by_subject$avg_correlation)
+```
+
+## Now same thing by age
+```{R}
+by_age_wide <- object_counts_by_age |>
+  group_by(age_mo, class_name) |>
+  summarize(num_detected = sum(num_detected)) %>%
+left_join(frames_by_age) %>%  
+  mutate(prop_detected = num_detected / total_frames_by_age) %>%
+  select(-num_detected, -total_frames_by_age) %>%
+  pivot_wider(names_from = class_name, values_from = prop_detected, values_fill=0)
+
+cor_matrix_age <- by_age_wide %>%
+  column_to_rownames("age_mo") %>%
+  t() %>%
+  cor(use = "pairwise.complete.obs", method='spearman')
+```
+
+Convert to tidy format and compute average correlation per age
+```{r}
+avg_corr_by_age <- as.data.frame(cor_matrix_age) %>%
+  rownames_to_column("age_mo") %>%
+  pivot_longer(-age_mo, names_to = "other_age", values_to = "correlation") %>%
+  filter(age_mo != other_age) %>%  # exclude self-age correlation
+  group_by(age_mo) %>%
+  summarise(avg_correlation = mean(correlation, na.rm = TRUE), sd_correlation = sd(correlation)) %>%
+  arrange(desc(age_mo)) %>%
+  mutate(age_mo = as.numeric(age_mo)) %>%
+  left_join(frames_by_age)
+```
+
+Whew this looks kinda like the data density plot.
+```{r}
+ggplot(data=avg_corr_by_age, aes(x=as.numeric(age_mo), y=avg_correlation, size=total_frames_by_age)) +
+  geom_point(alpha=.2) + 
+  ylab('Average spearman correlation between age bins')
+```
