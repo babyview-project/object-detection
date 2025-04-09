@@ -83,12 +83,12 @@ object_counts_by_age <- objects_joined %>%
   ungroup() %>%
   complete(class_name, subject_id, age_mo, fill=list(num_detected=0))  %>%
   left_join(frames_by_age) %>%
+  filter(!is.na(class_name)) %>%
   filter(!is.na(num_frames)) # only if we had data
 ```
 
 
-
-Preprocessed file
+Pre-processed file
 ```{R}
 write_csv(object_counts_by_age, file=here::here('frame_data/preprocessed_object_detections.csv'))
 ```
