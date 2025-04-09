@@ -91,35 +91,38 @@ nrow(objects_joined |> distinct(frame_id, superseded_gcp_name_feb25))
 
 ## Add no-detection frame rows to the dataframe
 ```{r}
-# object_counts_expanded_dataframe <- objects_joined %>%
-#   group_by(superseded_gcp_name_feb25, class_name, frame_id, time_in_extended_iso, subject_id, age_mo, confidence) %>%
-#   summarize(count = n()) %>%
-#   ungroup() %>%
-#   complete(superseded_gcp_name_feb25, class_name, fill = list(count = 0)) %>%
-#   mutate(class_present = count>0) %>%
-#   filter(!is.na(class_name)) # this comes from frames that had nothing, but doesn't need to be in list of objects
 
-  object_counts_expanded_dataframe <- objects_joined %>%
-    group_by(superseded_gcp_name_feb25, class_name, frame_id, time_in_extended_iso, subject_id, age_mo, confidence) %>%
-    summarize(count = n()) %>%
-    ungroup() %>%
-    # Complete missing combinations while preserving subject_id
-    complete(
-      nesting(superseded_gcp_name_feb25, subject_id, age_mo),
-      class_name,
-      fill = list(count = 0)
-    ) %>%
-    filter(!is.na(class_name)) %>%
+frames_by_age <- objects_joined %>%
+  mutate(frame_unique = paste0(superseded_gcp_name_feb25,'_',frame_id)) %>%
+  group_by(subject_id, age_mo) %>%
+  summarize(num_frames = length(unique(frame_unique)))
+  
+object_counts_by_age <- objects_joined %>%
+  mutate(frame_unique = paste0(superseded_gcp_name_feb25,'_',frame_id)) %>%
+  group_by(frame_unique, class_name, subject_id, age_mo) %>%
+  summarize(count = n()) %>%
+  mutate(class_present = count>0) %>%
+  group_by(class_name, subject_id, age_mo) %>%
+  summarize(num_detected = sum(class_present)) %>%
+  ungroup() %>%
+  complete(class_name, subject_id, age_mo, fill=list(num_detected=0))  %>%
+  left_join(frames_by_age) %>%
+  filter(!is.na(num_frames)) # only if we had data
+  
+
+
     
 ```
 
-
+Preprocessed file
+```{R}
+write_csv(object_counts_by_age, file=here::here('frame_data/preprocessed_object_detections.csv'))
+```
 
 
 ```{R}
-object_freq <- object_counts_expanded_dataframe %>%
+object_freq <- object_counts_by_age %>%
   group_by(class_name) %>%
-  mutate(class_present = count>0) %>%
   summarize(freq = mean(class_present)) %>%
   arrange(freq)
 ```
@@ -1934,7 +1937,7 @@ write.csv(
 glmer(proportion_detected ~ age_mo + (age_mo | subject) + (age_mo | category) , family=binomial, weights=total_frames)
 ```
 
-# C{reate subject-level detection proportions using frame_id
+# Create subject-level detection proportions using frame_id
 ```{r}
 subject_level_proportions_temp <- objects_joined_with_categories %>%
   # First get total detected frames per subject-age-video combination
@@ -2017,174 +2020,5 @@ cat("\nAge range:", min(subject_level_proportions$age_mo), "to",
 ```
 
 
-# Bria tries things 4/7/25
 
-First let's runs mixed-effect mdoels
-
-
-```{r}
-# First I'm going to get a random sample of 10% of the dataframe to test my code on -- was useful.
-
-# test_dataframe <-object_counts_expanded_dataframe %>%
-  # sample_frac(.1)
-
-# Wow it's still 3M rows, wow
-```
-
-```{R}
-total_frames <- object_counts_expanded_dataframe %>%
-  group_by(subject_id, age_mo) %>%
-  summarize(num_total_frames = length(unique(frame_id)))
-```
-
-So I was wrong here -- I don't think you need to fill out non-detected categories for every frame -- glmer can handle the missing data, which is the whole point.
-
-This now makes the data frame you need for the glmer
-```{R}
-for_glmer <- object_counts_expanded_dataframe %>%
-  mutate(class_present = count>0) %>% # make a new binary variable so that we only count each class once per frame
-  distinct(subject_id, frame_id, class_name, class_present, age_mo) %>% # only want class present or not once per frame, this was causing errors in proportions -- the distinct
-  group_by(subject_id, class_name, age_mo) %>% # now group by our main variables
-  summarize(num_detected = sum(class_present)) %>% # count
-  left_join(total_frames) %>% # join back total frame per age/subject_id bin
-  mutate(num_not_detected = num_total_frames - num_detected) %>%
-  mutate(class_name = as.factor(class_name), subject_id = as.factor(subject_id)) # as factor for models
-```
-
-Run your main age model, scaling for age, and with the maximal random effects structure justified by your data
-```{r}
-age_model= glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (scale(age_mo) | subject_id) +   (scale(age_mo) | class_name), family='binomial')
-```
-
-
-```{r}
-age_model_proportion= glmer(data=for_glmer %>% mutate(prop_detected = num_detected/num_total_frames), prop_detected ~ scale(age_mo) + (scale(age_mo) | subject_id) + (scale(age_mo) | class_name), weights =num_total_frames, family='binomial')
-
-summary(age_model_proportion)
-```
-
-OK, this made me worried that we're overfitting here as the conditional r-squared is really high, I"m not convinced this is the right model anymore
-```{R}
-library(MuMIn)
-r.squaredGLMM(age_model)
-
-r.squaredGLMM(age_model_proportion)
-```
-I think we also want to test whether the shape of the distribution changes with age, not just the proportion detected....oof. OK, back to the drawing board, I think,.
-
-# Bria tries something else 
-
-
-Now, let's just look at figuring out if we can correlate the distributions (we can try spearman rank correlations, which is better tha pearson's since it's non-linear data )
-
-First, get the total number of frames that we had per subject
-```{R}
-total_frames_by_sub <- object_counts_expanded_dataframe %>%
-  group_by(subject_id) %>%
-  summarize(num_total_frames = n())
-
-total_frames_by_age <- object_counts_expanded_dataframe %>%
-  group_by(age_mo) %>%
-  summarize(num_total_frames = n())
-# I don't think frameid is unique to video, so using n() here
-```
-
-Now, get counts of how often the objects appeared
-```{r}
-by_subject <- object_counts_expanded_dataframe %>%
-  mutate(class_present = count>0) %>% # make a new binary variable so that we only count each class once per frame
-  distinct(subject_id, frame_id, class_name, class_present) %>% # only want class present or not once per frame, this was causing errors in proportions -- the distinct
-  group_by(subject_id, class_name) %>% # now group by our main variables
-  summarize(num_detected = sum(class_present)) %>% # count
-  left_join(total_frames_by_sub) %>% # join back total frame per age/subject_id bin
-  mutate(num_not_detected = num_total_frames - num_detected) %>%
-  mutate(prop_detected = num_detected/num_total_frames)
-  
-```
-
-Get classes where 2/3 of subjects don't have detections, we might want to exclude them to see how correlations change later...
-```{r}
-mostly_zeros <- by_subject %>%
-  filter(prop_detected==0) %>%
-  group_by(class_name) %>%
-  summarize(num_subs_zeros = length(unique(subject_id))) %>%
-  arrange(-num_subs_zeros) %>%
-  filter(num_subs_zeros>20)
-  
-```
-
-
-OK, get a wide dataframe so you can make correlations across subjects
-```{R}
-by_subject_wide <- by_subject |>
-  filter(! class_name %in% mostly_zeros$class_name) %>%
-  select(subject_id, class_name, prop_detected) |>
-  pivot_wider(names_from = class_name, values_from = prop_detected, values_fill=0)
-
-cor_matrix <- by_subject_wide %>%
-  column_to_rownames("subject_id") %>%
-  t() %>%
-  cor(use = "pairwise.complete.obs", method='spearman')
-```
-
-Convert to tidy format and compute average correlation per subject
-```{r}
-avg_corr_by_subject <- as.data.frame(cor_matrix) %>%
-  rownames_to_column("subject_id") %>%
-  pivot_longer(-subject_id, names_to = "other_subject", values_to = "correlation") %>%
-  filter(subject_id != other_subject) %>%  # exclude self-correlation
-  group_by(subject_id) %>%
-  summarise(avg_correlation = mean(correlation, na.rm = TRUE), sd_correlation = sd(correlation)) %>%
-  arrange(desc(avg_correlation)) %>%
-  left_join(total_frames_by_sub)
-```
-
-OK, do subjects with more data just have higher correlations with each other?
-```{R}
-cor.test(avg_corr_by_subject$num_total_frames, avg_corr_by_subject$avg_correlation)
-```
-
-To some extent, I think so?
-```{r}
-qplot(avg_corr_by_subject$num_total_frames, avg_corr_by_subject$avg_correlation)
-```
-
-## Now same thing by age
-```{R}
-by_age_wide <- object_counts_expanded_dataframe |>
-  filter(! class_name %in% mostly_zeros$class_name) %>%
-    mutate(class_present = count>0) %>% # make a new binary variable so that we only count each class once per frame
-  distinct(age_mo, frame_id, class_name, class_present) %>% # only want class present or not once per frame
-  group_by(age_mo, class_name) |>
-  summarize(num_detected = sum(class_present)) %>%
-left_join(total_frames_by_age) %>%  
-  mutate(prop_detected = num_detected / num_total_frames) %>%
-  select(-num_detected, -num_total_frames) %>%
-  pivot_wider(names_from = class_name, values_from = prop_detected, values_fill=0)
-
-cor_matrix_age <- by_age_wide %>%
-  column_to_rownames("age_mo") %>%
-  t() %>%
-  cor(use = "pairwise.complete.obs", method='spearman')
-```
-
-Convert to tidy format and compute average correlation per age
-```{r}
-avg_corr_by_age <- as.data.frame(cor_matrix_age) %>%
-  rownames_to_column("age_mo") %>%
-  pivot_longer(-age_mo, names_to = "other_age", values_to = "correlation") %>%
-  filter(age_mo != other_age) %>%  # exclude self-age correlation
-  group_by(age_mo) %>%
-  summarise(avg_correlation = mean(correlation, na.rm = TRUE), sd_correlation = sd(correlation)) %>%
-  arrange(desc(age_mo)) %>%
-  mutate(age_mo = as.numeric(age_mo)) %>%
-  left_join(total_frames_by_age)
-```
-
-Whew this looks kinda like the data density plot.
-```{r}
-ggplot(data=avg_corr_by_age, aes(x=as.numeric(age_mo), y=avg_correlation, size=num_total_frames)) +
-  geom_point(alpha=.2) + 
-  ylab('Average spearman correlation between age bins')
-```
 
