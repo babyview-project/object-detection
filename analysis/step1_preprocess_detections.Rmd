@@ -1,0 +1,100 @@
+---
+title: "object_detection_analysis_ccn_mar25"
+author: "Jane Yang"
+date: "2025-03-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load the libraries
+library(tidyverse)
+library(babyviewr)
+library(lubridate)
+library(ggthemes)
+library(kableExtra)
+library(here)
+library(ggrepel)
+library(ggpubr)
+library(lme4)
+library(broom.mixed)
+library(effects)
+```
+
+# Load BV metadata from airtable
+```{r}
+# Load the data
+participants <- babyviewr::get_participant_data(include_demographics = TRUE)
+recordings <- babyviewr::get_main_recording_data(include_luna = TRUE)
+```
+
+# Filter to BV-main data only, plot cumulative number of hours per subject
+```{r}
+d <- left_join(recordings, 
+                      participants |>
+                        filter(dataset %in% c("BV-main")) |>
+                        select(-dataset), by = "subject_id") |>
+  filter(dataset == "BV-main") |>
+  group_by(subject_id) |>
+  arrange(date_time) |>
+  mutate(age = date(date_time) - date_birth_rounded, 
+         cumulative_hrs = cumsum(duration_hrs), 
+         age_mo = floor(as.numeric(age)/30.3))
+```
+
+
+# Load Object Detection Data (super large file!)
+```{r}
+objects <- read_csv(here::here("frame_data/allframes_1fps.csv")) 
+colnames(objects)
+```
+
+# Merge the object detection file with the recording data
+```{r}
+objects_joined <- inner_join(objects, d, by = c("superseded_gcp_name_feb25"))
+head(objects_joined)
+```
+
+## Get the number of frames with detections across subjects
+```{r}
+paste("Number of frames with detections:")
+nrow(objects_joined |> distinct(frame_id, superseded_gcp_name_feb25))
+```
+
+## Add no-detection frame rows to the dataframe
+```{r}
+frames_by_age <- objects_joined %>%
+  mutate(frame_unique = paste0(superseded_gcp_name_feb25,'_',frame_id)) %>%
+  group_by(subject_id, age_mo) %>%
+  summarize(num_frames = length(unique(frame_unique)))
+```
+
+```{r}
+object_counts_by_age <- objects_joined %>%
+  mutate(frame_unique = paste0(superseded_gcp_name_feb25,'_',frame_id)) %>%
+  group_by(frame_unique, class_name, subject_id, age_mo) %>%
+  summarize(count = n()) %>%
+  mutate(class_present = count>0) %>%
+  group_by(class_name, subject_id, age_mo) %>%
+  summarize(num_detected = sum(class_present)) %>%
+  ungroup() %>%
+  complete(class_name, subject_id, age_mo, fill=list(num_detected=0))  %>%
+  left_join(frames_by_age) %>%
+  filter(!is.na(num_frames)) # only if we had data
+```
+
+
+
+Preprocessed file
+```{R}
+write_csv(object_counts_by_age, file=here::here('frame_data/preprocessed_object_detections.csv'))
+```
+
+
+
+
+
+
