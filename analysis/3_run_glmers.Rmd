@@ -28,70 +28,50 @@ library(effects)
 # Load intermediate dataframe
 This comes from the first few steps in
 ```{r}
-read_csv(file=here::here('frame_data/preprocessed_object_detections.csv'))
+object_counts_by_age = read_csv(file=here::here('frame_data/preprocessed_object_detections.csv')) %>%
+  filter(!is.na(num_frames)) # we don't have data in every age bin
 ```
 
 
-# Bria tries things 4/7/25
-
-First let's runs mixed-effect mdoels
+# Mixed-effect models
 
 
-```{r}
-# First I'm going to get a random sample of 10% of the dataframe to test my code on -- was useful.
-
-test_dataframe <-object_counts_expanded_dataframe %>%
-  sample_frac(.1)
-
-# Wow it's still 3M rows, wow
-```
-
-```{R}
-total_frames <- object_counts_expanded_dataframe %>%
-  group_by(subject_id, age_mo) %>%
-  summarize(num_total_frames = length(unique(frame_id)))
-
-classes_per_age_by_subject <- test_dataframe %>%
-  group_by(subject_id, age_mo) %>%
-  summarize(num_classes = length(unique(class_name)))
-
-```
-
-So I was wrong here -- I don't think you need to fill out non-detected categories for every frame -- glmer can handle the missing data, which is the whole point.
-
-This now makes the data frame you need for the glmer
 ```{R}
 for_glmer <- object_counts_by_age %>%
   mutate(num_not_detected = num_frames - num_detected) %>%
-  mutate(class_name = as.factor(class_name), subject_id = as.factor(subject_id)) # as factor for models
+  mutate(class_name = as.factor(class_name), subject_id = as.factor(subject_id)) 
 ```
 
 Run your main age model, scaling for age, and with the maximal random effects structure justified by your data
 ```{r}
-age_model= glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (scale(age_mo) | subject_id) +   (scale(age_mo) | class_name), family='binomial')
+age_model = glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (scale(age_mo) | subject_id) +   (scale(age_mo) | class_name), family='binomial')
 
-age_model_no_slopes = glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (scale(age_mo) | subject_id) +   (1 | class_name), family='binomial')
+age_model_no_class_slopes = glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (scale(age_mo) | subject_id) +  (1| class_name), family='binomial')
 
-anova(age_model, age_model_no_slopes)
+age_model_no_sub_slopes = glmer(data=for_glmer, cbind(num_detected, num_not_detected) ~ scale(age_mo) + (1 | subject_id) +  (scale(age_mo)| class_name), family='binomial')
 ```
 
+```{R}
+anova(age_model, age_model_no_class_slopes)
+```
 
 ```{r}
-age_model_proportion= glmer(data=for_glmer %>% mutate(prop_detected = num_detected/num_total_frames), prop_detected ~ scale(age_mo) + (scale(age_mo) | subject_id) + (scale(age_mo) | class_name), weights =num_total_frames, family='binomial')
+anova(age_model, age_model_no_sub_slopes)
+
+```
+
+```{r}
+age_model_proportion= glmer(data=for_glmer %>% mutate(prop_detected = num_detected/num_frames), prop_detected ~ scale(age_mo) + (scale(age_mo) | subject_id) + (scale(age_mo) | class_name), weights =num_frames, family='binomial')
 
 summary(age_model_proportion)
 ```
 
-
 ```{r}
 ranef_df <- as.data.frame(ranef(age_model))
 head(ranef_df)
-
-
 ```
 
 ```{r}
-
 positive_changes_across_age <- ranef_df %>%
   filter(grpvar=='class_name') %>%
   filter(term=='scale(age_mo)') %>%
@@ -110,11 +90,8 @@ r.squaredGLMM(age_model)
 
 r.squaredGLMM(age_model_proportion)
 ```
-I think we also want to test whether the shape of the distribution changes with age, not just the proportion detected....oof. OK, back to the drawing board, I think,.
 
 # Bria tries something else 
-
-
 Now, let's just look at figuring out if we can correlate the distributions (we can try spearman rank correlations, which is better tha pearson's since it's non-linear data )
 
 
