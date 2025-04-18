@@ -1,6 +1,9 @@
 ---
 title: "Object–name cooccurrence statistics"
-format: html
+format: 
+  html:
+    toc: true
+    theme: flatly
 ---
 
 ```{r, message=F}
@@ -42,7 +45,7 @@ merged_cleaned <- merged_filtered |>
 Reading in other annotations
 ```{r}
 all_objects <- read_csv(here("data", "merged_objects.csv"))
-all_trans <- read_csv(here("data", "merged_trans.csv"))
+all_trans <- read_csv(here("data", "merged_trans.csv")) # NOTE: not in GitHub due to size
 ```
 
 Transcript parsing
