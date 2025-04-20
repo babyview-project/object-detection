@@ -1,0 +1,413 @@
+---
+title: "Object–name cooccurrence statistics"
+format: 
+  html:
+    toc: true
+    theme: flatly
+---
+
+```{r, message=F}
+library(tidyverse)
+library(lubridate)
+library(here)
+library(ggcorrplot)
+library(GGally)
+library(udpipe)
+theme_set(theme_classic())
+# ud_dl <- udpipe_download_model("english")
+ud_mod <- udpipe_load_model(here("english-ewt-ud-2.5-191206.udpipe"))
+
+knitr::opts_chunk$set(
+  message=F
+)
+```
+
+```{r}
+WINDOW_THRESHOLD = 5
+```
+
+
+## Data loading
+```{r}
+merged_filtered <- read_csv(here("data", "merged_cooccurrences_filtered.csv")) |> 
+  mutate(confidence = as.numeric(confidence))
+```
+
+```{r}
+merged_cleaned <- merged_filtered |> 
+  group_by(superseded_gcp_name_feb25, token_id, utterance_id, utterance, token_num, token, 
+           token_start_time, token_end_time, speaker) |> 
+  summarise(first_frame = min(original_frame_path),
+            min_window = min(min_diff),
+            .groups = "drop")
+```
+
+Reading in other annotations
+```{r}
+all_objects <- read_csv(here("data", "merged_objects.csv"))
+all_trans <- read_csv(here("data", "merged_trans.csv")) # NOTE: not in GitHub due to size
+```
+
+Transcript parsing
+```{r, eval=F}
+ud_text <- all_trans |> 
+  group_by(superseded_gcp_name_feb25, utterance_id, utterance) |> 
+  summarise(text = paste(token, collapse = "\n"),
+            .groups = "drop")
+
+ud_annotated <- udpipe_annotate(ud_mod, x = ud_text$text, tokenizer = "vertical") |> 
+  as_tibble()
+
+all_trans_annotated <- all_trans |> 
+  arrange(superseded_gcp_name_feb25, utterance_id) |> 
+  cbind(ud_annotated |> select(-token_id, -token))
+
+write_csv(all_trans_annotated, "merged_trans_annotated.csv")
+```
+
+```{r}
+all_trans_annotated <- read_csv(here("data", "merged_trans_annotated.csv"))
+```
+
+```{r}
+merged_cleaned_annotated <- merged_cleaned |> 
+  left_join(all_trans_annotated, 
+            by = join_by(superseded_gcp_name_feb25, 
+                         utterance_id, 
+                         token_id,
+                         utterance,
+                         token,
+                         token_num, 
+                         token_start_time, 
+                         token_end_time, 
+                         speaker)) |> 
+  filter(upos == "NOUN")
+```
+
+AoAs
+```{r}
+eng_aoas <- read_csv(here("data", "eng_aoas.csv")) |> 
+  select(-intercept, -slope) |> 
+  pivot_wider(names_from = "measure",
+              values_from = "aoa") |> 
+  mutate(item_definition = item_definition |>
+           str_replace_all(c(
+             " \\(object\\)" = "",
+             " \\(animal\\)" = "",
+             " \\(food\\)" = "",
+             " \\(beverage\\)" = "",
+             " \\(not beverage\\)" = "",
+             "soda/pop" = "soda",
+             "tissue/kleenex" = "tissue"
+           ))) |> 
+  group_by(item_definition) |>
+  summarise(produces = min(produces, na.rm = T),
+            understands = min(understands, na.rm = T),
+            .groups = "drop") |> 
+  mutate(understands = ifelse(is.infinite(understands), NA, understands))
+```
+
+```{r}
+merged_plot_annotated <- merged_cleaned_annotated |> 
+  filter(min_window <= WINDOW_THRESHOLD) |>
+  group_by(token) |> 
+  summarise(cooccurrences = n(),
+            .groups = "drop") |> 
+  left_join(eng_aoas, by = join_by(token == item_definition))
+```
+
+Summaries
+```{r}
+obj_summary <- all_objects |> 
+  group_by(class_name) |> 
+  summarise(n_frames = sum(n_frames),
+            mean_area = sum(n_detections * mean_area) / sum(n_detections),
+            n_detections = sum(n_detections),
+            .groups = "drop")
+tok_summary <- all_trans_annotated |> 
+  filter(upos == "NOUN") |> 
+  group_by(superseded_gcp_name_feb25, token) |> 
+  summarise(n_counts = n(),
+            .groups = "drop") |> 
+  group_by(token) |> 
+  summarise(n_counts = sum(n_counts),
+            n_videos = n(),
+            .groups = "drop")
+```
+
+```{r}
+merged_all <- merged_plot_annotated |> 
+  left_join(obj_summary, by = join_by(token == class_name)) |> 
+  left_join(tok_summary, by = join_by(token == token)) |> 
+  rename(frames_with_object = n_frames,
+         token_count = n_counts)
+```
+
+## Visualisations and models
+```{r}
+ggplot(merged_all,
+       aes(x = log(cooccurrences), y = log(frames_with_object))) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Log number of cooccurrences",
+       y = "Log number of frames with object")
+```
+
+```{r}
+lm(produces ~ scale(log(cooccurrences)) + scale(log(frames_with_object)) + scale(log(token_count)), 
+   data = merged_all) |> 
+  summary()
+```
+
+What about PMI?
+```{r}
+TOTAL_FRAMES = 3163675
+merged_all_info <- merged_all |> 
+  mutate(pmi = log(cooccurrences * TOTAL_FRAMES / (frames_with_object * token_count * 2 * WINDOW_THRESHOLD)),
+         pmi = ifelse(is.infinite(pmi), NA, pmi)) # |> 
+  # left_join(eng_aoas |> select(item_definition, measure, aoa) |> 
+  #             pivot_wider(names_from = measure, values_from = aoa) |> 
+  #             mutate(item_definition = item_definition |> 
+  #                      str_replace_all(" \\(\\w+\\)", "")) |> 
+  #             group_by(item_definition) |> 
+  #             summarise(produces = min(produces, na.rm = T),
+  #                       understands = min(understands, na.rm = T)) |> 
+  #             suppressWarnings() |> 
+  #             mutate(understands = ifelse(is.infinite(understands), NA, understands)),
+  #           by = join_by(token == item_definition)) |> 
+  # select(-aoa)
+```
+
+```{r}
+merged_all_info_log <- merged_all_info |> 
+  mutate(across(c(cooccurrences,
+                  frames_with_object,
+                  token_count),
+                log)) |> 
+  select(token,
+         cooccurrences,
+         frames_with_object,
+         token_count,
+         pmi,
+         aoa_prod = produces,
+         aoa_comp = understands)
+
+merged_cor <- cor(merged_all_info_log |> select(-token),
+                  use = "pairwise.complete.obs")
+ggcorrplot(merged_cor)
+```
+
+```{r, warning=F}
+ggpairs(merged_all_info_log |> select(-token), progress = FALSE)
+```
+
+```{r}
+lm(produces ~ scale(pmi) + scale(log(frames_with_object)) + scale(log(token_count)), 
+   data = merged_all_info) |> 
+  summary()
+```
+
+```{r}
+lm(understands ~ scale(pmi) + scale(log(frames_with_object)) + scale(log(token_count)), 
+   data = merged_all_info) |> 
+  summary()
+```
+
+## Clerkin & Smith analysis
+Things to replicate:
+
+- Relative proportion of things that are shared between visual objs and obj names
+- Using their "whole-mealtime" window: 
+  - In the future: cut up into 15min chunks (~=11.2min mean mealtime); for now just use videos
+  - Prop of chunks with object in view / name / cooccurrence
+  - Duration of objects that cooccur with name
+  - Number of naming instances when cooccurring with object
+  - They had a "pattern" over individual categories analysis; I think PMI is a better indicator of this
+
+### Q1. How do viz object freqs correlate with naming freqs?
+```{r}
+ggplot(merged_all_info,
+       aes(x = log(token_count), y = log(frames_with_object))) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Log number of tokens",
+       y = "Log number of frames with object")
+```
+
+```{r}
+cor(merged_all_info$token_count,
+    merged_all_info$frames_with_object,
+    use = "pairwise.complete.obs",
+    method = "spearman")
+```
+
+Answer: Not very. Note that this isn't due solely to lower freq items!
+
+### Q2. What are the proportions of videos that contain objects/namings/cooccurrences?
+
+```{r}
+# objects are already summarised
+objects_by_vid <- all_objects
+
+tokens_by_vid <- all_trans_annotated |> 
+  filter(upos == "NOUN", token %in% all_objects$class_name) |> 
+  group_by(superseded_gcp_name_feb25, token) |> 
+  summarise(n_counts = n(),
+            .groups = "drop")
+
+cooccurrences_by_vid <- merged_cleaned_annotated |> 
+  group_by(superseded_gcp_name_feb25, token) |> 
+  summarise(cooccurrences = n(),
+            .groups = "drop")
+```
+
+```{r}
+TOTAL_N_VIDEOS = n_distinct(all_objects$superseded_gcp_name_feb25)
+
+object_vid_props <- objects_by_vid |> 
+  group_by(class_name) |> 
+  summarise(vids_with_object = n(),
+            .groups = "drop") |> 
+  mutate(prop_vids_with_objects = vids_with_object / TOTAL_N_VIDEOS) |> 
+  rename(token = class_name)
+
+token_vid_props <- tokens_by_vid |>
+  group_by(token) |> 
+  summarise(vids_with_token = n(),
+            .groups = "drop") |> 
+  mutate(prop_vids_with_tokens = vids_with_token / TOTAL_N_VIDEOS)
+
+cooc_vid_props <- cooccurrences_by_vid |> 
+  group_by(token) |> 
+  summarise(vids_with_cooc = n(),
+            .groups = "drop") |> 
+  mutate(prop_vids_with_cooc = vids_with_cooc / TOTAL_N_VIDEOS)
+
+# We follow C&S by having our canonical sort order be the rank order of videos in which the object is in view.
+vid_props <- object_vid_props |> 
+  left_join(token_vid_props, by = join_by(token)) |> 
+  left_join(cooc_vid_props, by = join_by(token)) |> 
+  mutate(prop_vids_with_objects = ifelse(is.na(prop_vids_with_objects), 0, prop_vids_with_objects),
+         prop_vids_with_tokens = ifelse(is.na(prop_vids_with_tokens), 0, prop_vids_with_tokens),
+         prop_vids_with_cooc = ifelse(is.na(prop_vids_with_cooc), 0, prop_vids_with_cooc)) |> 
+  arrange(desc(vids_with_object))
+```
+
+For visual clarity we obtain the most frequent 25 viz objects and names, as in C&S
+```{r}
+top_objects <- vid_props |> 
+  arrange(desc(vids_with_object)) |> 
+  slice(1:25) |> 
+  pull(token)
+
+top_names <- vid_props |> 
+  arrange(desc(vids_with_token)) |> 
+  slice(1:25) |> 
+  pull(token)
+
+top_all <- union(top_objects, top_names)
+```
+
+Viz
+```{r}
+ggplot(vid_props |> filter(token %in% top_all),
+       aes(x = prop_vids_with_objects, y = reorder(token, -vids_with_object))) +
+  geom_col() +
+  coord_cartesian(xlim = c(0, 1)) +
+  labs(x = "Proportion of videos with object in view", y = "Object") +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1))
+```
+
+```{r}
+ggplot(vid_props |> filter(token %in% top_all),
+       aes(x = prop_vids_with_tokens, y = reorder(token, -vids_with_object))) +
+  geom_col() +
+  coord_cartesian(xlim = c(0, 1)) +
+  labs(x = "Proportion of videos with named object", y = "Object") +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1))
+```
+
+```{r}
+ggplot(vid_props |> filter(token %in% top_all),
+       aes(x = prop_vids_with_cooc, y = reorder(token, -vids_with_object))) +
+  geom_col() +
+  coord_cartesian(xlim = c(0, 1)) +
+  labs(x = "Proportion of videos with object–name cooccurrences", y = "Object") +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1))
+```
+
+### Q3. When objects and names do cooccur, what are the visual/naming statistics?
+
+```{r}
+vid_full <- cooccurrences_by_vid |> 
+  left_join(objects_by_vid, 
+            by = join_by(superseded_gcp_name_feb25, token == class_name)) |>
+  left_join(tokens_by_vid,
+            by = join_by(superseded_gcp_name_feb25, token)) |> 
+  left_join(object_vid_props,
+            by = join_by(token))
+```
+
+```{r}
+obj_medians <- vid_full |> filter(token %in% top_all) |> 
+                  group_by(token) |> 
+                  summarise(median_dur = median(n_frames, na.rm = T) / 60,
+                            .groups = "drop") |> 
+  left_join(object_vid_props,
+            by = join_by(token))
+
+ggplot(vid_full |> filter(token %in% top_all),
+       aes(x = n_frames / 60, y = reorder(token, -vids_with_object))) +
+  geom_jitter(alpha = .1) +
+  geom_crossbar(aes(x = median_dur, xmin = median_dur, xmax = median_dur), 
+                data = obj_medians,
+                color = "cornflowerblue") +
+  labs(x = "Duration of object in view (min)", y = "Object")
+```
+
+```{r}
+tok_medians <- vid_full |> filter(token %in% top_all) |> 
+                  group_by(token) |> 
+                  summarise(median_namings = median(n_counts, na.rm = T),
+                            .groups = "drop") |> 
+  left_join(object_vid_props,
+            by = join_by(token))
+
+ggplot(vid_full |> filter(token %in% top_all),
+       aes(x = n_counts, y = reorder(token, -vids_with_object))) +
+  geom_jitter(alpha = .1) +
+  geom_crossbar(aes(x = median_namings, xmin = median_namings, xmax = median_namings), 
+                data = tok_medians,
+                color = "cornflowerblue") +
+  labs(x = "Number of object namings", y = "Object")
+```
+
+### Q4. Are there different patterns of object–name cooccurrences?
+We operationalise this by showing PMI
+```{r}
+ggplot(merged_all_info |> 
+         filter(token %in% top_all) |> 
+         left_join(object_vid_props,
+            by = join_by(token)),
+       aes(x = pmi, y = reorder(token, -vids_with_object))) +
+  geom_col() +
+  labs(x = "Pointwise mutual information", y = "Object")
+```
+
+```{r}
+merged_info_top <- merged_all_info |> 
+  arrange(desc(pmi)) |> 
+  slice(1:20)
+merged_info_bot <- merged_all_info |> 
+  arrange(pmi) |> 
+  slice(1:20)
+merged_info_plot <- bind_rows(merged_info_top, merged_info_bot)
+
+ggplot(merged_info_plot,
+       aes(x = pmi, y = reorder(token, -pmi))) +
+  geom_col() +
+  facet_grid(ifelse(pmi > 0, "Highest PMI", "Lowest PMI") |> 
+               factor(levels = c("Lowest PMI", "Highest PMI")) ~ ., scales = "free") +
+  labs(x = "Pointwise mutual information", y = "Object")
+```
+
