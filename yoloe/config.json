@@ -1,3 +1,5 @@
 {
-    "save_folder": "/ccn2/dataset/babyview/outputs_20250312"
+    "save_folder": "/ccn2/dataset/babyview/outputs_20250312",
+    "save_with_mask": false,
+    "frame_save_rate": 1
 }

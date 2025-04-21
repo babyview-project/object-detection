@@ -21,8 +21,8 @@ all_output_10k = f"{output_folder}/yoloe/promptfree_10k"
 frames_path_1k = f"{output_folder}/1000_random_frames.txt"
 frames_path_10k = f"{output_folder}/10000_random_frames.txt"
 frames_path = f"{output_folder}/sampled_frames"
-save_frame_every = 1
-save_with_mask = False
+save_frame_every = config_data.get("save_frame_every")
+save_with_mask = config_data.get("save_with_mask")
 session_name = "test"
 
 # if word list is none, using VEDI by default
@@ -183,6 +183,9 @@ def main():
     elif args.input_frames == "1k":
         full_output_path = Path(f'{full_output_path}_1k')
         args.input_frames = frames_path_1k
+    # if using the default input frames with all of the sampled frames
+    elif args.input_frames == frames_path:
+        full_output_path = Path(f'{full_output_path}_allframes_1fps')
     if args.input_frames.endswith("mp4"):
         predict_video(args.input_frames, word_list, full_output_path, session_name, args)
     else:
