@@ -12,3 +12,4 @@ frame_data/allframes_1fps.csv
 **/*_files/
 *.udpipe
 *_trans*.csv
+**/.DS_Store
