@@ -432,15 +432,11 @@ def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
         # Sort these categories independently
         sorted_unique_cats = sort_categories(list(unique_cats), category_types)
         
-        # Create a new submatrix for these categories
-        submatrix = np.zeros((len(sorted_unique_cats), len(sorted_unique_cats)))
-        for i, cat1 in enumerate(sorted_unique_cats):
-            for j, cat2 in enumerate(sorted_unique_cats):
-                if i < j:  # Only compute upper triangle
-                    pair = f"{cat1}-{cat2}"
-                    if pair in between_rsa:
-                        submatrix[i, j] = 1 - between_rsa[pair]
-                        submatrix[j, i] = submatrix[i, j]  # Mirror the value
+        # Get indices of these categories in the full sorted list
+        cat_indices = [sorted_categories.index(cat) for cat in sorted_unique_cats]
+        
+        # Create submatrix using the full distance matrix
+        submatrix = distance_matrix[np.ix_(cat_indices, cat_indices)]
         
         # Create heatmap
         plt.figure(figsize=(15, 15))
