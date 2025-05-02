@@ -13,6 +13,8 @@ library(here)
 library(ggcorrplot)
 library(GGally)
 library(udpipe)
+library(lme4)
+library(lmerTest)
 theme_set(theme_classic())
 # ud_dl <- udpipe_download_model("english")
 ud_mod <- udpipe_load_model(here("english-ewt-ud-2.5-191206.udpipe"))
@@ -409,5 +411,159 @@ ggplot(merged_info_plot,
   facet_grid(ifelse(pmi > 0, "Highest PMI", "Lowest PMI") |> 
                factor(levels = c("Lowest PMI", "Highest PMI")) ~ ., scales = "free") +
   labs(x = "Pointwise mutual information", y = "Object")
+```
+
+## Developmental and interindividual analyses
+How do object, word, and cooccurrence patterns change with age? How do they vary across children?
+
+Demog data
+```{r}
+demog <- read_csv(here("data", "recordings_processed.csv"))
+demog_cleaned <- demog |> 
+  select(subject_id_internal, age_mo, superseded_gcp_name_feb25, duration_sec) |> 
+  mutate(age_bin = cut(age_mo, c(5, 12, 18, 24, 30, 36), include.lowest = TRUE))
+demog_durations <- demog_cleaned |> 
+  group_by(subject_id_internal, age_bin) |> 
+  filter(!is.na(superseded_gcp_name_feb25)) |> 
+  summarise(total_duration = sum(duration_sec, na.rm = TRUE),
+            .groups = "drop")
+```
+
+Resummarise by child x age bin
+```{r}
+tokens_by_child_age <- all_trans_annotated |> 
+  filter(upos == "NOUN") |> 
+  group_by(superseded_gcp_name_feb25, token) |> 
+  summarise(n_counts = n(),
+            .groups = "drop") |> 
+  left_join(demog_cleaned, by = join_by(superseded_gcp_name_feb25)) |> 
+  group_by(subject_id_internal, age_bin, token) |> 
+  summarise(n_counts = sum(n_counts),
+            .groups = "drop") |> 
+  filter(!is.na(subject_id_internal))
+
+objects_by_child_age <- all_objects |> 
+  group_by(superseded_gcp_name_feb25, class_name) |> 
+  summarise(n_frames = sum(n_frames),
+            mean_area = sum(n_detections * mean_area) / sum(n_detections),
+            n_detections = sum(n_detections),
+            .groups = "drop") |> 
+  left_join(demog_cleaned, by = join_by(superseded_gcp_name_feb25)) |> 
+  group_by(subject_id_internal, age_bin, class_name) |> 
+  summarise(n_frames = sum(n_frames),
+            mean_area = mean(mean_area),
+            n_detections = sum(n_detections),
+            .groups = "drop") |> 
+  filter(!is.na(subject_id_internal))
+
+cooccurrences_by_child_age <- merged_cleaned_annotated |> 
+  filter(min_window <= WINDOW_THRESHOLD) |>
+  group_by(superseded_gcp_name_feb25, token) |> 
+  summarise(cooccurrences = n(),
+            .groups = "drop") |> 
+  left_join(demog_cleaned, by = join_by(superseded_gcp_name_feb25)) |> 
+  group_by(subject_id_internal, age_bin, token) |> 
+  summarise(cooccurrences = sum(cooccurrences),
+            .groups = "drop") |> 
+  filter(!is.na(subject_id_internal))
+```
+
+```{r}
+merged_child_age <- objects_by_child_age |>  
+  rename(token = class_name) |> 
+  left_join(tokens_by_child_age, 
+            by = join_by(subject_id_internal, age_bin, token)) |> 
+  left_join(cooccurrences_by_child_age, 
+            by = join_by(subject_id_internal, age_bin, token)) |> 
+  left_join(demog_durations,
+            by = join_by(subject_id_internal, age_bin)) |>
+  rename(frames_with_object = n_frames,
+         token_count = n_counts) |> 
+  mutate(across(c(frames_with_object, token_count, cooccurrences), \(x) replace_na(x, 0)),
+         across(c(frames_with_object, token_count, cooccurrences), \(x) x / total_duration, .names = "{col}_normed"),
+         across(c(frames_with_object_normed, token_count_normed, cooccurrences_normed), log, .names = "log_{col}"),
+         pmi = log(cooccurrences * total_duration / (frames_with_object * token_count * 2 * WINDOW_THRESHOLD)),
+         pmi = ifelse(is.infinite(pmi), NA, pmi),
+         age_bin_mean = case_when(
+           age_bin == "(5,12]" ~ 9,
+           age_bin == "(12,18]" ~ 15,
+           age_bin == "(18,24]" ~ 21,
+           age_bin == "(24,30]" ~ 27,
+           age_bin == "(30,36]" ~ 33
+         )) |> 
+  filter(total_duration >= 60 * 60 * 2) # minimum 2h of video 
+```
+
+### Visualisation
+```{r}
+ggplot(merged_child_age |> 
+         filter(token %in% top_all),
+       aes(x = age_bin, y = log_frames_with_object_normed, 
+           col = subject_id_internal, group = subject_id_internal)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ token) +
+  labs(x = "Age bin",
+       y = "Log number of frames with object (normed by total duration)") +
+  theme(legend.position = "none")
+```
+
+```{r}
+ggplot(merged_child_age |> 
+         filter(token %in% top_all),
+       aes(x = age_bin, y = log_token_count_normed,
+           col = subject_id_internal, group = subject_id_internal)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ token) +
+  labs(x = "Age bin",
+       y = "Log token counts (normed by total duration)") +
+  theme(legend.position = "none")
+```
+
+```{r}
+ggplot(merged_child_age |> 
+         filter(token %in% top_all),
+       aes(x = age_bin, y = log_cooccurrences_normed, 
+           col = subject_id_internal, group = subject_id_internal)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ token) +
+  labs(x = "Age bin",
+       y = "Log cooccurrences (normed by total duration)") +
+  theme(legend.position = "none")
+```
+
+### Models
+```{r}
+mod_objects <- lmer(log_frames_with_object_normed ~ 
+                      age_bin_mean + 
+                      (1 + age_bin_mean | subject_id_internal) + 
+                      (1 + age_bin_mean | token),
+                    data = merged_child_age,
+                    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)))
+summary(mod_objects)
+```
+
+```{r}
+mod_tokens <- lmer(log_token_count_normed ~ 
+                      age_bin_mean + 
+                      (1 + age_bin_mean | subject_id_internal) + 
+                      (1 + age_bin_mean | token),
+                    data = merged_child_age |> 
+                     filter(!is.infinite(log_token_count_normed)),
+                    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)))
+summary(mod_tokens)
+```
+
+```{r}
+mod_cooc <- lmer(log_cooccurrences_normed ~ 
+                    age_bin_mean + 
+                    (1 + age_bin_mean | subject_id_internal) + 
+                    (1 + age_bin_mean | token),
+                  data = merged_child_age |> 
+                   filter(!is.infinite(log_cooccurrences_normed)),
+                 control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)))
+summary(mod_cooc)
 ```
 
