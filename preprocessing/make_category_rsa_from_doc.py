@@ -11,6 +11,8 @@ import pandas as pd
 import time
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
+from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
+from scipy.spatial.distance import squareform
 
 def detect_blur(image_path, threshold=100):
     """
@@ -93,25 +95,6 @@ def filter_blurry_images(embedding_store, threshold=100):
     filtered_store.EmbeddingList = embedding_store.EmbeddingList[valid_indices].copy()
     
     return filtered_store
-
-def compute_rsa_matrix(embeddings):
-    """
-    Compute RSA matrix for a set of embeddings
-    Args:
-        embeddings: numpy array of shape (n_samples, n_features)
-    Returns:
-        RSA matrix of shape (n_samples, n_samples)
-    """
-    # Compute correlation matrix
-    n_samples = embeddings.shape[0]
-    rsa_matrix = np.zeros((n_samples, n_samples))
-    
-    for i in range(n_samples):
-        for j in range(n_samples):
-            r, _ = pearsonr(embeddings[i], embeddings[j])
-            rsa_matrix[i, j] = r
-            
-    return rsa_matrix
 
 def compute_category_rsa(embedding_store, min_images=0):
     """
@@ -287,6 +270,11 @@ def plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, outp
         n_pairs: Number of top pairs to show
         category_types: Dictionary containing category type information
     """
+    # Set font sizes
+    title_fontsize = 18
+    tick_fontsize = 10
+    cbar_label_fontsize = 16
+    
     # Convert between_rsa to list of tuples (pair, distance) and sort by distance
     pairs_distances = [(pair, 1 - rsa) for pair, rsa in between_rsa.items()]
     pairs_distances.sort(key=lambda x: x[1])  # Sort by distance (ascending)
@@ -321,14 +309,20 @@ def plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, outp
                 vmin=0,
                 vmax=2,
                 square=True,
-                cbar_kws={'label': 'Distance (1 - RSA)'})
+                cbar_kws={'label': 'Distance (1 - RSA)', 'shrink': 0.5})
+    
+    # Adjust colorbar label size
+    cbar = ax.collections[0].colorbar
+    cbar.ax.set_ylabel('Distance (1 - RSA)', fontsize=cbar_label_fontsize)
+    cbar.ax.tick_params(labelsize=cbar_label_fontsize)
     
     # Adjust the layout to prevent label cutoff
-    plt.title(f'Top {n_pairs} Most Similar Category Pairs\n(Animate → Bodypart → Place → Big → Small → Others)', pad=20, fontsize=16)
+    plt.title(f'Babyview Top {n_pairs} Most Similar Category Pairs\n(Animate → Bodypart → Place → Big → Small → Others)', 
+              pad=20, fontsize=title_fontsize)
     
     # Rotate x-axis labels and adjust their alignment
-    plt.xticks(rotation=45, ha='right', fontsize=10)
-    plt.yticks(rotation=0, fontsize=10)
+    plt.xticks(rotation=45, ha='right', fontsize=tick_fontsize)
+    plt.yticks(rotation=0, fontsize=tick_fontsize)
     
     # Add more space for labels
     plt.subplots_adjust(left=0.2, right=0.95, top=0.95, bottom=0.2)
@@ -360,6 +354,13 @@ def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
     output_dir = Path(output_dir)
     output_dir.mkdir(exist_ok=True)
     
+    # Set font sizes
+    title_fontsize = 24  # Increased from 16
+    label_fontsize = 12  # Decreased from 20
+    legend_fontsize = 8  # Unchanged
+    tick_fontsize = 8    # Decreased from 14
+    cbar_label_fontsize = 24  # Increased from 16
+    
     # Load category types
     cdi_path = '/home/j7yang/babyview-projects/object-detection/data/cdi_words.csv'
     cdi_df = pd.read_csv(cdi_path)
@@ -382,13 +383,119 @@ def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
     # Sort correlation matrix
     sorted_corr = corr_matrix[sort_idx][:, sort_idx]
     
-    # Convert to distance matrix
+    # Convert to distance matrix and ensure exact symmetry
     distance_matrix = 1 - sorted_corr
+    distance_matrix = (distance_matrix + distance_matrix.T) / 2
+    np.fill_diagonal(distance_matrix, 0)
     
-    # Create full heatmap
+    # Convert to condensed form for hierarchical clustering
+    condensed_dist = squareform(distance_matrix, checks=False)
+    
+    # Perform hierarchical clustering
+    Z = linkage(condensed_dist, method='ward')
+    
+    # Create dendrogram
+    plt.figure(figsize=(20, 10))
+    plt.title('Babyview Hierarchical Clustering of Categories', fontsize=title_fontsize)
+    dend = dendrogram(Z, labels=sorted_categories, leaf_rotation=90)
+    plt.tight_layout()
+    plt.savefig(output_dir / 'category_dendrogram.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    # Get the order of categories from the dendrogram
+    ordered_categories = [sorted_categories[i] for i in dend['leaves']]
+    
+    # Create a new distance matrix with ordered categories for visualization
+    ordered_distances = np.zeros_like(distance_matrix)
+    for i, cat1 in enumerate(ordered_categories):
+        for j, cat2 in enumerate(ordered_categories):
+            idx1 = sorted_categories.index(cat1)
+            idx2 = sorted_categories.index(cat2)
+            ordered_distances[i, j] = distance_matrix[idx1, idx2]
+    
+    # Save the ordered category names
+    with open(output_dir / "ordered_category_names.txt", "w") as f:
+        f.write("Index\tCategory\n")  # Header
+        for idx, cat in enumerate(ordered_categories):
+            f.write(f"{idx}\t{cat}\n")
+    
+    # Create clustered heatmap
+    plt.figure(figsize=(30, 30))
+    ax = sns.heatmap(ordered_distances, 
+                xticklabels=ordered_categories,
+                yticklabels=ordered_categories,
+                cmap='viridis',
+                vmin=0,
+                vmax=2,
+                square=True,
+                cbar_kws={'label': 'Distance (1 - RSA)', 'shrink': 0.5})
+    
+    # Adjust colorbar label size
+    cbar = ax.collections[0].colorbar
+    cbar.ax.set_ylabel('Distance (1 - RSA)', fontsize=cbar_label_fontsize)
+    cbar.ax.tick_params(labelsize=cbar_label_fontsize)  # Also increase tick label size
+    
+    plt.title('Babyview Clustered Category Distance Matrix', fontsize=title_fontsize)
+    plt.xticks(rotation=45, ha='right', fontsize=tick_fontsize)
+    plt.yticks(rotation=0, fontsize=tick_fontsize)
+    plt.tight_layout()
+    plt.savefig(output_dir / 'clustered_distance_matrix.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    # Create category type clustering visualization
     plt.figure(figsize=(30, 30))
     
-    # Create the heatmap
+    # Create color matrix based on category types
+    n_categories = len(ordered_categories)
+    color_matrix = np.zeros((n_categories, n_categories, 3))
+    
+    def get_category_color(category):
+        if category not in category_types:
+            return 'gray'
+        cat_type = category_types[category]
+        if cat_type['is_animate']:
+            return 'purple'
+        elif cat_type['is_bodypart']:
+            return 'red'
+        elif cat_type['is_place']:
+            return 'green'
+        elif cat_type['is_big']:
+            return 'blue'
+        elif cat_type['is_small']:
+            return 'orange'
+        else:
+            return 'gray'
+    
+    for i, cat1 in enumerate(ordered_categories):
+        for j, cat2 in enumerate(ordered_categories):
+            color1 = get_category_color(cat1)
+            color2 = get_category_color(cat2)
+            color1_rgb = plt.cm.colors.to_rgb(color1)
+            color2_rgb = plt.cm.colors.to_rgb(color2)
+            color_matrix[i, j] = [(c1 + c2) / 2 for c1, c2 in zip(color1_rgb, color2_rgb)]
+    
+    plt.imshow(color_matrix)
+    plt.xticks(range(len(ordered_categories)), ordered_categories, rotation=45, ha='right', fontsize=tick_fontsize)
+    plt.yticks(range(len(ordered_categories)), ordered_categories, fontsize=tick_fontsize)
+    plt.title('Babyview Category Type Clustering', fontsize=title_fontsize)
+    
+    # Add legend with smaller size
+    legend_elements = [
+        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='purple', markersize=8, label='Animate'),
+        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='red', markersize=8, label='Body Part'),
+        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='green', markersize=8, label='Place'),
+        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='blue', markersize=8, label='Big Object'),
+        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='orange', markersize=8, label='Small Object'),
+        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='gray', markersize=8, label='Other')
+    ]
+    plt.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=legend_fontsize)
+    
+    plt.tight_layout()
+    plt.savefig(output_dir / 'category_type_clustering.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    # Create full heatmap (original visualization)
+    plt.figure(figsize=(30, 30))
     ax = sns.heatmap(distance_matrix, 
                 xticklabels=sorted_categories,
                 yticklabels=sorted_categories,
@@ -396,84 +503,23 @@ def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
                 vmin=0,
                 vmax=2,
                 square=True,
-                cbar_kws={'label': 'Distance (1 - RSA)'})
+                cbar_kws={'label': 'Distance (1 - RSA)', 'shrink': 0.5})
     
-    # Adjust the layout to prevent label cutoff
-    plt.title('Between-Category Distance (1 - RSA)', pad=20, fontsize=16)
+    # Adjust colorbar label size
+    cbar = ax.collections[0].colorbar
+    cbar.ax.set_ylabel('Distance (1 - RSA)', fontsize=cbar_label_fontsize)
+    cbar.ax.tick_params(labelsize=cbar_label_fontsize)  # Also increase tick label size
     
-    # Rotate x-axis labels and adjust their alignment
-    plt.xticks(rotation=45, ha='right', fontsize=10)
-    plt.yticks(rotation=0, fontsize=10)
-    
-    # Add more space for labels
-    plt.subplots_adjust(left=0.2, right=0.95, top=0.95, bottom=0.2)
-    
-    # Save with high DPI and tight bounding box
-    plt.savefig(output_dir / 'between_category_distance_heatmap.png', 
-                dpi=300, 
-                bbox_inches='tight',
-                pad_inches=0.5)
+    plt.title('Babyview Between-Category Distance (1 - RSA)', fontsize=title_fontsize)
+    plt.xticks(rotation=45, ha='right', fontsize=tick_fontsize)
+    plt.yticks(rotation=0, fontsize=tick_fontsize)
+    plt.tight_layout()
+    plt.savefig(output_dir / 'between_category_distance_heatmap.png', dpi=300, bbox_inches='tight')
     plt.close()
     
     # Create heatmaps for top pairs
     for n_pairs in [20, 50, 100]:
-        # Get top N pairs
-        pairs_distances = [(pair, 1 - rsa) for pair, rsa in between_rsa.items()]
-        pairs_distances.sort(key=lambda x: x[1])  # Sort by distance (ascending)
-        top_pairs = pairs_distances[:n_pairs]
-        
-        # Get unique categories from top pairs
-        unique_cats = set()
-        for pair, _ in top_pairs:
-            cat1, cat2 = pair.split('-')
-            unique_cats.add(cat1)
-            unique_cats.add(cat2)
-        
-        # Sort these categories independently
-        sorted_unique_cats = sort_categories(list(unique_cats), category_types)
-        
-        # Get indices of these categories in the full sorted list
-        cat_indices = [sorted_categories.index(cat) for cat in sorted_unique_cats]
-        
-        # Create submatrix using the full distance matrix
-        submatrix = distance_matrix[np.ix_(cat_indices, cat_indices)]
-        
-        # Create heatmap
-        plt.figure(figsize=(15, 15))
-        
-        # Create the heatmap
-        ax = sns.heatmap(submatrix, 
-                    xticklabels=sorted_unique_cats,
-                    yticklabels=sorted_unique_cats,
-                    cmap='viridis',
-                    vmin=0,
-                    vmax=2,
-                    square=True,
-                    cbar_kws={'label': 'Distance (1 - RSA)'})
-        
-        # Adjust the layout to prevent label cutoff
-        plt.title(f'Top {n_pairs} Most Similar Category Pairs\n(Animate → Bodypart → Place → Big → Small → Others)', pad=20, fontsize=16)
-        
-        # Rotate x-axis labels and adjust their alignment
-        plt.xticks(rotation=45, ha='right', fontsize=10)
-        plt.yticks(rotation=0, fontsize=10)
-        
-        # Add more space for labels
-        plt.subplots_adjust(left=0.2, right=0.95, top=0.95, bottom=0.2)
-        
-        # Save with high DPI and tight bounding box
-        plt.savefig(output_dir / f'top_{n_pairs}_pairs_heatmap.png', 
-                    dpi=300, 
-                    bbox_inches='tight',
-                    pad_inches=0.5)
-        plt.close()
-        
-        # Save the top pairs to a text file
-        with open(output_dir / f'top_{n_pairs}_pairs.txt', 'w') as f:
-            f.write(f"Top {n_pairs} Most Similar Category Pairs:\n")
-            for pair, distance in top_pairs:
-                rsa = 1 - distance
-                f.write(f"{pair}: RSA={rsa:.4f}, Distance={distance:.4f}\n")
+        plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, output_dir, n_pairs, category_types)
     
     # Save numerical results
     with open(output_dir / 'rsa_results.txt', 'w') as f:
@@ -483,21 +529,25 @@ def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
             distance = 1 - rsa
             f.write(f"{pair}: RSA={rsa:.4f}, Distance={distance:.4f}\n")
 
-def filter_embeddings_by_categories(embedding_store, categories_csv_path):
+def filter_embeddings_by_categories(embedding_store, categories_file):
     """
-    Filter embeddings to only include those whose text matches categories in the CSV file
+    Filter embeddings to only include those whose text matches categories in the text file
     Args:
         embedding_store: EmbeddingStore object
-        categories_csv_path: Path to CSV file containing categories
+        categories_file: Path to text file containing categories (one per line)
     Returns:
         Filtered EmbeddingStore object
     """
-    print(f"Loading categories from {categories_csv_path}...")
-    categories_df = pd.read_csv(categories_csv_path)
-    valid_categories = set(categories_df['category'].unique())
+    print(f"Loading categories from {categories_file}...")
+    try:
+        with open(categories_file, 'r') as f:
+            valid_categories = {line.strip() for line in f if line.strip()}
+    except Exception as e:
+        print(f"Error loading categories file: {e}")
+        raise
     
-    print(f"Found {len(valid_categories)} unique categories in CSV")
-    print("First few categories from CSV:", list(valid_categories)[:5])
+    print(f"Found {len(valid_categories)} unique categories in text file")
+    print("First few categories from text file:", list(valid_categories)[:5])
     
     # Get indices of embeddings with valid categories
     valid_indices = []
@@ -508,8 +558,8 @@ def filter_embeddings_by_categories(embedding_store, categories_csv_path):
         else:
             unmatched_categories.add(text)
     
-    print(f"Found {len(valid_indices)} embeddings matching categories from CSV")
-    print(f"Found {len(unmatched_categories)} unique categories in embeddings that don't match CSV")
+    print(f"Found {len(valid_indices)} embeddings matching categories from text file")
+    print(f"Found {len(unmatched_categories)} unique categories in embeddings that don't match text file")
     print("First few unmatched categories:", list(unmatched_categories)[:5])
     
     # Create filtered embedding store
@@ -534,7 +584,7 @@ def main():
     parser.add_argument("--doc_path", required=True, help="Path to the .doc file containing embeddings")
     parser.add_argument("--output_dir", required=True, help="Output directory for RSA results and visualizations")
     parser.add_argument("--min_images", type=int, default=0, help="Minimum number of images required per category (default: 0)")
-    parser.add_argument("--categories_csv", required=True, help="Path to CSV file containing categories to include")
+    parser.add_argument("--categories_file", required=True, help="Path to text file containing categories to include (one per line)")
     args = parser.parse_args()
     
     # Create output directory
@@ -545,9 +595,9 @@ def main():
     print(f"Loading embeddings from {args.doc_path}")
     embedding_store = EmbeddingStore.from_doc(args.doc_path)
     
-    # Filter embeddings by categories from CSV
+    # Filter embeddings by categories from text file
     print("Filtering embeddings by categories...")
-    filtered_store = filter_embeddings_by_categories(embedding_store, args.categories_csv)
+    filtered_store = filter_embeddings_by_categories(embedding_store, args.categories_file)
     
     # Save filtered embeddings to a new .doc file
     filtered_doc_path = output_dir / "filtered_embeddings.doc"
@@ -568,10 +618,16 @@ def main():
     np.save(output_dir / "rdm_matrix_lower_triangle.npy", np.tril(corr_matrix))
     np.save(output_dir / "category_means.npy", category_means)
     
-    # Save category names
+    # Save category names and their indices
     with open(output_dir / "category_names.txt", "w") as f:
-        for cat in categories:
-            f.write(f"{cat}\n")
+        f.write("Index\tCategory\n")  # Header
+        for idx, cat in enumerate(categories):
+            f.write(f"{idx}\t{cat}\n")
+    
+    # Save category means with their corresponding categories
+    means_df = pd.DataFrame(category_means)
+    means_df.index = categories
+    means_df.to_csv(output_dir / "category_means_with_names.csv")
     
     # Visualize results
     print("Creating visualizations...")
