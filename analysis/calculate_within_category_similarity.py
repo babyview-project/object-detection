@@ -33,21 +33,21 @@ def load_category_types(csv_path):
 def get_category_color(category, category_types):
     """Get color for a category based on its type"""
     if category not in category_types:
-        return 'gray'  # Default color for unknown categories
+        return '#C0BDBD'  # Default color for unknown categories
     
     cat_type = category_types[category]
     if cat_type['is_animate']:
-        return 'purple'
+        return '#8250A0'  # purple
     elif cat_type['is_bodypart']:
-        return 'red'
+        return '#CE1717'  # red
     elif cat_type['is_place']:
-        return 'green'
+        return '#4E9A13'  # green
     elif cat_type['is_big']:
-        return 'blue'
+        return '#3A53A4'  # blue
     elif cat_type['is_small']:
-        return 'orange'
+        return '#FAA41A'  # orange
     else:
-        return 'gray'
+        return '#C0BDBD'  # gray
 
 def calculate_within_category_similarity(categories1, embeddings1, categories2, embeddings2):
     """Calculate within-category similarity between two sets of embeddings"""
@@ -96,9 +96,9 @@ def plot_category_similarities(df, output_dir, category_types):
     ]
     
     # Set font sizes
-    title_fontsize = 16
-    label_fontsize = 14
-    tick_fontsize = 12
+    title_fontsize = 25
+    label_fontsize = 25
+    tick_fontsize = 25
     
     # Create bar plot for top 30 categories
     plt.figure(figsize=(15, 12))
@@ -106,11 +106,11 @@ def plot_category_similarities(df, output_dir, category_types):
     colors = [get_category_color(cat, category_types) for cat in top_30['category']]
     # Reverse the order for plotting to show highest correlation at the top
     plt.barh(range(len(top_30)-1, -1, -1), top_30['correlation'], color=colors)
-    plt.yticks(range(len(top_30)-1, -1, -1), top_30['category'], fontsize=tick_fontsize)
-    plt.title('Top 30 Categories: Within-Category Similarity between BabyView and THINGS', fontsize=title_fontsize)
+    plt.yticks(range(len(top_30)-1, -1, -1), top_30['category'], fontsize=tick_fontsize,fontweight='bold')
+    plt.xticks(fontsize=tick_fontsize)
     plt.xlabel('Correlation', fontsize=label_fontsize)
-    plt.ylabel('Category', fontsize=label_fontsize)
-    plt.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=label_fontsize)
+    #plt.title('Top 30 Categories: Within-Category Similarity between BabyView and THINGS', fontsize=title_fontsize)
+    # plt.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=label_fontsize)
     plt.tight_layout()
     plt.savefig(output_dir / 'top_30_categories.png', dpi=300, bbox_inches='tight')
     plt.close()
@@ -121,11 +121,11 @@ def plot_category_similarities(df, output_dir, category_types):
     colors = [get_category_color(cat, category_types) for cat in bottom_30['category']]
     # Reverse the order for plotting to show highest correlation at the top
     plt.barh(range(len(bottom_30)-1, -1, -1), bottom_30['correlation'], color=colors)
-    plt.yticks(range(len(bottom_30)-1, -1, -1), bottom_30['category'], fontsize=tick_fontsize)
-    plt.title('Bottom 30 Categories: Within-Category Similarity between BabyView and THINGS', fontsize=title_fontsize)
+    plt.yticks(range(len(bottom_30)-1, -1, -1), bottom_30['category'], fontsize=tick_fontsize,fontweight='bold')
+    #plt.title('Bottom 30 Categories: Within-Category Similarity between BabyView and THINGS', fontsize=title_fontsize)
     plt.xlabel('Correlation', fontsize=label_fontsize)
-    plt.ylabel('Category', fontsize=label_fontsize)
-    plt.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=label_fontsize)
+    plt.xticks(fontsize=tick_fontsize)
+    # plt.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=label_fontsize)
     plt.tight_layout()
     plt.savefig(output_dir / 'bottom_30_categories.png', dpi=300, bbox_inches='tight')
     plt.close()

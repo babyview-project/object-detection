@@ -13,6 +13,7 @@ from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from scipy.spatial.distance import squareform
+import json
 
 def detect_blur(image_path, threshold=100):
     """
@@ -162,6 +163,10 @@ def compute_category_rsa(embedding_store, min_images=0):
     valid_embeddings = embeddings[valid_indices]
     valid_categories = categories[valid_indices]
     
+    # Clear original embeddings to free memory
+    del embeddings
+    del categories
+    
     # Get unique valid categories
     unique_valid_categories = np.unique(valid_categories)
     print(f"\nNumber of unique categories after filtering: {len(unique_valid_categories)}")
@@ -171,8 +176,7 @@ def compute_category_rsa(embedding_store, min_images=0):
     for i in range(min(5, len(valid_indices))):
         idx = valid_indices[i]
         print(f"Index {idx}:")
-        print(f"  Original category: {categories[idx]}")
-        print(f"  Valid category: {valid_categories[i]}")
+        print(f"  Original category: {valid_categories[i]}")
         print(f"  Embedding shape: {valid_embeddings[i].shape}")
     
     # Compute mean embedding for each category using truly vectorized operations
@@ -192,9 +196,17 @@ def compute_category_rsa(embedding_store, min_images=0):
     # Initialize array for means
     category_means = np.zeros((n_categories, n_features))
     
-    # For each feature, compute means using bincount
-    for i in range(n_features):
-        category_means[:, i] = np.bincount(cat_indices, weights=valid_embeddings[:, i], minlength=n_categories) / np.bincount(cat_indices, minlength=n_categories)
+    # Process features in batches to reduce memory usage
+    batch_size = 1000  # Adjust this based on your available memory
+    for i in range(0, n_features, batch_size):
+        end_idx = min(i + batch_size, n_features)
+        for j in range(i, end_idx):
+            category_means[:, j] = np.bincount(cat_indices, weights=valid_embeddings[:, j], minlength=n_categories) / np.bincount(cat_indices, minlength=n_categories)
+    
+    # Clear valid embeddings to free memory
+    del valid_embeddings
+    del valid_categories
+    del cat_indices
     
     # Debug: Print mean embeddings for first few categories
     print("\nMean embeddings for first few categories:")
@@ -209,8 +221,32 @@ def compute_category_rsa(embedding_store, min_images=0):
     print("\nComputing between-category RSA...")
     rsa_start = time.time()
     
-    # Compute correlation matrix using np.corrcoef
-    corr_matrix = np.corrcoef(category_means)
+    # Compute correlation matrix in batches to reduce memory usage
+    corr_matrix = np.zeros((n_categories, n_categories))
+    batch_size = 100  # Adjust this based on your available memory
+    
+    for i in range(0, n_categories, batch_size):
+        end_i = min(i + batch_size, n_categories)
+        for j in range(0, n_categories, batch_size):
+            end_j = min(j + batch_size, n_categories)
+            
+            # Get the current batch of category means
+            batch_i = category_means[i:end_i]
+            batch_j = category_means[j:end_j]
+            
+            # Compute correlation for this batch
+            batch_corr = np.corrcoef(batch_i, batch_j)
+            
+            # Extract the relevant portion of the correlation matrix
+            if i == j:
+                # For diagonal blocks, use the upper triangle
+                corr_matrix[i:end_i, j:end_j] = batch_corr[:end_i-i, :end_j-j]
+            else:
+                # For off-diagonal blocks, use the cross-correlation
+                cross_corr = batch_corr[:end_i-i, end_i-i:]
+                corr_matrix[i:end_i, j:end_j] = cross_corr
+                # Mirror the correlation matrix
+                corr_matrix[j:end_j, i:end_i] = cross_corr.T
     
     # Convert to dictionary format
     between_rsa = {}
@@ -259,7 +295,7 @@ def sort_categories(categories, category_types):
     # Sort within each group alphabetically
     return sorted(animate) + sorted(bodypart) + sorted(place) + sorted(big) + sorted(small) + sorted(others)
 
-def plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, output_dir, n_pairs, category_types):
+def plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, output_dir, n_pairs, category_types, order_file_dir=None):
     """
     Create a heatmap showing the top N most similar category pairs
     Args:
@@ -269,15 +305,16 @@ def plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, outp
         output_dir: Output directory for saving the plot
         n_pairs: Number of top pairs to show
         category_types: Dictionary containing category type information
+        order_file_dir: Directory containing order files (optional)
     """
     # Set font sizes
-    title_fontsize = 18
-    tick_fontsize = 10
+    title_fontsize = 25
+    tick_fontsize = 18
     cbar_label_fontsize = 16
     
     # Convert between_rsa to list of tuples (pair, distance) and sort by distance
-    pairs_distances = [(pair, 1 - rsa) for pair, rsa in between_rsa.items()]
-    pairs_distances.sort(key=lambda x: x[1])  # Sort by distance (ascending)
+    pairs_distances = [(pair, rsa) for pair, rsa in between_rsa.items()]  # Keep as RSA values
+    pairs_distances.sort(key=lambda x: x[1], reverse=True)  # Sort by RSA (descending)
     
     # Get top N pairs
     top_pairs = pairs_distances[:n_pairs]
@@ -289,17 +326,61 @@ def plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, outp
         unique_cats.add(cat1)
         unique_cats.add(cat2)
     
-    # Sort the unique categories using the same sorting rules
-    sorted_unique_cats = sort_categories(list(unique_cats), category_types)
+    print(f"\nDebug: Found {len(unique_cats)} unique categories in top {n_pairs} pairs")
+    print("Categories in top pairs:", sorted(list(unique_cats)))
+    
+    # If order_file_dir is provided, try to load the existing order file
+    if order_file_dir:
+        order_file_dir = Path(order_file_dir)
+        existing_order_file = order_file_dir / f"top_{n_pairs}_pairs_category_order.json"
+        if existing_order_file.exists():
+            print(f"\nDebug: Loading existing category order from {existing_order_file}")
+            with open(existing_order_file, 'r') as f:
+                order_file_cats = json.load(f)
+            print(f"Debug: Found {len(order_file_cats)} categories in order file")
+            print("Categories in order file:", order_file_cats)
+            
+            # Use all categories from the order file
+            sorted_unique_cats = order_file_cats
+            
+            # Check which categories from order file are in current top pairs
+            missing_in_top_pairs = set(order_file_cats) - unique_cats
+            if missing_in_top_pairs:
+                print(f"\nDebug: Warning: Some categories in order file are not in current top pairs: {missing_in_top_pairs}")
+        else:
+            print(f"\nDebug: No existing order file found at {existing_order_file}, creating new order")
+            sorted_unique_cats = sort_categories(list(unique_cats), category_types)
+    else:
+        print("\nDebug: No order_file_dir provided, creating new order")
+        sorted_unique_cats = sort_categories(list(unique_cats), category_types)
+    
+    print(f"\nDebug: Final number of categories to plot: {len(sorted_unique_cats)}")
+    print("Final categories to plot:", sorted_unique_cats)
     
     # Get indices of these categories in the sorted list
     cat_indices = [sorted_categories.index(cat) for cat in sorted_unique_cats]
     
+    # Save the ordered category names as JSON
+    order_file = output_dir / f"top_{n_pairs}_pairs_category_order.json"
+    print(f"\nDebug: Saving category order to {order_file}")
+    with open(order_file, 'w') as f:
+        json.dump(sorted_unique_cats, f, indent=2)
+    
+    # If order_file_dir is provided, copy the order file there only if it didn't exist before
+    if order_file_dir and not existing_order_file.exists():
+        order_file_dir.mkdir(exist_ok=True)
+        import shutil
+        shutil.copy2(order_file, existing_order_file)
+    
     # Create submatrix for these categories
     submatrix = distance_matrix[np.ix_(cat_indices, cat_indices)]
     
+    # Calculate figure size based on number of categories
+    n_categories = len(sorted_unique_cats)
+    fig_size = max(15, n_categories * 0.5)  # Adjust size based on number of categories
+    
     # Create heatmap
-    plt.figure(figsize=(15, 15))
+    plt.figure(figsize=(fig_size, fig_size))
     
     # Create the heatmap
     ax = sns.heatmap(submatrix, 
@@ -309,20 +390,20 @@ def plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, outp
                 vmin=0,
                 vmax=2,
                 square=True,
-                cbar_kws={'label': 'Distance (1 - RSA)', 'shrink': 0.5})
+                cbar_kws={'label': 'Distance', 'shrink': 0.5})
     
     # Adjust colorbar label size
     cbar = ax.collections[0].colorbar
-    cbar.ax.set_ylabel('Distance (1 - RSA)', fontsize=cbar_label_fontsize)
+    cbar.ax.set_ylabel('Distance', fontsize=cbar_label_fontsize)
     cbar.ax.tick_params(labelsize=cbar_label_fontsize)
     
     # Adjust the layout to prevent label cutoff
     plt.title(f'Babyview Top {n_pairs} Most Similar Category Pairs\n(Animate → Bodypart → Place → Big → Small → Others)', 
               pad=20, fontsize=title_fontsize)
     
-    # Rotate x-axis labels and adjust their alignment
-    plt.xticks(rotation=45, ha='right', fontsize=tick_fontsize)
-    plt.yticks(rotation=0, fontsize=tick_fontsize)
+    # Rotate x-axis labels and adjust their alignment with bold font
+    plt.xticks(rotation=45, ha='right', fontsize=tick_fontsize, fontweight='bold')
+    plt.yticks(rotation=0, fontsize=tick_fontsize, fontweight='bold')
     
     # Add more space for labels
     plt.subplots_adjust(left=0.2, right=0.95, top=0.95, bottom=0.2)
@@ -337,11 +418,11 @@ def plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, outp
     # Save the top pairs to a text file
     with open(output_dir / f'top_{n_pairs}_pairs.txt', 'w') as f:
         f.write(f"Top {n_pairs} Most Similar Category Pairs:\n")
-        for pair, distance in top_pairs:
-            rsa = 1 - distance
+        for pair, rsa in top_pairs:
+            distance = 1 - rsa
             f.write(f"{pair}: RSA={rsa:.4f}, Distance={distance:.4f}\n")
 
-def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
+def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir, order_file_dir=None):
     """
     Create visualizations for RSA results
     Args:
@@ -349,17 +430,18 @@ def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
         corr_matrix: Full correlation matrix
         categories: List of category names in the same order as corr_matrix
         output_dir: Path to save visualizations
+        order_file_dir: Directory containing order files (optional)
     """
     # Create output directory
     output_dir = Path(output_dir)
     output_dir.mkdir(exist_ok=True)
     
     # Set font sizes
-    title_fontsize = 24  # Increased from 16
-    label_fontsize = 12  # Decreased from 20
-    legend_fontsize = 8  # Unchanged
-    tick_fontsize = 8    # Decreased from 14
-    cbar_label_fontsize = 24  # Increased from 16
+    title_fontsize = 24
+    label_fontsize = 12
+    legend_fontsize = 8
+    tick_fontsize = 8
+    cbar_label_fontsize = 24
     
     # Load category types
     cdi_path = '/home/j7yang/babyview-projects/object-detection/data/cdi_words.csv'
@@ -374,143 +456,28 @@ def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
             'is_big': row['is_big']
         }
     
-    # Sort categories
-    sorted_categories = sort_categories(categories, category_types)
-    
-    # Get sorting indices
-    sort_idx = np.array([list(categories).index(cat) for cat in sorted_categories])
-    
-    # Sort correlation matrix
-    sorted_corr = corr_matrix[sort_idx][:, sort_idx]
-    
     # Convert to distance matrix and ensure exact symmetry
-    distance_matrix = 1 - sorted_corr
+    distance_matrix = 1 - corr_matrix
     distance_matrix = (distance_matrix + distance_matrix.T) / 2
     np.fill_diagonal(distance_matrix, 0)
-    
-    # Convert to condensed form for hierarchical clustering
-    condensed_dist = squareform(distance_matrix, checks=False)
-    
-    # Perform hierarchical clustering
-    Z = linkage(condensed_dist, method='ward')
-    
-    # Create dendrogram
-    plt.figure(figsize=(20, 10))
-    plt.title('Babyview Hierarchical Clustering of Categories', fontsize=title_fontsize)
-    dend = dendrogram(Z, labels=sorted_categories, leaf_rotation=90)
-    plt.tight_layout()
-    plt.savefig(output_dir / 'category_dendrogram.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
-    # Get the order of categories from the dendrogram
-    ordered_categories = [sorted_categories[i] for i in dend['leaves']]
-    
-    # Create a new distance matrix with ordered categories for visualization
-    ordered_distances = np.zeros_like(distance_matrix)
-    for i, cat1 in enumerate(ordered_categories):
-        for j, cat2 in enumerate(ordered_categories):
-            idx1 = sorted_categories.index(cat1)
-            idx2 = sorted_categories.index(cat2)
-            ordered_distances[i, j] = distance_matrix[idx1, idx2]
-    
-    # Save the ordered category names
-    with open(output_dir / "ordered_category_names.txt", "w") as f:
-        f.write("Index\tCategory\n")  # Header
-        for idx, cat in enumerate(ordered_categories):
-            f.write(f"{idx}\t{cat}\n")
-    
-    # Create clustered heatmap
-    plt.figure(figsize=(30, 30))
-    ax = sns.heatmap(ordered_distances, 
-                xticklabels=ordered_categories,
-                yticklabels=ordered_categories,
-                cmap='viridis',
-                vmin=0,
-                vmax=2,
-                square=True,
-                cbar_kws={'label': 'Distance (1 - RSA)', 'shrink': 0.5})
-    
-    # Adjust colorbar label size
-    cbar = ax.collections[0].colorbar
-    cbar.ax.set_ylabel('Distance (1 - RSA)', fontsize=cbar_label_fontsize)
-    cbar.ax.tick_params(labelsize=cbar_label_fontsize)  # Also increase tick label size
-    
-    plt.title('Babyview Clustered Category Distance Matrix', fontsize=title_fontsize)
-    plt.xticks(rotation=45, ha='right', fontsize=tick_fontsize)
-    plt.yticks(rotation=0, fontsize=tick_fontsize)
-    plt.tight_layout()
-    plt.savefig(output_dir / 'clustered_distance_matrix.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
-    # Create category type clustering visualization
-    plt.figure(figsize=(30, 30))
-    
-    # Create color matrix based on category types
-    n_categories = len(ordered_categories)
-    color_matrix = np.zeros((n_categories, n_categories, 3))
-    
-    def get_category_color(category):
-        if category not in category_types:
-            return 'gray'
-        cat_type = category_types[category]
-        if cat_type['is_animate']:
-            return 'purple'
-        elif cat_type['is_bodypart']:
-            return 'red'
-        elif cat_type['is_place']:
-            return 'green'
-        elif cat_type['is_big']:
-            return 'blue'
-        elif cat_type['is_small']:
-            return 'orange'
-        else:
-            return 'gray'
-    
-    for i, cat1 in enumerate(ordered_categories):
-        for j, cat2 in enumerate(ordered_categories):
-            color1 = get_category_color(cat1)
-            color2 = get_category_color(cat2)
-            color1_rgb = plt.cm.colors.to_rgb(color1)
-            color2_rgb = plt.cm.colors.to_rgb(color2)
-            color_matrix[i, j] = [(c1 + c2) / 2 for c1, c2 in zip(color1_rgb, color2_rgb)]
-    
-    plt.imshow(color_matrix)
-    plt.xticks(range(len(ordered_categories)), ordered_categories, rotation=45, ha='right', fontsize=tick_fontsize)
-    plt.yticks(range(len(ordered_categories)), ordered_categories, fontsize=tick_fontsize)
-    plt.title('Babyview Category Type Clustering', fontsize=title_fontsize)
-    
-    # Add legend with smaller size
-    legend_elements = [
-        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='purple', markersize=8, label='Animate'),
-        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='red', markersize=8, label='Body Part'),
-        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='green', markersize=8, label='Place'),
-        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='blue', markersize=8, label='Big Object'),
-        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='orange', markersize=8, label='Small Object'),
-        plt.Line2D([0], [0], marker='s', color='w', markerfacecolor='gray', markersize=8, label='Other')
-    ]
-    plt.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1, 0.5), fontsize=legend_fontsize)
-    
-    plt.tight_layout()
-    plt.savefig(output_dir / 'category_type_clustering.png', dpi=300, bbox_inches='tight')
-    plt.close()
     
     # Create full heatmap (original visualization)
     plt.figure(figsize=(30, 30))
     ax = sns.heatmap(distance_matrix, 
-                xticklabels=sorted_categories,
-                yticklabels=sorted_categories,
+                xticklabels=categories,
+                yticklabels=categories,
                 cmap='viridis',
                 vmin=0,
                 vmax=2,
                 square=True,
-                cbar_kws={'label': 'Distance (1 - RSA)', 'shrink': 0.5})
+                cbar_kws={'label': 'Distance', 'shrink': 0.5})
     
     # Adjust colorbar label size
     cbar = ax.collections[0].colorbar
-    cbar.ax.set_ylabel('Distance (1 - RSA)', fontsize=cbar_label_fontsize)
-    cbar.ax.tick_params(labelsize=cbar_label_fontsize)  # Also increase tick label size
+    cbar.ax.set_ylabel('Distance', fontsize=cbar_label_fontsize)
+    cbar.ax.tick_params(labelsize=cbar_label_fontsize)
     
-    plt.title('Babyview Between-Category Distance (1 - RSA)', fontsize=title_fontsize)
+    plt.title('Babyview Between-Category Distance', fontsize=title_fontsize)
     plt.xticks(rotation=45, ha='right', fontsize=tick_fontsize)
     plt.yticks(rotation=0, fontsize=tick_fontsize)
     plt.tight_layout()
@@ -518,8 +485,8 @@ def visualize_rsa_results(between_rsa, corr_matrix, categories, output_dir):
     plt.close()
     
     # Create heatmaps for top pairs
-    for n_pairs in [20, 50, 100]:
-        plot_top_pairs_heatmap(distance_matrix, sorted_categories, between_rsa, output_dir, n_pairs, category_types)
+    for n_pairs in [20, 30, 50, 100]:
+        plot_top_pairs_heatmap(distance_matrix, categories, between_rsa, output_dir, n_pairs, category_types, order_file_dir)
     
     # Save numerical results
     with open(output_dir / 'rsa_results.txt', 'w') as f:
@@ -585,6 +552,7 @@ def main():
     parser.add_argument("--output_dir", required=True, help="Output directory for RSA results and visualizations")
     parser.add_argument("--min_images", type=int, default=0, help="Minimum number of images required per category (default: 0)")
     parser.add_argument("--categories_file", required=True, help="Path to text file containing categories to include (one per line)")
+    parser.add_argument("--order_file_dir", type=str, default=None, help="Directory containing order files (optional)")
     args = parser.parse_args()
     
     # Create output directory
@@ -612,6 +580,42 @@ def main():
     print("Computing RSA...")
     between_rsa, corr_matrix, categories, category_means = compute_category_rsa(filtered_store, args.min_images)
     
+    # Load category types for sorting
+    cdi_path = '/home/j7yang/babyview-projects/object-detection/data/cdi_words.csv'
+    cdi_df = pd.read_csv(cdi_path)
+    category_types = {}
+    for _, row in cdi_df.iterrows():
+        category_types[row['uni_lemma']] = {
+            'is_animate': row['is_animate'],
+            'is_bodypart': row['is_bodypart'],
+            'is_place': row['is_place'],
+            'is_small': row['is_small'],
+            'is_big': row['is_big']
+        }
+    
+    # Sort categories in the specified order
+    category_order = sort_categories(categories, category_types)
+    
+    # Get sorting indices
+    sort_idx = np.array([list(categories).index(cat) for cat in category_order])
+    
+    # Sort correlation matrix and category means
+    corr_matrix = corr_matrix[sort_idx][:, sort_idx]
+    category_means = category_means[sort_idx]
+    
+    # Save the sorted order
+    order_file = output_dir / 'category_order.json'
+    print(f"Saving category order to {order_file}")
+    with open(order_file, 'w') as f:
+        json.dump(category_order, f, indent=2)
+    
+    # If order_file_dir is provided, copy the order file there
+    if args.order_file_dir:
+        order_file_dir = Path(args.order_file_dir)
+        order_file_dir.mkdir(exist_ok=True)
+        import shutil
+        shutil.copy2(order_file, order_file_dir / 'category_order.json')
+    
     # Save RDM matrix and category means
     print("Saving RDM matrix and category means...")
     np.save(output_dir / "rdm_matrix.npy", corr_matrix)
@@ -621,17 +625,17 @@ def main():
     # Save category names and their indices
     with open(output_dir / "category_names.txt", "w") as f:
         f.write("Index\tCategory\n")  # Header
-        for idx, cat in enumerate(categories):
+        for idx, cat in enumerate(category_order):
             f.write(f"{idx}\t{cat}\n")
     
     # Save category means with their corresponding categories
     means_df = pd.DataFrame(category_means)
-    means_df.index = categories
+    means_df.index = category_order
     means_df.to_csv(output_dir / "category_means_with_names.csv")
     
     # Visualize results
     print("Creating visualizations...")
-    visualize_rsa_results(between_rsa, corr_matrix, categories, args.output_dir)
+    visualize_rsa_results(between_rsa, corr_matrix, category_order, args.output_dir, args.order_file_dir)
     
     print(f"Results saved to {args.output_dir}")
 
