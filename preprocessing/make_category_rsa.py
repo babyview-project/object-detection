@@ -104,35 +104,91 @@ def compute_cross_category_rsa(df: pd.DataFrame) -> np.ndarray:
     cross_category_similarity = compute_similarity_matrix(category_means)
     return cross_category_similarity
 
+def load_category_types(cdi_path: str = '../data/cdi_words.csv') -> Dict[str, Dict[str, bool]]:
+    """Load category types from CDI words file"""
+    cdi_df = pd.read_csv(cdi_path)
+    category_types = {}
+    
+    for _, row in cdi_df.iterrows():
+        category_types[row['uni_lemma']] = {
+            'is_animate': row['is_animate'],
+            'is_small': row['is_small'],
+            'is_big': row['is_big']
+        }
+    return category_types
+
+def sort_categories(categories: List[str], category_types: Dict[str, Dict[str, bool]]) -> List[str]:
+    """Sort categories by type (animate -> small -> big -> others)"""
+    # Create category groups
+    animate = []
+    small = []
+    big = []
+    others = []
+    
+    for cat in categories:
+        if cat not in category_types:
+            others.append(cat)
+            continue
+            
+        types = category_types[cat]
+        if types['is_animate']:
+            animate.append(cat)
+        elif types['is_small']:
+            small.append(cat)
+        elif types['is_big']:
+            big.append(cat)
+        else:
+            others.append(cat)
+    
+    # Sort within each group alphabetically
+    return sorted(animate) + sorted(small) + sorted(big) + sorted(others)
+
 def visualize_rsa_matrix(similarity_matrix: np.ndarray, 
                         labels: List[str], 
                         title: str,
-                        output_path: str):
+                        output_path: str,
+                        is_cross_category: bool = False):
     """
     Create and save a heatmap visualization of the RSA matrix
     """
-    plt.figure(figsize=(10, 8))
+    # Adjust figure size based on number of labels
+    if is_cross_category:
+        plt.figure(figsize=(15, 12))  # Larger figure for cross-category
+    else:
+        plt.figure(figsize=(10, 8))
+    
+    # Create heatmap
     sns.heatmap(similarity_matrix, 
                 xticklabels=labels,
                 yticklabels=labels,
                 cmap='viridis',
-                vmin=-1,
+                vmin=0,  # Changed from -1 to 0
                 vmax=1,
-                center=0,
                 square=True)
-    plt.title(title)
+    
+    # Rotate x-axis labels for better readability
+    plt.xticks(rotation=45, ha='right')
+    plt.yticks(rotation=0)
+    
+    # Adjust font sizes
+    plt.title(title, fontsize=12)
+    plt.xticks(fontsize=8)
+    plt.yticks(fontsize=8)
+    
+    # Adjust layout to prevent label cutoff
     plt.tight_layout()
-    plt.savefig(output_path)
+    plt.savefig(output_path, bbox_inches='tight', dpi=300)
     plt.close()
 
 def main():
-    # Read input CSV
-    df = pd.read_csv('/ccn2/dataset/babyview/outputs_20250312/yoloe_cdi_10k_cropped_by_class_filtered-by-size-0.05/embeddings/image_embeddings/clip_image_embeddings_npy.csv')  # Update path as needed
+    # Read input CSV and CDI words
+    df = pd.read_csv('/ccn2/dataset/babyview/outputs_20250312/yoloe_cdi_10k_cropped_by_class_mask/embeddings/image_embeddings/clip_image_embeddings_npy.csv')
+    category_types = load_category_types()
     
     # Create output directories
-    output_dir = Path('rsa_results')
+    output_dir = Path('../analysis/rsa_results')
     plot_dir = output_dir / 'plots'
-    output_dir.mkdir(exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     plot_dir.mkdir(exist_ok=True)
     
     # Compute and visualize within-category RSA
@@ -154,19 +210,28 @@ def main():
             plot_dir / f'{category}_rsa.png'
         )
     
-    # Compute and visualize cross-category RSA
+    # Compute cross-category RSA
     cross_category_rsa = compute_cross_category_rsa(df)
     
     # Save matrix
     np.save(output_dir / 'cross_category_rsa.npy', cross_category_rsa)
     
-    # Visualize cross-category RSA
+    # Get categories and sort them by type
     categories = df['text'].unique()
+    sorted_categories = sort_categories(categories, category_types)
+    
+    # Reorder the cross-category RSA matrix according to sorted categories
+    category_to_idx = {cat: i for i, cat in enumerate(categories)}
+    sorted_indices = [category_to_idx[cat] for cat in sorted_categories]
+    sorted_rsa = cross_category_rsa[sorted_indices][:, sorted_indices]
+    
+    # Visualize sorted cross-category RSA
     visualize_rsa_matrix(
-        cross_category_rsa,
-        categories,
-        'Cross-category RSA',
-        plot_dir / 'cross_category_rsa.png'
+        sorted_rsa,
+        sorted_categories,
+        'Cross-category RSA\n(Grouped by: Animate → Small → Big → Others)',
+        plot_dir / 'cross_category_rsa.png',
+        is_cross_category=True
     )
 
 if __name__ == '__main__':

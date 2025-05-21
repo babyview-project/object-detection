@@ -14,18 +14,16 @@ def calculate_mask_percentage(mask):
 
 def crop_image_by_mask(image, mask):
     """
-    Crop the image using the binary mask with transparency
+    Crop the image using the binary mask with black background
     Args:
         image: Original image (H,W,3)
         mask: Binary mask (H,W)
     Returns:
-        Masked and cropped image with transparency
+        Masked and cropped image with black background
     """
-    # Convert image to RGBA (4 channels)
-    rgba = np.concatenate([image, np.full(image.shape[:2] + (1,), 255, dtype=np.uint8)], axis=-1)
-    
-    # Set alpha channel using mask
-    rgba[..., 3] = mask * 255
+    # Apply mask to image (black background)
+    masked_image = image.copy()
+    masked_image[mask == 0] = [0, 0, 0]  # Set background to black
     
     # Find non-zero region to crop
     rows = np.any(mask, axis=1)
@@ -34,55 +32,46 @@ def crop_image_by_mask(image, mask):
     cmin, cmax = np.where(cols)[0][[0, -1]]
     
     # Crop to non-zero region
-    cropped_image = rgba[rmin:rmax, cmin:cmax]
+    cropped_image = masked_image[rmin:rmax, cmin:cmax]
     
     return cropped_image
 
 def process_images(input_csv, output_dir, output_csv, size_threshold=None):
     """
-    Process images and crop based on masks
-    
-    Args:
-        input_csv (str): Path to input CSV file
-        output_dir (str): Path to output directory
-        output_csv (str): Path to output CSV file
-        size_threshold (float, optional): Minimum percentage of frame that mask must cover
-                                        (0 to 100). None means no threshold.
+    Process images and crop based on masks, ensuring correct mask indexing within each frame group
     """
     # Create output directory if it doesn't exist
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Read the input CSV
+    # Read the input CSV and group by original_frame_path
     df = pd.read_csv(input_csv)
+    grouped = df.groupby('original_frame_path')
     
     # Initialize list to store new rows
     new_rows = []
-    
-    # Process each row
     total_masks = 0
     filtered_masks = 0
     
-    for idx, row in df.iterrows():
+    # Process each group (each original frame)
+    for frame_path, group in grouped:
         try:
-            # Load the original image
-            original_frame_path = row['original_frame_path']
-            original_frame = cv2.imread(original_frame_path)
+            # Load the original image once per group
+            original_frame = cv2.imread(frame_path)
             if original_frame is None:
-                print(f"Failed to load image: {original_frame_path}")
+                print(f"Failed to load image: {frame_path}")
                 continue
-                
-            # Load the mask file
-            masks = np.load(row['saved_mask_path'])
             
-            # Create category subfolder
-            category_dir = output_dir / row['class_name']
-            category_dir.mkdir(exist_ok=True)
+            # Load the mask file once per group with allow_pickle=True
+            first_row = group.iloc[0]
+            masks = np.load(first_row['saved_mask_path'], allow_pickle=True)
             
-            # Process each mask in the file
-            for mask_idx in range(masks.shape[0]):
+            # Process each row in the group with its corresponding mask
+            for idx, (_, row) in enumerate(group.iterrows()):
                 total_masks += 1
-                mask = masks[mask_idx]
+                
+                # Get the corresponding mask for this row
+                mask = masks[idx]  # Using group index to get correct mask
                 
                 # Check size threshold if specified
                 if size_threshold is not None:
@@ -92,16 +81,20 @@ def process_images(input_csv, output_dir, output_csv, size_threshold=None):
                 
                 filtered_masks += 1
                 
+                # Create category subfolder
+                category_dir = output_dir / row['class_name']
+                category_dir.mkdir(exist_ok=True)
+                
                 # Crop the image using the mask
                 cropped_image = crop_image_by_mask(original_frame, mask)
-
+                
                 # Extract the parent folder name and the file name without extension
-                parent_folder = os.path.basename(os.path.dirname(original_frame_path))
-                file_name = os.path.splitext(os.path.basename(original_frame_path))[0]
+                parent_folder = os.path.basename(os.path.dirname(frame_path))
+                file_name = os.path.splitext(os.path.basename(frame_path))[0]
                 simplified_path = f"{parent_folder}_{file_name}"
                 
                 # Save as PNG to preserve transparency
-                cropped_mask_filename = f"{row['class_name']}_mask_{mask_idx}_{simplified_path}.png"
+                cropped_mask_filename = f"{row['class_name']}_mask_{idx}_{simplified_path}.png"
                 cropped_path = category_dir / cropped_mask_filename
                 
                 # Save the cropped image with transparency
@@ -110,17 +103,17 @@ def process_images(input_csv, output_dir, output_csv, size_threshold=None):
                 # Add row to new_rows
                 new_row = {
                     'class_name': row['class_name'],
-                    'original_frame_path': row['original_frame_path'],
+                    'original_frame_path': frame_path,
                     'saved_mask_path': row['saved_mask_path'],
                     'cropped_mask_path': str(cropped_path),
                     'mask_percentage': mask_percent if size_threshold is not None else None
                 }
                 new_rows.append(new_row)
             
-            print(f"Processed frame {idx + 1}/{len(df)}")
+            print(f"Processed frame: {frame_path} with {len(group)} objects")
             
         except Exception as e:
-            print(f"Error processing row {idx}: {e}")
+            print(f"Error processing frame {frame_path}: {e}")
             continue
     
     # Create and save the output CSV

@@ -45,44 +45,58 @@ def create_montage(images, grid_size):
 
 def visualize_image_sizes(input_dir: Path, output_dir: Path):
     """
-    Create separate size visualizations for each category
+    Create separate size visualizations for each category subfolder
     """
     # Create directory for size analysis
     size_dir = output_dir / 'size_analysis'
     size_dir.mkdir(exist_ok=True)
+    print(f"Created size analysis directory: {size_dir}")
     
-    # Collect image sizes
-    sizes = defaultdict(list)  # category -> list of (width, height, area, filename)
-    
-    for img_path in input_dir.glob("*.jpg"):
-        category = img_path.name.split('_')[0]
-        img = cv2.imread(str(img_path))
-        if img is not None:
-            height, width = img.shape[:2]
-            area = width * height
-            sizes[category].append({
-                'width': width,
-                'height': height,
-                'area': area,
-                'filename': img_path.name
-            })
-
-    # Create plots and summary for each category
-    summary_file = size_dir / 'size_summary.txt'
-    with open(summary_file, 'w') as f:
-        for category, images in sizes.items():
-            print(f"\nAnalyzing category: {category}")
-            f.write(f"\nCategory: {category}\n")
+    # Process each category subfolder
+    print(f"Scanning input directory: {input_dir}")
+    for category_dir in input_dir.iterdir():
+        if not category_dir.is_dir():
+            continue
+            
+        category = category_dir.name
+        print(f"Processing category: {category}")
+        
+        # Initialize list for this category's images
+        category_images = []
+        
+        # Process all images in this category's subfolder
+        for img_path in category_dir.glob("*.jpg"):  # or use "*.png" if needed
+            img = cv2.imread(str(img_path))
+            if img is not None:
+                height, width = img.shape[:2]
+                area = width * height
+                category_images.append({
+                    'width': width,
+                    'height': height,
+                    'area': area,
+                    'filename': img_path.name
+                })
+        
+        if not category_images:
+            print(f"No images found in category: {category}")
+            continue
+            
+        print(f"Found {len(category_images)} images in {category}")
+        
+        # Create summary file for this category
+        summary_file = size_dir / f'{category}_size_summary.txt'
+        with open(summary_file, 'w') as f:
+            f.write(f"Size Analysis for Category: {category}\n")
             f.write("-" * 50 + "\n")
             
             # Extract dimensions
-            widths = [img['width'] for img in images]
-            heights = [img['height'] for img in images]
-            areas = [img['area'] for img in images]
+            widths = [img['width'] for img in category_images]
+            heights = [img['height'] for img in category_images]
+            areas = [img['area'] for img in category_images]
             
             # Calculate statistics
             stats = {
-                'Count': len(images),
+                'Count': len(category_images),
                 'Width range': f"{min(widths)} - {max(widths)}",
                 'Height range': f"{min(heights)} - {max(heights)}",
                 'Mean width': f"{sum(widths)/len(widths):.1f}",
@@ -97,41 +111,43 @@ def visualize_image_sizes(input_dir: Path, output_dir: Path):
             # Find extreme cases
             f.write("\nExtreme cases:\n")
             # Largest area
-            largest = max(images, key=lambda x: x['area'])
+            largest = max(category_images, key=lambda x: x['area'])
             f.write(f"Largest image: {largest['filename']} ({largest['width']}x{largest['height']})\n")
             # Smallest area
-            smallest = min(images, key=lambda x: x['area'])
-            f.write(f"Smallest image: {smallest['filename']} ({smallest['width']}x{smallest['height']})\n")
-            
-            # Create scatter plot for this category
-            plt.figure(figsize=(10, 8))
-            plt.scatter(widths, heights, alpha=0.6)
-            plt.xlabel('Width (pixels)')
-            plt.ylabel('Height (pixels)')
-            plt.title(f'Image Dimensions - {category}\n{len(images)} images')
-            
-            # Add mean point
-            mean_width = sum(widths) / len(widths)
-            mean_height = sum(heights) / len(heights)
-            plt.scatter([mean_width], [mean_height], color='red', s=100, 
-                       label='Mean size', marker='*')
-            
-            plt.grid(True, linestyle='--', alpha=0.7)
-            plt.legend()
-            plt.tight_layout()
-            plt.savefig(size_dir / f'{category}_size_scatter.png')
-            plt.close()
-            
-            # Create size distribution histogram
-            plt.figure(figsize=(10, 6))
-            plt.hist(areas, bins=30, alpha=0.7)
-            plt.xlabel('Image Area (pixels²)')
-            plt.ylabel('Count')
-            plt.title(f'Size Distribution - {category}')
-            plt.grid(True, linestyle='--', alpha=0.7)
-            plt.tight_layout()
-            plt.savefig(size_dir / f'{category}_size_distribution.png')
-            plt.close()
+            smallest = min(category_images, key=lambda x: x['area'])
+            f.write(f"Smallest image: {smallest['filename']} ({smallest['width']}x{largest['height']})\n")
+        
+        # Create scatter plot for this category
+        plt.figure(figsize=(10, 8))
+        plt.scatter(widths, heights, alpha=0.6)
+        plt.xlabel('Width (pixels)')
+        plt.ylabel('Height (pixels)')
+        plt.title(f'Image Dimensions - {category}\n{len(category_images)} images')
+        
+        # Add mean point
+        mean_width = sum(widths) / len(widths)
+        mean_height = sum(heights) / len(heights)
+        plt.scatter([mean_width], [mean_height], color='red', s=100, 
+                   label='Mean size', marker='*')
+        
+        plt.grid(True, linestyle='--', alpha=0.7)
+        plt.legend()
+        plt.tight_layout()
+        plt.savefig(size_dir / f'{category}_size_scatter.png')
+        plt.close()
+        
+        # Create size distribution histogram
+        plt.figure(figsize=(10, 6))
+        plt.hist(areas, bins=30, alpha=0.7)
+        plt.xlabel('Image Area (pixels²)')
+        plt.ylabel('Count')
+        plt.title(f'Size Distribution - {category}')
+        plt.grid(True, linestyle='--', alpha=0.7)
+        plt.tight_layout()
+        plt.savefig(size_dir / f'{category}_size_distribution.png')
+        plt.close()
+    
+    print("Size analysis complete!")
 
 def main():
     parser = argparse.ArgumentParser(description='Create montages and analyze image sizes')
@@ -150,44 +166,44 @@ def main():
     print("Analyzing image sizes...")
     visualize_image_sizes(input_dir, output_dir)
     
-    # Process each subfolder (category) one at a time
-    for category_dir in input_dir.iterdir():
-        if not category_dir.is_dir():
-            continue
+    # # Comment out montage creation temporarily
+    # for category_dir in input_dir.iterdir():
+    #     if not category_dir.is_dir():
+    #         continue
             
-        category = category_dir.name
-        print(f"\nProcessing category: {category}")
+    #     category = category_dir.name
+    #     print(f"\nProcessing category: {category}")
         
-        # Collect images for this category
-        images = []
-        for img_path in category_dir.glob("*.jpg"):
-            img = cv2.imread(str(img_path))
-            if img is not None:
-                images.append(img)
-                print(f"Loaded image: {img_path.name}")
-            else:
-                print(f"Warning: Could not read image {img_path}")
+    #     # Collect images for this category
+    #     images = []
+    #     for img_path in category_dir.glob("*.jpg"):
+    #         img = cv2.imread(str(img_path))
+    #         if img is not None:
+    #             images.append(img)
+    #             print(f"Loaded image: {img_path.name}")
+    #         else:
+    #             print(f"Warning: Could not read image {img_path}")
 
-        if not images:
-            print(f"No valid images found for category {category}")
-            continue
+    #     if not images:
+    #         print(f"No valid images found for category {category}")
+    #         continue
 
-        print(f"Creating montage for {category} with {len(images)} images")
+    #     print(f"Creating montage for {category} with {len(images)} images")
         
-        # Calculate grid size
-        n_images = len(images)
-        grid_size = int(np.ceil(np.sqrt(n_images)))
+    #     # Calculate grid size
+    #     n_images = len(images)
+    #     grid_size = int(np.ceil(np.sqrt(n_images)))
         
-        # Create and save montage
-        montage = create_montage(images, grid_size)
-        montage_path = output_dir / f"{category}_montage.jpg"
-        cv2.imwrite(str(montage_path), montage)
-        print(f"Saved montage for {category} at {montage_path}")
+    #     # Create and save montage
+    #     montage = create_montage(images, grid_size)
+    #     montage_path = output_dir / f"{category}_montage.jpg"
+    #     cv2.imwrite(str(montage_path), montage)
+    #     print(f"Saved montage for {category} at {montage_path}")
         
-        # Clear images list to free memory
-        images.clear()
+    #     # Clear images list to free memory
+    #     images.clear()
 
-    print("Analysis and montage creation complete!")
+    print("Size analysis complete!")
 
 if __name__ == "__main__":
     main()
