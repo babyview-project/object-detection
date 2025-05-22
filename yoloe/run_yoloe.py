@@ -10,6 +10,14 @@ import numpy as np
 from tqdm import tqdm
 import pandas as pd
 import time
+import yaml
+
+cwd_path = os.getcwd()
+config_path = Path(f"{cwd_path}/config.yaml")
+with open(config_path, 'r') as config_file:
+    config_data = yaml.safe_load(config_file)
+save_frames_with_mask = config_data["save_frames_with_mask"]
+save_masked_pixels = config_data["save_masked_pixels"]
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -49,12 +57,6 @@ def parse_args():
         help="How often to save annotated frames"
     )
     parser.add_argument(
-        "--save_with_mask",
-        action='store_true',
-        default=False,
-        help="Whether to save annotated frames with mask or not"
-    )
-    parser.add_argument(
         "--overwrite",
         action='store_true',
         default=False,
@@ -66,19 +68,15 @@ def parse_args():
                         help="Number of parallel processes.")
     parser.add_argument("--confidence", type=float, default=0.1, 
                         help="Confidence threshold for frame annotations.")
+    parser.add_argument("--frame_rate", type=int, default=1, 
+                        help="Frame rate at which frames were extracted.")
     return parser.parse_args()
 
-def get_file_list(source, args):
+def get_file_list(source):
     file_list = []
     if Path(source).suffix == ".txt":
         with open(source, "r") as f:
-            all_file_list = [line.strip() for line in f.readlines()]  # Read file paths from the text file
-            group_size = len(all_file_list) // args.num_parallel
-            start_idx = args.rank_id * group_size
-            end_idx = start_idx + group_size
-            if args.rank_id == args.num_parallel - 1:
-                end_idx = len(all_file_list)
-            file_list = all_file_list[start_idx:end_idx]
+            file_list = [line.strip() for line in f.readlines()]  # Read file paths from the text file
     elif Path(source).suffix in [".jpg", ".png"]:
         file_list = [source]  # Single file case
     return file_list
@@ -101,12 +99,10 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
     for input_path in tqdm(file_list):
         if video_id is None:
             video_id = Path(input_path).parent.name.removesuffix('_processed')
-            # pulling unique hashed id
-            # hashed_id = get_fourth_number(full_video_id)
         if frame_id is None:
             frame_id = Path(input_path).stem
         try:
-            timestamp = "T"+time.strftime("%H:%M:%S", time.gmtime(int(frame_id)))
+            timestamp = "T"+time.strftime("%H:%M:%S", time.gmtime(int(frame_id)/args.frame_rate))
         except(Exception):
             timestamp = ""
         file_name = f"{Path(input_path).stem}_annotated{Path(input_path).suffix}"
@@ -147,7 +143,7 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
         mask_output_path = ""
         if (count % args.save_frame_every == 0):
             annotated_image = image.copy()
-            if args.save_with_mask:
+            if save_frames_with_mask:
                 annotated_image = sv.MaskAnnotator(
                     color_lookup=sv.ColorLookup.INDEX,
                     opacity=0.4
@@ -162,9 +158,10 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
                 smart_position=True
             ).annotate(scene=annotated_image, detections=filtered_detections, labels=filtered_labels)
             annotated_image.save(output_path)
-            mask_output_path = str(output_path).removesuffix(f"_annotated{Path(input_path).suffix}") + "_mask.npy"
-            curr_mask_info = detections.mask
-            np.save(mask_output_path, curr_mask_info)
+            if save_masked_pixels:
+                mask_output_path = str(output_path).removesuffix(f"_annotated{Path(input_path).suffix}") + "_mask.npy"
+                curr_mask_info = detections.mask
+                np.save(mask_output_path, curr_mask_info)
             saved_path = output_path
         count = count+1
         with open(csv_file, mode="a", newline="") as f:
@@ -172,13 +169,14 @@ def predict_images(model, file_list, args, custom_file_name=True, count=0, video
             # TODO: different types of csvs -- one for the main pipeline and one for test runs that doesn't include gcp name etc. and a new one for when we switch off of superseded gcp names
             # original frame path should be a uid for each frame, saved frame path is either empty if this frame isn't saved or the full path
             if f.tell() == 0:  # Write header only if the file is empty
-                writer.writerow(["superseded_gcp_name_feb25", "time_in_extended_iso", "xmin", "ymin", "xmax", "ymax", "confidence", "class_name", "masked_pixel_count", "frame_number", "original_frame_path", "saved_frame_path", "saved_mask_path"])
+                # video_id == superseded_gcp_name for now
+                writer.writerow(["video_id", "time_in_extended_iso", "xmin", "ymin", "xmax", "ymax", "confidence", "class_name", "masked_pixel_count", "frame_number", "original_frame_path", "saved_frame_path", "saved_mask_path"])
             wrote_to_csv = False
             for bbox, confidence, class_name, masked_pixel_count in zip(detections.xyxy, detections.confidence, detections["class_name"], masked_pixel_counts):
                 writer.writerow([video_id, timestamp, *bbox.tolist(), confidence, class_name, masked_pixel_count, frame_id, input_path, saved_path, mask_output_path])
                 wrote_to_csv = True
             if not wrote_to_csv:
-                writer.writerow([video_id, timestamp, "", "", "", "", "", "", "", frame_id, input_path, saved_path, mask_output_path])
+                writer.writerow([video_id, timestamp, "", "", "", "", "", "", "", frame_id, input_path, saved_path])
                 wrote_to_csv = True
         frame_id = None
         video_id = None
@@ -206,7 +204,6 @@ def main():
         base = os.getcwd()
         args.output = Path(f"{base}/yoloe_outputs")
     main_output_folder = args.output
-    print(args.names)
     if len(args.names) <= 1:
         model = prompt_free_model()
     else:
@@ -240,7 +237,7 @@ def main():
             file_list = [str(Path(f"{args.source}/{file}")) for file in os.listdir(args.source)] 
             predict_images(model, file_list, args, custom_file_name=False)
     else:
-        predict_images(model, get_file_list(args.source, args), args)
+        predict_images(model, get_file_list(args.source), args)
         
 
 if __name__ == "__main__":

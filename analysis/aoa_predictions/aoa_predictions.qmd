@@ -27,7 +27,13 @@ label_size=7
 
 # 1. Import object detection data
 ```{r}
-object_counts <- read_csv(here("data/overall_category_distribution.csv"))
+old_object_counts <- read_csv(here("data/overall_category_distribution.csv")) |> rename(object=class_name)
+all_object_counts <- read_csv(here("frame_data/preprocessed_object_detections.csv"))
+object_counts <- all_object_counts |>
+  group_by(class_name) |>
+  summarize(total_detected = sum(num_detected), total_frames = sum(num_frames), proportion = total_detected / total_frames) |>
+  filter(!is.na(class_name))
+
 aoa_values <- read_csv(here("data/coef_data/eng_aoas.csv")) %>%
   mutate(
     item_definition = case_when(
@@ -54,7 +60,10 @@ object_counts_cleaned <- object_counts |>
          percentage = 100*proportion,
          log_proportion = log(percentage),
          visual_frequency = scale(log_proportion)) |>
-  rename(object=class_name)
+  rename(object=class_name) |>
+  left_join(old_object_counts |> rename(old_proportion=proportion) |> select(object, old_proportion), by="object")
+
+cor.test(object_counts_cleaned$proportion, object_counts_cleaned$old_proportion)
 ```
 
 
@@ -82,7 +91,7 @@ Phew.
 ```{r}
 # based on this model just going to join on any row that contains the object even if that means matching with multiple words, since that's what it looks like is being done with MLU etc.
 longer_cdi_objects <- object_counts_cleaned |>
-  select(object, visual_frequency, log_proportion, AoA) |>
+  select(object, visual_frequency, log_proportion) |>
   rowwise() |>
   mutate(matching = list(
     eng_joined |> filter(str_starts(uni_lemma, fixed(paste0(object, " ")))) |> filter(lexical_classes == "nouns")
@@ -94,7 +103,7 @@ longer_cdi_objects <- object_counts_cleaned |>
   filter(!is.na(language))
 
 shorter_cdi_objects <- object_counts_cleaned |>
-  select(object, visual_frequency, log_proportion, AoA)  |>
+  select(object, visual_frequency, log_proportion)  |>
   mutate(original_object=object) |>
   left_join(eng_joined, by=c("object"="uni_lemma")) |>
   # getting rid of words that do not have a match
@@ -165,7 +174,7 @@ object_counts_plot <- object_counts_cleaned |>
       group_by(uni_lemma) |> 
       slice_min(order_by = AoA, n = 1, with_ties = FALSE) |> 
       ungroup() |> 
-      select(uni_lemma, category),
+      select(uni_lemma, category, is_animated, is_small_obj, is_big_obj),
     by = c("object" = "uni_lemma")
   ) |>
   #mutate(category=ifelse(category == "furniture_rooms", ifelse(object %in% c("basement", "bathroom", "bedroom", "kitchen",
@@ -174,7 +183,13 @@ object_counts_plot <- object_counts_cleaned |>
       category == "food_drink" ~ "food",
       category == "body_parts" ~ "body parts",
       category == "furniture_rooms" ~ "household",
-      TRUE ~ category)) |>
+      TRUE ~ category),
+      konkle_category = case_when(
+        is_animated == 1 ~ "animated",
+        is_small_obj == 1 ~ "small_obj",
+        is_big_obj == 1 ~ "big_obj",
+        TRUE ~ "others"
+      )) |>
   mutate(category = str_to_sentence(category)) |>
   group_by(object) |>
  reframe(
@@ -182,8 +197,14 @@ object_counts_plot <- object_counts_cleaned |>
     aoa_understands = mean_na_or_na(aoa_understands),
     across(everything(), ~ first(.x))  
   ) |>
-  
   ungroup()
+
+konkle_colors <- c(
+  "animated" = "purple",   
+  "small_obj" = "orange",  
+  "big_obj" = "blue",    
+  "others" = "grey"      
+)
 
 category_averages <- object_counts_plot |>
   group_by(category) |>
@@ -194,8 +215,11 @@ category_averages <- object_counts_plot |>
 object_counts_plot <- object_counts_plot |>
   mutate(category = factor(category, levels = category_averages$category))
 
+# Big - blue, small - orange, animated - purple
+
+
 aoa_objects_plot_production <- ggplot(object_counts_plot, aes(x= aoa_produces, y=log_proportion)) +
-  geom_point(size=4, alpha=0.4, aes(color=category)) +
+  geom_point(size=4, alpha=0.4, aes(color=konkle_category)) +
   geom_smooth(method = "lm", color="#555") +
 ggrepel::geom_label_repel(
   size=label_size,
@@ -207,7 +231,7 @@ ggrepel::geom_label_repel(
   xlab("Estimated age-of-acquisition of word (in months)") +
   theme_minimal() +
  theme(
-    text = element_text(size=10),              # All text bold
+    text = element_text(size=10, face="bold"),              # All text bold
     # Increase space between x-axis and its title
     axis.title.x = element_text(
       #face = "bold", 
@@ -226,11 +250,8 @@ ggrepel::geom_label_repel(
     legend.text = element_text(size = 14),
     axis.text = element_text(size=16)    # Small bold legend text
   )+
-  scale_color_viridis(option="D",
-                        discrete=TRUE,
-                     end = 0.9,       # Avoids the light yellow at the end
-                     guide = guide_legend(reverse = TRUE),
-                     name="Object category") +
+  scale_color_manual(values = konkle_colors) +
+  guides(color = "none")+
  scale_x_continuous(breaks = seq(14, 34, by = 2)) +
    coord_cartesian(xlim = c(14,34))
 aoa_objects_plot_production
