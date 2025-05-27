@@ -23,10 +23,10 @@ python extract_depth.py \
 """
 
 def get_args():
-    parser = argparse.ArgumentParser(description='Process videos to the desired fps, resolution, rotation.')
+    parser = argparse.ArgumentParser(description='Extract depth from images using a pre-trained model')
     parser.add_argument('--input_dir', type=str, help='Path to input directory')
     parser.add_argument('--output_dir', type=str, required=True, help='Path to output directory')
-    parser.add_argument('--num_processes', type=int, default=16, help='Number of processes to use')
+    parser.add_argument('--num_processes', type=int, default=8, help='Number of processes to use')
     parser.add_argument('--batch_size', type=int, default=200, help='Batch size for processing images')
     parser.add_argument('--debug', action='store_true', help='Debug mode')
     return parser.parse_args()
@@ -51,9 +51,10 @@ def extract_depth(img_path_list, args):
 
             # Extract depth prediction, clip, round, and cast to int8 for storage efficiency
             depth = result["predicted_depth"].detach().cpu().numpy()
-            depth = np.clip(depth, -120, 120)
-            depth = np.round(depth)
-            depth = depth.astype(np.int8)
+            # depth = np.clip(depth, -120, 120)
+            # depth = np.round(depth)
+            # depth = depth.astype(np.int8)
+            depth = depth.astype(np.float16)
             min_depth, max_depth = depth.min(), depth.max()
             np.save(out_np_path, depth)
 
@@ -76,7 +77,7 @@ def extract_depth(img_path_list, args):
             fig.savefig(out_vis_path, dpi=300, bbox_inches="tight")
             plt.close(fig)
         
-@ray.remote(num_gpus=0.5)
+@ray.remote(num_gpus=1.0)
 def extract_depth_remote_babyview(img_path_list, args):
     return extract_depth(img_path_list, args)
 

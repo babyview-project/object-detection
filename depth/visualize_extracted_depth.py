@@ -1,3 +1,4 @@
+import shutil
 import glob
 import os
 import argparse
@@ -15,10 +16,10 @@ Visualize extracted depth from images stored in numpy format to verify it works 
 python visualize_extracted_depth.py
 """
 
-n_samples_to_visualize = 20
+n_samples_to_visualize = 100
 image_dir = '/ccn2/dataset/babyview/outputs_20250312/sampled_frames/'
 depth_dir = '/ccn2/dataset/babyview/outputs_20250312/depth/4M_frames/'
-viz_dir = '/ccn2/u/khaiaw/Code/babyview-pose/depth/viz_extracted_depth'
+viz_dir = './viz_extracted_depth'
 
 resize_transform_256 = transforms.Resize(256)
 
@@ -27,8 +28,9 @@ depth_files = glob.glob(os.path.join(depth_dir, '**/*.npy'), recursive=True)
 print(f"Found {len(depth_files)} depth files in {depth_dir}")
 random.shuffle(depth_files)
 depth_files = depth_files[:n_samples_to_visualize]
-if not os.path.exists(viz_dir):
-    os.makedirs(viz_dir)
+if os.path.exists(viz_dir): # delete viz_dir if it exists
+    shutil.rmtree(viz_dir)
+os.makedirs(viz_dir)
     
 for depth_path in tqdm(depth_files, desc="Visualizing depth files"):
     # Get the corresponding image file
