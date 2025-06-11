@@ -7,3 +7,10 @@
 .RData
 .Ruserdata
 frame_data/allframes_1fps.csv
+yoloe/pretrain
+**/recordings_processed.csv
+
+*.html
+**/*_files/
+*.udpipe
+*_trans*.csv

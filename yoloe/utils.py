@@ -125,6 +125,6 @@ def cdi_words_used():
     df_nouns = df_nouns.drop(columns=["form_type"])
     df_nouns.to_csv("cdi_words.csv", index=False)
 
-pull_random_annotations()
+#pull_random_annotations()
 #cdi_words_used()
 #fix_all_csvs()

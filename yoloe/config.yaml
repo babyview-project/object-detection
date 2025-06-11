@@ -1,0 +1,17 @@
+# Default save folder
+save_folder: "predicted_frames" #"/ccn2/dataset/babyview/outputs_20250312"
+# Set to true if you want to disply the mask detections as well in the annotated frames
+save_frames_with_mask: false
+# How often to save a raw frame. When processing hundreds of videos, this value is often set to something like 100
+frame_save_rate: 1
+# Set to true if you want to save the masked pixels in addition to the annotated frames as a numpy array. 
+# The saved numpy array will be a 3d array of shape (num_items, width, height) where values are 0 or 1 depending on whether the item is at the pixel or not
+save_masked_pixels: false
+
+# Processing when video input is provided
+video_processing:
+    # merge detections from all frames into a single video
+    create_output_video: true
+    delete_extracted_frames: false
+    # How many frames per second to extract from videos being processed -- set to 0 to use the original frame rate
+    frames_per_second_extraction: 1

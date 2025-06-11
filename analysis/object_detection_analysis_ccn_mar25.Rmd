@@ -1103,24 +1103,24 @@ plot_top50_by_age_prop <- function() {
 # Generate all three proportional plots for top 50
 top50_data_prop <- generate_combined_top50_prop()
 
-# Overall top 50 proportional plot - BIGGER labels
+# Overall top 50 proportional plot - HORIZONTAL
 p1_prop_50 <- ggplot(top50_data_prop, 
             aes(x = reorder(class_name, proportion),
                 y = proportion, 
                 fill = category_type)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = c(
-    "Animated" = "#9B6EDF",  # purple
-    "Small" = "#FFA500",     # orange
-    "Big" = "#4169E1",       # blue
-    "Other" = "#808080",     # gray for any other categories
-    "Animated & Small" = "#CD853F",
-    "Animated & Big" = "#2E8B57",
-    "Small & Big" = "#DAA520"
+    "Animated" = "#8250A0",  # purple
+    "Small" = "#FAA41A",     # orange
+    "Big" = "#3A53A4",       # blue
+    "Other" = "#C0BDBD",     # gray
+    "Animated & Small" = "#8250A0",  # purple
+    "Animated & Big" = "#8250A0",    # purple
+    "Small & Big" = "#FAA41A"        # orange
   )) +
   scale_y_continuous(labels = scales::percent,
                     breaks = seq(0, max(top50_data_prop$proportion), length.out = 6)) +
-  coord_flip() +
+  coord_flip() +  # This makes it horizontal
   theme_few() +
   theme(
     axis.text.y = element_text(hjust = 0, size = 32),
@@ -1135,133 +1135,8 @@ p1_prop_50 <- ggplot(top50_data_prop,
 
 ggsave(here::here("analysis_plots/combined_top50_proportions_nolabels.png"),
        p1_prop_50,
-       width = 16,
-       height = 20)
-
-# Plot by subject - SMALLER labels
-plot_top50_by_subject_prop <- function() {
-  # Get overall top 50 objects
-  top50_objects <- get_overall_top50_prop(objects_joined_with_categories)
-  
-  # Get total frames per subject
-  subject_totals <- objects_joined_with_categories %>%
-    distinct(superseded_gcp_name_feb25, frame_id, subject_id) %>%
-    group_by(subject_id) %>%
-    summarise(total_frames = n())
-  
-  # Get per-subject proportions for these objects
-  subject_props <- objects_joined_with_categories %>%
-    filter(class_name %in% top50_objects) %>%
-    distinct(superseded_gcp_name_feb25, frame_id, class_name, subject_id, .keep_all = TRUE) %>%
-    group_by(subject_id, class_name) %>%
-    summarise(
-      n_occurrences = n(),
-      mean_confidence = mean(confidence),
-      .groups = 'drop'
-    ) %>%
-    left_join(subject_totals, by = "subject_id") %>%
-    mutate(proportion = n_occurrences/total_frames) %>%
-    complete(subject_id, class_name, 
-             fill = list(n_occurrences = 0, 
-                        mean_confidence = 0, 
-                        proportion = 0))
-  
-  p <- ggplot(subject_props, 
-              aes(x = reorder(class_name, proportion),
-                  y = proportion,
-                  fill = mean_confidence)) +
-    geom_bar(stat = "identity") +
-    facet_wrap(~subject_id) +
-    scale_fill_gradient(low = "lightblue", high = "darkblue") +
-    scale_y_continuous(labels = scales::percent) +
-    coord_flip() +
-    theme_few() +
-    theme(
-      axis.text.y = element_text(hjust = 0, size = 7),  # Decreased to 7
-      axis.text.x = element_text(size = 7),  # Decreased to 7
-      strip.text = element_text(size = 10),
-      plot.title = element_text(size = 12)
-    ) +
-    labs(
-      y = "Proportion of Frames",
-      x = "Category",
-      title = "Top 50 Objects Across Subjects",
-      subtitle = "Percentage of frames containing each object",
-      fill = "Mean\nConfidence",
-      size = 30
-    )
-  
-  ggsave(here::here("analysis_plots/top50_by_subject_proportions_nolabels.png"),
-         p,
-         width = 22,
-         height = 25)
-  
-  return(p)
-}
-
-# Plot by age - BIGGER labels
-plot_top50_by_age_prop <- function() {
-  # Get overall top 50 objects
-  top50_objects <- get_overall_top50_prop(objects_joined_with_categories)
-  
-  # Get total frames per age bin
-  age_totals <- objects_joined_with_categories %>%
-    filter(age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
-    distinct(superseded_gcp_name_feb25, frame_id, age_bin) %>%
-    group_by(age_bin) %>%
-    summarise(total_frames = n())
-  
-  # Get per-age-bin proportions for these objects
-  age_props <- objects_joined_with_categories %>%
-    filter(class_name %in% top50_objects,
-           age_bin %in% c("06-12 months", "12-18 months", "18-24+ months")) %>%
-    distinct(superseded_gcp_name_feb25, frame_id, class_name, age_bin, .keep_all = TRUE) %>%
-    group_by(age_bin, class_name) %>%
-    summarise(
-      n_occurrences = n(),
-      mean_confidence = mean(confidence),
-      n_participants = n_distinct(subject_id),
-      .groups = 'drop'
-    ) %>%
-    left_join(age_totals, by = "age_bin") %>%
-    mutate(proportion = n_occurrences/total_frames) %>%
-    complete(age_bin, class_name, 
-             fill = list(n_occurrences = 0, 
-                        mean_confidence = 0, 
-                        n_participants = 0,
-                        proportion = 0))
-  
-  p <- ggplot(age_props, 
-              aes(x = reorder(class_name, proportion),
-                  y = proportion,
-                  fill = mean_confidence)) +
-    geom_bar(stat = "identity") +
-    facet_wrap(~age_bin) +
-    scale_fill_gradient(low = "lightblue", high = "darkblue") +
-    scale_y_continuous(labels = scales::percent) +
-    coord_flip() +
-    theme_few() +
-    theme(
-      axis.text.y = element_text(hjust = 0, size = 14),
-      axis.text.x = element_text(size = 12),
-      strip.text = element_text(size = 12),
-      plot.title = element_text(size = 12)
-    ) +
-    labs(
-      y = "Proportion of Frames",
-      x = "Category",
-      title = "Top 50 Objects Across Age Groups",
-      subtitle = "Percentage of frames containing each object",
-      fill = "Mean\nConfidence"
-    )
-  
-  ggsave(here::here("analysis_plots/top50_by_age_proportions_nolabels.png"),
-         p,
-         width = 17,
-         height = 20)
-  
-  return(p)
-}
+       width = 20,  # Increased width for horizontal layout
+       height = 16)  # Adjusted height for horizontal layout
 
 # Generate the plots
 p2_prop_50 <- plot_top50_by_subject_prop()
