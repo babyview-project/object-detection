@@ -55,13 +55,15 @@ age_model_no_sub_slopes = glmer(data=for_glmer, cbind(num_detected, num_not_dete
 anova(age_model, age_model_no_class_slopes)
 ```
 
+
+
 ```{r}
 anova(age_model, age_model_no_sub_slopes)
 
 ```
 
 ```{r}
-age_model_proportion= glmer(data=for_glmer %>% mutate(prop_detected = num_detected/num_frames), prop_detected ~ scale(age_mo) + (scale(age_mo) | subject_id) + (scale(age_mo) | class_name), weights =num_frames, family='binomial')
+age_model_proportion= glmer(data=for_glmer %>% mutate(prop_detected = num_detected/num_frames), prop_detected ~ scale(age_mo) + (scale(age_mo) | subject_id) + (scale(age_mo) | class_name), weights=num_frames, family='binomial')
 
 summary(age_model_proportion)
 ```
@@ -87,7 +89,6 @@ neg_changes_across_age <- ranef_df %>%
 ```{R}
 library(MuMIn)
 r.squaredGLMM(age_model)
-
 r.squaredGLMM(age_model_proportion)
 ```
 
