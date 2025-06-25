@@ -1,0 +1,1624 @@
+"object","source","log_prop","in_cdi"
+"adult","vqa",-4.57494086461881,FALSE
+"adult foot","vqa",-9.65100713863566,FALSE
+"adult hand","vqa",-9.98747937525687,FALSE
+"adult man","vqa",-9.80515781846292,FALSE
+"adult woman","vqa",-10.2106229265711,FALSE
+"air conditioner","vqa",-6.34989321553049,FALSE
+"air purifier","vqa",-9.29433219469693,FALSE
+"airplane toy","vqa",-10.903770107131,FALSE
+"alarm clock","vqa",-10.4983049990229,FALSE
+"alphabet block","vqa",-10.2106229265711,FALSE
+"animal","vqa_yoloe",-6.58882482683807,TRUE
+"animal picture","vqa",-10.4983049990229,FALSE
+"animal sticker","vqa",-10.2106229265711,FALSE
+"apple","vqa_yoloe",-5.64970585788746,TRUE
+"apple peeler","vqa",-9.65100713863566,FALSE
+"avocado","vqa",-9.98747937525687,FALSE
+"baby","vqa",-3.03303136828275,TRUE
+"baby and stroller","vqa",-10.903770107131,FALSE
+"baby animal book","vqa",-10.903770107131,FALSE
+"baby bath toy","vqa",-10.903770107131,FALSE
+"baby bed","vqa",-5.1230265913387,FALSE
+"baby bed sheet","vqa",-10.4983049990229,FALSE
+"baby book","vqa",-10.4983049990229,FALSE
+"baby bootie","vqa",-10.903770107131,FALSE
+"baby bottle","vqa",-4.88761294743268,FALSE
+"baby bottle cap","vqa",-10.2106229265711,FALSE
+"baby bouncer","vqa",-10.4983049990229,FALSE
+"baby car","vqa",-10.903770107131,FALSE
+"baby car seat","vqa",-8.95785995807572,FALSE
+"baby carriage","vqa",-9.03196793022944,FALSE
+"baby carrier","vqa",-9.65100713863566,FALSE
+"baby chair","vqa",-7.09710761736071,FALSE
+"baby change table","vqa",-10.903770107131,FALSE
+"baby clothe","vqa",-7.88334522098667,FALSE
+"baby crib","vqa",-5.51698409259538,FALSE
+"baby diaper","vqa",-10.903770107131,FALSE
+"baby doll","vqa",-6.17638228841869,FALSE
+"baby elephant","vqa",-9.65100713863566,FALSE
+"baby food","vqa",-7.37740958251487,FALSE
+"baby food bowl","vqa",-10.903770107131,FALSE
+"baby food box","vqa",-9.39969271035475,FALSE
+"baby food tray","vqa",-9.80515781846292,FALSE
+"baby foot","vqa",-8.04156922620156,FALSE
+"baby gate","vqa",-5.18509901998108,FALSE
+"baby girl","vqa",-10.903770107131,FALSE
+"baby helmet","vqa",-8.55239484996755,FALSE
+"baby in clothe","vqa",-10.903770107131,FALSE
+"baby pacifier","vqa",-9.65100713863566,FALSE
+"baby photo album","vqa",-10.903770107131,FALSE
+"baby plate","vqa",-9.11201063790297,FALSE
+"baby playpen","vqa",-10.903770107131,FALSE
+"baby pool","vqa",-8.76370394363476,FALSE
+"baby seat","vqa",-4.8888332038379,FALSE
+"baby shoe","vqa",-8.82432856545119,FALSE
+"baby stroller","vqa",-4.5043435717163,FALSE
+"baby swe","vqa",-8.16293008320583,FALSE
+"baby toy","vqa",-6.64815739731281,FALSE
+"baby walker","vqa",-5.75047851263325,FALSE
+"backpack","vqa",-5.85391409988149,FALSE
+"bag","vqa",-3.44385534088992,FALSE
+"bag of bread","vqa",-10.903770107131,FALSE
+"bag of candy","vqa",-10.903770107131,FALSE
+"bag of carrot","vqa",-9.98747937525687,FALSE
+"bag of cat food","vqa",-10.903770107131,FALSE
+"bag of cereal","vqa",-9.39969271035475,FALSE
+"bag of cheese","vqa",-10.903770107131,FALSE
+"bag of chip","vqa",-6.72938283723539,FALSE
+"bag of dog food","vqa",-10.4983049990229,FALSE
+"bag of flour","vqa",-8.33882074966949,FALSE
+"bag of food","vqa",-8.65247830852453,FALSE
+"bag of fruit","vqa",-10.903770107131,FALSE
+"bag of object","vqa",-10.903770107131,FALSE
+"bag of pasta","vqa",-10.903770107131,FALSE
+"bag of rice","vqa",-9.1990220148926,FALSE
+"bag of salt","vqa",-9.98747937525687,FALSE
+"bag of toy","vqa",-10.2106229265711,FALSE
+"bag of vegetable","vqa",-10.903770107131,FALSE
+"baguette","vqa",-9.39969271035475,FALSE
+"balcony","vqa",-10.903770107131,FALSE
+"ball","vqa_yoloe",-3.40770910181073,TRUE
+"ball hoop","vqa",-10.4983049990229,FALSE
+"ball net","vqa",-9.51747574601114,FALSE
+"ball pit","vqa",-7.45378256129944,FALSE
+"balloon","vqa_yoloe",-4.35974804996642,TRUE
+"balloon tube","vqa",-10.903770107131,FALSE
+"banana","vqa_yoloe",-5.10971868724701,TRUE
+"banana slice","vqa",-10.2106229265711,FALSE
+"banner","vqa",-10.903770107131,FALSE
+"bar","vqa",-10.903770107131,FALSE
+"bar stool","vqa",-10.903770107131,FALSE
+"barbeque","vqa",-8.88886708658876,FALSE
+"barbeque grill","vqa",-10.903770107131,FALSE
+"barbie doll","vqa",-10.2106229265711,FALSE
+"barrel","vqa",-10.903770107131,FALSE
+"baseball","vqa",-10.903770107131,FALSE
+"baseball bat","vqa",-9.1990220148926,FALSE
+"baseball glove","vqa",-10.903770107131,FALSE
+"basket","vqa_yoloe",-3.66494507277708,TRUE
+"basket of fruit","vqa",-10.903770107131,FALSE
+"basket of toy","vqa",-10.903770107131,FALSE
+"basket with toy","vqa",-10.4983049990229,FALSE
+"basketball","vqa",-7.98599937504675,FALSE
+"basketball hoop","vqa",-7.45378256129944,FALSE
+"bat","vqa_yoloe",-7.37779307452354,TRUE
+"bath tub","vqa",-9.39969271035475,FALSE
+"bathroom","vqa_yoloe",-6.08691021020605,TRUE
+"bathroom cabinet","vqa",-10.2106229265711,FALSE
+"bathroom sink","vqa",-10.4983049990229,FALSE
+"bathtub","vqa_yoloe",-5.56259695964855,TRUE
+"beach ball","vqa",-8.70654552979481,FALSE
+"bead","vqa_yoloe",-7.06698306958019,FALSE
+"bean","vqa_yoloe",-10.1253069049206,FALSE
+"bean bag chair","vqa",-10.903770107131,FALSE
+"bear","vqa_yoloe",-8.65855195060346,TRUE
+"bear toy","vqa",-9.39969271035475,FALSE
+"bed","vqa_yoloe",-2.70690602686007,TRUE
+"bed frame","vqa",-8.95785995807572,FALSE
+"bed sheet","vqa",-7.62662537413885,FALSE
+"bedroom","vqa_yoloe",-8.71308857316711,TRUE
+"bedspread","vqa",-10.903770107131,FALSE
+"bee","vqa_yoloe",-9.3660738378064,TRUE
+"belt","vqa_yoloe",-8.24817350508023,TRUE
+"bench","vqa_yoloe",-4.89542299749973,TRUE
+"bicycle","vqa_yoloe",-5.52835147807371,TRUE
+"bicycle helmet","vqa",-10.903770107131,FALSE
+"bike","vqa",-10.2106229265711,FALSE
+"bin","vqa",-8.2296214577045,FALSE
+"bird","vqa_yoloe",-7.4107294465989,TRUE
+"bird feeder","vqa",-9.51747574601114,FALSE
+"birdcage","vqa",-7.48604342351766,FALSE
+"biscuit","vqa",-9.80515781846292,FALSE
+"black board","vqa",-10.4983049990229,FALSE
+"black box","vqa",-8.65247830852453,FALSE
+"black hose","vqa",-10.903770107131,FALSE
+"black oven","vqa",-9.98747937525687,FALSE
+"black pan","vqa",-10.4983049990229,FALSE
+"black tv","vqa",-9.1990220148926,FALSE
+"black watch","vqa",-10.903770107131,FALSE
+"blackberry","vqa",-10.903770107131,FALSE
+"blackboard","vqa",-7.74676968598092,FALSE
+"blanket","vqa_yoloe",-3.11522009878139,TRUE
+"blender","vqa",-7.04304039609043,FALSE
+"blind","vqa",-8.70654552979481,FALSE
+"block","vqa_yoloe",-5.71453931978944,TRUE
+"blueberry","vqa",-10.903770107131,FALSE
+"board","vqa",-7.19019804042672,FALSE
+"board game","vqa",-9.65100713863566,FALSE
+"boat","vqa_yoloe",-8.06358392279654,TRUE
+"book","vqa_yoloe",-1.77681323152415,TRUE
+"book cover","vqa",-8.82432856545119,FALSE
+"bookcase","vqa",-7.26618394740464,FALSE
+"bookshelf","vqa",-2.88728720573969,FALSE
+"bottle","vqa_yoloe",-2.67368221056189,TRUE
+"bottle cap","vqa",-10.2106229265711,FALSE
+"bottle of detergent","vqa",-8.88886708658876,FALSE
+"bottle of hand wash","vqa",-10.903770107131,FALSE
+"bottle of ketchup","vqa",-9.65100713863566,FALSE
+"bottle of lotion","vqa",-9.98747937525687,FALSE
+"bottle of milk","vqa",-9.98747937525687,FALSE
+"bottle of mouthwash","vqa",-10.903770107131,FALSE
+"bottle of oil","vqa",-9.51747574601114,FALSE
+"bottle of sauce","vqa",-8.95785995807572,FALSE
+"bottle of shampoo","vqa",-10.903770107131,FALSE
+"bottle of soap","vqa",-9.29433219469693,FALSE
+"bottle of water","vqa",-10.903770107131,FALSE
+"bottle of wine","vqa",-10.2106229265711,FALSE
+"bow","vqa",-10.903770107131,FALSE
+"bowl","vqa_yoloe",-2.57291924574374,TRUE
+"bowl of ball","vqa",-10.903770107131,FALSE
+"bowl of blueberry","vqa",-10.4983049990229,FALSE
+"bowl of cereal","vqa",-7.40726254566455,FALSE
+"bowl of cherry","vqa",-10.4983049990229,FALSE
+"bowl of chip","vqa",-10.903770107131,FALSE
+"bowl of food","vqa",-6.64109023008971,FALSE
+"bowl of fruit","vqa",-7.93335564156133,FALSE
+"bowl of noodle","vqa",-10.2106229265711,FALSE
+"bowl of nut","vqa",-10.903770107131,FALSE
+"bowl of pasta","vqa",-10.903770107131,FALSE
+"bowl of potato","vqa",-10.903770107131,FALSE
+"bowl of salad","vqa",-9.98747937525687,FALSE
+"bowl of soup","vqa",-10.903770107131,FALSE
+"bowl of strawberry","vqa",-9.03196793022944,FALSE
+"bowl of toy","vqa",-9.98747937525687,FALSE
+"bowl of vegetable","vqa",-9.98747937525687,FALSE
+"bowl of water","vqa",-10.903770107131,FALSE
+"bowl of watermelon","vqa",-10.4983049990229,FALSE
+"box","vqa_yoloe",-2.54274514795047,TRUE
+"box lid","vqa",-9.98747937525687,FALSE
+"box of cereal","vqa",-8.37804146282277,FALSE
+"box of corn flake","vqa",-9.65100713863566,FALSE
+"box of crayon","vqa",-10.4983049990229,FALSE
+"box of food","vqa",-9.51747574601114,FALSE
+"box of snack","vqa",-10.4983049990229,FALSE
+"box of tea","vqa",-10.903770107131,FALSE
+"box of tissue","vqa",-10.4983049990229,FALSE
+"box of toy","vqa",-10.903770107131,FALSE
+"box of water","vqa",-10.903770107131,FALSE
+"boy","vqa",-5.78278675586591,TRUE
+"boy and camera","vqa",-10.903770107131,FALSE
+"boy doll","vqa",-10.903770107131,FALSE
+"bracelet","vqa",-10.2106229265711,FALSE
+"bread","vqa_yoloe",-5.56554136463621,TRUE
+"bread bag","vqa",-10.4983049990229,FALSE
+"bread box","vqa",-10.4983049990229,FALSE
+"brick","vqa",-10.4983049990229,FALSE
+"brick chimney","vqa",-10.903770107131,FALSE
+"brick fireplace","vqa",-10.903770107131,FALSE
+"brick floor","vqa",-9.98747937525687,FALSE
+"brick wall","vqa",-8.37804146282277,FALSE
+"bridge","vqa",-8.76370394363476,FALSE
+"broccoli","vqa",-8.88886708658876,FALSE
+"broom","vqa_yoloe",-6.41988025718766,TRUE
+"brown bag","vqa",-8.82432856545119,FALSE
+"brown ball","vqa",-9.98747937525687,FALSE
+"brown box","vqa",-8.50587483433266,FALSE
+"brown cabinet","vqa",-8.30108042168665,FALSE
+"brown cup","vqa",-10.903770107131,FALSE
+"brown mat","vqa",-9.80515781846292,FALSE
+"brown paper bag","vqa",-9.11201063790297,FALSE
+"brown shelf","vqa",-9.98747937525687,FALSE
+"brown shoe","vqa",-8.55239484996755,FALSE
+"brown sofa","vqa",-9.03196793022944,FALSE
+"brown stuff animal","vqa",-10.903770107131,FALSE
+"brown stuff toy","vqa",-10.903770107131,FALSE
+"brown teddy bear","vqa",-9.80515781846292,FALSE
+"brush","vqa_yoloe",-6.97709599882605,TRUE
+"bubble","vqa_yoloe",-7.18237064333424,FALSE
+"bubble blower","vqa",-8.50587483433266,FALSE
+"bubble bottle","vqa",-10.4983049990229,FALSE
+"bubble maker","vqa",-9.80515781846292,FALSE
+"bubble wand","vqa",-9.80515781846292,FALSE
+"bucket","vqa_yoloe",-3.8904635966576,TRUE
+"bucket of fruit","vqa",-10.903770107131,FALSE
+"build","vqa",-6.17638228841869,TRUE
+"build block","vqa",-10.903770107131,FALSE
+"building","vqa",-9.51747574601114,FALSE
+"bunny","vqa_yoloe",-8.31774700252592,TRUE
+"bunny ear","vqa",-10.903770107131,FALSE
+"bus","vqa_yoloe",-8.81557863226986,TRUE
+"bush","vqa",-6.84332709658461,FALSE
+"butter","vqa_yoloe",-7.95224095190257,TRUE
+"butterfly","vqa_yoloe",-8.21836553604868,TRUE
+"cabinet","vqa",-4.05099913648165,FALSE
+"cable","vqa",-9.98747937525687,FALSE
+"cactus","vqa",-8.16293008320583,FALSE
+"cage","vqa",-7.93335564156133,FALSE
+"cake","vqa_yoloe",-6.69596730273109,TRUE
+"cake stand","vqa",-10.903770107131,FALSE
+"calculator","vqa",-9.39969271035475,FALSE
+"calendar","vqa",-7.98599937504675,FALSE
+"camel","vqa",-9.98747937525687,FALSE
+"camera","vqa_yoloe",-5.79558608347639,TRUE
+"can","vqa_yoloe",-4.73236718922977,TRUE
+"can of soda","vqa",-10.903770107131,FALSE
+"can opener","vqa",-9.98747937525687,FALSE
+"candle","vqa",-7.90803783357704,FALSE
+"candy","vqa_yoloe",-10.0181019692479,TRUE
+"candy cane","vqa",-9.11201063790297,FALSE
+"canister","vqa",-10.903770107131,FALSE
+"cap","vqa",-9.11201063790297,FALSE
+"car","vqa_yoloe",-4.59539931647377,TRUE
+"car battery charger","vqa",-10.903770107131,FALSE
+"car door","vqa",-9.1990220148926,FALSE
+"car seat","vqa",-6.43786198847645,FALSE
+"car toy","vqa",-8.82432856545119,FALSE
+"car wheel","vqa",-10.4983049990229,FALSE
+"car window","vqa",-8.33882074966949,FALSE
+"card","vqa",-7.76827589120188,FALSE
+"card game","vqa",-10.4983049990229,FALSE
+"cardboard","vqa",-9.80515781846292,FALSE
+"cardboard box","vqa",-7.22746943522395,FALSE
+"carpet","vqa",-5.49212405527599,FALSE
+"carrot","vqa_yoloe",-7.13125771458304,FALSE
+"cart","vqa",-9.11201063790297,FALSE
+"cartoon","vqa",-10.903770107131,FALSE
+"cartoon character","vqa",-10.903770107131,FALSE
+"case","vqa",-10.903770107131,FALSE
+"cat","vqa_yoloe",-4.04174841825189,TRUE
+"cat bed","vqa",-8.10040972622449,FALSE
+"cat food","vqa",-9.1990220148926,FALSE
+"cat food bowl","vqa",-8.50587483433266,FALSE
+"cat food box","vqa",-10.2106229265711,FALSE
+"cat house","vqa",-10.4983049990229,FALSE
+"cat litter box","vqa",-10.903770107131,FALSE
+"cat toy","vqa",-7.19019804042672,FALSE
+"cat tree","vqa",-6.31880262846046,FALSE
+"cd","vqa",-10.903770107131,FALSE
+"ceiling","vqa",-5.08963957530596,FALSE
+"ceiling fan","vqa",-6.04008922599144,FALSE
+"ceiling light","vqa",-9.1990220148926,FALSE
+"cereal","vqa_yoloe",-9.03809576168947,TRUE
+"cereal box","vqa",-8.70654552979481,FALSE
+"chain","vqa",-10.903770107131,FALSE
+"chair","vqa_yoloe",-1.22290456993066,TRUE
+"chalk","vqa_yoloe",-7.5623499777962,TRUE
+"chandelier","vqa",-5.71638430129027,FALSE
+"charger","vqa",-9.98747937525687,FALSE
+"cheese","vqa_yoloe",-9.64276645689879,TRUE
+"chess board","vqa",-9.65100713863566,FALSE
+"chess piece","vqa",-9.29433219469693,FALSE
+"chessboard","vqa",-8.95785995807572,FALSE
+"chicken","vqa_yoloe",-8.96060872969823,TRUE
+"child","vqa",-2.72920807965159,TRUE
+"child 's foot","vqa",-7.4380342043313,FALSE
+"child 's hand","vqa",-7.85924766940761,FALSE
+"child 's head","vqa",-6.14587883412527,FALSE
+"child 's head camera","vqa",-10.2106229265711,FALSE
+"child 's leg","vqa",-9.80515781846292,FALSE
+"child and baby","vqa",-10.2106229265711,FALSE
+"child and doll","vqa",-10.903770107131,FALSE
+"child and man","vqa",-10.4983049990229,FALSE
+"child and person","vqa",-10.4983049990229,FALSE
+"child and toy","vqa",-8.65247830852453,FALSE
+"child in dress","vqa",-10.4983049990229,FALSE
+"child seat","vqa",-10.2106229265711,FALSE
+"chimney","vqa",-10.903770107131,FALSE
+"chop board","vqa",-9.65100713863566,FALSE
+"chopstick","vqa",-9.29433219469693,FALSE
+"christmas ball","vqa",-8.70654552979481,FALSE
+"christmas decoration","vqa",-7.30645784654258,FALSE
+"christmas light","vqa",-7.85924766940761,FALSE
+"christmas present","vqa",-8.82432856545119,FALSE
+"christmas stocking","vqa",-6.78473293231856,FALSE
+"christmas tree","vqa",-4.31966956105949,FALSE
+"christmas tree decoration","vqa",-8.55239484996755,FALSE
+"christmas tree ornament","vqa",-10.903770107131,FALSE
+"christmas tree toy","vqa",-10.4983049990229,FALSE
+"christmas wreath","vqa",-10.2106229265711,FALSE
+"clean cloth","vqa",-10.903770107131,FALSE
+"climb wall","vqa",-9.29433219469693,FALSE
+"clock","vqa_yoloe",-4.69504847154249,TRUE
+"closet","vqa_yoloe",-8.58450152357477,TRUE
+"cloth","vqa",-4.98085210255816,FALSE
+"clothe","vqa",-3.82965329093367,FALSE
+"clothe basket","vqa",-10.903770107131,FALSE
+"clothe dryer","vqa",-7.81272765377271,FALSE
+"clothe hanger","vqa",-8.76370394363476,FALSE
+"clothe rack","vqa",-8.10040972622449,FALSE
+"clothesline","vqa",-10.2106229265711,FALSE
+"clothespin","vqa",-10.4983049990229,FALSE
+"cloud","vqa_yoloe",-11.1037265147143,TRUE
+"coat","vqa_yoloe",-9.31607935187844,TRUE
+"coat rack","vqa",-10.903770107131,FALSE
+"coca cola","vqa",-10.903770107131,FALSE
+"coffee box","vqa",-10.4983049990229,FALSE
+"coffee cup","vqa",-8.04156922620156,FALSE
+"coffee filter","vqa",-10.903770107131,FALSE
+"coffee kettle","vqa",-10.903770107131,FALSE
+"coffee machine","vqa",-8.46142307176182,FALSE
+"coffee maker","vqa",-6.59970501392686,FALSE
+"coffee mug","vqa",-9.11201063790297,FALSE
+"coffee pot","vqa",-9.39969271035475,FALSE
+"coffee table","vqa",-8.04156922620156,FALSE
+"coin","vqa",-10.4983049990229,FALSE
+"comb","vqa_yoloe",-8.06649578137486,TRUE
+"computer","vqa",-6.13733177354682,FALSE
+"computer desk","vqa",-10.4983049990229,FALSE
+"computer monitor","vqa",-7.83571717199741,FALSE
+"computer screen","vqa",-9.39969271035475,FALSE
+"computer tower","vqa",-6.45525373118831,FALSE
+"cone","vqa",-7.4380342043313,FALSE
+"container","vqa",-4.59476133328735,FALSE
+"container lid","vqa",-10.903770107131,FALSE
+"container of food","vqa",-10.903770107131,FALSE
+"container with toy","vqa",-10.4983049990229,FALSE
+"controller","vqa",-10.2106229265711,FALSE
+"cookie","vqa_yoloe",-7.75374745930105,TRUE
+"cookie cutter","vqa",-10.2106229265711,FALSE
+"cord","vqa",-9.80515781846292,FALSE
+"corn","vqa_yoloe",-9.41809315700636,TRUE
+"couch","vqa_yoloe",-2.06594296743277,TRUE
+"counter","vqa",-8.13118138489125,FALSE
+"countertop","vqa",-8.26471277751577,FALSE
+"cow","vqa_yoloe",-8.00245875612038,TRUE
+"crayon","vqa_yoloe",-4.92258802252124,TRUE
+"crib","vqa_yoloe",-4.57320829866764,TRUE
+"crocodile","vqa",-10.903770107131,FALSE
+"cube","vqa",-9.39969271035475,FALSE
+"cuboid","vqa",-10.903770107131,FALSE
+"cucumber","vqa",-10.2106229265711,FALSE
+"cup","vqa_yoloe",-2.16019917106236,TRUE
+"cup holder","vqa",-9.98747937525687,FALSE
+"cup with straw","vqa",-9.29433219469693,FALSE
+"cupboard","vqa",-5.40047315989645,FALSE
+"cupcake","vqa",-8.19571990602882,FALSE
+"cupcake tray","vqa",-9.80515781846292,FALSE
+"cupcake wrapper","vqa",-10.903770107131,FALSE
+"curtain","vqa",-3.37409515687731,FALSE
+"curtain rod","vqa",-10.903770107131,FALSE
+"cushion","vqa",-7.40726254566455,FALSE
+"cut board","vqa",-9.1990220148926,FALSE
+"cutting board","vqa",-10.903770107131,FALSE
+"cylinder","vqa",-9.65100713863566,FALSE
+"deck","vqa",-9.51747574601114,FALSE
+"decoration","vqa",-9.1990220148926,FALSE
+"deer","vqa_yoloe",-9.7047732496023,TRUE
+"desk","vqa",-5.85071409715082,FALSE
+"desk lamp","vqa",-9.1990220148926,FALSE
+"detergent","vqa",-9.1990220148926,FALSE
+"detergent bottle","vqa",-10.2106229265711,FALSE
+"diaper","vqa_yoloe",-7.40338490016142,TRUE
+"dining table","vqa",-9.51747574601114,FALSE
+"dinosaur","vqa",-8.82432856545119,FALSE
+"dinosaur skeleton","vqa",-10.903770107131,FALSE
+"dinosaur toy","vqa",-9.11201063790297,FALSE
+"disc","vqa",-9.51747574601114,FALSE
+"dish","vqa_yoloe",-8.65346894912162,TRUE
+"dish brush","vqa",-10.903770107131,FALSE
+"dish rack","vqa",-6.19423990581869,FALSE
+"dish soap","vqa",-10.903770107131,FALSE
+"dish soap bottle","vqa",-9.98747937525687,FALSE
+"dishware","vqa",-10.2106229265711,FALSE
+"dishwashe liquid","vqa",-9.98747937525687,FALSE
+"dishwasher","vqa",-6.31371355895299,FALSE
+"dog","vqa_yoloe",-3.5228888982443,TRUE
+"dog and child","vqa",-10.903770107131,FALSE
+"dog bed","vqa",-8.46142307176182,FALSE
+"dog book","vqa",-10.903770107131,FALSE
+"dog bowl","vqa",-8.46142307176182,FALSE
+"dog crate","vqa",-10.4983049990229,FALSE
+"dog food","vqa",-10.903770107131,FALSE
+"dog food bowl","vqa",-9.98747937525687,FALSE
+"dog house","vqa",-9.29433219469693,FALSE
+"dog toy","vqa",-8.50587483433266,FALSE
+"doll","vqa_yoloe",-4.03691332179129,TRUE
+"doll bed","vqa",-10.4983049990229,FALSE
+"doll house","vqa",-8.10040972622449,FALSE
+"doll skeleton","vqa",-10.903770107131,FALSE
+"dollhouse","vqa",-9.39969271035475,FALSE
+"dolphin","vqa",-9.98747937525687,FALSE
+"dolphin toy","vqa",-9.80515781846292,FALSE
+"donut","vqa",-9.65100713863566,TRUE
+"door","vqa_yoloe",-2.47831246075605,TRUE
+"door frame","vqa",-6.86952946897863,FALSE
+"door handle","vqa",-6.86071883929648,FALSE
+"door hinge","vqa",-10.2106229265711,FALSE
+"door knob","vqa",-6.69164250925254,FALSE
+"door lock","vqa",-9.65100713863566,FALSE
+"door mat","vqa",-7.5895841024585,FALSE
+"door mat cover","vqa",-9.39969271035475,FALSE
+"door mat cover cover","vqa",-10.4983049990229,FALSE
+"door mat cover holder","vqa",-9.65100713863566,FALSE
+"door mat holder","vqa",-9.65100713863566,FALSE
+"door stand holder","vqa",-9.98747937525687,FALSE
+"doorbell","vqa",-10.4983049990229,FALSE
+"doorframe","vqa",-5.36840628409979,FALSE
+"dough","vqa",-9.65100713863566,FALSE
+"dragon","vqa",-9.98747937525687,FALSE
+"draw","vqa",-9.98747937525687,TRUE
+"drawer","vqa_yoloe",-5.85426645145858,TRUE
+"dress","vqa_yoloe",-7.50297379384467,TRUE
+"dresser","vqa",-5.73328611209288,FALSE
+"drill","vqa",-8.41886345734303,FALSE
+"drink","vqa_yoloe",-8.0489318123751,TRUE
+"drink bottle","vqa",-9.98747937525687,FALSE
+"drink cup","vqa",-9.98747937525687,FALSE
+"drum","vqa",-7.06431779453772,FALSE
+"drum set","vqa",-10.903770107131,FALSE
+"drumstick","vqa",-10.903770107131,FALSE
+"duck","vqa_yoloe",-8.13566928870193,TRUE
+"duck head","vqa",-10.903770107131,FALSE
+"duck toy","vqa",-8.76370394363476,FALSE
+"duckle","vqa",-10.4983049990229,FALSE
+"duckle toy","vqa",-10.903770107131,FALSE
+"dumbbell","vqa",-8.37804146282277,FALSE
+"dustpan","vqa",-8.46142307176182,FALSE
+"earphone","vqa",-9.98747937525687,FALSE
+"easel","vqa",-10.903770107131,FALSE
+"egg","vqa_yoloe",-5.57449450591741,TRUE
+"egg carton","vqa",-8.33882074966949,FALSE
+"egg shell","vqa",-9.80515781846292,FALSE
+"egg tray","vqa",-9.51747574601114,FALSE
+"egg yolk","vqa",-9.65100713863566,FALSE
+"eggplant","vqa",-10.903770107131,FALSE
+"electric mixer","vqa",-10.903770107131,FALSE
+"elephant","vqa_yoloe",-7.78450974774076,TRUE
+"elephant book","vqa",-10.903770107131,FALSE
+"elephant toy","vqa",-6.86952946897863,FALSE
+"enclosure","vqa",-10.903770107131,FALSE
+"envelope","vqa",-10.903770107131,FALSE
+"exercise bike","vqa",-9.65100713863566,FALSE
+"exercise machine","vqa",-9.80515781846292,FALSE
+"face","vqa_yoloe",-8.37333400837456,TRUE
+"fan","vqa",-4.2116863646244,FALSE
+"faucet","vqa",-7.62662537413885,FALSE
+"feather","vqa",-10.903770107131,FALSE
+"fence","vqa",-5.46135239660923,FALSE
+"fidget spinner","vqa",-10.903770107131,FALSE
+"file cabinet","vqa",-10.903770107131,FALSE
+"finger","vqa_yoloe",-7.90278917801809,TRUE
+"fire","vqa",-10.903770107131,FALSE
+"fire extinguisher","vqa",-7.98599937504675,FALSE
+"fire hydrant","vqa",-9.80515781846292,FALSE
+"fire place","vqa",-9.65100713863566,FALSE
+"fire truck","vqa",-9.98747937525687,FALSE
+"fireplace","vqa",-5.41070866379048,FALSE
+"fish","vqa_yoloe",-6.56476263111709,TRUE
+"fish food","vqa",-10.4983049990229,FALSE
+"fish tank","vqa",-8.16293008320583,FALSE
+"fish toy","vqa",-10.4983049990229,FALSE
+"fishbowl","vqa",-10.903770107131,FALSE
+"fixture","vqa",-6.76860355038867,FALSE
+"flag","vqa_yoloe",-6.86017187623012,TRUE
+"flagpole","vqa",-10.903770107131,FALSE
+"flamingo","vqa",-10.2106229265711,FALSE
+"flashlight","vqa",-10.903770107131,FALSE
+"floor","vqa",-3.64359894113054,FALSE
+"floor lamp","vqa",-10.903770107131,FALSE
+"floor mat","vqa",-9.51747574601114,FALSE
+"flower","vqa_yoloe",-4.44008110559497,TRUE
+"flower bed","vqa",-9.98747937525687,FALSE
+"flower pot","vqa",-7.37740958251487,FALSE
+"flower vase","vqa",-6.16319528413673,FALSE
+"folder","vqa",-10.2106229265711,FALSE
+"food","vqa_yoloe",-4.92534845835165,TRUE
+"food bag","vqa",-10.903770107131,FALSE
+"food bowl","vqa",-9.98747937525687,FALSE
+"food box","vqa",-8.70654552979481,FALSE
+"food container","vqa",-7.48604342351766,FALSE
+"food cup","vqa",-10.903770107131,FALSE
+"food item","vqa",-10.4983049990229,FALSE
+"food package","vqa",-9.29433219469693,FALSE
+"food packet","vqa",-9.51747574601114,FALSE
+"food plate","vqa",-9.98747937525687,FALSE
+"food spoon","vqa",-10.903770107131,FALSE
+"food tray","vqa",-8.88886708658876,FALSE
+"foot","vqa_yoloe",-8.08469926953043,TRUE
+"football","vqa",-7.90803783357704,FALSE
+"fork","vqa_yoloe",-4.76649527806508,TRUE
+"fox","vqa",-10.903770107131,FALSE
+"frame","vqa",-6.65527486508167,FALSE
+"fridge","vqa",-5.17367032415745,FALSE
+"frisbee","vqa",-9.65100713863566,FALSE
+"frog","vqa_yoloe",-6.97817384655676,TRUE
+"fruit","vqa",-7.17807667989438,FALSE
+"fruit basket","vqa",-9.29433219469693,FALSE
+"gallary","vqa",-10.903770107131,FALSE
+"game controller","vqa",-9.80515781846292,FALSE
+"garage door","vqa",-9.39969271035475,FALSE
+"garden","vqa_yoloe",-9.02069214320407,TRUE
+"garden hose","vqa",-10.903770107131,FALSE
+"garlic","vqa",-10.903770107131,FALSE
+"gate","vqa",-8.26471277751577,FALSE
+"ghost","vqa",-10.903770107131,FALSE
+"gift","vqa",-10.903770107131,FALSE
+"gift bag","vqa",-9.03196793022944,FALSE
+"gift box","vqa",-8.76370394363476,FALSE
+"giraffe","vqa_yoloe",-8.57769027273412,TRUE
+"giraffe toy","vqa",-8.2296214577045,FALSE
+"girl","vqa",-4.36563028336336,TRUE
+"girl and adult","vqa",-10.903770107131,FALSE
+"girl and child","vqa",-10.903770107131,FALSE
+"girl and dog","vqa",-10.903770107131,FALSE
+"girl and toy","vqa",-10.4983049990229,FALSE
+"girl doll","vqa",-9.65100713863566,FALSE
+"girl in clothe","vqa",-9.80515781846292,FALSE
+"girl in dress","vqa",-8.55239484996755,FALSE
+"girl in shirt","vqa",-9.98747937525687,FALSE
+"girl with dress","vqa",-10.903770107131,FALSE
+"girl with hair","vqa",-10.4983049990229,FALSE
+"glass","vqa_yoloe",-5.8539336473492,TRUE
+"glass bottle","vqa",-9.80515781846292,FALSE
+"glass bowl","vqa",-10.903770107131,FALSE
+"glass door","vqa",-8.30108042168665,FALSE
+"glass enclosure","vqa",-10.2106229265711,FALSE
+"glass of milk","vqa",-10.903770107131,FALSE
+"glass of water","vqa",-9.03196793022944,FALSE
+"glass of wine","vqa",-10.903770107131,FALSE
+"glass table","vqa",-9.98747937525687,FALSE
+"glass wall","vqa",-9.98747937525687,FALSE
+"glass window","vqa",-10.2106229265711,FALSE
+"glasses","vqa_yoloe",-5.85162285610978,TRUE
+"globe","vqa",-8.2296214577045,FALSE
+"glove","vqa_yoloe",-6.92501871518575,FALSE
+"glue stick","vqa",-10.903770107131,FALSE
+"goal","vqa",-9.65100713863566,FALSE
+"goal net","vqa",-10.2106229265711,FALSE
+"goal post","vqa",-9.80515781846292,FALSE
+"goat","vqa",-10.903770107131,FALSE
+"grape","vqa_yoloe",-8.00116281428244,FALSE
+"grass","vqa_yoloe",-5.02139304119731,TRUE
+"gray box","vqa",-10.2106229265711,FALSE
+"gray cabinet","vqa",-10.4983049990229,FALSE
+"gray floor","vqa",-9.03196793022944,FALSE
+"gray sofa","vqa",-9.29433219469693,FALSE
+"grey bag","vqa",-10.4983049990229,FALSE
+"grey couch","vqa",-9.51747574601114,FALSE
+"grey floor","vqa",-10.903770107131,FALSE
+"grey mat","vqa",-10.4983049990229,FALSE
+"grey shoe","vqa",-10.903770107131,FALSE
+"grey sofa","vqa",-10.2106229265711,FALSE
+"grey toy","vqa",-10.4983049990229,FALSE
+"grill","vqa",-7.72571627678308,FALSE
+"ground","vqa",-7.68489428226283,FALSE
+"guitar","vqa",-5.37038061840351,FALSE
+"guitar case","vqa",-10.2106229265711,FALSE
+"hair","vqa_yoloe",-7.24093415588497,TRUE
+"hair brush","vqa",-9.98747937525687,FALSE
+"hair dryer","vqa",-8.82432856545119,FALSE
+"hairbrush","vqa",-10.4983049990229,FALSE
+"hammer","vqa_yoloe",-7.88775139538343,TRUE
+"hammock","vqa",-9.11201063790297,FALSE
+"hamster","vqa",-9.98747937525687,FALSE
+"hamster cage","vqa",-10.903770107131,FALSE
+"hand","vqa_yoloe",-5.37013085535171,TRUE
+"handbag","vqa",-10.4983049990229,FALSE
+"handle","vqa",-9.80515781846292,FALSE
+"hang clothe","vqa",-10.903770107131,FALSE
+"hang lamp","vqa",-10.2106229265711,FALSE
+"hang light","vqa",-10.903770107131,FALSE
+"harp","vqa",-10.903770107131,FALSE
+"hat","vqa_yoloe",-4.95632600745165,TRUE
+"headphone","vqa",-9.98747937525687,FALSE
+"heater","vqa",-9.80515781846292,FALSE
+"helmet","vqa",-7.90803783357704,FALSE
+"hockey stick","vqa",-10.2106229265711,FALSE
+"honey dipper","vqa",-10.903770107131,FALSE
+"honeycomb","vqa",-10.903770107131,FALSE
+"hoodie","vqa",-10.903770107131,FALSE
+"hoop","vqa",-9.80515781846292,FALSE
+"horse","vqa_yoloe",-7.32827457810588,TRUE
+"horse toy","vqa",-9.29433219469693,FALSE
+"hose","vqa_yoloe",-7.72540941804902,TRUE
+"house","vqa",-3.8394385211068,TRUE
+"hula hoop","vqa",-7.93335564156133,FALSE
+"ice cream","vqa",-10.4983049990229,TRUE
+"include ball","vqa",-10.903770107131,FALSE
+"ipad","vqa",-6.86071883929648,FALSE
+"iron","vqa",-10.4983049990229,FALSE
+"ironing board","vqa",-9.98747937525687,FALSE
+"jacket","vqa_yoloe",-6.72430984518549,TRUE
+"jar","vqa_yoloe",-6.35559154063204,TRUE
+"jar of corn","vqa",-10.4983049990229,FALSE
+"jar of food","vqa",-10.4983049990229,FALSE
+"jar of jam","vqa",-9.65100713863566,FALSE
+"jar of mayonnaise","vqa",-10.903770107131,FALSE
+"jar of nut","vqa",-10.2106229265711,FALSE
+"jar of peanut butter","vqa",-9.51747574601114,FALSE
+"jar of pickle","vqa",-10.2106229265711,FALSE
+"jar of sauce","vqa",-10.4983049990229,FALSE
+"jean","vqa_yoloe",-7.76441034056711,FALSE
+"jigsaw puzzle","vqa",-9.80515781846292,FALSE
+"juice box","vqa",-9.80515781846292,FALSE
+"juice glass","vqa",-9.98747937525687,FALSE
+"juicer","vqa",-10.4983049990229,FALSE
+"kangaroo","vqa",-9.98747937525687,FALSE
+"kettle","vqa",-6.24505915421491,FALSE
+"key","vqa_yoloe",-10.1503817967633,FALSE
+"keyboard","vqa",-5.78278675586591,FALSE
+"keyboard bag","vqa",-10.903770107131,FALSE
+"keyboard belt buckle ring","vqa",-10.903770107131,FALSE
+"keyboard cable","vqa",-9.80515781846292,FALSE
+"keyboard case","vqa",-10.2106229265711,FALSE
+"keyboard cover","vqa",-9.29433219469693,FALSE
+"keyboard key","vqa",-10.4983049990229,FALSE
+"keyboard keycap","vqa",-10.903770107131,FALSE
+"keyboard keycap cover","vqa",-10.903770107131,FALSE
+"keyboard knob cover","vqa",-9.39969271035475,FALSE
+"keyboard mouse","vqa",-10.4983049990229,FALSE
+"keyboard mouse pad","vqa",-10.903770107131,FALSE
+"keyboard mousepad cover","vqa",-10.903770107131,FALSE
+"keyboard piano","vqa",-6.64109023008971,FALSE
+"keyboard piano piano","vqa",-10.903770107131,FALSE
+"keyboard piano stand","vqa",-9.98747937525687,FALSE
+"keyboard piano stool","vqa",-9.98747937525687,FALSE
+"keyboard piano stool stand","vqa",-10.2106229265711,FALSE
+"keyboard stand","vqa",-9.65100713863566,FALSE
+"keyboard strap","vqa",-10.903770107131,FALSE
+"keyboard tray","vqa",-10.4983049990229,FALSE
+"kid","vqa",-8.65247830852453,FALSE
+"kitchen","vqa_yoloe",-4.13073045859005,TRUE
+"kitchen cabinet","vqa",-4.03631612492242,FALSE
+"kitchen counter","vqa",-3.64430217603997,FALSE
+"kitchen floor","vqa",-9.65100713863566,FALSE
+"kitchen set","vqa",-9.98747937525687,FALSE
+"kitchen sink","vqa",-6.80942554490893,FALSE
+"kitchen table","vqa",-10.4983049990229,FALSE
+"kitchen towel","vqa",-10.903770107131,FALSE
+"kitchen utensil","vqa",-6.86952946897863,FALSE
+"kitchenware","vqa",-8.88886708658876,FALSE
+"kite","vqa",-10.2106229265711,FALSE
+"knife","vqa_yoloe",-4.56187319545384,TRUE
+"knife block","vqa",-8.46142307176182,FALSE
+"knob","vqa",-10.903770107131,FALSE
+"ladder","vqa_yoloe",-5.31135903255201,TRUE
+"lady","vqa",-7.00179743755638,TRUE
+"ladybug","vqa",-10.903770107131,FALSE
+"lamp","vqa_yoloe",-2.49477347337564,TRUE
+"lamp post","vqa",-9.11201063790297,FALSE
+"lampshade","vqa",-9.98747937525687,FALSE
+"lantern","vqa",-9.51747574601114,FALSE
+"laptop","vqa",-5.16076691932155,FALSE
+"laundry basket","vqa",-10.2106229265711,FALSE
+"lawn mower","vqa",-8.95785995807572,TRUE
+"leaves","vqa",-8.2296214577045,FALSE
+"leg","vqa_yoloe",-9.5046516675388,TRUE
+"lego","vqa",-10.903770107131,FALSE
+"lego block","vqa",-8.65247830852453,FALSE
+"lemon","vqa",-7.98599937504675,FALSE
+"letter","vqa",-8.95785995807572,FALSE
+"letter block","vqa",-10.2106229265711,FALSE
+"lettuce","vqa",-10.2106229265711,FALSE
+"lid","vqa",-9.80515781846292,FALSE
+"light","vqa_yoloe",-6.58137175648134,TRUE
+"light bulb","vqa",-10.903770107131,FALSE
+"lion","vqa",-8.88886708658876,TRUE
+"lion toy","vqa",-9.80515781846292,FALSE
+"llama","vqa",-10.903770107131,FALSE
+"log","vqa",-10.2106229265711,FALSE
+"lollipop","vqa_yoloe",-8.3453090899776,TRUE
+"machine","vqa",-9.1990220148926,FALSE
+"magazine","vqa",-9.51747574601114,FALSE
+"mailbox","vqa",-9.65100713863566,FALSE
+"man","vqa",-3.93491972878908,TRUE
+"man 's hand","vqa",-10.4983049990229,FALSE
+"man 's leg","vqa",-10.4983049990229,FALSE
+"man and child","vqa",-10.903770107131,FALSE
+"man and dog","vqa",-10.2106229265711,FALSE
+"man and girl","vqa",-10.903770107131,FALSE
+"man and two child","vqa",-10.903770107131,FALSE
+"man and woman","vqa",-9.51747574601114,FALSE
+"man in clothe","vqa",-10.903770107131,FALSE
+"man in grey shirt","vqa",-10.4983049990229,FALSE
+"man in shirt","vqa",-7.62662537413885,FALSE
+"man in short","vqa",-10.903770107131,FALSE
+"man with glasses","vqa",-10.903770107131,FALSE
+"mannequin","vqa",-9.80515781846292,FALSE
+"marker","vqa",-8.41886345734303,FALSE
+"mask","vqa",-9.39969271035475,FALSE
+"mat","vqa",-5.3430884761155,FALSE
+"mattress","vqa",-9.80515781846292,FALSE
+"meat","vqa_yoloe",-8.78648650709338,TRUE
+"melon","vqa_yoloe",-8.40455815447121,TRUE
+"metal bowl","vqa",-10.2106229265711,FALSE
+"metal container","vqa",-10.903770107131,FALSE
+"metal object","vqa",-10.903770107131,FALSE
+"metal surface","vqa",-10.903770107131,FALSE
+"meter","vqa",-9.03196793022944,FALSE
+"microphone","vqa",-10.4983049990229,FALSE
+"microwave","vqa",-4.44543182378624,FALSE
+"microwave oven","vqa",-6.58628199359472,FALSE
+"milk","vqa_yoloe",-7.19873736866119,TRUE
+"milk bottle","vqa",-5.90994193135115,FALSE
+"milk box","vqa",-8.95785995807572,FALSE
+"milk carton","vqa",-7.34842204564162,FALSE
+"milk glass","vqa",-10.903770107131,FALSE
+"milk jug","vqa",-7.88334522098667,FALSE
+"mirror","vqa",-3.80003694490745,FALSE
+"mirror frame","vqa",-10.903770107131,FALSE
+"mixer","vqa",-9.51747574601114,FALSE
+"money","vqa_yoloe",-8.16929540220651,TRUE
+"monitor","vqa",-5.85391409988149,FALSE
+"monitor cable","vqa",-10.4983049990229,FALSE
+"monitor cover","vqa",-10.4983049990229,FALSE
+"monitor screen","vqa",-10.903770107131,FALSE
+"monitor stand","vqa",-9.80515781846292,FALSE
+"monitor stand cover","vqa",-8.82432856545119,FALSE
+"monkey","vqa",-7.72571627678308,TRUE
+"monkey bar","vqa",-10.903770107131,FALSE
+"monkey toy","vqa",-7.83571717199741,FALSE
+"moon","vqa_yoloe",-7.83941028776211,TRUE
+"mop","vqa_yoloe",-7.6715234870918,TRUE
+"mop bucket","vqa",-9.98747937525687,FALSE
+"mother","vqa",-9.80515781846292,FALSE
+"mountain","vqa",-10.4983049990229,FALSE
+"mouse","vqa_yoloe",-5.54735333406869,TRUE
+"mouse pad","vqa",-9.98747937525687,FALSE
+"mug","vqa",-5.26541543779728,FALSE
+"mushroom","vqa",-9.98747937525687,FALSE
+"mushroom grow kit","vqa",-10.903770107131,FALSE
+"music box","vqa",-9.65100713863566,FALSE
+"music player","vqa",-7.66509165496665,FALSE
+"napkin","vqa_yoloe",-5.48879886202285,TRUE
+"net","vqa",-7.17807667989438,FALSE
+"newspaper","vqa",-9.65100713863566,FALSE
+"night stand","vqa",-10.903770107131,FALSE
+"notebook","vqa",-8.95785995807572,FALSE
+"object","vqa",-4.42372554520438,FALSE
+"office chair","vqa",-10.903770107131,FALSE
+"onion","vqa",-7.90803783357704,FALSE
+"orange","vqa_yoloe",-5.84984069334285,TRUE
+"orange and toy","vqa",-10.903770107131,FALSE
+"orange bag","vqa",-8.65247830852453,FALSE
+"orange ball","vqa",-6.80112674209423,FALSE
+"orange balloon","vqa",-9.80515781846292,FALSE
+"orange basket","vqa",-10.2106229265711,FALSE
+"orange block","vqa",-9.98747937525687,FALSE
+"orange book","vqa",-9.98747937525687,FALSE
+"orange bowl","vqa",-9.03196793022944,FALSE
+"orange box","vqa",-9.03196793022944,FALSE
+"orange bucket","vqa",-7.81272765377271,FALSE
+"orange cabinet","vqa",-10.903770107131,FALSE
+"orange car","vqa",-10.903770107131,FALSE
+"orange car toy","vqa",-10.903770107131,FALSE
+"orange carrot","vqa",-9.98747937525687,FALSE
+"orange cone","vqa",-8.88886708658876,FALSE
+"orange container","vqa",-9.98747937525687,FALSE
+"orange cube","vqa",-10.4983049990229,FALSE
+"orange cup","vqa",-8.50587483433266,FALSE
+"orange cylinder","vqa",-10.4983049990229,FALSE
+"orange flower","vqa",-10.4983049990229,FALSE
+"orange marker","vqa",-10.903770107131,FALSE
+"orange mat","vqa",-10.4983049990229,FALSE
+"orange object","vqa",-7.25311186583729,FALSE
+"orange packet","vqa",-10.903770107131,FALSE
+"orange paper","vqa",-10.4983049990229,FALSE
+"orange peel","vqa",-9.29433219469693,FALSE
+"orange pen","vqa",-10.2106229265711,FALSE
+"orange pillow","vqa",-10.4983049990229,FALSE
+"orange plate","vqa",-9.51747574601114,FALSE
+"orange pumpkin","vqa",-8.41886345734303,FALSE
+"orange ring","vqa",-9.1990220148926,FALSE
+"orange shirt","vqa",-10.903770107131,FALSE
+"orange stick","vqa",-9.98747937525687,FALSE
+"orange towel","vqa",-9.98747937525687,FALSE
+"orange toy","vqa",-7.25311186583729,FALSE
+"orange toy car","vqa",-9.51747574601114,FALSE
+"orange toy gun","vqa",-10.903770107131,FALSE
+"orange tree","vqa",-9.65100713863566,FALSE
+"orange tube","vqa",-8.76370394363476,FALSE
+"orange wall","vqa",-10.4983049990229,FALSE
+"ornament","vqa",-8.70654552979481,FALSE
+"ottoman","vqa",-7.76827589120188,FALSE
+"oven","vqa_yoloe",-3.78098664231929,TRUE
+"oven door","vqa",-8.10040972622449,FALSE
+"oven door handle","vqa",-8.65247830852453,FALSE
+"oven door knob","vqa",-10.2106229265711,FALSE
+"oven door light","vqa",-10.4983049990229,FALSE
+"oven handle","vqa",-9.51747574601114,FALSE
+"oven knob","vqa",-9.98747937525687,FALSE
+"oven light","vqa",-10.4983049990229,FALSE
+"oven mitt","vqa",-6.52174347245715,FALSE
+"oven mitt cover","vqa",-10.2106229265711,FALSE
+"oven mitt cover holder","vqa",-10.2106229265711,FALSE
+"oven mitt holder","vqa",-9.80515781846292,FALSE
+"oven rack","vqa",-10.4983049990229,FALSE
+"oven shelf","vqa",-10.903770107131,FALSE
+"oven tray","vqa",-10.903770107131,FALSE
+"owl","vqa_yoloe",-8.88923470583351,TRUE
+"owl toy","vqa",-10.903770107131,FALSE
+"pacifier","vqa",-10.4983049990229,FALSE
+"packet","vqa",-9.80515781846292,FALSE
+"pad","vqa",-9.98747937525687,FALSE
+"paint","vqa",-5.55904636776884,TRUE
+"paint bottle","vqa",-8.95785995807572,FALSE
+"paint box","vqa",-9.65100713863566,FALSE
+"paint brush","vqa",-8.16293008320583,FALSE
+"paint bucket","vqa",-10.2106229265711,FALSE
+"paint palette","vqa",-9.65100713863566,FALSE
+"paint roller","vqa",-9.65100713863566,FALSE
+"paintbrush","vqa",-9.98747937525687,FALSE
+"painting","vqa",-8.88886708658876,FALSE
+"palm tree","vqa",-10.4983049990229,FALSE
+"pan","vqa",-6.10797956153429,FALSE
+"pancake","vqa_yoloe",-8.20340378981254,TRUE
+"panda","vqa",-8.95785995807572,FALSE
+"panda toy","vqa",-9.11201063790297,FALSE
+"pant","vqa_yoloe",-7.31439153500551,FALSE
+"paper","vqa_yoloe",-4.6587586284224,TRUE
+"paper bag","vqa",-7.27942917415466,FALSE
+"paper cup","vqa",-8.82432856545119,FALSE
+"paper cutter","vqa",-7.2928521944868,FALSE
+"paper plate","vqa",-10.2106229265711,FALSE
+"paper roll","vqa",-10.2106229265711,FALSE
+"paper towel","vqa",-6.25937920798966,FALSE
+"paper towel box","vqa",-9.51747574601114,FALSE
+"paper towel dispenser","vqa",-8.37804146282277,FALSE
+"paper towel holder","vqa",-10.4983049990229,FALSE
+"paper towel roll","vqa",-6.00966862929072,FALSE
+"parrot","vqa",-10.4983049990229,FALSE
+"path","vqa",-10.903770107131,FALSE
+"patio","vqa",-8.65247830852453,FALSE
+"pavement","vqa",-10.903770107131,FALSE
+"pea","vqa_yoloe",-8.89291796374189,FALSE
+"peach","vqa",-10.2106229265711,FALSE
+"pear","vqa",-10.903770107131,FALSE
+"pen","vqa_yoloe",-5.26142503099707,TRUE
+"pen holder","vqa",-9.39969271035475,FALSE
+"pencil","vqa_yoloe",-6.06189629718404,TRUE
+"pencil box","vqa",-10.2106229265711,FALSE
+"pencil case","vqa",-8.19571990602882,FALSE
+"pencil holder","vqa",-10.903770107131,FALSE
+"penguin","vqa_yoloe",-8.73181817507464,TRUE
+"penguin toy","vqa",-8.50587483433266,FALSE
+"people","vqa",-9.39969271035475,TRUE
+"pepper","vqa",-10.2106229265711,FALSE
+"pepper grinder","vqa",-10.903770107131,FALSE
+"pepper shaker","vqa",-10.903770107131,FALSE
+"pepperoni","vqa",-9.80515781846292,FALSE
+"person","vqa_yoloe",-0.989275772817962,TRUE
+"person 's foot","vqa",-9.11201063790297,FALSE
+"person 's hand","vqa",-9.39969271035475,FALSE
+"person 's leg","vqa",-8.95785995807572,FALSE
+"person and dog","vqa",-10.4983049990229,FALSE
+"person and toy","vqa",-10.4983049990229,FALSE
+"person in clothe","vqa",-9.29433219469693,FALSE
+"person in dress","vqa",-9.51747574601114,FALSE
+"person in kitchen","vqa",-9.98747937525687,FALSE
+"person in shirt","vqa",-8.70654552979481,FALSE
+"phone","vqa",-4.35197574135397,FALSE
+"phone case","vqa",-9.65100713863566,FALSE
+"phone charger","vqa",-9.51747574601114,FALSE
+"photo","vqa",-8.07055676307481,FALSE
+"photo frame","vqa",-6.72938283723539,FALSE
+"piano","vqa",-5.59303022058443,FALSE
+"piano bench","vqa",-10.903770107131,FALSE
+"piano book","vqa",-10.903770107131,FALSE
+"piano key","vqa",-10.903770107131,FALSE
+"piano sheet music","vqa",-10.903770107131,FALSE
+"piano toy","vqa",-9.98747937525687,FALSE
+"picture","vqa_yoloe",-3.1211424145917,TRUE
+"picture frame","vqa",-5.9837891813029,FALSE
+"picture on wall","vqa",-10.2106229265711,FALSE
+"pig","vqa_yoloe",-8.32635306696648,TRUE
+"pig toy","vqa",-10.2106229265711,FALSE
+"piggy bank","vqa",-8.55239484996755,FALSE
+"pillar","vqa",-10.4983049990229,FALSE
+"pillow","vqa_yoloe",-2.24720836773235,TRUE
+"pineapple","vqa",-8.76370394363476,FALSE
+"pink box","vqa",-8.76370394363476,FALSE
+"pipe","vqa",-7.46978290264588,FALSE
+"pizza","vqa_yoloe",-6.99393914634836,TRUE
+"pizza box","vqa",-7.95933112796459,FALSE
+"plane","vqa",-10.903770107131,FALSE
+"plank","vqa",-9.98747937525687,FALSE
+"plant","vqa_yoloe",-3.25504579568668,TRUE
+"plant pot","vqa",-8.2296214577045,FALSE
+"plant stand","vqa",-10.2106229265711,FALSE
+"plastic","vqa",-10.2106229265711,FALSE
+"plastic bag","vqa",-9.65100713863566,FALSE
+"plastic box","vqa",-9.98747937525687,FALSE
+"plastic container","vqa",-8.01339834923486,FALSE
+"plastic cup","vqa",-10.2106229265711,FALSE
+"plastic object","vqa",-10.903770107131,FALSE
+"plastic sheet","vqa",-10.4983049990229,FALSE
+"plastic toy","vqa",-9.65100713863566,FALSE
+"plastic wrap","vqa",-9.98747937525687,FALSE
+"plate","vqa_yoloe",-2.97563579293455,TRUE
+"plate of cookie","vqa",-10.903770107131,FALSE
+"plate of food","vqa",-7.34842204564162,FALSE
+"plate of grape","vqa",-10.4983049990229,FALSE
+"plate with food","vqa",-7.95933112796459,FALSE
+"plate with fruit","vqa",-10.4983049990229,FALSE
+"play kitchen","vqa",-10.4983049990229,FALSE
+"playground","vqa",-7.93335564156133,TRUE
+"playground equipment","vqa",-8.10040972622449,FALSE
+"playground slide","vqa",-10.903770107131,FALSE
+"playpen","vqa",-10.903770107131,FALSE
+"plug","vqa",-9.80515781846292,FALSE
+"pole","vqa",-7.37740958251487,FALSE
+"pool","vqa_yoloe",-6.71218167881629,TRUE
+"pool cover","vqa",-10.4983049990229,FALSE
+"pool float","vqa",-10.4983049990229,FALSE
+"pool table","vqa",-9.98747937525687,FALSE
+"pool toy","vqa",-8.76370394363476,FALSE
+"popcorn","vqa_yoloe",-8.33301933304065,TRUE
+"popcorn bag","vqa",-10.4983049990229,FALSE
+"porch","vqa_yoloe",-12.5889337474992,TRUE
+"poster","vqa",-5.76503481040746,FALSE
+"pot","vqa",-5.59303022058443,FALSE
+"pot and pan","vqa",-10.903770107131,FALSE
+"pot lid","vqa",-10.2106229265711,FALSE
+"pot plant","vqa",-7.32025116867492,FALSE
+"potato","vqa_yoloe",-8.07272916575743,TRUE
+"potato chip","vqa",-9.65100713863566,TRUE
+"potty","vqa_yoloe",-7.32736565220569,TRUE
+"power line","vqa",-9.98747937525687,FALSE
+"power socket","vqa",-10.903770107131,FALSE
+"power strip","vqa",-10.903770107131,FALSE
+"present","vqa_yoloe",-5.46880872285063,TRUE
+"printer","vqa",-7.6079332411267,FALSE
+"pug","vqa",-10.903770107131,FALSE
+"pumpkin","vqa_yoloe",-6.09814487938504,TRUE
+"puppet","vqa",-10.4983049990229,FALSE
+"purple box","vqa",-9.80515781846292,FALSE
+"purse","vqa_yoloe",-6.49101098431186,TRUE
+"push toy","vqa",-10.903770107131,FALSE
+"puzzle","vqa_yoloe",-7.40005599045971,TRUE
+"puzzle piece","vqa",-8.26471277751577,FALSE
+"rabbit","vqa",-8.01339834923486,FALSE
+"rabbit toy","vqa",-9.80515781846292,FALSE
+"rack","vqa",-10.903770107131,FALSE
+"racket","vqa",-7.5895841024585,FALSE
+"radiator","vqa",-6.06352779896345,FALSE
+"rail","vqa",-8.33882074966949,FALSE
+"railing","vqa",-8.33882074966949,FALSE
+"rainbow","vqa",-8.37804146282277,FALSE
+"ramp","vqa",-10.4983049990229,FALSE
+"record player","vqa",-10.2106229265711,FALSE
+"recycle bin","vqa",-10.903770107131,FALSE
+"recycling bin","vqa",-10.4983049990229,FALSE
+"refrigerator","vqa_yoloe",-3.09396809490991,TRUE
+"reindeer","vqa",-9.98747937525687,FALSE
+"remote","vqa",-7.46978290264588,FALSE
+"remote control","vqa",-6.60648470091224,FALSE
+"ribbon","vqa",-9.65100713863566,FALSE
+"rice cooker","vqa",-10.4983049990229,FALSE
+"ring","vqa",-6.86071883929648,FALSE
+"rise","vqa",-10.2106229265711,FALSE
+"road","vqa",-7.48604342351766,FALSE
+"robot","vqa",-10.4983049990229,FALSE
+"robot toy","vqa",-10.4983049990229,FALSE
+"robot vacuum","vqa",-10.2106229265711,FALSE
+"rock","vqa_yoloe",-8.33151353458287,TRUE
+"rock climbing wall","vqa",-10.903770107131,FALSE
+"roll pin","vqa",-9.80515781846292,FALSE
+"roller","vqa",-10.2106229265711,FALSE
+"roof","vqa_yoloe",-7.80011564051577,TRUE
+"room","vqa_yoloe",-6.38085813724171,TRUE
+"rope","vqa",-7.5895841024585,FALSE
+"rope swe","vqa",-10.903770107131,FALSE
+"round mirror","vqa",-10.2106229265711,FALSE
+"round table","vqa",-10.903770107131,FALSE
+"rubber duck","vqa",-8.76370394363476,FALSE
+"rubber ring","vqa",-10.903770107131,FALSE
+"rug","vqa",-6.83474335289322,FALSE
+"ruler","vqa",-10.2106229265711,FALSE
+"salt","vqa",-9.98747937525687,TRUE
+"salt shaker","vqa",-9.80515781846292,FALSE
+"sand","vqa",-7.04304039609043,FALSE
+"sand box","vqa",-7.15426603120066,FALSE
+"sand pit","vqa",-10.903770107131,FALSE
+"sand tray","vqa",-10.903770107131,FALSE
+"sandal","vqa",-10.4983049990229,FALSE
+"sandwich","vqa_yoloe",-9.15860191177504,TRUE
+"santa claus","vqa",-9.11201063790297,FALSE
+"santa claus doll","vqa",-9.11201063790297,FALSE
+"sauce","vqa_yoloe",-9.30174462386508,TRUE
+"sauce bottle","vqa",-10.903770107131,FALSE
+"saucepan","vqa",-9.80515781846292,FALSE
+"scale","vqa",-10.4983049990229,FALSE
+"scissors","vqa_yoloe",-5.9191893193027,TRUE
+"scooter","vqa",-6.52801308547074,FALSE
+"screen","vqa",-9.39969271035475,FALSE
+"screwdriver","vqa",-10.903770107131,FALSE
+"seagull","vqa",-10.4983049990229,FALSE
+"seashell","vqa",-10.2106229265711,FALSE
+"seat","vqa",-10.903770107131,FALSE
+"seat belt","vqa",-8.33882074966949,FALSE
+"seatbelt","vqa",-9.11201063790297,FALSE
+"shadow","vqa",-8.26471277751577,FALSE
+"shark","vqa",-10.903770107131,FALSE
+"shed","vqa",-8.60118501413698,FALSE
+"sheep","vqa_yoloe",-8.40598120889796,TRUE
+"sheep toy","vqa",-10.903770107131,FALSE
+"sheet","vqa",-9.1990220148926,FALSE
+"shelf","vqa",-3.78453908170236,FALSE
+"shelf with toy","vqa",-10.2106229265711,FALSE
+"shirt","vqa_yoloe",-6.0336345269241,TRUE
+"shoe","vqa_yoloe",-4.56187398167759,TRUE
+"shoe rack","vqa",-9.98747937525687,FALSE
+"shopping cart","vqa",-8.60118501413698,FALSE
+"short","vqa_yoloe",-7.93006559012615,FALSE
+"shovel","vqa_yoloe",-5.88621369172613,TRUE
+"shower","vqa_yoloe",-8.30727718398429,TRUE
+"shower curtain","vqa",-8.65247830852453,FALSE
+"shower curtain ring","vqa",-10.2106229265711,FALSE
+"shower curtain rod","vqa",-10.2106229265711,FALSE
+"shower head","vqa",-9.1990220148926,FALSE
+"sidewalk","vqa_yoloe",-6.02305196902318,TRUE
+"sign","vqa",-8.60118501413698,FALSE
+"sign board","vqa",-10.903770107131,FALSE
+"signboard","vqa",-9.98747937525687,FALSE
+"silver bowl","vqa",-10.903770107131,FALSE
+"silverware","vqa",-9.65100713863566,FALSE
+"sink","vqa_yoloe",-3.72666644950837,TRUE
+"sink basin","vqa",-9.29433219469693,FALSE
+"sink cover","vqa",-10.2106229265711,FALSE
+"sink drain","vqa",-8.95785995807572,FALSE
+"sink drain cover","vqa",-10.4983049990229,FALSE
+"sink faucet","vqa",-9.51747574601114,FALSE
+"sink tap","vqa",-9.98747937525687,FALSE
+"skateboard","vqa",-7.90803783357704,FALSE
+"skeleton","vqa",-7.95933112796459,FALSE
+"skeleton doll","vqa",-10.903770107131,FALSE
+"skirt","vqa",-10.4983049990229,FALSE
+"sky","vqa_yoloe",-5.59066435811935,TRUE
+"slide","vqa_yoloe",-5.85712879090627,TRUE
+"slipper","vqa_yoloe",-5.01847192978586,TRUE
+"smartphone","vqa",-9.39969271035475,FALSE
+"snake","vqa",-9.80515781846292,FALSE
+"snow","vqa_yoloe",-7.95389850940721,TRUE
+"snowflake","vqa",-10.903770107131,FALSE
+"snowman","vqa_yoloe",-6.93932449814768,TRUE
+"snowman book","vqa",-10.903770107131,FALSE
+"snowman toy","vqa",-10.4983049990229,FALSE
+"soap","vqa_yoloe",-7.16120179232654,TRUE
+"soap bottle","vqa",-9.1990220148926,FALSE
+"soap dish","vqa",-10.903770107131,FALSE
+"soap dispenser","vqa",-6.66966360253377,FALSE
+"soccer ball","vqa",-7.93335564156133,FALSE
+"soccer goal","vqa",-9.98747937525687,FALSE
+"soccer net","vqa",-10.903770107131,FALSE
+"sock","vqa_yoloe",-6.33709669361799,TRUE
+"sofa","vqa",-3.76371333904992,TRUE
+"sofa bed","vqa",-10.4983049990229,FALSE
+"sofa chair","vqa",-8.65247830852453,FALSE
+"sofa pillow","vqa",-10.4983049990229,FALSE
+"soil","vqa",-10.2106229265711,FALSE
+"soup","vqa_yoloe",-7.96355260426164,TRUE
+"soup bowl","vqa",-8.82432856545119,FALSE
+"soup container","vqa",-8.50587483433266,FALSE
+"soup cup","vqa",-10.903770107131,FALSE
+"soup spoon","vqa",-10.2106229265711,FALSE
+"spatula","vqa",-8.07055676307481,FALSE
+"speaker","vqa",-6.79289624295772,FALSE
+"spider","vqa",-10.903770107131,FALSE
+"sponge","vqa",-6.80942554490893,FALSE
+"spoon","vqa_yoloe",-3.61159001624846,TRUE
+"spray","vqa",-10.903770107131,FALSE
+"spray bottle","vqa",-8.26471277751577,FALSE
+"stack of cup","vqa",-10.903770107131,FALSE
+"stair","vqa_yoloe",-4.87461952700262,FALSE
+"stair carpet","vqa",-10.903770107131,FALSE
+"stair handrail","vqa",-10.903770107131,FALSE
+"stair rail","vqa",-9.65100713863566,FALSE
+"stair stair rail","vqa",-10.903770107131,FALSE
+"stair step","vqa",-10.903770107131,FALSE
+"staircase","vqa",-7.36281078309371,FALSE
+"star","vqa_yoloe",-7.55570555709205,TRUE
+"star toy","vqa",-10.2106229265711,FALSE
+"star wand","vqa",-9.98747937525687,FALSE
+"starfish","vqa",-9.51747574601114,FALSE
+"steering wheel","vqa",-9.39969271035475,FALSE
+"stick","vqa_yoloe",-8.42037918271795,TRUE
+"sticker","vqa",-9.80515781846292,FALSE
+"stocking","vqa",-8.10040972622449,FALSE
+"stone","vqa_yoloe",-11.0104335369241,TRUE
+"stone path","vqa",-9.80515781846292,FALSE
+"stone wall","vqa",-10.4983049990229,FALSE
+"stool","vqa",-5.31652144873078,FALSE
+"stop sign","vqa",-10.903770107131,FALSE
+"stove","vqa_yoloe",-4.59380182652558,TRUE
+"strap","vqa",-10.4983049990229,FALSE
+"straw","vqa",-8.95785995807572,FALSE
+"strawberry","vqa_yoloe",-7.63345396381177,TRUE
+"street","vqa_yoloe",-7.71604346924614,TRUE
+"street light","vqa",-8.95785995807572,FALSE
+"string","vqa",-9.1990220148926,FALSE
+"string light","vqa",-10.903770107131,FALSE
+"string of bead","vqa",-10.903770107131,FALSE
+"stroller","vqa_yoloe",-5.53944386311765,TRUE
+"structure","vqa",-10.4983049990229,FALSE
+"stuff animal","vqa",-5.8348659049108,FALSE
+"stuff dog","vqa",-9.98747937525687,FALSE
+"stuff panda","vqa",-10.903770107131,FALSE
+"stuff toy","vqa",-6.32905912862765,FALSE
+"suitcase","vqa",-6.45525373118831,FALSE
+"sun","vqa_yoloe",-8.93903506412011,TRUE
+"sunglass","vqa",-8.88886708658876,FALSE
+"surface","vqa",-10.4983049990229,FALSE
+"sushi","vqa",-10.903770107131,FALSE
+"swan","vqa",-9.80515781846292,FALSE
+"swan doll","vqa",-10.903770107131,FALSE
+"swan toy","vqa",-10.903770107131,FALSE
+"sweater","vqa_yoloe",-7.70800055606491,TRUE
+"swing","vqa_yoloe",-8.0819535185336,TRUE
+"swing set","vqa",-9.80515781846292,FALSE
+"switch","vqa",-6.65527486508167,FALSE
+"switchboard","vqa",-10.4983049990229,FALSE
+"table","vqa_yoloe",-1.413293824955,TRUE
+"table cloth","vqa",-10.4983049990229,FALSE
+"table cover","vqa",-10.903770107131,FALSE
+"table decoration","vqa",-10.903770107131,FALSE
+"table fan","vqa",-10.903770107131,FALSE
+"table lamp","vqa",-6.24033101301896,FALSE
+"table leg","vqa",-10.903770107131,FALSE
+"table mat","vqa",-9.03196793022944,FALSE
+"table piano","vqa",-10.903770107131,FALSE
+"table tennis paddle","vqa",-10.903770107131,FALSE
+"table tennis table","vqa",-10.903770107131,FALSE
+"table top","vqa",-10.903770107131,FALSE
+"tablecloth","vqa",-6.16319528413673,FALSE
+"tablet","vqa",-5.87660551108356,FALSE
+"tableware","vqa",-8.60118501413698,FALSE
+"tambourine","vqa",-9.51747574601114,FALSE
+"tap","vqa",-7.15426603120066,FALSE
+"tape","vqa_yoloe",-7.42671763175285,TRUE
+"tape dispenser","vqa",-10.2106229265711,FALSE
+"tape roll","vqa",-10.903770107131,FALSE
+"teapot","vqa",-10.2106229265711,FALSE
+"teddy bear","vqa_yoloe",-3.6368878211228,FALSE
+"telephone","vqa_yoloe",-6.63930268826083,TRUE
+"telephone antenna","vqa",-10.903770107131,FALSE
+"telephone cord","vqa",-10.903770107131,FALSE
+"telephone line","vqa",-10.903770107131,FALSE
+"telephone pole","vqa",-10.4983049990229,FALSE
+"telephone pole bracket","vqa",-10.903770107131,FALSE
+"telephone pole bracket bolt","vqa",-10.903770107131,FALSE
+"telephone receiver","vqa",-10.903770107131,FALSE
+"telephone wire","vqa",-10.903770107131,FALSE
+"television","vqa",-6.44942281087752,FALSE
+"tennis ball","vqa",-9.03196793022944,FALSE
+"tennis racket","vqa",-9.98747937525687,FALSE
+"tennis racquet","vqa",-6.62710398811497,FALSE
+"tent","vqa",-6.30361246296648,FALSE
+"tiger","vqa_yoloe",-8.01443537663162,TRUE
+"tiger toy","vqa",-8.55239484996755,FALSE
+"tile","vqa",-9.51747574601114,FALSE
+"tile floor","vqa",-7.37740958251487,FALSE
+"tile wall","vqa",-10.903770107131,FALSE
+"tire","vqa",-9.65100713863566,FALSE
+"tissue","vqa_yoloe",-6.77020204123403,FALSE
+"tissue box","vqa",-6.72938283723539,FALSE
+"tissue paper","vqa",-8.13118138489125,FALSE
+"toaster","vqa",-7.72571627678308,FALSE
+"toaster oven","vqa",-7.95933112796459,FALSE
+"toddler","vqa",-8.07055676307481,FALSE
+"toilet","vqa",-5.75918684052503,FALSE
+"toilet brush","vqa",-9.65100713863566,FALSE
+"toilet paper","vqa",-6.59970501392686,FALSE
+"toilet paper holder","vqa",-9.80515781846292,FALSE
+"toilet paper roll","vqa",-7.37740958251487,FALSE
+"toilet seat","vqa",-9.98747937525687,FALSE
+"toilet seat cover","vqa",-8.70654552979481,FALSE
+"toilet seat cover dispenser","vqa",-9.03196793022944,FALSE
+"tomato","vqa",-8.26471277751577,FALSE
+"tomato sauce","vqa",-10.903770107131,FALSE
+"toolbox","vqa",-10.2106229265711,FALSE
+"toothbrush","vqa_yoloe",-5.82997060408204,TRUE
+"toothpaste","vqa",-8.16293008320583,FALSE
+"towel","vqa_yoloe",-3.83864502702092,TRUE
+"towel rack","vqa",-7.27942917415466,FALSE
+"tower","vqa",-10.903770107131,FALSE
+"toy","vqa_yoloe",-1.57109948123607,TRUE
+"toy airplane","vqa",-8.46142307176182,FALSE
+"toy alphabet","vqa",-10.2106229265711,FALSE
+"toy ambulance","vqa",-10.4983049990229,FALSE
+"toy animal","vqa",-7.51937984378525,FALSE
+"toy astronaut space shuttle","vqa",-10.4983049990229,FALSE
+"toy astronaut space station","vqa",-10.4983049990229,FALSE
+"toy baby bottle","vqa",-10.4983049990229,FALSE
+"toy bag","vqa",-9.39969271035475,FALSE
+"toy ball","vqa",-8.46142307176182,FALSE
+"toy basket","vqa",-8.37804146282277,FALSE
+"toy basketball hoop","vqa",-9.80515781846292,FALSE
+"toy bear","vqa",-8.16293008320583,FALSE
+"toy bee","vqa",-8.76370394363476,FALSE
+"toy bicycle","vqa",-9.11201063790297,FALSE
+"toy bike","vqa",-7.50257272546887,FALSE
+"toy bird","vqa",-9.80515781846292,FALSE
+"toy block","vqa",-5.51014256077867,FALSE
+"toy boat","vqa",-7.88334522098667,FALSE
+"toy book","vqa",-10.2106229265711,FALSE
+"toy bottle","vqa",-10.2106229265711,FALSE
+"toy bowl","vqa",-9.1990220148926,FALSE
+"toy box","vqa",-5.19334308975616,FALSE
+"toy bridge","vqa",-8.50587483433266,FALSE
+"toy broom","vqa",-10.4983049990229,FALSE
+"toy brush","vqa",-10.4983049990229,FALSE
+"toy bucket","vqa",-9.51747574601114,FALSE
+"toy bunny","vqa",-8.95785995807572,FALSE
+"toy bus","vqa",-6.52801308547074,FALSE
+"toy calculator","vqa",-10.903770107131,FALSE
+"toy car","vqa",-2.78720374718271,FALSE
+"toy car steering wheel","vqa",-10.903770107131,FALSE
+"toy car track","vqa",-10.903770107131,FALSE
+"toy carrot","vqa",-9.51747574601114,FALSE
+"toy cart","vqa",-10.2106229265711,FALSE
+"toy cat","vqa",-9.03196793022944,FALSE
+"toy caterpillar","vqa",-10.903770107131,FALSE
+"toy chair","vqa",-10.903770107131,FALSE
+"toy chest","vqa",-10.903770107131,FALSE
+"toy chicken","vqa",-9.98747937525687,FALSE
+"toy clock","vqa",-8.88886708658876,FALSE
+"toy clothe","vqa",-10.903770107131,FALSE
+"toy clothe dryer","vqa",-10.4983049990229,FALSE
+"toy container","vqa",-10.2106229265711,FALSE
+"toy cow","vqa",-7.76827589120188,FALSE
+"toy crane","vqa",-10.903770107131,FALSE
+"toy crocodile","vqa",-9.03196793022944,FALSE
+"toy cube","vqa",-9.98747937525687,FALSE
+"toy cup","vqa",-9.98747937525687,FALSE
+"toy cupboard","vqa",-10.903770107131,FALSE
+"toy dinosaur","vqa",-8.19571990602882,FALSE
+"toy dog","vqa",-7.20246813301854,FALSE
+"toy doll","vqa",-7.14256999143747,FALSE
+"toy dragon","vqa",-10.903770107131,FALSE
+"toy drum","vqa",-7.95933112796459,FALSE
+"toy duck","vqa",-9.65100713863566,FALSE
+"toy dustpan","vqa",-10.4983049990229,FALSE
+"toy egg","vqa",-10.903770107131,FALSE
+"toy elephant","vqa",-6.19423990581869,FALSE
+"toy fence","vqa",-10.903770107131,FALSE
+"toy fire engine","vqa",-10.903770107131,FALSE
+"toy fire truck","vqa",-9.98747937525687,FALSE
+"toy fish","vqa",-9.39969271035475,FALSE
+"toy food","vqa",-9.03196793022944,FALSE
+"toy food box","vqa",-10.4983049990229,FALSE
+"toy football","vqa",-10.4983049990229,FALSE
+"toy fox","vqa",-8.88886708658876,FALSE
+"toy fridge","vqa",-10.903770107131,FALSE
+"toy frog","vqa",-10.2106229265711,FALSE
+"toy giraffe","vqa",-7.16610048884766,FALSE
+"toy goat","vqa",-10.4983049990229,FALSE
+"toy guitar","vqa",-7.45378256129944,FALSE
+"toy gun","vqa",-8.04156922620156,FALSE
+"toy hammer","vqa",-7.42253001779534,FALSE
+"toy hamster","vqa",-10.903770107131,FALSE
+"toy helicopter","vqa",-8.13118138489125,FALSE
+"toy hoop","vqa",-9.39969271035475,FALSE
+"toy horse","vqa",-6.07146434855919,FALSE
+"toy house","vqa",-5.03871948487871,FALSE
+"toy kettle","vqa",-10.903770107131,FALSE
+"toy keyboard","vqa",-9.1990220148926,FALSE
+"toy kitchen","vqa",-7.88334522098667,FALSE
+"toy kitchen set","vqa",-7.13100916903639,FALSE
+"toy knife","vqa",-9.51747574601114,FALSE
+"toy ladder","vqa",-9.51747574601114,FALSE
+"toy lion","vqa",-8.95785995807572,FALSE
+"toy lizard","vqa",-10.903770107131,FALSE
+"toy mallet","vqa",-9.1990220148926,FALSE
+"toy microphone","vqa",-10.4983049990229,FALSE
+"toy microwave","vqa",-10.4983049990229,FALSE
+"toy mixer","vqa",-10.4983049990229,FALSE
+"toy monkey","vqa",-8.30108042168665,FALSE
+"toy mop","vqa",-9.98747937525687,FALSE
+"toy motorcycle","vqa",-9.98747937525687,FALSE
+"toy mouse","vqa",-9.29433219469693,FALSE
+"toy on floor","vqa",-9.65100713863566,FALSE
+"toy oven","vqa",-8.10040972622449,FALSE
+"toy pan","vqa",-10.903770107131,FALSE
+"toy panda","vqa",-8.46142307176182,FALSE
+"toy penguin","vqa",-9.03196793022944,FALSE
+"toy phone","vqa",-7.50257272546887,FALSE
+"toy piano","vqa",-5.4854499481883,FALSE
+"toy pig","vqa",-8.07055676307481,FALSE
+"toy plane","vqa",-6.66244335456028,FALSE
+"toy plant","vqa",-10.903770107131,FALSE
+"toy plate","vqa",-9.1990220148926,FALSE
+"toy pool","vqa",-9.98747937525687,FALSE
+"toy pot","vqa",-10.4983049990229,FALSE
+"toy rabbit","vqa",-9.11201063790297,FALSE
+"toy raccoon","vqa",-10.903770107131,FALSE
+"toy refrigerator","vqa",-10.903770107131,FALSE
+"toy remote control","vqa",-10.2106229265711,FALSE
+"toy ring","vqa",-9.51747574601114,FALSE
+"toy road","vqa",-10.903770107131,FALSE
+"toy robot","vqa",-8.70654552979481,FALSE
+"toy rocket","vqa",-9.39969271035475,FALSE
+"toy santa claus","vqa",-10.903770107131,FALSE
+"toy scissors","vqa",-10.903770107131,FALSE
+"toy scooter","vqa",-9.39969271035475,FALSE
+"toy shark","vqa",-9.51747574601114,FALSE
+"toy sheep","vqa",-8.70654552979481,FALSE
+"toy shelf","vqa",-8.76370394363476,FALSE
+"toy ship","vqa",-9.39969271035475,FALSE
+"toy shopping cart","vqa",-8.41886345734303,FALSE
+"toy shovel","vqa",-8.2296214577045,FALSE
+"toy sink","vqa",-8.76370394363476,FALSE
+"toy skateboard","vqa",-10.903770107131,FALSE
+"toy slide","vqa",-10.4983049990229,FALSE
+"toy snake","vqa",-9.80515781846292,FALSE
+"toy space shuttle","vqa",-10.4983049990229,FALSE
+"toy spatula","vqa",-9.98747937525687,FALSE
+"toy spider","vqa",-10.2106229265711,FALSE
+"toy sponge","vqa",-10.903770107131,FALSE
+"toy spoon","vqa",-9.51747574601114,FALSE
+"toy steering wheel","vqa",-8.95785995807572,FALSE
+"toy stick","vqa",-10.903770107131,FALSE
+"toy stove","vqa",-9.1990220148926,FALSE
+"toy stroller","vqa",-8.16293008320583,FALSE
+"toy structure","vqa",-10.4983049990229,FALSE
+"toy submarine","vqa",-10.4983049990229,FALSE
+"toy swan","vqa",-10.903770107131,FALSE
+"toy sword","vqa",-10.903770107131,FALSE
+"toy table","vqa",-8.60118501413698,FALSE
+"toy table and chair","vqa",-10.4983049990229,FALSE
+"toy tambourine","vqa",-10.2106229265711,FALSE
+"toy tea set","vqa",-10.4983049990229,FALSE
+"toy telephone","vqa",-10.903770107131,FALSE
+"toy tent","vqa",-10.4983049990229,FALSE
+"toy tiger","vqa",-8.46142307176182,FALSE
+"toy toilet","vqa",-10.903770107131,FALSE
+"toy tower","vqa",-8.95785995807572,FALSE
+"toy track","vqa",-9.1990220148926,FALSE
+"toy tractor","vqa",-10.903770107131,FALSE
+"toy train","vqa",-5.32971673914961,FALSE
+"toy train set","vqa",-7.81272765377271,FALSE
+"toy train track","vqa",-8.30108042168665,FALSE
+"toy tree","vqa",-10.2106229265711,FALSE
+"toy truck","vqa",-5.30165128625133,FALSE
+"toy turtle","vqa",-8.70654552979481,FALSE
+"toy unicorn","vqa",-10.903770107131,FALSE
+"toy vacuum","vqa",-9.65100713863566,FALSE
+"toy wagon","vqa",-10.903770107131,FALSE
+"toy walker","vqa",-9.98747937525687,FALSE
+"toy washing machine","vqa",-10.2106229265711,FALSE
+"toy watering can","vqa",-10.2106229265711,FALSE
+"toy xylophone","vqa",-8.19571990602882,FALSE
+"toy zebra","vqa",-10.2106229265711,FALSE
+"track","vqa",-10.2106229265711,FALSE
+"train","vqa_yoloe",-6.26816585760155,TRUE
+"train set","vqa",-10.2106229265711,FALSE
+"train toy","vqa",-9.80515781846292,FALSE
+"train track","vqa",-8.30108042168665,FALSE
+"trampoline","vqa",-8.30108042168665,FALSE
+"trash","vqa_yoloe",-7.94497063855861,TRUE
+"trash bag","vqa",-8.41886345734303,FALSE
+"trash bin","vqa",-7.16610048884766,FALSE
+"trash can","vqa",-4.90483354518435,FALSE
+"tray","vqa_yoloe",-5.58557250844735,TRUE
+"tray with toy","vqa",-10.903770107131,FALSE
+"treadmill","vqa",-8.88886708658876,FALSE
+"tree","vqa_yoloe",-4.63184327698263,TRUE
+"tree trunk","vqa",-10.903770107131,FALSE
+"triangle","vqa",-9.80515781846292,FALSE
+"tricycle","vqa_yoloe",-9.23795356449792,TRUE
+"tripod","vqa",-10.2106229265711,FALSE
+"trolley","vqa",-10.2106229265711,FALSE
+"truck","vqa_yoloe",-7.80583625773368,TRUE
+"tub","vqa",-10.903770107131,FALSE
+"tube","vqa",-8.16293008320583,FALSE
+"tunnel","vqa",-9.65100713863566,FALSE
+"turtle","vqa_yoloe",-10.6612074205293,TRUE
+"turtle toy","vqa",-9.98747937525687,FALSE
+"tutu","vqa",-10.4983049990229,FALSE
+"tv","vqa_yoloe",-2.07745564235593,TRUE
+"tv remote","vqa",-5.8668175047174,FALSE
+"tv screen","vqa",-6.74488702377136,FALSE
+"tv stand","vqa",-3.79389064405876,FALSE
+"two people","vqa",-10.903770107131,FALSE
+"ukulele","vqa",-8.41886345734303,FALSE
+"umbrella","vqa",-6.07146434855919,FALSE
+"unicorn","vqa",-10.903770107131,FALSE
+"unicorn toy","vqa",-10.2106229265711,FALSE
+"utensil","vqa",-9.29433219469693,FALSE
+"vacuum","vqa_yoloe",-4.45373623841749,TRUE
+"vacuum cleaner","vqa",-10.903770107131,FALSE
+"van","vqa",-10.4983049990229,FALSE
+"vase","vqa",-5.8008595369256,FALSE
+"vase with flower","vqa",-9.65100713863566,FALSE
+"vegetable","vqa",-9.03196793022944,FALSE
+"violin","vqa",-10.2106229265711,FALSE
+"walker","vqa_yoloe",-7.28578046758717,TRUE
+"wall","vqa",-2.04383863751493,FALSE
+"wall art","vqa",-9.98747937525687,FALSE
+"wall clock","vqa",-4.52195408972493,FALSE
+"wall decor","vqa",-10.903770107131,FALSE
+"wall decoration","vqa",-6.76860355038867,FALSE
+"wall frame","vqa",-10.4983049990229,FALSE
+"wall hang","vqa",-7.76827589120188,FALSE
+"wall hanging","vqa",-9.03196793022944,FALSE
+"wall lamp","vqa",-8.13118138489125,FALSE
+"wall light","vqa",-10.4983049990229,FALSE
+"wall mount","vqa",-9.65100713863566,FALSE
+"wall picture","vqa",-7.40726254566455,FALSE
+"wall socket","vqa",-9.03196793022944,FALSE
+"wall sticker","vqa",-9.1990220148926,FALSE
+"wall switch","vqa",-10.4983049990229,FALSE
+"wallet","vqa",-9.65100713863566,FALSE
+"wardrobe","vqa",-7.85924766940761,FALSE
+"wardrobe closet","vqa",-8.88886708658876,FALSE
+"washer","vqa",-10.2106229265711,FALSE
+"washing machine","vqa",-6.27390730855257,TRUE
+"water","vqa_yoloe",-6.69380668482793,TRUE
+"water bottle","vqa",-5.2373434190186,FALSE
+"water bowl","vqa",-10.4983049990229,FALSE
+"water bucket","vqa",-9.51747574601114,FALSE
+"water can","vqa",-10.2106229265711,FALSE
+"water container","vqa",-9.80515781846292,FALSE
+"water dispenser","vqa",-9.11201063790297,FALSE
+"water fountain","vqa",-9.80515781846292,FALSE
+"water glass","vqa",-9.39969271035475,FALSE
+"water gun","vqa",-8.76370394363476,FALSE
+"water hose","vqa",-10.2106229265711,FALSE
+"water jug","vqa",-9.65100713863566,FALSE
+"water pipe","vqa",-9.03196793022944,FALSE
+"water pitcher","vqa",-10.2106229265711,FALSE
+"water pool","vqa",-9.80515781846292,FALSE
+"water puddle","vqa",-10.903770107131,FALSE
+"water pump","vqa",-9.39969271035475,FALSE
+"water table","vqa",-9.65100713863566,FALSE
+"water tank","vqa",-9.51747574601114,FALSE
+"water tap","vqa",-8.37804146282277,FALSE
+"water toy","vqa",-8.82432856545119,FALSE
+"watering can","vqa",-8.26471277751577,FALSE
+"watermelon","vqa",-7.79025479792065,FALSE
+"watermelon book","vqa",-10.903770107131,FALSE
+"weight","vqa",-10.903770107131,FALSE
+"wheel","vqa",-10.2106229265711,FALSE
+"wheelbarrow","vqa",-8.76370394363476,FALSE
+"wheelchair","vqa",-10.2106229265711,FALSE
+"whisk","vqa",-10.2106229265711,FALSE
+"whiteboard","vqa",-4.56252935777547,FALSE
+"whiteboard eraser","vqa",-5.97289978150364,FALSE
+"whiteboard eraser cover","vqa",-10.4983049990229,FALSE
+"whiteboard eraser holder","vqa",-10.4983049990229,FALSE
+"whiteboard marker","vqa",-8.82432856545119,FALSE
+"wicker basket","vqa",-9.51747574601114,FALSE
+"window","vqa_yoloe",-2.37619476425065,TRUE
+"window blind","vqa",-7.09710761736071,FALSE
+"window curtain","vqa",-5.57346969472994,FALSE
+"window frame","vqa",-7.6079332411267,FALSE
+"window glass","vqa",-9.80515781846292,FALSE
+"window screen","vqa",-10.4983049990229,FALSE
+"window shade","vqa",-7.83571717199741,FALSE
+"window with curtain","vqa",-9.80515781846292,FALSE
+"wine bottle","vqa",-8.01339834923486,FALSE
+"wine glass","vqa",-7.70509698958035,FALSE
+"wine rack","vqa",-10.2106229265711,FALSE
+"wire","vqa",-8.37804146282277,FALSE
+"woman","vqa",-4.11761764990814,FALSE
+"woman and adult","vqa",-10.903770107131,FALSE
+"woman and baby","vqa",-10.903770107131,FALSE
+"woman and child","vqa",-9.29433219469693,FALSE
+"woman and girl","vqa",-9.98747937525687,FALSE
+"woman and man","vqa",-9.1990220148926,FALSE
+"woman and person","vqa",-10.903770107131,FALSE
+"woman and two child","vqa",-10.2106229265711,FALSE
+"woman and two girl","vqa",-10.903770107131,FALSE
+"woman at table","vqa",-10.903770107131,FALSE
+"woman in clothe","vqa",-9.65100713863566,FALSE
+"woman in dress","vqa",-9.51747574601114,FALSE
+"woman in kitchen","vqa",-10.903770107131,FALSE
+"woman in pant","vqa",-10.2106229265711,FALSE
+"woman in shirt","vqa",-8.46142307176182,FALSE
+"woman in sweater","vqa",-9.29433219469693,FALSE
+"woman in top","vqa",-10.903770107131,FALSE
+"woman with glasses","vqa",-10.903770107131,FALSE
+"woman with hair","vqa",-9.98747937525687,FALSE
+"wooden board","vqa",-7.33423741064966,FALSE
+"wooden board game","vqa",-10.903770107131,FALSE
+"wooden box","vqa",-8.16293008320583,FALSE
+"wooden house","vqa",-10.2106229265711,FALSE
+"world map","vqa",-9.29433219469693,FALSE
+"yard","vqa_yoloe",-8.96025612037474,TRUE
+"yarn","vqa",-10.903770107131,FALSE
+"zebra","vqa_yoloe",-9.42877447107703,TRUE
+"watch","yoloe",-3.45092487038905,TRUE
+"basement","yoloe",-3.66007716207893,TRUE
+"underpant","yoloe",-3.79227043339769,FALSE
+"sandbox","yoloe",-3.8584750688666,TRUE
+"toe","yoloe",-4.09085913320572,TRUE
+"gum","yoloe",-4.41281299154966,TRUE
+"jello","yoloe",-4.45856711409036,TRUE
+"sled","yoloe",-4.65689288686929,TRUE
+"dryer","yoloe",-4.72542935877049,TRUE
+"boot","yoloe",-4.80806883310123,FALSE
+"necklace","yoloe",-4.86971277240223,TRUE
+"tight","yoloe",-4.87541197011965,FALSE
+"bib","yoloe",-5.03799180800514,TRUE
+"pajama","yoloe",-5.06185881860809,FALSE
+"cheerios","yoloe",-5.08029298453127,TRUE
+"alligator","yoloe",-5.12637737787283,TRUE
+"mitten","yoloe",-5.2113293803583,FALSE
+"nail","yoloe",-5.3855475579764,TRUE
+"coke","yoloe",-5.49831628420371,TRUE
+"sneaker","yoloe",-5.53825071040976,TRUE
+"radio","yoloe",-5.54940234112686,TRUE
+"jelly","yoloe",-5.91355800649649,TRUE
+"glue","yoloe",-5.95926520858279,TRUE
+"squirrel","yoloe",-5.97967281806025,TRUE
+"pudding","yoloe",-6.00947655845613,TRUE
+"popsicle","yoloe",-6.1926223477303,TRUE
+"arm","yoloe",-6.27929645658857,TRUE
+"rooster","yoloe",-6.35947967882667,TRUE
+"head","yoloe",-6.381645344347,TRUE
+"motorcycle","yoloe",-6.39518447557021,TRUE
+"lip","yoloe",-6.41429820730524,FALSE
+"cracker","yoloe",-6.43339093611795,TRUE
+"yogurt","yoloe",-6.63253294660638,TRUE
+"pickle","yoloe",-6.78356798580664,TRUE
+"coffee","yoloe",-6.83277699814973,TRUE
+"airplane","yoloe",-6.84993210682532,TRUE
+"pretzel","yoloe",-6.86617306530774,TRUE
+"penis","yoloe",-6.92326013720574,FALSE
+"sprinkler","yoloe",-7.00031107002245,TRUE
+"muffin","yoloe",-7.07143619134411,TRUE
+"tooth","yoloe",-7.10397784441772,TRUE
+"pony","yoloe",-7.26333435881098,TRUE
+"bug","yoloe",-7.45736150727238,TRUE
+"scarf","yoloe",-7.47003734522398,TRUE
+"wolf","yoloe",-7.55629269284366,TRUE
+"kitty","yoloe",-7.61416264791186,TRUE
+"turkey","yoloe",-7.73595756409968,TRUE
+"nose","yoloe",-7.76235205822262,TRUE
+"ankle","yoloe",-7.76906099132535,TRUE
+"tractor","yoloe",-7.77807683000697,TRUE
+"hamburger","yoloe",-7.92408465243895,TRUE
+"raisin","yoloe",-7.97056308025076,TRUE
+"vanilla","yoloe",-8.16263004836467,TRUE
+"story","yoloe",-8.20915006399956,TRUE
+"tummy","yoloe",-8.24823141404203,TRUE
+"nut","yoloe",-8.28513597097748,FALSE
+"ear","yoloe",-8.35789532525991,TRUE
+"hen","yoloe",-8.60249381157538,TRUE
+"chip","yoloe",-8.70957698054466,FALSE
+"button","yoloe",-8.71920169391887,TRUE
+"soda","yoloe",-8.77080044063277,FALSE
+"juice","yoloe",-8.79345846452535,TRUE
+"mouth","yoloe",-8.88046984151499,TRUE
+"garage","yoloe",-8.88960232507826,TRUE
+"ice","yoloe",-9.10931141394383,TRUE
+"penny","yoloe",-9.19892357263352,TRUE
+"cheek","yoloe",-9.21150235484038,TRUE
+"tongue","yoloe",-9.29049076615901,TRUE
+"eye","yoloe",-9.32533749748918,TRUE
+"firetruck","yoloe",-9.44179162929551,TRUE
+"applesauce","yoloe",-9.44979167196258,TRUE
+"snowsuit","yoloe",-9.64423458928888,TRUE
+"butt","yoloe",-9.71497114038066,FALSE
+"wind","yoloe",-9.73080260559734,TRUE
+"pasta","yoloe",-9.91099876307898,FALSE
+"helicopter","yoloe",-9.94336404758102,TRUE
+"zipper","yoloe",-10.1309626614758,TRUE
+"pastry","yoloe",-10.138930831125,FALSE
+"game","yoloe",-10.1965599439616,TRUE
+"chocolate","yoloe",-10.2758966861982,TRUE
+"medicine","yoloe",-10.3925335899239,TRUE
+"rain","yoloe",-10.636511228141,TRUE
+"vitamin","yoloe",-10.8241098420358,FALSE
+"goose","yoloe",-10.9599113831948,TRUE
+"toast","yoloe",-11.3563266557831,TRUE
+"vagina","yoloe",-11.4707370069608,FALSE
+"owie","yoloe",-11.5332573639421,FALSE
+"ant","yoloe",-12.6646594754332,TRUE
+"moose","yoloe",-12.6646594754332,TRUE
+"lamb","yoloe",-12.7700199910911,TRUE
+"shoulder","yoloe",-13.1754850991992,TRUE
+"tuna","yoloe",-13.1754850991992,TRUE
+"puppy","yoloe",-13.3578066559932,TRUE
+"knee","yoloe",-13.8686322797592,TRUE

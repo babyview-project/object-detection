@@ -1,0 +1,1641 @@
+"","target","min_distance","cleaned_target","object","source","log_prop","in_cdi","num_direct_children","direct_parent","path_1","path_2","path_3","path_4","path_5","path_6"
+"1","adieu.n.01",1,"adieu","cheerios","yoloe",-5.08029298453127,TRUE,0,"entity.n.01","adieu",NA,NA,NA,NA,NA
+"2","adult.n.01",3,"adult","adult","vqa",-4.57494086461881,FALSE,2,"person.n.01","object","person","adult",NA,NA,NA
+"3","air_conditioner.n.01",3,"air conditioner","air conditioner","vqa",-6.34989321553049,FALSE,0,"device.n.01","object","device","air conditioner",NA,NA,NA
+"4","airplane.n.01",3,"airplane","plane","vqa",-10.903770107131,FALSE,0,"conveyance.n.03","object","conveyance","airplane",NA,NA,NA
+"5","airplane.n.01",3,"airplane","airplane","yoloe",-6.84993210682532,TRUE,0,"conveyance.n.03","object","conveyance","airplane",NA,NA,NA
+"6","alarm_clock.n.01",4,"alarm clock","alarm clock","vqa",-10.4983049990229,FALSE,0,"clock.n.01","object","device","clock","alarm clock",NA,NA
+"7","alligator.n.02",3,"alligator","alligator","yoloe",-5.12637737787283,TRUE,0,"animal.n.01","object","animal","alligator",NA,NA,NA
+"8","animal.n.01",2,"animal","animal","vqa_yoloe",-6.58882482683807,TRUE,47,"object.n.01","object","animal",NA,NA,NA,NA
+"9","ankle.n.01",2,"ankle","ankle","yoloe",-7.76906099132535,TRUE,0,"body_part.n.01","body part","ankle",NA,NA,NA,NA
+"10","ant.n.01",3,"ant","ant","yoloe",-12.6646594754332,TRUE,0,"animal.n.01","object","animal","ant",NA,NA,NA
+"11","apple.n.02",3,"apple","apple","vqa_yoloe",-5.64970585788746,TRUE,0,"tree.n.01","object","tree","apple",NA,NA,NA
+"12","applesauce.n.01",2,"applesauce","applesauce","yoloe",-9.44979167196258,TRUE,0,"dish.n.02","dish","applesauce",NA,NA,NA,NA
+"13","aquarium.n.01",3,"aquarium","fish tank","vqa",-8.16293008320583,FALSE,0,"enclosure.n.01","object","enclosure","aquarium",NA,NA,NA
+"14","ascent.n.01",2,"ascent","rise","vqa",-10.2106229265711,FALSE,0,"object.n.01","object","ascent",NA,NA,NA,NA
+"15","ashcan.n.01",4,"ashcan","trash bin","vqa",-7.16610048884766,FALSE,0,"bin.n.01","object","container","bin","ashcan",NA,NA
+"16","ashcan.n.01",4,"ashcan","trash can","vqa",-4.90483354518435,FALSE,0,"bin.n.01","object","container","bin","ashcan",NA,NA
+"17","auricle.n.02",2,"auricle","ear","yoloe",-8.35789532525991,TRUE,0,"body_part.n.01","body part","auricle",NA,NA,NA,NA
+"18","automaton.n.02",3,"automaton","robot","vqa",-10.4983049990229,FALSE,0,"device.n.01","object","device","automaton",NA,NA,NA
+"19","avocado.n.02",3,"avocado","avocado","vqa",-9.98747937525687,FALSE,0,"tree.n.01","object","tree","avocado",NA,NA,NA
+"20","baby.n.05",6,"baby","baby","vqa",-3.03303136828275,TRUE,0,"girl.n.01","object","person","adult","woman","girl","baby"
+"21","baby_bed.n.01",3,"baby bed","baby bed","vqa",-5.1230265913387,FALSE,1,"furniture.n.01","object","furniture","baby bed",NA,NA,NA
+"22","baby_buggy.n.01",3,"baby buggy","baby carriage","vqa",-9.03196793022944,FALSE,0,"container.n.01","object","container","baby buggy",NA,NA,NA
+"23","baby_buggy.n.01",3,"baby buggy","stroller","vqa_yoloe",-5.53944386311765,TRUE,0,"container.n.01","object","container","baby buggy",NA,NA,NA
+"24","baby_shoe.n.01",4,"baby shoe","baby shoe","vqa",-8.82432856545119,FALSE,0,"shoe.n.01","object","footwear","shoe","baby shoe",NA,NA
+"25","backpack.n.01",4,"backpack","backpack","vqa",-5.85391409988149,FALSE,0,"bag.n.01","object","container","bag","backpack",NA,NA
+"26","bag.n.01",3,"bag","bag","vqa",-3.44385534088992,FALSE,3,"container.n.01","object","container","bag",NA,NA,NA
+"27","bag.n.04",3,"bag","handbag","vqa",-10.4983049990229,FALSE,0,"container.n.01","object","container","bag",NA,NA,NA
+"28","bag.n.04",3,"bag","purse","vqa_yoloe",-6.49101098431186,TRUE,0,"container.n.01","object","container","bag",NA,NA,NA
+"29","bag.n.06",4,"bag","suitcase","vqa",-6.45525373118831,FALSE,0,"case.n.05","object","container","case","bag",NA,NA
+"30","baguet.n.01",3,"baguet","baguette","vqa",-9.39969271035475,FALSE,0,"bread.n.01","food","bread","baguet",NA,NA,NA
+"31","balcony.n.01",2,"balcony","balcony","vqa",-10.903770107131,FALSE,0,"object.n.01","object","balcony",NA,NA,NA,NA
+"32","ball.n.01",2,"ball","ball","vqa_yoloe",-3.40770910181073,TRUE,3,"object.n.01","object","ball",NA,NA,NA,NA
+"33","ball.n.03",1,"ball","globe","vqa",-8.2296214577045,FALSE,1,"entity.n.01","ball",NA,NA,NA,NA,NA
+"34","ballet_skirt.n.01",3,"ballet skirt","tutu","vqa",-10.4983049990229,FALSE,0,"clothing.n.01","object","clothing","ballet skirt",NA,NA,NA
+"35","balloon.n.01",3,"balloon","balloon","vqa_yoloe",-4.35974804996642,TRUE,0,"conveyance.n.03","object","conveyance","balloon",NA,NA,NA
+"36","banana.n.02",2,"banana","banana","vqa_yoloe",-5.10971868724701,TRUE,0,"food.n.02","food","banana",NA,NA,NA,NA
+"37","banner.n.01",4,"banner","banner","vqa",-10.903770107131,FALSE,0,"flag.n.01","object","decoration","flag","banner",NA,NA
+"38","bar.n.02",5,"bar","bar","vqa",-10.903770107131,FALSE,0,"counter.n.01","object","furniture","table","counter","bar",NA
+"39","barbecue.n.03",3,"barbecue","barbeque","vqa",-8.88886708658876,FALSE,0,"rack.n.01","object","rack","barbecue",NA,NA,NA
+"40","barrel.n.02",3,"barrel","barrel","vqa",-10.903770107131,FALSE,1,"container.n.01","object","container","barrel",NA,NA,NA
+"41","barrow.n.03",4,"barrow","wheelbarrow","vqa",-8.76370394363476,FALSE,0,"handcart.n.01","object","container","handcart","barrow",NA,NA
+"42","baseball.n.01",2,"baseball","baseball","vqa",-10.903770107131,FALSE,0,"game.n.01","game","baseball",NA,NA,NA,NA
+"43","baseball_bat.n.01",4,"baseball bat","baseball bat","vqa",-9.1990220148926,FALSE,0,"bat.n.05","object","stick","bat","baseball bat",NA,NA
+"44","baseball_glove.n.01",3,"baseball glove","baseball glove","vqa",-10.903770107131,FALSE,0,"sports_equipment.n.01","object","sports equipment","baseball glove",NA,NA,NA
+"45","baseball_glove.n.01",3,"baseball glove","glove","vqa_yoloe",-6.92501871518575,FALSE,0,"sports_equipment.n.01","object","sports equipment","baseball glove",NA,NA,NA
+"46","basement.n.01",3,"basement","basement","yoloe",-3.66007716207893,TRUE,0,"floor.n.02","object","floor","basement",NA,NA,NA
+"47","basket.n.01",3,"basket","basket","vqa_yoloe",-3.66494507277708,TRUE,2,"container.n.01","object","container","basket",NA,NA,NA
+"48","basket.n.03",3,"basket","basketball hoop","vqa",-7.45378256129944,FALSE,0,"goal.n.03","object","goal","basket",NA,NA,NA
+"49","basket.n.03",3,"basket","hoop","vqa",-9.80515781846292,FALSE,0,"goal.n.03","object","goal","basket",NA,NA,NA
+"50","basketball.n.02",3,"basketball","basketball","vqa",-7.98599937504675,FALSE,0,"sports_equipment.n.01","object","sports equipment","basketball",NA,NA,NA
+"51","bat.n.05",3,"bat","bat","vqa_yoloe",-7.37779307452354,TRUE,1,"stick.n.01","object","stick","bat",NA,NA,NA
+"52","bathtub.n.01",3,"bathtub","bathtub","vqa_yoloe",-5.56259695964855,TRUE,0,"container.n.01","object","container","bathtub",NA,NA,NA
+"53","bathtub.n.01",3,"bathtub","tub","vqa",-10.903770107131,FALSE,0,"container.n.01","object","container","bathtub",NA,NA,NA
+"54","beach_ball.n.01",3,"beach ball","beach ball","vqa",-8.70654552979481,FALSE,0,"plaything.n.01","object","plaything","beach ball",NA,NA,NA
+"55","bead.n.01",3,"bead","bead","vqa_yoloe",-7.06698306958019,FALSE,0,"decoration.n.01","object","decoration","bead",NA,NA,NA
+"56","bean.n.01",3,"bean","bean","vqa_yoloe",-10.1253069049206,FALSE,0,"vegetable.n.01","food","vegetable","bean",NA,NA,NA
+"57","bear.n.01",3,"bear","bear","vqa_yoloe",-8.65855195060346,TRUE,0,"animal.n.01","object","animal","bear",NA,NA,NA
+"58","bed.n.01",3,"bed","bed","vqa_yoloe",-2.70690602686007,TRUE,1,"furniture.n.01","object","furniture","bed",NA,NA,NA
+"59","bedroom.n.01",3,"bedroom","bedroom","vqa_yoloe",-8.71308857316711,TRUE,0,"room.n.01","object","room","bedroom",NA,NA,NA
+"60","bedspread.n.01",2,"bedspread","bedspread","vqa",-10.903770107131,FALSE,0,"object.n.01","object","bedspread",NA,NA,NA,NA
+"61","bee.n.01",3,"bee","bee","vqa_yoloe",-9.3660738378064,TRUE,0,"animal.n.01","object","animal","bee",NA,NA,NA
+"62","belt.n.01",1,"belt","belt","vqa_yoloe",-8.24817350508023,TRUE,0,"entity.n.01","belt",NA,NA,NA,NA,NA
+"63","bench.n.01",4,"bench","bench","vqa_yoloe",-4.89542299749973,TRUE,0,"seat.n.03","object","furniture","seat","bench",NA,NA
+"64","beverage.n.01",1,"beverage","drink","vqa_yoloe",-8.0489318123751,TRUE,4,"entity.n.01","beverage",NA,NA,NA,NA,NA
+"65","bib.n.01",3,"bib","bib","yoloe",-5.03799180800514,TRUE,0,"fabric.n.01","object","fabric","bib",NA,NA,NA
+"66","bicycle.n.01",3,"bicycle","bicycle","vqa_yoloe",-5.52835147807371,TRUE,0,"container.n.01","object","container","bicycle",NA,NA,NA
+"67","bin.n.01",3,"bin","bin","vqa",-8.2296214577045,FALSE,2,"container.n.01","object","container","bin",NA,NA,NA
+"68","bird_feeder.n.01",3,"bird feeder","bird feeder","vqa",-9.51747574601114,FALSE,0,"device.n.01","object","device","bird feeder",NA,NA,NA
+"69","birdcage.n.01",4,"birdcage","birdcage","vqa",-7.48604342351766,FALSE,0,"cage.n.01","object","enclosure","cage","birdcage",NA,NA
+"70","black_box.n.01",2,"black box","black box","vqa",-8.65247830852453,FALSE,0,"object.n.01","object","black box",NA,NA,NA,NA
+"71","blackberry.n.02",2,"blackberry","blackberry","vqa",-10.903770107131,FALSE,0,"object.n.01","object","blackberry",NA,NA,NA,NA
+"72","blackboard.n.01",3,"blackboard","blackboard","vqa",-7.74676968598092,FALSE,0,"sheet.n.06","object","sheet","blackboard",NA,NA,NA
+"73","blanket.n.01",2,"blanket","blanket","vqa_yoloe",-3.11522009878139,TRUE,0,"object.n.01","object","blanket",NA,NA,NA,NA
+"74","blender.n.01",5,"blender","blender","vqa",-7.04304039609043,FALSE,0,"mixer.n.04","object","utensil","kitchen utensil","mixer","blender",NA
+"75","blind.n.03",2,"blind","blind","vqa",-8.70654552979481,FALSE,2,"object.n.01","object","blind",NA,NA,NA,NA
+"76","blind.n.03",2,"blind","screen","vqa",-9.39969271035475,FALSE,2,"object.n.01","object","blind",NA,NA,NA,NA
+"77","block.n.01",2,"block","block","vqa_yoloe",-5.71453931978944,TRUE,2,"object.n.01","object","block",NA,NA,NA,NA
+"78","blueberry.n.01",3,"blueberry","blueberry","vqa",-10.903770107131,FALSE,0,"shrub.n.01","object","shrub","blueberry",NA,NA,NA
+"79","board.n.02",2,"board","plank","vqa",-9.98747937525687,FALSE,0,"object.n.01","object","board",NA,NA,NA,NA
+"80","board.n.03",3,"board","board","vqa",-7.19019804042672,FALSE,2,"sheet.n.06","object","sheet","board",NA,NA,NA
+"81","board_game.n.01",2,"board game","board game","vqa",-9.65100713863566,FALSE,0,"game.n.01","game","board game",NA,NA,NA,NA
+"82","body_of_water.n.01",1,"body of_water","water","vqa_yoloe",-6.69380668482793,TRUE,0,"entity.n.01","body of_water",NA,NA,NA,NA,NA
+"83","body_part.n.01",1,"body part","body part",NA,NA,NA,15,"entity.n.01","body part",NA,NA,NA,NA,NA
+"84","book.n.02",2,"book","book","vqa_yoloe",-1.77681323152415,TRUE,1,"object.n.01","object","book",NA,NA,NA,NA
+"85","bookcase.n.01",3,"bookcase","bookcase","vqa",-7.26618394740464,FALSE,0,"furniture.n.01","object","furniture","bookcase",NA,NA,NA
+"86","booklet.n.01",2,"booklet","folder","vqa",-10.2106229265711,FALSE,0,"object.n.01","object","booklet",NA,NA,NA,NA
+"87","bookshelf.n.01",4,"bookshelf","bookshelf","vqa",-2.88728720573969,FALSE,0,"shelf.n.01","object","device","shelf","bookshelf",NA,NA
+"88","boot.n.02",3,"boot","boot","yoloe",-4.80806883310123,FALSE,0,"room.n.01","object","room","boot",NA,NA,NA
+"89","bottle.n.01",3,"bottle","bottle","vqa_yoloe",-2.67368221056189,TRUE,3,"container.n.01","object","container","bottle",NA,NA,NA
+"90","bow.n.04",4,"bow","bow","vqa",-10.903770107131,FALSE,0,"weapon.n.01","object","device","weapon","bow",NA,NA
+"91","bowed_stringed_instrument.n.01",4,"bowed stringed_instrument","string","vqa",-9.1990220148926,FALSE,1,"musical_instrument.n.01","object","device","musical instrument","bowed stringed_instrument",NA,NA
+"92","bowl.n.03",3,"bowl","bowl","vqa_yoloe",-2.57291924574374,TRUE,1,"container.n.01","object","container","bowl",NA,NA,NA
+"93","box.n.01",3,"box","box","vqa_yoloe",-2.54274514795047,TRUE,5,"container.n.01","object","container","box",NA,NA,NA
+"94","boy.n.02",5,"boy","boy","vqa",-5.78278675586591,TRUE,0,"man.n.01","object","person","adult","man","boy",NA
+"95","bracelet.n.02",3,"bracelet","bracelet","vqa",-10.2106229265711,FALSE,0,"decoration.n.01","object","decoration","bracelet",NA,NA,NA
+"96","bread.n.01",2,"bread","bread","vqa_yoloe",-5.56554136463621,TRUE,4,"food.n.02","food","bread",NA,NA,NA,NA
+"97","brick.n.02",3,"brick","brick","vqa",-10.4983049990229,FALSE,0,"person.n.01","object","person","brick",NA,NA,NA
+"98","bridge.n.09",3,"bridge","bridge","vqa",-8.76370394363476,FALSE,0,"surface.n.01","object","surface","bridge",NA,NA,NA
+"99","brim.n.01",3,"brim","lip","yoloe",-6.41429820730524,FALSE,0,"surface.n.01","object","surface","brim",NA,NA,NA
+"100","broccoli.n.01",2,"broccoli","broccoli","vqa",-8.88886708658876,FALSE,0,"object.n.01","object","broccoli",NA,NA,NA,NA
+"101","broom.n.01",2,"broom","broom","vqa_yoloe",-6.41988025718766,TRUE,0,"object.n.01","object","broom",NA,NA,NA,NA
+"102","brown_cup.n.01",2,"brown cup","brown cup","vqa",-10.903770107131,FALSE,0,"object.n.01","object","brown cup",NA,NA,NA,NA
+"103","brush.n.02",2,"brush","brush","vqa_yoloe",-6.97709599882605,TRUE,3,"object.n.01","object","brush",NA,NA,NA,NA
+"104","bubble.n.01",2,"bubble","bubble","vqa_yoloe",-7.18237064333424,FALSE,0,"ball.n.03","ball","bubble",NA,NA,NA,NA
+"105","bucket.n.01",3,"bucket","bucket","vqa_yoloe",-3.8904635966576,TRUE,0,"container.n.01","object","container","bucket",NA,NA,NA
+"106","bug.n.03",4,"bug","bug","yoloe",-7.45736150727238,TRUE,0,"microphone.n.01","object","device","microphone","bug",NA,NA
+"107","building.n.01",2,"building","building","vqa",-9.51747574601114,FALSE,4,"object.n.01","object","building",NA,NA,NA,NA
+"108","bunny.n.02",4,"bunny","bunny","vqa_yoloe",-8.31774700252592,TRUE,0,"rabbit.n.01","object","animal","rabbit","bunny",NA,NA
+"109","bus.n.01",3,"bus","bus","vqa_yoloe",-8.81557863226986,TRUE,0,"conveyance.n.03","object","conveyance","bus",NA,NA,NA
+"110","butt.n.08",4,"butt","butt","yoloe",-9.71497114038066,FALSE,0,"barrel.n.02","object","container","barrel","butt",NA,NA
+"111","butter.n.01",1,"butter","butter","vqa_yoloe",-7.95224095190257,TRUE,0,"entity.n.01","butter",NA,NA,NA,NA,NA
+"112","butterfly.n.01",3,"butterfly","butterfly","vqa_yoloe",-8.21836553604868,TRUE,0,"animal.n.01","object","animal","butterfly",NA,NA,NA
+"113","button.n.01",3,"button","button","yoloe",-8.71920169391887,TRUE,0,"device.n.01","object","device","button",NA,NA,NA
+"114","cabinet.n.01",3,"cabinet","cabinet","vqa",-4.05099913648165,FALSE,0,"furniture.n.01","object","furniture","cabinet",NA,NA,NA
+"115","cable.n.02",3,"cable","cable","vqa",-9.98747937525687,FALSE,1,"device.n.01","object","device","cable",NA,NA,NA
+"116","cactus.n.01",2,"cactus","cactus","vqa",-8.16293008320583,FALSE,1,"object.n.01","object","cactus",NA,NA,NA,NA
+"117","cage.n.01",3,"cage","cage","vqa",-7.93335564156133,FALSE,1,"enclosure.n.01","object","enclosure","cage",NA,NA,NA
+"118","cake.n.03",2,"cake","cake","vqa_yoloe",-6.69596730273109,TRUE,4,"food.n.02","food","cake",NA,NA,NA,NA
+"119","calculator.n.02",4,"calculator","calculator","vqa",-9.39969271035475,FALSE,0,"machine.n.01","object","device","machine","calculator",NA,NA
+"120","calendar.n.01",1,"calendar","calendar","vqa",-7.98599937504675,FALSE,0,"entity.n.01","calendar",NA,NA,NA,NA,NA
+"121","camel.n.01",3,"camel","camel","vqa",-9.98747937525687,FALSE,0,"animal.n.01","object","animal","camel",NA,NA,NA
+"122","camera.n.01",2,"camera","camera","vqa_yoloe",-5.79558608347639,TRUE,0,"object.n.01","object","camera",NA,NA,NA,NA
+"123","can_opener.n.01",3,"can opener","can opener","vqa",-9.98747937525687,FALSE,0,"tool.n.01","object","tool","can opener",NA,NA,NA
+"124","candle.n.01",4,"candle","candle","vqa",-7.90803783357704,FALSE,0,"lamp.n.01","object","device","lamp","candle",NA,NA
+"125","candy.n.01",1,"candy","candy","vqa_yoloe",-10.0181019692479,TRUE,2,"entity.n.01","candy",NA,NA,NA,NA,NA
+"126","candy_cane.n.01",2,"candy cane","candy cane","vqa",-9.11201063790297,FALSE,0,"candy.n.01","candy","candy cane",NA,NA,NA,NA
+"127","canister.n.02",3,"canister","canister","vqa",-10.903770107131,FALSE,0,"container.n.01","object","container","canister",NA,NA,NA
+"128","cap.n.01",3,"cap","cap","vqa",-9.11201063790297,FALSE,0,"clothing.n.01","object","clothing","cap",NA,NA,NA
+"129","capsicum.n.01",3,"capsicum","pepper","vqa",-10.2106229265711,FALSE,0,"shrub.n.01","object","shrub","capsicum",NA,NA,NA
+"130","car.n.01",3,"car","car","vqa_yoloe",-4.59539931647377,TRUE,0,"container.n.01","object","container","car",NA,NA,NA
+"131","car_door.n.01",3,"car door","car door","vqa",-9.1990220148926,FALSE,0,"door.n.01","object","door","car door",NA,NA,NA
+"132","car_seat.n.01",3,"car seat","car seat","vqa",-6.43786198847645,FALSE,0,"device.n.01","object","device","car seat",NA,NA,NA
+"133","car_wheel.n.01",4,"car wheel","car wheel","vqa",-10.4983049990229,FALSE,0,"wheel.n.01","object","device","wheel","car wheel",NA,NA
+"134","car_window.n.01",2,"car window","car window","vqa",-8.33882074966949,FALSE,0,"object.n.01","object","car window",NA,NA,NA,NA
+"135","card.n.04",3,"card","card","vqa",-7.76827589120188,FALSE,0,"cardboard.n.01","paper","cardboard","card",NA,NA,NA
+"136","card_game.n.01",2,"card game","card game","vqa",-10.4983049990229,FALSE,0,"game.n.01","game","card game",NA,NA,NA,NA
+"137","cardboard.n.01",2,"cardboard","cardboard","vqa",-9.80515781846292,FALSE,1,"paper.n.01","paper","cardboard",NA,NA,NA,NA
+"138","caribou.n.01",4,"caribou","reindeer","vqa",-9.98747937525687,FALSE,0,"deer.n.01","object","animal","deer","caribou",NA,NA
+"139","carrot.n.02",2,"carrot","carrot","vqa_yoloe",-7.13125771458304,FALSE,0,"object.n.01","object","carrot",NA,NA,NA,NA
+"140","cartoon.n.01",1,"cartoon","cartoon","vqa",-10.903770107131,FALSE,0,"entity.n.01","cartoon",NA,NA,NA,NA,NA
+"141","case.n.05",3,"case","case","vqa",-10.903770107131,FALSE,2,"container.n.01","object","container","case",NA,NA,NA
+"142","cat_food.n.01",1,"cat food","cat food","vqa",-9.1990220148926,FALSE,0,"entity.n.01","cat food",NA,NA,NA,NA,NA
+"143","ceiling.n.01",3,"ceiling","ceiling","vqa",-5.08963957530596,FALSE,0,"surface.n.01","object","surface","ceiling",NA,NA,NA
+"144","ceiling.n.03",1,"ceiling","roof","vqa_yoloe",-7.80011564051577,TRUE,0,"entity.n.01","ceiling",NA,NA,NA,NA,NA
+"145","cereal.n.01",3,"cereal","cereal","vqa_yoloe",-9.03809576168947,TRUE,1,"grass.n.01","object","grass","cereal",NA,NA,NA
+"146","cereal_box.n.01",4,"cereal box","cereal box","vqa",-8.70654552979481,FALSE,0,"box.n.01","object","container","box","cereal box",NA,NA
+"147","chain.n.09",4,"chain","chain","vqa",-10.903770107131,FALSE,0,"necklace.n.01","object","decoration","necklace","chain",NA,NA
+"148","chair.n.01",4,"chair","chair","vqa_yoloe",-1.22290456993066,TRUE,1,"seat.n.03","object","furniture","seat","chair",NA,NA
+"149","chalk.n.04",3,"chalk","chalk","vqa_yoloe",-7.5623499777962,TRUE,0,"writing_implement.n.01","object","writing implement","chalk",NA,NA,NA
+"150","chandelier.n.01",3,"chandelier","chandelier","vqa",-5.71638430129027,FALSE,0,"fixture.n.01","object","fixture","chandelier",NA,NA,NA
+"151","charger.n.01",4,"charger","charger","vqa",-9.98747937525687,FALSE,0,"horse.n.01","object","animal","horse","charger",NA,NA
+"152","cheek.n.01",2,"cheek","cheek","yoloe",-9.21150235484038,TRUE,0,"body_part.n.01","body part","cheek",NA,NA,NA,NA
+"153","chessboard.n.01",3,"chessboard","chess board","vqa",-9.65100713863566,FALSE,0,"surface.n.01","object","surface","chessboard",NA,NA,NA
+"154","chessboard.n.01",3,"chessboard","chessboard","vqa",-8.95785995807572,FALSE,0,"surface.n.01","object","surface","chessboard",NA,NA,NA
+"155","chessman.n.01",2,"chessman","chess piece","vqa",-9.29433219469693,FALSE,0,"object.n.01","object","chessman",NA,NA,NA,NA
+"156","chewing_gum.n.01",1,"chewing gum","gum","yoloe",-4.41281299154966,TRUE,0,"entity.n.01","chewing gum",NA,NA,NA,NA,NA
+"157","chicken.n.01",3,"chicken","chicken","vqa_yoloe",-8.96060872969823,TRUE,0,"meat.n.01","food","meat","chicken",NA,NA,NA
+"158","child.n.01",3,"child","child","vqa",-2.72920807965159,TRUE,1,"person.n.01","object","person","child",NA,NA,NA
+"159","child.n.01",3,"child","kid","vqa",-8.65247830852453,FALSE,1,"person.n.01","object","person","child",NA,NA,NA
+"160","chimney.n.01",2,"chimney","chimney","vqa",-10.903770107131,FALSE,0,"object.n.01","object","chimney",NA,NA,NA,NA
+"161","chip.n.04",2,"chip","potato chip","vqa",-9.65100713863566,TRUE,0,"dish.n.02","dish","chip",NA,NA,NA,NA
+"162","chip.n.04",2,"chip","chip","yoloe",-8.70957698054466,FALSE,0,"dish.n.02","dish","chip",NA,NA,NA,NA
+"163","chopping_board.n.01",4,"chopping board","cutting board","vqa",-10.903770107131,FALSE,0,"board.n.03","object","sheet","board","chopping board",NA,NA
+"164","chopstick.n.01",3,"chopstick","chopstick","vqa",-9.29433219469693,FALSE,0,"tableware.n.01","object","tableware","chopstick",NA,NA,NA
+"165","christmas_bush.n.01",3,"christmas bush","christmas tree","vqa",-4.31966956105949,FALSE,0,"tree.n.01","object","tree","christmas bush",NA,NA,NA
+"166","christmas_present.n.01",3,"christmas present","christmas present","vqa",-8.82432856545119,FALSE,0,"present.n.02","gift","present","christmas present",NA,NA,NA
+"167","christmas_stocking.n.01",5,"christmas stocking","christmas stocking","vqa",-6.78473293231856,FALSE,0,"stocking.n.01","object","clothing","hosiery","stocking","christmas stocking",NA
+"168","cistern.n.02",3,"cistern","water tank","vqa",-9.51747574601114,FALSE,0,"container.n.01","object","container","cistern",NA,NA,NA
+"169","clock.n.01",3,"clock","clock","vqa_yoloe",-4.69504847154249,TRUE,3,"device.n.01","object","device","clock",NA,NA,NA
+"170","clothes_hamper.n.01",4,"clothes hamper","laundry basket","vqa",-10.2106229265711,FALSE,0,"basket.n.01","object","container","basket","clothes hamper",NA,NA
+"171","clothesline.n.01",3,"clothesline","clothesline","vqa",-10.2106229265711,FALSE,0,"cord.n.01","object","cord","clothesline",NA,NA,NA
+"172","clothespin.n.01",3,"clothespin","clothespin","vqa",-10.4983049990229,FALSE,0,"device.n.01","object","device","clothespin",NA,NA,NA
+"173","clothing.n.01",2,"clothing","clothing",NA,NA,NA,14,"object.n.01","object","clothing",NA,NA,NA,NA
+"174","cloud.n.01",1,"cloud","cloud","vqa_yoloe",-11.1037265147143,TRUE,0,"entity.n.01","cloud",NA,NA,NA,NA,NA
+"175","coat.n.01",3,"coat","coat","vqa_yoloe",-9.31607935187844,TRUE,1,"clothing.n.01","object","clothing","coat",NA,NA,NA
+"176","coatrack.n.01",3,"coatrack","coat rack","vqa",-10.903770107131,FALSE,0,"rack.n.01","object","rack","coatrack",NA,NA,NA
+"177","coca_cola.n.01",2,"coca cola","coca cola","vqa",-10.903770107131,FALSE,0,"beverage.n.01","beverage","coca cola",NA,NA,NA,NA
+"178","coca_cola.n.01",2,"coca cola","coke","yoloe",-5.49831628420371,TRUE,0,"beverage.n.01","beverage","coca cola",NA,NA,NA,NA
+"179","cock.n.04",3,"cock","rooster","yoloe",-6.35947967882667,TRUE,0,"animal.n.01","object","animal","cock",NA,NA,NA
+"180","cocoa.n.01",2,"cocoa","chocolate","yoloe",-10.2758966861982,TRUE,0,"beverage.n.01","beverage","cocoa",NA,NA,NA,NA
+"181","coffee.n.02",3,"coffee","coffee","yoloe",-6.83277699814973,TRUE,0,"tree.n.01","object","tree","coffee",NA,NA,NA
+"182","coffee_cup.n.01",4,"coffee cup","coffee cup","vqa",-8.04156922620156,FALSE,0,"cup.n.01","object","container","cup","coffee cup",NA,NA
+"183","coffee_filter.n.01",3,"coffee filter","coffee filter","vqa",-10.903770107131,FALSE,0,"device.n.01","object","device","coffee filter",NA,NA,NA
+"184","coffee_maker.n.01",3,"coffee maker","coffee maker","vqa",-6.59970501392686,FALSE,0,"home_appliance.n.01","object","home appliance","coffee maker",NA,NA,NA
+"185","coffee_mug.n.01",4,"coffee mug","coffee mug","vqa",-9.11201063790297,FALSE,0,"mug.n.04","object","container","mug","coffee mug",NA,NA
+"186","coffee_table.n.01",4,"coffee table","coffee table","vqa",-8.04156922620156,FALSE,0,"table.n.02","object","furniture","table","coffee table",NA,NA
+"187","coin.n.01",1,"coin","coin","vqa",-10.4983049990229,FALSE,1,"entity.n.01","coin",NA,NA,NA,NA,NA
+"188","comb.n.04",2,"comb","comb","vqa_yoloe",-8.06649578137486,TRUE,0,"body_part.n.01","body part","comb",NA,NA,NA,NA
+"189","compact_disk.n.01",3,"compact disk","cd","vqa",-10.903770107131,FALSE,0,"device.n.01","object","device","compact disk",NA,NA,NA
+"190","computer.n.01",4,"computer","computer","vqa",-6.13733177354682,FALSE,1,"machine.n.01","object","device","machine","computer",NA,NA
+"191","computer_monitor.n.01",4,"computer monitor","computer monitor","vqa",-7.83571717199741,FALSE,0,"monitor.n.04","object","device","monitor","computer monitor",NA,NA
+"192","computer_screen.n.01",3,"computer screen","computer screen","vqa",-9.39969271035475,FALSE,0,"device.n.01","object","device","computer screen",NA,NA,NA
+"193","conciliator.n.01",3,"conciliator","pacifier","vqa",-10.4983049990229,FALSE,0,"person.n.01","object","person","conciliator",NA,NA,NA
+"194","cone.n.01",2,"cone","cone","vqa",-7.4380342043313,FALSE,0,"object.n.01","object","cone",NA,NA,NA,NA
+"195","container.n.01",2,"container","container","vqa",-4.59476133328735,FALSE,39,"object.n.01","object","container",NA,NA,NA,NA
+"196","control.n.09",3,"control","controller","vqa",-10.2106229265711,FALSE,3,"device.n.01","object","device","control",NA,NA,NA
+"197","convertible.n.03",5,"convertible","sofa bed","vqa",-10.4983049990229,FALSE,0,"sofa.n.01","object","furniture","seat","sofa","convertible",NA
+"198","conveyance.n.03",2,"conveyance","conveyance",NA,NA,NA,7,"object.n.01","object","conveyance",NA,NA,NA,NA
+"199","cookie.n.01",3,"cookie","biscuit","vqa",-9.80515781846292,FALSE,0,"cake.n.03","food","cake","cookie",NA,NA,NA
+"200","cookie.n.01",3,"cookie","cookie","vqa_yoloe",-7.75374745930105,TRUE,0,"cake.n.03","food","cake","cookie",NA,NA,NA
+"201","cookie_cutter.n.01",4,"cookie cutter","cookie cutter","vqa",-10.2106229265711,FALSE,0,"kitchen_utensil.n.01","object","utensil","kitchen utensil","cookie cutter",NA,NA
+"202","cord.n.01",2,"cord","cord","vqa",-9.80515781846292,FALSE,2,"object.n.01","object","cord",NA,NA,NA,NA
+"203","corn.n.01",4,"corn","corn","vqa_yoloe",-9.41809315700636,TRUE,1,"cereal.n.01","object","grass","cereal","corn",NA,NA
+"204","counter.n.01",4,"counter","counter","vqa",-8.13118138489125,FALSE,1,"table.n.02","object","furniture","table","counter",NA,NA
+"205","countertop.n.01",3,"countertop","countertop","vqa",-8.26471277751577,FALSE,0,"surface.n.01","object","surface","countertop",NA,NA,NA
+"206","cow.n.01",3,"cow","cow","vqa_yoloe",-8.00245875612038,TRUE,0,"animal.n.01","object","animal","cow",NA,NA,NA
+"207","cracker.n.01",3,"cracker","cracker","yoloe",-6.43339093611795,TRUE,1,"bread.n.01","food","bread","cracker",NA,NA,NA
+"208","crayon.n.01",3,"crayon","crayon","vqa_yoloe",-4.92258802252124,TRUE,0,"writing_implement.n.01","object","writing implement","crayon",NA,NA,NA
+"209","crib.n.01",4,"crib","crib","vqa_yoloe",-4.57320829866764,TRUE,0,"baby_bed.n.01","object","furniture","baby bed","crib",NA,NA
+"210","crockery.n.01",3,"crockery","dishware","vqa",-10.2106229265711,FALSE,0,"tableware.n.01","object","tableware","crockery",NA,NA,NA
+"211","crocodile.n.01",3,"crocodile","crocodile","vqa",-10.903770107131,FALSE,0,"animal.n.01","object","animal","crocodile",NA,NA,NA
+"212","cube.n.04",3,"cube","cube","vqa",-9.39969271035475,FALSE,0,"shrub.n.01","object","shrub","cube",NA,NA,NA
+"213","cuboid.n.01",1,"cuboid","cuboid","vqa",-10.903770107131,FALSE,0,"entity.n.01","cuboid",NA,NA,NA,NA,NA
+"214","cucumber.n.01",3,"cucumber","cucumber","vqa",-10.2106229265711,FALSE,0,"melon.n.02","object","melon","cucumber",NA,NA,NA
+"215","cup.n.01",3,"cup","cup","vqa_yoloe",-2.16019917106236,TRUE,2,"container.n.01","object","container","cup",NA,NA,NA
+"216","cupboard.n.01",2,"cupboard","cupboard","vqa",-5.40047315989645,FALSE,0,"object.n.01","object","cupboard",NA,NA,NA,NA
+"217","cupcake.n.01",3,"cupcake","cupcake","vqa",-8.19571990602882,FALSE,0,"cake.n.03","food","cake","cupcake",NA,NA,NA
+"218","curtain.n.01",3,"curtain","curtain","vqa",-3.37409515687731,FALSE,1,"blind.n.03","object","blind","curtain",NA,NA,NA
+"219","cylinder.n.02",1,"cylinder","cylinder","vqa",-9.65100713863566,FALSE,0,"entity.n.01","cylinder",NA,NA,NA,NA,NA
+"220","dagger.n.01",5,"dagger","sticker","vqa",-9.80515781846292,FALSE,0,"knife.n.02","object","device","weapon","knife","dagger",NA
+"221","dame.n.01",6,"dame","bird","vqa_yoloe",-7.4107294465989,TRUE,0,"girl.n.01","object","person","adult","woman","girl","dame"
+"222","dame.n.01",6,"dame","doll","vqa_yoloe",-4.03691332179129,TRUE,0,"girl.n.01","object","person","adult","woman","girl","dame"
+"223","dame.n.01",6,"dame","skirt","vqa",-10.4983049990229,FALSE,0,"girl.n.01","object","person","adult","woman","girl","dame"
+"224","dame.n.02",5,"dame","lady","vqa",-7.00179743755638,TRUE,0,"woman.n.01","object","person","adult","woman","dame",NA
+"225","deck.n.02",4,"deck","deck","vqa",-9.51747574601114,FALSE,0,"packet.n.03","object","container","packet","deck",NA,NA
+"226","decoration.n.01",2,"decoration","decoration","vqa",-9.1990220148926,FALSE,6,"object.n.01","object","decoration",NA,NA,NA,NA
+"227","decoration.n.01",2,"decoration","ornament","vqa",-8.70654552979481,FALSE,6,"object.n.01","object","decoration",NA,NA,NA,NA
+"228","deer.n.01",3,"deer","deer","vqa_yoloe",-9.7047732496023,TRUE,2,"animal.n.01","object","animal","deer",NA,NA,NA
+"229","desk.n.01",4,"desk","desk","vqa",-5.85071409715082,FALSE,0,"table.n.02","object","furniture","table","desk",NA,NA
+"230","detergent.n.01",1,"detergent","detergent","vqa",-9.1990220148926,FALSE,0,"entity.n.01","detergent",NA,NA,NA,NA,NA
+"231","device.n.01",2,"device","device",NA,NA,NA,55,"object.n.01","object","device",NA,NA,NA,NA
+"232","diaper.n.01",3,"diaper","diaper","vqa_yoloe",-7.40338490016142,TRUE,0,"clothing.n.01","object","clothing","diaper",NA,NA,NA
+"233","diaper.n.01",3,"diaper","napkin","vqa_yoloe",-5.48879886202285,TRUE,0,"clothing.n.01","object","clothing","diaper",NA,NA,NA
+"234","dining_table.n.01",3,"dining table","dining table","vqa",-9.51747574601114,FALSE,0,"furniture.n.01","object","furniture","dining table",NA,NA,NA
+"235","dinosaur.n.01",3,"dinosaur","dinosaur","vqa",-8.82432856545119,FALSE,0,"animal.n.01","object","animal","dinosaur",NA,NA,NA
+"236","dish.n.02",1,"dish","dish","vqa_yoloe",-8.65346894912162,TRUE,8,"entity.n.01","dish",NA,NA,NA,NA,NA
+"237","dish_rack.n.01",3,"dish rack","dish rack","vqa",-6.19423990581869,FALSE,0,"rack.n.01","object","rack","dish rack",NA,NA,NA
+"238","dishwasher.n.01",3,"dishwasher","dishwasher","vqa",-6.31371355895299,FALSE,0,"home_appliance.n.01","object","home appliance","dishwasher",NA,NA,NA
+"239","disk.n.02",3,"disk","disc","vqa",-9.51747574601114,FALSE,1,"device.n.01","object","device","disk",NA,NA,NA
+"240","dixie_cup.n.01",4,"dixie cup","paper cup","vqa",-8.82432856545119,FALSE,0,"cup.n.01","object","container","cup","dixie cup",NA,NA
+"241","dog.n.01",3,"dog","dog","vqa_yoloe",-3.5228888982443,TRUE,3,"animal.n.01","object","animal","dog",NA,NA,NA
+"242","dog_food.n.01",1,"dog food","dog food","vqa",-10.903770107131,FALSE,0,"entity.n.01","dog food",NA,NA,NA,NA,NA
+"243","dollhouse.n.01",4,"dollhouse","dollhouse","vqa",-9.39969271035475,FALSE,0,"house.n.01","object","building","house","dollhouse",NA,NA
+"244","dolphinfish.n.02",4,"dolphinfish","dolphin","vqa",-9.98747937525687,FALSE,0,"fish.n.01","object","animal","fish","dolphinfish",NA,NA
+"245","door.n.01",2,"door","door","vqa_yoloe",-2.47831246075605,TRUE,1,"object.n.01","object","door",NA,NA,NA,NA
+"246","doorbell.n.01",5,"doorbell","doorbell","vqa",-10.4983049990229,FALSE,0,"switch.n.01","object","device","control","switch","doorbell",NA
+"247","doorframe.n.01",2,"doorframe","doorframe","vqa",-5.36840628409979,FALSE,0,"object.n.01","object","doorframe",NA,NA,NA,NA
+"248","dough.n.01",1,"dough","dough","vqa",-9.65100713863566,FALSE,1,"entity.n.01","dough",NA,NA,NA,NA,NA
+"249","doughnut.n.02",3,"doughnut","donut","vqa",-9.65100713863566,TRUE,0,"cake.n.03","food","cake","doughnut",NA,NA,NA
+"250","dragon.n.02",3,"dragon","dragon","vqa",-9.98747937525687,FALSE,0,"person.n.01","object","person","dragon",NA,NA,NA
+"251","drawer.n.01",2,"drawer","drawer","vqa_yoloe",-5.85426645145858,TRUE,0,"object.n.01","object","drawer",NA,NA,NA,NA
+"252","drawing_card.n.01",3,"drawing card","draw","vqa",-9.98747937525687,TRUE,0,"person.n.01","object","person","drawing card",NA,NA,NA
+"253","dress.n.01",3,"dress","dress","vqa_yoloe",-7.50297379384467,TRUE,0,"clothing.n.01","object","clothing","dress",NA,NA,NA
+"254","dressing_table.n.01",4,"dressing table","dresser","vqa",-5.73328611209288,FALSE,0,"table.n.02","object","furniture","table","dressing table",NA,NA
+"255","drill.n.02",4,"drill","drill","vqa",-8.41886345734303,FALSE,0,"monkey.n.01","object","animal","monkey","drill",NA,NA
+"256","drinking_fountain.n.01",2,"drinking fountain","water fountain","vqa",-9.80515781846292,FALSE,0,"object.n.01","object","drinking fountain",NA,NA,NA,NA
+"257","drum.n.01",4,"drum","drum","vqa",-7.06431779453772,FALSE,1,"musical_instrument.n.01","object","device","musical instrument","drum",NA,NA
+"258","drumstick.n.02",3,"drumstick","drumstick","vqa",-10.903770107131,FALSE,1,"stick.n.01","object","stick","drumstick",NA,NA,NA
+"259","dryer.n.01",2,"dryer","dryer","yoloe",-4.72542935877049,TRUE,0,"object.n.01","object","dryer",NA,NA,NA,NA
+"260","duck.n.01",3,"duck","duck","vqa_yoloe",-8.13566928870193,TRUE,1,"animal.n.01","object","animal","duck",NA,NA,NA
+"261","dumbbell.n.01",4,"dumbbell","dumbbell","vqa",-8.37804146282277,FALSE,0,"weight.n.02","object","sports equipment","weight","dumbbell",NA,NA
+"262","dustpan.n.02",3,"dustpan","dustpan","vqa",-8.46142307176182,FALSE,0,"container.n.01","object","container","dustpan",NA,NA,NA
+"263","earphone.n.01",3,"earphone","earphone","vqa",-9.98747937525687,FALSE,1,"device.n.01","object","device","earphone",NA,NA,NA
+"264","earphone.n.01",3,"earphone","headphone","vqa",-9.98747937525687,FALSE,1,"device.n.01","object","device","earphone",NA,NA,NA
+"265","earphone.n.01",3,"earphone","phone","vqa",-4.35197574135397,FALSE,1,"device.n.01","object","device","earphone",NA,NA,NA
+"266","easel.n.01",4,"easel","easel","vqa",-10.903770107131,FALSE,0,"tripod.n.01","object","device","tripod","easel",NA,NA
+"267","egg.n.01",2,"egg","egg","vqa_yoloe",-5.57449450591741,TRUE,0,"object.n.01","object","egg",NA,NA,NA,NA
+"268","egg_yolk.n.01",1,"egg yolk","egg yolk","vqa",-9.65100713863566,FALSE,0,"entity.n.01","egg yolk",NA,NA,NA,NA,NA
+"269","eggplant.n.01",3,"eggplant","eggplant","vqa",-10.903770107131,FALSE,0,"vegetable.n.01","food","vegetable","eggplant",NA,NA,NA
+"270","electric_mixer.n.01",5,"electric mixer","electric mixer","vqa",-10.903770107131,FALSE,0,"mixer.n.04","object","utensil","kitchen utensil","mixer","electric mixer",NA
+"271","electric_refrigerator.n.01",4,"electric refrigerator","fridge","vqa",-5.17367032415745,FALSE,0,"refrigerator.n.01","object","home appliance","refrigerator","electric refrigerator",NA,NA
+"272","electronic_equipment.n.01",2,"electronic equipment","electronic equipment",NA,NA,NA,2,"object.n.01","object","electronic equipment",NA,NA,NA,NA
+"273","elephant.n.01",3,"elephant","elephant","vqa_yoloe",-7.78450974774076,TRUE,0,"animal.n.01","object","animal","elephant",NA,NA,NA
+"274","elk.n.01",4,"elk","moose","yoloe",-12.6646594754332,TRUE,0,"deer.n.01","object","animal","deer","elk",NA,NA
+"275","enclosure.n.01",2,"enclosure","enclosure","vqa",-10.903770107131,FALSE,4,"object.n.01","object","enclosure",NA,NA,NA,NA
+"276","entity.n.01",0,"entity","entity",NA,NA,NA,58,NA,NA,NA,NA,NA,NA,NA
+"277","envelope.n.01",3,"envelope","envelope","vqa",-10.903770107131,FALSE,0,"container.n.01","object","container","envelope",NA,NA,NA
+"278","exercise_bike.n.01",3,"exercise bike","exercise bike","vqa",-9.65100713863566,FALSE,0,"device.n.01","object","device","exercise bike",NA,NA,NA
+"279","eye.n.01",2,"eye","eye","yoloe",-9.32533749748918,TRUE,0,"body_part.n.01","body part","eye",NA,NA,NA,NA
+"280","fabric.n.01",2,"fabric","cloth","vqa",-4.98085210255816,FALSE,2,"object.n.01","object","fabric",NA,NA,NA,NA
+"281","face.n.04",3,"face","face","vqa_yoloe",-8.37333400837456,TRUE,0,"surface.n.01","object","surface","face",NA,NA,NA
+"282","fan.n.01",3,"fan","fan","vqa",-4.2116863646244,FALSE,0,"device.n.01","object","device","fan",NA,NA,NA
+"283","faucet.n.01",4,"faucet","faucet","vqa",-7.62662537413885,FALSE,0,"control.n.09","object","device","control","faucet",NA,NA
+"284","feather.n.01",2,"feather","feather","vqa",-10.903770107131,FALSE,0,"object.n.01","object","feather",NA,NA,NA,NA
+"285","fence.n.01",2,"fence","fence","vqa",-5.46135239660923,FALSE,2,"object.n.01","object","fence",NA,NA,NA,NA
+"286","file.n.03",3,"file","file cabinet","vqa",-10.903770107131,FALSE,0,"furniture.n.01","object","furniture","file",NA,NA,NA
+"287","finger.n.01",2,"finger","finger","vqa_yoloe",-7.90278917801809,TRUE,0,"body_part.n.01","body part","finger",NA,NA,NA,NA
+"288","fire.n.04",4,"fire","fire","vqa",-10.903770107131,FALSE,0,"fireplace.n.01","object","enclosure","fireplace","fire",NA,NA
+"289","fire_engine.n.01",4,"fire engine","fire truck","vqa",-9.98747937525687,FALSE,0,"truck.n.01","object","container","truck","fire engine",NA,NA
+"290","fire_extinguisher.n.01",3,"fire extinguisher","fire extinguisher","vqa",-7.98599937504675,FALSE,0,"device.n.01","object","device","fire extinguisher",NA,NA,NA
+"291","fireplace.n.01",3,"fireplace","fireplace","vqa",-5.41070866379048,FALSE,1,"enclosure.n.01","object","enclosure","fireplace",NA,NA,NA
+"292","fireplug.n.01",3,"fireplug","fire hydrant","vqa",-9.80515781846292,FALSE,0,"tube.n.01","object","tube","fireplug",NA,NA,NA
+"293","fireplug.n.01",3,"fireplug","plug","vqa",-9.80515781846292,FALSE,0,"tube.n.01","object","tube","fireplug",NA,NA,NA
+"294","fish.n.01",3,"fish","fish","vqa_yoloe",-6.56476263111709,TRUE,2,"animal.n.01","object","animal","fish",NA,NA,NA
+"295","fishbowl.n.02",3,"fishbowl","fishbowl","vqa",-10.903770107131,FALSE,0,"container.n.01","object","container","fishbowl",NA,NA,NA
+"296","fixture.n.01",2,"fixture","fixture","vqa",-6.76860355038867,FALSE,6,"object.n.01","object","fixture",NA,NA,NA,NA
+"297","flag.n.01",3,"flag","flag","vqa_yoloe",-6.86017187623012,TRUE,1,"decoration.n.01","object","decoration","flag",NA,NA,NA
+"298","flamingo.n.01",3,"flamingo","flamingo","vqa",-10.2106229265711,FALSE,0,"animal.n.01","object","animal","flamingo",NA,NA,NA
+"299","flashlight.n.01",4,"flashlight","flashlight","vqa",-10.903770107131,FALSE,0,"lamp.n.01","object","device","lamp","flashlight",NA,NA
+"300","floor.n.02",2,"floor","floor","vqa",-3.64359894113054,FALSE,1,"object.n.01","object","floor",NA,NA,NA,NA
+"301","floor.n.02",2,"floor","story","yoloe",-8.20915006399956,TRUE,1,"object.n.01","object","floor",NA,NA,NA,NA
+"302","floor_lamp.n.01",3,"floor lamp","floor lamp","vqa",-10.903770107131,FALSE,0,"furniture.n.01","object","furniture","floor lamp",NA,NA,NA
+"303","flower.n.01",2,"flower","flower","vqa_yoloe",-4.44008110559497,TRUE,1,"object.n.01","object","flower",NA,NA,NA,NA
+"304","flowerbed.n.01",2,"flowerbed","flower bed","vqa",-9.98747937525687,FALSE,0,"object.n.01","object","flowerbed",NA,NA,NA,NA
+"305","food.n.02",1,"food","food","vqa_yoloe",-4.92534845835165,TRUE,6,"entity.n.01","food",NA,NA,NA,NA,NA
+"306","football.n.02",3,"football","football","vqa",-7.90803783357704,FALSE,0,"ball.n.01","object","ball","football",NA,NA,NA
+"307","footstool.n.01",5,"footstool","ottoman","vqa",-7.76827589120188,FALSE,0,"stool.n.01","object","furniture","seat","stool","footstool",NA
+"308","footwear.n.02",2,"footwear","footwear",NA,NA,NA,2,"object.n.01","object","footwear",NA,NA,NA,NA
+"309","fork.n.01",3,"fork","fork","vqa_yoloe",-4.76649527806508,TRUE,0,"tableware.n.01","object","tableware","fork",NA,NA,NA
+"310","foundation.n.03",2,"foundation","foot","vqa_yoloe",-8.08469926953043,TRUE,0,"object.n.01","object","foundation",NA,NA,NA,NA
+"311","fox.n.01",3,"fox","fox","vqa",-10.903770107131,FALSE,0,"animal.n.01","object","animal","fox",NA,NA,NA
+"312","frame.n.02",3,"frame","frame","vqa",-6.65527486508167,FALSE,0,"photograph.n.01","object","photograph","frame",NA,NA,NA
+"313","frisbee.n.01",4,"frisbee","frisbee","vqa",-9.65100713863566,FALSE,0,"disk.n.02","object","device","disk","frisbee",NA,NA
+"314","frog.n.01",3,"frog","frog","vqa_yoloe",-6.97817384655676,TRUE,0,"animal.n.01","object","animal","frog",NA,NA,NA
+"315","fruit.n.01",2,"fruit","fruit","vqa",-7.17807667989438,FALSE,1,"object.n.01","object","fruit",NA,NA,NA,NA
+"316","furniture.n.01",2,"furniture","furniture",NA,NA,NA,11,"object.n.01","object","furniture",NA,NA,NA,NA
+"317","game.n.01",1,"game","game","yoloe",-10.1965599439616,TRUE,3,"entity.n.01","game",NA,NA,NA,NA,NA
+"318","garage.n.01",3,"garage","garage","yoloe",-8.88960232507826,TRUE,0,"building.n.01","object","building","garage",NA,NA,NA
+"319","garden.n.03",3,"garden","garden","vqa_yoloe",-9.02069214320407,TRUE,0,"yard.n.02","object","yard","garden",NA,NA,NA
+"320","garden_hose.n.01",3,"garden hose","garden hose","vqa",-10.903770107131,FALSE,0,"tube.n.01","object","tube","garden hose",NA,NA,NA
+"321","garlic.n.01",2,"garlic","garlic","vqa",-10.903770107131,FALSE,0,"object.n.01","object","garlic",NA,NA,NA,NA
+"322","gate.n.01",2,"gate","gate","vqa",-8.26471277751577,FALSE,0,"object.n.01","object","gate",NA,NA,NA,NA
+"323","gelatin.n.02",1,"gelatin","jelly","yoloe",-5.91355800649649,TRUE,0,"entity.n.01","gelatin",NA,NA,NA,NA,NA
+"324","ghost.n.01",1,"ghost","ghost","vqa",-10.903770107131,FALSE,0,"entity.n.01","ghost",NA,NA,NA,NA,NA
+"325","giant_panda.n.01",3,"giant panda","panda","vqa",-8.95785995807572,FALSE,0,"animal.n.01","object","animal","giant panda",NA,NA,NA
+"326","gift.n.01",1,"gift","gift","vqa",-10.903770107131,FALSE,1,"entity.n.01","gift",NA,NA,NA,NA,NA
+"327","giraffe.n.01",3,"giraffe","giraffe","vqa_yoloe",-8.57769027273412,TRUE,0,"animal.n.01","object","animal","giraffe",NA,NA,NA
+"328","girl.n.01",5,"girl","girl","vqa",-4.36563028336336,TRUE,2,"woman.n.01","object","person","adult","woman","girl",NA
+"329","glass.n.02",3,"glass","glasses","vqa_yoloe",-5.85162285610978,TRUE,0,"container.n.01","object","container","glass",NA,NA,NA
+"330","glass.n.07",3,"glass","glass","vqa_yoloe",-5.8539336473492,TRUE,0,"tableware.n.01","object","tableware","glass",NA,NA,NA
+"331","glue.n.01",1,"glue","glue","yoloe",-5.95926520858279,TRUE,0,"entity.n.01","glue",NA,NA,NA,NA,NA
+"332","goal.n.03",2,"goal","goal","vqa",-9.65100713863566,FALSE,2,"object.n.01","object","goal",NA,NA,NA,NA
+"333","goat.n.01",3,"goat","goat","vqa",-10.903770107131,FALSE,0,"animal.n.01","object","animal","goat",NA,NA,NA
+"334","goose.n.01",3,"goose","goose","yoloe",-10.9599113831948,TRUE,0,"animal.n.01","object","animal","goose",NA,NA,NA
+"335","grapeshot.n.01",4,"grapeshot","grape","vqa_yoloe",-8.00116281428244,FALSE,0,"weapon.n.01","object","device","weapon","grapeshot",NA,NA
+"336","grass.n.01",2,"grass","grass","vqa_yoloe",-5.02139304119731,TRUE,1,"object.n.01","object","grass",NA,NA,NA,NA
+"337","gravy_boat.n.01",3,"gravy boat","boat","vqa_yoloe",-8.06358392279654,TRUE,0,"container.n.01","object","container","gravy boat",NA,NA,NA
+"338","grillroom.n.01",3,"grillroom","grill","vqa",-7.72571627678308,FALSE,0,"building.n.01","object","building","grillroom",NA,NA,NA
+"339","guitar.n.01",4,"guitar","guitar","vqa",-5.37038061840351,FALSE,1,"musical_instrument.n.01","object","device","musical instrument","guitar",NA,NA
+"340","gull.n.02",3,"gull","seagull","vqa",-10.4983049990229,FALSE,0,"animal.n.01","object","animal","gull",NA,NA,NA
+"341","guy.n.01",5,"guy","cat","vqa_yoloe",-4.04174841825189,TRUE,0,"man.n.01","object","person","adult","man","guy",NA
+"342","gym_shoe.n.01",4,"gym shoe","sneaker","yoloe",-5.53825071040976,TRUE,0,"shoe.n.01","object","footwear","shoe","gym shoe",NA,NA
+"343","hair.n.01",2,"hair","hair","vqa_yoloe",-7.24093415588497,TRUE,0,"object.n.01","object","hair",NA,NA,NA,NA
+"344","hairbrush.n.01",3,"hairbrush","hairbrush","vqa",-10.4983049990229,FALSE,0,"brush.n.02","object","brush","hairbrush",NA,NA,NA
+"345","hamburger.n.01",3,"hamburger","hamburger","yoloe",-7.92408465243895,TRUE,0,"sandwich.n.01","dish","sandwich","hamburger",NA,NA,NA
+"346","hammock.n.02",4,"hammock","hammock","vqa",-9.11201063790297,FALSE,0,"bed.n.01","object","furniture","bed","hammock",NA,NA
+"347","hamster.n.01",3,"hamster","hamster","vqa",-9.98747937525687,FALSE,0,"animal.n.01","object","animal","hamster",NA,NA,NA
+"348","hand_blower.n.01",3,"hand blower","hair dryer","vqa",-8.82432856545119,FALSE,0,"device.n.01","object","device","hand blower",NA,NA,NA
+"349","handcart.n.01",3,"handcart","cart","vqa",-9.11201063790297,FALSE,2,"container.n.01","object","container","handcart",NA,NA,NA
+"350","handle.n.01",2,"handle","handle","vqa",-9.80515781846292,FALSE,0,"object.n.01","object","handle",NA,NA,NA,NA
+"351","hanging.n.01",3,"hanging","wall hanging","vqa",-9.03196793022944,FALSE,0,"decoration.n.01","object","decoration","hanging",NA,NA,NA
+"352","harp.n.01",4,"harp","harp","vqa",-10.903770107131,FALSE,0,"musical_instrument.n.01","object","device","musical instrument","harp",NA,NA
+"353","hat.n.01",3,"hat","hat","vqa_yoloe",-4.95632600745165,TRUE,0,"clothing.n.01","object","clothing","hat",NA,NA,NA
+"354","hat.n.01",3,"hat","lid","vqa",-9.80515781846292,FALSE,0,"clothing.n.01","object","clothing","hat",NA,NA,NA
+"355","head.n.01",2,"head","head","yoloe",-6.381645344347,TRUE,0,"body_part.n.01","body part","head",NA,NA,NA,NA
+"356","heater.n.01",3,"heater","heater","vqa",-9.80515781846292,FALSE,2,"device.n.01","object","device","heater",NA,NA,NA
+"357","helicopter.n.01",3,"helicopter","helicopter","yoloe",-9.94336404758102,TRUE,0,"conveyance.n.03","object","conveyance","helicopter",NA,NA,NA
+"358","helmet.n.01",2,"helmet","helmet","vqa",-7.90803783357704,FALSE,0,"object.n.01","object","helmet",NA,NA,NA,NA
+"359","hen.n.01",3,"hen","hen","yoloe",-8.60249381157538,TRUE,0,"animal.n.01","object","animal","hen",NA,NA,NA
+"360","hired_hand.n.01",3,"hired hand","hand","vqa_yoloe",-5.37013085535171,TRUE,0,"person.n.01","object","person","hired hand",NA,NA,NA
+"361","hockey_stick.n.01",3,"hockey stick","hockey stick","vqa",-10.2106229265711,FALSE,0,"sports_equipment.n.01","object","sports equipment","hockey stick",NA,NA,NA
+"362","hog.n.03",3,"hog","pig","vqa_yoloe",-8.32635306696648,TRUE,0,"animal.n.01","object","animal","hog",NA,NA,NA
+"363","home_appliance.n.01",2,"home appliance","home appliance",NA,NA,NA,8,"object.n.01","object","home appliance",NA,NA,NA,NA
+"364","honeycomb.n.01",2,"honeycomb","honeycomb","vqa",-10.903770107131,FALSE,0,"object.n.01","object","honeycomb",NA,NA,NA,NA
+"365","hookah.n.01",3,"hookah","water pipe","vqa",-9.03196793022944,FALSE,0,"tube.n.01","object","tube","hookah",NA,NA,NA
+"366","hoop.n.02",2,"hoop","ring","vqa",-6.86071883929648,FALSE,1,"object.n.01","object","hoop",NA,NA,NA,NA
+"367","horse.n.01",3,"horse","horse","vqa_yoloe",-7.32827457810588,TRUE,3,"animal.n.01","object","animal","horse",NA,NA,NA
+"368","hosiery.n.01",3,"hosiery","hose","vqa_yoloe",-7.72540941804902,TRUE,2,"clothing.n.01","object","clothing","hosiery",NA,NA,NA
+"369","house.n.01",3,"house","house","vqa",-3.8394385211068,TRUE,1,"building.n.01","object","building","house",NA,NA,NA
+"370","human_body.n.01",2,"human body","build","vqa",-6.17638228841869,TRUE,0,"object.n.01","object","human body",NA,NA,NA,NA
+"371","human_body.n.01",2,"human body","shape",NA,NA,NA,0,"object.n.01","object","human body",NA,NA,NA,NA
+"372","ice.n.01",1,"ice","ice","yoloe",-9.10931141394383,TRUE,0,"entity.n.01","ice",NA,NA,NA,NA,NA
+"373","ice_cream.n.01",1,"ice cream","ice cream","vqa",-10.4983049990229,TRUE,0,"entity.n.01","ice cream",NA,NA,NA,NA,NA
+"374","ice_lolly.n.01",1,"ice lolly","popsicle","yoloe",-6.1926223477303,TRUE,0,"entity.n.01","ice lolly",NA,NA,NA,NA,NA
+"375","iron.n.02",3,"iron","iron","vqa",-10.4983049990229,FALSE,0,"sports_equipment.n.01","object","sports equipment","iron",NA,NA,NA
+"376","ironing_board.n.01",4,"ironing board","ironing board","vqa",-9.98747937525687,FALSE,0,"board.n.03","object","sheet","board","ironing board",NA,NA
+"377","jacket.n.01",4,"jacket","jacket","vqa_yoloe",-6.72430984518549,TRUE,0,"coat.n.01","object","clothing","coat","jacket",NA,NA
+"378","jar.n.01",3,"jar","jar","vqa_yoloe",-6.35559154063204,TRUE,1,"container.n.01","object","container","jar",NA,NA,NA
+"379","jean.n.01",4,"jean","jean","vqa_yoloe",-7.76441034056711,FALSE,0,"trouser.n.01","object","clothing","trouser","jean",NA,NA
+"380","jello.n.01",1,"jello","jello","yoloe",-4.45856711409036,TRUE,0,"entity.n.01","jello",NA,NA,NA,NA,NA
+"381","jigsaw_puzzle.n.01",3,"jigsaw puzzle","jigsaw puzzle","vqa",-9.80515781846292,FALSE,0,"puzzle.n.02","object","puzzle","jigsaw puzzle",NA,NA,NA
+"382","juice.n.01",1,"juice","juice","yoloe",-8.79345846452535,TRUE,0,"entity.n.01","juice",NA,NA,NA,NA,NA
+"383","kangaroo.n.01",3,"kangaroo","kangaroo","vqa",-9.98747937525687,FALSE,0,"animal.n.01","object","animal","kangaroo",NA,NA,NA
+"384","kennel.n.01",2,"kennel","dog house","vqa",-9.29433219469693,FALSE,0,"object.n.01","object","kennel",NA,NA,NA,NA
+"385","kettle.n.01",5,"kettle","kettle","vqa",-6.24505915421491,FALSE,0,"pot.n.01","object","utensil","kitchen utensil","pot","kettle",NA
+"386","key.n.01",3,"key","key","vqa_yoloe",-10.1503817967633,FALSE,0,"device.n.01","object","device","key",NA,NA,NA
+"387","key.n.09",2,"key","paint","vqa",-5.55904636776884,TRUE,0,"object.n.01","object","key",NA,NA,NA,NA
+"388","keyboard.n.01",3,"keyboard","keyboard","vqa",-5.78278675586591,FALSE,0,"device.n.01","object","device","keyboard",NA,NA,NA
+"389","kitchen.n.01",3,"kitchen","kitchen","vqa_yoloe",-4.13073045859005,TRUE,0,"room.n.01","object","room","kitchen",NA,NA,NA
+"390","kitchen_cabinet.n.01",1,"kitchen cabinet","kitchen cabinet","vqa",-4.03631612492242,FALSE,0,"entity.n.01","kitchen cabinet",NA,NA,NA,NA,NA
+"391","kitchen_sink.n.01",4,"kitchen sink","kitchen sink","vqa",-6.80942554490893,FALSE,0,"sink.n.01","object","fixture","sink","kitchen sink",NA,NA
+"392","kitchen_table.n.01",4,"kitchen table","kitchen table","vqa",-10.4983049990229,FALSE,0,"table.n.02","object","furniture","table","kitchen table",NA,NA
+"393","kitchen_utensil.n.01",3,"kitchen utensil","kitchen utensil","vqa",-6.86952946897863,FALSE,7,"utensil.n.01","object","utensil","kitchen utensil",NA,NA,NA
+"394","kitchenware.n.01",4,"kitchenware","kitchenware","vqa",-8.88886708658876,FALSE,0,"kitchen_utensil.n.01","object","utensil","kitchen utensil","kitchenware",NA,NA
+"395","kite.n.03",3,"kite","kite","vqa",-10.2106229265711,FALSE,0,"plaything.n.01","object","plaything","kite",NA,NA,NA
+"396","kitten.n.01",3,"kitten","kitty","yoloe",-7.61416264791186,TRUE,0,"animal.n.01","object","animal","kitten",NA,NA,NA
+"397","knee.n.01",2,"knee","knee","yoloe",-13.8686322797592,TRUE,0,"body_part.n.01","body part","knee",NA,NA,NA,NA
+"398","knife.n.02",4,"knife","knife","vqa_yoloe",-4.56187319545384,TRUE,1,"weapon.n.01","object","device","weapon","knife",NA,NA
+"399","knob.n.01",2,"knob","knob","vqa",-10.903770107131,FALSE,0,"object.n.01","object","knob",NA,NA,NA,NA
+"400","ladder.n.01",3,"ladder","ladder","vqa_yoloe",-5.31135903255201,TRUE,0,"stairway.n.01","object","stairway","ladder",NA,NA,NA
+"401","ladybug.n.01",3,"ladybug","ladybug","vqa",-10.903770107131,FALSE,0,"animal.n.01","object","animal","ladybug",NA,NA,NA
+"402","lamb.n.01",3,"lamb","lamb","yoloe",-12.7700199910911,TRUE,0,"animal.n.01","object","animal","lamb",NA,NA,NA
+"403","lamp.n.01",3,"lamp","lamp","vqa_yoloe",-2.49477347337564,TRUE,4,"device.n.01","object","device","lamp",NA,NA,NA
+"404","lampshade.n.01",2,"lampshade","lampshade","vqa",-9.98747937525687,FALSE,0,"object.n.01","object","lampshade",NA,NA,NA,NA
+"405","land.n.02",2,"land","soil","vqa",-10.2106229265711,FALSE,0,"object.n.01","object","land",NA,NA,NA,NA
+"406","land.n.04",2,"land","ground","vqa",-7.68489428226283,FALSE,1,"object.n.01","object","land",NA,NA,NA,NA
+"407","lantern.n.01",4,"lantern","lantern","vqa",-9.51747574601114,FALSE,0,"lamp.n.01","object","device","lamp","lantern",NA,NA
+"408","laptop.n.01",5,"laptop","laptop","vqa",-5.16076691932155,FALSE,0,"computer.n.01","object","device","machine","computer","laptop",NA
+"409","lawn_mower.n.01",3,"lawn mower","lawn mower","vqa",-8.95785995807572,TRUE,0,"tool.n.01","object","tool","lawn mower",NA,NA,NA
+"410","leaf.n.01",2,"leaf","leaves","vqa",-8.2296214577045,FALSE,0,"object.n.01","object","leaf",NA,NA,NA,NA
+"411","leg.n.03",3,"leg","leg","vqa_yoloe",-9.5046516675388,TRUE,0,"device.n.01","object","device","leg",NA,NA,NA
+"412","lego.n.01",3,"lego","lego","vqa",-10.903770107131,FALSE,0,"plaything.n.01","object","plaything","lego",NA,NA,NA
+"413","lemon.n.03",3,"lemon","lemon","vqa",-7.98599937504675,FALSE,0,"tree.n.01","object","tree","lemon",NA,NA,NA
+"414","letter.n.03",3,"letter","letter","vqa",-8.95785995807572,FALSE,0,"person.n.01","object","person","letter",NA,NA,NA
+"415","lettuce.n.02",2,"lettuce","lettuce","vqa",-10.2106229265711,FALSE,0,"object.n.01","object","lettuce",NA,NA,NA,NA
+"416","light.n.02",3,"light","light","vqa_yoloe",-6.58137175648134,TRUE,0,"device.n.01","object","device","light",NA,NA,NA
+"417","light_bulb.n.01",4,"light bulb","light bulb","vqa",-10.903770107131,FALSE,0,"lamp.n.01","object","device","lamp","light bulb",NA,NA
+"418","lion.n.01",3,"lion","lion","vqa",-8.88886708658876,TRUE,0,"animal.n.01","object","animal","lion",NA,NA,NA
+"419","llama.n.01",3,"llama","llama","vqa",-10.903770107131,FALSE,0,"animal.n.01","object","animal","llama",NA,NA,NA
+"420","log.n.05",3,"log","log","vqa",-10.2106229265711,FALSE,0,"device.n.01","object","device","log",NA,NA,NA
+"421","lollipop.n.02",2,"lollipop","lollipop","vqa_yoloe",-8.3453090899776,TRUE,0,"candy.n.01","candy","lollipop",NA,NA,NA,NA
+"422","machine.n.01",3,"machine","machine","vqa",-9.1990220148926,FALSE,7,"device.n.01","object","device","machine",NA,NA,NA
+"423","magazine.n.04",3,"magazine","magazine","vqa",-9.51747574601114,FALSE,0,"device.n.01","object","device","magazine",NA,NA,NA
+"424","mailbox.n.01",4,"mailbox","mailbox","vqa",-9.65100713863566,FALSE,0,"box.n.01","object","container","box","mailbox",NA,NA
+"425","mallet.n.02",4,"mallet","hammer","vqa_yoloe",-7.88775139538343,TRUE,0,"drumstick.n.02","object","stick","drumstick","mallet",NA,NA
+"426","man.n.01",4,"man","man","vqa",-3.93491972878908,TRUE,3,"adult.n.01","object","person","adult","man",NA,NA
+"427","mannequin.n.01",3,"mannequin","mannequin","vqa",-9.80515781846292,FALSE,0,"person.n.01","object","person","mannequin",NA,NA,NA
+"428","marker.n.03",3,"marker","marker","vqa",-8.41886345734303,FALSE,0,"writing_implement.n.01","object","writing implement","marker",NA,NA,NA
+"429","mask.n.01",3,"mask","mask","vqa",-9.39969271035475,FALSE,0,"clothing.n.01","object","clothing","mask",NA,NA,NA
+"430","mat.n.02",2,"mat","mat","vqa",-5.3430884761155,FALSE,0,"object.n.01","object","mat",NA,NA,NA,NA
+"431","mattress.n.01",3,"mattress","mattress","vqa",-9.80515781846292,FALSE,0,"pad.n.04","object","pad","mattress",NA,NA,NA
+"432","meat.n.01",2,"meat","meat","vqa_yoloe",-8.78648650709338,TRUE,3,"food.n.02","food","meat",NA,NA,NA,NA
+"433","medicine.n.01",1,"medicine","medicine","yoloe",-10.3925335899239,TRUE,0,"entity.n.01","medicine",NA,NA,NA,NA,NA
+"434","melon.n.02",2,"melon","melon","vqa_yoloe",-8.40455815447121,TRUE,2,"object.n.01","object","melon",NA,NA,NA,NA
+"435","meter.n.02",3,"meter","meter","vqa",-9.03196793022944,FALSE,0,"device.n.01","object","device","meter",NA,NA,NA
+"436","microphone.n.01",3,"microphone","microphone","vqa",-10.4983049990229,FALSE,1,"device.n.01","object","device","microphone",NA,NA,NA
+"437","microwave.n.02",3,"microwave","microwave","vqa",-4.44543182378624,FALSE,0,"home_appliance.n.01","object","home appliance","microwave",NA,NA,NA
+"438","microwave.n.02",3,"microwave","microwave oven","vqa",-6.58628199359472,FALSE,0,"home_appliance.n.01","object","home appliance","microwave",NA,NA,NA
+"439","milk.n.01",2,"milk","milk","vqa_yoloe",-7.19873736866119,TRUE,0,"beverage.n.01","beverage","milk",NA,NA,NA,NA
+"440","mirror.n.01",3,"mirror","mirror","vqa",-3.80003694490745,FALSE,0,"device.n.01","object","device","mirror",NA,NA,NA
+"441","mitten.n.01",3,"mitten","mitten","yoloe",-5.2113293803583,FALSE,0,"clothing.n.01","object","clothing","mitten",NA,NA,NA
+"442","mixer.n.04",4,"mixer","mixer","vqa",-9.51747574601114,FALSE,3,"kitchen_utensil.n.01","object","utensil","kitchen utensil","mixer",NA,NA
+"443","money.n.01",1,"money","money","vqa_yoloe",-8.16929540220651,TRUE,0,"entity.n.01","money",NA,NA,NA,NA,NA
+"444","monitor.n.04",3,"monitor","monitor","vqa",-5.85391409988149,FALSE,1,"device.n.01","object","device","monitor",NA,NA,NA
+"445","monkey.n.01",3,"monkey","monkey","vqa",-7.72571627678308,TRUE,1,"animal.n.01","object","animal","monkey",NA,NA,NA
+"446","moon.n.02",2,"moon","moon","vqa_yoloe",-7.83941028776211,TRUE,0,"object.n.01","object","moon",NA,NA,NA,NA
+"447","mother.n.03",5,"mother","mother","vqa",-9.80515781846292,FALSE,0,"woman.n.01","object","person","adult","woman","mother",NA
+"448","motorcycle.n.01",3,"motorcycle","bike","vqa",-10.2106229265711,FALSE,0,"container.n.01","object","container","motorcycle",NA,NA,NA
+"449","motorcycle.n.01",3,"motorcycle","motorcycle","yoloe",-6.39518447557021,TRUE,0,"container.n.01","object","container","motorcycle",NA,NA,NA
+"450","mountain.n.01",2,"mountain","mountain","vqa",-10.4983049990229,FALSE,0,"object.n.01","object","mountain",NA,NA,NA,NA
+"451","mouse.n.01",3,"mouse","mouse","vqa_yoloe",-5.54735333406869,TRUE,0,"animal.n.01","object","animal","mouse",NA,NA,NA
+"452","mouth.n.01",2,"mouth","mouth","yoloe",-8.88046984151499,TRUE,0,"body_part.n.01","body part","mouth",NA,NA,NA,NA
+"453","muffin.n.01",3,"muffin","muffin","yoloe",-7.07143619134411,TRUE,0,"bread.n.01","food","bread","muffin",NA,NA,NA
+"454","mug.n.04",3,"mug","mug","vqa",-5.26541543779728,FALSE,1,"container.n.01","object","container","mug",NA,NA,NA
+"455","mushroom.n.05",3,"mushroom","mushroom","vqa",-9.98747937525687,FALSE,0,"vegetable.n.01","food","vegetable","mushroom",NA,NA,NA
+"456","music_box.n.01",4,"music box","music box","vqa",-9.65100713863566,FALSE,0,"musical_instrument.n.01","object","device","musical instrument","music box",NA,NA
+"457","musical_instrument.n.01",3,"musical instrument","instrument",NA,NA,NA,7,"device.n.01","object","device","musical instrument",NA,NA,NA
+"458","musical_instrument.n.01",3,"musical instrument","musical instrument",NA,NA,NA,7,"device.n.01","object","device","musical instrument",NA,NA,NA
+"459","nail.n.01",2,"nail","nail","yoloe",-5.3855475579764,TRUE,0,"body_part.n.01","body part","nail",NA,NA,NA,NA
+"460","necklace.n.01",3,"necklace","necklace","yoloe",-4.86971277240223,TRUE,1,"decoration.n.01","object","decoration","necklace",NA,NA,NA
+"461","net.n.04",3,"net","net","vqa",-7.17807667989438,FALSE,0,"goal.n.03","object","goal","net",NA,NA,NA
+"462","newspaper.n.01",2,"newspaper","newspaper","vqa",-9.65100713863566,FALSE,0,"object.n.01","object","newspaper",NA,NA,NA,NA
+"463","nose.n.02",3,"nose","nose","yoloe",-7.76235205822262,TRUE,0,"surface.n.01","object","surface","nose",NA,NA,NA
+"464","notebook.n.01",3,"notebook","notebook","vqa",-8.95785995807572,FALSE,0,"book.n.02","object","book","notebook",NA,NA,NA
+"465","nut.n.01",3,"nut","nut","yoloe",-8.28513597097748,FALSE,0,"fruit.n.01","object","fruit","nut",NA,NA,NA
+"466","object.n.01",1,"object","object","vqa",-4.42372554520438,FALSE,141,"entity.n.01","object",NA,NA,NA,NA,NA
+"467","onion.n.02",2,"onion","onion","vqa",-7.90803783357704,FALSE,0,"object.n.01","object","onion",NA,NA,NA,NA
+"468","opal_glass.n.01",1,"opal glass","milk glass","vqa",-10.903770107131,FALSE,0,"entity.n.01","opal glass",NA,NA,NA,NA,NA
+"469","orange.n.03",3,"orange","orange","vqa_yoloe",-5.84984069334285,TRUE,0,"tree.n.01","object","tree","orange",NA,NA,NA
+"470","orange.n.03",3,"orange","orange tree","vqa",-9.65100713863566,FALSE,0,"tree.n.01","object","tree","orange",NA,NA,NA
+"471","orange_peel.n.02",1,"orange peel","orange peel","vqa",-9.29433219469693,FALSE,0,"entity.n.01","orange peel",NA,NA,NA,NA,NA
+"472","oven.n.01",3,"oven","oven","vqa_yoloe",-3.78098664231929,TRUE,0,"home_appliance.n.01","object","home appliance","oven",NA,NA,NA
+"473","owl.n.01",3,"owl","owl","vqa_yoloe",-8.88923470583351,TRUE,0,"animal.n.01","object","animal","owl",NA,NA,NA
+"474","packet.n.03",3,"packet","packet","vqa",-9.80515781846292,FALSE,1,"container.n.01","object","container","packet",NA,NA,NA
+"475","pad.n.04",2,"pad","pad","vqa",-9.98747937525687,FALSE,2,"object.n.01","object","pad",NA,NA,NA,NA
+"476","paint_roller.n.01",1,"paint roller","paint roller","vqa",-9.65100713863566,FALSE,0,"entity.n.01","paint roller",NA,NA,NA,NA,NA
+"477","paintbrush.n.01",3,"paintbrush","paintbrush","vqa",-9.98747937525687,FALSE,0,"brush.n.02","object","brush","paintbrush",NA,NA,NA
+"478","painting.n.01",2,"painting","painting","vqa",-8.88886708658876,FALSE,0,"object.n.01","object","painting",NA,NA,NA,NA
+"479","pajama.n.01",4,"pajama","pajama","yoloe",-5.06185881860809,FALSE,0,"trouser.n.01","object","clothing","trouser","pajama",NA,NA
+"480","palm.n.03",3,"palm","palm tree","vqa",-10.4983049990229,FALSE,0,"tree.n.01","object","tree","palm",NA,NA,NA
+"481","pan.n.01",4,"pan","pan","vqa",-6.10797956153429,FALSE,2,"kitchen_utensil.n.01","object","utensil","kitchen utensil","pan",NA,NA
+"482","pancake.n.01",3,"pancake","pancake","vqa_yoloe",-8.20340378981254,TRUE,0,"cake.n.03","food","cake","pancake",NA,NA,NA
+"483","pane.n.01",3,"pane","window glass","vqa",-9.80515781846292,FALSE,0,"sheet.n.06","object","sheet","pane",NA,NA,NA
+"484","paper.n.01",1,"paper","paper","vqa_yoloe",-4.6587586284224,TRUE,2,"entity.n.01","paper",NA,NA,NA,NA,NA
+"485","paper_cutter.n.01",3,"paper cutter","paper cutter","vqa",-7.2928521944868,FALSE,0,"tool.n.01","object","tool","paper cutter",NA,NA,NA
+"486","paper_plate.n.01",3,"paper plate","paper plate","vqa",-10.2106229265711,FALSE,0,"tableware.n.01","object","tableware","paper plate",NA,NA,NA
+"487","paper_towel.n.01",4,"paper towel","paper towel","vqa",-6.25937920798966,FALSE,0,"towel.n.01","object","fabric","towel","paper towel",NA,NA
+"488","parrot.n.01",3,"parrot","parrot","vqa",-10.4983049990229,FALSE,0,"animal.n.01","object","animal","parrot",NA,NA,NA
+"489","pasta.n.01",2,"pasta","pasta","yoloe",-9.91099876307898,FALSE,0,"dish.n.02","dish","pasta",NA,NA,NA,NA
+"490","pastry.n.01",2,"pastry","pastry","yoloe",-10.138930831125,FALSE,0,"dough.n.01","dough","pastry",NA,NA,NA,NA
+"491","path.n.03",2,"path","path","vqa",-10.903770107131,FALSE,0,"object.n.01","object","path",NA,NA,NA,NA
+"492","path.n.04",2,"path","track","vqa",-10.2106229265711,FALSE,0,"object.n.01","object","path",NA,NA,NA,NA
+"493","patio.n.01",2,"patio","patio","vqa",-8.65247830852453,FALSE,0,"object.n.01","object","patio",NA,NA,NA,NA
+"494","pea.n.01",3,"pea","pea","vqa_yoloe",-8.89291796374189,FALSE,0,"vegetable.n.01","food","vegetable","pea",NA,NA,NA
+"495","pear.n.02",3,"pear","pear","vqa",-10.903770107131,FALSE,0,"tree.n.01","object","tree","pear",NA,NA,NA
+"496","pencil.n.01",3,"pencil","pencil","vqa_yoloe",-6.06189629718404,TRUE,0,"writing_implement.n.01","object","writing implement","pencil",NA,NA,NA
+"497","pencil_box.n.01",4,"pencil box","pencil box","vqa",-10.2106229265711,FALSE,0,"box.n.01","object","container","box","pencil box",NA,NA
+"498","pencil_box.n.01",4,"pencil box","pencil case","vqa",-8.19571990602882,FALSE,0,"box.n.01","object","container","box","pencil box",NA,NA
+"499","penguin.n.01",3,"penguin","penguin","vqa_yoloe",-8.73181817507464,TRUE,0,"animal.n.01","object","animal","penguin",NA,NA,NA
+"500","penis.n.01",2,"penis","penis","yoloe",-6.92326013720574,FALSE,0,"body_part.n.01","body part","penis",NA,NA,NA,NA
+"501","penny.n.02",2,"penny","penny","yoloe",-9.19892357263352,TRUE,0,"coin.n.01","coin","penny",NA,NA,NA,NA
+"502","people.n.01",1,"people","people","vqa",-9.39969271035475,TRUE,0,"entity.n.01","people",NA,NA,NA,NA,NA
+"503","pepper_mill.n.01",4,"pepper mill","pepper grinder","vqa",-10.903770107131,FALSE,0,"machine.n.01","object","device","machine","pepper mill",NA,NA
+"504","pepper_shaker.n.01",3,"pepper shaker","pepper shaker","vqa",-10.903770107131,FALSE,0,"container.n.01","object","container","pepper shaker",NA,NA,NA
+"505","pepperoni.n.01",3,"pepperoni","pepperoni","vqa",-9.80515781846292,FALSE,0,"meat.n.01","food","meat","pepperoni",NA,NA,NA
+"506","person.n.01",2,"person","person","vqa_yoloe",-0.989275772817962,TRUE,17,"object.n.01","object","person",NA,NA,NA,NA
+"507","photograph.n.01",2,"photograph","photo","vqa",-8.07055676307481,FALSE,1,"object.n.01","object","photograph",NA,NA,NA,NA
+"508","photograph.n.01",2,"photograph","picture","vqa_yoloe",-3.1211424145917,TRUE,1,"object.n.01","object","photograph",NA,NA,NA,NA
+"509","piano.n.01",4,"piano","piano","vqa",-5.59303022058443,FALSE,0,"musical_instrument.n.01","object","device","musical instrument","piano",NA,NA
+"510","pickle.n.01",1,"pickle","pickle","yoloe",-6.78356798580664,TRUE,0,"entity.n.01","pickle",NA,NA,NA,NA,NA
+"511","picture_frame.n.01",2,"picture frame","picture frame","vqa",-5.9837891813029,FALSE,0,"object.n.01","object","picture frame",NA,NA,NA,NA
+"512","piggy_bank.n.01",3,"piggy bank","piggy bank","vqa",-8.55239484996755,FALSE,0,"container.n.01","object","container","piggy bank",NA,NA,NA
+"513","pillar.n.03",3,"pillar","pillar","vqa",-10.4983049990229,FALSE,0,"person.n.01","object","person","pillar",NA,NA,NA
+"514","pillow.n.01",2,"pillow","pillow","vqa_yoloe",-2.24720836773235,TRUE,0,"object.n.01","object","pillow",NA,NA,NA,NA
+"515","pineapple.n.01",2,"pineapple","pineapple","vqa",-8.76370394363476,FALSE,0,"object.n.01","object","pineapple",NA,NA,NA,NA
+"516","pipe.n.04",5,"pipe","pipe","vqa",-7.46978290264588,FALSE,0,"wind_instrument.n.01","object","device","musical instrument","wind instrument","pipe",NA
+"517","pizza.n.01",2,"pizza","pizza","vqa_yoloe",-6.99393914634836,TRUE,0,"dish.n.02","dish","pizza",NA,NA,NA,NA
+"518","plant.n.01",2,"plant","plant","vqa_yoloe",-3.25504579568668,TRUE,0,"object.n.01","object","plant",NA,NA,NA,NA
+"519","plastic.n.01",1,"plastic","plastic","vqa",-10.2106229265711,FALSE,0,"entity.n.01","plastic",NA,NA,NA,NA,NA
+"520","plastic_bag.n.01",4,"plastic bag","plastic bag","vqa",-9.65100713863566,FALSE,0,"bag.n.01","object","container","bag","plastic bag",NA,NA
+"521","plastic_wrap.n.01",2,"plastic wrap","plastic wrap","vqa",-9.98747937525687,FALSE,0,"object.n.01","object","plastic wrap",NA,NA,NA,NA
+"522","plate.n.02",3,"plate","plate","vqa_yoloe",-2.97563579293455,TRUE,1,"sheet.n.06","object","sheet","plate",NA,NA,NA
+"523","playground.n.02",3,"playground","playground","vqa",-7.93335564156133,TRUE,0,"yard.n.02","object","yard","playground",NA,NA,NA
+"524","playpen.n.01",3,"playpen","pen","vqa_yoloe",-5.26142503099707,TRUE,0,"enclosure.n.01","object","enclosure","playpen",NA,NA,NA
+"525","playpen.n.01",3,"playpen","playpen","vqa",-10.903770107131,FALSE,0,"enclosure.n.01","object","enclosure","playpen",NA,NA,NA
+"526","plaything.n.01",2,"plaything","toy","vqa_yoloe",-1.57109948123607,TRUE,8,"object.n.01","object","plaything",NA,NA,NA,NA
+"527","plaything.n.01",2,"plaything","plaything",NA,NA,NA,8,"object.n.01","object","plaything",NA,NA,NA,NA
+"528","pole.n.02",3,"pole","pole","vqa",-7.37740958251487,FALSE,0,"person.n.01","object","person","pole",NA,NA,NA
+"529","pony.n.01",4,"pony","pony","yoloe",-7.26333435881098,TRUE,0,"horse.n.01","object","animal","horse","pony",NA,NA
+"530","pool.n.01",2,"pool","pool","vqa_yoloe",-6.71218167881629,TRUE,0,"object.n.01","object","pool",NA,NA,NA,NA
+"531","pool_table.n.01",4,"pool table","pool table","vqa",-9.98747937525687,FALSE,0,"table.n.02","object","furniture","table","pool table",NA,NA
+"532","pop.n.02",2,"pop","soda","yoloe",-8.77080044063277,FALSE,0,"beverage.n.01","beverage","pop",NA,NA,NA,NA
+"533","popcorn.n.01",5,"popcorn","popcorn","vqa_yoloe",-8.33301933304065,TRUE,0,"corn.n.01","object","grass","cereal","corn","popcorn",NA
+"534","porch.n.01",2,"porch","porch","vqa_yoloe",-12.5889337474992,TRUE,0,"object.n.01","object","porch",NA,NA,NA,NA
+"535","post_horse.n.01",4,"post horse","poster","vqa",-5.76503481040746,FALSE,0,"horse.n.01","object","animal","horse","post horse",NA,NA
+"536","pot.n.01",4,"pot","pot","vqa",-5.59303022058443,FALSE,2,"kitchen_utensil.n.01","object","utensil","kitchen utensil","pot",NA,NA
+"537","pot_plant.n.01",2,"pot plant","pot plant","vqa",-7.32025116867492,FALSE,0,"object.n.01","object","pot plant",NA,NA,NA,NA
+"538","potato.n.02",2,"potato","potato","vqa_yoloe",-8.07272916575743,TRUE,0,"object.n.01","object","potato",NA,NA,NA,NA
+"539","power_line.n.01",4,"power line","power line","vqa",-9.98747937525687,FALSE,0,"cable.n.02","object","device","cable","power line",NA,NA
+"540","power_shovel.n.01",4,"power shovel","shovel","vqa_yoloe",-5.88621369172613,TRUE,0,"machine.n.01","object","device","machine","power shovel",NA,NA
+"541","present.n.02",2,"present","present","vqa_yoloe",-5.46880872285063,TRUE,1,"gift.n.01","gift","present",NA,NA,NA,NA
+"542","pretzel.n.01",4,"pretzel","pretzel","yoloe",-6.86617306530774,TRUE,0,"cracker.n.01","food","bread","cracker","pretzel",NA,NA
+"543","printer.n.02",4,"printer","printer","vqa",-7.6079332411267,FALSE,0,"machine.n.01","object","device","machine","printer",NA,NA
+"544","pudding.n.01",2,"pudding","pudding","yoloe",-6.00947655845613,TRUE,0,"dish.n.02","dish","pudding",NA,NA,NA,NA
+"545","pug.n.01",4,"pug","pug","vqa",-10.903770107131,FALSE,0,"dog.n.01","object","animal","dog","pug",NA,NA
+"546","pumpkin.n.01",2,"pumpkin","pumpkin","vqa_yoloe",-6.09814487938504,TRUE,0,"object.n.01","object","pumpkin",NA,NA,NA,NA
+"547","puppet.n.03",3,"puppet","puppet","vqa",-10.4983049990229,FALSE,0,"plaything.n.01","object","plaything","puppet",NA,NA,NA
+"548","puppy.n.01",4,"puppy","puppy","yoloe",-13.3578066559932,TRUE,0,"dog.n.01","object","animal","dog","puppy",NA,NA
+"549","puzzle.n.02",2,"puzzle","puzzle","vqa_yoloe",-7.40005599045971,TRUE,1,"object.n.01","object","puzzle",NA,NA,NA,NA
+"550","rabbit.n.01",3,"rabbit","rabbit","vqa",-8.01339834923486,FALSE,1,"animal.n.01","object","animal","rabbit",NA,NA,NA
+"551","rack.n.01",2,"rack","rack","vqa",-10.903770107131,FALSE,4,"object.n.01","object","rack",NA,NA,NA,NA
+"552","racket.n.04",2,"racket","racket","vqa",-7.5895841024585,FALSE,1,"object.n.01","object","racket",NA,NA,NA,NA
+"553","radiator.n.02",4,"radiator","radiator","vqa",-6.06352779896345,FALSE,0,"heater.n.01","object","device","heater","radiator",NA,NA
+"554","radio_receiver.n.01",3,"radio receiver","radio","yoloe",-5.54940234112686,TRUE,0,"electronic_equipment.n.01","object","electronic equipment","radio receiver",NA,NA,NA
+"555","railing.n.01",2,"railing","rail","vqa",-8.33882074966949,FALSE,0,"object.n.01","object","railing",NA,NA,NA,NA
+"556","railing.n.01",2,"railing","railing","vqa",-8.33882074966949,FALSE,0,"object.n.01","object","railing",NA,NA,NA,NA
+"557","rain.n.01",1,"rain","rain","yoloe",-10.636511228141,TRUE,0,"entity.n.01","rain",NA,NA,NA,NA,NA
+"558","rainbow.n.01",1,"rainbow","rainbow","vqa",-8.37804146282277,FALSE,0,"entity.n.01","rainbow",NA,NA,NA,NA,NA
+"559","raisin.n.01",2,"raisin","raisin","yoloe",-7.97056308025076,TRUE,0,"food.n.02","food","raisin",NA,NA,NA,NA
+"560","ramp.n.01",3,"ramp","ramp","vqa",-10.4983049990229,FALSE,0,"device.n.01","object","device","ramp",NA,NA,NA
+"561","range_pole.n.01",3,"range pole","flagpole","vqa",-10.903770107131,FALSE,0,"device.n.01","object","device","range pole",NA,NA,NA
+"562","reamer.n.01",4,"reamer","juicer","vqa",-10.4983049990229,FALSE,0,"kitchen_utensil.n.01","object","utensil","kitchen utensil","reamer",NA,NA
+"563","record_player.n.01",4,"record player","record player","vqa",-10.2106229265711,FALSE,0,"machine.n.01","object","device","machine","record player",NA,NA
+"564","recycling_bin.n.01",4,"recycling bin","recycling bin","vqa",-10.4983049990229,FALSE,0,"bin.n.01","object","container","bin","recycling bin",NA,NA
+"565","refrigerator.n.01",3,"refrigerator","refrigerator","vqa_yoloe",-3.09396809490991,TRUE,1,"home_appliance.n.01","object","home appliance","refrigerator",NA,NA,NA
+"566","remote_control.n.01",3,"remote control","remote","vqa",-7.46978290264588,FALSE,0,"device.n.01","object","device","remote control",NA,NA,NA
+"567","remote_control.n.01",3,"remote control","remote control","vqa",-6.60648470091224,FALSE,0,"device.n.01","object","device","remote control",NA,NA,NA
+"568","ribbon.n.01",2,"ribbon","ribbon","vqa",-9.65100713863566,FALSE,0,"object.n.01","object","ribbon",NA,NA,NA,NA
+"569","road.n.01",2,"road","road","vqa",-7.48604342351766,FALSE,1,"object.n.01","object","road",NA,NA,NA,NA
+"570","rock.n.01",2,"rock","rock","vqa_yoloe",-8.33151353458287,TRUE,0,"object.n.01","object","rock",NA,NA,NA,NA
+"571","rock.n.01",2,"rock","stone","vqa_yoloe",-11.0104335369241,TRUE,0,"object.n.01","object","rock",NA,NA,NA,NA
+"572","roller.n.03",4,"roller","roller","vqa",-10.2106229265711,FALSE,0,"wheel.n.01","object","device","wheel","roller",NA,NA
+"573","room.n.01",2,"room","room","vqa_yoloe",-6.38085813724171,TRUE,4,"object.n.01","object","room",NA,NA,NA,NA
+"574","rope.n.01",2,"rope","rope","vqa",-7.5895841024585,FALSE,0,"object.n.01","object","rope",NA,NA,NA,NA
+"575","round_table.n.01",1,"round table","round table","vqa",-10.903770107131,FALSE,0,"entity.n.01","round table",NA,NA,NA,NA,NA
+"576","rubbish.n.01",1,"rubbish","trash","vqa_yoloe",-7.94497063855861,TRUE,0,"entity.n.01","rubbish",NA,NA,NA,NA,NA
+"577","rug.n.01",2,"rug","carpet","vqa",-5.49212405527599,FALSE,0,"object.n.01","object","rug",NA,NA,NA,NA
+"578","rug.n.01",2,"rug","rug","vqa",-6.83474335289322,FALSE,0,"object.n.01","object","rug",NA,NA,NA,NA
+"579","rule.n.12",3,"rule","ruler","vqa",-10.2106229265711,FALSE,0,"device.n.01","object","device","rule",NA,NA,NA
+"580","sack.n.01",4,"sack","paper bag","vqa",-7.27942917415466,FALSE,0,"bag.n.01","object","container","bag","sack",NA,NA
+"581","salt.n.02",1,"salt","salt","vqa",-9.98747937525687,TRUE,0,"entity.n.01","salt",NA,NA,NA,NA,NA
+"582","saltshaker.n.01",3,"saltshaker","salt shaker","vqa",-9.80515781846292,FALSE,0,"container.n.01","object","container","saltshaker",NA,NA,NA
+"583","sand.n.01",1,"sand","sand","vqa",-7.04304039609043,FALSE,0,"entity.n.01","sand",NA,NA,NA,NA,NA
+"584","sandal.n.01",4,"sandal","sandal","vqa",-10.4983049990229,FALSE,0,"shoe.n.01","object","footwear","shoe","sandal",NA,NA
+"585","sandbox.n.01",3,"sandbox","sandbox","yoloe",-3.8584750688666,TRUE,0,"container.n.01","object","container","sandbox",NA,NA,NA
+"586","sandwich.n.01",2,"sandwich","sandwich","vqa_yoloe",-9.15860191177504,TRUE,1,"dish.n.02","dish","sandwich",NA,NA,NA,NA
+"587","sauce.n.01",1,"sauce","sauce","vqa_yoloe",-9.30174462386508,TRUE,1,"entity.n.01","sauce",NA,NA,NA,NA,NA
+"588","saucepan.n.01",5,"saucepan","saucepan","vqa",-9.80515781846292,FALSE,0,"pan.n.01","object","utensil","kitchen utensil","pan","saucepan",NA
+"589","scale.n.07",3,"scale","scale","vqa",-10.4983049990229,FALSE,0,"device.n.01","object","device","scale",NA,NA,NA
+"590","scarf.n.01",3,"scarf","scarf","yoloe",-7.47003734522398,TRUE,0,"clothing.n.01","object","clothing","scarf",NA,NA,NA
+"591","scissors.n.01",3,"scissors","scissors","vqa_yoloe",-5.9191893193027,TRUE,0,"tool.n.01","object","tool","scissors",NA,NA,NA
+"592","scoter.n.01",4,"scoter","scooter","vqa",-6.52801308547074,FALSE,0,"duck.n.01","object","animal","duck","scoter",NA,NA
+"593","screwdriver.n.01",3,"screwdriver","screwdriver","vqa",-10.903770107131,FALSE,0,"tool.n.01","object","tool","screwdriver",NA,NA,NA
+"594","seashell.n.01",2,"seashell","seashell","vqa",-10.2106229265711,FALSE,0,"object.n.01","object","seashell",NA,NA,NA,NA
+"595","seat.n.03",3,"seat","seat","vqa",-10.903770107131,FALSE,5,"furniture.n.01","object","furniture","seat",NA,NA,NA
+"596","seat_belt.n.01",3,"seat belt","seat belt","vqa",-8.33882074966949,FALSE,0,"device.n.01","object","device","seat belt",NA,NA,NA
+"597","seat_belt.n.01",3,"seat belt","seatbelt","vqa",-9.11201063790297,FALSE,0,"device.n.01","object","device","seat belt",NA,NA,NA
+"598","shark.n.01",4,"shark","shark","vqa",-10.903770107131,FALSE,0,"fish.n.01","object","animal","fish","shark",NA,NA
+"599","shed.n.01",3,"shed","shed","vqa",-8.60118501413698,FALSE,0,"building.n.01","object","building","shed",NA,NA,NA
+"600","sheep.n.01",3,"sheep","sheep","vqa_yoloe",-8.40598120889796,TRUE,0,"animal.n.01","object","animal","sheep",NA,NA,NA
+"601","sheet.n.03",2,"sheet","bed sheet","vqa",-7.62662537413885,FALSE,0,"object.n.01","object","sheet",NA,NA,NA,NA
+"602","sheet.n.06",2,"sheet","sheet","vqa",-9.1990220148926,FALSE,5,"object.n.01","object","sheet",NA,NA,NA,NA
+"603","shelf.n.01",3,"shelf","shelf","vqa",-3.78453908170236,FALSE,1,"device.n.01","object","device","shelf",NA,NA,NA
+"604","shirt.n.01",3,"shirt","shirt","vqa_yoloe",-6.0336345269241,TRUE,0,"clothing.n.01","object","clothing","shirt",NA,NA,NA
+"605","shock_absorber.n.01",3,"shock absorber","cushion","vqa",-7.40726254566455,FALSE,0,"device.n.01","object","device","shock absorber",NA,NA,NA
+"606","shoe.n.01",3,"shoe","shoe","vqa_yoloe",-4.56187398167759,TRUE,4,"footwear.n.02","object","footwear","shoe",NA,NA,NA
+"607","shopping_cart.n.01",4,"shopping cart","shopping cart","vqa",-8.60118501413698,FALSE,0,"handcart.n.01","object","container","handcart","shopping cart",NA,NA
+"608","short.n.01",2,"short","short","vqa_yoloe",-7.93006559012615,FALSE,0,"object.n.01","object","short",NA,NA,NA,NA
+"609","shoulder.n.02",3,"shoulder","shoulder","yoloe",-13.1754850991992,TRUE,0,"meat.n.01","food","meat","shoulder",NA,NA,NA
+"610","shower.n.01",3,"shower","shower","vqa_yoloe",-8.30727718398429,TRUE,0,"fixture.n.01","object","fixture","shower",NA,NA,NA
+"611","shower_curtain.n.01",4,"shower curtain","shower curtain","vqa",-8.65247830852453,FALSE,0,"curtain.n.01","object","blind","curtain","shower curtain",NA,NA
+"612","shrub.n.01",2,"shrub","bush","vqa",-6.84332709658461,FALSE,4,"object.n.01","object","shrub",NA,NA,NA,NA
+"613","sidewalk.n.01",2,"sidewalk","pavement","vqa",-10.903770107131,FALSE,0,"object.n.01","object","sidewalk",NA,NA,NA,NA
+"614","sidewalk.n.01",2,"sidewalk","sidewalk","vqa_yoloe",-6.02305196902318,TRUE,0,"object.n.01","object","sidewalk",NA,NA,NA,NA
+"615","signboard.n.01",2,"signboard","sign","vqa",-8.60118501413698,FALSE,0,"object.n.01","object","signboard",NA,NA,NA,NA
+"616","signboard.n.01",2,"signboard","signboard","vqa",-9.98747937525687,FALSE,0,"object.n.01","object","signboard",NA,NA,NA,NA
+"617","silverware.n.01",3,"silverware","silverware","vqa",-9.65100713863566,FALSE,0,"tableware.n.01","object","tableware","silverware",NA,NA,NA
+"618","sink.n.01",3,"sink","sink","vqa_yoloe",-3.72666644950837,TRUE,1,"fixture.n.01","object","fixture","sink",NA,NA,NA
+"619","skateboard.n.01",3,"skateboard","skateboard","vqa",-7.90803783357704,FALSE,0,"container.n.01","object","container","skateboard",NA,NA,NA
+"620","skeleton.n.04",2,"skeleton","skeleton","vqa",-7.95933112796459,FALSE,0,"object.n.01","object","skeleton",NA,NA,NA,NA
+"621","sky.n.01",1,"sky","sky","vqa_yoloe",-5.59066435811935,TRUE,0,"entity.n.01","sky",NA,NA,NA,NA,NA
+"622","sled.n.01",3,"sled","sled","yoloe",-4.65689288686929,TRUE,0,"conveyance.n.03","object","conveyance","sled",NA,NA,NA
+"623","slide.n.01",3,"slide","slide","vqa_yoloe",-5.85712879090627,TRUE,0,"sheet.n.06","object","sheet","slide",NA,NA,NA
+"624","slide.n.04",3,"slide","playground slide","vqa",-10.903770107131,FALSE,0,"plaything.n.01","object","plaything","slide",NA,NA,NA
+"625","slide_fastener.n.01",3,"slide fastener","zipper","yoloe",-10.1309626614758,TRUE,0,"device.n.01","object","device","slide fastener",NA,NA,NA
+"626","slipper.n.01",3,"slipper","slipper","vqa_yoloe",-5.01847192978586,TRUE,0,"footwear.n.02","object","footwear","slipper",NA,NA,NA
+"627","smasher.n.02",5,"smasher","peach","vqa",-10.2106229265711,FALSE,0,"woman.n.01","object","person","adult","woman","smasher",NA
+"628","snake.n.01",3,"snake","snake","vqa",-9.80515781846292,FALSE,0,"animal.n.01","object","animal","snake",NA,NA,NA
+"629","snow.n.02",2,"snow","snow","vqa_yoloe",-7.95389850940721,TRUE,0,"object.n.01","object","snow",NA,NA,NA,NA
+"630","snow_bunting.n.01",3,"snow bunting","snowflake","vqa",-10.903770107131,FALSE,0,"animal.n.01","object","animal","snow bunting",NA,NA,NA
+"631","snowman.n.01",2,"snowman","snowman","vqa_yoloe",-6.93932449814768,TRUE,0,"object.n.01","object","snowman",NA,NA,NA,NA
+"632","snowsuit.n.01",3,"snowsuit","snowsuit","yoloe",-9.64423458928888,TRUE,0,"clothing.n.01","object","clothing","snowsuit",NA,NA,NA
+"633","soap.n.01",1,"soap","soap","vqa_yoloe",-7.16120179232654,TRUE,0,"entity.n.01","soap",NA,NA,NA,NA,NA
+"634","soap_dish.n.01",3,"soap dish","soap dish","vqa",-10.903770107131,FALSE,0,"fixture.n.01","object","fixture","soap dish",NA,NA,NA
+"635","soap_dispenser.n.01",3,"soap dispenser","soap dispenser","vqa",-6.66966360253377,FALSE,0,"container.n.01","object","container","soap dispenser",NA,NA,NA
+"636","soccer_ball.n.01",3,"soccer ball","soccer ball","vqa",-7.93335564156133,FALSE,0,"ball.n.01","object","ball","soccer ball",NA,NA,NA
+"637","sock.n.01",4,"sock","sock","vqa_yoloe",-6.33709669361799,TRUE,0,"hosiery.n.01","object","clothing","hosiery","sock",NA,NA
+"638","sofa.n.01",4,"sofa","couch","vqa_yoloe",-2.06594296743277,TRUE,1,"seat.n.03","object","furniture","seat","sofa",NA,NA
+"639","sofa.n.01",4,"sofa","sofa","vqa",-3.76371333904992,TRUE,1,"seat.n.03","object","furniture","seat","sofa",NA,NA
+"640","soup.n.01",2,"soup","soup","vqa_yoloe",-7.96355260426164,TRUE,0,"dish.n.02","dish","soup",NA,NA,NA,NA
+"641","soup_bowl.n.01",4,"soup bowl","soup bowl","vqa",-8.82432856545119,FALSE,0,"bowl.n.03","object","container","bowl","soup bowl",NA,NA
+"642","soupspoon.n.01",4,"soupspoon","soup spoon","vqa",-10.2106229265711,FALSE,0,"spoon.n.01","object","tableware","spoon","soupspoon",NA,NA
+"643","spatula.n.01",4,"spatula","spatula","vqa",-8.07055676307481,FALSE,0,"kitchen_utensil.n.01","object","utensil","kitchen utensil","spatula",NA,NA
+"644","speaker.n.01",3,"speaker","speaker","vqa",-6.79289624295772,FALSE,0,"person.n.01","object","person","speaker",NA,NA,NA
+"645","spider.n.03",5,"spider","spider","vqa",-10.903770107131,FALSE,0,"pan.n.01","object","utensil","kitchen utensil","pan","spider",NA
+"646","spit.n.01",3,"spit","tongue","yoloe",-9.29049076615901,TRUE,0,"land.n.04","object","land","spit",NA,NA,NA
+"647","sponge.n.01",1,"sponge","sponge","vqa",-6.80942554490893,FALSE,0,"entity.n.01","sponge",NA,NA,NA,NA,NA
+"648","spoon.n.01",3,"spoon","spoon","vqa_yoloe",-3.61159001624846,TRUE,1,"tableware.n.01","object","tableware","spoon",NA,NA,NA
+"649","sport.n.03",3,"sport","sport",NA,NA,NA,0,"person.n.01","object","person","sport",NA,NA,NA
+"650","sports_equipment.n.01",2,"sports equipment","sports equipment",NA,NA,NA,6,"object.n.01","object","sports equipment",NA,NA,NA,NA
+"651","spray.n.03",3,"spray","spray","vqa",-10.903770107131,FALSE,0,"decoration.n.01","object","decoration","spray",NA,NA,NA
+"652","sprinkler.n.01",3,"sprinkler","sprinkler","yoloe",-7.00031107002245,TRUE,0,"device.n.01","object","device","sprinkler",NA,NA,NA
+"653","squirrel.n.01",3,"squirrel","squirrel","yoloe",-5.97967281806025,TRUE,0,"animal.n.01","object","animal","squirrel",NA,NA,NA
+"654","stairway.n.01",2,"stairway","staircase","vqa",-7.36281078309371,FALSE,1,"object.n.01","object","stairway",NA,NA,NA,NA
+"655","star.n.01",2,"star","star","vqa_yoloe",-7.55570555709205,TRUE,0,"object.n.01","object","star",NA,NA,NA,NA
+"656","starfish.n.01",3,"starfish","starfish","vqa",-9.51747574601114,FALSE,0,"animal.n.01","object","animal","starfish",NA,NA,NA
+"657","steering_wheel.n.01",4,"steering wheel","steering wheel","vqa",-9.39969271035475,FALSE,0,"control.n.09","object","device","control","steering wheel",NA,NA
+"658","step.n.04",3,"step","stair","vqa_yoloe",-4.87461952700262,FALSE,0,"device.n.01","object","device","step",NA,NA,NA
+"659","stick.n.01",2,"stick","stick","vqa_yoloe",-8.42037918271795,TRUE,2,"object.n.01","object","stick",NA,NA,NA,NA
+"660","stocking.n.01",4,"stocking","stocking","vqa",-8.10040972622449,FALSE,1,"hosiery.n.01","object","clothing","hosiery","stocking",NA,NA
+"661","stomach.n.01",2,"stomach","tummy","yoloe",-8.24823141404203,TRUE,0,"body_part.n.01","body part","stomach",NA,NA,NA,NA
+"662","stone_wall.n.01",3,"stone wall","stone wall","vqa",-10.4983049990229,FALSE,0,"fence.n.01","object","fence","stone wall",NA,NA,NA
+"663","stool.n.01",4,"stool","stool","vqa",-5.31652144873078,FALSE,1,"seat.n.03","object","furniture","seat","stool",NA,NA
+"664","stove.n.02",4,"stove","stove","vqa_yoloe",-4.59380182652558,TRUE,0,"heater.n.01","object","device","heater","stove",NA,NA
+"665","strap.n.04",3,"strap","strap","vqa",-10.4983049990229,FALSE,0,"device.n.01","object","device","strap",NA,NA,NA
+"666","straw.n.04",3,"straw","straw","vqa",-8.95785995807572,FALSE,0,"tube.n.01","object","tube","straw",NA,NA,NA
+"667","strawberry.n.02",2,"strawberry","strawberry","vqa_yoloe",-7.63345396381177,TRUE,0,"object.n.01","object","strawberry",NA,NA,NA,NA
+"668","street.n.01",3,"street","street","vqa_yoloe",-7.71604346924614,TRUE,0,"road.n.01","object","road","street",NA,NA,NA
+"669","streetcar.n.01",3,"streetcar","trolley","vqa",-10.2106229265711,FALSE,0,"container.n.01","object","container","streetcar",NA,NA,NA
+"670","sunglass.n.01",3,"sunglass","sunglass","vqa",-8.88886708658876,FALSE,0,"device.n.01","object","device","sunglass",NA,NA,NA
+"671","surface.n.01",2,"surface","surface","vqa",-10.4983049990229,FALSE,7,"object.n.01","object","surface",NA,NA,NA,NA
+"672","sushi.n.01",2,"sushi","sushi","vqa",-10.903770107131,FALSE,0,"dish.n.02","dish","sushi",NA,NA,NA,NA
+"673","swab.n.02",2,"swab","mop","vqa_yoloe",-7.6715234870918,TRUE,0,"object.n.01","object","swab",NA,NA,NA,NA
+"674","swan.n.01",3,"swan","swan","vqa",-9.80515781846292,FALSE,0,"animal.n.01","object","animal","swan",NA,NA,NA
+"675","sweater.n.01",3,"sweater","sweater","vqa_yoloe",-7.70800055606491,TRUE,1,"clothing.n.01","object","clothing","sweater",NA,NA,NA
+"676","swing.n.02",3,"swing","swing","vqa_yoloe",-8.0819535185336,TRUE,0,"device.n.01","object","device","swing",NA,NA,NA
+"677","switch.n.01",4,"switch","switch","vqa",-6.65527486508167,FALSE,1,"control.n.09","object","device","control","switch",NA,NA
+"678","switchboard.n.01",2,"switchboard","switchboard","vqa",-10.4983049990229,FALSE,0,"object.n.01","object","switchboard",NA,NA,NA,NA
+"679","table.n.02",3,"table","table","vqa_yoloe",-1.413293824955,TRUE,6,"furniture.n.01","object","furniture","table",NA,NA,NA
+"680","table_lamp.n.01",3,"table lamp","table lamp","vqa",-6.24033101301896,FALSE,0,"furniture.n.01","object","furniture","table lamp",NA,NA,NA
+"681","table_mat.n.01",3,"table mat","table mat","vqa",-9.03196793022944,FALSE,0,"pad.n.04","object","pad","table mat",NA,NA,NA
+"682","tablecloth.n.01",2,"tablecloth","tablecloth","vqa",-6.16319528413673,FALSE,0,"object.n.01","object","tablecloth",NA,NA,NA,NA
+"683","tablet.n.03",3,"tablet","tablet","vqa",-5.87660551108356,FALSE,0,"block.n.01","object","block","tablet",NA,NA,NA
+"684","tableware.n.01",2,"tableware","tableware","vqa",-8.60118501413698,FALSE,7,"object.n.01","object","tableware",NA,NA,NA,NA
+"685","tail.n.05",3,"tail","shadow","vqa",-8.26471277751577,FALSE,0,"person.n.01","object","person","tail",NA,NA,NA
+"686","tall_mallow.n.01",3,"tall mallow","cheese","vqa_yoloe",-9.64276645689879,TRUE,0,"shrub.n.01","object","shrub","tall mallow",NA,NA,NA
+"687","tambourine.n.01",5,"tambourine","tambourine","vqa",-9.51747574601114,FALSE,0,"drum.n.01","object","device","musical instrument","drum","tambourine",NA
+"688","tap.n.04",4,"tap","tap","vqa",-7.15426603120066,FALSE,0,"plate.n.02","object","sheet","plate","tap",NA,NA
+"689","tape.n.04",3,"tape","tape","vqa_yoloe",-7.42671763175285,TRUE,0,"device.n.01","object","device","tape",NA,NA,NA
+"690","teapot.n.01",5,"teapot","teapot","vqa",-10.2106229265711,FALSE,0,"pot.n.01","object","utensil","kitchen utensil","pot","teapot",NA
+"691","teddy.n.01",3,"teddy","teddy bear","vqa_yoloe",-3.6368878211228,FALSE,0,"plaything.n.01","object","plaything","teddy",NA,NA,NA
+"692","telephone.n.01",3,"telephone","telephone","vqa_yoloe",-6.63930268826083,TRUE,0,"electronic_equipment.n.01","object","electronic equipment","telephone",NA,NA,NA
+"693","telephone_cord.n.01",5,"telephone cord","telephone cord","vqa",-10.903770107131,FALSE,0,"telephone_wire.n.01","object","device","wire","telephone wire","telephone cord",NA
+"694","telephone_pole.n.01",3,"telephone pole","telephone pole","vqa",-10.4983049990229,FALSE,0,"device.n.01","object","device","telephone pole",NA,NA,NA
+"695","telephone_receiver.n.01",4,"telephone receiver","telephone receiver","vqa",-10.903770107131,FALSE,0,"earphone.n.01","object","device","earphone","telephone receiver",NA,NA
+"696","telephone_wire.n.01",4,"telephone wire","telephone line","vqa",-10.903770107131,FALSE,1,"wire.n.02","object","device","wire","telephone wire",NA,NA
+"697","telephone_wire.n.01",4,"telephone wire","telephone wire","vqa",-10.903770107131,FALSE,1,"wire.n.02","object","device","wire","telephone wire",NA,NA
+"698","television.n.01",2,"television","tv","vqa_yoloe",-2.07745564235593,TRUE,0,"object.n.01","object","television",NA,NA,NA,NA
+"699","television.n.02",2,"television","television","vqa",-6.44942281087752,FALSE,0,"object.n.01","object","television",NA,NA,NA,NA
+"700","tennis_ball.n.01",3,"tennis ball","tennis ball","vqa",-9.03196793022944,FALSE,0,"ball.n.01","object","ball","tennis ball",NA,NA,NA
+"701","tennis_racket.n.01",3,"tennis racket","tennis racket","vqa",-9.98747937525687,FALSE,0,"racket.n.04","object","racket","tennis racket",NA,NA,NA
+"702","tennis_racket.n.01",3,"tennis racket","tennis racquet","vqa",-6.62710398811497,FALSE,0,"racket.n.04","object","racket","tennis racket",NA,NA,NA
+"703","tent.n.01",2,"tent","tent","vqa",-6.30361246296648,FALSE,0,"object.n.01","object","tent",NA,NA,NA,NA
+"704","thread.n.01",3,"thread","yarn","vqa",-10.903770107131,FALSE,0,"cord.n.01","object","cord","thread",NA,NA,NA
+"705","tiger.n.01",3,"tiger","tiger","vqa_yoloe",-8.01443537663162,TRUE,0,"person.n.01","object","person","tiger",NA,NA,NA
+"706","tile.n.01",3,"tile","tile","vqa",-9.51747574601114,FALSE,0,"block.n.01","object","block","tile",NA,NA,NA
+"707","tire.n.01",3,"tire","tire","vqa",-9.65100713863566,FALSE,0,"hoop.n.02","object","hoop","tire",NA,NA,NA
+"708","tissue.n.01",2,"tissue","tissue","vqa_yoloe",-6.77020204123403,FALSE,1,"body_part.n.01","body part","tissue",NA,NA,NA,NA
+"709","tissue.n.02",2,"tissue","tissue paper","vqa",-8.13118138489125,FALSE,1,"paper.n.01","paper","tissue",NA,NA,NA,NA
+"710","toast.n.01",3,"toast","toast","yoloe",-11.3563266557831,TRUE,0,"bread.n.01","food","bread","toast",NA,NA,NA
+"711","toaster.n.01",3,"toaster","toaster","vqa",-7.72571627678308,FALSE,0,"person.n.01","object","person","toaster",NA,NA,NA
+"712","toaster_oven.n.01",3,"toaster oven","toaster oven","vqa",-7.95933112796459,FALSE,0,"home_appliance.n.01","object","home appliance","toaster oven",NA,NA,NA
+"713","toddler.n.01",4,"toddler","toddler","vqa",-8.07055676307481,FALSE,0,"child.n.01","object","person","child","toddler",NA,NA
+"714","toe.n.01",2,"toe","toe","yoloe",-4.09085913320572,TRUE,0,"body_part.n.01","body part","toe",NA,NA,NA,NA
+"715","toilet.n.01",3,"toilet","bathroom","vqa_yoloe",-6.08691021020605,TRUE,1,"room.n.01","object","room","toilet",NA,NA,NA
+"716","toilet.n.01",3,"toilet","can","vqa_yoloe",-4.73236718922977,TRUE,1,"room.n.01","object","room","toilet",NA,NA,NA
+"717","toilet.n.01",3,"toilet","toilet","vqa",-5.75918684052503,FALSE,1,"room.n.01","object","room","toilet",NA,NA,NA
+"718","toilet.n.02",3,"toilet","potty","vqa_yoloe",-7.32736565220569,TRUE,0,"fixture.n.01","object","fixture","toilet",NA,NA,NA
+"719","toilet_seat.n.01",4,"toilet seat","toilet seat","vqa",-9.98747937525687,FALSE,0,"seat.n.03","object","furniture","seat","toilet seat",NA,NA
+"720","toilet_tissue.n.01",3,"toilet tissue","toilet paper","vqa",-6.59970501392686,FALSE,0,"tissue.n.02","paper","tissue","toilet tissue",NA,NA,NA
+"721","tomato.n.01",3,"tomato","tomato","vqa",-8.26471277751577,FALSE,0,"vegetable.n.01","food","vegetable","tomato",NA,NA,NA
+"722","tomato_sauce.n.01",2,"tomato sauce","tomato sauce","vqa",-10.903770107131,FALSE,0,"sauce.n.01","sauce","tomato sauce",NA,NA,NA,NA
+"723","tool.n.01",2,"tool","tool",NA,NA,NA,5,"object.n.01","object","tool",NA,NA,NA,NA
+"724","toolbox.n.01",4,"toolbox","toolbox","vqa",-10.2106229265711,FALSE,0,"box.n.01","object","container","box","toolbox",NA,NA
+"725","tooth.n.01",3,"tooth","tooth","yoloe",-7.10397784441772,TRUE,0,"tissue.n.01","body part","tissue","tooth",NA,NA,NA
+"726","toothbrush.n.01",3,"toothbrush","toothbrush","vqa_yoloe",-5.82997060408204,TRUE,0,"brush.n.02","object","brush","toothbrush",NA,NA,NA
+"727","toothpaste.n.01",1,"toothpaste","toothpaste","vqa",-8.16293008320583,FALSE,0,"entity.n.01","toothpaste",NA,NA,NA,NA,NA
+"728","towel.n.01",3,"towel","towel","vqa_yoloe",-3.83864502702092,TRUE,1,"fabric.n.01","object","fabric","towel",NA,NA,NA
+"729","towel_rack.n.01",3,"towel rack","towel rack","vqa",-7.27942917415466,FALSE,0,"rack.n.01","object","rack","towel rack",NA,NA,NA
+"730","toy_box.n.01",4,"toy box","toy box","vqa",-5.19334308975616,FALSE,0,"box.n.01","object","container","box","toy box",NA,NA
+"731","toy_box.n.01",4,"toy box","toy chest","vqa",-10.903770107131,FALSE,0,"box.n.01","object","container","box","toy box",NA,NA
+"732","toy_dog.n.01",4,"toy dog","toy dog","vqa",-7.20246813301854,FALSE,0,"dog.n.01","object","animal","dog","toy dog",NA,NA
+"733","tractor.n.02",4,"tractor","tractor","yoloe",-7.77807683000697,TRUE,0,"truck.n.01","object","container","truck","tractor",NA,NA
+"734","train.n.01",3,"train","train","vqa_yoloe",-6.26816585760155,TRUE,0,"conveyance.n.03","object","conveyance","train",NA,NA,NA
+"735","train_set.n.01",3,"train set","train set","vqa",-10.2106229265711,FALSE,0,"plaything.n.01","object","plaything","train set",NA,NA,NA
+"736","trampoline.n.01",3,"trampoline","trampoline","vqa",-8.30108042168665,FALSE,0,"sports_equipment.n.01","object","sports equipment","trampoline",NA,NA,NA
+"737","tray.n.01",3,"tray","tray","vqa_yoloe",-5.58557250844735,TRUE,0,"container.n.01","object","container","tray",NA,NA,NA
+"738","treadmill.n.02",4,"treadmill","treadmill","vqa",-8.88886708658876,FALSE,0,"machine.n.01","object","device","machine","treadmill",NA,NA
+"739","tree.n.01",2,"tree","tree","vqa_yoloe",-4.63184327698263,TRUE,8,"object.n.01","object","tree",NA,NA,NA,NA
+"740","triangle.n.04",3,"triangle","triangle","vqa",-9.80515781846292,FALSE,0,"device.n.01","object","device","triangle",NA,NA,NA
+"741","tricycle.n.01",3,"tricycle","tricycle","vqa_yoloe",-9.23795356449792,TRUE,0,"container.n.01","object","container","tricycle",NA,NA,NA
+"742","tripod.n.01",3,"tripod","tripod","vqa",-10.2106229265711,FALSE,1,"device.n.01","object","device","tripod",NA,NA,NA
+"743","trouser.n.01",3,"trouser","pant","vqa_yoloe",-7.31439153500551,FALSE,2,"clothing.n.01","object","clothing","trouser",NA,NA,NA
+"744","truck.n.01",3,"truck","truck","vqa_yoloe",-7.80583625773368,TRUE,2,"container.n.01","object","container","truck",NA,NA,NA
+"745","trunk.n.01",2,"trunk","tree trunk","vqa",-10.903770107131,FALSE,0,"object.n.01","object","trunk",NA,NA,NA,NA
+"746","tube.n.01",2,"tube","tube","vqa",-8.16293008320583,FALSE,4,"object.n.01","object","tube",NA,NA,NA,NA
+"747","tugboat.n.01",3,"tugboat","tower","vqa",-10.903770107131,FALSE,0,"conveyance.n.03","object","conveyance","tugboat",NA,NA,NA
+"748","tuna.n.01",3,"tuna","tuna","yoloe",-13.1754850991992,TRUE,0,"cactus.n.01","object","cactus","tuna",NA,NA,NA
+"749","tunnel.n.01",2,"tunnel","tunnel","vqa",-9.65100713863566,FALSE,0,"object.n.01","object","tunnel",NA,NA,NA,NA
+"750","turkey.n.01",3,"turkey","turkey","yoloe",-7.73595756409968,TRUE,0,"animal.n.01","object","animal","turkey",NA,NA,NA
+"751","turtleneck.n.01",4,"turtleneck","turtle","vqa_yoloe",-10.6612074205293,TRUE,0,"sweater.n.01","object","clothing","sweater","turtleneck",NA,NA
+"752","uke.n.01",5,"uke","ukulele","vqa",-8.41886345734303,FALSE,0,"guitar.n.01","object","device","musical instrument","guitar","uke",NA
+"753","umbrella.n.01",2,"umbrella","umbrella","vqa",-6.07146434855919,FALSE,0,"object.n.01","object","umbrella",NA,NA,NA,NA
+"754","unicorn.n.01",1,"unicorn","unicorn","vqa",-10.903770107131,FALSE,0,"entity.n.01","unicorn",NA,NA,NA,NA,NA
+"755","utensil.n.01",2,"utensil","utensil","vqa",-9.29433219469693,FALSE,1,"object.n.01","object","utensil",NA,NA,NA,NA
+"756","vacuum.n.04",3,"vacuum","vacuum","vqa_yoloe",-4.45373623841749,TRUE,0,"home_appliance.n.01","object","home appliance","vacuum",NA,NA,NA
+"757","vacuum.n.04",3,"vacuum","vacuum cleaner","vqa",-10.903770107131,FALSE,0,"home_appliance.n.01","object","home appliance","vacuum",NA,NA,NA
+"758","vagina.n.01",2,"vagina","vagina","yoloe",-11.4707370069608,FALSE,0,"body_part.n.01","body part","vagina",NA,NA,NA,NA
+"759","van.n.03",3,"van","van","vqa",-10.4983049990229,FALSE,0,"container.n.01","object","container","van",NA,NA,NA
+"760","vanilla.n.01",3,"vanilla","vanilla","yoloe",-8.16263004836467,TRUE,0,"flower.n.01","object","flower","vanilla",NA,NA,NA
+"761","vase.n.01",4,"vase","vase","vqa",-5.8008595369256,FALSE,0,"jar.n.01","object","container","jar","vase",NA,NA
+"762","vegetable.n.01",2,"vegetable","vegetable","vqa",-9.03196793022944,FALSE,5,"food.n.02","food","vegetable",NA,NA,NA,NA
+"763","violin.n.01",5,"violin","violin","vqa",-10.2106229265711,FALSE,0,"bowed_stringed_instrument.n.01","object","device","musical instrument","bowed stringed_instrument","violin",NA
+"764","vitamin.n.01",1,"vitamin","vitamin","yoloe",-10.8241098420358,FALSE,0,"entity.n.01","vitamin",NA,NA,NA,NA,NA
+"765","walker.n.04",4,"walker","walker","vqa_yoloe",-7.28578046758717,TRUE,0,"shoe.n.01","object","footwear","shoe","walker",NA,NA
+"766","wall.n.07",3,"wall","wall","vqa",-2.04383863751493,FALSE,0,"fence.n.01","object","fence","wall",NA,NA,NA
+"767","wall_clock.n.01",4,"wall clock","wall clock","vqa",-4.52195408972493,FALSE,0,"clock.n.01","object","device","clock","wall clock",NA,NA
+"768","wall_socket.n.01",2,"wall socket","wall socket","vqa",-9.03196793022944,FALSE,0,"object.n.01","object","wall socket",NA,NA,NA,NA
+"769","wallet.n.01",4,"wallet","wallet","vqa",-9.65100713863566,FALSE,0,"case.n.05","object","container","case","wallet",NA,NA
+"770","wardrobe.n.01",3,"wardrobe","wardrobe","vqa",-7.85924766940761,FALSE,0,"furniture.n.01","object","furniture","wardrobe",NA,NA,NA
+"771","washer.n.01",3,"washer","washer","vqa",-10.2106229265711,FALSE,0,"person.n.01","object","person","washer",NA,NA,NA
+"772","washer.n.03",3,"washer","washing machine","vqa",-6.27390730855257,TRUE,0,"home_appliance.n.01","object","home appliance","washer",NA,NA,NA
+"773","watch.n.01",3,"watch","watch","yoloe",-3.45092487038905,TRUE,0,"device.n.01","object","device","watch",NA,NA,NA
+"774","water_bottle.n.01",4,"water bottle","water bottle","vqa",-5.2373434190186,FALSE,0,"bottle.n.01","object","container","bottle","water bottle",NA,NA
+"775","water_clock.n.01",4,"water clock","water glass","vqa",-9.39969271035475,FALSE,0,"clock.n.01","object","device","clock","water clock",NA,NA
+"776","water_closet.n.01",4,"water closet","closet","vqa_yoloe",-8.58450152357477,TRUE,0,"toilet.n.01","object","room","toilet","water closet",NA,NA
+"777","water_faucet.n.01",3,"water faucet","water tap","vqa",-8.37804146282277,FALSE,0,"fixture.n.01","object","fixture","water faucet",NA,NA,NA
+"778","water_jug.n.01",4,"water jug","water jug","vqa",-9.65100713863566,FALSE,0,"bottle.n.01","object","container","bottle","water jug",NA,NA
+"779","water_pistol.n.01",3,"water pistol","water gun","vqa",-8.76370394363476,FALSE,0,"plaything.n.01","object","plaything","water pistol",NA,NA,NA
+"780","water_pump.n.01",3,"water pump","water pump","vqa",-9.39969271035475,FALSE,0,"device.n.01","object","device","water pump",NA,NA,NA
+"781","water_table.n.01",2,"water table","water table","vqa",-9.65100713863566,FALSE,0,"object.n.01","object","water table",NA,NA,NA,NA
+"782","watering_can.n.01",3,"watering can","watering can","vqa",-8.26471277751577,FALSE,0,"container.n.01","object","container","watering can",NA,NA,NA
+"783","watermelon.n.01",3,"watermelon","watermelon","vqa",-7.79025479792065,FALSE,0,"melon.n.02","object","melon","watermelon",NA,NA,NA
+"784","weapon.n.01",3,"weapon","arm","yoloe",-6.27929645658857,TRUE,3,"device.n.01","object","device","weapon",NA,NA,NA
+"785","weight.n.02",3,"weight","weight","vqa",-10.903770107131,FALSE,1,"sports_equipment.n.01","object","sports equipment","weight",NA,NA,NA
+"786","wheel.n.01",3,"wheel","wheel","vqa",-10.2106229265711,FALSE,2,"device.n.01","object","device","wheel",NA,NA,NA
+"787","wheelchair.n.01",5,"wheelchair","wheelchair","vqa",-10.2106229265711,FALSE,0,"chair.n.01","object","furniture","seat","chair","wheelchair",NA
+"788","whisk.n.01",5,"whisk","whisk","vqa",-10.2106229265711,FALSE,0,"mixer.n.04","object","utensil","kitchen utensil","mixer","whisk",NA
+"789","wicker_basket.n.01",4,"wicker basket","wicker basket","vqa",-9.51747574601114,FALSE,0,"basket.n.01","object","container","basket","wicker basket",NA,NA
+"790","wind_instrument.n.01",4,"wind instrument","wind","yoloe",-9.73080260559734,TRUE,1,"musical_instrument.n.01","object","device","musical instrument","wind instrument",NA,NA
+"791","window.n.01",2,"window","window","vqa_yoloe",-2.37619476425065,TRUE,0,"object.n.01","object","window",NA,NA,NA,NA
+"792","window_blind.n.01",3,"window blind","window blind","vqa",-7.09710761736071,FALSE,1,"blind.n.03","object","blind","window blind",NA,NA,NA
+"793","window_frame.n.01",2,"window frame","window frame","vqa",-7.6079332411267,FALSE,0,"object.n.01","object","window frame",NA,NA,NA,NA
+"794","window_screen.n.01",2,"window screen","window screen","vqa",-10.4983049990229,FALSE,0,"object.n.01","object","window screen",NA,NA,NA,NA
+"795","window_shade.n.01",4,"window shade","window shade","vqa",-7.83571717199741,FALSE,0,"window_blind.n.01","object","blind","window blind","window shade",NA,NA
+"796","wine_bottle.n.01",4,"wine bottle","wine bottle","vqa",-8.01339834923486,FALSE,0,"bottle.n.01","object","container","bottle","wine bottle",NA,NA
+"797","wire.n.02",3,"wire","wire","vqa",-8.37804146282277,FALSE,1,"device.n.01","object","device","wire",NA,NA,NA
+"798","wolf.n.04",5,"wolf","wolf","yoloe",-7.55629269284366,TRUE,0,"man.n.01","object","person","adult","man","wolf",NA
+"799","woman.n.01",4,"woman","woman","vqa",-4.11761764990814,FALSE,4,"adult.n.01","object","person","adult","woman",NA,NA
+"800","writing_implement.n.01",2,"writing implement","writing implement",NA,NA,NA,4,"object.n.01","object","writing implement",NA,NA,NA,NA
+"801","yard.n.02",2,"yard","yard","vqa_yoloe",-8.96025612037474,TRUE,2,"object.n.01","object","yard",NA,NA,NA,NA
+"802","yogurt.n.01",1,"yogurt","yogurt","yoloe",-6.63253294660638,TRUE,0,"entity.n.01","yogurt",NA,NA,NA,NA,NA
+"803","zebra.n.01",3,"zebra","zebra","vqa_yoloe",-9.42877447107703,TRUE,0,"animal.n.01","object","animal","zebra",NA,NA,NA
+"804",NA,NA,NA,"adult foot","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"805",NA,NA,NA,"adult hand","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"806",NA,NA,NA,"adult man","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"807",NA,NA,NA,"adult woman","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"808",NA,NA,NA,"air purifier","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"809",NA,NA,NA,"airplane toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"810",NA,NA,NA,"alphabet block","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"811",NA,NA,NA,"animal picture","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"812",NA,NA,NA,"animal sticker","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"813",NA,NA,NA,"apple peeler","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"814",NA,NA,NA,"baby and stroller","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"815",NA,NA,NA,"baby animal book","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"816",NA,NA,NA,"baby bath toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"817",NA,NA,NA,"baby bed sheet","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"818",NA,NA,NA,"baby book","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"819",NA,NA,NA,"baby bootie","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"820",NA,NA,NA,"baby bottle","vqa",-4.88761294743268,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"821",NA,NA,NA,"baby bottle cap","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"822",NA,NA,NA,"baby bouncer","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"823",NA,NA,NA,"baby car","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"824",NA,NA,NA,"baby car seat","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"825",NA,NA,NA,"baby carrier","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"826",NA,NA,NA,"baby chair","vqa",-7.09710761736071,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"827",NA,NA,NA,"baby change table","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"828",NA,NA,NA,"baby clothe","vqa",-7.88334522098667,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"829",NA,NA,NA,"baby crib","vqa",-5.51698409259538,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"830",NA,NA,NA,"baby diaper","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"831",NA,NA,NA,"baby doll","vqa",-6.17638228841869,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"832",NA,NA,NA,"baby elephant","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"833",NA,NA,NA,"baby food","vqa",-7.37740958251487,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"834",NA,NA,NA,"baby food bowl","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"835",NA,NA,NA,"baby food box","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"836",NA,NA,NA,"baby food tray","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"837",NA,NA,NA,"baby foot","vqa",-8.04156922620156,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"838",NA,NA,NA,"baby gate","vqa",-5.18509901998108,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"839",NA,NA,NA,"baby girl","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"840",NA,NA,NA,"baby helmet","vqa",-8.55239484996755,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"841",NA,NA,NA,"baby in clothe","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"842",NA,NA,NA,"baby pacifier","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"843",NA,NA,NA,"baby photo album","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"844",NA,NA,NA,"baby plate","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"845",NA,NA,NA,"baby playpen","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"846",NA,NA,NA,"baby pool","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"847",NA,NA,NA,"baby seat","vqa",-4.8888332038379,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"848",NA,NA,NA,"baby stroller","vqa",-4.5043435717163,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"849",NA,NA,NA,"baby swe","vqa",-8.16293008320583,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"850",NA,NA,NA,"baby toy","vqa",-6.64815739731281,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"851",NA,NA,NA,"baby walker","vqa",-5.75047851263325,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"852",NA,NA,NA,"bag of bread","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"853",NA,NA,NA,"bag of candy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"854",NA,NA,NA,"bag of carrot","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"855",NA,NA,NA,"bag of cat food","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"856",NA,NA,NA,"bag of cereal","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"857",NA,NA,NA,"bag of cheese","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"858",NA,NA,NA,"bag of chip","vqa",-6.72938283723539,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"859",NA,NA,NA,"bag of dog food","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"860",NA,NA,NA,"bag of flour","vqa",-8.33882074966949,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"861",NA,NA,NA,"bag of food","vqa",-8.65247830852453,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"862",NA,NA,NA,"bag of fruit","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"863",NA,NA,NA,"bag of object","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"864",NA,NA,NA,"bag of pasta","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"865",NA,NA,NA,"bag of rice","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"866",NA,NA,NA,"bag of salt","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"867",NA,NA,NA,"bag of toy","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"868",NA,NA,NA,"bag of vegetable","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"869",NA,NA,NA,"ball hoop","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"870",NA,NA,NA,"ball net","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"871",NA,NA,NA,"ball pit","vqa",-7.45378256129944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"872",NA,NA,NA,"balloon tube","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"873",NA,NA,NA,"banana slice","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"874",NA,NA,NA,"bar stool","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"875",NA,NA,NA,"barbeque grill","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"876",NA,NA,NA,"barbie doll","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"877",NA,NA,NA,"basket of fruit","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"878",NA,NA,NA,"basket of toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"879",NA,NA,NA,"basket with toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"880",NA,NA,NA,"bath tub","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"881",NA,NA,NA,"bathroom cabinet","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"882",NA,NA,NA,"bathroom sink","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"883",NA,NA,NA,"bean bag chair","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"884",NA,NA,NA,"bear toy","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"885",NA,NA,NA,"bed frame","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"886",NA,NA,NA,"bicycle helmet","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"887",NA,NA,NA,"black board","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"888",NA,NA,NA,"black hose","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"889",NA,NA,NA,"black oven","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"890",NA,NA,NA,"black pan","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"891",NA,NA,NA,"black tv","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"892",NA,NA,NA,"black watch","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"893",NA,NA,NA,"book cover","vqa",-8.82432856545119,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"894",NA,NA,NA,"bottle cap","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"895",NA,NA,NA,"bottle of detergent","vqa",-8.88886708658876,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"896",NA,NA,NA,"bottle of hand wash","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"897",NA,NA,NA,"bottle of ketchup","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"898",NA,NA,NA,"bottle of lotion","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"899",NA,NA,NA,"bottle of milk","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"900",NA,NA,NA,"bottle of mouthwash","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"901",NA,NA,NA,"bottle of oil","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"902",NA,NA,NA,"bottle of sauce","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"903",NA,NA,NA,"bottle of shampoo","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"904",NA,NA,NA,"bottle of soap","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"905",NA,NA,NA,"bottle of water","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"906",NA,NA,NA,"bottle of wine","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"907",NA,NA,NA,"bowl of ball","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"908",NA,NA,NA,"bowl of blueberry","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"909",NA,NA,NA,"bowl of cereal","vqa",-7.40726254566455,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"910",NA,NA,NA,"bowl of cherry","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"911",NA,NA,NA,"bowl of chip","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"912",NA,NA,NA,"bowl of food","vqa",-6.64109023008971,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"913",NA,NA,NA,"bowl of fruit","vqa",-7.93335564156133,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"914",NA,NA,NA,"bowl of noodle","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"915",NA,NA,NA,"bowl of nut","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"916",NA,NA,NA,"bowl of pasta","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"917",NA,NA,NA,"bowl of potato","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"918",NA,NA,NA,"bowl of salad","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"919",NA,NA,NA,"bowl of soup","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"920",NA,NA,NA,"bowl of strawberry","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"921",NA,NA,NA,"bowl of toy","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"922",NA,NA,NA,"bowl of vegetable","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"923",NA,NA,NA,"bowl of water","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"924",NA,NA,NA,"bowl of watermelon","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"925",NA,NA,NA,"box lid","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"926",NA,NA,NA,"box of cereal","vqa",-8.37804146282277,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"927",NA,NA,NA,"box of corn flake","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"928",NA,NA,NA,"box of crayon","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"929",NA,NA,NA,"box of food","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"930",NA,NA,NA,"box of snack","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"931",NA,NA,NA,"box of tea","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"932",NA,NA,NA,"box of tissue","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"933",NA,NA,NA,"box of toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"934",NA,NA,NA,"box of water","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"935",NA,NA,NA,"boy and camera","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"936",NA,NA,NA,"boy doll","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"937",NA,NA,NA,"bread bag","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"938",NA,NA,NA,"bread box","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"939",NA,NA,NA,"brick chimney","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"940",NA,NA,NA,"brick fireplace","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"941",NA,NA,NA,"brick floor","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"942",NA,NA,NA,"brick wall","vqa",-8.37804146282277,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"943",NA,NA,NA,"brown bag","vqa",-8.82432856545119,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"944",NA,NA,NA,"brown ball","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"945",NA,NA,NA,"brown box","vqa",-8.50587483433266,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"946",NA,NA,NA,"brown cabinet","vqa",-8.30108042168665,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"947",NA,NA,NA,"brown mat","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"948",NA,NA,NA,"brown paper bag","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"949",NA,NA,NA,"brown shelf","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"950",NA,NA,NA,"brown shoe","vqa",-8.55239484996755,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"951",NA,NA,NA,"brown sofa","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"952",NA,NA,NA,"brown stuff animal","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"953",NA,NA,NA,"brown stuff toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"954",NA,NA,NA,"brown teddy bear","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"955",NA,NA,NA,"bubble blower","vqa",-8.50587483433266,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"956",NA,NA,NA,"bubble bottle","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"957",NA,NA,NA,"bubble maker","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"958",NA,NA,NA,"bubble wand","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"959",NA,NA,NA,"bucket of fruit","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"960",NA,NA,NA,"build block","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"961",NA,NA,NA,"bunny ear","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"962",NA,NA,NA,"cake stand","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"963",NA,NA,NA,"can of soda","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"964",NA,NA,NA,"car battery charger","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"965",NA,NA,NA,"car toy","vqa",-8.82432856545119,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"966",NA,NA,NA,"cardboard box","vqa",-7.22746943522395,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"967",NA,NA,NA,"cartoon character","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"968",NA,NA,NA,"cat bed","vqa",-8.10040972622449,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"969",NA,NA,NA,"cat food bowl","vqa",-8.50587483433266,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"970",NA,NA,NA,"cat food box","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"971",NA,NA,NA,"cat house","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"972",NA,NA,NA,"cat litter box","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"973",NA,NA,NA,"cat toy","vqa",-7.19019804042672,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"974",NA,NA,NA,"cat tree","vqa",-6.31880262846046,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"975",NA,NA,NA,"ceiling fan","vqa",-6.04008922599144,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"976",NA,NA,NA,"ceiling light","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"977",NA,NA,NA,"child 's foot","vqa",-7.4380342043313,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"978",NA,NA,NA,"child 's hand","vqa",-7.85924766940761,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"979",NA,NA,NA,"child 's head","vqa",-6.14587883412527,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"980",NA,NA,NA,"child 's head camera","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"981",NA,NA,NA,"child 's leg","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"982",NA,NA,NA,"child and baby","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"983",NA,NA,NA,"child and doll","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"984",NA,NA,NA,"child and man","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"985",NA,NA,NA,"child and person","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"986",NA,NA,NA,"child and toy","vqa",-8.65247830852453,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"987",NA,NA,NA,"child in dress","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"988",NA,NA,NA,"child seat","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"989",NA,NA,NA,"chop board","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"990",NA,NA,NA,"christmas ball","vqa",-8.70654552979481,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"991",NA,NA,NA,"christmas decoration","vqa",-7.30645784654258,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"992",NA,NA,NA,"christmas light","vqa",-7.85924766940761,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"993",NA,NA,NA,"christmas tree decoration","vqa",-8.55239484996755,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"994",NA,NA,NA,"christmas tree ornament","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"995",NA,NA,NA,"christmas tree toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"996",NA,NA,NA,"christmas wreath","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"997",NA,NA,NA,"clean cloth","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"998",NA,NA,NA,"climb wall","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"999",NA,NA,NA,"clothe","vqa",-3.82965329093367,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1000",NA,NA,NA,"clothe basket","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1001",NA,NA,NA,"clothe dryer","vqa",-7.81272765377271,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1002",NA,NA,NA,"clothe hanger","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1003",NA,NA,NA,"clothe rack","vqa",-8.10040972622449,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1004",NA,NA,NA,"coffee box","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1005",NA,NA,NA,"coffee kettle","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1006",NA,NA,NA,"coffee machine","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1007",NA,NA,NA,"coffee pot","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1008",NA,NA,NA,"computer desk","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1009",NA,NA,NA,"computer tower","vqa",-6.45525373118831,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1010",NA,NA,NA,"container lid","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1011",NA,NA,NA,"container of food","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1012",NA,NA,NA,"container with toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1013",NA,NA,NA,"cup holder","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1014",NA,NA,NA,"cup with straw","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1015",NA,NA,NA,"cupcake tray","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1016",NA,NA,NA,"cupcake wrapper","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1017",NA,NA,NA,"curtain rod","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1018",NA,NA,NA,"cut board","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1019",NA,NA,NA,"desk lamp","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1020",NA,NA,NA,"detergent bottle","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1021",NA,NA,NA,"dinosaur skeleton","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1022",NA,NA,NA,"dinosaur toy","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1023",NA,NA,NA,"dish brush","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1024",NA,NA,NA,"dish soap","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1025",NA,NA,NA,"dish soap bottle","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1026",NA,NA,NA,"dishwashe liquid","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1027",NA,NA,NA,"dog and child","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1028",NA,NA,NA,"dog bed","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1029",NA,NA,NA,"dog book","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1030",NA,NA,NA,"dog bowl","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1031",NA,NA,NA,"dog crate","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1032",NA,NA,NA,"dog food bowl","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1033",NA,NA,NA,"dog toy","vqa",-8.50587483433266,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1034",NA,NA,NA,"doll bed","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1035",NA,NA,NA,"doll house","vqa",-8.10040972622449,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1036",NA,NA,NA,"doll skeleton","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1037",NA,NA,NA,"dolphin toy","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1038",NA,NA,NA,"door frame","vqa",-6.86952946897863,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1039",NA,NA,NA,"door handle","vqa",-6.86071883929648,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1040",NA,NA,NA,"door hinge","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1041",NA,NA,NA,"door knob","vqa",-6.69164250925254,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1042",NA,NA,NA,"door lock","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1043",NA,NA,NA,"door mat","vqa",-7.5895841024585,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1044",NA,NA,NA,"door mat cover","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1045",NA,NA,NA,"door mat cover cover","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1046",NA,NA,NA,"door mat cover holder","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1047",NA,NA,NA,"door mat holder","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1048",NA,NA,NA,"door stand holder","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1049",NA,NA,NA,"drink bottle","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1050",NA,NA,NA,"drink cup","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1051",NA,NA,NA,"drum set","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1052",NA,NA,NA,"duck head","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1053",NA,NA,NA,"duck toy","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1054",NA,NA,NA,"duckle","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1055",NA,NA,NA,"duckle toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1056",NA,NA,NA,"egg carton","vqa",-8.33882074966949,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1057",NA,NA,NA,"egg shell","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1058",NA,NA,NA,"egg tray","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1059",NA,NA,NA,"elephant book","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1060",NA,NA,NA,"elephant toy","vqa",-6.86952946897863,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1061",NA,NA,NA,"exercise machine","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1062",NA,NA,NA,"fidget spinner","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1063",NA,NA,NA,"fire place","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1064",NA,NA,NA,"fish food","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1065",NA,NA,NA,"fish toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1066",NA,NA,NA,"floor mat","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1067",NA,NA,NA,"flower pot","vqa",-7.37740958251487,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1068",NA,NA,NA,"flower vase","vqa",-6.16319528413673,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1069",NA,NA,NA,"food bag","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1070",NA,NA,NA,"food bowl","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1071",NA,NA,NA,"food box","vqa",-8.70654552979481,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1072",NA,NA,NA,"food container","vqa",-7.48604342351766,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1073",NA,NA,NA,"food cup","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1074",NA,NA,NA,"food item","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1075",NA,NA,NA,"food package","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1076",NA,NA,NA,"food packet","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1077",NA,NA,NA,"food plate","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1078",NA,NA,NA,"food spoon","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1079",NA,NA,NA,"food tray","vqa",-8.88886708658876,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1080",NA,NA,NA,"fruit basket","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1081",NA,NA,NA,"gallary","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1082",NA,NA,NA,"game controller","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1083",NA,NA,NA,"garage door","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1084",NA,NA,NA,"gift bag","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1085",NA,NA,NA,"gift box","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1086",NA,NA,NA,"giraffe toy","vqa",-8.2296214577045,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1087",NA,NA,NA,"girl and adult","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1088",NA,NA,NA,"girl and child","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1089",NA,NA,NA,"girl and dog","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1090",NA,NA,NA,"girl and toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1091",NA,NA,NA,"girl doll","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1092",NA,NA,NA,"girl in clothe","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1093",NA,NA,NA,"girl in dress","vqa",-8.55239484996755,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1094",NA,NA,NA,"girl in shirt","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1095",NA,NA,NA,"girl with dress","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1096",NA,NA,NA,"girl with hair","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1097",NA,NA,NA,"glass bottle","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1098",NA,NA,NA,"glass bowl","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1099",NA,NA,NA,"glass door","vqa",-8.30108042168665,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1100",NA,NA,NA,"glass enclosure","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1101",NA,NA,NA,"glass of milk","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1102",NA,NA,NA,"glass of water","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1103",NA,NA,NA,"glass of wine","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1104",NA,NA,NA,"glass table","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1105",NA,NA,NA,"glass wall","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1106",NA,NA,NA,"glass window","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1107",NA,NA,NA,"glue stick","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1108",NA,NA,NA,"goal net","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1109",NA,NA,NA,"goal post","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1110",NA,NA,NA,"gray box","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1111",NA,NA,NA,"gray cabinet","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1112",NA,NA,NA,"gray floor","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1113",NA,NA,NA,"gray sofa","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1114",NA,NA,NA,"grey bag","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1115",NA,NA,NA,"grey couch","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1116",NA,NA,NA,"grey floor","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1117",NA,NA,NA,"grey mat","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1118",NA,NA,NA,"grey shoe","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1119",NA,NA,NA,"grey sofa","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1120",NA,NA,NA,"grey toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1121",NA,NA,NA,"guitar case","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1122",NA,NA,NA,"hair brush","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1123",NA,NA,NA,"hamster cage","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1124",NA,NA,NA,"hang clothe","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1125",NA,NA,NA,"hang lamp","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1126",NA,NA,NA,"hang light","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1127",NA,NA,NA,"honey dipper","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1128",NA,NA,NA,"hoodie","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1129",NA,NA,NA,"horse toy","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1130",NA,NA,NA,"hula hoop","vqa",-7.93335564156133,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1131",NA,NA,NA,"include ball","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1132",NA,NA,NA,"ipad","vqa",-6.86071883929648,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1133",NA,NA,NA,"jar of corn","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1134",NA,NA,NA,"jar of food","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1135",NA,NA,NA,"jar of jam","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1136",NA,NA,NA,"jar of mayonnaise","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1137",NA,NA,NA,"jar of nut","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1138",NA,NA,NA,"jar of peanut butter","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1139",NA,NA,NA,"jar of pickle","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1140",NA,NA,NA,"jar of sauce","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1141",NA,NA,NA,"juice box","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1142",NA,NA,NA,"juice glass","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1143",NA,NA,NA,"keyboard bag","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1144",NA,NA,NA,"keyboard belt buckle ring","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1145",NA,NA,NA,"keyboard cable","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1146",NA,NA,NA,"keyboard case","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1147",NA,NA,NA,"keyboard cover","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1148",NA,NA,NA,"keyboard key","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1149",NA,NA,NA,"keyboard keycap","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1150",NA,NA,NA,"keyboard keycap cover","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1151",NA,NA,NA,"keyboard knob cover","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1152",NA,NA,NA,"keyboard mouse","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1153",NA,NA,NA,"keyboard mouse pad","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1154",NA,NA,NA,"keyboard mousepad cover","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1155",NA,NA,NA,"keyboard piano","vqa",-6.64109023008971,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1156",NA,NA,NA,"keyboard piano piano","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1157",NA,NA,NA,"keyboard piano stand","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1158",NA,NA,NA,"keyboard piano stool","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1159",NA,NA,NA,"keyboard piano stool stand","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1160",NA,NA,NA,"keyboard stand","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1161",NA,NA,NA,"keyboard strap","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1162",NA,NA,NA,"keyboard tray","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1163",NA,NA,NA,"kitchen counter","vqa",-3.64430217603997,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1164",NA,NA,NA,"kitchen floor","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1165",NA,NA,NA,"kitchen set","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1166",NA,NA,NA,"kitchen towel","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1167",NA,NA,NA,"knife block","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1168",NA,NA,NA,"lamp post","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1169",NA,NA,NA,"lego block","vqa",-8.65247830852453,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1170",NA,NA,NA,"letter block","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1171",NA,NA,NA,"lion toy","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1172",NA,NA,NA,"man 's hand","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1173",NA,NA,NA,"man 's leg","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1174",NA,NA,NA,"man and child","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1175",NA,NA,NA,"man and dog","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1176",NA,NA,NA,"man and girl","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1177",NA,NA,NA,"man and two child","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1178",NA,NA,NA,"man and woman","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1179",NA,NA,NA,"man in clothe","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1180",NA,NA,NA,"man in grey shirt","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1181",NA,NA,NA,"man in shirt","vqa",-7.62662537413885,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1182",NA,NA,NA,"man in short","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1183",NA,NA,NA,"man with glasses","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1184",NA,NA,NA,"metal bowl","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1185",NA,NA,NA,"metal container","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1186",NA,NA,NA,"metal object","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1187",NA,NA,NA,"metal surface","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1188",NA,NA,NA,"milk bottle","vqa",-5.90994193135115,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1189",NA,NA,NA,"milk box","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1190",NA,NA,NA,"milk carton","vqa",-7.34842204564162,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1191",NA,NA,NA,"milk jug","vqa",-7.88334522098667,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1192",NA,NA,NA,"mirror frame","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1193",NA,NA,NA,"monitor cable","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1194",NA,NA,NA,"monitor cover","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1195",NA,NA,NA,"monitor screen","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1196",NA,NA,NA,"monitor stand","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1197",NA,NA,NA,"monitor stand cover","vqa",-8.82432856545119,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1198",NA,NA,NA,"monkey bar","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1199",NA,NA,NA,"monkey toy","vqa",-7.83571717199741,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1200",NA,NA,NA,"mop bucket","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1201",NA,NA,NA,"mouse pad","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1202",NA,NA,NA,"mushroom grow kit","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1203",NA,NA,NA,"music player","vqa",-7.66509165496665,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1204",NA,NA,NA,"night stand","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1205",NA,NA,NA,"office chair","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1206",NA,NA,NA,"orange and toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1207",NA,NA,NA,"orange bag","vqa",-8.65247830852453,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1208",NA,NA,NA,"orange ball","vqa",-6.80112674209423,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1209",NA,NA,NA,"orange balloon","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1210",NA,NA,NA,"orange basket","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1211",NA,NA,NA,"orange block","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1212",NA,NA,NA,"orange book","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1213",NA,NA,NA,"orange bowl","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1214",NA,NA,NA,"orange box","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1215",NA,NA,NA,"orange bucket","vqa",-7.81272765377271,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1216",NA,NA,NA,"orange cabinet","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1217",NA,NA,NA,"orange car","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1218",NA,NA,NA,"orange car toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1219",NA,NA,NA,"orange carrot","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1220",NA,NA,NA,"orange cone","vqa",-8.88886708658876,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1221",NA,NA,NA,"orange container","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1222",NA,NA,NA,"orange cube","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1223",NA,NA,NA,"orange cup","vqa",-8.50587483433266,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1224",NA,NA,NA,"orange cylinder","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1225",NA,NA,NA,"orange flower","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1226",NA,NA,NA,"orange marker","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1227",NA,NA,NA,"orange mat","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1228",NA,NA,NA,"orange object","vqa",-7.25311186583729,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1229",NA,NA,NA,"orange packet","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1230",NA,NA,NA,"orange paper","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1231",NA,NA,NA,"orange pen","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1232",NA,NA,NA,"orange pillow","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1233",NA,NA,NA,"orange plate","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1234",NA,NA,NA,"orange pumpkin","vqa",-8.41886345734303,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1235",NA,NA,NA,"orange ring","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1236",NA,NA,NA,"orange shirt","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1237",NA,NA,NA,"orange stick","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1238",NA,NA,NA,"orange towel","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1239",NA,NA,NA,"orange toy","vqa",-7.25311186583729,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1240",NA,NA,NA,"orange toy car","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1241",NA,NA,NA,"orange toy gun","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1242",NA,NA,NA,"orange tube","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1243",NA,NA,NA,"orange wall","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1244",NA,NA,NA,"oven door","vqa",-8.10040972622449,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1245",NA,NA,NA,"oven door handle","vqa",-8.65247830852453,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1246",NA,NA,NA,"oven door knob","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1247",NA,NA,NA,"oven door light","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1248",NA,NA,NA,"oven handle","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1249",NA,NA,NA,"oven knob","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1250",NA,NA,NA,"oven light","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1251",NA,NA,NA,"oven mitt","vqa",-6.52174347245715,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1252",NA,NA,NA,"oven mitt cover","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1253",NA,NA,NA,"oven mitt cover holder","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1254",NA,NA,NA,"oven mitt holder","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1255",NA,NA,NA,"oven rack","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1256",NA,NA,NA,"oven shelf","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1257",NA,NA,NA,"oven tray","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1258",NA,NA,NA,"owl toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1259",NA,NA,NA,"paint bottle","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1260",NA,NA,NA,"paint box","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1261",NA,NA,NA,"paint brush","vqa",-8.16293008320583,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1262",NA,NA,NA,"paint bucket","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1263",NA,NA,NA,"paint palette","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1264",NA,NA,NA,"panda toy","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1265",NA,NA,NA,"paper roll","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1266",NA,NA,NA,"paper towel box","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1267",NA,NA,NA,"paper towel dispenser","vqa",-8.37804146282277,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1268",NA,NA,NA,"paper towel holder","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1269",NA,NA,NA,"paper towel roll","vqa",-6.00966862929072,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1270",NA,NA,NA,"pen holder","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1271",NA,NA,NA,"pencil holder","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1272",NA,NA,NA,"penguin toy","vqa",-8.50587483433266,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1273",NA,NA,NA,"person 's foot","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1274",NA,NA,NA,"person 's hand","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1275",NA,NA,NA,"person 's leg","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1276",NA,NA,NA,"person and dog","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1277",NA,NA,NA,"person and toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1278",NA,NA,NA,"person in clothe","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1279",NA,NA,NA,"person in dress","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1280",NA,NA,NA,"person in kitchen","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1281",NA,NA,NA,"person in shirt","vqa",-8.70654552979481,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1282",NA,NA,NA,"phone case","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1283",NA,NA,NA,"phone charger","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1284",NA,NA,NA,"photo frame","vqa",-6.72938283723539,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1285",NA,NA,NA,"piano bench","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1286",NA,NA,NA,"piano book","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1287",NA,NA,NA,"piano key","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1288",NA,NA,NA,"piano sheet music","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1289",NA,NA,NA,"piano toy","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1290",NA,NA,NA,"picture on wall","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1291",NA,NA,NA,"pig toy","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1292",NA,NA,NA,"pink box","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1293",NA,NA,NA,"pizza box","vqa",-7.95933112796459,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1294",NA,NA,NA,"plant pot","vqa",-8.2296214577045,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1295",NA,NA,NA,"plant stand","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1296",NA,NA,NA,"plastic box","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1297",NA,NA,NA,"plastic container","vqa",-8.01339834923486,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1298",NA,NA,NA,"plastic cup","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1299",NA,NA,NA,"plastic object","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1300",NA,NA,NA,"plastic sheet","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1301",NA,NA,NA,"plastic toy","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1302",NA,NA,NA,"plate of cookie","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1303",NA,NA,NA,"plate of food","vqa",-7.34842204564162,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1304",NA,NA,NA,"plate of grape","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1305",NA,NA,NA,"plate with food","vqa",-7.95933112796459,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1306",NA,NA,NA,"plate with fruit","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1307",NA,NA,NA,"play kitchen","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1308",NA,NA,NA,"playground equipment","vqa",-8.10040972622449,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1309",NA,NA,NA,"pool cover","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1310",NA,NA,NA,"pool float","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1311",NA,NA,NA,"pool toy","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1312",NA,NA,NA,"popcorn bag","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1313",NA,NA,NA,"pot and pan","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1314",NA,NA,NA,"pot lid","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1315",NA,NA,NA,"power socket","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1316",NA,NA,NA,"power strip","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1317",NA,NA,NA,"purple box","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1318",NA,NA,NA,"push toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1319",NA,NA,NA,"puzzle piece","vqa",-8.26471277751577,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1320",NA,NA,NA,"rabbit toy","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1321",NA,NA,NA,"recycle bin","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1322",NA,NA,NA,"rice cooker","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1323",NA,NA,NA,"robot toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1324",NA,NA,NA,"robot vacuum","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1325",NA,NA,NA,"rock climbing wall","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1326",NA,NA,NA,"roll pin","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1327",NA,NA,NA,"rope swe","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1328",NA,NA,NA,"round mirror","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1329",NA,NA,NA,"rubber duck","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1330",NA,NA,NA,"rubber ring","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1331",NA,NA,NA,"sand box","vqa",-7.15426603120066,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1332",NA,NA,NA,"sand pit","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1333",NA,NA,NA,"sand tray","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1334",NA,NA,NA,"santa claus","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1335",NA,NA,NA,"santa claus doll","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1336",NA,NA,NA,"sauce bottle","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1337",NA,NA,NA,"sheep toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1338",NA,NA,NA,"shelf with toy","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1339",NA,NA,NA,"shoe rack","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1340",NA,NA,NA,"shower curtain ring","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1341",NA,NA,NA,"shower curtain rod","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1342",NA,NA,NA,"shower head","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1343",NA,NA,NA,"sign board","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1344",NA,NA,NA,"silver bowl","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1345",NA,NA,NA,"sink basin","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1346",NA,NA,NA,"sink cover","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1347",NA,NA,NA,"sink drain","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1348",NA,NA,NA,"sink drain cover","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1349",NA,NA,NA,"sink faucet","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1350",NA,NA,NA,"sink tap","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1351",NA,NA,NA,"skeleton doll","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1352",NA,NA,NA,"smartphone","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1353",NA,NA,NA,"snowman book","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1354",NA,NA,NA,"snowman toy","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1355",NA,NA,NA,"soap bottle","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1356",NA,NA,NA,"soccer goal","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1357",NA,NA,NA,"soccer net","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1358",NA,NA,NA,"sofa chair","vqa",-8.65247830852453,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1359",NA,NA,NA,"sofa pillow","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1360",NA,NA,NA,"soup container","vqa",-8.50587483433266,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1361",NA,NA,NA,"soup cup","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1362",NA,NA,NA,"spray bottle","vqa",-8.26471277751577,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1363",NA,NA,NA,"stack of cup","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1364",NA,NA,NA,"stair carpet","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1365",NA,NA,NA,"stair handrail","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1366",NA,NA,NA,"stair rail","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1367",NA,NA,NA,"stair stair rail","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1368",NA,NA,NA,"stair step","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1369",NA,NA,NA,"star toy","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1370",NA,NA,NA,"star wand","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1371",NA,NA,NA,"stone path","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1372",NA,NA,NA,"stop sign","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1373",NA,NA,NA,"street light","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1374",NA,NA,NA,"string light","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1375",NA,NA,NA,"string of bead","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1376",NA,NA,NA,"structure","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1377",NA,NA,NA,"stuff animal","vqa",-5.8348659049108,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1378",NA,NA,NA,"stuff dog","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1379",NA,NA,NA,"stuff panda","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1380",NA,NA,NA,"stuff toy","vqa",-6.32905912862765,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1381",NA,NA,NA,"sun","vqa_yoloe",-8.93903506412011,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+"1382",NA,NA,NA,"swan doll","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1383",NA,NA,NA,"swan toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1384",NA,NA,NA,"swing set","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1385",NA,NA,NA,"table cloth","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1386",NA,NA,NA,"table cover","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1387",NA,NA,NA,"table decoration","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1388",NA,NA,NA,"table fan","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1389",NA,NA,NA,"table leg","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1390",NA,NA,NA,"table piano","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1391",NA,NA,NA,"table tennis paddle","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1392",NA,NA,NA,"table tennis table","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1393",NA,NA,NA,"table top","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1394",NA,NA,NA,"tape dispenser","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1395",NA,NA,NA,"tape roll","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1396",NA,NA,NA,"telephone antenna","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1397",NA,NA,NA,"telephone pole bracket","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1398",NA,NA,NA,"telephone pole bracket bolt","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1399",NA,NA,NA,"tiger toy","vqa",-8.55239484996755,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1400",NA,NA,NA,"tile floor","vqa",-7.37740958251487,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1401",NA,NA,NA,"tile wall","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1402",NA,NA,NA,"tissue box","vqa",-6.72938283723539,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1403",NA,NA,NA,"toilet brush","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1404",NA,NA,NA,"toilet paper holder","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1405",NA,NA,NA,"toilet paper roll","vqa",-7.37740958251487,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1406",NA,NA,NA,"toilet seat cover","vqa",-8.70654552979481,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1407",NA,NA,NA,"toilet seat cover dispenser","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1408",NA,NA,NA,"toy airplane","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1409",NA,NA,NA,"toy alphabet","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1410",NA,NA,NA,"toy ambulance","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1411",NA,NA,NA,"toy animal","vqa",-7.51937984378525,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1412",NA,NA,NA,"toy astronaut space shuttle","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1413",NA,NA,NA,"toy astronaut space station","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1414",NA,NA,NA,"toy baby bottle","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1415",NA,NA,NA,"toy bag","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1416",NA,NA,NA,"toy ball","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1417",NA,NA,NA,"toy basket","vqa",-8.37804146282277,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1418",NA,NA,NA,"toy basketball hoop","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1419",NA,NA,NA,"toy bear","vqa",-8.16293008320583,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1420",NA,NA,NA,"toy bee","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1421",NA,NA,NA,"toy bicycle","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1422",NA,NA,NA,"toy bike","vqa",-7.50257272546887,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1423",NA,NA,NA,"toy bird","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1424",NA,NA,NA,"toy block","vqa",-5.51014256077867,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1425",NA,NA,NA,"toy boat","vqa",-7.88334522098667,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1426",NA,NA,NA,"toy book","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1427",NA,NA,NA,"toy bottle","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1428",NA,NA,NA,"toy bowl","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1429",NA,NA,NA,"toy bridge","vqa",-8.50587483433266,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1430",NA,NA,NA,"toy broom","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1431",NA,NA,NA,"toy brush","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1432",NA,NA,NA,"toy bucket","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1433",NA,NA,NA,"toy bunny","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1434",NA,NA,NA,"toy bus","vqa",-6.52801308547074,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1435",NA,NA,NA,"toy calculator","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1436",NA,NA,NA,"toy car","vqa",-2.78720374718271,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1437",NA,NA,NA,"toy car steering wheel","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1438",NA,NA,NA,"toy car track","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1439",NA,NA,NA,"toy carrot","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1440",NA,NA,NA,"toy cart","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1441",NA,NA,NA,"toy cat","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1442",NA,NA,NA,"toy caterpillar","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1443",NA,NA,NA,"toy chair","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1444",NA,NA,NA,"toy chicken","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1445",NA,NA,NA,"toy clock","vqa",-8.88886708658876,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1446",NA,NA,NA,"toy clothe","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1447",NA,NA,NA,"toy clothe dryer","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1448",NA,NA,NA,"toy container","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1449",NA,NA,NA,"toy cow","vqa",-7.76827589120188,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1450",NA,NA,NA,"toy crane","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1451",NA,NA,NA,"toy crocodile","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1452",NA,NA,NA,"toy cube","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1453",NA,NA,NA,"toy cup","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1454",NA,NA,NA,"toy cupboard","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1455",NA,NA,NA,"toy dinosaur","vqa",-8.19571990602882,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1456",NA,NA,NA,"toy doll","vqa",-7.14256999143747,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1457",NA,NA,NA,"toy dragon","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1458",NA,NA,NA,"toy drum","vqa",-7.95933112796459,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1459",NA,NA,NA,"toy duck","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1460",NA,NA,NA,"toy dustpan","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1461",NA,NA,NA,"toy egg","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1462",NA,NA,NA,"toy elephant","vqa",-6.19423990581869,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1463",NA,NA,NA,"toy fence","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1464",NA,NA,NA,"toy fire engine","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1465",NA,NA,NA,"toy fire truck","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1466",NA,NA,NA,"toy fish","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1467",NA,NA,NA,"toy food","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1468",NA,NA,NA,"toy food box","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1469",NA,NA,NA,"toy football","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1470",NA,NA,NA,"toy fox","vqa",-8.88886708658876,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1471",NA,NA,NA,"toy fridge","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1472",NA,NA,NA,"toy frog","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1473",NA,NA,NA,"toy giraffe","vqa",-7.16610048884766,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1474",NA,NA,NA,"toy goat","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1475",NA,NA,NA,"toy guitar","vqa",-7.45378256129944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1476",NA,NA,NA,"toy gun","vqa",-8.04156922620156,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1477",NA,NA,NA,"toy hammer","vqa",-7.42253001779534,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1478",NA,NA,NA,"toy hamster","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1479",NA,NA,NA,"toy helicopter","vqa",-8.13118138489125,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1480",NA,NA,NA,"toy hoop","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1481",NA,NA,NA,"toy horse","vqa",-6.07146434855919,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1482",NA,NA,NA,"toy house","vqa",-5.03871948487871,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1483",NA,NA,NA,"toy kettle","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1484",NA,NA,NA,"toy keyboard","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1485",NA,NA,NA,"toy kitchen","vqa",-7.88334522098667,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1486",NA,NA,NA,"toy kitchen set","vqa",-7.13100916903639,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1487",NA,NA,NA,"toy knife","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1488",NA,NA,NA,"toy ladder","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1489",NA,NA,NA,"toy lion","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1490",NA,NA,NA,"toy lizard","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1491",NA,NA,NA,"toy mallet","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1492",NA,NA,NA,"toy microphone","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1493",NA,NA,NA,"toy microwave","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1494",NA,NA,NA,"toy mixer","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1495",NA,NA,NA,"toy monkey","vqa",-8.30108042168665,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1496",NA,NA,NA,"toy mop","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1497",NA,NA,NA,"toy motorcycle","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1498",NA,NA,NA,"toy mouse","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1499",NA,NA,NA,"toy on floor","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1500",NA,NA,NA,"toy oven","vqa",-8.10040972622449,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1501",NA,NA,NA,"toy pan","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1502",NA,NA,NA,"toy panda","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1503",NA,NA,NA,"toy penguin","vqa",-9.03196793022944,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1504",NA,NA,NA,"toy phone","vqa",-7.50257272546887,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1505",NA,NA,NA,"toy piano","vqa",-5.4854499481883,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1506",NA,NA,NA,"toy pig","vqa",-8.07055676307481,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1507",NA,NA,NA,"toy plane","vqa",-6.66244335456028,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1508",NA,NA,NA,"toy plant","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1509",NA,NA,NA,"toy plate","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1510",NA,NA,NA,"toy pool","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1511",NA,NA,NA,"toy pot","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1512",NA,NA,NA,"toy rabbit","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1513",NA,NA,NA,"toy raccoon","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1514",NA,NA,NA,"toy refrigerator","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1515",NA,NA,NA,"toy remote control","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1516",NA,NA,NA,"toy ring","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1517",NA,NA,NA,"toy road","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1518",NA,NA,NA,"toy robot","vqa",-8.70654552979481,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1519",NA,NA,NA,"toy rocket","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1520",NA,NA,NA,"toy santa claus","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1521",NA,NA,NA,"toy scissors","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1522",NA,NA,NA,"toy scooter","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1523",NA,NA,NA,"toy shark","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1524",NA,NA,NA,"toy sheep","vqa",-8.70654552979481,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1525",NA,NA,NA,"toy shelf","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1526",NA,NA,NA,"toy ship","vqa",-9.39969271035475,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1527",NA,NA,NA,"toy shopping cart","vqa",-8.41886345734303,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1528",NA,NA,NA,"toy shovel","vqa",-8.2296214577045,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1529",NA,NA,NA,"toy sink","vqa",-8.76370394363476,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1530",NA,NA,NA,"toy skateboard","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1531",NA,NA,NA,"toy slide","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1532",NA,NA,NA,"toy snake","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1533",NA,NA,NA,"toy space shuttle","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1534",NA,NA,NA,"toy spatula","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1535",NA,NA,NA,"toy spider","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1536",NA,NA,NA,"toy sponge","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1537",NA,NA,NA,"toy spoon","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1538",NA,NA,NA,"toy steering wheel","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1539",NA,NA,NA,"toy stick","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1540",NA,NA,NA,"toy stove","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1541",NA,NA,NA,"toy stroller","vqa",-8.16293008320583,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1542",NA,NA,NA,"toy structure","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1543",NA,NA,NA,"toy submarine","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1544",NA,NA,NA,"toy swan","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1545",NA,NA,NA,"toy sword","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1546",NA,NA,NA,"toy table","vqa",-8.60118501413698,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1547",NA,NA,NA,"toy table and chair","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1548",NA,NA,NA,"toy tambourine","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1549",NA,NA,NA,"toy tea set","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1550",NA,NA,NA,"toy telephone","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1551",NA,NA,NA,"toy tent","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1552",NA,NA,NA,"toy tiger","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1553",NA,NA,NA,"toy toilet","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1554",NA,NA,NA,"toy tower","vqa",-8.95785995807572,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1555",NA,NA,NA,"toy track","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1556",NA,NA,NA,"toy tractor","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1557",NA,NA,NA,"toy train","vqa",-5.32971673914961,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1558",NA,NA,NA,"toy train set","vqa",-7.81272765377271,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1559",NA,NA,NA,"toy train track","vqa",-8.30108042168665,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1560",NA,NA,NA,"toy tree","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1561",NA,NA,NA,"toy truck","vqa",-5.30165128625133,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1562",NA,NA,NA,"toy turtle","vqa",-8.70654552979481,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1563",NA,NA,NA,"toy unicorn","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1564",NA,NA,NA,"toy vacuum","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1565",NA,NA,NA,"toy wagon","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1566",NA,NA,NA,"toy walker","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1567",NA,NA,NA,"toy washing machine","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1568",NA,NA,NA,"toy watering can","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1569",NA,NA,NA,"toy xylophone","vqa",-8.19571990602882,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1570",NA,NA,NA,"toy zebra","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1571",NA,NA,NA,"train toy","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1572",NA,NA,NA,"train track","vqa",-8.30108042168665,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1573",NA,NA,NA,"trash bag","vqa",-8.41886345734303,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1574",NA,NA,NA,"tray with toy","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1575",NA,NA,NA,"turtle toy","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1576",NA,NA,NA,"tv remote","vqa",-5.8668175047174,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1577",NA,NA,NA,"tv screen","vqa",-6.74488702377136,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1578",NA,NA,NA,"tv stand","vqa",-3.79389064405876,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1579",NA,NA,NA,"two people","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1580",NA,NA,NA,"unicorn toy","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1581",NA,NA,NA,"vase with flower","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1582",NA,NA,NA,"wall art","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1583",NA,NA,NA,"wall decor","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1584",NA,NA,NA,"wall decoration","vqa",-6.76860355038867,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1585",NA,NA,NA,"wall frame","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1586",NA,NA,NA,"wall hang","vqa",-7.76827589120188,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1587",NA,NA,NA,"wall lamp","vqa",-8.13118138489125,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1588",NA,NA,NA,"wall light","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1589",NA,NA,NA,"wall mount","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1590",NA,NA,NA,"wall picture","vqa",-7.40726254566455,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1591",NA,NA,NA,"wall sticker","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1592",NA,NA,NA,"wall switch","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1593",NA,NA,NA,"wardrobe closet","vqa",-8.88886708658876,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1594",NA,NA,NA,"water bowl","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1595",NA,NA,NA,"water bucket","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1596",NA,NA,NA,"water can","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1597",NA,NA,NA,"water container","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1598",NA,NA,NA,"water dispenser","vqa",-9.11201063790297,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1599",NA,NA,NA,"water hose","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1600",NA,NA,NA,"water pitcher","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1601",NA,NA,NA,"water pool","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1602",NA,NA,NA,"water puddle","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1603",NA,NA,NA,"water toy","vqa",-8.82432856545119,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1604",NA,NA,NA,"watermelon book","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1605",NA,NA,NA,"whiteboard","vqa",-4.56252935777547,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1606",NA,NA,NA,"whiteboard eraser","vqa",-5.97289978150364,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1607",NA,NA,NA,"whiteboard eraser cover","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1608",NA,NA,NA,"whiteboard eraser holder","vqa",-10.4983049990229,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1609",NA,NA,NA,"whiteboard marker","vqa",-8.82432856545119,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1610",NA,NA,NA,"window curtain","vqa",-5.57346969472994,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1611",NA,NA,NA,"window with curtain","vqa",-9.80515781846292,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1612",NA,NA,NA,"wine glass","vqa",-7.70509698958035,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1613",NA,NA,NA,"wine rack","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1614",NA,NA,NA,"woman and adult","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1615",NA,NA,NA,"woman and baby","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1616",NA,NA,NA,"woman and child","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1617",NA,NA,NA,"woman and girl","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1618",NA,NA,NA,"woman and man","vqa",-9.1990220148926,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1619",NA,NA,NA,"woman and person","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1620",NA,NA,NA,"woman and two child","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1621",NA,NA,NA,"woman and two girl","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1622",NA,NA,NA,"woman at table","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1623",NA,NA,NA,"woman in clothe","vqa",-9.65100713863566,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1624",NA,NA,NA,"woman in dress","vqa",-9.51747574601114,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1625",NA,NA,NA,"woman in kitchen","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1626",NA,NA,NA,"woman in pant","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1627",NA,NA,NA,"woman in shirt","vqa",-8.46142307176182,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1628",NA,NA,NA,"woman in sweater","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1629",NA,NA,NA,"woman in top","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1630",NA,NA,NA,"woman with glasses","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1631",NA,NA,NA,"woman with hair","vqa",-9.98747937525687,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1632",NA,NA,NA,"wooden board","vqa",-7.33423741064966,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1633",NA,NA,NA,"wooden board game","vqa",-10.903770107131,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1634",NA,NA,NA,"wooden box","vqa",-8.16293008320583,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1635",NA,NA,NA,"wooden house","vqa",-10.2106229265711,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1636",NA,NA,NA,"world map","vqa",-9.29433219469693,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1637",NA,NA,NA,"underpant","yoloe",-3.79227043339769,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1638",NA,NA,NA,"tight","yoloe",-4.87541197011965,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
+"1639",NA,NA,NA,"firetruck","yoloe",-9.44179162929551,TRUE,NA,NA,NA,NA,NA,NA,NA,NA
+"1640",NA,NA,NA,"owie","yoloe",-11.5332573639421,FALSE,NA,NA,NA,NA,NA,NA,NA,NA
