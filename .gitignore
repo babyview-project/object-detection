@@ -14,3 +14,4 @@ yoloe/pretrain
 **/*_files/
 *.udpipe
 *_trans*.csv
+**/__pycache__/
