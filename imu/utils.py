@@ -145,9 +145,9 @@ def process_imu_for_video_dir(accel_dir):
     gyro_csv_path = os.path.join(accel_dir, f"gyro.csv")
     grav_csv_path = os.path.join(accel_dir, f"grav.csv")
 
-    if os.path.exists(accel_csv_path) and os.path.exists(gyro_csv_path) and os.path.exists(grav_csv_path):
-        print(f"IMU CSV files for {accel_dir} already exist. Skipping processing.")
-        return
+    # if os.path.exists(accel_csv_path) and os.path.exists(gyro_csv_path) and os.path.exists(grav_csv_path):
+    #     print(f"IMU CSV files for {accel_dir} already exist. Skipping processing.")
+    #     return
 
     # Convert txt files to CSV files
     if os.path.exists(accel_txt_path) and os.path.exists(gyro_txt_path) and os.path.exists(grav_txt_path):
@@ -156,7 +156,7 @@ def process_imu_for_video_dir(accel_dir):
         process_file(grav_txt_path, "GRAV", grav_csv_path)
     else:
         print(f"IMU txt files for {accel_dir} are missing.")
-        return
+        return None
 
     # Load CSV data
     imu_data = load_csv_data(accel_csv_path, gyro_csv_path, grav_csv_path)
@@ -168,6 +168,13 @@ def process_imu_for_video_dir(accel_dir):
         imu_csv_path = os.path.join(accel_dir, "imu.csv")
         imu_df.to_csv(imu_csv_path, index=False)
         print(f"imu data saved to {imu_csv_path}")
+
+    # delete the intermediate CSV files
+    os.remove(accel_csv_path)
+    os.remove(gyro_csv_path)
+    os.remove(grav_csv_path)
+    
+    return imu_df
 
 def process_file(file_path, sensor_type, output_file):
     # Attempt to read the file with different encodings
@@ -301,11 +308,13 @@ def load_csv_data(accel_path, gyro_path, grav_path):
         merged_data = pd.merge_asof(accel_data.sort_values('Timestamp (s)'), 
                                     gyro_data.sort_values('Timestamp (s)'), 
                                     on='Timestamp (s)')
-        # grav data has lower sampling rate (60Hz) than accel and gyro (200Hz), so it is placed second
-        merged_data = pd.merge_asof(merged_data.sort_values('Timestamp (s)'), 
-                                    grav_data.sort_values('Timestamp (s)'), 
-                                    on='Timestamp (s)',
-                                    direction='nearest')
+        # grav data has lower sampling rate (30Hz) than accel and gyro (200Hz)
+        merged_data = pd.merge_asof(
+            grav_data.sort_values('Timestamp (s)'),
+            merged_data.sort_values('Timestamp (s)'),
+            on='Timestamp (s)',
+            direction='nearest'
+        )
         
         # interpolate to fill NaN values (of grav data, since it has lower sampling rate)
         merged_data = merged_data.interpolate(method='linear', limit_direction='both')
