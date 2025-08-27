@@ -28,7 +28,7 @@ def create_imu_csv_for_10s_clips(args, video_path):
         imu_df
         .assign(ChunkNum=(imu_df['Timestamp (s)'] // 10).astype(int))  # 0–9.999 -> 0, 10–19.999 -> 1, etc.
         .groupby('ChunkNum', as_index=False)[cols_to_avg]
-        .mean()  # averages all other numeric cols; NaNs are skipped by default
+        .agg(lambda x: x.abs().mean())  # averages mean absolute value; use (x**2) for squared values if preferred
     )
 
     out['video_id'] = out['ChunkNum'].apply(lambda x, b=basename: f"{b}_{x:03d}.mp4")
