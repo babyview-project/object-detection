@@ -1,0 +1,54 @@
+---
+title: "rdm-explore-objects"
+author: "Bria Long"
+date: "2025-12-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(tidyverse)
+
+# --- 1. READ IN EMBEDDINGS ---
+# File should look like:
+# category, dim1, dim2, ...
+embeddings_raw <- read_csv("category_embeddings.csv")
+
+# --- 2. Z-SCORE EACH DIMENSION ---
+embeddings_z <- embeddings_raw %>%
+  mutate(across(starts_with("dim"), ~ as.numeric(scale(.x))))  # z-score per dimension
+
+# Or more robust:
+# mutate(across(where(is.numeric) & !category, ~ as.numeric(scale(.x))))
+
+# --- Convert to matrix for similarity operations ---
+categories <- embeddings_z$category
+emb_matrix <- embeddings_z %>% select(-category) %>% as.matrix()
+
+# --- 3. COMPUTE RDMs ---
+## Cosine distance function
+cosine_distance <- function(x, y) {
+  1 - sum(x * y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)))
+}
+
+# Compute cosine RDM (n x n)
+rdm_cosine <- outer(
+  1:nrow(emb_matrix),
+  1:nrow(emb_matrix),
+  Vectorize(function(i, j) cosine_distance(emb_matrix[i, ], emb_matrix[j, ]))
+)
+
+# Add row/colnames
+rownames(rdm_cosine) <- categories
+colnames(rdm_cosine) <- categories
+
+# --- Euclide
+```

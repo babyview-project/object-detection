@@ -52,6 +52,7 @@ age_model_no_sub_slopes = glmer(data=for_glmer, cbind(num_detected, num_not_dete
 ```
 
 ```{R}
+# This is the chi-squared test that is reported in the ccn 2025 paper
 anova(age_model, age_model_no_class_slopes)
 ```
 
