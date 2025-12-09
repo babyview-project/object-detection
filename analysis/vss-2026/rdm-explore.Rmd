@@ -9,46 +9,156 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ```{r}
 library(tidyverse)
+library(here)
+library(langcog)
 ```
 
+
 ```{r}
-library(tidyverse)
+embeddings_babyview_clip <- read_csv(here::here('data/embeddings/babyview_clip_filtered26_category_average_embeddings.csv'))  %>%
+  rename(category = 1) %>%
+  rename_with(
+    .cols = where(is.numeric),
+    .fn   = ~ paste0("dim_", seq_along(.x))
+  )  %>%
+  mutate(
+    across(
+      .cols = where(is.numeric) & !matches("category"),
+      .fns  = ~ as.numeric(scale(.x))
+    )
+  )
 
-# --- 1. READ IN EMBEDDINGS ---
-# File should look like:
-# category, dim1, dim2, ...
-embeddings_raw <- read_csv("category_embeddings.csv")
+```
 
-# --- 2. Z-SCORE EACH DIMENSION ---
-embeddings_z <- embeddings_raw %>%
-  mutate(across(starts_with("dim"), ~ as.numeric(scale(.x))))  # z-score per dimension
 
-# Or more robust:
-# mutate(across(where(is.numeric) & !category, ~ as.numeric(scale(.x))))
 
-# --- Convert to matrix for similarity operations ---
-categories <- embeddings_z$category
-emb_matrix <- embeddings_z %>% select(-category) %>% as.matrix()
+```{r}
+embeddings_babyview_dino <- read_csv(here::here('data/embeddings/babyview_dinov3_filtered26_category_average_embeddings.csv'))  %>%
+  rename(category = 1) %>%
+  rename_with(
+    .cols = where(is.numeric),
+    .fn   = ~ paste0("dim_", seq_along(.x))
+  )  %>%
+  mutate(
+    across(
+      .cols = where(is.numeric) & !matches("category"),
+      .fns  = ~ as.numeric(scale(.x))
+    )
+  )
+```
 
-# --- 3. COMPUTE RDMs ---
-## Cosine distance function
+
+## Do this for babyview clip
+```{R}
+categories <- embeddings_babyview_clip$category
+
+emb_matrix <- embeddings_babyview_clip %>%
+  select(starts_with("dim_")) %>%
+  as.matrix()
+
+# Cosine distance helper
 cosine_distance <- function(x, y) {
   1 - sum(x * y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)))
 }
 
-# Compute cosine RDM (n x n)
-rdm_cosine <- outer(
+# Cosine RDM as an n x n matrix
+rdm_cosine_mat <- outer(
   1:nrow(emb_matrix),
   1:nrow(emb_matrix),
   Vectorize(function(i, j) cosine_distance(emb_matrix[i, ], emb_matrix[j, ]))
 )
 
-# Add row/colnames
-rownames(rdm_cosine) <- categories
-colnames(rdm_cosine) <- categories
+dimnames(rdm_cosine_mat) <- list(categories, categories)
 
-# --- Euclide
+# Tidy long version (great for ggplot / RSA)
+rdm_cosine_long <- as_tibble(rdm_cosine_mat, rownames = "category1") %>%
+  pivot_longer(
+    cols = -category1,
+    names_to = "category2",
+    values_to = "cosine_distance"
+  )
+
+rdm_cosine_long_clip = rdm_cosine_long
+```
+
+## DO this for babyview dino
+```{R}
+categories <- embeddings_babyview_dino$category
+
+emb_matrix_dino <- embeddings_babyview_dino %>%
+  select(starts_with("dim_")) %>%
+  as.matrix()
+
+# Cosine distance helper
+cosine_distance <- function(x, y) {
+  1 - sum(x * y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)))
+}
+
+pearson_distance <- function(x, y) {
+  1 - cor(x, y, method = "pearson")
+}
+
+# Cosine RDM as an n x n matrix
+rdm_cosine_mat_dino <- outer(
+  1:nrow(emb_matrix_dino),
+  1:nrow(emb_matrix_dino),
+  Vectorize(function(i, j) cosine_distance(emb_matrix_dino[i, ], emb_matrix_dino[j, ]))
+)
+
+dimnames(rdm_cosine_mat_dino) <- list(categories, categories)
+
+# Tidy long version (great for ggplot / RSA)
+rdm_cosine_long_dino <- as_tibble(rdm_cosine_mat_dino, rownames = "category1") %>%
+  pivot_longer(
+    cols = -category1,
+    names_to = "category2",
+    values_to = "cosine_distance"
+  )
+
+rdm_cosine_long_dino 
+
+```
+
+
+```{r}
+# Make a wide matrix again for clustering
+rdm_mat <- rdm_cosine_long %>%
+  pivot_wider(
+    names_from = category2,
+    values_from = cosine_distance
+  ) %>%
+  column_to_rownames("category1") %>%
+  as.matrix()
+
+# Hierarchical clustering order
+hc <- hclust(as.dist(rdm_mat))
+ord <- rownames(rdm_mat)[hc$order]
+
+rdm_cosine_long_ordered <- rdm_cosine_long %>%
+  mutate(
+    category1 = factor(category1, levels = ord),
+    category2 = factor(category2, levels = ord)
+  )
+```
+
+```{r}
+ggplot(rdm_cosine_long_ordered, aes(x = category1, y = category2, fill = cosine_distance)) +
+  geom_tile() +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  coord_equal() +
+  theme_minimal(base_size = 10) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),
+    panel.grid = element_blank()
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = "Cosine distance",
+    title = "CLIP category RDM (cluster-ordered)"
+  )
+
+
 ```
