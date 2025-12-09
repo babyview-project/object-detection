@@ -1,0 +1,287 @@
+```{r libraries}
+library(tidyverse)
+library(here)
+library(lmerTest)
+library(MuMIn)
+base_size_print=10
+label_size=7
+```
+
+# AoA predictions
+## Helpers
+```{r}
+mean_na_or_na <- function(x) {
+  if (all(is.na(x))) NA_real_ else mean(x, na.rm = TRUE)
+}
+```
+
+## 1. Import object detection data
+```{r}
+old_object_counts <- read_csv(here("data/overall_category_distribution.csv")) |> rename(object=class_name)
+all_object_counts <- read_csv(here("frame_data/preprocessed_object_detections.csv"))
+object_counts <- all_object_counts |>
+  group_by(class_name) |>
+  summarize(total_detected = sum(num_detected), total_frames = sum(num_frames), proportion = total_detected / total_frames) |>
+  filter(!is.na(class_name))
+
+aoa_values <- read_csv(here("data/coef_data/eng_aoas.csv")) %>%
+  mutate(
+    item_definition = case_when(
+      item_definition == "TV" ~ "tv",
+      item_definition %in% c("couch") ~ "couch, sofa",
+      item_definition %in% c("trash") ~ "garbage, trash",
+      item_definition %in% c("backyard") ~ "backyard, yard",
+      item_definition %in% c("noodles") ~ "noodles, spaghetti",
+      TRUE ~ item_definition
+    )
+  ) %>%
+  pivot_wider(
+    id_cols = "item_definition",
+    names_from = measure,
+    values_from = aoa,
+    names_prefix = "aoa_"
+  )
+
+object_counts_cleaned <- object_counts |>
+  distinct(class_name, .keep_all=TRUE) |>
+  # filtering out more spurious classes
+  filter(class_name != "person" & class_name != "picture") |>
+  mutate(proportion_cleaned = round(10000* proportion,5),
+         percentage = 100*proportion,
+         log_proportion = log(percentage),
+         visual_frequency = scale(log_proportion)) |>
+  rename(object=class_name) |>
+  left_join(old_object_counts |> rename(old_proportion=proportion) |> select(object, old_proportion), by="object")
+
+cor.test(object_counts_cleaned$proportion, object_counts_cleaned$old_proportion)
+```
+
+
+
+## 2. Combine existing word trajectory predictors
+```{r}
+# loaded from https://github.com/mikabr/aoa-prediction
+original_uni_joined <- load(here("data/coef_data/original_uni_joined.RData"))
+original_uni_joined <- get(original_uni_joined)
+
+# loading my updated aoa predictor file
+load(here("data/coef_data/uni_joined.Rdata"))
+eng_joined <- uni_joined |> filter(language == "English (American)") |> left_join(aoa_values, by=c("words"="item_definition"))
+original_eng_joined <- original_uni_joined |> filter(language == "English (American)") |> left_join(aoa_values, by=c("words"="item_definition"))
+```
+
+Checking if the proportions from the new preprocessing code I incorporated correlates with the old ones pulled directly from Mika's code.
+```{r}
+added_coefs <- eng_joined |>
+  left_join(original_eng_joined |> rename(original_prop = prop, original_frequency = frequency) |> select(original_prop, uni_lemma, measure, original_frequency, age)) |>
+  filter(!is.na(original_prop) & !is.na(prop) & !is.na(original_prop) & !is.na(original_frequency))
+
+cor(added_coefs |> select(prop, original_prop, frequency, original_frequency))
+```
+Phew.
+
+```{r}
+# based on this model just going to join on any row that contains the object even if that means matching with multiple words, since that's what it looks like is being done with MLU etc.
+longer_cdi_objects <- object_counts_cleaned |>
+  select(object, visual_frequency, log_proportion) |>
+  rowwise() |>
+  mutate(matching = list(
+    eng_joined |> filter(str_starts(uni_lemma, fixed(paste0(object, " ")))) |> filter(lexical_classes == "nouns")
+  )) |>
+  unnest(matching) |>
+  rename(original_object=object) |>
+  filter(uni_lemma != "ice cream") |>
+  rename(object=uni_lemma) |>
+  filter(!is.na(language))
+
+shorter_cdi_objects <- object_counts_cleaned |>
+  select(object, visual_frequency, log_proportion)  |>
+  mutate(original_object=object) |>
+  left_join(eng_joined, by=c("object"="uni_lemma")) |>
+  # getting rid of words that do not have a match
+  filter(!is.na(language))
+  
+eng_vars <- bind_rows(longer_cdi_objects, shorter_cdi_objects) |>
+  # re-calculating visual frequency after getting rid of all of the CDI words that don't exist in the model
+  mutate(visual_frequency = scale(log_proportion))
+```
+
+And now looking at whether we missed any objects that were detected:
+```{r}
+anti_join(object_counts_cleaned |> distinct(object), eng_vars |> distinct(original_object), by = c("object"="original_object"))
+```
+Right.
+
+Looking at whether any of our words don't have AoAs and adding in AoAs to the object counts
+```{r}
+eng_vars |> filter(is.na(aoa_produces) & is.na(aoa_understands)) |> distinct(words)
+object_counts_cleaned <- object_counts_cleaned |> left_join(eng_vars |> distinct(original_object, aoa_produces, aoa_understands),
+                                                            by = c("object"="original_object"))
+```
+
+Sanity checks:
+```{r}
+nrow(eng_vars |> distinct(object))
+nrow(eng_vars |> distinct(original_object))
+nrow(eng_joined |> distinct(uni_lemma))
+```
+
+## 3. AoA predictions
+```{r}
+object_counts_long <- object_counts_cleaned %>%
+  pivot_longer(
+    cols = c(aoa_produces, aoa_understands),
+    names_to = "aoa_type",
+    values_to = "aoa_value"
+  ) %>%
+  mutate(aoa_type = recode(aoa_type,
+                           "aoa_produces" = "AoA Production",
+                           "aoa_understands" = "AoA Comprehension"))
+
+# Create the faceted plot
+aoa_objects_plot <- ggplot(object_counts_long, aes(x = aoa_value, y = log_proportion)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~ aoa_type, scales = "free_x") +
+   ggrepel::geom_label_repel(
+    data = object_counts_long |> filter(object %in% c("book", "dog", "milk", "penny", "chair", "table")),
+    aes(label = object)
+  ) +
+  ylim(-10, 8) +  
+  ggpubr::stat_cor(vjust = 2) +  
+  ylab("Log (percentage of frames with object detected)") +
+  xlab("Age of Acquisition") +
+  theme_minimal()
+
+ggsave(here("data/figures/aoa_plot_full.png"), aoa_objects_plot)
+```
+
+### 3a. Plot for CCN
+```{r}
+cdi_metadata <- read_csv(here("data/cdi_words.csv"))
+
+object_counts_plot <- object_counts_cleaned |> 
+  left_join(
+    cdi_metadata |> 
+      group_by(uni_lemma) |> 
+      slice_min(order_by = AoA, n = 1, with_ties = FALSE) |> 
+      ungroup() |> 
+      select(uni_lemma, category, is_animate, is_small, is_big),
+    by = c("object" = "uni_lemma")
+  ) |>
+  #mutate(category=ifelse(category == "furniture_rooms", ifelse(object %in% c("basement", "bathroom", "bedroom", "kitchen",
+  #                                                                           "garage", "room"), "room", "furniture"), category)) |>
+  mutate(category = case_when(
+      category == "food_drink" ~ "food",
+      category == "body_parts" ~ "body parts",
+      category == "furniture_rooms" ~ "household",
+      TRUE ~ category),
+      konkle_category = case_when(
+        is_animate == 1 ~ "animated",
+        is_small == 1 ~ "small_obj",
+        is_big == 1 ~ "big_obj",
+        TRUE ~ "others"
+      )) |>
+  mutate(category = str_to_sentence(category)) |>
+  group_by(object) |>
+ reframe(
+     aoa_produces   = mean_na_or_na(aoa_produces),
+    aoa_understands = mean_na_or_na(aoa_understands),
+    across(everything(), ~ first(.x))  
+  ) |>
+  ungroup()
+
+konkle_colors <- c(
+  "animated" = "purple",   
+  "small_obj" = "orange",  
+  "big_obj" = "blue",    
+  "others" = "grey"      
+)
+
+category_averages <- object_counts_plot |>
+  group_by(category) |>
+  summarize(avg_log_proportion = mean(log_proportion, na.rm = TRUE)) |>
+  arrange(avg_log_proportion)
+
+# Convert category to factor with ordered levels based on average log_proportion
+object_counts_plot <- object_counts_plot |>
+  mutate(category = factor(category, levels = category_averages$category))
+
+# Big - blue, small - orange, animated - purple
+
+
+aoa_objects_plot_production <- ggplot(object_counts_plot, aes(x= aoa_produces, y=log_proportion)) +
+  geom_point(size=4, alpha=0.4, aes(color=konkle_category)) +
+  geom_smooth(method = "lm", color="#555") +
+ggrepel::geom_label_repel(
+  size=label_size,
+    data = object_counts_cleaned |> filter(object %in% c("book", "dog", "milk", "penny", "chair", "table", "porch", "plant", "hat", "crayon", "diaper", "bathroom", "tv", "toy", "truck", "hand", "ball", "face", "nose", "penguin", "juice", "cheese", "crib", "blanket", "bucket", "plate", "tray", "knee", "owie", "raisin", "puzzle", "drink", "zipper", "pasta", "turtle")), alpha=0.8,force=10,force_pull=0.1,nudge_y=-0.1,max.overlaps = 15,
+    aes(label = object)
+  ) +
+  ylim(-10, 6) +  
+  ylab("log (percentage of frames with object)") +
+  xlab("Estimated age-of-acquisition of word (in months)") +
+  theme_minimal() +
+ theme(
+    text = element_text(size=10, face="bold"),              # All text bold
+    # Increase space between x-axis and its title
+    axis.title.x = element_text(
+      #face = "bold", 
+      size = 20,
+      margin = margin(t = 10, r = 0, b = 0, l = 0),
+      hjust = 0.1
+    ),
+    
+    # Increase space between y-axis and its title
+    axis.title.y = element_text(
+      #face = "bold", 
+      size= 20,
+      margin = margin(t = 10, r = 5, b = 0, l = 0)
+    ), 
+    legend.title = element_text(size = 14),  # Small bold legend title
+    legend.text = element_text(size = 14),
+    axis.text = element_text(size=16)    # Small bold legend text
+  )+
+  scale_color_manual(values = konkle_colors) +
+  guides(color = "none")+
+ scale_x_continuous(breaks = seq(14, 34, by = 2)) +
+   coord_cartesian(xlim = c(14,34))
+aoa_objects_plot_production
+ggsave(here("data/figures/aoa_plot_afd.svg"),device="pdf", aoa_objects_plot_production, width=7.5,height=9,bg = "white")
+ggsave(here("data/figures/aoa_plot.svg"),aoa_objects_plot_production, width=7.5,height=9,bg = "white")
+```
+
+### 3b. Linear modeling
+```{r}
+simple_effect <- lm(aoa_produces ~ visual_frequency, data=object_counts_plot)
+summary(simple_effect)
+
+all_effects <- lm(aoa_produces ~ visual_frequency + scale(MLU) + scale(frequency) + scale(babiness) + scale(concreteness) + scale(final_frequency) + scale(solo_freq) + scale(valence) + scale(arousal), data=eng_vars |> filter(!is.na(aoa_understands)) |> distinct(object, .keep_all=TRUE))
+summary(all_effects)
+r.squaredGLMM(all_effects)
+car::vif(all_effects)
+#plot(all_effects)
+```
+
+The main models we're using for CCN:
+```{r}
+smaller_model_understands <- lm(aoa_understands ~ visual_frequency + scale(frequency) + scale(concreteness), data=eng_vars |> distinct(object, .keep_all=TRUE))
+summary(smaller_model_understands)
+smaller_model_produces <- lm(aoa_produces ~ visual_frequency + scale(frequency) + scale(concreteness), data=eng_vars  |> distinct(object, .keep_all=TRUE))
+summary(smaller_model_produces)
+```
+
+Which words might be causing this AoA understanding and AoA production disconnect
+```{r}
+eng_vars |> filter(is.na(aoa_understands)) |> distinct(object)
+```
+
+### 3c. Predictor correlations
+```{r}
+eng_vars_filtered <- eng_vars |> 
+  filter(!is.na(frequency) & !is.na(visual_frequency) & !is.na(concreteness))
+cor(eng_vars_filtered |> distinct(visual_frequency, frequency, final_frequency, concreteness, object) |> select(-object), use = "pairwise.complete.obs")
+cor_test_eng_vars <- eng_vars_filtered |> distinct(visual_frequency, frequency, final_frequency, concreteness, object)
+cor.test(cor_test_eng_vars$visual_frequency, cor_test_eng_vars$frequency)
+cor.test(cor_test_eng_vars$visual_frequency, cor_test_eng_vars$concreteness)
+```
