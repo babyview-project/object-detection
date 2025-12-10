@@ -15,6 +15,38 @@ library(here)
 library(langcog)
 ```
 
+# Load embedding
+```{r}
+embeddings_things_dino <- read_csv(here::here('data/embeddings/things_dino_embeddings.csv'))  %>%
+  rename(category = 1) %>%
+  rename_with(
+    .cols = where(is.numeric),
+    .fn   = ~ paste0("dim_", seq_along(.x))
+  )  %>%
+  mutate(
+    across(
+      .cols = where(is.numeric) & !matches("category"),
+      .fns  = ~ as.numeric(scale(.x))
+    )
+  )
+```
+
+```{r}
+embeddings_things_clip <- read_csv(here::here('data/embeddings/things_clip_embeddings.csv'))  %>%
+  rename(category = 1) %>%
+  rename_with(
+    .cols = where(is.numeric),
+    .fn   = ~ paste0("dim_", seq_along(.x))
+  )  %>%
+  mutate(
+    across(
+      .cols = where(is.numeric) & !matches("category"),
+      .fns  = ~ as.numeric(scale(.x))
+    )
+  )
+
+filtered_categories = unique(embeddings_things_clip$category)
+```
 
 ```{r}
 embeddings_babyview_clip <- read_csv(here::here('data/embeddings/babyview_clip_filtered26_category_average_embeddings.csv'))  %>%
@@ -28,7 +60,8 @@ embeddings_babyview_clip <- read_csv(here::here('data/embeddings/babyview_clip_f
       .cols = where(is.numeric) & !matches("category"),
       .fns  = ~ as.numeric(scale(.x))
     )
-  )
+  ) %>%
+  filter(category %in%filtered_categories)
 
 ```
 
@@ -46,83 +79,60 @@ embeddings_babyview_dino <- read_csv(here::here('data/embeddings/babyview_dinov3
       .cols = where(is.numeric) & !matches("category"),
       .fns  = ~ as.numeric(scale(.x))
     )
-  )
+  ) %>%
+  filter(category %in%filtered_categories)
 ```
 
 
-## Do this for babyview clip
+## Functions for 
 ```{R}
-categories <- embeddings_babyview_clip$category
-
-emb_matrix <- embeddings_babyview_clip %>%
-  select(starts_with("dim_")) %>%
-  as.matrix()
-
 # Cosine distance helper
 cosine_distance <- function(x, y) {
   1 - sum(x * y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)))
 }
 
-# Cosine RDM as an n x n matrix
-rdm_cosine_mat <- outer(
-  1:nrow(emb_matrix),
-  1:nrow(emb_matrix),
-  Vectorize(function(i, j) cosine_distance(emb_matrix[i, ], emb_matrix[j, ]))
-)
+makeLongRDM <- function(embeddings) {
+  
+  categories <- embeddings$category
+  emb_matrix <- embeddings %>%
+    select(starts_with("dim_")) %>%
+    as.matrix()
+  
+  # Cosine RDM as an n x n matrix
+  rdm_cosine_mat <- outer(
+    1:nrow(emb_matrix),
+    1:nrow(emb_matrix),
+    Vectorize(function(i, j) cosine_distance(emb_matrix[i, ], emb_matrix[j, ]))
+  )
 
-dimnames(rdm_cosine_mat) <- list(categories, categories)
+  dimnames(rdm_cosine_mat) <- list(categories, categories)
 
-# Tidy long version (great for ggplot / RSA)
-rdm_cosine_long <- as_tibble(rdm_cosine_mat, rownames = "category1") %>%
+  # Tidy long version (great for ggplot / RSA)
+  rdm_cosine_long <- as_tibble(rdm_cosine_mat, rownames = "category1") %>%
   pivot_longer(
     cols = -category1,
     names_to = "category2",
     values_to = "cosine_distance"
   )
 
-rdm_cosine_long_clip = rdm_cosine_long
+  return(rdm_cosine_long)
+  
+}
+
 ```
 
 ## DO this for babyview dino
 ```{R}
-categories <- embeddings_babyview_dino$category
-
-emb_matrix_dino <- embeddings_babyview_dino %>%
-  select(starts_with("dim_")) %>%
-  as.matrix()
-
-# Cosine distance helper
-cosine_distance <- function(x, y) {
-  1 - sum(x * y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)))
-}
-
-pearson_distance <- function(x, y) {
-  1 - cor(x, y, method = "pearson")
-}
-
-# Cosine RDM as an n x n matrix
-rdm_cosine_mat_dino <- outer(
-  1:nrow(emb_matrix_dino),
-  1:nrow(emb_matrix_dino),
-  Vectorize(function(i, j) cosine_distance(emb_matrix_dino[i, ], emb_matrix_dino[j, ]))
-)
-
-dimnames(rdm_cosine_mat_dino) <- list(categories, categories)
-
-# Tidy long version (great for ggplot / RSA)
-rdm_cosine_long_dino <- as_tibble(rdm_cosine_mat_dino, rownames = "category1") %>%
-  pivot_longer(
-    cols = -category1,
-    names_to = "category2",
-    values_to = "cosine_distance"
-  )
-
-rdm_cosine_long_dino 
-
+babyview_dino <- makeLongRDM(embeddings_babyview_dino)
+babyview_clip <- makeLongRDM(embeddings_babyview_clip)
+#
+things_clip <- makeLongRDM(embeddings_things_clip)
+things_dino <- makeLongRDM(embeddings_things_dino)
 ```
 
 
 ```{r}
+makeLongOrderedRDM <- function(rdm_cosine_long){
 # Make a wide matrix again for clustering
 rdm_mat <- rdm_cosine_long %>%
   pivot_wider(
@@ -141,16 +151,23 @@ rdm_cosine_long_ordered <- rdm_cosine_long %>%
     category1 = factor(category1, levels = ord),
     category2 = factor(category2, levels = ord)
   )
+}
 ```
 
 ```{r}
-ggplot(rdm_cosine_long_ordered, aes(x = category1, y = category2, fill = cosine_distance)) +
+babyview_clip_ordered <- makeLongOrderedRDM(babyview_clip)
+ordered_categories = levels(babyview_clip_ordered$category1)
+```
+
+```{r}
+ggplot(babyview_clip_ordered, aes(x = category1, y = category2, fill = cosine_distance)) +
   geom_tile() +
   scale_fill_viridis_c(option = "magma", direction = -1) +
   coord_equal() +
-  theme_minimal(base_size = 10) +
+  # theme_minimal(base_size = 10) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size=4),
+    axis.text.y = element_text(hjust = 1, vjust = 1, size=4),
     panel.grid = element_blank()
   ) +
   labs(
@@ -160,5 +177,70 @@ ggplot(rdm_cosine_long_ordered, aes(x = category1, y = category2, fill = cosine_
     title = "CLIP category RDM (cluster-ordered)"
   )
 
+ggsave('babyview-clip-ordered.pdf', width=6, height=6, units='in')
+```
 
+
+Make ordered RDMs
+```{r}
+babyview_dino_ordered <- babyview_dino %>%
+  mutate(
+    category1 = factor(category1, levels = ordered_categories),
+    category2 = factor(category2, levels = ordered_categories)
+  )
+
+things_dino_ordered <- things_dino %>%
+  mutate(
+    category1 = factor(category1, levels = ordered_categories),
+    category2 = factor(category2, levels = ordered_categories)
+  )
+
+things_clip_ordered <- things_clip %>%
+  mutate(
+    category1 = factor(category1, levels = ordered_categories),
+    category2 = factor(category2, levels = ordered_categories)
+  )
+
+```
+
+```{r}
+ggplot(things_dino_ordered, aes(x = category1, y = category2, fill = cosine_distance)) +
+  geom_tile() +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  coord_equal() +
+  # theme_minimal(base_size = 10) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size=4),
+    axis.text.y = element_text(hjust = 1, vjust = 1, size=4),
+    panel.grid = element_blank()
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = "Cosine distance",
+    title = "THINGS Dino category RDM (CLIP cluster-ordered)"
+  )
+
+ggsave('things-dino-ordered.pdf', width=6, height=6, units='in')
+```
+
+```{r}
+ggplot(things_clip_ordered, aes(x = category1, y = category2, fill = cosine_distance)) +
+  geom_tile() +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  coord_equal() +
+  # theme_minimal(base_size = 10) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size=4),
+    axis.text.y = element_text(hjust = 1, vjust = 1, size=4),
+    panel.grid = element_blank()
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = "Cosine distance",
+    title = "Things CLIP category RDM (CLIP cluster-ordered)"
+  )
+
+ggsave('things-clip-ordered.pdf', width=6, height=6, units='in')
 ```
