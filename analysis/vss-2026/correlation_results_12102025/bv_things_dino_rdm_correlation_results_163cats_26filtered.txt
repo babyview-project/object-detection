@@ -2,8 +2,8 @@
 RDM MATRIX CORRELATION RESULTS
 ============================================================
 
-RDM 1: bv_clip_filtered_zscored_hierarchical_163cats/distance_matrix_filtered_original.npy
-RDM 2: things_clip_filtered_zscored_hierarchical_163cats/distance_matrix_filtered_original.npy
+RDM 1: bv_dino_filtered_zscored_hierarchical_163cats/distance_matrix_filtered_original.npy
+RDM 2: things_dino_filtered_zscored_hierarchical_163cats/distance_matrix_filtered_original.npy
 
 Matrix 1 shape: (163, 163)
 Matrix 2 shape: (163, 163)
@@ -14,13 +14,13 @@ Valid elements: 13203 / 13203
 ============================================================
 CORRELATION RESULTS
 ============================================================
-Spearman r: 0.371377
-Spearman p-value: 0.00e+00
-Pearson r: 0.467521
+Spearman r: 0.314168
+Spearman p-value: 2.84e-300
+Pearson r: 0.449798
 Pearson p-value: 0.00e+00
-Kendall τ: 0.256535
-Kendall p-value: 0.00e+00
+Kendall τ: 0.214315
+Kendall p-value: 1.33e-298
 
 Matrix Statistics:
-  Matrix 1: Mean=1.003400, Std=0.269071
-  Matrix 2: Mean=1.005676, Std=0.125451
+  Matrix 1: Mean=1.004837, Std=0.188553
+  Matrix 2: Mean=1.005878, Std=0.066091
