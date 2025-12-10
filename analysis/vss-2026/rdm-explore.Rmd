@@ -34,7 +34,9 @@ embeddings_things_dino <- read_csv(here::here('data/embeddings/things_dino_embed
       .fns  = ~ as.numeric(scale(.x))
     )
   ) %>%
-  filter(!category %in% exclude_low_precision$X1)
+  filter(!category %in% exclude_low_precision$X1)  %>%
+  mutate(category = as.factor(category)) %>%
+  arrange(-desc(category))
 ```
 
 ```{r}
@@ -149,6 +151,14 @@ things_dino <- makeLongRDM(embeddings_things_dino,cosine_distance)
 ```
 
 
+```{r}
+assertthat::assert_that( sum(!babyview_clip$category1==babyview_dino$category1)==0)
+assertthat::assert_that( sum(!things_dino$category1==babyview_dino$category1)==0)
+assertthat::assert_that( sum(!things_clip$category1==things_dino$category1)==0)
+assertthat::assert_that( sum(!babyview_clip$category1==things_clip$category1)==0)
+
+
+```
 # Compare RDMs
 
 Babyview vs THINGS
