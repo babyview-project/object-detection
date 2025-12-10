@@ -24,6 +24,7 @@ exclude_low_precision = read_csv('low_precision.txt', col_names=FALSE)
 ```{r}
 embeddings_things_dino <- read_csv(here::here('data/embeddings/things_dino_embeddings.csv'))  %>%
   rename(category = 1) %>%
+  filter(!category %in% exclude_low_precision$X1)  %>%
   rename_with(
     .cols = where(is.numeric),
     .fn   = ~ paste0("dim_", seq_along(.x))
@@ -34,7 +35,6 @@ embeddings_things_dino <- read_csv(here::here('data/embeddings/things_dino_embed
       .fns  = ~ as.numeric(scale(.x))
     )
   ) %>%
-  filter(!category %in% exclude_low_precision$X1)  %>%
   mutate(category = as.factor(category)) %>%
   arrange(-desc(category))
 ```
@@ -42,6 +42,7 @@ embeddings_things_dino <- read_csv(here::here('data/embeddings/things_dino_embed
 ```{r}
 embeddings_things_clip <- read_csv(here::here('data/embeddings/things_clip_embeddings.csv'))  %>%
   rename(category = 1) %>%
+  filter(!category %in% exclude_low_precision$X1)  %>%
   rename_with(
     .cols = where(is.numeric),
     .fn   = ~ paste0("dim_", seq_along(.x))
@@ -52,7 +53,6 @@ embeddings_things_clip <- read_csv(here::here('data/embeddings/things_clip_embed
       .fns  = ~ as.numeric(scale(.x))
     )
   ) %>%
-  filter(!category %in% exclude_low_precision$X1)  %>%
   mutate(category = as.factor(category)) %>%
   arrange(-desc(category))
 
@@ -62,6 +62,8 @@ filtered_categories = unique(embeddings_things_clip$category)
 ```{r}
 embeddings_babyview_clip <- read_csv(here::here('data/embeddings/babyview_clip_filtered26_category_average_embeddings.csv'))  %>%
   rename(category = 1) %>%
+  filter(!category %in% exclude_low_precision$X1)  %>%
+  filter(category %in% filtered_categories) %>%
   rename_with(
     .cols = where(is.numeric),
     .fn   = ~ paste0("dim_", seq_along(.x))
@@ -72,16 +74,37 @@ embeddings_babyview_clip <- read_csv(here::here('data/embeddings/babyview_clip_f
       .fns  = ~ as.numeric(scale(.x))
     )
   ) %>%
-  filter(category %in%filtered_categories) %>%
-  filter(!category %in% exclude_low_precision$X1) %>%
-   mutate(category = as.factor(category)) %>%
+  mutate(category = as.factor(category)) %>%
   arrange(-desc(category))
 
+
+
 ```
+Sanity check
+```{r}
+alligator = as.numeric(embeddings_babyview_clip %>% filter(category=='alligator'))
+
+deer = as.numeric(embeddings_babyview_clip %>% filter(category=='deer'))
+deer_things = as.numeric(embeddings_things_clip %>% filter(category=='deer'))
+
+
+
+cosine_distance <- function(x, y) {
+  1 - sum(x * y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)))
+}
+
+#
+pearsons_distance_sanity = 1 - cor(deer[2:513], alligator[2:513])
+cosine_distance_sanity = cosine_distance(deer[2:513], alligator[2:513])
+
+```
+
 
 ```{r}
 embeddings_babyview_dino <- read_csv(here::here('data/embeddings/babyview_dinov3_filtered26_category_average_embeddings.csv'))  %>%
   rename(category = 1) %>%
+  filter(category %in%filtered_categories) %>%
+  filter(!category %in% exclude_low_precision$X1) %>%
   rename_with(
     .cols = where(is.numeric),
     .fn   = ~ paste0("dim_", seq_along(.x))
@@ -92,9 +115,7 @@ embeddings_babyview_dino <- read_csv(here::here('data/embeddings/babyview_dinov3
       .fns  = ~ as.numeric(scale(.x))
     )
   ) %>%
-  filter(category %in%filtered_categories) %>%
-  filter(!category %in% exclude_low_precision$X1) %>%
-   mutate(category = as.factor(category)) %>%
+  mutate(category = as.factor(category)) %>%
   arrange(-desc(category))
 ```
 
@@ -136,57 +157,80 @@ makeLongRDM <- function(embeddings,distance_metric) {
     values_to = "distance"
   )
   
-  return(rdm_cosine_mat)
+  return(rdm_cosine_long)
+}
+
+
+makeRDM <- function(embeddings,distance_metric) {
+  
+  categories <- embeddings$category
+  emb_matrix <- embeddings %>%
+    select(starts_with("dim_")) %>%
+    as.matrix()
+  
+    row_norms <- sqrt(rowSums(emb_matrix^2))
+    emb_norm  <- emb_matrix / row_norms
+
+   # cosine *similarity* RDM
+   cosine_sim_rdm <- tcrossprod(emb_norm)   
+
+   # cosine *distance* RDM (1 - similarity)
+   cosine_dist_rdm <- 1 - cosine_sim_rdm
+   dimnames(cosine_dist_rdm) <- list(categories, categories)
+  
+  return(cosine_dist_rdm)
 }
 
 ```
 
 
 ```{r}
-babyview_dino <- makeLongRDM(embeddings_babyview_dino,cosine_distance)
-babyview_clip <- makeLongRDM(embeddings_babyview_clip,cosine_distance)
-things_clip <- makeLongRDM(embeddings_things_clip,cosine_distance)
-things_dino <- makeLongRDM(embeddings_things_dino,cosine_distance)
+babyview_dino_mat <- makeRDM(embeddings_babyview_dino)
+babyview_clip_mat <- makeRDM(embeddings_babyview_clip)
+things_clip_mat <- makeRDM(embeddings_things_clip)
+things_dino_mat <- makeRDM(embeddings_things_dino)
 ```
 
 
 ```{r}
-# assertthat::assert_that( sum(!babyview_clip$category1==babyview_dino$category1)==0)
-# assertthat::assert_that( sum(!things_dino$category1==babyview_dino$category1)==0)
-# assertthat::assert_that( sum(!things_clip$category1==things_dino$category1)==0)
-# assertthat::assert_that( sum(!babyview_clip$category1==things_clip$category1)==0)
+babyview_dino <- makeLongRDM(embeddings_babyview_dino,pearson_distance)
+babyview_clip <- makeLongRDM(embeddings_babyview_clip,pearson_distance)
+things_clip <- makeLongRDM(embeddings_things_clip,pearson_distance)
+things_dino <- makeLongRDM(embeddings_things_dino,pearson_distance)
+```
+
+
+```{r}
+assertthat::assert_that( sum(!babyview_clip$category1==babyview_dino$category1)==0)
+assertthat::assert_that( sum(!things_dino$category1==babyview_dino$category1)==0)
+assertthat::assert_that( sum(!things_clip$category1==things_dino$category1)==0)
+assertthat::assert_that( sum(!babyview_clip$category1==things_clip$category1)==0)
 
 
 ```
+
 # Compare RDMs
-
 ```{r}
-cor.test(babyview_dino[upper.tri(babyview_dino)],things_dino[upper.tri(things_dino)], method='spearman')
+cor.test(babyview_clip_mat[upper.tri(babyview_clip_mat)],things_clip_mat[upper.tri(things_clip_mat)], method='spearman')
 ```
 
 ```{r}
-cor.test(babyview_dino[upper.tri(babyview_dino)],things_dino[upper.tri(things_dino)], method='spearman')
-```
 
-Babyview vs THINGS
-```{r}
-cor.test(babyview_clip$distance, things_clip$distance, method='spearman')
-```
-
-Babyview vs THINGS in DINO
-```{r}
-cor.test(babyview_dino$distance, things_dino$distance, method='spearman')
 ```
 
 
-Babyview clip vs dino
 ```{r}
-cor.test(babyview_clip$distance, babyview_dino$distance, method='spearman')
+cor.test(babyview_dino_mat[upper.tri(babyview_dino_mat)],things_dino_mat[upper.tri(things_dino_mat)], method='spearman')
 ```
 
-THINGS clip vs dino
+
+Babyview Dino vs CLIP is .88
 ```{r}
-cor.test(things_clip$distance, things_dino$distance, method='spearman')
+cor.test(babyview_dino_mat[upper.tri(babyview_dino_mat)],babyview_clip_mat[upper.tri(babyview_clip_mat)], method='spearman')
+```
+THINGS Dino vs CLIP is .46??
+```{r}
+cor.test(things_dino_mat[upper.tri(things_dino_mat)],things_clip_mat[upper.tri(things_clip_mat)], method='spearman')
 ```
 
 
@@ -259,7 +303,7 @@ ggplot(babyview_clip_ordered, aes(x = category1, y = category2, fill = distance)
     title = "CLIP category RDM (cluster-ordered)"
   )
 
-ggsave('babyview-clip-ordered.pdf', width=6, height=6, units='in')
+ggsave('babyview-clip-ordered.pdf', width=8, height=8, units='in')
 ```
 ```{r}
 ggplot(babyview_dino_ordered, aes(x = category1, y = category2, fill = distance)) +
@@ -324,4 +368,107 @@ ggplot(things_clip_ordered, aes(x = category1, y = category2, fill = distance)) 
   )
 
 ggsave('things-clip-ordered.pdf', width=6, height=6, units='in')
+```
+
+
+
+## category variablity
+
+```{r}
+row_correlation_matrix <- function(A, B) {
+  A <- A %>% select(-category)
+  B <- B %>% select(-category)
+  A <- as.matrix(A)
+  B <- as.matrix(B)
+  stopifnot(ncol(A) == ncol(B))
+
+  # center each row by its own mean
+  A_center <- A - rowMeans(A)
+  B_center <- B - rowMeans(B)
+
+  # row-wise L2 norms of centered rows (proportional to SD)
+  A_norm <- sqrt(rowSums(A_center^2))
+  B_norm <- sqrt(rowSums(B_center^2))
+
+  # avoid division by zero
+  A_center <- A_center / A_norm
+  B_center <- B_center / B_norm
+
+  # all-pairs row correlations: (n1 x d) %*% (d x n2) -> n1 x n2
+  A_center %*% t(B_center)
+}
+
+categories <- embeddings_babyview_clip$category
+corr_matrix = row_correlation_matrix(embeddings_babyview_clip, embeddings_things_clip)
+dimnames(corr_matrix) <- list(categories, categories)
+```
+
+
+```{r}
+corr_long <- corr_matrix |>
+  as.data.frame() |>
+  rownames_to_column("category1") |>
+  pivot_longer(
+    cols = -category1,
+    names_to = "category2",
+    values_to = "correlation"
+  )
+```
+
+```{r}
+most_similar <- corr_long %>%
+  filter(category1==category2) %>%
+  slice_max(correlation, n=10)
+
+least_similar <- corr_long %>%
+  filter(category1==category2) %>%
+  slice_min(correlation, n=10)
+```
+
+```{r}
+## sanity check
+deer = as.numeric(embeddings_babyview_clip %>% filter(category=='deer'))
+deer_things = as.numeric(embeddings_things_clip %>% filter(category=='deer'))
+
+
+sanity <- corr_long %>%
+  filter(category1=='deer') %>%
+  filter(category1==category2)
+```
+
+
+```{r}
+deer = as.numeric(embeddings_babyview_clip %>% filter(category=='deer'))
+deer_things = as.numeric(embeddings_things_clip %>% filter(category=='deer'))
+
+
+cosine_distance <- function(x, y) {
+  1 - sum(x * y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)))
+}
+
+#
+pearsons_distance_sanity = 1 - cor(deer[2:513], alligator[2:513])
+cosine_distance_sanity = cosine_distance(deer[2:513], alligator[2:513])
+
+```
+
+
+```{r}
+ggplot(corr_long, aes(x = category1, y = category2, fill = correlation)) +
+  geom_tile() +
+  scale_fill_viridis_c(option = "magma", direction = -1) +
+  coord_equal() +
+   # ylim(0,1.8) +
+  # theme_minimal(base_size = 10) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size=4),
+    axis.text.y = element_text(hjust = 1, vjust = 1, size=4),
+    panel.grid = element_blank()
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = "Pearons corrleation distance",
+    title = "THINGS vs BV Category similarity"
+  )
 ```
