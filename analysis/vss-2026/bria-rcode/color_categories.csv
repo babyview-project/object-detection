@@ -1,0 +1,164 @@
+item,category,color
+nail,Body Parts,#1f77b4
+sauce,Food & Drink,#ff7f0e
+watch,Household,#2ca02c
+fish,Animals,#d62728
+flower,Natural World,#9467bd
+shirt,Clothing,#8c564b
+car,Vehicles,#e377c2
+grass,Natural World,#9467bd
+bird,Animals,#d62728
+owl,Animals,#d62728
+bear,Animals,#d62728
+belt,Clothing,#8c564b
+hair,Body Parts,#1f77b4
+alligator,Animals,#d62728
+raisin,Food & Drink,#ff7f0e
+pickle,Food & Drink,#ff7f0e
+plant,Natural World,#9467bd
+applesauce,Food & Drink,#ff7f0e
+slipper,Clothing,#8c564b
+mitten,Clothing,#8c564b
+soap,Household,#2ca02c
+bread,Food & Drink,#ff7f0e
+can,Household,#2ca02c
+elephant,Animals,#d62728
+mop,Household,#2ca02c
+pajamas,Clothing,#8c564b
+frog,Animals,#d62728
+snow,Natural World,#9467bd
+crayon,Toys & Objects,#bcbd22
+milk,Food & Drink,#ff7f0e
+dress,Clothing,#8c564b
+truck,Vehicles,#e377c2
+rock,Natural World,#9467bd
+table,Household,#2ca02c
+muffin,Food & Drink,#ff7f0e
+gum,Food & Drink,#ff7f0e
+jacket,Clothing,#8c564b
+hat,Clothing,#8c564b
+radio,Household,#2ca02c
+sweater,Clothing,#8c564b
+glasses,Body Parts,#1f77b4
+dog,Animals,#d62728
+bib,Clothing,#8c564b
+rooster,Animals,#d62728
+horse,Animals,#d62728
+boat,Vehicles,#e377c2
+cookie,Food & Drink,#ff7f0e
+dish,Household,#2ca02c
+toast,Food & Drink,#ff7f0e
+coat,Clothing,#8c564b
+face,Body Parts,#1f77b4
+door,Household,#2ca02c
+strawberry,Food & Drink,#ff7f0e
+carrot,Food & Drink,#ff7f0e
+bed,Household,#2ca02c
+coffee,Food & Drink,#ff7f0e
+motorcycle,Vehicles,#e377c2
+butterfly,Animals,#d62728
+blanket,Household,#2ca02c
+soup,Food & Drink,#ff7f0e
+cup,Household,#2ca02c
+pony,Animals,#d62728
+pen,Toys & Objects,#bcbd22
+bottle,Household,#2ca02c
+cat,Animals,#d62728
+game,Toys & Objects,#bcbd22
+pencil,Toys & Objects,#bcbd22
+sprinkler,Household,#2ca02c
+book,Toys & Objects,#bcbd22
+necklace,Clothing,#8c564b
+lamp,Household,#2ca02c
+tree,Natural World,#9467bd
+duck,Animals,#d62728
+meat,Food & Drink,#ff7f0e
+hamburger,Food & Drink,#ff7f0e
+sandwich,Food & Drink,#ff7f0e
+pants,Clothing,#8c564b
+tooth,Body Parts,#1f77b4
+pastry,Food & Drink,#ff7f0e
+jeans,Clothing,#8c564b
+tray,Household,#2ca02c
+scarf,Clothing,#8c564b
+potato,Food & Drink,#ff7f0e
+vacuum,Household,#2ca02c
+knife,Household,#2ca02c
+towel,Household,#2ca02c
+bench,Household,#2ca02c
+apple,Food & Drink,#ff7f0e
+orange,Food & Drink,#ff7f0e
+tape,Household,#2ca02c
+bathtub,Household,#2ca02c
+chips,Food & Drink,#ff7f0e
+balloon,Toys & Objects,#bcbd22
+arm,Body Parts,#1f77b4
+leg,Body Parts,#1f77b4
+broom,Household,#2ca02c
+glove,Clothing,#8c564b
+egg,Food & Drink,#ff7f0e
+closet,Household,#2ca02c
+firetruck,Vehicles,#e377c2
+pasta,Food & Drink,#ff7f0e
+clock,Household,#2ca02c
+doll,Toys & Objects,#bcbd22
+paper,Toys & Objects,#bcbd22
+chair,Household,#2ca02c
+toe,Body Parts,#1f77b4
+hand,Body Parts,#1f77b4
+box,Household,#2ca02c
+corn,Food & Drink,#ff7f0e
+bowl,Household,#2ca02c
+ladder,Household,#2ca02c
+deer,Animals,#d62728
+pizza,Food & Drink,#ff7f0e
+window,Household,#2ca02c
+pillow,Household,#2ca02c
+shorts,Clothing,#8c564b
+ankle,Body Parts,#1f77b4
+pumpkin,Food & Drink,#ff7f0e
+ear,Body Parts,#1f77b4
+stick,Natural World,#9467bd
+pig,Animals,#d62728
+purse,Clothing,#8c564b
+penguin,Animals,#d62728
+melon,Food & Drink,#ff7f0e
+drawer,Household,#2ca02c
+napkin,Household,#2ca02c
+basket,Household,#2ca02c
+eye,Body Parts,#1f77b4
+couch,Household,#2ca02c
+crib,Household,#2ca02c
+cloud,Natural World,#9467bd
+toothbrush,Household,#2ca02c
+hose,Household,#2ca02c
+plate,Household,#2ca02c
+bucket,Household,#2ca02c
+shovel,Household,#2ca02c
+sock,Clothing,#8c564b
+swing,Toys & Objects,#bcbd22
+fork,Household,#2ca02c
+jar,Household,#2ca02c
+glass,Household,#2ca02c
+sink,Household,#2ca02c
+comb,Household,#2ca02c
+toy,Toys & Objects,#bcbd22
+refrigerator,Household,#2ca02c
+spoon,Household,#2ca02c
+finger,Body Parts,#1f77b4
+shower,Household,#2ca02c
+banana,Food & Drink,#ff7f0e
+ball,Toys & Objects,#bcbd22
+slide,Toys & Objects,#bcbd22
+mouth,Body Parts,#1f77b4
+oven,Household,#2ca02c
+scissors,Household,#2ca02c
+cracker,Food & Drink,#ff7f0e
+tricycle,Vehicles,#e377c2
+zebra,Animals,#d62728
+nose,Body Parts,#1f77b4
+shoe,Clothing,#8c564b
+stroller,Vehicles,#e377c2
+foot,Body Parts,#1f77b4
+helicopter,Vehicles,#e377c2
+giraffe,Animals,#d62728

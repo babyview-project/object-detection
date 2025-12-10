@@ -397,24 +397,43 @@ row_correlation_matrix <- function(A, B) {
   # all-pairs row correlations: (n1 x d) %*% (d x n2) -> n1 x n2
   A_center %*% t(B_center)
 }
+```
 
+```{R}
 categories <- embeddings_babyview_clip$category
-corr_matrix = row_correlation_matrix(embeddings_babyview_clip, embeddings_things_clip)
-dimnames(corr_matrix) <- list(categories, categories)
+corr_matrix_clip = row_correlation_matrix(embeddings_babyview_clip, embeddings_things_clip)
+dimnames(corr_matrix_clip) <- list(categories, categories)
+
+corr_matrix_dino = row_correlation_matrix(embeddings_babyview_dino, embeddings_things_dino)
+dimnames(corr_matrix_dino) <- list(categories, categories)
+
+
 ```
 
 
 ```{r}
-corr_long <- corr_matrix |>
+corr_long_clip <- corr_matrix_clip |>
   as.data.frame() |>
   rownames_to_column("category1") |>
   pivot_longer(
     cols = -category1,
     names_to = "category2",
     values_to = "correlation"
-  )
+  ) %>%
+  mutate(model='clip')
+
+corr_long_dino <- corr_matrix_dino |>
+  as.data.frame() |>
+  rownames_to_column("category1") |>
+  pivot_longer(
+    cols = -category1,
+    names_to = "category2",
+    values_to = "correlation"
+  ) %>%
+  mutate(model='dino')
 ```
 
+Most and least similar in clip
 ```{r}
 most_similar <- corr_long %>%
   filter(category1==category2) %>%
@@ -429,6 +448,7 @@ least_similar <- corr_long %>%
 ## sanity check
 deer = as.numeric(embeddings_babyview_clip %>% filter(category=='deer'))
 deer_things = as.numeric(embeddings_things_clip %>% filter(category=='deer'))
+cor.test(deer[2:513], deer_things[2:513])
 
 
 sanity <- corr_long %>%
@@ -438,37 +458,39 @@ sanity <- corr_long %>%
 
 
 ```{r}
-deer = as.numeric(embeddings_babyview_clip %>% filter(category=='deer'))
-deer_things = as.numeric(embeddings_things_clip %>% filter(category=='deer'))
-
-
-cosine_distance <- function(x, y) {
-  1 - sum(x * y) / (sqrt(sum(x^2)) * sqrt(sum(y^2)))
-}
-
-#
-pearsons_distance_sanity = 1 - cor(deer[2:513], alligator[2:513])
-cosine_distance_sanity = cosine_distance(deer[2:513], alligator[2:513])
-
+ordered_similarity <- corr_long_clip %>%
+  full_join(corr_long_dino) %>%
+  filter(category1==category2) %>%
+  arrange(correlation, desc=TRUE) %>%
+  group_by(model) %>%
+  mutate(category1 = fct_reorder(category1, -correlation)) %>%
+  pivot_wider(names_from='model', values_from="correlation") %>%
+  select(-category2) 
 ```
-
-
 ```{r}
-ggplot(corr_long, aes(x = category1, y = category2, fill = correlation)) +
-  geom_tile() +
-  scale_fill_viridis_c(option = "magma", direction = -1) +
-  coord_equal() +
-   # ylim(0,1.8) +
-  # theme_minimal(base_size = 10) +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size=4),
-    axis.text.y = element_text(hjust = 1, vjust = 1, size=4),
-    panel.grid = element_blank()
-  ) +
-  labs(
-    x = NULL,
-    y = NULL,
-    fill = "Pearons corrleation distance",
-    title = "THINGS vs BV Category similarity"
-  )
+colors = read_csv('color_categories.csv') %>%
+  as_tibble()  %>%
+  rename(category1 = item, group = category)
+
+ordered_similarity <- ordered_similarity %>%
+  left_join(colors)
+```
+```{r}
+library(ggthemes)
+ggplot(ordered_similarity, aes(x = clip, y = dino, col=group)) +
+  geom_point() +
+  theme_few(base_size=6) +
+  ggrepel::geom_label_repel(aes(label=category1), box.padding = 0.3,
+    point.padding = 0.2,
+    size = 2,
+    max.overlaps = 20) +
+  ylim(0,1) +
+  xlim(0,1) +
+  xlab('Similarity in CLIP (Babyview vs THINGS)') +
+  ylab('Similarity in DINO (Babyview vs THINGS)') +
+  facet_wrap(~group, nrow=2)
+  
+ggsave('similarity_comparison.pdf', width=8, height=4, unit='in')
+  
+ 
 ```
