@@ -1,0 +1,64 @@
+============================================================
+CATEGORY EMBEDDING CORRELATION RESULTS
+============================================================
+
+Embeddings 1: bv_clip_rdm_results_26/category_average_embeddings.npz
+Embeddings 2: ../../data/things_clip_embeddings.npz
+
+Categories 1: 291, Embedding dim: 512
+Categories 2: 205, Embedding dim: 512
+Matching categories: 205
+
+============================================================
+SUMMARY STATISTICS
+============================================================
+Categories analyzed: 205
+
+Pearson Correlation:
+  Mean:   0.738748
+  Std:    0.058235
+  Median: 0.731409
+  Min:    0.483288
+  Max:    0.866345
+
+Spearman Correlation:
+  Mean:   0.313609
+  Std:    0.108621
+  Median: 0.309980
+  Min:    0.091185
+  Max:    0.668478
+
+Cosine Similarity:
+  Mean:   0.738715
+  Std:    0.058269
+  Median: 0.731800
+  Min:    0.483619
+  Max:    0.866445
+
+============================================================
+TOP 10 CATEGORIES BY PEARSON CORRELATION
+============================================================
+   1. cloud                          pearson_r=0.866345, spearman_r=0.543904, cosine=0.866445
+   2. stick                          pearson_r=0.865384, spearman_r=0.520253, cosine=0.865511
+   3. rock                           pearson_r=0.863378, spearman_r=0.575580, cosine=0.863799
+   4. tree                           pearson_r=0.854524, spearman_r=0.540701, cosine=0.854646
+   5. paper                          pearson_r=0.850181, spearman_r=0.469555, cosine=0.850099
+   6. slide                          pearson_r=0.849322, spearman_r=0.519680, cosine=0.849533
+   7. swing                          pearson_r=0.848575, spearman_r=0.489825, cosine=0.848515
+   8. zebra                          pearson_r=0.844745, spearman_r=0.668478, cosine=0.844523
+   9. giraffe                        pearson_r=0.844194, spearman_r=0.643277, cosine=0.844238
+  10. finger                         pearson_r=0.843874, spearman_r=0.474200, cosine=0.843923
+
+============================================================
+BOTTOM 10 CATEGORIES BY PEARSON CORRELATION
+============================================================
+  196. turkey                         pearson_r=0.646077, spearman_r=0.159960, cosine=0.646461
+  197. nut                            pearson_r=0.643673, spearman_r=0.199723, cosine=0.643876
+  198. wolf                           pearson_r=0.639932, spearman_r=0.136390, cosine=0.640366
+  199. ant                            pearson_r=0.629434, spearman_r=0.135851, cosine=0.629778
+  200. popsicle                       pearson_r=0.599230, spearman_r=0.093033, cosine=0.599344
+  201. watch                          pearson_r=0.597485, spearman_r=0.091185, cosine=0.597071
+  202. bug                            pearson_r=0.596182, spearman_r=0.134838, cosine=0.597101
+  203. raisin                         pearson_r=0.595778, spearman_r=0.168661, cosine=0.595052
+  204. train                          pearson_r=0.585604, spearman_r=0.226862, cosine=0.585432
+  205. car                            pearson_r=0.483288, spearman_r=0.130417, cosine=0.483619

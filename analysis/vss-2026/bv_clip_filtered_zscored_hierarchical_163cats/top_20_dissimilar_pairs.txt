@@ -1,0 +1,22 @@
+Top 20 Most Dissimilar Category Pairs:
+============================================================
+lamp <-> mitten: 1.6258
+table <-> slipper: 1.6181
+soap <-> pajamas: 1.6150
+fish <-> crib: 1.5897
+crib <-> egg: 1.5862
+crib <-> pickle: 1.5856
+crib <-> apple: 1.5832
+pen <-> bib: 1.5762
+soap <-> scarf: 1.5756
+lamp <-> bib: 1.5738
+bread <-> pajamas: 1.5719
+bed <-> pickle: 1.5717
+bed <-> spoon: 1.5679
+crib <-> slipper: 1.5662
+alligator <-> cup: 1.5632
+bed <-> soap: 1.5628
+soap <-> bib: 1.5613
+soap <-> jacket: 1.5597
+clock <-> mitten: 1.5585
+crayon <-> bib: 1.5580

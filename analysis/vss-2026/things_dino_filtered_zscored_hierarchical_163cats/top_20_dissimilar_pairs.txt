@@ -1,0 +1,22 @@
+Top 20 Most Dissimilar Category Pairs:
+============================================================
+raisin <-> ball: 1.1740
+plant <-> cup: 1.1702
+vacuum <-> fork: 1.1650
+gum <-> basket: 1.1636
+pencil <-> blanket: 1.1586
+soup <-> glass: 1.1541
+bathtub <-> jar: 1.1502
+pony <-> glove: 1.1482
+nail <-> vacuum: 1.1481
+pasta <-> jeans: 1.1450
+stroller <-> cup: 1.1439
+foot <-> sweater: 1.1438
+foot <-> belt: 1.1430
+rooster <-> ear: 1.1425
+leg <-> firetruck: 1.1423
+face <-> plant: 1.1407
+muffin <-> napkin: 1.1405
+helicopter <-> dish: 1.1402
+truck <-> purse: 1.1397
+soup <-> bottle: 1.1392

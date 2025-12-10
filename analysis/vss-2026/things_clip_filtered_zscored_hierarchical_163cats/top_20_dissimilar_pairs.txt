@@ -1,0 +1,22 @@
+Top 20 Most Dissimilar Category Pairs:
+============================================================
+table <-> corn: 1.3191
+egg <-> purse: 1.2750
+apple <-> blanket: 1.2685
+closet <-> corn: 1.2501
+table <-> carrot: 1.2470
+crib <-> chips: 1.2463
+potato <-> blanket: 1.2446
+carrot <-> jacket: 1.2436
+carrot <-> shirt: 1.2407
+pig <-> lamp: 1.2402
+leg <-> plate: 1.2401
+pastry <-> broom: 1.2398
+purse <-> cloud: 1.2388
+chair <-> corn: 1.2367
+hair <-> shovel: 1.2351
+stick <-> dish: 1.2349
+finger <-> basket: 1.2345
+lamp <-> muffin: 1.2341
+corn <-> tray: 1.2332
+soap <-> pants: 1.2327

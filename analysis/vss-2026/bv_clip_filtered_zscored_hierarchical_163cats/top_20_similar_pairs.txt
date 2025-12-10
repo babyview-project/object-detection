@@ -1,0 +1,22 @@
+Top 20 Most Similar Category Pairs:
+============================================================
+pencil <-> pen: 0.0177
+pen <-> crayon: 0.0649
+spoon <-> fork: 0.0701
+ball <-> balloon: 0.0721
+sweater <-> shirt: 0.0775
+jeans <-> pants: 0.0818
+pony <-> horse: 0.0886
+pencil <-> crayon: 0.0890
+towel <-> napkin: 0.0893
+pajamas <-> bib: 0.0910
+jacket <-> sweater: 0.0934
+finger <-> toe: 0.0978
+coat <-> jacket: 0.0992
+egg <-> orange: 0.1045
+fork <-> knife: 0.1067
+broom <-> mop: 0.1113
+sauce <-> soup: 0.1140
+slipper <-> watch: 0.1155
+deer <-> pony: 0.1161
+toast <-> cracker: 0.1173
