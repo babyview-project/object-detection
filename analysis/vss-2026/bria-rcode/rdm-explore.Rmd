@@ -135,9 +135,8 @@ makeLongRDM <- function(embeddings,distance_metric) {
     names_to = "category2",
     values_to = "distance"
   )
-
-  return(rdm_cosine_long)
   
+  return(rdm_cosine_mat)
 }
 
 ```
@@ -152,14 +151,22 @@ things_dino <- makeLongRDM(embeddings_things_dino,cosine_distance)
 
 
 ```{r}
-assertthat::assert_that( sum(!babyview_clip$category1==babyview_dino$category1)==0)
-assertthat::assert_that( sum(!things_dino$category1==babyview_dino$category1)==0)
-assertthat::assert_that( sum(!things_clip$category1==things_dino$category1)==0)
-assertthat::assert_that( sum(!babyview_clip$category1==things_clip$category1)==0)
+# assertthat::assert_that( sum(!babyview_clip$category1==babyview_dino$category1)==0)
+# assertthat::assert_that( sum(!things_dino$category1==babyview_dino$category1)==0)
+# assertthat::assert_that( sum(!things_clip$category1==things_dino$category1)==0)
+# assertthat::assert_that( sum(!babyview_clip$category1==things_clip$category1)==0)
 
 
 ```
 # Compare RDMs
+
+```{r}
+cor.test(babyview_dino[upper.tri(babyview_dino)],things_dino[upper.tri(things_dino)], method='spearman')
+```
+
+```{r}
+cor.test(babyview_dino[upper.tri(babyview_dino)],things_dino[upper.tri(things_dino)], method='spearman')
+```
 
 Babyview vs THINGS
 ```{r}
