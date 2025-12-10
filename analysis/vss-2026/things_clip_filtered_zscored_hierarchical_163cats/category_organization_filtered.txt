@@ -171,5 +171,5 @@ Small Objects (96):
   radio
 
 Others (2):
-  game
   cloud
+  game
