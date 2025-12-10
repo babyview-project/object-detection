@@ -20,7 +20,8 @@ Low precision categories from Jane
 exclude_low_precision = read_csv('low_precision.txt', col_names=FALSE)
 ```
 
-# Load embeddings
+# Setup
+## Load embeddings
 ```{r}
 embeddings_things_dino <- read_csv(here::here('data/embeddings/things_dino_embeddings.csv'))  %>%
   rename(category = 1) %>%
@@ -183,7 +184,7 @@ makeRDM <- function(embeddings,distance_metric) {
 
 ```
 
-
+## Calculate RDMs
 ```{r}
 babyview_dino_mat <- makeRDM(embeddings_babyview_dino)
 babyview_clip_mat <- makeRDM(embeddings_babyview_clip)
@@ -192,6 +193,7 @@ things_dino_mat <- makeRDM(embeddings_things_dino)
 ```
 
 
+## Get long-form RDMs for plotting
 ```{r}
 babyview_dino <- makeLongRDM(embeddings_babyview_dino,pearson_distance)
 babyview_clip <- makeLongRDM(embeddings_babyview_clip,pearson_distance)
@@ -199,7 +201,7 @@ things_clip <- makeLongRDM(embeddings_things_clip,pearson_distance)
 things_dino <- makeLongRDM(embeddings_things_dino,pearson_distance)
 ```
 
-
+Check categories
 ```{r}
 assertthat::assert_that( sum(!babyview_clip$category1==babyview_dino$category1)==0)
 assertthat::assert_that( sum(!things_dino$category1==babyview_dino$category1)==0)
@@ -209,31 +211,29 @@ assertthat::assert_that( sum(!babyview_clip$category1==things_clip$category1)==0
 
 ```
 
-# Compare RDMs
+# Stats for comparing RDMs 
+## Between datasets
 ```{r}
 cor.test(babyview_clip_mat[upper.tri(babyview_clip_mat)],things_clip_mat[upper.tri(things_clip_mat)], method='spearman')
 ```
 
-```{r}
-
-```
 
 
 ```{r}
 cor.test(babyview_dino_mat[upper.tri(babyview_dino_mat)],things_dino_mat[upper.tri(things_dino_mat)], method='spearman')
 ```
 
-
+## Between encoders
 Babyview Dino vs CLIP is .88
 ```{r}
 cor.test(babyview_dino_mat[upper.tri(babyview_dino_mat)],babyview_clip_mat[upper.tri(babyview_clip_mat)], method='spearman')
 ```
-THINGS Dino vs CLIP is .46??
+THINGS Dino vs CLIP is .46?? Why.
 ```{r}
 cor.test(things_dino_mat[upper.tri(things_dino_mat)],things_clip_mat[upper.tri(things_clip_mat)], method='spearman')
 ```
 
-
+# Plotting RDMs 
 ```{r}
 makeLongOrderedRDM <- function(rdm_cosine_long){
 # Make a wide matrix again for clustering
@@ -257,6 +257,7 @@ rdm_cosine_long_ordered <- rdm_cosine_long %>%
 }
 ```
 
+Order all the RDMs by the babyview clip one
 ```{r}
 babyview_clip_ordered <- makeLongOrderedRDM(babyview_clip)
 ordered_categories = levels(babyview_clip_ordered$category1)
@@ -284,7 +285,7 @@ things_clip_ordered <- things_clip %>%
 
 ```
 
-
+Plot and save into pdfs
 ```{r}
 ggplot(babyview_clip_ordered, aes(x = category1, y = category2, fill = distance)) +
   geom_tile() +
@@ -372,8 +373,9 @@ ggsave('things-clip-ordered.pdf', width=6, height=6, units='in')
 
 
 
-## category variablity
+# Calculating and plotting category variablity
 
+Correlate embeddings for all categories
 ```{r}
 row_correlation_matrix <- function(A, B) {
   A <- A %>% select(-category)
@@ -399,6 +401,7 @@ row_correlation_matrix <- function(A, B) {
 }
 ```
 
+ Do this for both cliip and dino
 ```{R}
 categories <- embeddings_babyview_clip$category
 corr_matrix_clip = row_correlation_matrix(embeddings_babyview_clip, embeddings_things_clip)
@@ -411,6 +414,7 @@ dimnames(corr_matrix_dino) <- list(categories, categories)
 ```
 
 
+Get the correlations in long format for each cncoder
 ```{r}
 corr_long_clip <- corr_matrix_clip |>
   as.data.frame() |>
@@ -433,30 +437,32 @@ corr_long_dino <- corr_matrix_dino |>
   mutate(model='dino')
 ```
 
-Most and least similar in clip
+Output most and least similar in clip
 ```{r}
-most_similar <- corr_long %>%
+most_similar <- corr_long_clip %>%
   filter(category1==category2) %>%
   slice_max(correlation, n=10)
 
-least_similar <- corr_long %>%
+least_similar <- corr_long_clip %>%
   filter(category1==category2) %>%
   slice_min(correlation, n=10)
 ```
 
+Sanity check we did pearon's corr right in that function
 ```{r}
 ## sanity check
 deer = as.numeric(embeddings_babyview_clip %>% filter(category=='deer'))
 deer_things = as.numeric(embeddings_things_clip %>% filter(category=='deer'))
-cor.test(deer[2:513], deer_things[2:513])
+cor.test(deer[2:513], deer_things[2:513]) # funky because of the category column
 
 
-sanity <- corr_long %>%
+sanity <- corr_long_clip %>%
   filter(category1=='deer') %>%
   filter(category1==category2)
 ```
 
 
+Put together clip and dino similarity and get rid of the csecond category
 ```{r}
 ordered_similarity <- corr_long_clip %>%
   full_join(corr_long_dino) %>%
@@ -467,6 +473,7 @@ ordered_similarity <- corr_long_clip %>%
   pivot_wider(names_from='model', values_from="correlation") %>%
   select(-category2) 
 ```
+Get some colors outputted by the CDI categories
 ```{r}
 colors = read_csv('color_categories.csv') %>%
   as_tibble()  %>%
@@ -475,6 +482,8 @@ colors = read_csv('color_categories.csv') %>%
 ordered_similarity <- ordered_similarity %>%
   left_join(colors)
 ```
+
+Plot similarity for clip vs dino by CDI category
 ```{r}
 library(ggthemes)
 ggplot(ordered_similarity, aes(x = clip, y = dino, col=group)) +
