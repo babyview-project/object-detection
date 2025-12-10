@@ -1,0 +1,25 @@
+Top 20 Most Dissimilar Category Pairs
+============================================================
+
+Category 1                     Category 2                     Distance  
+----------------------------------------------------------------------
+raisin                         ball                           1.174020
+plant                          cup                            1.170243
+vacuum                         fork                           1.165001
+gum                            basket                         1.163594
+pencil                         blanket                        1.158503
+soup                           glass                          1.154134
+bathtub                        jar                            1.150006
+pony                           glove                          1.148081
+nail                           vacuum                         1.148043
+pasta                          jeans                          1.144876
+stroller                       cup                            1.143879
+foot                           sweater                        1.143789
+foot                           belt                           1.142865
+rooster                        ear                            1.142561
+leg                            firetruck                      1.142312
+face                           plant                          1.140689
+muffin                         napkin                         1.140453
+helicopter                     dish                           1.140297
+truck                          purse                          1.139752
+soup                           bottle                         1.139199

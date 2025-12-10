@@ -1,0 +1,35 @@
+Top 30 Most Similar Category Pairs
+============================================================
+
+Category 1                     Category 2                     Distance  
+----------------------------------------------------------------------
+pen                            pencil                         0.032791
+shirt                          sweater                        0.106162
+horse                          pony                           0.112049
+napkin                         towel                          0.117172
+sauce                          soup                           0.117734
+closet                         door                           0.121053
+face                           hair                           0.123491
+jeans                          pants                          0.127483
+bed                            blanket                        0.138857
+mop                            broom                          0.142556
+sweater                        jacket                         0.142959
+crayon                         pen                            0.143090
+balloon                        ball                           0.149295
+toast                          cracker                        0.153489
+pajamas                        bib                            0.161804
+orange                         pumpkin                        0.169289
+crayon                         pencil                         0.170606
+deer                           pony                           0.172864
+pony                           pig                            0.179690
+fork                           spoon                          0.179966
+ankle                          sock                           0.186609
+jacket                         coat                           0.192180
+egg                            orange                         0.193140
+ankle                          foot                           0.196032
+foot                           sock                           0.197937
+cracker                        sandwich                       0.198185
+spoon                          knife                          0.203146
+apple                          orange                         0.205671
+pants                          shorts                         0.208417
+cookie                         bread                          0.208877

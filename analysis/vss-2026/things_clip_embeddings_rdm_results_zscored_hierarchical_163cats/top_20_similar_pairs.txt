@@ -1,0 +1,25 @@
+Top 20 Most Similar Category Pairs
+============================================================
+
+Category 1                     Category 2                     Distance  
+----------------------------------------------------------------------
+foot                           ankle                          0.128695
+mop                            broom                          0.145582
+toe                            foot                           0.159403
+shower                         bathtub                        0.200621
+nose                           mouth                          0.210428
+pony                           horse                          0.211710
+bathtub                        sink                           0.224096
+dish                           plate                          0.249642
+finger                         hand                           0.271681
+pen                            pencil                         0.275767
+giraffe                        zebra                          0.278508
+toe                            ankle                          0.291930
+pencil                         crayon                         0.303685
+pants                          shorts                         0.306664
+slide                          swing                          0.312872
+shirt                          jacket                         0.317577
+refrigerator                   oven                           0.322326
+cookie                         muffin                         0.329847
+spoon                          fork                           0.330774
+shower                         sink                           0.336510

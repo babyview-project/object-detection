@@ -1,0 +1,25 @@
+Top 20 Most Dissimilar Category Pairs
+============================================================
+
+Category 1                     Category 2                     Distance  
+----------------------------------------------------------------------
+pajamas                        soap                           1.431284
+alligator                      nail                           1.420138
+blanket                        crayon                         1.417203
+bed                            crayon                         1.416272
+crib                           slipper                        1.413712
+pajamas                        bread                          1.409334
+table                          slipper                        1.408503
+jacket                         bread                          1.407228
+arm                            soap                           1.405621
+alligator                      egg                            1.405358
+jacket                         slipper                        1.405000
+bed                            slipper                        1.404818
+jeans                          bread                          1.392051
+jacket                         crayon                         1.389066
+alligator                      cup                            1.387059
+bed                            soap                           1.384880
+sweater                        slipper                        1.384595
+alligator                      bowl                           1.383565
+blanket                        soap                           1.383476
+blanket                        nail                           1.377079

@@ -1,0 +1,25 @@
+Top 20 Most Similar Category Pairs
+============================================================
+
+Category 1                     Category 2                     Distance  
+----------------------------------------------------------------------
+pencil                         pen                            0.017699
+pen                            crayon                         0.064894
+spoon                          fork                           0.070067
+ball                           balloon                        0.072150
+sweater                        shirt                          0.077539
+jeans                          pants                          0.081845
+pony                           horse                          0.088644
+pencil                         crayon                         0.089022
+towel                          napkin                         0.089354
+pajamas                        bib                            0.091020
+jacket                         sweater                        0.093457
+finger                         toe                            0.097808
+coat                           jacket                         0.099243
+egg                            orange                         0.104481
+fork                           knife                          0.106682
+broom                          mop                            0.111318
+sauce                          soup                           0.114007
+slipper                        watch                          0.115538
+deer                           pony                           0.116139
+toast                          cracker                        0.117283

@@ -1,0 +1,55 @@
+Top 50 Most Dissimilar Category Pairs
+============================================================
+
+Category 1                     Category 2                     Distance  
+----------------------------------------------------------------------
+lamp                           mitten                         1.625698
+table                          slipper                        1.618073
+soap                           pajamas                        1.614902
+fish                           crib                           1.589719
+crib                           egg                            1.586212
+crib                           pickle                         1.585633
+crib                           apple                          1.583250
+pen                            bib                            1.576159
+soap                           scarf                          1.575353
+lamp                           bib                            1.573769
+bread                          pajamas                        1.571797
+bed                            pickle                         1.571645
+bed                            spoon                          1.567865
+crib                           slipper                        1.566218
+alligator                      cup                            1.563087
+bed                            soap                           1.562691
+soap                           bib                            1.561104
+soap                           jacket                         1.559577
+clock                          mitten                         1.558398
+crayon                         bib                            1.557933
+pencil                         bib                            1.557185
+spoon                          pajamas                        1.554596
+tape                           coat                           1.554577
+spoon                          jacket                         1.553521
+fish                           table                          1.551863
+bed                            strawberry                     1.551628
+bread                          jacket                         1.549837
+lamp                           pajamas                        1.548802
+soap                           blanket                        1.548287
+soap                           jeans                          1.547384
+crib                           strawberry                     1.547098
+tape                           pajamas                        1.546819
+pen                            mitten                         1.546092
+cup                            pajamas                        1.545120
+pen                            pajamas                        1.545041
+crib                           soap                           1.544470
+crib                           bread                          1.544373
+crayon                         pajamas                        1.544367
+alligator                      bottle                         1.541910
+tape                           shirt                          1.541808
+soap                           sweater                        1.540066
+slipper                        tray                           1.539845
+tape                           jeans                          1.538469
+bathtub                        slipper                        1.537817
+bed                            apple                          1.537164
+pickle                         pajamas                        1.537145
+table                          crayon                         1.536970
+crib                           raisin                         1.536319
+soap                           shirt                          1.534495
+cup                            jeans                          1.534297

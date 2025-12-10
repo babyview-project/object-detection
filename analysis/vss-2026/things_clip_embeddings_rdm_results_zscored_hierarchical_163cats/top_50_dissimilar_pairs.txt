@@ -1,0 +1,55 @@
+Top 50 Most Dissimilar Category Pairs
+============================================================
+
+Category 1                     Category 2                     Distance  
+----------------------------------------------------------------------
+table                          corn                           1.319146
+egg                            purse                          1.274955
+apple                          blanket                        1.268548
+closet                         corn                           1.250140
+table                          carrot                         1.247045
+crib                           chips                          1.246294
+potato                         blanket                        1.244574
+carrot                         jacket                         1.243551
+carrot                         shirt                          1.240724
+pig                            lamp                           1.240232
+leg                            plate                          1.240058
+pastry                         broom                          1.239840
+purse                          cloud                          1.238843
+chair                          corn                           1.236740
+hair                           shovel                         1.235125
+stick                          dish                           1.234927
+finger                         basket                         1.234487
+lamp                           muffin                         1.234117
+corn                           tray                           1.233204
+soap                           pants                          1.232736
+arm                            dish                           1.231716
+rooster                        purse                          1.231300
+bear                           pillow                         1.231268
+lamp                           cookie                         1.228907
+toothbrush                     rock                           1.228870
+toe                            napkin                         1.228611
+apple                          sock                           1.225928
+corn                           jacket                         1.225411
+sandwich                       bucket                         1.225211
+sprinkler                      pastry                         1.224864
+broom                          pants                          1.224120
+stroller                       raisin                         1.223239
+corn                           watch                          1.222125
+melon                          purse                          1.220399
+leg                            bowl                           1.219965
+leg                            dish                           1.219261
+lamp                           carrot                         1.218927
+crib                           potato                         1.218774
+egg                            watch                          1.218632
+nose                           basket                         1.217988
+bed                            corn                           1.217423
+chair                          orange                         1.216980
+carrot                         purse                          1.216309
+milk                           radio                          1.216202
+carrot                         necklace                       1.215424
+giraffe                        basket                         1.214937
+carrot                         dress                          1.214548
+crib                           cracker                        1.214465
+pig                            closet                         1.214289
+couch                          egg                            1.214023

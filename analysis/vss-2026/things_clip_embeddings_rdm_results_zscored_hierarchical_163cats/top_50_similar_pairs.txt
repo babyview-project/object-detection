@@ -1,0 +1,55 @@
+Top 50 Most Similar Category Pairs
+============================================================
+
+Category 1                     Category 2                     Distance  
+----------------------------------------------------------------------
+foot                           ankle                          0.128695
+mop                            broom                          0.145582
+toe                            foot                           0.159403
+shower                         bathtub                        0.200621
+nose                           mouth                          0.210428
+pony                           horse                          0.211710
+bathtub                        sink                           0.224096
+dish                           plate                          0.249642
+finger                         hand                           0.271681
+pen                            pencil                         0.275767
+giraffe                        zebra                          0.278508
+toe                            ankle                          0.291930
+pencil                         crayon                         0.303685
+pants                          shorts                         0.306664
+slide                          swing                          0.312872
+shirt                          jacket                         0.317577
+refrigerator                   oven                           0.322326
+cookie                         muffin                         0.329847
+spoon                          fork                           0.330774
+shower                         sink                           0.336510
+mitten                         sock                           0.341057
+shorts                         jeans                          0.355884
+cracker                        cookie                         0.360478
+pants                          jeans                          0.369107
+bed                            pillow                         0.378011
+jacket                         coat                           0.386921
+table                          chair                          0.387916
+coffee                         cup                            0.391280
+sweater                        scarf                          0.392242
+drawer                         tray                           0.394726
+sandwich                       hamburger                      0.396680
+toast                          sandwich                       0.397763
+elephant                       giraffe                        0.400311
+closet                         drawer                         0.401462
+mouth                          tooth                          0.410858
+pajamas                        shirt                          0.415048
+muffin                         pastry                         0.416798
+jar                            bottle                         0.430099
+glass                          jar                            0.431196
+stroller                       crib                           0.431653
+hand                           arm                            0.433504
+bowl                           dish                           0.433859
+blanket                        pillow                         0.439880
+pen                            crayon                         0.440549
+elephant                       zebra                          0.443302
+chips                          cracker                        0.445767
+couch                          bed                            0.446714
+door                           window                         0.449430
+ankle                          leg                            0.453058
+duck                           bird                           0.454662

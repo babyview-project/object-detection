@@ -1,0 +1,57 @@
+
+CATEGORY EMBEDDING CORRELATION RESULTS
+============================================================
+
+Input Files:
+  Embeddings 1: ./clip_rdm_results_26/category_average_embeddings.npz
+    Categories: 291, Embedding dim: 512
+  Embeddings 2: ../data/things_clip_embeddings.npz
+    Categories: 205, Embedding dim: 512
+
+Matching Categories: 205
+
+SUMMARY STATISTICS
+============================================================
+
+Pearson Correlation:
+  Mean:   0.738748
+  Std:    0.058235
+  Median: 0.731409
+  Min:    0.483288
+  Max:    0.866345
+
+Spearman Correlation:
+  Mean:   0.313609
+  Std:    0.108621
+  Median: 0.309980
+
+Cosine Similarity:
+  Mean:   0.738715
+  Std:    0.058269
+  Median: 0.731800
+
+TOP 10 CATEGORIES BY PEARSON CORRELATION
+============================================================
+ 1. cloud                          r=0.866345, cos=0.866445
+ 2. stick                          r=0.865384, cos=0.865511
+ 3. rock                           r=0.863378, cos=0.863799
+ 4. tree                           r=0.854524, cos=0.854646
+ 5. paper                          r=0.850181, cos=0.850099
+ 6. slide                          r=0.849322, cos=0.849533
+ 7. swing                          r=0.848575, cos=0.848515
+ 8. zebra                          r=0.844745, cos=0.844523
+ 9. giraffe                        r=0.844194, cos=0.844238
+10. finger                         r=0.843874, cos=0.843923
+
+BOTTOM 10 CATEGORIES BY PEARSON CORRELATION
+============================================================
+196. turkey                         r=0.646077, cos=0.646461
+197. nut                            r=0.643673, cos=0.643876
+198. wolf                           r=0.639932, cos=0.640366
+199. ant                            r=0.629434, cos=0.629778
+200. popsicle                       r=0.599230, cos=0.599344
+201. watch                          r=0.597485, cos=0.597071
+202. bug                            r=0.596182, cos=0.597101
+203. raisin                         r=0.595778, cos=0.595052
+204. train                          r=0.585604, cos=0.585432
+205. car                            r=0.483288, cos=0.483619
