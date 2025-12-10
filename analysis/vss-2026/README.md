@@ -1,15 +1,15 @@
-# VSS 2026 RDM Analysis Scripts
+# VSS 2026 RDM Analysis Notebooks
 
-This directory contains scripts for computing and analyzing Representational Dissimilarity Matrices (RDMs) for CLIP and DINOv3 category embeddings.
+This directory contains Jupyter notebooks for computing and analyzing Representational Dissimilarity Matrices (RDMs) for CLIP and DINOv3 category embeddings.
 
 ## Overview
 
-The analysis pipeline consists of four main scripts:
+The analysis pipeline consists of four main notebooks:
 
-1. **`compute_clip_category_rdm.py`** - Computes pairwise RDM matrices from category embeddings
-2. **`reorganize_clip_rdm.py`** - Filters and reorganizes RDMs by category type with optional hierarchical clustering
-3. **`correlate_rdm_matrices.py`** - Correlates two RDM matrices (e.g., CLIP vs DINOv3)
-4. **`correlate_category_embeddings.py`** - Correlates category-level average embeddings between two embedding files
+1. **`01_compute_average_embeddings.ipynb`** - Computes category average embeddings from individual CLIP and DINOv3 embeddings
+2. **`02_filter_normalize_and_compute_rdm.ipynb`** - Filters, normalizes, and reorganizes RDMs by category type with optional hierarchical clustering
+3. **`03_correlate_rdm_matrices.ipynb`** - Correlates two RDM matrices (e.g., BV_CLIP vs THINGS_CLIP)
+4. **`04_correlate_category_embeddings.ipynb`** - Correlates category-level average embeddings between two embedding files
 
 ## Prerequisites
 
@@ -25,295 +25,227 @@ The analysis pipeline consists of four main scripts:
 
 ## Typical Workflow
 
-### Step 1: Compute RDM Matrices
+The analysis follows a sequential pipeline through four notebooks. Each notebook should be executed in order, with outputs from earlier steps serving as inputs to later steps.
 
-First, compute RDM matrices for your embeddings (CLIP and/or DINOv3):
+### Step 1: Compute Average Embeddings
 
-```bash
-# For CLIP embeddings
-python compute_clip_category_rdm.py \
-  --embedding_list /path/to/clip_embeddings_list.txt \
-  --embeddings_dir /path/to/clip_embeddings \
-  --output_dir ./clip_rdm_results \
-  --cdi_path ./data/cdi_words.csv \
-  --embedding_type clip
+**Notebook:** `01_compute_average_embeddings.ipynb`
 
-# For DINOv3 embeddings (matching CLIP list to ensure same images)
-python compute_clip_category_rdm.py \
-  --embedding_list /path/to/clip_embeddings_list.txt \
-  --embeddings_dir /path/to/dinov3_embeddings \
-  --output_dir ./dinov3_rdm_results \
-  --cdi_path ./data/cdi_words.csv \
-  --embedding_type dinov3 \
-  --match_from_list
-```
+This notebook computes category average embeddings from individual CLIP and DINOv3 embeddings.
 
-### Step 2: Filter and Reorganize RDMs (Optional)
+**What it does:**
+- Loads individual CLIP embeddings from files
+- Groups embeddings by category
+- Computes category average embeddings for CLIP
+- Loads individual DINOv3 embeddings from files (optionally matching from CLIP list)
+- Groups embeddings by category
+- Computes category average embeddings for DINOv3
+- Saves the average embeddings for later RDM computation
 
-Filter out low-quality categories and reorganize by type:
+**Configuration:**
+- Update paths in the configuration cell for:
+  - CLIP embedding list and directory
+  - DINOv3 embedding list and directory
+  - Output directories for CLIP and DINOv3 results
+  - Option to match DINOv3 filenames from CLIP list (ensures same images)
 
-```bash
-# Using exclusion file
-python reorganize_clip_rdm.py \
-  --npz_path ./clip_rdm_results/category_average_embeddings.npz \
-  --exclusion_file ./data/categories_with_zero_precision.txt \
-  --cdi_path ./data/cdi_words.csv \
-  --output_dir ./clip_rdm_results_filtered \
-  --save_dendrograms
+**Output:**
+- `category_average_embeddings.npz` files for CLIP and DINOv3
+- Category information files
 
-# Or using inclusion file
-python reorganize_clip_rdm.py \
-  --npz_path ./clip_rdm_results/category_average_embeddings.npz \
-  --inclusion_file ./data/categories_to_include.txt \
-  --cdi_path ./data/cdi_words.csv \
-  --output_dir ./clip_rdm_results_filtered
-```
+### Step 2: Filter, Normalize, and Compute RDM
+
+**Notebook:** `02_filter_normalize_and_compute_rdm.ipynb`
+
+This notebook filters out low-quality categories, normalizes embeddings, and reorganizes the RDM by category type with optional hierarchical clustering.
+
+**What it does:**
+- Loads category average embeddings from Step 1
+- Filters categories based on inclusion/exclusion lists
+- Normalizes embeddings (z-scoring)
+- Computes and saves filtered RDM matrices (similarity and distance)
+- Organizes categories by type (animals, bodyparts, big objects, small objects)
+- Optionally applies hierarchical clustering within each group
+- Creates visualizations (RDM heatmaps, dendrograms)
+
+**Configuration:**
+- Update paths in the configuration cell for:
+  - Input NPZ file with category average embeddings
+  - Inclusion or exclusion list file
+  - CDI words CSV file for category type information
+  - Output directory
+
+**Output:**
+- Filtered and normalized RDM matrices (similarity and distance)
+- Reorganized RDM visualizations
+- Dendrograms for each category group (if enabled)
+- Top similar/dissimilar category pairs
 
 ### Step 3: Correlate RDM Matrices
 
-Compare RDM matrices between different models:
+**Notebook:** `03_correlate_rdm_matrices.ipynb`
 
-```bash
-python correlate_rdm_matrices.py \
-  --rdm1 ./clip_rdm_results_filtered/distance_matrix_filtered.npy \
-  --rdm2 ./dinov3_rdm_results_filtered/distance_matrix_filtered.npy \
-  --output ./rdm_correlation_results.txt
-```
+This notebook correlates two RDM matrices (e.g., BV_CLIP vs THINGS_CLIP) using Pearson and Spearman correlations.
 
-### Step 4: Correlate Category Embeddings (Optional)
-
-Compare category-level embeddings directly:
-
-```bash
-python correlate_category_embeddings.py \
-  --embeddings1 ./clip_rdm_results/category_average_embeddings.npz \
-  --embeddings2 ./dinov3_rdm_results/category_average_embeddings.npz \
-  --output ./category_embedding_correlations.txt \
-  --save_per_category
-```
-
----
-
-## Script Documentation
-
-### 1. `compute_clip_category_rdm.py`
-
-Computes pairwise Representational Dissimilarity Matrices (RDMs) for CLIP or DINOv3 category embeddings.
-
-**Key Features:**
-- Loads embeddings from `.npy` files
-- Computes category average embeddings
-- Generates cosine similarity and distance matrices
-- Organizes categories by type (animate, bodyparts, small, big objects)
-- Creates visualization heatmaps
-
-**Required Arguments:**
-- `--embeddings_dir`: Base directory containing embedding files
-- `--output_dir`: Output directory for results
-- `--cdi_path`: Path to CDI words CSV file
-
-**Optional Arguments:**
-- `--embedding_list`: Text file with embedding paths (one per line)
-- `--match_from_list`: Match filenames from embedding_list to embeddings_dir
-- `--embedding_type`: Type of embeddings (`clip` or `dinov3`, default: `clip`)
-- `--num_workers`: Number of parallel workers (default: auto-detect, max 16)
-- `--no_parallel`: Disable parallel loading
-
-**Example Usage:**
-
-```bash
-# CLIP embeddings with list file
-python compute_clip_category_rdm.py \
-  --embedding_list /data/clip_embeddings_list.txt \
-  --embeddings_dir /data/clip_embeddings \
-  --output_dir ./clip_rdm_results \
-  --cdi_path ./data/cdi_words.csv \
-  --embedding_type clip
-
-# DINOv3 embeddings (auto-scan directory)
-python compute_clip_category_rdm.py \
-  --embeddings_dir /data/dinov3_embeddings \
-  --output_dir ./dinov3_rdm_results \
-  --cdi_path ./data/cdi_words.csv \
-  --embedding_type dinov3
-
-# DINOv3 embeddings matching CLIP list
-python compute_clip_category_rdm.py \
-  --embedding_list /data/clip_embeddings_list.txt \
-  --embeddings_dir /data/dinov3_embeddings \
-  --output_dir ./dinov3_rdm_results \
-  --cdi_path ./data/cdi_words.csv \
-  --embedding_type dinov3 \
-  --match_from_list
-```
-
-**Output Files:**
-- `category_average_embeddings.npz`: Category average embeddings
-- `category_average_embeddings.csv`: Category averages (CSV format)
-- `similarity_matrix.npy` / `.csv`: Cosine similarity matrix
-- `distance_matrix.npy` / `.csv`: Cosine distance matrix (1 - similarity)
-- `rdm_full.png`: Full RDM heatmap
-- `rdm_organized_by_type.png`: RDM organized by category type
-
----
-
-### 2. `reorganize_clip_rdm.py`
-
-Filters and reorganizes CLIP category RDM by loading saved embeddings and excluding/including categories.
-
-**Key Features:**
-- Filters categories by exclusion or inclusion lists
-- Organizes categories by type with hierarchical clustering
-- Creates filtered RDM visualizations
-- Generates dendrograms for category groups
-- Identifies top similar/dissimilar category pairs
-
-**Required Arguments:**
-- `--npz_path`: Path to NPZ file with category average embeddings
-- Either `--exclusion_file` OR `--inclusion_file` must be provided
-
-**Optional Arguments:**
-- `--exclusion_file`: Text file with categories to exclude (one per line)
-- `--inclusion_file`: Text file with categories to include (one per line)
-- `--cdi_path`: Path to CDI words CSV (default: `./data/cdi_words.csv`)
-- `--output_dir`: Output directory (default: `./clip_rdm_results_filtered`)
-- `--organization_file`: Use custom category organization from file
-- `--no_clustering`: Disable hierarchical clustering within groups
-- `--save_dendrograms`: Save dendrogram plots for each category group
-
-**Example Usage:**
-
-```bash
-# Filter by exclusion
-python reorganize_clip_rdm.py \
-  --npz_path ./clip_rdm_results/category_average_embeddings.npz \
-  --exclusion_file ./data/low_precision_categories.txt \
-  --cdi_path ./data/cdi_words.csv \
-  --output_dir ./clip_rdm_results_filtered \
-  --save_dendrograms
-
-# Filter by inclusion
-python reorganize_clip_rdm.py \
-  --npz_path ./clip_rdm_results/category_average_embeddings.npz \
-  --inclusion_file ./data/high_quality_categories.txt \
-  --cdi_path ./data/cdi_words.csv \
-  --output_dir ./clip_rdm_results_filtered
-
-# Use custom organization file
-python reorganize_clip_rdm.py \
-  --npz_path ./clip_rdm_results/category_average_embeddings.npz \
-  --exclusion_file ./data/low_precision_categories.txt \
-  --organization_file ./clip_rdm_results/category_organization.txt \
-  --output_dir ./clip_rdm_results_filtered
-```
-
-**Output Files:**
-- `similarity_matrix_filtered.npy` / `.csv`: Filtered similarity matrix
-- `distance_matrix_filtered.npy` / `.csv`: Filtered distance matrix
-- `rdm_organized_filtered.png`: Filtered RDM heatmap (viridis colormap)
-- `rdm_organized_filtered_coolwarm.png`: Filtered RDM heatmap (coolwarm colormap)
-- `dendrogram_*.png` / `.pdf`: Dendrograms for each category group (if `--save_dendrograms`)
-- `top_N_similar_pairs.png` / `.txt`: Top N most similar category pairs
-- `top_N_dissimilar_pairs.png` / `.txt`: Top N most dissimilar category pairs
-
----
-
-### 3. `correlate_rdm_matrices.py`
-
-Correlates the lower triangle of two RDM matrices using Pearson and Spearman correlations.
-
-**Key Features:**
-- Supports both `.npy` and `.csv` input formats
+**What it does:**
+- Loads two RDM distance matrices (e.g., BV_CLIP and THINGS_CLIP)
+- Matches categories between matrices if needed
+- Extracts lower triangle (excluding diagonal)
 - Computes Pearson and Spearman correlations
-- Option to include/exclude diagonal elements
-- Option to use upper or lower triangle
+- Reports correlation statistics
 
-**Required Arguments:**
-- `--rdm1`: Path to first RDM matrix file (.npy or .csv)
-- `--rdm2`: Path to second RDM matrix file (.npy or .csv)
-
-**Optional Arguments:**
-- `--output`: Output file path (default: print to stdout)
-- `--include_diagonal`: Include diagonal elements in correlation
-- `--use_upper_triangle`: Use upper triangle instead of lower triangle
-
-**Example Usage:**
-
-```bash
-# Basic correlation (NPY files)
-python correlate_rdm_matrices.py \
-  --rdm1 ./clip_rdm_results_filtered/distance_matrix_filtered.npy \
-  --rdm2 ./dinov3_rdm_results_filtered/distance_matrix_filtered.npy \
-  --output ./rdm_correlation_results.txt
-
-# Using CSV files
-python correlate_rdm_matrices.py \
-  --rdm1 ./clip_rdm_results_filtered/distance_matrix_filtered.csv \
-  --rdm2 ./dinov3_rdm_results_filtered/distance_matrix_filtered.csv \
-  --output ./rdm_correlation_results.txt
-
-# Include diagonal
-python correlate_rdm_matrices.py \
-  --rdm1 ./clip_rdm_results_filtered/distance_matrix_filtered.npy \
-  --rdm2 ./dinov3_rdm_results_filtered/distance_matrix_filtered.npy \
-  --include_diagonal \
-  --output ./rdm_correlation_results.txt
-```
+**Configuration:**
+- Update paths in the configuration cell for:
+  - First RDM matrix path
+  - Second RDM matrix path
+  - Output directory and filename for results
 
 **Output:**
 - Correlation statistics (Pearson r, p-value; Spearman r, p-value)
 - Matrix information and statistics
-- Results saved to text file or printed to stdout
+- Results saved to text file
 
----
+### Step 4: Correlate Category Embeddings
 
-### 4. `correlate_category_embeddings.py`
+**Notebook:** `04_correlate_category_embeddings.ipynb`
 
-Correlates within-category average embeddings between two embedding files.
+This notebook correlates category-level average embeddings between two embedding files (e.g., bv_clip and things_clip).
 
-**Key Features:**
-- Computes correlations for each matching category
-- Multiple similarity metrics: Pearson, Spearman, cosine similarity, Euclidean distance
-- Summary statistics across all categories
-- Optional per-category detailed results
+**What it does:**
+- Loads category average embeddings from two sources
+- Finds matching categories between the two sets
+- Computes correlations (Pearson, Spearman, Cosine) for each category
+- Reports summary statistics and top/bottom categories
 
-**Required Arguments:**
-- `--embeddings1`: Path to first embeddings file (.npz)
-- `--embeddings2`: Path to second embeddings file (.npz)
-
-**Optional Arguments:**
-- `--output`: Output file path (default: print to stdout)
-- `--save_per_category`: Save detailed per-category results to CSV
-- `--min_correlation`: Only report categories with correlation above threshold
-
-**Example Usage:**
-
-```bash
-# Basic correlation
-python correlate_category_embeddings.py \
-  --embeddings1 ./clip_rdm_results/category_average_embeddings.npz \
-  --embeddings2 ./dinov3_rdm_results/category_average_embeddings.npz \
-  --output ./category_embedding_correlations.txt
-
-# Save per-category results
-python correlate_category_embeddings.py \
-  --embeddings1 ./clip_rdm_results/category_average_embeddings.npz \
-  --embeddings2 ./dinov3_rdm_results/category_average_embeddings.npz \
-  --output ./category_embedding_correlations.txt \
-  --save_per_category
-
-# Filter by minimum correlation
-python correlate_category_embeddings.py \
-  --embeddings1 ./clip_rdm_results/category_average_embeddings.npz \
-  --embeddings2 ./dinov3_rdm_results/category_average_embeddings.npz \
-  --output ./category_embedding_correlations.txt \
-  --min_correlation 0.5
-```
+**Configuration:**
+- Update paths in the configuration cell for:
+  - First category average embeddings file
+  - Second category average embeddings file
+  - Output directory and filename for results
 
 **Output:**
 - Summary statistics (mean, std, median, min, max for each metric)
 - Top 10 and bottom 10 categories by Pearson correlation
-- Per-category CSV file (if `--save_per_category`)
+- Detailed correlation results saved to text file
+
+---
+
+## Notebook Documentation
+
+### 1. `01_compute_average_embeddings.ipynb`
+
+Computes category average embeddings from individual CLIP and DINOv3 embeddings.
+
+**Key Features:**
+- Loads embeddings from `.npy` files
+- Groups embeddings by category
+- Computes category average embeddings for CLIP and DINOv3
+- Supports parallel loading for efficiency
+- Option to match DINOv3 filenames from CLIP list (ensures same images)
+
+**Configuration:**
+- Update paths in the configuration cell:
+  - `CLIP_EMBEDDING_LIST`: Path to text file with CLIP embedding paths (one per line), or None to scan directory
+  - `CLIP_EMBEDDINGS_DIR`: Base directory for CLIP embeddings
+  - `CLIP_OUTPUT_DIR`: Directory where CLIP results will be saved
+  - `DINOV3_EMBEDDING_LIST`: Path to text file with DINOv3 embedding paths, or None to scan directory
+  - `DINOV3_EMBEDDINGS_DIR`: Base directory for DINOv3 embeddings
+  - `DINOV3_OUTPUT_DIR`: Directory where DINOv3 results will be saved
+  - `MATCH_FROM_CLIP_LIST`: If True, match DINOv3 filenames from CLIP list
+  - `NUM_WORKERS`: Number of parallel workers (None = auto-detect)
+  - `USE_PARALLEL`: Enable parallel loading
+
+**Output Files:**
+- `category_average_embeddings.npz`: Category average embeddings (numpy array and category names)
+- `category_average_embeddings.csv`: Category averages (CSV format)
+- `category_average_info.txt`: Summary information about categories
+- `category_names.txt`: List of category names
+
+---
+
+### 2. `02_filter_normalize_and_compute_rdm.ipynb`
+
+Filters out low-quality categories, normalizes embeddings, and reorganizes the RDM by category type with optional hierarchical clustering.
+
+**Key Features:**
+- Filters categories by exclusion or inclusion lists
+- Normalizes embeddings using z-scoring
+- Computes cosine similarity and distance matrices
+- Organizes categories by type (animals, bodyparts, big objects, small objects)
+- Applies hierarchical clustering within each group
+- Creates filtered RDM visualizations
+- Generates dendrograms for category groups
+- Identifies top similar/dissimilar category pairs
+
+**Configuration:**
+- Update paths in the configuration cell:
+  - `INPUT_NPZ_PATH`: Path to NPZ file with category average embeddings from Step 1
+  - `EXCLUSION_FILE` or `INCLUSION_FILE`: Text file with categories to exclude/include (one per line)
+  - `CDI_PATH`: Path to CDI words CSV file (default: `./data/cdi_words.csv`)
+  - `OUTPUT_DIR`: Output directory for filtered results
+  - `USE_CLUSTERING`: Enable hierarchical clustering within groups
+  - `SAVE_DENDROGRAMS`: Save dendrogram plots for each category group
+
+**Output Files:**
+- `similarity_matrix_filtered.npy` / `.csv`: Filtered similarity matrix
+- `distance_matrix_filtered.npy` / `.csv`: Filtered distance matrix
+- `distance_matrix_filtered_original.npy`: Original distance matrix before normalization
+- `rdm_organized_filtered.png`: Filtered RDM heatmap (viridis colormap)
+- `rdm_organized_filtered_coolwarm.png`: Filtered RDM heatmap (coolwarm colormap)
+- `dendrogram_*.png` / `.pdf`: Dendrograms for each category group (if enabled)
+- `top_N_similar_pairs.png` / `.txt`: Top N most similar category pairs
+- `top_N_dissimilar_pairs.png` / `.txt`: Top N most dissimilar category pairs
+- `category_names_filtered.txt`: List of filtered category names
+- `category_organization_filtered.txt`: Category organization information
+
+---
+
+### 3. `03_correlate_rdm_matrices.ipynb`
+
+Correlates two RDM matrices (e.g., BV_CLIP vs THINGS_CLIP) using Pearson and Spearman correlations.
+
+**Key Features:**
+- Supports both `.npy` and `.csv` input formats
+- Matches categories between matrices if needed
+- Extracts lower triangle (excluding diagonal)
+- Computes Pearson and Spearman correlations
+- Reports correlation statistics
+
+**Configuration:**
+- Update paths in the configuration cell:
+  - `INPUT_RDM1_PATH`: Path to first RDM matrix file (.npy or .csv)
+  - `INPUT_RDM2_PATH`: Path to second RDM matrix file (.npy or .csv)
+  - `OUTPUT_DIR`: Output directory for correlation results
+  - `OUTPUT_FILENAME`: Output filename for results
+
+**Output:**
+- Correlation statistics (Pearson r, p-value; Spearman r, p-value)
+- Matrix information and statistics
+- Results saved to text file
+
+---
+
+### 4. `04_correlate_category_embeddings.ipynb`
+
+Correlates category-level average embeddings between two embedding files (e.g., bv_clip and things_clip).
+
+**Key Features:**
+- Loads category average embeddings from two sources
+- Finds matching categories between the two sets
+- Computes correlations (Pearson, Spearman, Cosine) for each category
+- Reports summary statistics and top/bottom categories
+
+**Configuration:**
+- Update paths in the configuration cell:
+  - `AVG_CAT_EMB_PATH1`: Path to first category average embeddings file (.npz)
+  - `AVG_CAT_EMB_PATH2`: Path to second category average embeddings file (.npz)
+  - `OUTPUT_DIR`: Output directory for correlation results
+  - `OUTPUT_FILENAME`: Output filename for results
+
+**Output:**
+- Summary statistics (mean, std, median, min, max for each metric)
+- Top 10 and bottom 10 categories by Pearson correlation
+- Detailed correlation results saved to text file
 
 ---
 
@@ -339,17 +271,21 @@ python correlate_category_embeddings.py \
 
 ## Tips and Best Practices
 
-1. **Matching Embeddings**: Use `--match_from_list` when comparing CLIP and DINOv3 to ensure the same images are used for both models.
+1. **Matching Embeddings**: In `01_compute_average_embeddings.ipynb`, set `MATCH_FROM_CLIP_LIST = True` when comparing CLIP and DINOv3 to ensure the same images are used for both models.
 
-2. **Filtering Categories**: Filter out low-quality categories before computing correlations to get more reliable results.
+2. **Filtering Categories**: Filter out low-quality categories in `02_filter_normalize_and_compute_rdm.ipynb` before computing correlations to get more reliable results.
 
-3. **Hierarchical Clustering**: The `reorganize_clip_rdm.py` script uses hierarchical clustering within category groups by default. Disable with `--no_clustering` if you prefer alphabetical sorting.
+3. **Hierarchical Clustering**: The `02_filter_normalize_and_compute_rdm.ipynb` notebook uses hierarchical clustering within category groups by default. Set `USE_CLUSTERING = False` if you prefer alphabetical sorting.
 
-4. **Parallel Processing**: The `compute_clip_category_rdm.py` script uses parallel loading by default. For very large datasets, you may want to adjust `--num_workers`.
+4. **Parallel Processing**: The `01_compute_average_embeddings.ipynb` notebook uses parallel loading by default. For very large datasets, you may want to adjust `NUM_WORKERS` in the configuration cell.
 
-5. **Memory Usage**: For large embedding sets, consider processing in batches or using memory-efficient loading options.
+5. **Memory Usage**: For large embedding sets, consider processing in batches or using memory-efficient loading options. You can disable parallel processing by setting `USE_PARALLEL = False`.
 
 6. **Visualization**: The RDM heatmaps are saved as high-resolution PNG files (300 DPI) suitable for publication.
+
+7. **Notebook Execution**: Execute notebooks sequentially (01 → 02 → 03 → 04) as each step depends on outputs from previous steps. Make sure to update configuration paths in each notebook before running.
+
+8. **Configuration Management**: Keep track of your configuration settings for reproducibility. Consider saving configuration cells separately or documenting your parameter choices.
 
 ---
 
@@ -357,19 +293,19 @@ python correlate_category_embeddings.py \
 
 ### Common Issues
 
-1. **"No matching categories found"**: Check that category names match exactly (case-sensitive, no extra whitespace).
+1. **"No matching categories found"**: Check that category names match exactly (case-sensitive, no extra whitespace). Verify your CDI words CSV file has the correct category names.
 
-2. **"Matrix is not square"**: Ensure your RDM matrices are properly formatted symmetric matrices.
+2. **"Matrix is not square"**: Ensure your RDM matrices are properly formatted symmetric matrices. This usually indicates an issue in Step 2.
 
-3. **"File not found"**: Verify all file paths are correct and use absolute paths if needed.
+3. **"File not found"**: Verify all file paths in the configuration cells are correct. Use absolute paths if relative paths don't work. Make sure outputs from previous steps exist before running subsequent notebooks.
 
-4. **Pandas CSV export errors**: The scripts include fallback mechanisms, but if you encounter persistent CSV errors, you may need to reinstall pandas.
+4. **Pandas CSV export errors**: The notebooks include fallback mechanisms, but if you encounter persistent CSV errors, you may need to reinstall pandas or check file permissions.
 
-5. **Memory errors**: For very large datasets, reduce `--num_workers` or use `--no_parallel` for sequential processing.
+5. **Memory errors**: For very large datasets, reduce `NUM_WORKERS` in the configuration cell or set `USE_PARALLEL = False` in `01_compute_average_embeddings.ipynb` for sequential processing.
+
+6. **Kernel crashes**: If a notebook kernel crashes, restart it and re-run all cells from the beginning. Make sure all required packages are installed.
+
+7. **Path issues**: If you're having trouble with paths, try using absolute paths in the configuration cells. Check that all input files exist before running each notebook.
 
 ---
-
-## Citation
-
-If you use these scripts in your research, please cite appropriately and acknowledge the original sources for CLIP and DINOv3 models.
 
