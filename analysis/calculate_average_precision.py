@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Calculate average precision for categories in the inclusion file.
+Calculate average precision and standard deviation for categories in the inclusion file.
 Averages precision across two annotators (Dora and Mira) for each category,
-and calculates the global average across all included categories.
+and calculates the global average and standard deviation across all included categories.
 """
 
 import pandas as pd
@@ -58,16 +58,19 @@ for category in included_categories:
     if len(precisions) == 1:
         # Only one annotator has data
         avg_precision = precisions[0]
+        std_precision = np.nan  # Cannot calculate std with only one value
         annotators_present = category_data['annotator'].values[0]
         print(f"Warning: Category '{category}' only has data from {annotators_present}")
     else:
-        # Average across annotators
+        # Average and standard deviation across annotators
         avg_precision = np.mean(precisions)
+        std_precision = np.std(precisions, ddof=0)  # Population std (ddof=0) since we have all annotators
         annotators_present = list(category_data['annotator'].values)
     
     category_precisions.append({
         'category': category,
         'average_precision': avg_precision,
+        'std_precision': std_precision,
         'dora_precision': category_data[category_data['annotator'] == 'Dora']['precision'].values[0] if 'Dora' in category_data['annotator'].values else np.nan,
         'mira_precision': category_data[category_data['annotator'] == 'Mira']['precision'].values[0] if 'Mira' in category_data['annotator'].values else np.nan
     })
@@ -75,16 +78,19 @@ for category in included_categories:
 # Create results dataframe
 results_df = pd.DataFrame(category_precisions)
 
-# Calculate global average precision
+# Calculate global average precision and standard deviation
 global_avg_precision = results_df['average_precision'].mean()
+global_std_precision = results_df['average_precision'].std(ddof=1)  # Sample std (ddof=1) for the distribution of averages
 
 print(f"\nCalculated average precision for {len(results_df)} categories")
 print(f"Global average precision: {global_avg_precision:.6f}")
+print(f"Global standard deviation: {global_std_precision:.6f}")
 
 # Add global average as a summary row
 summary_row = pd.DataFrame([{
     'category': 'GLOBAL_AVERAGE',
     'average_precision': global_avg_precision,
+    'std_precision': global_std_precision,
     'dora_precision': np.nan,
     'mira_precision': np.nan
 }])
@@ -100,5 +106,6 @@ print(f"\nDone! Results saved to {output_file}")
 print(f"\nSummary:")
 print(f"  Number of categories: {len(results_df)}")
 print(f"  Global average precision: {global_avg_precision:.6f}")
+print(f"  Global standard deviation: {global_std_precision:.6f}")
 print(f"  Min category precision: {results_df['average_precision'].min():.6f}")
 print(f"  Max category precision: {results_df['average_precision'].max():.6f}")
