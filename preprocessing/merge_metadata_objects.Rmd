@@ -57,7 +57,7 @@ ggplot(filter(d, dataset == "BV-main"),
 
 # Load Object Detection Data (super large file!)
 ```{r}
-objects <- read_csv(here::here("../frame_data/merged_frame_detections.csv"))  %>%
+objects <- read_csv(here::here("../frame_data/allframes_1fps.csv"))  %>%
   mutate(frame_id = paste0(superseded_gcp_name_feb25, time_in_extended_iso))
 colnames(objects)
 ```
