@@ -1,0 +1,80 @@
+---
+title: "merge_metadata_objects_dec25"
+author: "Jane Yang"
+date: "2025-12-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load the libraries
+library(tidyverse)
+library(babyviewr)
+library(lubridate)
+library(ggthemes)
+library(kableExtra)
+library(here)
+library(ggrepel)
+library(ggpubr)
+library(lme4)
+library(broom.mixed)
+library(effects)
+```
+
+# Load BV metadata from airtable
+```{r}
+# Load the data
+participants <- babyviewr::get_participant_data(include_demographics = TRUE)
+recordings <- babyviewr::get_main_recording_data(include_luna = TRUE)
+```
+
+# Filter to BV-main data only, plot cumulative number of hours per subject
+```{r}
+d <- left_join(recordings, 
+                      participants |>
+                        filter(dataset %in% c("BV-main")) |>
+                        select(-dataset), by = "subject_id") |>
+  filter(dataset == "BV-main") |>
+  group_by(subject_id) |>
+  arrange(date_time) |>
+  mutate(age = date(date_time) - date_birth_rounded, 
+         cumulative_hrs = cumsum(duration_hrs), 
+         age_mo = floor(as.numeric(age)/30.3))
+```
+```{R}
+
+ggplot(filter(d, dataset == "BV-main"), 
+       aes(x = age/30.3, y = cumulative_hrs, col = subject_id)) + 
+  geom_point(alpha= .1) + 
+  scale_color_discrete(guide = FALSE) + 
+  theme_few() + 
+  xlab("Age (months)") + 
+  ylab("Cumulative hours of data")
+```
+
+# Load Object Detection Data (super large file!)
+```{r}
+objects <- read_csv(here::here("../frame_data/merged_frame_detections.csv"))  %>%
+  mutate(frame_id = paste0(superseded_gcp_name_feb25, time_in_extended_iso))
+colnames(objects)
+```
+
+Looks like a fair amount off the sampled frames are from Bing or Luna -- not in including these in analysis.
+```{r}
+length(objects$superseded_gcp_name_feb25[!(objects$superseded_gcp_name_feb25 %in% recordings$superseded_gcp_name_feb25)]) 
+```
+
+# Merge the object detection file with the recording data
+```{r}
+objects_joined <- inner_join(objects, d, by = c("superseded_gcp_name_feb25"))
+head(objects_joined)
+```
+
+# Save the joined data
+```{r}
+write_csv(objects_joined, here::here("../frame_data/merged_frame_detections_with_metadata.csv"))
+```
+
