@@ -23,6 +23,9 @@ parser.add_argument('--output-dir', type=str,
                     help='Output directory for grouped embeddings')
 parser.add_argument('--num-workers', type=int, default=1,
                     help='Number of parallel workers for processing categories (default: 1, sequential)')
+parser.add_argument('--categories-file', type=str, 
+                    default="/home/j7yang/babyview-projects/vss2026/object-detection/data/things_bv_overlap_categories_exclude_zero_precisions.txt",
+                    help='Path to text file with category names (one per line). If specified, only these categories will be processed. Default: things_bv_overlap_categories_exclude_zero_precisions.txt')
 args = parser.parse_args()
 
 # Define paths
@@ -107,17 +110,41 @@ filename_pattern = re.compile(r'^(.+?)_([\d.]+)_(\d+)_(.+?)_processed_(\d+)\.npy
 # Iterate through all category folders
 all_category_folders = [f for f in embeddings_dir.iterdir() if f.is_dir()]
 
-# Filter to test category if specified
+# Load allowed categories from file if specified
+allowed_categories = None
+if args.categories_file:
+    categories_file = Path(args.categories_file)
+    if categories_file.exists():
+        print(f"Loading allowed categories from: {categories_file}")
+        with open(categories_file, 'r') as f:
+            allowed_categories = set(line.strip() for line in f if line.strip())
+        print(f"Loaded {len(allowed_categories)} categories from file")
+    else:
+        print(f"Warning: Categories file not found: {categories_file}")
+        print("  Processing all categories instead.")
+
+# Filter categories based on test category, categories file, or use all
 if args.test_category:
+    # Test mode: only process the specified category
     category_folders = [f for f in all_category_folders if f.name == args.test_category]
     if not category_folders:
         print(f"Error: Category '{args.test_category}' not found in embeddings directory.")
         print(f"Available categories: {sorted([f.name for f in all_category_folders])[:10]}...")
         exit(1)
     print(f"\nTEST MODE: Processing only category '{args.test_category}'...")
+elif allowed_categories is not None:
+    # Filter to only categories in the allowed list
+    category_folders = [f for f in all_category_folders if f.name in allowed_categories]
+    print(f"\nFILTERED MODE: Processing {len(category_folders)} categories from allowed list...")
+    # Check if any categories in the file don't exist
+    missing_categories = allowed_categories - set(f.name for f in all_category_folders)
+    if missing_categories:
+        print(f"Warning: {len(missing_categories)} categories from file not found in embeddings directory:")
+        print(f"  {sorted(list(missing_categories))[:10]}{'...' if len(missing_categories) > 10 else ''}")
 else:
+    # Process all categories
     category_folders = all_category_folders
-    print(f"\nProcessing {len(category_folders)} categories...")
+    print(f"\nProcessing all {len(category_folders)} categories...")
 
 # Count total embeddings for overall progress (optimized: count while getting file lists)
 print("Counting embeddings...")
