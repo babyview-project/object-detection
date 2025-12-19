@@ -24,57 +24,108 @@ library(broom.mixed)
 library(effects)
 ```
 
-# Load BV metadata from airtable
+# Load BV metadata from CSV
 ```{r}
-# Load the data
-participants <- babyviewr::get_participant_data(include_demographics = TRUE)
-recordings <- babyviewr::get_main_recording_data(include_luna = TRUE)
-```
-
-# Filter to BV-main data only, plot cumulative number of hours per subject
-```{r}
-d <- left_join(recordings, 
-                      participants |>
-                        filter(dataset %in% c("BV-main")) |>
-                        select(-dataset), by = "subject_id") |>
-  filter(dataset == "BV-main") |>
-  group_by(subject_id) |>
-  arrange(date_time) |>
-  mutate(age = date(date_time) - date_birth_rounded, 
-         cumulative_hrs = cumsum(duration_hrs), 
-         age_mo = floor(as.numeric(age)/30.3))
-```
-```{R}
-
-ggplot(filter(d, dataset == "BV-main"), 
-       aes(x = age/30.3, y = cumulative_hrs, col = subject_id)) + 
-  geom_point(alpha= .1) + 
-  scale_color_discrete(guide = FALSE) + 
-  theme_few() + 
-  xlab("Age (months)") + 
-  ylab("Cumulative hours of data")
+# Load the metadata CSV, filter to BV-main only, and select only needed columns
+metadata <- read_csv("/Users/visuallearninglab/babyview-project/vss2026/object-detection/data/babyview-videos-metadata-2025.1.csv") %>%
+  filter(dataset == "BV-main") %>%
+  select(superseded_gcp_name_feb25, subject_id, unique_video_id, date_time, date_birth_rounded)
 ```
 
 # Load Object Detection Data (super large file!)
 ```{r}
-objects <- read_csv(here::here("../frame_data/allframes_1fps.csv"))  %>%
-  mutate(frame_id = paste0(superseded_gcp_name_feb25, time_in_extended_iso))
+# Load objects and select only needed columns before joining
+objects <- read_csv("/Users/visuallearninglab/babyview-project/vss2026/object-detection/frame_data/allframes_1fps.csv") %>%
+  select(superseded_gcp_name_feb25, class_name, confidence, original_frame_path)
 colnames(objects)
 ```
 
-Looks like a fair amount off the sampled frames are from Bing or Luna -- not in including these in analysis.
+# Merge the object detection file with the metadata
 ```{r}
-length(objects$superseded_gcp_name_feb25[!(objects$superseded_gcp_name_feb25 %in% recordings$superseded_gcp_name_feb25)]) 
-```
+# Join on superseded_gcp_name_feb25 to get unique_video_id and other metadata
+objects_joined <- inner_join(objects, metadata, by = "superseded_gcp_name_feb25")
 
-# Merge the object detection file with the recording data
-```{r}
-objects_joined <- inner_join(objects, d, by = c("superseded_gcp_name_feb25"))
+# Calculate age in months (rounded)
+# Parse date_time and date_birth_rounded, then calculate age
+# Handle various date_time formats
+objects_joined <- objects_joined %>%
+  mutate(
+    date_time_parsed = parse_date_time(date_time, orders = c("mdy HMp", "mdy H:Mp", "mdy")),
+    date_birth_parsed = mdy(date_birth_rounded),
+    age_days = as.numeric(date(date_time_parsed) - date_birth_parsed),
+    age_mo = round(age_days / 30.3)
+  ) %>%
+  select(-date_time_parsed, -date_birth_parsed, -age_days)
+
 head(objects_joined)
 ```
 
+# Filter out rows where class_name is "person" or "picture"
+```{r}
+objects_joined <- objects_joined %>%
+  filter(!class_name %in% c("person", "picture"))
+```
+
+# Create original_embedding_name column
+```{r}
+objects_joined <- objects_joined %>%
+  mutate(
+    # Extract last two path components
+    path_parts = strsplit(original_frame_path, "/"),
+    last_two_fields = sapply(path_parts, function(x) {
+      if (length(x) >= 2) {
+        paste(tail(x, 2), collapse = "_")
+      } else {
+        x[length(x)]
+      }
+    }),
+    # Remove file extension and add .npy
+    last_two_fields_no_ext = sub("\\.[^.]+$", "", last_two_fields),
+    # Round confidence to 3 decimals
+    confidence_rounded = round(confidence, 3),
+    # Combine: class_name_confidence_last_two_fields.npy
+    original_embedding_name = paste0(class_name, "_", confidence_rounded, "_", last_two_fields_no_ext, ".npy")
+  ) %>%
+  select(-path_parts, -last_two_fields, -last_two_fields_no_ext, -confidence_rounded)
+```
+
+# Load embedding names from the clip embeddings file
+```{r}
+# Read the embeddings file and extract the last field (filename) from each line
+embedding_paths <- read_lines("/Users/visuallearninglab/babyview-project/vss2026/object-detection/data/clip_image_embeddings_doc_normalized_filtered-by-clip-0.26.txt")
+embedding_names <- basename(embedding_paths)  # Extract just the filename from each path
+embedding_names_set <- unique(embedding_names)  # Remove duplicates if any
+cat("Number of unique embedding names:", length(embedding_names_set), "\n")
+```
+
+# Filter to keep only rows where original_embedding_name matches an embedding name
+```{r}
+objects_joined <- objects_joined %>%
+  filter(original_embedding_name %in% embedding_names_set)
+cat("Number of rows after filtering:", nrow(objects_joined), "\n")
+```
+
+# Select only the columns we want to keep
+```{r}
+objects_joined <- objects_joined %>%
+  select(class_name, confidence, age_mo, subject_id, unique_video_id, 
+         superseded_gcp_name_feb25, original_frame_path, original_embedding_name)
+```
+
+
+
 # Save the joined data
 ```{r}
-write_csv(objects_joined, here::here("../frame_data/merged_frame_detections_with_metadata.csv"))
+write_csv(objects_joined, "../frame_data/merged_frame_detections_with_metadata.csv")
+```
+
+# Visualize the first few rows of the joined data
+```{r}
+head(objects_joined)
+```
+
+# List the columns of the joined data
+```{r}
+colnames(objects_joined)
 ```
 
