@@ -1,0 +1,22 @@
+Top 20 Most Dissimilar Category Pairs:
+============================================================
+soap <-> pajamas: 1.4313
+alligator <-> nail: 1.4202
+crayon <-> blanket: 1.4173
+bed <-> crayon: 1.4163
+crib <-> slipper: 1.4136
+bread <-> pajamas: 1.4093
+table <-> slipper: 1.4084
+bread <-> jacket: 1.4072
+arm <-> soap: 1.4056
+alligator <-> egg: 1.4053
+slipper <-> jacket: 1.4050
+bed <-> slipper: 1.4047
+bread <-> jeans: 1.3921
+crayon <-> jacket: 1.3891
+alligator <-> cup: 1.3870
+bed <-> soap: 1.3849
+slipper <-> sweater: 1.3846
+alligator <-> bowl: 1.3835
+soap <-> blanket: 1.3835
+nail <-> blanket: 1.3771

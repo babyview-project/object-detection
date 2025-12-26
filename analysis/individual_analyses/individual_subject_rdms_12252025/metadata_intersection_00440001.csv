@@ -1,0 +1,2 @@
+subject_id,n_categories_total,n_categories_available,n_categories_missing,mean_distance,std_distance,min_distance,max_distance
+00440001,140,131,9,0.9276313395233714,0.19486004255768954,0.05709528923034668,1.4161670207977295

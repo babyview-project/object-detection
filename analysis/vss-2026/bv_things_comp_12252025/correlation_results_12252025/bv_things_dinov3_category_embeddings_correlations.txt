@@ -1,0 +1,72 @@
+============================================================
+CATEGORY EMBEDDING CORRELATION RESULTS
+============================================================
+
+CSV File 1: bv_things_comp_12252025/bv_dinov3_filtered_zscored_hierarchical_163cats/normalized_filtered_embeddings_alphabetical.csv
+CSV File 2: bv_things_comp_12252025/things_dinov3_filtered_zscored_hierarchical_163cats/normalized_filtered_embeddings_alphabetical.csv
+
+Categories 1: 163, Embedding dim: 768
+Categories 2: 163, Embedding dim: 768
+Category include file: ../../data/things_bv_overlap_categories_exclude_zero_precisions.txt
+Matching categories: 163
+
+============================================================
+SUMMARY STATISTICS
+============================================================
+Categories analyzed: 163
+
+Pearson Correlation:
+  Mean:   0.367984
+  Std:    0.166945
+  Median: 0.366334
+  Min:    -0.013829
+  Max:    0.729533
+
+Spearman Correlation:
+  Mean:   0.352944
+  Std:    0.161349
+  Median: 0.351250
+  Min:    -0.024681
+  Max:    0.707359
+
+Kendall Correlation:
+  Mean:   0.243660
+  Std:    0.115991
+  Median: 0.236500
+  Min:    -0.015902
+  Max:    0.516642
+
+Cosine Similarity:
+  Mean:   0.367907
+  Std:    0.166945
+  Median: 0.366347
+  Min:    -0.013752
+  Max:    0.729568
+
+============================================================
+TOP 10 CATEGORIES BY PEARSON CORRELATION
+============================================================
+   1. fork                           pearson_r=0.729533, spearman_r=0.707359, kendall_r=0.516642, cosine=0.729568
+   2. scissors                       pearson_r=0.704904, spearman_r=0.672845, kendall_r=0.487859, cosine=0.704875
+   3. slide                          pearson_r=0.702099, spearman_r=0.702011, kendall_r=0.506431, cosine=0.701860
+   4. foot                           pearson_r=0.699726, spearman_r=0.682208, kendall_r=0.493258, cosine=0.699518
+   5. stroller                       pearson_r=0.677572, spearman_r=0.663778, kendall_r=0.476120, cosine=0.677662
+   6. giraffe                        pearson_r=0.657683, spearman_r=0.639627, kendall_r=0.453546, cosine=0.657711
+   7. oven                           pearson_r=0.648652, spearman_r=0.617811, kendall_r=0.442246, cosine=0.648562
+   8. helicopter                     pearson_r=0.632842, spearman_r=0.581735, kendall_r=0.414451, cosine=0.633026
+   9. tooth                          pearson_r=0.626659, spearman_r=0.617258, kendall_r=0.435626, cosine=0.626466
+  10. shoe                           pearson_r=0.621344, spearman_r=0.604601, kendall_r=0.428144, cosine=0.621322
+
+============================================================
+BOTTOM 10 CATEGORIES BY PEARSON CORRELATION
+============================================================
+  154. bear                           pearson_r=0.099136, spearman_r=0.109797, kendall_r=0.074255, cosine=0.099136
+  155. owl                            pearson_r=0.095457, spearman_r=0.103397, kendall_r=0.068858, cosine=0.095482
+  156. bird                           pearson_r=0.094554, spearman_r=0.072889, kendall_r=0.049483, cosine=0.094551
+  157. grass                          pearson_r=0.090940, spearman_r=0.075527, kendall_r=0.049767, cosine=0.091471
+  158. car                            pearson_r=0.083910, spearman_r=0.055719, kendall_r=0.036731, cosine=0.083911
+  159. shirt                          pearson_r=0.081192, spearman_r=0.072715, kendall_r=0.048557, cosine=0.080506
+  160. flower                         pearson_r=0.069175, spearman_r=0.053250, kendall_r=0.036095, cosine=0.069161
+  161. fish                           pearson_r=0.067977, spearman_r=0.048006, kendall_r=0.032815, cosine=0.067960
+  162. sauce                          pearson_r=0.043772, spearman_r=0.048219, kendall_r=0.031528, cosine=0.043498
+  163. nail                           pearson_r=-0.013829, spearman_r=-0.024681, kendall_r=-0.015902, cosine=-0.013752
