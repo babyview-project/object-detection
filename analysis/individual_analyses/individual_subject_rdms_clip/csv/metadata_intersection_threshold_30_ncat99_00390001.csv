@@ -1,0 +1,2 @@
+subject_id,threshold_min_subjects,n_categories_total,n_categories_available,n_categories_missing,mean_distance,std_distance,min_distance,max_distance
+00390001,30,99,99,0,0.9613793985464903,0.2901852505525408,0.04311645030975342,1.5844123363494873
