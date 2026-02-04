@@ -1,0 +1,4 @@
+CLIP vs DINOv3 correlation across CDI categories (UMAP)
+  displacement_mean:    r = -0.1203
+  direction_alignment: r = -0.1478
+  magnitude_consistency: r = 0.1365
