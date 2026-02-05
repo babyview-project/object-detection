@@ -1,0 +1,4 @@
+CLIP vs DINOv3 correlation across CDI categories (TSNE)
+  displacement_mean:    r = 0.2623
+  direction_alignment: r = -0.0028
+  magnitude_consistency: r = 0.2085
