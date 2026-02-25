@@ -1,0 +1,10 @@
+Object detection proportion distribution (163 categories)
+==================================================
+Skewness (proportion):     3.1759
+Power-law exponent α:      2.2010
+Number of categories:      163
+
+animated: n=19, skewness=1.7915, power-law α=2.4117
+small_obj: n=96, skewness=2.7045, power-law α=2.0474
+big_obj: n=32, skewness=2.2031, power-law α=2.5608
+others: n=16, skewness=2.3863, power-law α=2.6736
