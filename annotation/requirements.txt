@@ -1,0 +1,3 @@
+# Dependencies for the crop annotation tool (annotate_crops.py).
+# tkinter and csv are from the Python standard library; only Pillow is needed here.
+Pillow>=9.0.0
