@@ -19,7 +19,7 @@ parser.add_argument('--metadata-csv', type=str,
                     default="/home/j7yang/babyview-projects/vss2026/object-detection/frame_data/merged_frame_detections_with_metadata.csv",
                     help='Path to the metadata CSV file')
 parser.add_argument('--output-dir', type=str,
-                    default="/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/clip_embeddings_grouped_by_age-mo",
+                    default="/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/clip_embeddings_grouped_by_age-mo_filtered-0.27",
                     help='Output directory for grouped embeddings')
 parser.add_argument('--num-workers', type=int, default=1,
                     help='Number of parallel workers for processing categories (default: 1, sequential)')

@@ -92,7 +92,7 @@ objects_joined <- objects_joined %>%
 # Load embedding names from the clip embeddings file
 ```{r}
 # Read the embeddings file and extract the last field (filename) from each line
-embedding_paths <- read_lines("/Users/visuallearninglab/babyview-project/vss2026/object-detection/data/clip_image_embeddings_doc_normalized_filtered-by-clip-0.26.txt")
+embedding_paths <- read_lines("/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/clip_image_embeddings_filtered-by-clip-0.27_exclude-people_exclude-subject-00270001.txt")
 embedding_names <- basename(embedding_paths)  # Extract just the filename from each path
 embedding_names_set <- unique(embedding_names)  # Remove duplicates if any
 cat("Number of unique embedding names:", length(embedding_names_set), "\n")
