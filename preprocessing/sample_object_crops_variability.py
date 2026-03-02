@@ -16,7 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 CDI_VOCAB_CSV = PROJECT_ROOT / "data" / "cdi_words.csv"
 CROPPED_DIR = Path("/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_all_cropped_by_class")
 # CLIP-filtered list: one embedding path per line ( .../category/filename.npy ); only these stems are sampled
-FILTER_LIST = PROJECT_ROOT / "data" / "clip_image_embeddings_doc_normalized_filtered-by-clip-0.26.txt"
+FILTER_LIST = Path("/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/clip_image_embeddings_filtered-by-clip-0.27_exclude-people_exclude-subject-00270001.txt")
 OUTPUT_DIR = PROJECT_ROOT / "annotation" / "sampled_object_crops"
 OUTPUT_CSV = PROJECT_ROOT / "annotation" / "sampled_object_crops.csv"
 SEED_FILE = PROJECT_ROOT / "annotation" / "sampled_object_crops_seed.txt"

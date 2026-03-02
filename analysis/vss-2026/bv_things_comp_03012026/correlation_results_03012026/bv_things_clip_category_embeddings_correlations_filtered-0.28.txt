@@ -1,0 +1,72 @@
+============================================================
+CATEGORY EMBEDDING CORRELATION RESULTS
+============================================================
+
+CSV File 1: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/vss-2026/bv_things_comp_03012026/bv_clip_filtered_zscored_hierarchical_threshold_0.28_163cats/normalized_filtered_embeddings_alphabetical.csv
+CSV File 2: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/vss-2026/bv_things_comp_03012026/things_clip_filtered_zscored_hierarchical_threshold_0.28_163cats/normalized_filtered_embeddings_alphabetical.csv
+
+Categories 1: 163, Embedding dim: 512
+Categories 2: 163, Embedding dim: 512
+Category include file: /home/j7yang/babyview-projects/vss2026/object-detection/data/things_bv_overlap_categories_exclude_zero_precisions.txt
+Matching categories: 163
+
+============================================================
+SUMMARY STATISTICS
+============================================================
+Categories analyzed: 163
+
+Pearson Correlation:
+  Mean:   0.631171
+  Std:    0.123677
+  Median: 0.656339
+  Min:    0.128861
+  Max:    0.845826
+
+Spearman Correlation:
+  Mean:   0.613261
+  Std:    0.125331
+  Median: 0.642817
+  Min:    0.110940
+  Max:    0.839735
+
+Kendall Correlation:
+  Mean:   0.441166
+  Std:    0.100284
+  Median: 0.459710
+  Min:    0.073131
+  Max:    0.647056
+
+Cosine Similarity:
+  Mean:   0.631308
+  Std:    0.123573
+  Median: 0.656419
+  Min:    0.129250
+  Max:    0.845776
+
+============================================================
+TOP 10 CATEGORIES BY SPEARMAN CORRELATION
+============================================================
+   1. helicopter                     pearson_r=0.845826, spearman_r=0.839735, kendall_r=0.647056, cosine=0.845776
+   2. foot                           pearson_r=0.820527, spearman_r=0.815639, kendall_r=0.622377, cosine=0.820814
+   3. tricycle                       pearson_r=0.824399, spearman_r=0.812536, kendall_r=0.616171, cosine=0.824231
+   4. shower                         pearson_r=0.811396, spearman_r=0.801465, kendall_r=0.605339, cosine=0.813401
+   5. pizza                          pearson_r=0.810329, spearman_r=0.799564, kendall_r=0.601125, cosine=0.810540
+   6. crib                           pearson_r=0.811763, spearman_r=0.789731, kendall_r=0.598704, cosine=0.811911
+   7. cracker                        pearson_r=0.800629, spearman_r=0.787717, kendall_r=0.593608, cosine=0.800745
+   8. cat                            pearson_r=0.794119, spearman_r=0.782879, kendall_r=0.588161, cosine=0.794222
+   9. zebra                          pearson_r=0.797636, spearman_r=0.775345, kendall_r=0.585677, cosine=0.798246
+  10. giraffe                        pearson_r=0.771284, spearman_r=0.766792, kendall_r=0.570964, cosine=0.771289
+
+============================================================
+BOTTOM 10 CATEGORIES BY SPEARMAN CORRELATION
+============================================================
+  154. carrot                         pearson_r=0.401780, spearman_r=0.395300, kendall_r=0.270184, cosine=0.401466
+  155. sprinkler                      pearson_r=0.412103, spearman_r=0.390413, kendall_r=0.266478, cosine=0.411489
+  156. shirt                          pearson_r=0.407044, spearman_r=0.383473, kendall_r=0.263754, cosine=0.407268
+  157. bib                            pearson_r=0.390852, spearman_r=0.372486, kendall_r=0.256684, cosine=0.390783
+  158. car                            pearson_r=0.359325, spearman_r=0.326101, kendall_r=0.219465, cosine=0.356816
+  159. sauce                          pearson_r=0.316175, spearman_r=0.321846, kendall_r=0.214934, cosine=0.316805
+  160. face                           pearson_r=0.328481, spearman_r=0.299981, kendall_r=0.203148, cosine=0.331646
+  161. raisin                         pearson_r=0.290777, spearman_r=0.265925, kendall_r=0.181679, cosine=0.290257
+  162. bear                           pearson_r=0.170181, spearman_r=0.159441, kendall_r=0.109090, cosine=0.169989
+  163. nail                           pearson_r=0.128861, spearman_r=0.110940, kendall_r=0.073131, cosine=0.129250
