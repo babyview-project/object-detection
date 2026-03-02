@@ -1,0 +1,22 @@
+Top 20 Most Similar Category Pairs:
+============================================================
+horse <-> pony: 0.0457
+pencil <-> pen: 0.0494
+cracker <-> toast: 0.0820
+ankle <-> foot: 0.1204
+jeans <-> pants: 0.1207
+sweater <-> shirt: 0.1340
+bed <-> blanket: 0.1382
+broom <-> mop: 0.1389
+balloon <-> ball: 0.1438
+cookie <-> bread: 0.1588
+toe <-> ankle: 0.1598
+door <-> closet: 0.1614
+toe <-> foot: 0.1667
+tooth <-> mouth: 0.1744
+sauce <-> soup: 0.1745
+egg <-> orange: 0.1776
+refrigerator <-> oven: 0.1896
+fork <-> spoon: 0.1946
+sink <-> bathtub: 0.1952
+pants <-> shorts: 0.2017

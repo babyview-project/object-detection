@@ -1,0 +1,26 @@
+============================================================
+RDM MATRIX CORRELATION RESULTS
+============================================================
+
+RDM 1: bv_things_comp_03012026/bv_dinov3_filtered_zscored_hierarchical_163cats/distance_matrix_alphabetical.npy
+RDM 2: bv_things_comp_03012026/things_dinov3_filtered_zscored_hierarchical_163cats/distance_matrix_alphabetical.npy
+
+Matrix 1 shape: (163, 163)
+Matrix 2 shape: (163, 163)
+
+Extracted lower triangle (excluding diagonal): 13203 elements
+Valid elements: 13203 / 13203
+
+============================================================
+CORRELATION RESULTS
+============================================================
+Spearman r: 0.389662
+Spearman p-value: 0.00e+00
+Pearson r: 0.543643
+Pearson p-value: 0.00e+00
+Kendall τ: 0.268784
+Kendall p-value: 0.00e+00
+
+Matrix Statistics:
+  Matrix 1: Mean=1.004855, Std=0.152213
+  Matrix 2: Mean=1.005878, Std=0.066091

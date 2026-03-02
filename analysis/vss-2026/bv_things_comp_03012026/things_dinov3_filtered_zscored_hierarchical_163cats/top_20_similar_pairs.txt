@@ -1,0 +1,22 @@
+Top 20 Most Similar Category Pairs:
+============================================================
+toe <-> foot: 0.1995
+ankle <-> foot: 0.2345
+nose <-> mouth: 0.2510
+plate <-> dish: 0.2850
+horse <-> pony: 0.3187
+fork <-> spoon: 0.3405
+dish <-> cup: 0.3584
+jeans <-> pants: 0.3596
+hand <-> finger: 0.3879
+broom <-> mop: 0.3906
+pants <-> shorts: 0.3976
+toe <-> ankle: 0.4066
+jeans <-> shorts: 0.4256
+pencil <-> pen: 0.4430
+crayon <-> pencil: 0.4492
+toast <-> sandwich: 0.4619
+refrigerator <-> oven: 0.4637
+mitten <-> glove: 0.4722
+slipper <-> shoe: 0.4749
+bathtub <-> shower: 0.4877
