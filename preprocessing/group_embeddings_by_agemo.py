@@ -1,3 +1,25 @@
+"""
+Group embeddings by category, subject, and age_mo; compute per-group averages and save.
+
+Run (defaults use project paths):
+  # All categories from allowlist file (default), person always excluded
+  python preprocessing/group_embeddings_by_agemo.py
+
+  # All categories (no allowlist), 8 workers for speed
+  python preprocessing/group_embeddings_by_agemo.py --no-categories-file --num-workers 8
+
+  # Single category test
+  python preprocessing/group_embeddings_by_agemo.py --test-category zipper
+
+  # Custom paths
+  python preprocessing/group_embeddings_by_agemo.py --embeddings-dir /path/to/embeddings --metadata-csv /path/to/metadata.csv --output-dir /path/to/out
+
+  # DINOv3 embeddings (uses dinov3 defaults; same pipeline)
+  python preprocessing/group_embeddings_by_agemo.py --embedding-type dinov3 --no-categories-file --num-workers 8
+
+  # Different confidence threshold (0.26 or 0.28); used with --embedding-type for metadata/output paths
+  python preprocessing/group_embeddings_by_agemo.py --embedding-type clip --threshold 0.28 --no-categories-file
+"""
 import numpy as np
 import pandas as pd
 from pathlib import Path
@@ -16,17 +38,107 @@ parser.add_argument('--embeddings-dir', type=str,
                     default="/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/clip_embeddings_new",
                     help='Directory containing category subfolders with embedding files')
 parser.add_argument('--metadata-csv', type=str,
-                    default="/home/j7yang/babyview-projects/vss2026/object-detection/frame_data/merged_frame_detections_with_metadata.csv",
+                    default="/home/j7yang/babyview-projects/vss2026/object-detection/frame_data/merged_frame_detections_with_metadata_filtered-0.27.csv",
                     help='Path to the metadata CSV file')
 parser.add_argument('--output-dir', type=str,
                     default="/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/clip_embeddings_grouped_by_age-mo_filtered-0.27",
                     help='Output directory for grouped embeddings')
 parser.add_argument('--num-workers', type=int, default=1,
-                    help='Number of parallel workers for processing categories (default: 1, sequential)')
+                    help='Number of parallel workers to process categories (default: 1). Use e.g. 8 to speed up on multi-core machines.')
 parser.add_argument('--categories-file', type=str, 
                     default="/home/j7yang/babyview-projects/vss2026/object-detection/data/things_bv_overlap_categories_exclude_zero_precisions.txt",
-                    help='Path to text file with category names (one per line). If specified, only these categories will be processed. Default: things_bv_overlap_categories_exclude_zero_precisions.txt')
+                    help='Path to text file with category names (one per line). If specified, only these categories will be processed.')
+parser.add_argument('--no-categories-file', action='store_true',
+                    help='Process all categories; ignore --categories-file and do not load any category exclusion/allowlist.')
+parser.add_argument('--skipped-csv', type=str, default=None,
+                    help='Path to save skipped embeddings (default: <base-embeddings>/skipped_embeddings_filtered-<threshold>_<embedding-type>.csv)')
+parser.add_argument('--tracked-csv', type=str, default=None,
+                    help='Path to save embedding-to-group mapping (default: <output-dir>/embedding_to_grouped_mapping.csv)')
+parser.add_argument('--embedding-type', type=str, choices=['clip', 'dinov3'], default=None,
+                    help='Preset paths for clip or dinov3 embeddings (overrides --embeddings-dir and --output-dir defaults)')
+parser.add_argument('--threshold', type=float, default=0.27,
+                    help='Confidence threshold for metadata/output paths when using --embedding-type (e.g. 0.26, 0.27, 0.28). Default: 0.27')
 args = parser.parse_args()
+
+# Apply embedding-type presets (same filtering: metadata filtered-{threshold} + categories file for both)
+_BASE_EMBEDDINGS = "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings"
+_FRAME_DATA_DIR = "/home/j7yang/babyview-projects/vss2026/object-detection/frame_data"
+_CATEGORIES_FILE = "/home/j7yang/babyview-projects/vss2026/object-detection/data/things_bv_overlap_categories_exclude_zero_precisions.txt"
+_threshold = args.threshold
+if args.embedding_type == 'dinov3':
+    args.embeddings_dir = f"{_BASE_EMBEDDINGS}/facebook_dinov3-vitb16-pretrain-lvd1689m"
+    args.output_dir = f"{_BASE_EMBEDDINGS}/dinov3_embeddings_grouped_by_age-mo_filtered-{_threshold}"
+    args.metadata_csv = f"{_FRAME_DATA_DIR}/merged_frame_detections_with_metadata_filtered-{_threshold}.csv"
+    args.categories_file = _CATEGORIES_FILE
+elif args.embedding_type == 'clip':
+    args.embeddings_dir = f"{_BASE_EMBEDDINGS}/clip_embeddings_new"
+    args.output_dir = f"{_BASE_EMBEDDINGS}/clip_embeddings_grouped_by_age-mo_filtered-{_threshold}"
+    args.metadata_csv = f"{_FRAME_DATA_DIR}/merged_frame_detections_with_metadata_filtered-{_threshold}.csv"
+    args.categories_file = _CATEGORIES_FILE
+_embedding_type_label = args.embedding_type if args.embedding_type else 'clip'
+
+# Worker for one category (must be top-level for multiprocessing pickling)
+def _process_one_category(pack):
+    """Process a single category; return (group_sums_counts, processed, skipped, skip_reasons, skipped_list, tracked_list)."""
+    category_folder, file_paths, metadata_lookup, pattern_str, excluded_subject_ids = pack
+    category = category_folder.name
+    pattern = re.compile(pattern_str) if isinstance(pattern_str, str) else pattern_str
+    group_sums_counts = {}  # key (category, subject_id, age_mo) -> (sum_array, count)
+    processed = 0
+    skipped = 0
+    skip_reasons = {'pattern_mismatch': 0, 'category_mismatch': 0, 'missing_metadata': 0, 'missing_age_mo': 0, 'load_error': 0, 'excluded_subject': 0}
+    skipped_list = []  # (embedding_name, category, skip_reason)
+    tracked_list = []  # (embedding_name, category, subject_id, age_mo) for CSV mapping
+    for embedding_file in file_paths:
+        processed += 1
+        embedding_name = embedding_file.name
+        if excluded_subject_ids and any(f"_{sid}_" in embedding_name or f"_{sid}." in embedding_name for sid in excluded_subject_ids):
+            skipped += 1
+            skip_reasons['excluded_subject'] += 1
+            skipped_list.append((embedding_name, category, 'excluded_subject'))
+            continue
+        match = pattern.match(embedding_name)
+        if not match:
+            skipped += 1
+            skip_reasons['pattern_mismatch'] += 1
+            skipped_list.append((embedding_name, category, 'pattern_mismatch'))
+            continue
+        parsed_category, confidence, subject_id, gcp_name, frame_id = match.groups()
+        if parsed_category != category:
+            skipped += 1
+            skip_reasons['category_mismatch'] += 1
+            skipped_list.append((embedding_name, category, 'category_mismatch'))
+            continue
+        if embedding_name not in metadata_lookup:
+            skipped += 1
+            skip_reasons['missing_metadata'] += 1
+            skipped_list.append((embedding_name, category, 'missing_metadata'))
+            continue
+        metadata = metadata_lookup[embedding_name]
+        age_mo = metadata['age_mo']
+        if age_mo is None:
+            skipped += 1
+            skip_reasons['missing_age_mo'] += 1
+            skipped_list.append((embedding_name, category, 'missing_age_mo'))
+            continue
+        try:
+            embedding = np.load(embedding_file, mmap_mode='r')
+            embedding_array = np.asarray(embedding, dtype=np.float64)
+            key = (category, subject_id, age_mo)
+            if key not in group_sums_counts:
+                group_sums_counts[key] = [embedding_array.copy(), 1]
+            else:
+                group_sums_counts[key][0] += embedding_array
+                group_sums_counts[key][1] += 1
+            tracked_list.append((embedding_name, category, subject_id, age_mo))
+            del embedding, embedding_array
+        except Exception:
+            skipped += 1
+            skip_reasons['load_error'] += 1
+            skipped_list.append((embedding_name, category, 'load_error'))
+            continue
+    return group_sums_counts, processed, skipped, skip_reasons, skipped_list, tracked_list
+
 
 # Define paths
 embeddings_dir = Path(args.embeddings_dir)
@@ -105,14 +217,15 @@ with tqdm(total=1, desc="Creating grouped names", unit="step") as pbar:
 embeddings_by_group = defaultdict(lambda: {'sum': None, 'count': 0})
 
 # Pattern to parse filenames: {category}_{confidence}_{subject_id}_{gcp_name}_processed_{frame_id}.npy
-filename_pattern = re.compile(r'^(.+?)_([\d.]+)_(\d+)_(.+?)_processed_(\d+)\.npy$')
+_filename_pattern_str = r'^(.+?)_([\d.]+)_(\d+)_(.+?)_processed_(\d+)\.npy$'
+filename_pattern = re.compile(_filename_pattern_str)
 
 # Iterate through all category folders
 all_category_folders = [f for f in embeddings_dir.iterdir() if f.is_dir()]
 
-# Load allowed categories from file if specified
+# Load allowed categories from file unless --no-categories-file is set
 allowed_categories = None
-if args.categories_file:
+if not args.no_categories_file and args.categories_file:
     categories_file = Path(args.categories_file)
     if categories_file.exists():
         print(f"Loading allowed categories from: {categories_file}")
@@ -122,6 +235,13 @@ if args.categories_file:
     else:
         print(f"Warning: Categories file not found: {categories_file}")
         print("  Processing all categories instead.")
+elif args.no_categories_file:
+    print("Using --no-categories-file: processing all categories (no category allowlist).")
+
+# Categories to always exclude (e.g. person), regardless of --categories-file or --no-categories-file
+ALWAYS_EXCLUDED_CATEGORIES = {'person'}
+# Subjects to always exclude (e.g. different filename format / special data)
+ALWAYS_EXCLUDED_SUBJECT_IDS = {'00270001'}
 
 # Filter categories based on test category, categories file, or use all
 if args.test_category:
@@ -146,6 +266,15 @@ else:
     category_folders = all_category_folders
     print(f"\nProcessing all {len(category_folders)} categories...")
 
+# Always exclude certain categories (e.g. person)
+excluded_present = [f for f in category_folders if f.name in ALWAYS_EXCLUDED_CATEGORIES]
+if excluded_present:
+    category_folders = [f for f in category_folders if f.name not in ALWAYS_EXCLUDED_CATEGORIES]
+    print(f"Excluding always-ignored categories: {sorted(ALWAYS_EXCLUDED_CATEGORIES)} ({len(excluded_present)} folder(s) skipped).")
+    print(f"Categories to process: {len(category_folders)}")
+if ALWAYS_EXCLUDED_SUBJECT_IDS:
+    print(f"Excluding always-ignored subject(s): {sorted(ALWAYS_EXCLUDED_SUBJECT_IDS)} (files with this subject ID in filename will be skipped).")
+
 # Count total embeddings for overall progress (optimized: count while getting file lists)
 print("Counting embeddings...")
 category_file_lists = {}
@@ -166,80 +295,129 @@ skip_reasons = {
     'category_mismatch': 0,
     'missing_metadata': 0,
     'missing_age_mo': 0,
-    'load_error': 0
+    'load_error': 0,
+    'excluded_subject': 0
 }
+skipped_records = []  # list of (embedding_name, category, skip_reason)
+tracked_records = []  # list of (embedding_name, category, subject_id, age_mo) for mapping CSV
 
-for category_folder in tqdm(category_folders, desc="Processing categories", unit="category"):
-    category = category_folder.name
-    
-    # Use pre-computed file list (avoid double glob)
-    embedding_files = category_file_lists[category_folder]
-    
-    for embedding_file in tqdm(embedding_files, desc=f"  {category}", leave=False, unit="file"):
-        embeddings_processed += 1
-        
-        # Parse filename
-        match = filename_pattern.match(embedding_file.name)
-        if not match:
-            embeddings_skipped += 1
-            skip_reasons['pattern_mismatch'] += 1
-            continue
-        
-        parsed_category, confidence, subject_id, gcp_name, frame_id = match.groups()
-        
-        # Verify category matches folder name
-        if parsed_category != category:
-            embeddings_skipped += 1
-            skip_reasons['category_mismatch'] += 1
-            continue
-        
-        # Look up metadata using the embedding filename
-        embedding_name = embedding_file.name
-        if embedding_name not in metadata_lookup:
-            embeddings_skipped += 1
-            skip_reasons['missing_metadata'] += 1
-            continue
-        
-        metadata = metadata_lookup[embedding_name]
-        age_mo = metadata['age_mo']
-        
-        # Skip if age_mo is missing
-        if age_mo is None:
-            embeddings_skipped += 1
-            skip_reasons['missing_age_mo'] += 1
-            continue
-        
-        # Load embedding and update running average incrementally
-        # This avoids storing all embeddings in memory
-        try:
-            # Use mmap_mode='r' for large files to avoid loading full array into memory
-            # This is especially useful for very large embedding files
-            embedding = np.load(embedding_file, mmap_mode='r')
-            # Convert to float64 in-place if needed, but keep original dtype if possible
-            embedding_array = np.asarray(embedding, dtype=np.float64)
-            
-            key = (category, subject_id, age_mo)
-            group_data = embeddings_by_group[key]
-            
-            if group_data['sum'] is None:
-                # First embedding for this group - copy to avoid mmap issues
-                group_data['sum'] = embedding_array.copy()
-                group_data['count'] = 1
-            else:
-                # Incremental update: new_sum = old_sum + new_value
-                group_data['sum'] += embedding_array
-                group_data['count'] += 1
-            
-            # Free memory immediately
-            del embedding, embedding_array
-        except Exception as e:
-            print(f"Error loading {embedding_file}: {e}")
-            embeddings_skipped += 1
-            skip_reasons['load_error'] += 1
-            continue
-    
-    # Periodic garbage collection after each category to free memory
+num_workers = max(1, args.num_workers)
+pbar_files = tqdm(total=total_embeddings, desc="Embeddings", unit="file", smoothing=0.01)
+
+if num_workers > 1:
+    # Parallel: process categories in worker processes, then merge
+    print(f"Processing {len(category_folders)} categories with {num_workers} workers...")
+    task_packs = [
+        (cat_folder, category_file_lists[cat_folder], metadata_lookup, _filename_pattern_str, ALWAYS_EXCLUDED_SUBJECT_IDS)
+        for cat_folder in category_folders
+    ]
+    with Pool(num_workers) as pool:
+        for group_sums_counts, proc, skp, reasons, skipped_list, tracked_list in tqdm(
+            pool.imap(_process_one_category, task_packs, chunksize=1),
+            total=len(task_packs), desc="Categories", unit="cat", leave=False
+        ):
+            pbar_files.update(proc + skp)
+            embeddings_processed += proc
+            embeddings_skipped += skp
+            skipped_records.extend(skipped_list)
+            tracked_records.extend(tracked_list)
+            for k, v in reasons.items():
+                skip_reasons[k] += v
+            for key, (sum_arr, count) in group_sums_counts.items():
+                existing = embeddings_by_group[key]
+                if existing['sum'] is None:
+                    existing['sum'] = sum_arr
+                    existing['count'] = count
+                else:
+                    existing['sum'] = existing['sum'] + sum_arr
+                    existing['count'] += count
+    del task_packs
     gc.collect()
+else:
+    # Sequential
+    for category_folder in tqdm(category_folders, desc="Categories", unit="cat", leave=False):
+        category = category_folder.name
+        embedding_files = category_file_lists[category_folder]
+        for embedding_file in embedding_files:
+            pbar_files.update(1)
+            pbar_files.set_postfix(cat=category)
+            embeddings_processed += 1
+            embedding_name = embedding_file.name
+            if ALWAYS_EXCLUDED_SUBJECT_IDS and any(f"_{sid}_" in embedding_name or f"_{sid}." in embedding_name for sid in ALWAYS_EXCLUDED_SUBJECT_IDS):
+                embeddings_skipped += 1
+                skip_reasons['excluded_subject'] += 1
+                skipped_records.append((embedding_name, category, 'excluded_subject'))
+                continue
+            match = filename_pattern.match(embedding_name)
+            if not match:
+                embeddings_skipped += 1
+                skip_reasons['pattern_mismatch'] += 1
+                skipped_records.append((embedding_name, category, 'pattern_mismatch'))
+                continue
+            parsed_category, confidence, subject_id, gcp_name, frame_id = match.groups()
+            if parsed_category != category:
+                embeddings_skipped += 1
+                skip_reasons['category_mismatch'] += 1
+                skipped_records.append((embedding_name, category, 'category_mismatch'))
+                continue
+            if embedding_name not in metadata_lookup:
+                embeddings_skipped += 1
+                skip_reasons['missing_metadata'] += 1
+                skipped_records.append((embedding_name, category, 'missing_metadata'))
+                continue
+            metadata = metadata_lookup[embedding_name]
+            age_mo = metadata['age_mo']
+            if age_mo is None:
+                embeddings_skipped += 1
+                skip_reasons['missing_age_mo'] += 1
+                skipped_records.append((embedding_name, category, 'missing_age_mo'))
+                continue
+            try:
+                embedding = np.load(embedding_file, mmap_mode='r')
+                embedding_array = np.asarray(embedding, dtype=np.float64)
+                key = (category, subject_id, age_mo)
+                group_data = embeddings_by_group[key]
+                if group_data['sum'] is None:
+                    group_data['sum'] = embedding_array.copy()
+                    group_data['count'] = 1
+                else:
+                    group_data['sum'] += embedding_array
+                    group_data['count'] += 1
+                tracked_records.append((embedding_name, category, subject_id, age_mo))
+                del embedding, embedding_array
+            except Exception as e:
+                print(f"Error loading {embedding_file}: {e}")
+                embeddings_skipped += 1
+                skip_reasons['load_error'] += 1
+                skipped_records.append((embedding_name, category, 'load_error'))
+                continue
+        gc.collect()
+
+pbar_files.close()
+
+# Save skipped embeddings with reasons (default: embeddings root)
+if skipped_records:
+    skipped_csv = Path(args.skipped_csv) if args.skipped_csv else Path(f"{_BASE_EMBEDDINGS}/skipped_embeddings_filtered-{args.threshold}_{_embedding_type_label}.csv")
+    skipped_csv.parent.mkdir(parents=True, exist_ok=True)
+    skipped_df = pd.DataFrame(skipped_records, columns=['embedding_name', 'category', 'skip_reason'])
+    skipped_df.to_csv(skipped_csv, index=False)
+    print(f"\nSaved {len(skipped_records):,} skipped embeddings to: {skipped_csv}")
+
+# Save embedding-to-group mapping CSV (which tracked embeddings belong to which grouped embedding)
+if tracked_records:
+    tracked_csv = Path(args.tracked_csv) if args.tracked_csv else (output_dir / "embedding_to_grouped_mapping.csv")
+    tracked_csv.parent.mkdir(parents=True, exist_ok=True)
+    tracked_df = pd.DataFrame(
+        tracked_records,
+        columns=['original_embedding_name', 'category', 'subject_id', 'age_mo']
+    )
+    tracked_df['grouped_embedding_name'] = (
+        tracked_df['category'].astype(str) + '/' +
+        tracked_df['subject_id'].astype(str) + '_' +
+        tracked_df['age_mo'].astype(int).astype(str) + '_month_level_avg.npy'
+    )
+    tracked_df.to_csv(tracked_csv, index=False)
+    print(f"Saved {len(tracked_df):,} tracked embeddings → grouped mapping to: {tracked_csv}")
 
 # Calculate and save averaged embeddings
 # Since we used incremental averaging, we just need to divide sum by count
@@ -295,6 +473,9 @@ print(f"Updated metadata saved to: {metadata_csv}")
 print(f"\n{'='*60}")
 print(f"Done! Summary:")
 print(f"  - Averaged embeddings saved to: {output_dir}")
+if tracked_records:
+    tracked_csv = Path(args.tracked_csv) if args.tracked_csv else (output_dir / "embedding_to_grouped_mapping.csv")
+    print(f"  - Embedding→group mapping CSV: {tracked_csv}")
 print(f"  - Total groups processed: {len(embeddings_by_group):,}")
 print(f"  - Embeddings processed: {embeddings_processed:,}")
 print(f"  - Embeddings skipped: {embeddings_skipped:,}")
@@ -307,4 +488,8 @@ if embeddings_skipped > 0:
     print(f"    - Missing in metadata: {skip_reasons['missing_metadata']:,}")
     print(f"    - Missing age_mo: {skip_reasons['missing_age_mo']:,}")
     print(f"    - Load error: {skip_reasons['load_error']:,}")
+    print(f"    - Excluded subject: {skip_reasons['excluded_subject']:,}")
+    if skipped_records:
+        skipped_csv = Path(args.skipped_csv) if args.skipped_csv else Path(f"{_BASE_EMBEDDINGS}/skipped_embeddings_filtered-{args.threshold}_{_embedding_type_label}.csv")
+        print(f"  - Skipped list saved to: {skipped_csv}")
 print(f"{'='*60}")
