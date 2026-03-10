@@ -1,0 +1,625 @@
+---
+title: "Developmental Trajectory"
+author: "Jane Yang"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: show
+    theme: flatly
+execute:
+  warning: false
+  message: false
+---
+
+## Purpose
+
+This document shows **essential plots** (bright colors, top 8 subjects, all categories and top-50, no CI; linear fit and connect-dots), a **filtered set (≥3 hours)** with the same plot types, and **core statistical models** for the developmental trajectory: mixed-effects trend and all vs top-50 comparison.
+
+**Data:** Month-to-month and youngest-vs-later RDM correlations for the top 8 densest subjects. Render from the same directory as the main doc (e.g. `quarto render developmental_trajectory_stats_interpretation.qmd`).
+
+## Setup and data
+
+```{r setup}
+#| label: setup
+library(tidyverse)
+
+if (requireNamespace("lme4", quietly = TRUE)) library(lme4)
+
+data_dir <- "./data"
+stopifnot("Data directory not found" = dir.exists(data_dir))
+
+figures_dir <- "./figures"
+dir.create(figures_dir, showWarnings = FALSE, recursive = TRUE)
+
+mm <- read_csv(file.path(data_dir, "month_to_month_correlations.csv"), show_col_types = FALSE)
+yv <- read_csv(file.path(data_dir, "youngest_vs_later_month_correlations.csv"), show_col_types = FALSE)
+mm_top50 <- read_csv(file.path(data_dir, "month_to_month_correlations_top50.csv"), show_col_types = FALSE)
+yv_top50 <- read_csv(file.path(data_dir, "youngest_vs_later_month_correlations_top50.csv"), show_col_types = FALSE)
+
+mm    <- mm    %>% mutate(ci_lo = correlation - 1.96 * cor_se, ci_hi = correlation + 1.96 * cor_se)
+yv    <- yv    %>% mutate(ci_lo = correlation - 1.96 * cor_se, ci_hi = correlation + 1.96 * cor_se)
+mm_top50 <- mm_top50 %>% mutate(ci_lo = correlation - 1.96 * cor_se, ci_hi = correlation + 1.96 * cor_se)
+yv_top50 <- yv_top50 %>% mutate(ci_lo = correlation - 1.96 * cor_se, ci_hi = correlation + 1.96 * cor_se)
+
+mm_top50 <- mm_top50 %>%
+  left_join(mm %>% select(subject_id, age_from, age_to, hours_bin), by = c("subject_id", "age_from", "age_to")) %>%
+  mutate(hours_bin = replace_na(hours_bin, 1))
+yv_top50 <- yv_top50 %>%
+  left_join(yv %>% select(subject_id, age_youngest, age_compared, hours_compared), by = c("subject_id", "age_youngest", "age_compared")) %>%
+  mutate(hours_compared = replace_na(hours_compared, 1))
+
+n_subj <- n_distinct(mm$subject_id)
+subject_ids <- sort(unique(mm$subject_id))
+
+# Bright color palette (top 8 subjects + overall accents)
+pal_alt_subjects <- c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3")
+pastel_named_alt <- setNames(pal_alt_subjects[seq_len(n_subj)], subject_ids)
+pal_blue_alt   <- "#5B9BD5"
+pal_orange_alt <- "#E67E50"
+pal_coral_alt  <- "#D4786A"
+
+# Minimum hours for filtered plots (≥ this many hours)
+min_hours <- 3
+```
+
+## Linear fits for plotting (no CI bands)
+
+```{r fit-linear}
+#| label: fit-linear
+age_grid_mm   <- seq(min(mm$age_midpoint), max(mm$age_midpoint), length.out = 100)
+age_grid_yv   <- seq(min(yv$age_compared), max(yv$age_compared), length.out = 100)
+age_grid_mm_t50 <- seq(min(mm_top50$age_midpoint), max(mm_top50$age_midpoint), length.out = 100)
+age_grid_yv_t50 <- seq(min(yv_top50$age_compared), max(yv_top50$age_compared), length.out = 100)
+
+# All categories: per-subject linear
+pred_mm_subj_linear <- mm %>%
+  group_by(subject_id) %>% group_nest() %>%
+  mutate(pred = map(data, function(d) {
+    if (nrow(d) < 2) return(data.frame(age = age_grid_mm, pred = NA_real_))
+    fit <- lm(correlation ~ age_midpoint, data = d)
+    data.frame(age = age_grid_mm, pred = predict(fit, newdata = data.frame(age_midpoint = age_grid_mm)))
+  })) %>% select(subject_id, pred) %>% unnest(cols = pred)
+pred_yv_subj_linear <- yv %>%
+  group_by(subject_id) %>% group_nest() %>%
+  mutate(pred = map(data, function(d) {
+    if (nrow(d) < 2) return(data.frame(age = age_grid_yv, pred = NA_real_))
+    fit <- lm(correlation ~ age_compared, data = d)
+    data.frame(age = age_grid_yv, pred = predict(fit, newdata = data.frame(age_compared = age_grid_yv)))
+  })) %>% select(subject_id, pred) %>% unnest(cols = pred)
+
+# All categories: overall linear (binned)
+mm_bin <- mm %>% mutate(age_bin = round(age_midpoint * 2) / 2) %>%
+  group_by(age_bin) %>% summarise(mean_corr = mean(correlation), .groups = "drop")
+yv_bin <- yv %>% mutate(age_bin = round(age_compared * 2) / 2) %>%
+  group_by(age_bin) %>% summarise(mean_corr = mean(correlation), .groups = "drop")
+fit_mm_overall_linear <- lm(mean_corr ~ age_bin, data = mm_bin)
+fit_yv_overall_linear <- lm(mean_corr ~ age_bin, data = yv_bin)
+smooth_mm_overall_linear <- data.frame(age = age_grid_mm, pred = predict(fit_mm_overall_linear, newdata = data.frame(age_bin = age_grid_mm)))
+smooth_yv_overall_linear <- data.frame(age = age_grid_yv, pred = predict(fit_yv_overall_linear, newdata = data.frame(age_bin = age_grid_yv)))
+
+# Top-50: per-subject and overall linear
+pred_mm_top50_subj_linear <- mm_top50 %>% group_by(subject_id) %>% group_nest() %>%
+  mutate(pred = map(data, function(d) {
+    if (nrow(d) < 2) return(data.frame(age = age_grid_mm_t50, pred = NA_real_))
+    fit <- lm(correlation ~ age_midpoint, data = d)
+    data.frame(age = age_grid_mm_t50, pred = predict(fit, newdata = data.frame(age_midpoint = age_grid_mm_t50)))
+  })) %>% select(subject_id, pred) %>% unnest(cols = pred)
+pred_yv_top50_subj_linear <- yv_top50 %>% group_by(subject_id) %>% group_nest() %>%
+  mutate(pred = map(data, function(d) {
+    if (nrow(d) < 2) return(data.frame(age = age_grid_yv_t50, pred = NA_real_))
+    fit <- lm(correlation ~ age_compared, data = d)
+    data.frame(age = age_grid_yv_t50, pred = predict(fit, newdata = data.frame(age_compared = age_grid_yv_t50)))
+  })) %>% select(subject_id, pred) %>% unnest(cols = pred)
+mm_top50_bin <- mm_top50 %>% mutate(age_bin = round(age_midpoint * 2) / 2) %>%
+  group_by(age_bin) %>% summarise(mean_corr = mean(correlation), .groups = "drop")
+yv_top50_bin <- yv_top50 %>% mutate(age_bin = round(age_compared * 2) / 2) %>%
+  group_by(age_bin) %>% summarise(mean_corr = mean(correlation), .groups = "drop")
+fit_mm_t50_lin <- lm(mean_corr ~ age_bin, data = mm_top50_bin)
+fit_yv_t50_lin <- lm(mean_corr ~ age_bin, data = yv_top50_bin)
+smooth_mm_top50_overall_linear <- data.frame(age = age_grid_mm_t50, pred = predict(fit_mm_t50_lin, newdata = data.frame(age_bin = age_grid_mm_t50)))
+smooth_yv_top50_overall_linear <- data.frame(age = age_grid_yv_t50, pred = predict(fit_yv_t50_lin, newdata = data.frame(age_bin = age_grid_yv_t50)))
+```
+
+## Linear fits for filtered data (≥3 hours)
+
+Same structure as above, but fits use only observations with **≥3 hours** (reduces clutter from low-reliability timepoints).
+
+```{r fit-linear-filtered}
+#| label: fit-linear-filtered
+mm_f3   <- mm   %>% filter(hours_bin >= min_hours)
+yv_f3   <- yv   %>% filter(hours_compared >= min_hours)
+mm_t50_f3 <- mm_top50 %>% filter(hours_bin >= min_hours)
+yv_t50_f3 <- yv_top50 %>% filter(hours_compared >= min_hours)
+
+pred_mm_subj_linear_f3 <- mm_f3 %>% group_by(subject_id) %>% group_nest() %>%
+  mutate(pred = map(data, function(d) {
+    if (nrow(d) < 2) return(data.frame(age = age_grid_mm, pred = NA_real_))
+    fit <- lm(correlation ~ age_midpoint, data = d)
+    data.frame(age = age_grid_mm, pred = predict(fit, newdata = data.frame(age_midpoint = age_grid_mm)))
+  })) %>% select(subject_id, pred) %>% unnest(cols = pred)
+pred_yv_subj_linear_f3 <- yv_f3 %>% group_by(subject_id) %>% group_nest() %>%
+  mutate(pred = map(data, function(d) {
+    if (nrow(d) < 2) return(data.frame(age = age_grid_yv, pred = NA_real_))
+    fit <- lm(correlation ~ age_compared, data = d)
+    data.frame(age = age_grid_yv, pred = predict(fit, newdata = data.frame(age_compared = age_grid_yv)))
+  })) %>% select(subject_id, pred) %>% unnest(cols = pred)
+
+mm_bin_f3 <- mm_f3 %>% mutate(age_bin = round(age_midpoint * 2) / 2) %>% group_by(age_bin) %>% summarise(mean_corr = mean(correlation), .groups = "drop")
+yv_bin_f3 <- yv_f3 %>% mutate(age_bin = round(age_compared * 2) / 2) %>% group_by(age_bin) %>% summarise(mean_corr = mean(correlation), .groups = "drop")
+if (nrow(mm_bin_f3) >= 2) { fit_mm_overall_f3 <- lm(mean_corr ~ age_bin, data = mm_bin_f3); smooth_mm_overall_linear_f3 <- data.frame(age = age_grid_mm, pred = predict(fit_mm_overall_f3, newdata = data.frame(age_bin = age_grid_mm))) } else { smooth_mm_overall_linear_f3 <- data.frame(age = age_grid_mm, pred = NA_real_) }
+if (nrow(yv_bin_f3) >= 2) { fit_yv_overall_f3 <- lm(mean_corr ~ age_bin, data = yv_bin_f3); smooth_yv_overall_linear_f3 <- data.frame(age = age_grid_yv, pred = predict(fit_yv_overall_f3, newdata = data.frame(age_bin = age_grid_yv))) } else { smooth_yv_overall_linear_f3 <- data.frame(age = age_grid_yv, pred = NA_real_) }
+
+pred_mm_top50_subj_linear_f3 <- mm_t50_f3 %>% group_by(subject_id) %>% group_nest() %>%
+  mutate(pred = map(data, function(d) {
+    if (nrow(d) < 2) return(data.frame(age = age_grid_mm_t50, pred = NA_real_))
+    fit <- lm(correlation ~ age_midpoint, data = d)
+    data.frame(age = age_grid_mm_t50, pred = predict(fit, newdata = data.frame(age_midpoint = age_grid_mm_t50)))
+  })) %>% select(subject_id, pred) %>% unnest(cols = pred)
+pred_yv_top50_subj_linear_f3 <- yv_t50_f3 %>% group_by(subject_id) %>% group_nest() %>%
+  mutate(pred = map(data, function(d) {
+    if (nrow(d) < 2) return(data.frame(age = age_grid_yv_t50, pred = NA_real_))
+    fit <- lm(correlation ~ age_compared, data = d)
+    data.frame(age = age_grid_yv_t50, pred = predict(fit, newdata = data.frame(age_compared = age_grid_yv_t50)))
+  })) %>% select(subject_id, pred) %>% unnest(cols = pred)
+mm_top50_bin_f3 <- mm_t50_f3 %>% mutate(age_bin = round(age_midpoint * 2) / 2) %>% group_by(age_bin) %>% summarise(mean_corr = mean(correlation), .groups = "drop")
+yv_top50_bin_f3 <- yv_t50_f3 %>% mutate(age_bin = round(age_compared * 2) / 2) %>% group_by(age_bin) %>% summarise(mean_corr = mean(correlation), .groups = "drop")
+if (nrow(mm_top50_bin_f3) >= 2) { fit_mm_t50_f3 <- lm(mean_corr ~ age_bin, data = mm_top50_bin_f3); smooth_mm_top50_overall_linear_f3 <- data.frame(age = age_grid_mm_t50, pred = predict(fit_mm_t50_f3, newdata = data.frame(age_bin = age_grid_mm_t50))) } else { smooth_mm_top50_overall_linear_f3 <- data.frame(age = age_grid_mm_t50, pred = NA_real_) }
+if (nrow(yv_top50_bin_f3) >= 2) { fit_yv_t50_f3 <- lm(mean_corr ~ age_bin, data = yv_top50_bin_f3); smooth_yv_top50_overall_linear_f3 <- data.frame(age = age_grid_yv_t50, pred = predict(fit_yv_t50_f3, newdata = data.frame(age_bin = age_grid_yv_t50))) } else { smooth_yv_top50_overall_linear_f3 <- data.frame(age = age_grid_yv_t50, pred = NA_real_) }
+```
+
+---
+
+## Plots: linear fit, no CI, bright colors
+
+Top 8 subjects and overall; **all categories** and **top-50**. No confidence bands.
+
+### Month-to-month
+
+```{r fig-mm-all-linear}
+#| label: fig-mm-all-linear
+#| fig-cap: "Month-to-month, all categories — linear fit, no CI (bright colors)."
+p_mm_subj_lin <- ggplot() +
+  geom_line(data = pred_mm_subj_linear %>% filter(!is.na(pred)), aes(x = age, y = pred, color = subject_id), linewidth = 0.8) +
+  geom_point(data = mm %>% filter(hours_bin > 0), aes(x = age_midpoint, y = correlation, color = subject_id, size = hours_bin), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: per subject (all categories) — linear, no CI", x = "Age midpoint (months)", y = "RDM correlation (consecutive months)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_mm_subj_lin
+ggsave(file.path(figures_dir, "mm_all_per_subject_linear_noci.pdf"), p_mm_subj_lin, width = 8, height = 5)
+ggsave(file.path(figures_dir, "mm_all_per_subject_linear_noci.png"), p_mm_subj_lin, width = 8, height = 5, dpi = 150)
+```
+
+```{r fig-mm-all-overall-linear}
+#| label: fig-mm-all-overall-linear
+#| fig-cap: "Month-to-month overall (all categories) — linear, no CI."
+p_mm_overall_lin <- ggplot() +
+  geom_line(data = smooth_mm_overall_linear, aes(x = age, y = pred), color = pal_blue_alt, linewidth = 1.2) +
+  geom_point(data = mm %>% filter(hours_bin > 0), aes(x = age_midpoint, y = correlation, size = hours_bin), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: overall (all categories) — linear, no CI", x = "Age (months)", y = "RDM correlation (consecutive months)") +
+  theme_minimal(base_size = 12)
+p_mm_overall_lin
+```
+
+```{r fig-mm-top50-linear}
+#| label: fig-mm-top50-linear
+#| fig-cap: "Month-to-month, top-50 categories — linear fit, no CI (bright colors)."
+p_mm_top50_subj_lin <- ggplot() +
+  geom_line(data = pred_mm_top50_subj_linear %>% filter(!is.na(pred)), aes(x = age, y = pred, color = subject_id), linewidth = 0.8) +
+  geom_point(data = mm_top50 %>% filter(hours_bin > 0), aes(x = age_midpoint, y = correlation, color = subject_id, size = hours_bin), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: per subject (top-50) — linear, no CI", x = "Age midpoint (months)", y = "RDM correlation (consecutive months, top-50)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_mm_top50_subj_lin
+```
+
+```{r fig-mm-top50-overall-linear}
+#| label: fig-mm-top50-overall-linear
+p_mm_top50_overall_lin <- ggplot() +
+  geom_line(data = smooth_mm_top50_overall_linear, aes(x = age, y = pred), color = pal_coral_alt, linewidth = 1.2) +
+  geom_point(data = mm_top50 %>% filter(hours_bin > 0), aes(x = age_midpoint, y = correlation, size = hours_bin), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: overall (top-50) — linear, no CI", x = "Age (months)", y = "RDM correlation (top-50)") +
+  theme_minimal(base_size = 12)
+p_mm_top50_overall_lin
+```
+
+### Youngest vs later
+
+```{r fig-yv-all-linear}
+#| label: fig-yv-all-linear
+#| fig-cap: "Youngest vs later, all categories — linear fit, no CI (bright colors)."
+p_yv_subj_lin <- ggplot() +
+  geom_line(data = pred_yv_subj_linear %>% filter(!is.na(pred)), aes(x = age, y = pred, color = subject_id), linewidth = 0.8) +
+  geom_point(data = yv %>% filter(hours_compared > 0), aes(x = age_compared, y = correlation, color = subject_id, size = hours_compared), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: per subject (all categories) — linear, no CI", x = "Age (months)", y = "Correlation with youngest month RDM", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_yv_subj_lin
+```
+
+```{r fig-yv-all-overall-linear}
+#| label: fig-yv-all-overall-linear
+p_yv_overall_lin <- ggplot() +
+  geom_line(data = smooth_yv_overall_linear, aes(x = age, y = pred), color = pal_orange_alt, linewidth = 1.2) +
+  geom_point(data = yv %>% filter(hours_compared > 0), aes(x = age_compared, y = correlation, size = hours_compared), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: overall (all categories) — linear, no CI", x = "Age (months)", y = "Correlation with youngest month RDM") +
+  theme_minimal(base_size = 12)
+p_yv_overall_lin
+```
+
+```{r fig-yv-top50-linear}
+#| label: fig-yv-top50-linear
+p_yv_top50_subj_lin <- ggplot() +
+  geom_line(data = pred_yv_top50_subj_linear %>% filter(!is.na(pred)), aes(x = age, y = pred, color = subject_id), linewidth = 0.8) +
+  geom_point(data = yv_top50 %>% filter(hours_compared > 0), aes(x = age_compared, y = correlation, color = subject_id, size = hours_compared), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: per subject (top-50) — linear, no CI", x = "Age (months)", y = "Correlation with youngest month RDM (top-50)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_yv_top50_subj_lin
+```
+
+```{r fig-yv-top50-overall-linear}
+#| label: fig-yv-top50-overall-linear
+p_yv_top50_overall_lin <- ggplot() +
+  geom_line(data = smooth_yv_top50_overall_linear, aes(x = age, y = pred), color = pal_coral_alt, linewidth = 1.2) +
+  geom_point(data = yv_top50 %>% filter(hours_compared > 0), aes(x = age_compared, y = correlation, size = hours_compared), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: overall (top-50) — linear, no CI", x = "Age (months)", y = "Correlation with youngest month RDM (top-50)") +
+  theme_minimal(base_size = 12)
+p_yv_top50_overall_lin
+```
+
+---
+
+## Plots: connect dots, no CI, bright colors
+
+Lines connect observed points (no fitted curve). Same structure: all categories and top-50, month-to-month and youngest vs later.
+
+### Month-to-month
+
+```{r fig-mm-all-connect}
+#| label: fig-mm-all-connect
+#| fig-cap: "Month-to-month, all categories — connect dots, no CI (bright colors)."
+p_mm_subj_connect <- ggplot() +
+  geom_line(data = mm %>% filter(hours_bin > 0) %>% arrange(subject_id, age_midpoint), aes(x = age_midpoint, y = correlation, group = subject_id, color = subject_id), linewidth = 0.8) +
+  geom_point(data = mm %>% filter(hours_bin > 0), aes(x = age_midpoint, y = correlation, color = subject_id, size = hours_bin), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: per subject (all categories) — connect dots, no CI", x = "Age midpoint (months)", y = "RDM correlation (consecutive months)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_mm_subj_connect
+ggsave(file.path(figures_dir, "mm_all_per_subject_connect_noci.pdf"), p_mm_subj_connect, width = 8, height = 5)
+ggsave(file.path(figures_dir, "mm_all_per_subject_connect_noci.png"), p_mm_subj_connect, width = 8, height = 5, dpi = 150)
+```
+
+```{r fig-mm-all-overall-connect}
+#| label: fig-mm-all-overall-connect
+p_mm_overall_connect <- ggplot() +
+  geom_line(data = mm %>% filter(hours_bin > 0) %>% group_by(age_midpoint) %>% summarise(correlation = mean(correlation), .groups = "drop") %>% arrange(age_midpoint), aes(x = age_midpoint, y = correlation), color = pal_blue_alt, linewidth = 1.2) +
+  geom_point(data = mm %>% filter(hours_bin > 0), aes(x = age_midpoint, y = correlation, size = hours_bin), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: overall (all categories) — connect dots, no CI", x = "Age (months)", y = "RDM correlation (consecutive months)") +
+  theme_minimal(base_size = 12)
+p_mm_overall_connect
+```
+
+```{r fig-mm-top50-connect}
+#| label: fig-mm-top50-connect
+p_mm_top50_subj_connect <- ggplot() +
+  geom_line(data = mm_top50 %>% filter(hours_bin > 0) %>% arrange(subject_id, age_midpoint), aes(x = age_midpoint, y = correlation, group = subject_id, color = subject_id), linewidth = 0.8) +
+  geom_point(data = mm_top50 %>% filter(hours_bin > 0), aes(x = age_midpoint, y = correlation, color = subject_id, size = hours_bin), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: per subject (top-50) — connect dots, no CI", x = "Age midpoint (months)", y = "RDM correlation (top-50)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_mm_top50_subj_connect
+```
+
+```{r fig-mm-top50-overall-connect}
+#| label: fig-mm-top50-overall-connect
+p_mm_top50_overall_connect <- ggplot() +
+  geom_line(data = mm_top50 %>% filter(hours_bin > 0) %>% group_by(age_midpoint) %>% summarise(correlation = mean(correlation), .groups = "drop") %>% arrange(age_midpoint), aes(x = age_midpoint, y = correlation), color = pal_coral_alt, linewidth = 1.2) +
+  geom_point(data = mm_top50 %>% filter(hours_bin > 0), aes(x = age_midpoint, y = correlation, size = hours_bin), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: overall (top-50) — connect dots, no CI", x = "Age (months)", y = "RDM correlation (top-50)") +
+  theme_minimal(base_size = 12)
+p_mm_top50_overall_connect
+```
+
+### Youngest vs later
+
+```{r fig-yv-all-connect}
+#| label: fig-yv-all-connect
+p_yv_subj_connect <- ggplot() +
+  geom_line(data = yv %>% filter(hours_compared > 0) %>% arrange(subject_id, age_compared), aes(x = age_compared, y = correlation, group = subject_id, color = subject_id), linewidth = 0.8) +
+  geom_point(data = yv %>% filter(hours_compared > 0), aes(x = age_compared, y = correlation, color = subject_id, size = hours_compared), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: per subject (all categories) — connect dots, no CI", x = "Age (months)", y = "Correlation with youngest month RDM", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_yv_subj_connect
+```
+
+```{r fig-yv-all-overall-connect}
+#| label: fig-yv-all-overall-connect
+p_yv_overall_connect <- ggplot() +
+  geom_line(data = yv %>% filter(hours_compared > 0) %>% group_by(age_compared) %>% summarise(correlation = mean(correlation), .groups = "drop") %>% arrange(age_compared), aes(x = age_compared, y = correlation), color = pal_orange_alt, linewidth = 1.2) +
+  geom_point(data = yv %>% filter(hours_compared > 0), aes(x = age_compared, y = correlation, size = hours_compared), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: overall (all categories) — connect dots, no CI", x = "Age (months)", y = "Correlation with youngest month RDM") +
+  theme_minimal(base_size = 12)
+p_yv_overall_connect
+```
+
+```{r fig-yv-top50-connect}
+#| label: fig-yv-top50-connect
+p_yv_top50_subj_connect <- ggplot() +
+  geom_line(data = yv_top50 %>% filter(hours_compared > 0) %>% arrange(subject_id, age_compared), aes(x = age_compared, y = correlation, group = subject_id, color = subject_id), linewidth = 0.8) +
+  geom_point(data = yv_top50 %>% filter(hours_compared > 0), aes(x = age_compared, y = correlation, color = subject_id, size = hours_compared), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: per subject (top-50) — connect dots, no CI", x = "Age (months)", y = "Correlation with youngest month RDM (top-50)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_yv_top50_subj_connect
+```
+
+```{r fig-yv-top50-overall-connect}
+#| label: fig-yv-top50-overall-connect
+p_yv_top50_overall_connect <- ggplot() +
+  geom_line(data = yv_top50 %>% filter(hours_compared > 0) %>% group_by(age_compared) %>% summarise(correlation = mean(correlation), .groups = "drop") %>% arrange(age_compared), aes(x = age_compared, y = correlation), color = pal_coral_alt, linewidth = 1.2) +
+  geom_point(data = yv_top50 %>% filter(hours_compared > 0), aes(x = age_compared, y = correlation, size = hours_compared), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: overall (top-50) — connect dots, no CI", x = "Age (months)", y = "Correlation with youngest month RDM (top-50)") +
+  theme_minimal(base_size = 12)
+p_yv_top50_overall_connect
+```
+
+---
+
+## Plots: filtered data (≥3 hours)
+
+Same plot set as above, restricted to observations with **≥3 hours** of video. Linear fits are computed on the filtered data; connect-dots lines link only those points.
+
+### Filtered: linear fit, no CI, bright colors
+
+```{r fig-mm-all-linear-f3}
+#| label: fig-mm-all-linear-f3
+#| fig-cap: "Month-to-month, all categories — ≥3 h, linear fit, no CI."
+p_mm_subj_lin_f3 <- ggplot() +
+  geom_line(data = pred_mm_subj_linear_f3 %>% filter(!is.na(pred)), aes(x = age, y = pred, color = subject_id), linewidth = 0.8) +
+  geom_point(data = mm %>% filter(hours_bin >= min_hours), aes(x = age_midpoint, y = correlation, color = subject_id, size = hours_bin), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: per subject (all categories) — ≥3 h, linear, no CI", x = "Age midpoint (months)", y = "RDM correlation (consecutive months)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_mm_subj_lin_f3
+ggsave(file.path(figures_dir, "mm_all_per_subject_linear_noci_3h.pdf"), p_mm_subj_lin_f3, width = 8, height = 5)
+```
+
+```{r fig-mm-all-overall-linear-f3}
+#| label: fig-mm-all-overall-linear-f3
+p_mm_overall_lin_f3 <- ggplot() +
+  geom_line(data = smooth_mm_overall_linear_f3 %>% filter(!is.na(pred)), aes(x = age, y = pred), color = pal_blue_alt, linewidth = 1.2) +
+  geom_point(data = mm %>% filter(hours_bin >= min_hours), aes(x = age_midpoint, y = correlation, size = hours_bin), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: overall (all categories) — ≥3 h, linear, no CI", x = "Age (months)", y = "RDM correlation (consecutive months)") +
+  theme_minimal(base_size = 12)
+p_mm_overall_lin_f3
+```
+
+```{r fig-mm-top50-linear-f3}
+#| label: fig-mm-top50-linear-f3
+p_mm_top50_subj_lin_f3 <- ggplot() +
+  geom_line(data = pred_mm_top50_subj_linear_f3 %>% filter(!is.na(pred)), aes(x = age, y = pred, color = subject_id), linewidth = 0.8) +
+  geom_point(data = mm_top50 %>% filter(hours_bin >= min_hours), aes(x = age_midpoint, y = correlation, color = subject_id, size = hours_bin), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: per subject (top-50) — ≥3 h, linear, no CI", x = "Age midpoint (months)", y = "RDM correlation (top-50)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_mm_top50_subj_lin_f3
+```
+
+```{r fig-mm-top50-overall-linear-f3}
+#| label: fig-mm-top50-overall-linear-f3
+p_mm_top50_overall_lin_f3 <- ggplot() +
+  geom_line(data = smooth_mm_top50_overall_linear_f3 %>% filter(!is.na(pred)), aes(x = age, y = pred), color = pal_coral_alt, linewidth = 1.2) +
+  geom_point(data = mm_top50 %>% filter(hours_bin >= min_hours), aes(x = age_midpoint, y = correlation, size = hours_bin), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: overall (top-50) — ≥3 h, linear, no CI", x = "Age (months)", y = "RDM correlation (top-50)") +
+  theme_minimal(base_size = 12)
+p_mm_top50_overall_lin_f3
+```
+
+```{r fig-yv-all-linear-f3}
+#| label: fig-yv-all-linear-f3
+p_yv_subj_lin_f3 <- ggplot() +
+  geom_line(data = pred_yv_subj_linear_f3 %>% filter(!is.na(pred)), aes(x = age, y = pred, color = subject_id), linewidth = 0.8) +
+  geom_point(data = yv %>% filter(hours_compared >= min_hours), aes(x = age_compared, y = correlation, color = subject_id, size = hours_compared), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: per subject (all categories) — ≥3 h, linear, no CI", x = "Age (months)", y = "Correlation with youngest month RDM", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_yv_subj_lin_f3
+```
+
+```{r fig-yv-all-overall-linear-f3}
+#| label: fig-yv-all-overall-linear-f3
+p_yv_overall_lin_f3 <- ggplot() +
+  geom_line(data = smooth_yv_overall_linear_f3 %>% filter(!is.na(pred)), aes(x = age, y = pred), color = pal_orange_alt, linewidth = 1.2) +
+  geom_point(data = yv %>% filter(hours_compared >= min_hours), aes(x = age_compared, y = correlation, size = hours_compared), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: overall (all categories) — ≥3 h, linear, no CI", x = "Age (months)", y = "Correlation with youngest month RDM") +
+  theme_minimal(base_size = 12)
+p_yv_overall_lin_f3
+```
+
+```{r fig-yv-top50-linear-f3}
+#| label: fig-yv-top50-linear-f3
+p_yv_top50_subj_lin_f3 <- ggplot() +
+  geom_line(data = pred_yv_top50_subj_linear_f3 %>% filter(!is.na(pred)), aes(x = age, y = pred, color = subject_id), linewidth = 0.8) +
+  geom_point(data = yv_top50 %>% filter(hours_compared >= min_hours), aes(x = age_compared, y = correlation, color = subject_id, size = hours_compared), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: per subject (top-50) — ≥3 h, linear, no CI", x = "Age (months)", y = "Correlation with youngest month RDM (top-50)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_yv_top50_subj_lin_f3
+```
+
+```{r fig-yv-top50-overall-linear-f3}
+#| label: fig-yv-top50-overall-linear-f3
+p_yv_top50_overall_lin_f3 <- ggplot() +
+  geom_line(data = smooth_yv_top50_overall_linear_f3 %>% filter(!is.na(pred)), aes(x = age, y = pred), color = pal_coral_alt, linewidth = 1.2) +
+  geom_point(data = yv_top50 %>% filter(hours_compared >= min_hours), aes(x = age_compared, y = correlation, size = hours_compared), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: overall (top-50) — ≥3 h, linear, no CI", x = "Age (months)", y = "Correlation with youngest month RDM (top-50)") +
+  theme_minimal(base_size = 12)
+p_yv_top50_overall_lin_f3
+```
+
+### Filtered: connect dots, no CI, bright colors (≥3 h)
+
+```{r fig-mm-all-connect-f3}
+#| label: fig-mm-all-connect-f3
+#| fig-cap: "Month-to-month, all categories — ≥3 h, connect dots, no CI."
+p_mm_subj_connect_f3 <- ggplot() +
+  geom_line(data = mm %>% filter(hours_bin >= min_hours) %>% arrange(subject_id, age_midpoint), aes(x = age_midpoint, y = correlation, group = subject_id, color = subject_id), linewidth = 0.8) +
+  geom_point(data = mm %>% filter(hours_bin >= min_hours), aes(x = age_midpoint, y = correlation, color = subject_id, size = hours_bin), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: per subject (all categories) — ≥3 h, connect dots, no CI", x = "Age midpoint (months)", y = "RDM correlation (consecutive months)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_mm_subj_connect_f3
+ggsave(file.path(figures_dir, "mm_all_per_subject_connect_noci_3h.pdf"), p_mm_subj_connect_f3, width = 8, height = 5)
+```
+
+```{r fig-mm-all-overall-connect-f3}
+#| label: fig-mm-all-overall-connect-f3
+p_mm_overall_connect_f3 <- ggplot() +
+  geom_line(data = mm %>% filter(hours_bin >= min_hours) %>% group_by(age_midpoint) %>% summarise(correlation = mean(correlation), .groups = "drop") %>% arrange(age_midpoint), aes(x = age_midpoint, y = correlation), color = pal_blue_alt, linewidth = 1.2) +
+  geom_point(data = mm %>% filter(hours_bin >= min_hours), aes(x = age_midpoint, y = correlation, size = hours_bin), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: overall (all categories) — ≥3 h, connect dots, no CI", x = "Age (months)", y = "RDM correlation (consecutive months)") +
+  theme_minimal(base_size = 12)
+p_mm_overall_connect_f3
+```
+
+```{r fig-mm-top50-connect-f3}
+#| label: fig-mm-top50-connect-f3
+p_mm_top50_subj_connect_f3 <- ggplot() +
+  geom_line(data = mm_top50 %>% filter(hours_bin >= min_hours) %>% arrange(subject_id, age_midpoint), aes(x = age_midpoint, y = correlation, group = subject_id, color = subject_id), linewidth = 0.8) +
+  geom_point(data = mm_top50 %>% filter(hours_bin >= min_hours), aes(x = age_midpoint, y = correlation, color = subject_id, size = hours_bin), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: per subject (top-50) — ≥3 h, connect dots, no CI", x = "Age midpoint (months)", y = "RDM correlation (top-50)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_mm_top50_subj_connect_f3
+```
+
+```{r fig-mm-top50-overall-connect-f3}
+#| label: fig-mm-top50-overall-connect-f3
+p_mm_top50_overall_connect_f3 <- ggplot() +
+  geom_line(data = mm_top50 %>% filter(hours_bin >= min_hours) %>% group_by(age_midpoint) %>% summarise(correlation = mean(correlation), .groups = "drop") %>% arrange(age_midpoint), aes(x = age_midpoint, y = correlation), color = pal_coral_alt, linewidth = 1.2) +
+  geom_point(data = mm_top50 %>% filter(hours_bin >= min_hours), aes(x = age_midpoint, y = correlation, size = hours_bin), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Month-to-month: overall (top-50) — ≥3 h, connect dots, no CI", x = "Age (months)", y = "RDM correlation (top-50)") +
+  theme_minimal(base_size = 12)
+p_mm_top50_overall_connect_f3
+```
+
+```{r fig-yv-all-connect-f3}
+#| label: fig-yv-all-connect-f3
+p_yv_subj_connect_f3 <- ggplot() +
+  geom_line(data = yv %>% filter(hours_compared >= min_hours) %>% arrange(subject_id, age_compared), aes(x = age_compared, y = correlation, group = subject_id, color = subject_id), linewidth = 0.8) +
+  geom_point(data = yv %>% filter(hours_compared >= min_hours), aes(x = age_compared, y = correlation, color = subject_id, size = hours_compared), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: per subject (all categories) — ≥3 h, connect dots, no CI", x = "Age (months)", y = "Correlation with youngest month RDM", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_yv_subj_connect_f3
+```
+
+```{r fig-yv-all-overall-connect-f3}
+#| label: fig-yv-all-overall-connect-f3
+p_yv_overall_connect_f3 <- ggplot() +
+  geom_line(data = yv %>% filter(hours_compared >= min_hours) %>% group_by(age_compared) %>% summarise(correlation = mean(correlation), .groups = "drop") %>% arrange(age_compared), aes(x = age_compared, y = correlation), color = pal_orange_alt, linewidth = 1.2) +
+  geom_point(data = yv %>% filter(hours_compared >= min_hours), aes(x = age_compared, y = correlation, size = hours_compared), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: overall (all categories) — ≥3 h, connect dots, no CI", x = "Age (months)", y = "Correlation with youngest month RDM") +
+  theme_minimal(base_size = 12)
+p_yv_overall_connect_f3
+```
+
+```{r fig-yv-top50-connect-f3}
+#| label: fig-yv-top50-connect-f3
+p_yv_top50_subj_connect_f3 <- ggplot() +
+  geom_line(data = yv_top50 %>% filter(hours_compared >= min_hours) %>% arrange(subject_id, age_compared), aes(x = age_compared, y = correlation, group = subject_id, color = subject_id), linewidth = 0.8) +
+  geom_point(data = yv_top50 %>% filter(hours_compared >= min_hours), aes(x = age_compared, y = correlation, color = subject_id, size = hours_compared), alpha = 0.9) +
+  scale_color_manual(values = pastel_named_alt) + scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: per subject (top-50) — ≥3 h, connect dots, no CI", x = "Age (months)", y = "Correlation with youngest month RDM (top-50)", color = "Subject") +
+  theme_minimal(base_size = 12) + theme(legend.position = "right")
+p_yv_top50_subj_connect_f3
+```
+
+```{r fig-yv-top50-overall-connect-f3}
+#| label: fig-yv-top50-overall-connect-f3
+p_yv_top50_overall_connect_f3 <- ggplot() +
+  geom_line(data = yv_top50 %>% filter(hours_compared >= min_hours) %>% group_by(age_compared) %>% summarise(correlation = mean(correlation), .groups = "drop") %>% arrange(age_compared), aes(x = age_compared, y = correlation), color = pal_coral_alt, linewidth = 1.2) +
+  geom_point(data = yv_top50 %>% filter(hours_compared >= min_hours), aes(x = age_compared, y = correlation, size = hours_compared), color = "gray40", alpha = 0.9) +
+  scale_size_continuous(name = "Hours video", range = c(0.5, 3)) +
+  labs(title = "Youngest vs later: overall (top-50) — ≥3 h, connect dots, no CI", x = "Age (months)", y = "Correlation with youngest month RDM (top-50)") +
+  theme_minimal(base_size = 12)
+p_yv_top50_overall_connect_f3
+```
+
+---
+
+## Essential statistical models
+
+### 1. Month-to-month: does correlation depend on age? (mixed model)
+
+```{r test-mm-mixed}
+#| label: test-mm-mixed
+if (requireNamespace("lme4", quietly = TRUE)) {
+  fit_mm_mixed <- lme4::lmer(correlation ~ age_midpoint + (1 | subject_id), data = mm)
+  summary(fit_mm_mixed)
+  cat("\n--- 95% CI (Wald) for fixed effects ---\n")
+  print(confint(fit_mm_mixed, method = "Wald", parm = c("(Intercept)", "age_midpoint")))
+} else {
+  cat("lme4 not installed; install to run mixed model.\n")
+}
+```
+
+**Interpretation:** Fixed effect **age_midpoint** = average change in correlation per month (accounting for repeated measures per subject). Random intercept captures between-subject differences in level. Use the slope estimate, SE, and CI to describe the developmental trend.
+
+### 2. Youngest vs later: does correlation decrease with age gap? (mixed model)
+
+```{r test-yv-mixed}
+#| label: test-yv-mixed
+if (requireNamespace("lme4", quietly = TRUE)) {
+  fit_yv_mixed <- lme4::lmer(correlation ~ age_compared + (1 | subject_id), data = yv)
+  summary(fit_yv_mixed)
+  cat("\n--- 95% CI (Wald) ---\n")
+  print(confint(fit_yv_mixed, method = "Wald", parm = c("(Intercept)", "age_compared")))
+} else {
+  cat("lme4 not installed.\n")
+}
+```
+
+**Interpretation:** **age_compared** = average trend in correlation with the youngest month as the comparison age increases. Negative slope ⇒ correlation with youngest month tends to decrease with age gap.
+
+### 3. All categories vs top-50 (paired comparison)
+
+At the same (subject, age) pairs, is top-50 correlation systematically different from all-categories?
+
+```{r compare-all-top50}
+#| label: compare-all-top50
+both_mm <- mm %>%
+  select(subject_id, age_from, age_to, age_midpoint, correlation, cor_se) %>%
+  rename(corr_all = correlation, cor_se_all = cor_se) %>%
+  inner_join(
+    mm_top50 %>% select(subject_id, age_from, age_to, correlation, cor_se) %>%
+      rename(corr_top50 = correlation, cor_se_top50 = cor_se),
+    by = c("subject_id", "age_from", "age_to")
+  )
+with(both_mm, t.test(corr_top50, corr_all, paired = TRUE))
+both_mm %>%
+  mutate(diff = corr_top50 - corr_all) %>%
+  summarise(mean_diff = mean(diff), se_diff = sd(diff) / sqrt(n()), ci_lo = mean_diff - 1.96 * se_diff, ci_hi = mean_diff + 1.96 * se_diff, .groups = "drop") %>%
+  knitr::kable(digits = 4)
+```
+
+**Interpretation:** Paired t-test on (top50 − all) at each timepoint. Positive mean difference ⇒ top-50 correlation tends to be higher than all-categories at the same age; 95% CI excluding 0 (or p < 0.05) indicates a significant systematic difference.
+
+---
