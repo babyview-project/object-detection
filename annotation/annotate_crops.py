@@ -101,6 +101,13 @@ class AnnotateApp:
         self.root.title("Crop annotation")
         self.root.geometry("900x700")
 
+        # The folder the user selected (either dataset root or a single category folder).
+        self.user_selected_dir: Path | None = None
+        # The folder we use to generate stable image_filename keys (typically "sampled_object_crops").
+        self.dataset_root_dir: Path | None = None
+        # If user_selected_dir is a category folder, we filter display to that folder but still key by dataset_root_dir.
+        self.scope_dir: Path | None = None
+
         self.image_dir: Path | None = None
         self.csv_path: Path | None = None
         self.image_list: list[tuple[Path, str, str]] = []
@@ -118,6 +125,74 @@ class AnnotateApp:
         self._build_ui()
         self._bind_keys()
         self._ask_folder()
+
+    def _possible_lookup_keys(self, rel_str: str) -> list[str]:
+        """
+        Backward-compatible lookup:
+        - Canonical keys are relative to the dataset root (often "category/...").
+        - Older sessions may have saved keys without the leading category segment.
+        """
+        keys = [rel_str]
+        if "/" in rel_str:
+            keys.append(rel_str.split("/", 1)[1])
+        return keys
+
+    def _is_annotated(self, rel_str: str) -> bool:
+        """
+        A frame is considered annotated only if both answers exist.
+        This avoids treating partially-written/old CSV rows as "done".
+        """
+        for key in self._possible_lookup_keys(rel_str):
+            row = self.annotations.get(key)
+            if not row:
+                continue
+            d = str(row.get("correct_detection", "")).strip()
+            c = str(row.get("correct_cdi", "")).strip()
+            if d in {"0", "1"} and c in {"0", "1"}:
+                return True
+        return False
+
+    def _get_annotation_row_for_display(self, rel_str: str) -> dict:
+        """
+        Return the best matching row for UI display.
+        Prefers rows where both fields are present (valid "annotated" rows).
+        """
+        for key in self._possible_lookup_keys(rel_str):
+            row = self.annotations.get(key)
+            if not row:
+                continue
+            d = str(row.get("correct_detection", "")).strip()
+            c = str(row.get("correct_cdi", "")).strip()
+            if d in {"0", "1"} and c in {"0", "1"}:
+                return row
+        return self.annotations.get(rel_str, {})
+
+    def _resolve_dataset_root(self, selected_dir: Path) -> Path:
+        """
+        Determine the stable "dataset root" for generating image_filename keys.
+        In this project that is usually the directory named "sampled_object_crops".
+        """
+        # Prefer the explicit known directory name (robust across selecting root vs category).
+        for p in [selected_dir, *selected_dir.parents]:
+            if p.name == "sampled_object_crops":
+                return p
+
+        # Also handle the case where the user selected the parent of "sampled_object_crops".
+        try:
+            for child in selected_dir.iterdir():
+                if child.is_dir() and child.name == "sampled_object_crops":
+                    return child
+        except Exception:
+            pass
+
+        # Fallback: if selected_dir contains images directly, assume it is a category folder.
+        try:
+            for child in selected_dir.iterdir():
+                if child.is_file() and child.suffix.lower() in {e.lower() for e in IMAGE_EXTENSIONS}:
+                    return selected_dir.parent
+        except Exception:
+            pass
+        return selected_dir
 
     def _build_ui(self):
         top = ttk.Frame(self.root, padding=8)
@@ -186,8 +261,12 @@ class AnnotateApp:
     def _ask_folder(self):
         """Optionally start with default folder or prompt."""
         if DEFAULT_IMAGE_DIR.exists():
-            self.image_dir = DEFAULT_IMAGE_DIR
-            self.csv_path = DEFAULT_IMAGE_DIR.parent / "annotation_results.csv"
+            self.user_selected_dir = DEFAULT_IMAGE_DIR
+            self.dataset_root_dir = self._resolve_dataset_root(DEFAULT_IMAGE_DIR)
+            self.image_dir = self.dataset_root_dir
+            self.scope_dir = self.user_selected_dir
+            self.csv_path = self.dataset_root_dir.parent / "annotation_results.csv"
+            self.annotations = load_existing_annotations(self.csv_path)
             self._load_list()
         else:
             self.status_var.set("Default folder not found. Click 'Choose image folder'.")
@@ -197,8 +276,12 @@ class AnnotateApp:
         path = filedialog.askdirectory(title="Select image folder", initialdir=str(start))
         if not path:
             return
-        self.image_dir = Path(path)
-        self.csv_path = self.image_dir.parent / "annotation_results.csv"
+
+        self.user_selected_dir = Path(path)
+        self.dataset_root_dir = self._resolve_dataset_root(self.user_selected_dir)
+        self.image_dir = self.dataset_root_dir
+        self.scope_dir = self.user_selected_dir
+        self.csv_path = self.dataset_root_dir.parent / "annotation_results.csv"
         self.annotations = load_existing_annotations(self.csv_path)
         self._load_list()
 
@@ -206,10 +289,38 @@ class AnnotateApp:
         if not self.image_dir or not self.image_dir.is_dir():
             messagebox.showerror("Error", "Invalid image folder.")
             return
-        self.image_list = collect_images(self.image_dir)
-        self.index = 0
+
+        all_images = collect_images(self.image_dir)
+        # If the user selected a category folder, only display files under that folder,
+        # but keep their image_filename keys stable relative to dataset_root_dir.
+        if self.scope_dir and self.scope_dir != self.image_dir:
+            filtered: list[tuple[Path, str, str]] = []
+            for path, category, rel_str in all_images:
+                try:
+                    path.relative_to(self.scope_dir)
+                except ValueError:
+                    continue
+                filtered.append((path, category, rel_str))
+            self.image_list = filtered
+        else:
+            self.image_list = all_images
+
         self.status_var.set(f"Loaded {len(self.image_list)} images. CSV: {self.csv_path}")
+
         if self.image_list:
+            # Jump to the first unannotated frame so reopening the app resumes progress.
+            first_unannotated_idx: int | None = None
+            for i, (_path, _cat, rel_str) in enumerate(self.image_list):
+                if not self._is_annotated(rel_str):
+                    first_unannotated_idx = i
+                    break
+            if first_unannotated_idx is None:
+                self.index = 0
+                self.status_var.set(
+                    f"Loaded {len(self.image_list)} images. CSV: {self.csv_path} (All annotated)"
+                )
+            else:
+                self.index = first_unannotated_idx
             self._show_current()
             self._schedule_auto_save()
         else:
@@ -232,7 +343,7 @@ class AnnotateApp:
             return
         path, category, rel_str = entry
         self.question_step = 0
-        existing = self.annotations.get(rel_str)
+        annotated = self._is_annotated(rel_str)
 
         # Load and display image
         try:
@@ -243,11 +354,17 @@ class AnnotateApp:
         self._draw_image()
 
         # Progress and category
-        self.info_var.set(f"Image {self.index + 1} / {len(self.image_list)}  |  Category: {category}  |  File: {rel_str}")
+        status_word = "Annotated" if annotated else "Unannotated"
+        self.info_var.set(
+            f"Image {self.index + 1} / {len(self.image_list)}  |  Category: {category}  |  Status: {status_word}  |  File: {rel_str}"
+        )
 
-        if existing is not None:
+        if annotated:
+            existing = self._get_annotation_row_for_display(rel_str)
             d, c = existing.get("correct_detection", ""), existing.get("correct_cdi", "")
-            self.prompt_var.set(f"Already annotated: correct_detection={d}, correct_cdi={c}. Press Y/N to re-annotate or P to go back.")
+            self.prompt_var.set(
+                f"Already annotated: correct_detection={d}, correct_cdi={c}. Press Y/N to re-annotate or P to go back."
+            )
             self.next_btn.state(["!disabled"])
         else:
             self.prompt_var.set("(1) Is this crop the correct category? Press Y or N")
@@ -330,7 +447,7 @@ class AnnotateApp:
         entry = self._current_entry()
         if entry:
             _path, _cat, rel_str = entry
-            if rel_str not in self.annotations:
+            if not self._is_annotated(rel_str):
                 if self.question_step == 0:
                     q = "(1) Is this crop the correct category? Press Y or N"
                 else:
