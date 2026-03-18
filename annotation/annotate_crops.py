@@ -355,6 +355,12 @@ class AnnotateApp:
         path, category, rel_str = entry
         self.question_step = 0
         annotated = self._is_annotated(rel_str)
+        total = len(self.image_list)
+        annotated_count = sum(1 for _path, _cat, fn in self.image_list if self._is_annotated(fn))
+        first_unannotated_idx = next(
+            (i for i, (_path, _cat, fn) in enumerate(self.image_list) if not self._is_annotated(fn)),
+            None,
+        )
 
         # Load and display image
         try:
@@ -366,8 +372,13 @@ class AnnotateApp:
 
         # Progress and category
         status_word = "Annotated" if annotated else "Unannotated"
+        if first_unannotated_idx is None:
+            next_unannotated = "none"
+        else:
+            next_unannotated = str(first_unannotated_idx + 1)
         self.info_var.set(
-            f"Image {self.index + 1} / {len(self.image_list)}  |  Category: {category}  |  Status: {status_word}  |  File: {rel_str}"
+            f"Image {self.index + 1} / {total} (position)  |  Annotated in folder: {annotated_count} / {total}"
+            f"  |  Next unannotated: {next_unannotated}  |  Category: {category}  |  Status: {status_word}  |  File: {rel_str}"
         )
 
         if annotated:
