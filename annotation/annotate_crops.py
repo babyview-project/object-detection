@@ -33,7 +33,13 @@ IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".bmp")
 
 
 def collect_images(root_dir: Path) -> list[tuple[Path, str, str]]:
-    """Collect (full_path, category, relative_filename) for all images under root_dir."""
+    """
+    Collect (full_path, category, image_filename_key) for all images under root_dir.
+
+    Important: `annotation_results.csv` uses `image_filename` values that are basenames
+    (e.g. `frog_0.250_...jpg`), not `category/filename.jpg`. We therefore use `path.name`
+    as the stable key so parent-folder and category-folder selections behave identically.
+    """
     root_dir = root_dir.resolve()
     out = []
     for ext in IMAGE_EXTENSIONS:
@@ -51,8 +57,8 @@ def collect_images(root_dir: Path) -> list[tuple[Path, str, str]]:
             else:
                 stem = path.stem
                 category = stem.split("_")[0] if "_" in stem else stem
-            rel_str = str(rel).replace("\\", "/")
-            out.append((path, category, rel_str))
+            image_filename_key = path.name  # Must match CSV `image_filename`
+            out.append((path, category, image_filename_key))
     out.sort(key=lambda x: (x[1], x[2]))
     return out
 
@@ -305,10 +311,11 @@ class AnnotateApp:
         else:
             self.image_list = all_images
 
-        self.status_var.set(f"Loaded {len(self.image_list)} images. CSV: {self.csv_path}")
-
         if self.image_list:
             # Jump to the first unannotated frame so reopening the app resumes progress.
+            annotated_count = sum(
+                1 for _path, _cat, rel_str in self.image_list if self._is_annotated(rel_str)
+            )
             first_unannotated_idx: int | None = None
             for i, (_path, _cat, rel_str) in enumerate(self.image_list):
                 if not self._is_annotated(rel_str):
@@ -317,10 +324,14 @@ class AnnotateApp:
             if first_unannotated_idx is None:
                 self.index = 0
                 self.status_var.set(
-                    f"Loaded {len(self.image_list)} images. CSV: {self.csv_path} (All annotated)"
+                    f"Loaded {len(self.image_list)} images ({annotated_count} annotated). CSV: {self.csv_path} (All annotated)"
                 )
             else:
                 self.index = first_unannotated_idx
+                self.status_var.set(
+                    f"Loaded {len(self.image_list)} images ({annotated_count} annotated). "
+                    f"Next unannotated: {self.index + 1}/{len(self.image_list)}. CSV: {self.csv_path}"
+                )
             self._show_current()
             self._schedule_auto_save()
         else:
