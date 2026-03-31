@@ -1,0 +1,38 @@
+============================================================
+CATEGORY-WISE COSINE SIMILARITY (BABYVIEW vs THINGS)
+============================================================
+BV CSV: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/vss-2026/bv_things_comp_03012026/bv_clip_filtered_zscored_hierarchical_threshold_0.27_163cats/normalized_filtered_embeddings_alphabetical.csv
+THINGS CSV: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/vss-2026/bv_things_comp_03012026/things_clip_filtered_zscored_hierarchical_threshold_0.27_163cats/normalized_filtered_embeddings_alphabetical.csv
+Included categories file: /home/j7yang/babyview-projects/vss2026/object-detection/data/included_categories.txt
+Categories analyzed: 129
+
+Cosine similarity summary:
+  Mean:   0.603006
+  Std:    0.113977
+  Median: 0.609702
+  Min:    0.119257
+  Max:    0.795785
+
+Top 10 categories by cosine similarity:
+   1. cracker                        cos=0.795785
+   2. cat                            cos=0.794062
+   3. foot                           cos=0.777534
+   4. pizza                          cos=0.775670
+   5. shower                         cos=0.771790
+   6. crib                           cos=0.769360
+   7. hose                           cos=0.757882
+   8. scissors                       cos=0.755242
+   9. melon                          cos=0.741582
+  10. spoon                          cos=0.740226
+
+Bottom 10 categories by cosine similarity:
+  120. sprinkler                      cos=0.431472
+  121. pickle                         cos=0.409525
+  122. glasses                        cos=0.406816
+  123. table                          cos=0.392212
+  124. shirt                          cos=0.378572
+  125. carrot                         cos=0.368463
+  126. bib                            cos=0.359090
+  127. face                           cos=0.342822
+  128. car                            cos=0.335729
+  129. nail                           cos=0.119257
