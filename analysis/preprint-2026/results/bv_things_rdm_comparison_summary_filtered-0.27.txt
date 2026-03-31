@@ -1,0 +1,26 @@
+BV vs THINGS RDM comparison summary
+
+Included categories file: /home/j7yang/babyview-projects/vss2026/object-detection/data/included_categories.txt
+Threshold: 0.27
+
+Model: clip
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.665206 (p=0.000e+00)
+  spearman_r: 0.549640 (p=0.000e+00)
+  kendall_r: 0.390351 (p=0.000e+00)
+  mae: 0.122401
+  rmse: 0.155299
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_clip_cdi_clustered_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_clip_cdi_clustered_filtered-0.pdf
+
+Model: dinov3
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.548522 (p=0.000e+00)
+  spearman_r: 0.400513 (p=0.000e+00)
+  kendall_r: 0.275929 (p=2.192e-309)
+  mae: 0.101613
+  rmse: 0.136755
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_dinov3_cdi_clustered_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_dinov3_cdi_clustered_filtered-0.pdf

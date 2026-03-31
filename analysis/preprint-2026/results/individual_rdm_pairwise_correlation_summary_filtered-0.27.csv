@@ -1,0 +1,3 @@
+group,n_subjects,n_subject_pairs,avg_pairwise_r,std_pairwise_r,avg_common_categories,avg_rdm_pairs
+all_subjects,31,465,0.713105440375846,0.10390274917677378,118.84301075268817,7072.7806451612905
+top8_densest_subjects,8,28,0.824781919076154,0.03169575057116384,128.5,8192.035714285714

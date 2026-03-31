@@ -1,0 +1,15 @@
+Per-semantic-cluster CLIP-vs-DINOv3 RDM correlations (lower triangle)
+
+n_common_categories: 129
+Saved CSV: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/results/bv_things_cross_model_cluster_correlations_filtered-0.27.csv
+
+Ranked by BV Spearman r:
+- vehicles         n= 3 | BV sp=1.000, TH sp=0.500
+- toys             n= 5 | BV sp=0.988, TH sp=0.636
+- clothing         n=18 | BV sp=0.943, TH sp=0.816
+- food_drink       n=23 | BV sp=0.933, TH sp=0.574
+- outside          n=11 | BV sp=0.921, TH sp=0.778
+- body_parts       n=13 | BV sp=0.885, TH sp=0.674
+- furniture_rooms  n=15 | BV sp=0.825, TH sp=0.569
+- household        n=34 | BV sp=0.810, TH sp=0.704
+- animals          n= 7 | BV sp=0.704, TH sp=0.573

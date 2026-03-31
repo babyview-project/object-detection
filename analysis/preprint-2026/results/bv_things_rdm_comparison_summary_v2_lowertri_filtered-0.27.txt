@@ -1,0 +1,54 @@
+BV vs THINGS RDM comparison summary (v2)
+
+Included categories file: /home/j7yang/babyview-projects/vss2026/object-detection/data/included_categories.txt
+CDI semantic mapping: /home/j7yang/babyview-projects/vss2026/object-detection/data/long_tailed_dist_prop_included_categories.csv
+Threshold: 0.27
+N_THINGS_CLUSTERS: 9
+
+Model: clip | Ordering: bv_first_semantic
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.665206 (p=0.000e+00)
+  spearman_r: 0.549640 (p=0.000e+00)
+  kendall_r: 0.390351 (p=0.000e+00)
+  mae: 0.122401
+  rmse: 0.155299
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_clip_bv_semantic_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_clip_bv_semantic_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/results/bv_things_rdm_order_bv_semantic_clip_filtered-0.27.csv
+
+Model: clip | Ordering: things_first_cluster
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.665206 (p=0.000e+00)
+  spearman_r: 0.549640 (p=0.000e+00)
+  kendall_r: 0.390351 (p=0.000e+00)
+  mae: 0.122401
+  rmse: 0.155299
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_clip_things_cluster_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_clip_things_cluster_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/results/bv_things_rdm_order_things_cluster_clip_filtered-0.27.csv
+
+Model: dinov3 | Ordering: bv_first_semantic
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.548522 (p=0.000e+00)
+  spearman_r: 0.400513 (p=0.000e+00)
+  kendall_r: 0.275929 (p=2.192e-309)
+  mae: 0.101613
+  rmse: 0.136755
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_dinov3_bv_semantic_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_dinov3_bv_semantic_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/results/bv_things_rdm_order_bv_semantic_dinov3_filtered-0.27.csv
+
+Model: dinov3 | Ordering: things_first_cluster
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.548522 (p=0.000e+00)
+  spearman_r: 0.400513 (p=0.000e+00)
+  kendall_r: 0.275929 (p=2.192e-309)
+  mae: 0.101613
+  rmse: 0.136755
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_dinov3_things_cluster_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/figures/bv_things_rdm_comparison_dinov3_things_cluster_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/results/bv_things_rdm_order_things_cluster_dinov3_filtered-0.27.csv

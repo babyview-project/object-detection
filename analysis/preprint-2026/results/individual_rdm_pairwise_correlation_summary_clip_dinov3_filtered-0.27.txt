@@ -1,0 +1,43 @@
+Individual RDM pairwise correlation summary (CLIP + DINOv3)
+==========================================================
+Threshold: 0.27
+
+Group: all_subjects_clip
+  n_subjects: 31
+  n_subject_pairs: 465
+  avg_pearson_r: 0.713105
+  std_pearson_r: 0.103903
+  avg_spearman_rho: 0.688918
+  std_spearman_rho: 0.108171
+  avg_common_categories: 118.843
+  avg_rdm_pairs: 7072.8
+
+Group: top8_densest_subjects_clip
+  n_subjects: 8
+  n_subject_pairs: 28
+  avg_pearson_r: 0.824782
+  std_pearson_r: 0.031696
+  avg_spearman_rho: 0.805795
+  std_spearman_rho: 0.034076
+  avg_common_categories: 128.500
+  avg_rdm_pairs: 8192.0
+
+Group: all_subjects_dinov3
+  n_subjects: 31
+  n_subject_pairs: 465
+  avg_pearson_r: 0.737798
+  std_pearson_r: 0.093282
+  avg_spearman_rho: 0.707503
+  std_spearman_rho: 0.100656
+  avg_common_categories: 118.843
+  avg_rdm_pairs: 7072.8
+
+Group: top8_densest_subjects_dinov3
+  n_subjects: 8
+  n_subject_pairs: 28
+  avg_pearson_r: 0.841723
+  std_pearson_r: 0.028222
+  avg_spearman_rho: 0.819560
+  std_spearman_rho: 0.031694
+  avg_common_categories: 128.500
+  avg_rdm_pairs: 8192.0

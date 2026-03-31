@@ -1,0 +1,20 @@
+Individual RDM pairwise correlation summary
+============================================
+Threshold: 0.27
+Order CSV (from notebook 03): /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/results/bv_things_rdm_order_bv_semantic_clip_filtered-0.27.csv
+
+Group: all_subjects
+  n_subjects: 31
+  n_subject_pairs: 465
+  avg_pairwise_r: 0.713105
+  std_pairwise_r: 0.103903
+  avg_common_categories: 118.843
+  avg_rdm_pairs: 7072.8
+
+Group: top8_densest_subjects
+  n_subjects: 8
+  n_subject_pairs: 28
+  avg_pairwise_r: 0.824782
+  std_pairwise_r: 0.031696
+  avg_common_categories: 128.500
+  avg_rdm_pairs: 8192.0
