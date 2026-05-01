@@ -1,0 +1,28 @@
+BV-vs-THINGS RDM baseline summary (run=valid85)
+Threshold token: 0.27
+N permutations: 5000
+Seed: 2026
+
+[clip] n_categories=85, n_pairs=3570
+  bv_vs_things_spearman_r: 0.574390
+  bv_vs_things_pearson_r: 0.702888
+  perm_empirical_p_two_sided: 0.00019996
+  perm_empirical_z: 35.167748
+  semantic_block_vs_bv_spearman_r: 0.376625
+  semantic_block_vs_things_spearman_r: 0.402165
+
+[dinov3] n_categories=85, n_pairs=3570
+  bv_vs_things_spearman_r: 0.454278
+  bv_vs_things_pearson_r: 0.624011
+  perm_empirical_p_two_sided: 0.00019996
+  perm_empirical_z: 26.820175
+  semantic_block_vs_bv_spearman_r: 0.346547
+  semantic_block_vs_things_spearman_r: 0.318962
+
+[clip_vs_dinov3_anchor] dataset=bv
+  cross_model_spearman_r: 0.839000
+  cross_model_pearson_r: 0.888768
+
+[clip_vs_dinov3_anchor] dataset=things
+  cross_model_spearman_r: 0.514016
+  cross_model_pearson_r: 0.701937

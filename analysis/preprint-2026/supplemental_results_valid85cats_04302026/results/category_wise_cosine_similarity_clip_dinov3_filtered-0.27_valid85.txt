@@ -1,0 +1,20 @@
+========================================================================
+CATEGORY-WISE COSINE SIMILARITY (BABYVIEW vs THINGS): CLIP + DINOv3
+========================================================================
+CATEGORY_SET: valid85
+Included categories file: /home/j7yang/babyview-projects/vss2026/object-detection/data/included_categories_valid85.txt
+Categories analyzed: 85
+
+CLIP summary:
+  Mean:   0.615215
+  Std:    0.107965
+  Median: 0.625402
+  Min:    0.322516
+  Max:    0.818538
+
+DINOv3 summary:
+  Mean:   0.495703
+  Std:    0.174166
+  Median: 0.493176
+  Min:    0.071708
+  Max:    0.839217

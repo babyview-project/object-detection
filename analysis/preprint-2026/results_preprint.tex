@@ -1,0 +1,139 @@
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.99\textwidth]{figures/methods/pipeline_overview.pdf}
+  \caption{An overview of our automated detection pipeline. Step (1) applies an automated object detection model (YOLO-E) to detect exemplars from nouns in the CDI vocabulary list, with example detections for one category (book) shown in (2).  We then extract embeddings for all exemplars in both a vision-language model (CLIP) and an unsupervised visual encoder (DINOv3), shown in (3). We then filtered false alarms by using CLIP similarity scores (i.e., the cosine similarity of the CLIP embedding for each detected exemplar and it's associated label in a language encoder). For category-level analyses, we then took an average across all filtered, detected objects in each category (shown in 5) in both DINOv3 and CLIP.}
+  \label{fig:3}
+\end{figure}
+
+% We analyze naturalistic, at-home egocentric video data collected with the BabyView camera \citep{long2023, long2024babyview} using the 2025.1 release with 868 hours of data, \textit{N} = 31 subjects aged 5--36 months; see Methods and \citet{long2024babyview} for further details on the dataset. Recordings captured infants when they were engaged primarily in everyday activities at home (e.g., mealtime, playtime, storytime; see \citep{sepuri2025characterizing} for a detailed description) in both indoor and outdoor locations. 
+
+\subsection*{Identifying the object categories in the child's view}
+First, we extracted frames at 1 frame per second for a total of 3.68M frames from the 868 hours of the 2025.1 release of the BabyView dataset \citep{long2024babyview}. We then selected nouns from the MacArthur-Bates Communicative Development Inventories (a commonly used questionnaire for measuring children's vocabulary; CDI) \citep{marchman2023} and performed category detection for $N$=129 categories using the YOLOE-v8-L \citep{wang2025yoloe}; our final list of detected categories was based on iterative rounds of model validation (see Supplemental Materials). We then filtered all object detections using CLIP, a vision-language model \citep{radford2021learning}, to decrease the probability of false alarms (see Supplemental Materials). This pipeline resulted in a set of 2,994,667 detections for 129 categories across the entire dataset. 
+
+We validated the precision of the pipeline detections by crowdsourcing categorizations from human participants for a set of detections (roughly 100 per category) that were stratified across participants and videos. Using these data, we observed an average precision of $P$=0.67 for our 129 categories ($SD$=0.22, see Supplemental Materials). We also constructed a set of human-validated, crowd-sourced detections for $N$=85 categories ($N$=7,018 object detection overall) for robustness checks. While object detection at scale in naturalistic egocentric video is still a difficult challenge, this level of precision (combined with robustness checks using smaller sets of human annotations) allows us to access a vastly larger amount of data about children's visual experience. 
+
+As a secondary check on the robustness of our YOLOE detections, we prompted a video question-answering model, VideoLlama3 \citep{zhang2025videollama}, to detect all objects in 10-second, contiguous chunks of the dataset \citep{sepuri2025characterizing}. We compared these detected categories and their frequencies with those extracted from our pipeline. The observed frequencies were relatively similar across these two distinct model pipelines ($r=.72$, $p<.01$, $n$=99 categories overlapping, see Supplemental Materials, Figure XX).
+
+\subsection*{The distribution of objects in infants' visual experience is long-tailed}
+
+We observed a skewed distribution of object categories in the child's view: a small number of object categories (e.g., \textit{chair, toy}) appeared very frequently while many others (e.g., \textit{penguin}) appeared less frequently, consistent with prior work \citep{clerkin2017real}. Figure~\ref{fig:longtail} shows the distribution of the top 50 most frequent categories that were detected in the dataset (excluding most frequent ``person'' and ``picture'' detections, which only further amplify the skewed distribution); these detections are further broken down by their semantic category using categories from the CDI.
+
+To quantify the shape of these distributions, we fit a power-law function to these frequencies, finding a power-law exponent of $\alpha$ = 1.93 across all 129 categories, comparable to the $\alpha$ = 2.44 reported by \citep{clerkin2017real} for hand-annotated object frequencies from egocentric videos of infants' mealtimes. Distributions were long-tailed even within each CDI category, with $\alpha$ = 1.23 (clothing), $\alpha$ = 1.98 (furniture/rooms), $\alpha$ = 1.93 (household), $\alpha$ = 1.68 (toys), $\alpha$ = 2.36 (body parts), $\alpha$ = 1.68 (food/drink), $\alpha$ = 1.98 (outside), $\alpha$ = 3.13 (vehicles), and $\alpha$ = 1.69 (animals). 
+As robustness checks, we found same pattern of results both when we restricted our analyses to the N=85 categories with high precision as captured by human annotations and in the detections resulting from the VQA model pipeline (see Supplemental Information, Figure XX). Overall, these results suggest that skewed distributions of object categories are a highly robust, general property of naturalistic visual environments as experienced by young children.
+
+% suggesting that the observed skewed distributions were not an artifact of our object detection and filtering pipeline. 
+ % In addition, we found this long-tailed distribution of categories within each of the top XX most frequent activities in the BabyView dataset (see SI for visualizations for mealtime, playtime, storytime, and XX). 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/results/long_tailed_top50_plus_semantic_subplots_bll.pdf}
+  \caption{Long-tailed distribution of categories in infants' everyday visual experience - some categories are a lot more frequently observed than others.}
+  \label{fig:longtail}
+\end{figure}
+
+\subsection*{Object categories in the child's view vary in their similarity to the canonical view}
+
+Next, we examined how children experience individual exemplars and views of these categories.
+% To do so, we compared the views from the infant experience to photographs of objets in a oaptured in curated datasets? 
+% The infant experience of categories likely differs from curated datasets not only in distribution but in the kinds of exemplars are experiences. 
+We compared the visual similarity between the average ``cup'' that infants experienced to the average photograph of a ``cup'' in a curated dataset -- THINGS \citep{stoinski2024thingsplus}, which is widely used to examine visual representations in adults. To do so, we first took all filtered object crops in BabyView and all images for each category in the THINGS dataset (see Methods), and extracted embeddings from both a vision-language model (CLIP; \citet{radford2021learning}) and an unsupervised vision model (DINOv3; \citet{simeoni2025dinov3}) for all individual cropped images (see Methods) and averaged across exemplars. We anticipated that vision-language model embeddings might be better able capture the higher-level similarity between the infant view and curated datasets, given that it is often trained on inputs that vary in representational format (e.g., line drawings). In contrast, embeddings from an unsupervised vision model provide a lower bound estimate of the visual similarity between these datasets. In both cases, we computed the cosine similarity between the average category embeddings across the two datasets for 129 categories. 
+
+Similarity values varied substantially across categories, ranging from approximately .12 to .80 (average cosine similarity between BabyView vs Things, $\cos(\theta)=0.60$; Fig. \ref{fig:category_wise_cos_sim}). While we found relative convergence across the two feature spaces in which categories were more or less similar (Pearson's correlation between DINOv3 vs. CLIP category-wise similarity values, $r = .73$, $p < .01$), there was some divergence, particularly for categories with diverse exemplars where the DINO embeddings appeared to  capture more of this variability. For example, while all of the ``car" exemplars in THINGS were photographs of cars, the child's view contained many toys cars and depictions of cars -- leading to a lower correspondence between BabyView vs THINGS in the DINOv3 model (see \ref{fig:category_wise_cos_sim}). 
+
+To follow up on this analysis, we conducted further manual annotation of detected exemplars by visual format (e.g., real-life objects, drawings, toys, photographs, and screen-based media), revealing that for many categories, particularly animals, depictions constituted a substantial proportion of exemplars -- whereas  depictions are entirely absent in THINGS (see Supplemental Materials, Figure XX).
+
+However, we found that there were many ways in which the objects in the child's view differ from curated datasets, and that this variation did not fall neatly along domain boundaries: no broad category domain (animate objects, furniture, toys) was consistently more or less similar to its curated counterpart. Instead, qualitatively it appears to reflect differences in the range of viewpoints, contexts, and visual formats through which children encountered particular categories: objects in children's everyday experiences are often seen from non-canonical angles, under variable lighting conditions, and often partially occluded. 
+% Despite the fact that YOLOE was trained to detect images in photographs -- and thus our detections likely vastly underestimate the prevalence of depictions in the dataset -- we still found a high prevalence of depictions in our detections.  M
+
+% An infant's representation of ``giraffe'' is likely built largely or entirely from picture books, toy animals, and screen media rather than from encounters with real giraffes.  [add manual annotation of visual formats?, see next Figure].
+% Overall, these findings highlight that the gap between infant visual experience and curated training sets extends well beyond the frequency distribution of categories. The exemplars themselves differ along multiple dimensions: viewpoint, occlusion, lighting, background context, and visual format. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{figures/results/category_wise_cosine_montage_fixed_5high_5low_clip_dinov3_filtered-0.27_4columns.pdf}
+  \caption{Within-category similarity between BabyView and THINGS. Distribution of category-level correlations (CLIP and DINOv3 embeddings) showing high variability across categories (e.g., cracker $r \approx 0.80$; car $r \approx 0.34$).}
+  \label{fig:category_wise_cos_sim}
+\end{figure}
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.85\textwidth]{figures/results/visual_format_montage.png}
+%   \caption{Manual annotations of model detections grouped by visual formats.}
+%   \label{fig:9}
+% \end{figure}
+
+\subsection*{Between-category representational geometry in young children's object experiences}
+
+Adults' behavioral and neural responses exhibit a consistent representational geometry across broad categorizations: for example, animals share visual feature similarities with other animals in both visual cortical responses to curated images and perceptual judgments \citep{konkle2013tripartite, kriegeskorte2008representational, hebart2023things, long2018mid}. This broad similarity structure is mirrored in deep neural network responses to photographs of these categories in curated datasets \citep{muttenthaler2021thingsvision, conwell2024large}. Here, we examined whether this same representational geometry emerges when examining the categories extracted from the BabyView dataset. 
+
+We used Representational Similarity Analysis (RSA) to compare between-category representational geometries between objects captured in BabyView vs. in THINGS (see Methods).  For each dataset, we took the mean embedding for each of the 129 categories across the entire dataset, calculated pairwise cosine distances between all category pairs, and constructed a representational dissimilarity matrix (RDM). We then compared RDMs by computing their Spearman rank correlation over all unique pairwise values (i.e., the lower-triangle of the matrix).  
+
+First, we observed coherent groupings for the CDI semantic categories: animals, body parts, clothing, large household objects, and small household objects clustered together when manually inspecting the RDMs: for example, the average embedding of ``cat'' was more similar to other animals than to clothing or household objects. We found this to be case when we constructed RDMS using embeddings from CLIP or Dinov3.  Thus, these results suggest that despite their diversity, young children's everyday experiences with objects recapitulate the broad semantic structure observed in both adult neural and behavioral responses to curated object categories.
+
+
+In fact, we found that the superordinate clusters were stronger in the BabyView dataset vs. in the THINGS dataset (see Figure \ref{fig:bv_things_rdm}).   We quantified within vs between category distances, finding....
+Overall, these results highlight MORE redundancy the superordinate level in BabyVIew than is captured in THINGS.....
+True in both representational spaces...
+ 
+% add in superordinate clusters in bv vs things -- can look at relative strength? are certain CDI categories stronger (seems like it, household items is low? supp figure)
+
+% Category centroids are closer together within each CDI cluster, despite having greater variability at the exemplar level
+% Suggests variability is clustered wit
+% Suggests MORE redundancy the superordinate level than is captured in THINGS
+
+% Next, we aimed to quantify how similar this representational structure is to the similarity structure evident in curated photographs. 
+
+% In addition, we observed that the RDM derived from BabyView was notably noisier, with greater within-cluster variance — consistent with the exemplar-level variability documented above — yet objects that are conceptually similar still tend to cluster together in infant experience, even when viewed from non-canonical angles, partially occluded, or encountered as depictions. These findings suggest that the infant visual diet, despite its surface-level noise, preserves enough structure for coherent category organization to emerge.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.99\textwidth]{figures/results/bv_things_clip_dino_rdm_129cats.pdf}
+  \caption{Representational dissimilarity matrix (RDM) for BabyView categories (CLIP, 129 categories, CLIP-filtered) (Spearman's $\rho = .55$, $p < .01$). Comparison with DINOv3 embeddings shows moderate correlation between BabyView and THINGS structure (Spearman's $\rho = .40$, $p < .01$).}
+  \label{fig:bv_things_rdm}
+\end{figure}
+
+
+% \begin{figure*}[t]
+%   \centering
+%   \includegraphics[width=0.5\textwidth]{figures/results/dinov3_bv_versus_things.png}
+%   \caption{RDM for THINGS categories (DINOv3, same 163 categories). Comparison with Figure~\ref{fig:5} shows moderate correlation between BabyView and THINGS structure (Spearman's $\rho = .38$, $p < .01$).}
+%   \label{fig:7}
+% \end{figure*}
+
+
+\subsection*{Idiosyncratic experiences across families support similar category structures}
+% The analyses reported above pooled data across all 31 families in the BabyView dataset
+
+Every family has their own unique home environment. Does the category structure we observed averaging across families reflect consistent properties of individual children's visual experience?
+% Prior work has characterized infant visual statistics either within specific contexts or using longitudinal data from a small number of children, leaving an open question about how much visual experience varies across individual children and families. 
+% If meaningful category organization only emerges when data are pooled across many families, any individual infant's experience may be too sparse or idiosyncratic to support structured category representations on its own. If, on the other hand, consistent category structure is present within individual families, the statistical regularities of everyday experiences may be sufficient to support category learning even from a single child's perspective.
+
+We constructed separate RDMs for the eight families with the densest recording data (greater than N=XX hours of data per family, range = XX - XX hours, ages XX - XX). Despite the unique visual environments of each family, the broad organizational structure observed in the aggregate was remarkably consistent across individual families). Figure XX shows the individual RDMs in CLIP embedding space, highlighting again coherent clusters for animals, body parts, and large household objects were identifiable in each family's RDM. Statistically, we found that these individual RDMs were relatively similar to each other (average between-subject RDM correlation $r=.806$, $SD=.018$, see Figure \ref{fig:clip_top8_rdm}). We observed the same pattern using DINOv3 embeddings (average between-subject RDM correlation $r=.820$, $SD=.018$, see Figure \ref{fig:dinov3_top8_rdm}). Thus,  this category structure appears across families in both embeddings from a vision-language model and a purely visual self-supervised model. Overall, these findings indicate that the category structure documented in our aggregate analyses is not merely an artifact of averaging across diverse inputs but is a property that arises from the visual experiences of individual children. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.99\textwidth]{figures/results/clip_top8_rdms_129cats.pdf}
+  \caption{Individual family RDM for the top 8 subjects in BabyView}
+  \label{fig:clip_top8_rdm}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.99\textwidth]{figures/results/dinov3_top8_top8_rdms_129cats.pdf}
+  \caption{Individual family RDM for the top 8 subjects in BabyView}
+  \label{fig:dinov3_top8_rdm}
+\end{figure}
+
+% In addition, we found this same pattern of results when restricting to the N=XX most valid categories. 
+
+
+% To quantify the consistency of category structure across families, we computed pairwise correlations between individual family RDMs. 
+% For each pair of families, we identified the set of overlapping categories present in both RDMs, extracted the lower triangle of the resulting dissimilarity matrices, and computed their Spearman rank correlation. 
+% Across all pairwise comparisons, the mean inter-family RDM correlation was [X] for CLIP and [X] for DINOv3, indicating moderate convergence in category organization across families despite differences in their specific visual environments. To rule out the possibility that this consistency was driven by the structure of the embedding spaces themselves rather than by shared properties of the visual input, we tested [placeholder for control analysis, e.g., comparison against baseline correlations computed from randomly sampled images or permutation tests on category labels]. [See SI for shuffled control baseline
+
+% The consistency of relational structure across homes suggests the statistical regularities of everyday environments, perhaps the co-occurrence of objects in shared functional contexts such as kitchens, living rooms, and play areas, gives rise to stable category organization even when the specific exemplars vary considerably.
+% \subsection{Developmental trajectory/age trend consistency + slight decline in correlation?...}
+
+% \subsection{Data scaling}
+

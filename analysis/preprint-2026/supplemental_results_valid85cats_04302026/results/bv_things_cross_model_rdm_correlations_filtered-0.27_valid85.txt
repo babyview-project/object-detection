@@ -1,0 +1,21 @@
+Cross-model RDM correlations (lower triangle, run=valid85)
+
+Included categories file: /home/j7yang/babyview-projects/vss2026/object-detection/data/included_categories_valid85.txt
+Threshold: 0.27
+n_common_categories: 85
+
+Dataset: bv (clip vs dinov3)
+  n_pairs: 3570
+  pearson_r: 0.888768 (p=0.000e+00)
+  spearman_r: 0.839000 (p=0.000e+00)
+  kendall_r: 0.653615 (p=0.000e+00)
+  mae: 0.070333
+  rmse: 0.088757
+
+Dataset: things (clip vs dinov3)
+  n_pairs: 3570
+  pearson_r: 0.701937 (p=0.000e+00)
+  spearman_r: 0.514016 (p=5.017e-240)
+  kendall_r: 0.362104 (p=8.153e-231)
+  mae: 0.075592
+  rmse: 0.096782
