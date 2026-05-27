@@ -1,3 +1,16 @@
+---
+title: "BabyView Objects unconstraiend detections"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    self-contained: true
+execute:
+  warning: false
+  message: false
+---
+
 # Imports and helpers
 ```{r}
 library(here)
@@ -5,26 +18,29 @@ library(stringr)
 library(tidyverse)
 library(udpipe)
 library(spacyr)
+
+FIRST_TIME_RUNNING <- FALSE
 ```
 
 ```{r}
-spacy_install()
-spacy_download_langmodel("en_core_web_lg")
-spacy_finalize()
+if (FIRST_TIME_RUNNING) {
+  spacy_install()
+  spacy_download_langmodel("en_core_web_lg")
+  spacy_finalize()
+}
 spacy_initialize(model = "en_core_web_lg")
-ud_model <- udpipe_download_model(language = "english")
-ud_model <- udpipe_load_model(ud_model$file_model)
-
 
 unconstrained_objects <- read.csv(here("data/unconstrained_objects/unconstrained_objects.csv"))
 aoa_values <- read_csv(here("data/coef_data/eng_aoas.csv"))
 yoloe_objects_raw <- read.csv(here("data/overall_category_distribution.csv"))
-
+yoloe_objects_129 <- read.csv(here("data/overall_category_distribution_129.csv"))
+yoloe_objects_85 <- read.csv(here("data/overall_category_distribution_85.csv"))
 # Constants 
-colors_to_remove <- c("white", "green", "blue", "yellow", "red")
+colors_to_remove <- c("white", "green", "blue", "yellow", "red", "black", "brown", "gray", "grey", "orange")
 excluded_words <- c("and", "of", "in", "on", "at", "'s")
-non_lemma <- c("glasses", "sled", "scissors", "leaves")
+non_lemma <- c("glasses", "sled", "scissors", "leaves", "clothes", "stuffed", "swing")
 more_exclusions <- c("two")
+adjectives_to_keep <- c("")
 ```
 
 ```{r}
@@ -40,6 +56,36 @@ object_counts.bar <- function(df, input_n=50, input_title="Proportion of frames"
   ) +
   theme_minimal(base_size = 14) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+}
+
+object_counts.bar.powerlaw <- function(df, input_n=50, input_title="Proportion of frames") {
+
+  df_ranked <- df |>
+    arrange(desc(proportion)) |>
+    mutate(rank = row_number())
+
+  sliced_df <- df_ranked |> slice_head(n = input_n)
+
+  coverage = round(sum(sliced_df$video_count)/sum(df$video_count) * 100, 2)
+
+  fit <- lm(log(proportion) ~ log(rank), data = df_ranked)
+
+  ggplot(sliced_df, aes(x = rank, y = proportion)) +
+    geom_point(color = "steelblue") +
+    geom_line(color = "steelblue") +
+    stat_function(
+      fun = function(x) exp(coef(fit)[1]) * x^(coef(fit)[2]),
+      color = "red",
+      linewidth = 1
+    ) +
+    scale_x_log10() +
+    scale_y_log10() +
+    labs(
+      title = paste0(input_title, " (Coverage = ", coverage,"%)"),
+      x = "Rank",
+      y = "Proportion (log scale)"
+    ) +
+    theme_minimal(base_size = 14)
 }
 
 # Helper function to filter tokens
@@ -124,7 +170,7 @@ nrow(object_counts)
 
 ## Main proportion plot
 Top 50 by default.
-```{r}
+```{r obj-with-frames, fig.width=20, fig.height=6}
 object_counts.bar(object_counts |> rename(object = cleaned_lemma), input_title="Proportion of Frames with Each Object")
 write.csv(object_counts, here("data/unconstrained_objects/vqa_object_counts.csv"))
 ```
@@ -134,7 +180,7 @@ object_counts.bar(object_counts |> rename(object = cleaned_lemma) |> filter(grep
 ```
 
 ## Types of toys
-```{r}
+```{r toys, fig.width=20, fig.height=6}
 toys <- object_counts |>
   filter(grepl("^(toy)", cleaned_lemma)) |>
   mutate(toy_name = ifelse(cleaned_lemma == "toy", cleaned_lemma, gsub("toy ", "", cleaned_lemma)))
@@ -169,23 +215,46 @@ ggplot(removed_adjectives |> mutate(removed_adj = as.character(removed_adj)), ae
 
 Some YOLOe cleaning
 ```{r}
-yoloe_objects <- yoloe_objects_raw |>
-  filter(!is.na(class_name)) |>
-  distinct(class_name, .keep_all=TRUE) |>
+yoloe_objects_129_comp <- yoloe_objects_129 |>
+  filter(!is.na(category)) |>
+  distinct(category, .keep_all=TRUE) |>
   mutate(
-    parsed = map(class_name, ~ spacy_parse(.x, lemma = TRUE, pos = TRUE)),
+    parsed = map(category, ~ spacy_parse(.x, lemma = TRUE, pos = TRUE)),
     parsed = map(parsed, ~ mutate(.x,
       lemma = if_else(token %in% non_lemma & lemma != token, token, lemma)
     )),
     class_name = map_chr(parsed, ~ paste(.x$lemma, collapse = " ")),
-    class_name = case_when(class_name == "teddybear" ~ "teddy bear",
-                          TRUE ~ class_name)
+    class_name = case_when(category == "teddybear" ~ "teddy bear",
+                          TRUE ~ category)
   ) |>
-  select(-parsed)
+  select(-parsed) 
+
+yoloe_objects_85_comp <- yoloe_objects_85 |>
+  filter(!is.na(category)) |>
+  distinct(category, .keep_all=TRUE) |>
+  mutate(
+    parsed = map(category, ~ spacy_parse(.x, lemma = TRUE, pos = TRUE)),
+    parsed = map(parsed, ~ mutate(.x,
+      lemma = if_else(token %in% non_lemma & lemma != token, token, lemma)
+    )),
+    class_name = map_chr(parsed, ~ paste(.x$lemma, collapse = " ")),
+    class_name = case_when(category == "teddybear" ~ "teddy bear",
+                          TRUE ~ category)
+  ) |>
+  select(-parsed) 
+
+yoloe_objects_all <- yoloe_objects_129_comp |>
+  mutate(
+    category = if_else(
+      class_name %in% yoloe_objects_85_comp$class_name,
+      "filtered",
+      "total"
+    )
+  )
 ```
 
 ## most important missing words
-```{r}
+```{r missing, fig.width=20, fig.height=6}
 non_yoloe_word_counts <- object_counts |>
   filter(!(cleaned_lemma %in% yoloe_objects$class_name)) 
 
@@ -205,8 +274,8 @@ object_counts.bar(non_yoloe_word_counts |> rename(object = cleaned_lemma) |> fil
 
 ## missing YOLOe words
 ```{r}
-yoloe_and_vqa <- object_counts |> inner_join(yoloe_objects |> distinct(class_name, .keep_all=TRUE) |> rename(yoloe_proportion = proportion), by=c("cleaned_lemma"="class_name"))
-yoloe_only_words <- yoloe_objects |> anti_join(yoloe_and_vqa, by=c("class_name"="cleaned_lemma")) |> rename(object=class_name)
+yoloe_and_vqa <- object_counts |> inner_join(yoloe_objects_all |> distinct(class_name, .keep_all=TRUE) |> rename(yoloe_proportion = proportion), by=c("cleaned_lemma"="class_name"))
+yoloe_only_words <- yoloe_objects_all |> anti_join(yoloe_and_vqa, by=c("class_name"="cleaned_lemma")) |> rename(object=class_name)
 object_counts.bar(yoloe_only_words, input_title = "Words in YOLOe but not VQA")
 ```
 Some of these are missing because of our lemmatization, for example 'block' vs 'blocks'
@@ -222,24 +291,86 @@ yoloe_and_vqa_labeled <- yoloe_and_vqa %>%
     log_yoloe = log(yoloe_proportion),
     resid = abs(residuals(model)),
     is_outlier = resid > quantile(resid, 0.85)
-  )
+  ) |>
+  mutate(category = ifelse(category == "filtered", "high-precision subset", category))
 
 # Plot
-ggplot(yoloe_and_vqa_labeled, aes(x = log_prop, y = log_yoloe)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
+ggplot(yoloe_and_vqa_labeled, aes(x = log_prop, y = log_yoloe, color = category)) +
+  geom_point(size = 5, alpha = 0.5) +
+  
+  # black line: all data
+  geom_smooth(
+    data = yoloe_and_vqa_labeled,
+    aes(x = log_prop, y = log_yoloe),
+    method = "lm",
+    se = FALSE,
+    color = "gray",
+    size = 1.2,
+    alpha=0.4,
+    inherit.aes = FALSE
+  ) +
+  
+  # blue line: high-precision subset only
+  geom_smooth(
+    data = subset(yoloe_and_vqa_labeled, category == "high-precision subset"),
+    aes(x = log_prop, y = log_yoloe),
+    method = "lm",
+    se = FALSE,
+    color = "#1f78b4",
+    size = 1.2,
+    alpha=0.4,
+    inherit.aes = FALSE
+  ) +
+  
   ggrepel::geom_label_repel(
     data = filter(yoloe_and_vqa_labeled, is_outlier),
-    size = 3,
-    aes(label=cleaned_lemma),
+    aes(label = cleaned_lemma, color = category),
+    size = 5,
     max.overlaps = 20,
     box.padding = 0.4,
-    point.padding = 0.3
+    point.padding = 0.3,
+    show.legend = FALSE
   ) +
-  ylab("YOLOe proportion") +
-  xlab("VQA proportion") +
-  labs(title=paste(nrow(yoloe_and_vqa_labeled), "objects")) +
-  ggpubr::stat_cor()
+  
+  scale_color_manual(values = c("high-precision subset" = "#1f78b4")) +
+  
+  guides(color = guide_legend(
+    override.aes = list(
+      alpha = 1,
+      linetype = 0,
+      shape = 16,
+      size = 5
+    )
+  )) +
+  
+  ylab("log(proportion) from automated pipeline") +
+  xlab("log(proportion) from video question-answering model") +
+  
+  labs(color = "Set") +
+  
+  theme_classic() +
+  theme(
+    axis.title = element_text(size = 15.5),
+    axis.text = element_text(size = 14),
+    legend.title = element_blank(),
+    legend.text = element_text(size = 14)
+  )
+
+ggsave(here("data/figures/vqa_comparison.png"))
+```
+
+
+```{r}
+df_ranked <- yoloe_and_vqa |>
+  filter(category == "filtered") |>
+  rename(object = cleaned_lemma) |>
+  arrange(desc(proportion)) |>
+  mutate(rank = row_number())
+
+fit <- lm(log(proportion) ~ log(rank), data = df_ranked)
+
+alpha <- -coef(fit)[2]
+alpha
 ```
 
 # Hierarchical clustering
@@ -317,8 +448,7 @@ summary_df <- annotated %>%
   group_by(min_distance) %>%
   summarise(
     total_objects = n(),
-    proportion = exp(log_prop),
-    total_coverage = sum(proportion),
+    total_coverage = sum(exp(log_prop)),
     avg_num_direct_children = mean(num_direct_children),
     .groups = "drop"
   )
@@ -340,6 +470,11 @@ ggplot(annotated, aes(x = min_distance, y = exp(log_prop))) +
   theme_minimal()
 
 ```
+Biggest WordNet misses
+```{r}
+object_counts.bar((all_objects |> anti_join(annotated) |> left_join(object_counts, by=c("object"="cleaned_lemma")) |> filter(!is.na(video_count))), input_title = "Words undetected by Wordnet", input_n=25)
+```
+
 Ancestor chain for processing
 ```{r}
 get_trimmed_path <- function(node, max_depth = 7) {
