@@ -1,0 +1,3 @@
+category_set,top_k,q_threshold_precision,abs_threshold_precision,n_excluded_q,n_excluded_abs,top1_raw,top1_weighted,top1_trimmed_q,top1_trimmed_abs,overlap_raw_vs_weighted_topk,overlap_raw_vs_trimmed_q_topk,overlap_raw_vs_trimmed_abs_topk
+valid85,10,0.64466,0.7,9,19,chair,chair,chair,chair,10,10,10
+valid129,10,0.3013,0.7,13,63,chair,chair,chair,chair,10,10,10

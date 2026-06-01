@@ -1,0 +1,965 @@
+{
+  "category_set": "valid85",
+  "exemplar_source": "sampled_csv_per_file_validated_clip_filter_list_npy",
+  "included_categories_txt": "<redacted_local_path>",
+  "n_categories": 85,
+  "n_unique_npy_paths": 7018,
+  "n_inclusion_categories": 85,
+  "n_categories_with_at_least_one_paired_npy": 85,
+  "precision_threshold": 0.6,
+  "clip_filter_list_path": "<redacted_local_path>",
+  "clip_filter_list_stats": {
+    "n_category_stem_pairs_in_clip_filter_list_for_eligible_cats": 3386077
+  },
+  "clip_embeddings_dir": "<redacted_local_path>",
+  "dinov3_embeddings_dir": "<redacted_local_path>",
+  "categories_alphabetical": [
+    "apple",
+    "arm",
+    "ball",
+    "balloon",
+    "basket",
+    "bed",
+    "bench",
+    "bird",
+    "blanket",
+    "book",
+    "bottle",
+    "bowl",
+    "box",
+    "bucket",
+    "butterfly",
+    "can",
+    "car",
+    "cat",
+    "chair",
+    "clock",
+    "closet",
+    "couch",
+    "cracker",
+    "crib",
+    "cup",
+    "dish",
+    "dog",
+    "doll",
+    "door",
+    "drawer",
+    "dress",
+    "ear",
+    "eye",
+    "face",
+    "finger",
+    "flower",
+    "foot",
+    "fork",
+    "glass",
+    "glasses",
+    "grass",
+    "hair",
+    "hand",
+    "hat",
+    "jacket",
+    "jar",
+    "jeans",
+    "lamp",
+    "mouth",
+    "napkin",
+    "necklace",
+    "nose",
+    "oven",
+    "pajamas",
+    "pants",
+    "paper",
+    "pillow",
+    "plant",
+    "plate",
+    "pony",
+    "purse",
+    "refrigerator",
+    "rock",
+    "scarf",
+    "shirt",
+    "shoe",
+    "shorts",
+    "shower",
+    "sink",
+    "slide",
+    "sock",
+    "stick",
+    "stroller",
+    "sweater",
+    "swing",
+    "table",
+    "toe",
+    "tooth",
+    "towel",
+    "toy",
+    "tray",
+    "tree",
+    "vacuum",
+    "watch",
+    "window"
+  ],
+  "diagnostics_clip": {
+    "n_paths": {
+      "apple": {
+        "total": 64,
+        "unique_paths": 64,
+        "found": 64
+      },
+      "arm": {
+        "total": 91,
+        "unique_paths": 91,
+        "found": 90
+      },
+      "ball": {
+        "total": 86,
+        "unique_paths": 86,
+        "found": 85
+      },
+      "balloon": {
+        "total": 74,
+        "unique_paths": 74,
+        "found": 73
+      },
+      "basket": {
+        "total": 91,
+        "unique_paths": 91,
+        "found": 91
+      },
+      "bed": {
+        "total": 74,
+        "unique_paths": 74,
+        "found": 74
+      },
+      "bench": {
+        "total": 64,
+        "unique_paths": 64,
+        "found": 64
+      },
+      "bird": {
+        "total": 63,
+        "unique_paths": 63,
+        "found": 62
+      },
+      "blanket": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 92
+      },
+      "book": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 93
+      },
+      "bottle": {
+        "total": 85,
+        "unique_paths": 85,
+        "found": 84
+      },
+      "bowl": {
+        "total": 88,
+        "unique_paths": 88,
+        "found": 87
+      },
+      "box": {
+        "total": 86,
+        "unique_paths": 86,
+        "found": 86
+      },
+      "bucket": {
+        "total": 71,
+        "unique_paths": 71,
+        "found": 71
+      },
+      "butterfly": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 92
+      },
+      "can": {
+        "total": 61,
+        "unique_paths": 61,
+        "found": 61
+      },
+      "car": {
+        "total": 69,
+        "unique_paths": 69,
+        "found": 69
+      },
+      "cat": {
+        "total": 68,
+        "unique_paths": 68,
+        "found": 68
+      },
+      "chair": {
+        "total": 95,
+        "unique_paths": 95,
+        "found": 95
+      },
+      "clock": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 91
+      },
+      "closet": {
+        "total": 81,
+        "unique_paths": 81,
+        "found": 81
+      },
+      "couch": {
+        "total": 98,
+        "unique_paths": 98,
+        "found": 98
+      },
+      "cracker": {
+        "total": 73,
+        "unique_paths": 73,
+        "found": 73
+      },
+      "crib": {
+        "total": 60,
+        "unique_paths": 60,
+        "found": 59
+      },
+      "cup": {
+        "total": 83,
+        "unique_paths": 83,
+        "found": 83
+      },
+      "dish": {
+        "total": 90,
+        "unique_paths": 90,
+        "found": 88
+      },
+      "dog": {
+        "total": 71,
+        "unique_paths": 71,
+        "found": 71
+      },
+      "doll": {
+        "total": 89,
+        "unique_paths": 89,
+        "found": 89
+      },
+      "door": {
+        "total": 95,
+        "unique_paths": 95,
+        "found": 95
+      },
+      "drawer": {
+        "total": 87,
+        "unique_paths": 87,
+        "found": 87
+      },
+      "dress": {
+        "total": 97,
+        "unique_paths": 97,
+        "found": 95
+      },
+      "ear": {
+        "total": 78,
+        "unique_paths": 78,
+        "found": 78
+      },
+      "eye": {
+        "total": 66,
+        "unique_paths": 66,
+        "found": 65
+      },
+      "face": {
+        "total": 91,
+        "unique_paths": 91,
+        "found": 91
+      },
+      "finger": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 93
+      },
+      "flower": {
+        "total": 93,
+        "unique_paths": 93,
+        "found": 93
+      },
+      "foot": {
+        "total": 93,
+        "unique_paths": 93,
+        "found": 92
+      },
+      "fork": {
+        "total": 63,
+        "unique_paths": 63,
+        "found": 63
+      },
+      "glass": {
+        "total": 80,
+        "unique_paths": 80,
+        "found": 78
+      },
+      "glasses": {
+        "total": 96,
+        "unique_paths": 96,
+        "found": 96
+      },
+      "grass": {
+        "total": 100,
+        "unique_paths": 100,
+        "found": 100
+      },
+      "hair": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 92
+      },
+      "hand": {
+        "total": 96,
+        "unique_paths": 96,
+        "found": 96
+      },
+      "hat": {
+        "total": 78,
+        "unique_paths": 78,
+        "found": 78
+      },
+      "jacket": {
+        "total": 76,
+        "unique_paths": 76,
+        "found": 75
+      },
+      "jar": {
+        "total": 79,
+        "unique_paths": 79,
+        "found": 78
+      },
+      "jeans": {
+        "total": 84,
+        "unique_paths": 84,
+        "found": 84
+      },
+      "lamp": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 91
+      },
+      "mouth": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 92
+      },
+      "napkin": {
+        "total": 77,
+        "unique_paths": 77,
+        "found": 77
+      },
+      "necklace": {
+        "total": 85,
+        "unique_paths": 85,
+        "found": 85
+      },
+      "nose": {
+        "total": 64,
+        "unique_paths": 64,
+        "found": 64
+      },
+      "oven": {
+        "total": 83,
+        "unique_paths": 83,
+        "found": 83
+      },
+      "pajamas": {
+        "total": 86,
+        "unique_paths": 86,
+        "found": 86
+      },
+      "pants": {
+        "total": 90,
+        "unique_paths": 90,
+        "found": 90
+      },
+      "paper": {
+        "total": 99,
+        "unique_paths": 99,
+        "found": 99
+      },
+      "pillow": {
+        "total": 85,
+        "unique_paths": 85,
+        "found": 85
+      },
+      "plant": {
+        "total": 99,
+        "unique_paths": 99,
+        "found": 99
+      },
+      "plate": {
+        "total": 93,
+        "unique_paths": 93,
+        "found": 93
+      },
+      "pony": {
+        "total": 63,
+        "unique_paths": 63,
+        "found": 63
+      },
+      "purse": {
+        "total": 76,
+        "unique_paths": 76,
+        "found": 76
+      },
+      "refrigerator": {
+        "total": 65,
+        "unique_paths": 65,
+        "found": 65
+      },
+      "rock": {
+        "total": 71,
+        "unique_paths": 71,
+        "found": 71
+      },
+      "scarf": {
+        "total": 73,
+        "unique_paths": 73,
+        "found": 73
+      },
+      "shirt": {
+        "total": 91,
+        "unique_paths": 91,
+        "found": 89
+      },
+      "shoe": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 94
+      },
+      "shorts": {
+        "total": 95,
+        "unique_paths": 95,
+        "found": 95
+      },
+      "shower": {
+        "total": 77,
+        "unique_paths": 77,
+        "found": 76
+      },
+      "sink": {
+        "total": 64,
+        "unique_paths": 64,
+        "found": 64
+      },
+      "slide": {
+        "total": 57,
+        "unique_paths": 57,
+        "found": 57
+      },
+      "sock": {
+        "total": 83,
+        "unique_paths": 83,
+        "found": 81
+      },
+      "stick": {
+        "total": 73,
+        "unique_paths": 73,
+        "found": 73
+      },
+      "stroller": {
+        "total": 88,
+        "unique_paths": 88,
+        "found": 87
+      },
+      "sweater": {
+        "total": 97,
+        "unique_paths": 97,
+        "found": 97
+      },
+      "swing": {
+        "total": 65,
+        "unique_paths": 65,
+        "found": 65
+      },
+      "table": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 94
+      },
+      "toe": {
+        "total": 63,
+        "unique_paths": 63,
+        "found": 61
+      },
+      "tooth": {
+        "total": 79,
+        "unique_paths": 79,
+        "found": 79
+      },
+      "towel": {
+        "total": 83,
+        "unique_paths": 83,
+        "found": 83
+      },
+      "toy": {
+        "total": 100,
+        "unique_paths": 100,
+        "found": 100
+      },
+      "tray": {
+        "total": 80,
+        "unique_paths": 80,
+        "found": 80
+      },
+      "tree": {
+        "total": 99,
+        "unique_paths": 99,
+        "found": 99
+      },
+      "vacuum": {
+        "total": 62,
+        "unique_paths": 62,
+        "found": 60
+      },
+      "watch": {
+        "total": 97,
+        "unique_paths": 97,
+        "found": 95
+      },
+      "window": {
+        "total": 99,
+        "unique_paths": 99,
+        "found": 98
+      }
+    },
+    "skipped_categories": []
+  },
+  "diagnostics_dinov3": {
+    "n_paths": {
+      "apple": {
+        "total": 64,
+        "unique_paths": 64,
+        "found": 64
+      },
+      "arm": {
+        "total": 91,
+        "unique_paths": 91,
+        "found": 90
+      },
+      "ball": {
+        "total": 86,
+        "unique_paths": 86,
+        "found": 85
+      },
+      "balloon": {
+        "total": 74,
+        "unique_paths": 74,
+        "found": 73
+      },
+      "basket": {
+        "total": 91,
+        "unique_paths": 91,
+        "found": 91
+      },
+      "bed": {
+        "total": 74,
+        "unique_paths": 74,
+        "found": 74
+      },
+      "bench": {
+        "total": 64,
+        "unique_paths": 64,
+        "found": 64
+      },
+      "bird": {
+        "total": 63,
+        "unique_paths": 63,
+        "found": 62
+      },
+      "blanket": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 92
+      },
+      "book": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 93
+      },
+      "bottle": {
+        "total": 85,
+        "unique_paths": 85,
+        "found": 84
+      },
+      "bowl": {
+        "total": 88,
+        "unique_paths": 88,
+        "found": 87
+      },
+      "box": {
+        "total": 86,
+        "unique_paths": 86,
+        "found": 86
+      },
+      "bucket": {
+        "total": 71,
+        "unique_paths": 71,
+        "found": 71
+      },
+      "butterfly": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 92
+      },
+      "can": {
+        "total": 61,
+        "unique_paths": 61,
+        "found": 61
+      },
+      "car": {
+        "total": 69,
+        "unique_paths": 69,
+        "found": 69
+      },
+      "cat": {
+        "total": 68,
+        "unique_paths": 68,
+        "found": 68
+      },
+      "chair": {
+        "total": 95,
+        "unique_paths": 95,
+        "found": 95
+      },
+      "clock": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 91
+      },
+      "closet": {
+        "total": 81,
+        "unique_paths": 81,
+        "found": 81
+      },
+      "couch": {
+        "total": 98,
+        "unique_paths": 98,
+        "found": 98
+      },
+      "cracker": {
+        "total": 73,
+        "unique_paths": 73,
+        "found": 73
+      },
+      "crib": {
+        "total": 60,
+        "unique_paths": 60,
+        "found": 59
+      },
+      "cup": {
+        "total": 83,
+        "unique_paths": 83,
+        "found": 83
+      },
+      "dish": {
+        "total": 90,
+        "unique_paths": 90,
+        "found": 88
+      },
+      "dog": {
+        "total": 71,
+        "unique_paths": 71,
+        "found": 71
+      },
+      "doll": {
+        "total": 89,
+        "unique_paths": 89,
+        "found": 89
+      },
+      "door": {
+        "total": 95,
+        "unique_paths": 95,
+        "found": 95
+      },
+      "drawer": {
+        "total": 87,
+        "unique_paths": 87,
+        "found": 87
+      },
+      "dress": {
+        "total": 97,
+        "unique_paths": 97,
+        "found": 95
+      },
+      "ear": {
+        "total": 78,
+        "unique_paths": 78,
+        "found": 78
+      },
+      "eye": {
+        "total": 66,
+        "unique_paths": 66,
+        "found": 65
+      },
+      "face": {
+        "total": 91,
+        "unique_paths": 91,
+        "found": 91
+      },
+      "finger": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 93
+      },
+      "flower": {
+        "total": 93,
+        "unique_paths": 93,
+        "found": 93
+      },
+      "foot": {
+        "total": 93,
+        "unique_paths": 93,
+        "found": 92
+      },
+      "fork": {
+        "total": 63,
+        "unique_paths": 63,
+        "found": 63
+      },
+      "glass": {
+        "total": 80,
+        "unique_paths": 80,
+        "found": 78
+      },
+      "glasses": {
+        "total": 96,
+        "unique_paths": 96,
+        "found": 96
+      },
+      "grass": {
+        "total": 100,
+        "unique_paths": 100,
+        "found": 100
+      },
+      "hair": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 92
+      },
+      "hand": {
+        "total": 96,
+        "unique_paths": 96,
+        "found": 96
+      },
+      "hat": {
+        "total": 78,
+        "unique_paths": 78,
+        "found": 78
+      },
+      "jacket": {
+        "total": 76,
+        "unique_paths": 76,
+        "found": 75
+      },
+      "jar": {
+        "total": 79,
+        "unique_paths": 79,
+        "found": 78
+      },
+      "jeans": {
+        "total": 84,
+        "unique_paths": 84,
+        "found": 84
+      },
+      "lamp": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 91
+      },
+      "mouth": {
+        "total": 92,
+        "unique_paths": 92,
+        "found": 92
+      },
+      "napkin": {
+        "total": 77,
+        "unique_paths": 77,
+        "found": 77
+      },
+      "necklace": {
+        "total": 85,
+        "unique_paths": 85,
+        "found": 85
+      },
+      "nose": {
+        "total": 64,
+        "unique_paths": 64,
+        "found": 64
+      },
+      "oven": {
+        "total": 83,
+        "unique_paths": 83,
+        "found": 83
+      },
+      "pajamas": {
+        "total": 86,
+        "unique_paths": 86,
+        "found": 86
+      },
+      "pants": {
+        "total": 90,
+        "unique_paths": 90,
+        "found": 90
+      },
+      "paper": {
+        "total": 99,
+        "unique_paths": 99,
+        "found": 99
+      },
+      "pillow": {
+        "total": 85,
+        "unique_paths": 85,
+        "found": 85
+      },
+      "plant": {
+        "total": 99,
+        "unique_paths": 99,
+        "found": 99
+      },
+      "plate": {
+        "total": 93,
+        "unique_paths": 93,
+        "found": 93
+      },
+      "pony": {
+        "total": 63,
+        "unique_paths": 63,
+        "found": 63
+      },
+      "purse": {
+        "total": 76,
+        "unique_paths": 76,
+        "found": 76
+      },
+      "refrigerator": {
+        "total": 65,
+        "unique_paths": 65,
+        "found": 65
+      },
+      "rock": {
+        "total": 71,
+        "unique_paths": 71,
+        "found": 71
+      },
+      "scarf": {
+        "total": 73,
+        "unique_paths": 73,
+        "found": 73
+      },
+      "shirt": {
+        "total": 91,
+        "unique_paths": 91,
+        "found": 89
+      },
+      "shoe": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 94
+      },
+      "shorts": {
+        "total": 95,
+        "unique_paths": 95,
+        "found": 95
+      },
+      "shower": {
+        "total": 77,
+        "unique_paths": 77,
+        "found": 76
+      },
+      "sink": {
+        "total": 64,
+        "unique_paths": 64,
+        "found": 64
+      },
+      "slide": {
+        "total": 57,
+        "unique_paths": 57,
+        "found": 57
+      },
+      "sock": {
+        "total": 83,
+        "unique_paths": 83,
+        "found": 81
+      },
+      "stick": {
+        "total": 73,
+        "unique_paths": 73,
+        "found": 73
+      },
+      "stroller": {
+        "total": 88,
+        "unique_paths": 88,
+        "found": 87
+      },
+      "sweater": {
+        "total": 97,
+        "unique_paths": 97,
+        "found": 97
+      },
+      "swing": {
+        "total": 65,
+        "unique_paths": 65,
+        "found": 65
+      },
+      "table": {
+        "total": 94,
+        "unique_paths": 94,
+        "found": 94
+      },
+      "toe": {
+        "total": 63,
+        "unique_paths": 63,
+        "found": 61
+      },
+      "tooth": {
+        "total": 79,
+        "unique_paths": 79,
+        "found": 79
+      },
+      "towel": {
+        "total": 83,
+        "unique_paths": 83,
+        "found": 83
+      },
+      "toy": {
+        "total": 100,
+        "unique_paths": 100,
+        "found": 100
+      },
+      "tray": {
+        "total": 80,
+        "unique_paths": 80,
+        "found": 80
+      },
+      "tree": {
+        "total": 99,
+        "unique_paths": 99,
+        "found": 99
+      },
+      "vacuum": {
+        "total": 62,
+        "unique_paths": 62,
+        "found": 60
+      },
+      "watch": {
+        "total": 97,
+        "unique_paths": 97,
+        "found": 95
+      },
+      "window": {
+        "total": 99,
+        "unique_paths": 99,
+        "found": 98
+      }
+    },
+    "skipped_categories": []
+  },
+  "n_missing_paths_reported_clip": 36,
+  "n_missing_paths_reported_dino": 36
+}

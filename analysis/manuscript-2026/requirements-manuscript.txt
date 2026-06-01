@@ -1,0 +1,13 @@
+# Python dependencies for analysis/manuscript-2026 notebooks and scripts.
+# Install in a conda/venv used for Jupyter (e.g. vislearnlabpy).
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+matplotlib>=3.7
+seaborn>=0.13
+tqdm>=4.65
+jupyter>=1.0
+ipykernel>=6.0
+
+# Optional: UMAP figure (plot_things_dinov3_vs_babydinov3_umap.py)
+umap-learn>=0.5

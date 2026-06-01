@@ -1,0 +1,24 @@
+Additional BV-vs-THINGS baseline summary (run=valid129)
+Threshold token: 0.27
+N permutations: 5000
+Seed: 2127
+
+[clip] things_label_shuffle
+  observed_spearman_r: 0.553607
+  null_mean_spearman_r: -0.000004
+  null_sd_spearman_r: 0.011072
+  empirical_p_two_sided: 0.00019996
+  empirical_z: 50.001409
+
+[dinov3] things_label_shuffle
+  observed_spearman_r: 0.401780
+  null_mean_spearman_r: 0.000009
+  null_sd_spearman_r: 0.010964
+  empirical_p_two_sided: 0.00019996
+  empirical_z: 36.644702
+
+Histogram figures:
+- clip: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_additional_nulls_clip_filtered-0.27_valid129.png
+- clip: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_additional_nulls_clip_filtered-0.27_valid129.pdf
+- dinov3: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_additional_nulls_dinov3_filtered-0.27_valid129.png
+- dinov3: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_additional_nulls_dinov3_filtered-0.27_valid129.pdf

@@ -15,13 +15,45 @@ yoloe/pretrain
 *.udpipe
 *_trans*.csv
 **/__pycache__/
-analysis/preprint-2026/results_preprint_autofilled_backup.tex
-analysis/preprint-2026/results_preprint_numbers_autofill.txt
-analysis/preprint-2026/results_preprint_numbers_table.csv
-analysis/preprint-2026/results_preprint.tex
-analysis/ccn-2026/
-analysis/ccn-2026/plotB_tsne_distance_to_centroid_outputs_20260401/*.csv
+analysis/manuscript-2026/BV_Objects_Manuscript_Submission*.pdf
+analysis/manuscript-2026/results_preprint_autofilled_backup.tex
+analysis/manuscript-2026/results_preprint_numbers_autofill.txt
+analysis/manuscript-2026/results_preprint_numbers_table.csv
+analysis/manuscript-2026/results_preprint.tex
+# CCN 2026 — source + docs in git; large / redundant outputs local only
+analysis/ccn-2026/ccn_2026_abstract.pdf
+analysis/ccn-2026/old_plots/
+analysis/ccn-2026/archive/
+analysis/ccn-2026/plotB_tsne_distance_to_centroid_outputs*/
+analysis/ccn-2026/bv_to_things_centroid_*_tsne_by_category/
+analysis/ccn-2026/plotA_category_montages_low_to_high/
+analysis/ccn-2026/plotE_invalid_exemplar_montages_per_category/
+analysis/ccn-2026/plot_things_and_bv_comparisons_outputs*/
+analysis/ccn-2026/tsne_datapage/
+analysis/ccn-2026/plotC_knn_diversity_outputs/**/*.png
+analysis/ccn-2026/plotC_knn_diversity_outputs/**/*.pdf
+analysis/ccn-2026/plotC_knn_diversity_outputs/original_embeddings_rerun/
+analysis/ccn-2026/plotC_knn_diversity_outputs/zscore_rerun/
+analysis/ccn-2026/plotC_knn_diversity_outputs/new_things_embeddings_valid85_20260428/
+analysis/ccn-2026/combined_plot*.png
 
-analysis/ccn-2026/
-
-analysis/preprint-2026/results_*
+# Manuscript 2026 — submission PDF, figures, logs, Tier-B embeddings, exploratory images
+analysis/manuscript-2026/logs/
+analysis/manuscript-2026/exemplar_set_embeddings/
+analysis/manuscript-2026/main_results_*/figures/
+analysis/manuscript-2026/supplemental_results_*/figures/
+analysis/manuscript-2026/not_in_manuscript/**/*.png
+analysis/manuscript-2026/not_in_manuscript/**/*.pdf
+analysis/manuscript-2026/not_in_manuscript/**/*.svg
+analysis/manuscript-2026/not_in_manuscript/clutter_proxy_exploration/results/
+# Exploratory t-SNE/UMAP figures (keep tsne_cdi_coordinates.csv etc.)
+analysis/manuscript-2026/tsne_cdi_results*/*.png
+analysis/manuscript-2026/tsne_cdi_results*/*.pdf
+analysis/manuscript-2026/umap_cdi_results*/*.png
+analysis/manuscript-2026/umap_cdi_results*/*.pdf
+analysis/manuscript-2026/**/tsne_cdi_results*/*.png
+analysis/manuscript-2026/**/tsne_cdi_results*/*.pdf
+analysis/manuscript-2026/**/umap_cdi_results*/*.png
+analysis/manuscript-2026/**/umap_cdi_results*/*.pdf
+analysis/manuscript-2026/results_*
+analysis/manuscript-2026/paths.local.env

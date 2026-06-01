@@ -1,0 +1,11 @@
+category,trimmed_abs_count,precision,cdi_semantic
+chair,262155,0.9133,furniture_rooms
+lamp,200703,0.7833,household
+table,164742,0.8833,furniture_rooms
+couch,162456,0.9267,furniture_rooms
+pillow,143127,0.82,household
+cup,105120,0.8,household
+toy,103218,0.9833,toys
+bed,85036,0.7133,furniture_rooms
+bowl,84414,0.8333,household
+plate,73273,0.92,household

@@ -1,0 +1,34 @@
+{
+  "categories": [
+    "car",
+    "cat",
+    "cup",
+    "dog",
+    "plate",
+    "stroller"
+  ],
+  "strata": [
+    "all",
+    "kitchen_like",
+    "living_room",
+    "outside",
+    "eating",
+    "playing"
+  ],
+  "n_geom_rows": 1172,
+  "n_edges": 862,
+  "domains": {
+    "household": [
+      "plate",
+      "cup"
+    ],
+    "animals": [
+      "dog",
+      "cat"
+    ],
+    "vehicles": [
+      "stroller",
+      "car"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+THINGS UMAP comparison (valid129)
+n_categories: 129
+UMAP: seed=42, n_neighbors=15, min_dist=0.25, metric=cosine
+Inputs: things_dinov3_exemplar_avg_zscore_within_valid129.csv vs things_babydinov3_exemplar_avg_zscore_within_valid129.csv
+RDM Spearman (DINOv3 vs BabyDINOv3): 0.411000
+kNN set agreement (k=5): 0.0310
+kNN set agreement (k=10): 0.0000
+
+Interpretation note: separate UMAP fits per backbone (geometry change is visible).
+CDI colors are superordinate bins from long_tailed_dist_prop CSV.

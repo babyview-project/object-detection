@@ -1,0 +1,80 @@
+BV vs THINGS RDM comparison summary (v2, run=valid129)
+
+Included categories file: /home/j7yang/babyview-projects/vss2026/object-detection/data/included_categories_valid129.txt
+CDI semantic mapping: /home/j7yang/babyview-projects/vss2026/object-detection/data/long_tailed_dist_prop_included_categories_valid129.csv
+Threshold: 0.27
+N_THINGS_CLUSTERS: 9
+combined_2x2_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_2x2_bv_first_clip_dinov3_filtered-0.27_valid129.png
+combined_2x2_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_2x2_bv_first_clip_dinov3_filtered-0.27_valid129.pdf
+
+Model: clip | Ordering: bv_first_semantic
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.668613 (p=0.000e+00)
+  spearman_r: 0.553607 (p=0.000e+00)
+  kendall_r: 0.393597 (p=0.000e+00)
+  mae: 0.120356
+  rmse: 0.152891
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_clip_bv_semantic_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_clip_bv_semantic_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/results/bv_things_rdm_order_bv_semantic_clip_filtered-0.27_valid129.csv
+
+Model: clip | Ordering: things_first_cluster
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.668613 (p=0.000e+00)
+  spearman_r: 0.553607 (p=0.000e+00)
+  kendall_r: 0.393597 (p=0.000e+00)
+  mae: 0.120356
+  rmse: 0.152891
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_clip_things_cluster_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_clip_things_cluster_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/results/bv_things_rdm_order_things_cluster_clip_filtered-0.27_valid129.csv
+
+Model: dinov3 | Ordering: bv_first_semantic
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.549003 (p=0.000e+00)
+  spearman_r: 0.401780 (p=0.000e+00)
+  kendall_r: 0.277181 (p=0.000e+00)
+  mae: 0.100230
+  rmse: 0.134689
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_dinov3_bv_semantic_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_dinov3_bv_semantic_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/results/bv_things_rdm_order_bv_semantic_dinov3_filtered-0.27_valid129.csv
+
+Model: dinov3 | Ordering: things_first_cluster
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.549003 (p=0.000e+00)
+  spearman_r: 0.401780 (p=0.000e+00)
+  kendall_r: 0.277181 (p=0.000e+00)
+  mae: 0.100230
+  rmse: 0.134689
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_dinov3_things_cluster_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_dinov3_things_cluster_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/results/bv_things_rdm_order_things_cluster_dinov3_filtered-0.27_valid129.csv
+
+Model: babydinov3 | Ordering: bv_first_semantic
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.585087 (p=0.000e+00)
+  spearman_r: 0.513841 (p=0.000e+00)
+  kendall_r: 0.360197 (p=0.000e+00)
+  mae: 0.127536
+  rmse: 0.162444
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_babydinov3_bv_semantic_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_babydinov3_bv_semantic_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/results/bv_things_rdm_order_bv_semantic_babydinov3_filtered-0.27_valid129.csv
+
+Model: babydinov3 | Ordering: things_first_cluster
+  n_categories: 129
+  n_pairs: 8256
+  pearson_r: 0.585087 (p=0.000e+00)
+  spearman_r: 0.513841 (p=0.000e+00)
+  kendall_r: 0.360197 (p=0.000e+00)
+  mae: 0.127536
+  rmse: 0.162444
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_babydinov3_things_cluster_lowertri_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/figures/bv_things_rdm_comparison_babydinov3_things_cluster_lowertri_filtered-0.pdf
+  order_csv: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/main_results_valid129s_04302026/results/bv_things_rdm_order_things_cluster_babydinov3_filtered-0.27_valid129.csv
