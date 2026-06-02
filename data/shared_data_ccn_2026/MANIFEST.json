@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-06-02T06:15:04.185219+00:00",
+  "description": "CCN 2026 public-shareable intermediate tables exported from this repository. This bundle contains only Tier A category-level aggregates (no per-exemplar subject_id/stem fields).",
+  "notes": [
+    "Do not redistribute Plot A/B/C images, per-exemplar CSVs, or thumbnails.",
+    "Per-exemplar tables contain subject/file-stem-like identifiers and are excluded."
+  ],
+  "files": [
+    "README.md",
+    "inputs/included_categories_valid129.txt",
+    "inputs/included_categories_valid85.txt",
+    "inputs/per_class_validation_data.csv",
+    "plotB_tsne_distance_to_centroid_outputs_20260402/bv-to-bv-centroid_distance_clip_summary.csv",
+    "plotB_tsne_distance_to_centroid_outputs_20260402/bv-to-bv-centroid_distance_clip_vs_dinov3_comparison.csv",
+    "plotB_tsne_distance_to_centroid_outputs_20260402/bv-to-bv-centroid_distance_dinov3_summary.csv",
+    "plotC_knn_diversity_outputs/bv_within_category_knn_clip_k5_summary.csv",
+    "plotC_knn_diversity_outputs/bv_within_category_knn_clip_vs_dinov3_k5_comparison.csv",
+    "plotC_knn_diversity_outputs/bv_within_category_knn_dinov3_k5_summary.csv",
+    "plotC_knn_diversity_outputs/ccn2026_local_global_extreme_categories_clip_dino.csv",
+    "plotC_knn_diversity_outputs/ccn2026_local_global_extreme_categories_things_clip_dino.csv",
+    "plotC_knn_diversity_outputs/ccn2026_local_global_overlap_categories_used_for_tsne_2x2.csv",
+    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/bv_clip_local_global_k5_valid129.csv",
+    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/bv_dinov3_local_global_k5_valid129.csv",
+    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_clip_local_global_k5_valid129.csv",
+    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_dinov3_local_global_k5_valid129.csv",
+    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_vs_bv_clip_local_global_k5_valid129.csv",
+    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_vs_bv_dinov3_local_global_k5_valid129.csv",
+    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_vs_bv_metric_summary_k5_valid129.csv",
+    "plotC_knn_diversity_outputs/things_image_vs_embedding_counts.csv"
+  ]
+}

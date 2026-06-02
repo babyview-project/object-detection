@@ -8,20 +8,33 @@ Paths (per-exemplar):
 """
 from pathlib import Path
 from collections import defaultdict
+import os
 import numpy as np
 
 # CLIP filter threshold (align with BV: 0.27); used for THINGS CLIP .docs path
 FILTER_THRESHOLD = 0.27
 
-# Default paths (per-image exemplars, not averaged)
-THINGS_DINOV3_DIR = Path("/ccn2/dataset/babyview/outputs_20250312/image_embeddings/things_bv_overlapping_categories_corrected/facebook_dinov3-vitb16-pretrain-lvd1689m")
-THINGS_CLIP_DOCS = Path(f"/ccn2/dataset/babyview/outputs_20250312/things_bv_overlapping_categories_corrected/embeddings/image_embeddings/clip_image_embeddings_doc_normalized_filtered-by-clip-{FILTER_THRESHOLD}.docs")
+def _env_path(name, fallback=None):
+    raw = os.getenv(name, "").strip()
+    if raw:
+        return Path(raw).expanduser()
+    if fallback is None:
+        return None
+    return Path(fallback)
+
+
+# Paths are environment-driven for public portability.
+# Set in analysis/ccn-2026/paths.example.env
+THINGS_DINOV3_DIR = _env_path("THINGS_DINOV3_DIR", "SET_THINGS_DINOV3_DIR")
+THINGS_CLIP_DOCS = _env_path("THINGS_CLIP_DOCS", f"SET_THINGS_CLIP_DOCS_FILTER_{FILTER_THRESHOLD}")
 
 # Prefer newly generated THINGS CLIP embeddings, then fall back to legacy location.
 THINGS_CLIP_NPY_CANDIDATES = [
-    Path("/ccn2/dataset/babyview/outputs_20250312/things_image_embeddings/clip_embeddings"),
-    Path("/ccn2/dataset/babyview/outputs_20250312/things_bv_overlapping_categories_corrected/embeddings/image_embeddings/clip_image_embeddings_npy_by_category"),
+    _env_path("THINGS_CLIP_NPY_CANDIDATE_1"),
+    _env_path("THINGS_CLIP_NPY_CANDIDATE_2"),
+    Path("SET_THINGS_CLIP_NPY_DIR"),
 ]
+THINGS_CLIP_NPY_CANDIDATES = [p for p in THINGS_CLIP_NPY_CANDIDATES if p is not None]
 THINGS_CLIP_NPY_DIR = next((p for p in THINGS_CLIP_NPY_CANDIDATES if p.exists()), THINGS_CLIP_NPY_CANDIDATES[0])
 
 

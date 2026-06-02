@@ -74,10 +74,11 @@ Older or duplicate runs live under [`old_plots/`](old_plots/) and [`archive/`](a
 
 - Python 3.10+ with: `numpy`, `pandas`, `matplotlib`, `scikit-learn`, `scipy`, `PIL`, `tqdm`
 - Repo data: `data/included_categories.txt`, `annotation/*.csv`
-- **Cluster paths** for embeddings and crops (set in each notebook’s Parameters cell), e.g.:
-  - BV crops: `/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_all_cropped_by_class`
-  - BV CLIP: `.../yoloe_cdi_embeddings/clip_embeddings_new`
-  - THINGS loaders: [`load_things_embeddings.py`](load_things_embeddings.py) defaults under `/ccn2/dataset/babyview/...`
+- Environment-based paths for embeddings/crops (set via env vars; see [`paths.example.env`](paths.example.env)):
+  - `BV_CROPS_BASE`
+  - `BV_EMBEDDINGS_BASE`
+  - `BV_CLIP_EMBEDDINGS_DIR`, `BV_DINOV3_EMBEDDINGS_DIR`
+  - `THINGS_DINOV3_DIR`, `THINGS_CLIP_DOCS`, `THINGS_CLIP_NPY_CANDIDATE_{1,2}`
 
 ## Conventions
 
@@ -88,3 +89,13 @@ Older or duplicate runs live under [`old_plots/`](old_plots/) and [`archive/`](a
 ## Git / storage
 
 Large generated assets are listed in the repo [`.gitignore`](../../.gitignore). Source notebooks, `.py` helpers, and this documentation are intended to be versioned; regenerate figures locally after clone.
+
+## Reproducibility
+
+See [`REPRODUCTION.md`](REPRODUCTION.md) for what can be rerun end-to-end vs what is
+verifiable from shareable category-level CSVs.
+
+To export a safe public subset (no per-exemplar `subject_id`/`stem`, no images), run:
+```bash
+python analysis/ccn-2026/scripts/build_shared_public_data_ccn.py
+```

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import argparse
+import os
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
@@ -23,7 +24,9 @@ from load_things_embeddings import (
 )
 
 FILTER_THRESHOLD = 0.27
-GROUPED_EMBEDDINGS_BASE = Path("/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings")
+GROUPED_EMBEDDINGS_BASE = Path(
+    os.getenv("BV_EMBEDDINGS_BASE", "SET_BV_EMBEDDINGS_BASE")
+).expanduser()
 GROUPED_EMBEDDINGS_DIRS = {
     "clip": GROUPED_EMBEDDINGS_BASE / f"clip_embeddings_grouped_by_age-mo_filtered-{FILTER_THRESHOLD}_normalized",
     "dinov3": GROUPED_EMBEDDINGS_BASE / f"dinov3_embeddings_grouped_by_age-mo_filtered-{FILTER_THRESHOLD}_normalized",

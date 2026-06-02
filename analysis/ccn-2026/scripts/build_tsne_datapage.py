@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import shutil
 from pathlib import Path
@@ -24,10 +25,12 @@ DEFAULT_PER_EXEMPLAR_CSV = (
     / "plotB_tsne_distance_to_centroid_outputs_20260401"
     / "bv_to_things_centroid_clip_per_exemplar.csv"
 )
-DEFAULT_CROPPED_DIR = Path("/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_all_cropped_by_class")
+DEFAULT_CROPPED_DIR = Path(
+    os.getenv("BV_CROPS_BASE", "SET_BV_CROPS_BASE")
+).expanduser()
 DEFAULT_EMBEDDINGS_DIR = Path(
-    "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/clip_embeddings_new"
-)
+    os.getenv("BV_CLIP_EMBEDDINGS_DIR", "SET_BV_CLIP_EMBEDDINGS_DIR")
+).expanduser()
 
 
 def find_crop_file(cropped_root: Path, category: str, stem: str) -> Path | None:
