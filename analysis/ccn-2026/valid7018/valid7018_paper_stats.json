@@ -374,8 +374,8 @@
         "model": "clip",
         "frequency_column": "proportion",
         "dispersion_column": "clip_global_dispersion",
-        "spearman_rho": 0.1823529411764706,
-        "p_value": 0.09484910163673936,
+        "spearman_rho": 0.18022278678913425,
+        "p_value": 0.09883766033901735,
         "n_categories": 85
       },
       "dinov3": {
@@ -387,8 +387,8 @@
         "model": "dinov3",
         "frequency_column": "proportion",
         "dispersion_column": "dinov3_global_dispersion",
-        "spearman_rho": 0.2654094195817862,
-        "p_value": 0.01409146585812018,
+        "spearman_rho": 0.26542896228258744,
+        "p_value": 0.014084116449459625,
         "n_categories": 85
       }
     },
@@ -402,8 +402,8 @@
         "model": "clip",
         "frequency_column": "proportion",
         "dispersion_column": "clip_global_dispersion",
-        "spearman_rho": 0.1823529411764706,
-        "p_value": 0.09484910163673936,
+        "spearman_rho": 0.18022278678913425,
+        "p_value": 0.09883766033901735,
         "n_categories": 85
       },
       "dinov3": {
@@ -415,8 +415,8 @@
         "model": "dinov3",
         "frequency_column": "proportion",
         "dispersion_column": "dinov3_global_dispersion",
-        "spearman_rho": 0.2654094195817862,
-        "p_value": 0.01409146585812018,
+        "spearman_rho": 0.26542896228258744,
+        "p_value": 0.014084116449459625,
         "n_categories": 85
       }
     },
@@ -430,8 +430,8 @@
         "model": "clip",
         "frequency_column": "proportion",
         "dispersion_column": "clip_global_dispersion",
-        "spearman_rho": -0.020552865569534454,
-        "p_value": 0.8518941896658565,
+        "spearman_rho": 0.01424892638500355,
+        "p_value": 0.8970173585137132,
         "n_categories": 85
       },
       "dinov3": {
@@ -443,8 +443,8 @@
         "model": "dinov3",
         "frequency_column": "proportion",
         "dispersion_column": "dinov3_global_dispersion",
-        "spearman_rho": 0.041389151539219404,
-        "p_value": 0.7068422540750385,
+        "spearman_rho": 0.03334522416024149,
+        "p_value": 0.761920232258869,
         "n_categories": 85
       }
     },
@@ -458,8 +458,8 @@
         "model": "clip",
         "frequency_column": "proportion",
         "dispersion_column": "clip_global_dispersion",
-        "spearman_rho": 0.1823529411764706,
-        "p_value": 0.09484910163673936,
+        "spearman_rho": 0.18022278678913425,
+        "p_value": 0.09883766033901735,
         "n_categories": 85
       },
       "dinov3": {
@@ -471,8 +471,8 @@
         "model": "dinov3",
         "frequency_column": "proportion",
         "dispersion_column": "dinov3_global_dispersion",
-        "spearman_rho": 0.2654094195817862,
-        "p_value": 0.01409146585812018,
+        "spearman_rho": 0.26542896228258744,
+        "p_value": 0.014084116449459625,
         "n_categories": 85
       }
     }
@@ -480,107 +480,172 @@
   "frequency_definition_sensitivity": [
     {
       "model": "clip",
-      "frequency_definition": "annotation_pool_proportion",
-      "frequency_column": "proportion",
-      "spearman_rho": -0.020552865569534454,
-      "p_value": 0.8518941896658565,
+      "frequency_definition": "annotation_pool_frame_prevalence",
+      "frequency_column": "ann_frame_prev",
+      "spearman_rho": 0.01424892638500355,
+      "p_value": 0.8970173585137132,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "annotation_pool_detection_proportion",
+      "frequency_column": "ann_det_prop",
+      "spearman_rho": -0.014767468862990105,
+      "p_value": 0.8932912771812964,
       "n_categories": 85
     },
     {
       "model": "clip",
       "frequency_definition": "annotation_pool_count_instances",
-      "frequency_column": "count_instances",
-      "spearman_rho": -0.020552865569534454,
-      "p_value": 0.8518941896658565,
+      "frequency_column": "ann_det_instances",
+      "spearman_rho": -0.014767468862990105,
+      "p_value": 0.8932912771812964,
       "n_categories": 85
     },
     {
       "model": "clip",
-      "frequency_definition": "full_dataset_prop129_denom",
-      "frequency_column": "ms_prop129",
+      "frequency_definition": "full_dataset_frame_prevalence",
+      "frequency_column": "full_frame_prev",
+      "spearman_rho": 0.18022278678913425,
+      "p_value": 0.09883766033901735,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "full_dataset_frame_prevalence_renorm85",
+      "frequency_column": "full_frame_prev_renorm85",
+      "spearman_rho": 0.18022278678913425,
+      "p_value": 0.09883766033901735,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "full_dataset_detection_proportion",
+      "frequency_column": "full_det_prop",
       "spearman_rho": 0.1823529411764706,
       "p_value": 0.09484910163673936,
       "n_categories": 85
     },
     {
       "model": "clip",
-      "frequency_definition": "full_dataset_prop_renorm85",
-      "frequency_column": "ms_prop85",
+      "frequency_definition": "full_dataset_raw_count_instances",
+      "frequency_column": "full_det_instances",
       "spearman_rho": 0.1823529411764706,
       "p_value": 0.09484910163673936,
       "n_categories": 85
     },
     {
       "model": "clip",
-      "frequency_definition": "full_dataset_raw_count129",
-      "frequency_column": "ms_count129",
-      "spearman_rho": 0.1823529411764706,
-      "p_value": 0.09484910163673936,
+      "frequency_definition": "rank_agreement_annotation_pool_vs_full_dataset_frame_prevalence",
+      "frequency_column": "ann_frame_prev vs full_frame_prev",
+      "spearman_rho": 0.8247176953207678,
+      "p_value": null,
       "n_categories": 85
     },
     {
       "model": "clip",
-      "frequency_definition": "rank_agreement_annotation_pool_vs_full_dataset_prop129",
-      "frequency_column": "proportion vs ms_prop129",
-      "spearman_rho": 0.8275484759704704,
+      "frequency_definition": "rank_agreement_frame_prevalence_vs_detection_proportion_annotation_pool",
+      "frequency_column": "ann_frame_prev vs ann_det_prop",
+      "spearman_rho": 0.9915838252792287,
+      "p_value": null,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "rank_agreement_frame_prevalence_vs_detection_proportion_full_dataset",
+      "frequency_column": "full_frame_prev vs full_det_prop",
+      "spearman_rho": 0.9995309751807698,
       "p_value": null,
       "n_categories": 85
     },
     {
       "model": "dinov3",
-      "frequency_definition": "annotation_pool_proportion",
-      "frequency_column": "proportion",
-      "spearman_rho": 0.041389151539219404,
-      "p_value": 0.7068422540750385,
+      "frequency_definition": "annotation_pool_frame_prevalence",
+      "frequency_column": "ann_frame_prev",
+      "spearman_rho": 0.03334522416024149,
+      "p_value": 0.761920232258869,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "annotation_pool_detection_proportion",
+      "frequency_column": "ann_det_prop",
+      "spearman_rho": 0.04243570470092855,
+      "p_value": 0.6997789785695737,
       "n_categories": 85
     },
     {
       "model": "dinov3",
       "frequency_definition": "annotation_pool_count_instances",
-      "frequency_column": "count_instances",
-      "spearman_rho": 0.041389151539219404,
-      "p_value": 0.7068422540750385,
+      "frequency_column": "ann_det_instances",
+      "spearman_rho": 0.04243570470092855,
+      "p_value": 0.6997789785695737,
       "n_categories": 85
     },
     {
       "model": "dinov3",
-      "frequency_definition": "full_dataset_prop129_denom",
-      "frequency_column": "ms_prop129",
+      "frequency_definition": "full_dataset_frame_prevalence",
+      "frequency_column": "full_frame_prev",
+      "spearman_rho": 0.26542896228258744,
+      "p_value": 0.014084116449459625,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "full_dataset_frame_prevalence_renorm85",
+      "frequency_column": "full_frame_prev_renorm85",
+      "spearman_rho": 0.26542896228258744,
+      "p_value": 0.014084116449459625,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "full_dataset_detection_proportion",
+      "frequency_column": "full_det_prop",
       "spearman_rho": 0.2654094195817862,
       "p_value": 0.01409146585812018,
       "n_categories": 85
     },
     {
       "model": "dinov3",
-      "frequency_definition": "full_dataset_prop_renorm85",
-      "frequency_column": "ms_prop85",
+      "frequency_definition": "full_dataset_raw_count_instances",
+      "frequency_column": "full_det_instances",
       "spearman_rho": 0.2654094195817862,
       "p_value": 0.01409146585812018,
       "n_categories": 85
     },
     {
       "model": "dinov3",
-      "frequency_definition": "full_dataset_raw_count129",
-      "frequency_column": "ms_count129",
-      "spearman_rho": 0.2654094195817862,
-      "p_value": 0.01409146585812018,
+      "frequency_definition": "rank_agreement_annotation_pool_vs_full_dataset_frame_prevalence",
+      "frequency_column": "ann_frame_prev vs full_frame_prev",
+      "spearman_rho": 0.8247176953207678,
+      "p_value": null,
       "n_categories": 85
     },
     {
       "model": "dinov3",
-      "frequency_definition": "rank_agreement_annotation_pool_vs_full_dataset_prop129",
-      "frequency_column": "proportion vs ms_prop129",
-      "spearman_rho": 0.8275484759704704,
+      "frequency_definition": "rank_agreement_frame_prevalence_vs_detection_proportion_annotation_pool",
+      "frequency_column": "ann_frame_prev vs ann_det_prop",
+      "spearman_rho": 0.9915838252792287,
+      "p_value": null,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "rank_agreement_frame_prevalence_vs_detection_proportion_full_dataset",
+      "frequency_column": "full_frame_prev vs full_det_prop",
+      "spearman_rho": 0.9995309751807698,
       "p_value": null,
       "n_categories": 85
     }
   ],
   "frequency_plot_notes": {
-    "abstract_frequency_source": "Abstract frequency panels use full infant-view detections (valid129_filtered, 0.27 CLIP filter). Dispersion is always from the 7,018 rater-validated crop sample (uniform per-category sampling by design).",
-    "dot_size_encodes": "n rater-validated crops used to estimate dispersion (not detection frequency)",
-    "renormalization_note": "Right abstract panel renormalizes 0.27-filtered detection proportions over the 85 plotted categories. Spearman rho is unchanged vs the 129-category denominator.",
-    "annotation_pool_note": "valid85_detections uses the smaller VQA/annotation detection pool (~10k instances) \u2014 exploratory only.",
-    "raw_counts_note": "Spearman rho is identical for proportions vs raw counts within each detection pool (monotonic transform). Differences across panels reflect different detection pools, not count vs proportion."
+    "frequency_definition": "Frame prevalence (Clerkin-style): unique frames with >=1 detection of the category / total unique frames in the pool.",
+    "abstract_frequency_source": "Abstract frequency panels use full infant-view frame prevalence (valid129_filtered, 0.27 CLIP filter). Dispersion is always from the 7,018 rater-validated crop sample (uniform per-category sampling by design).",
+    "dot_size_encodes": "n rater-validated crops used to estimate dispersion (not frame prevalence)",
+    "renormalization_note": "Right abstract panel renormalizes frame prevalences over the 85 plotted categories. Spearman rho is unchanged vs the unrenormalized full-dataset prevalences.",
+    "annotation_pool_note": "valid85_detections uses frame prevalence within the rater-validated annotation frame pool \u2014 exploratory only.",
+    "legacy_detection_proportion_note": "Detection-instance proportions (old definition) are retained as count_instances in CSVs for sensitivity checks."
   },
   "abstract_frequency_config_keys": [
     "full_dataset_frequency",

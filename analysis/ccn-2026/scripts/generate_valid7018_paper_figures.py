@@ -110,6 +110,7 @@ _ANNOTATE_OFFSETS_OUTLIER = [
     (16, 4), (-16, -4), (4, 16), (-4, -16), (18, -8), (-18, 8),
     (6, -18), (-6, 18), (14, 10), (-14, -10), (20, 0), (-20, 0),
 ]
+_ANNOTATE_OFFSETS_LOWER_LEFT = [(-14, -10), (-12, -14), (-16, -8), (-10, -16)]
 
 
 def parse_confidence(stem: str) -> float:
@@ -166,11 +167,20 @@ def _style_corr_axes(ax, title: str, xlabel: str, ylabel: str) -> None:
     ax.margins(x=0.16, y=0.16)
 
 
+def _format_p_value(p: float) -> str:
+    if p < 0.001:
+        return "<.001"
+    s = f"{p:.3f}" if p < 0.01 else f"{p:.2f}"
+    if s.startswith("0."):
+        s = s[1:]
+    return f"={s}"
+
+
 def _add_spearman_box(ax, rho: float, p: float) -> None:
     ax.text(
         0.02,
         0.98,
-        f"Spearman ρ = {rho:.3f}",
+        f"Spearman ρ = {rho:.2f}, p{_format_p_value(p)}",
         transform=ax.transAxes,
         va="top",
         ha="left",
@@ -489,21 +499,24 @@ def write_paper_stats(
     stats["frequency_vs_global_dispersion"] = freq_check
     stats["frequency_definition_sensitivity"] = compute_frequency_definition_sensitivity(semantic_map)
     stats["frequency_plot_notes"] = {
+        "frequency_definition": (
+            "Frame prevalence (Clerkin-style): unique frames with >=1 detection of the category / "
+            "total unique frames in the pool."
+        ),
         "abstract_frequency_source": (
-            "Abstract frequency panels use full infant-view detections (valid129_filtered, 0.27 CLIP filter). "
+            "Abstract frequency panels use full infant-view frame prevalence (valid129_filtered, 0.27 CLIP filter). "
             "Dispersion is always from the 7,018 rater-validated crop sample (uniform per-category sampling by design)."
         ),
-        "dot_size_encodes": "n rater-validated crops used to estimate dispersion (not detection frequency)",
+        "dot_size_encodes": "n rater-validated crops used to estimate dispersion (not frame prevalence)",
         "renormalization_note": (
-            "Right abstract panel renormalizes 0.27-filtered detection proportions over the 85 plotted categories. "
-            "Spearman rho is unchanged vs the 129-category denominator."
+            "Right abstract panel renormalizes frame prevalences over the 85 plotted categories. "
+            "Spearman rho is unchanged vs the unrenormalized full-dataset prevalences."
         ),
         "annotation_pool_note": (
-            "valid85_detections uses the smaller VQA/annotation detection pool (~10k instances) — exploratory only."
+            "valid85_detections uses frame prevalence within the rater-validated annotation frame pool — exploratory only."
         ),
-        "raw_counts_note": (
-            "Spearman rho is identical for proportions vs raw counts within each detection pool "
-            "(monotonic transform). Differences across panels reflect different detection pools, not count vs proportion."
+        "legacy_detection_proportion_note": (
+            "Detection-instance proportions (old definition) are retained as count_instances in CSVs for sensitivity checks."
         ),
     }
     stats["abstract_frequency_config_keys"] = list(ABSTRACT_FREQUENCY_CONFIG_KEYS)
@@ -757,11 +770,14 @@ FREQUENCY_DISPERSION_CONFIGS = {
         "dispersion_cohort": "valid85",
         "frequency_mode": "proportion",
         "renormalize_proportion": False,
-        "panel_title": "Infant-view frequency (full dataset, 0.27-filtered)",
-        "xlabel": "Detection proportion (0.27-filtered pool; 129-category denominator)",
+        "log_x": True,
+        "panel_title": "Infant-view frame prevalence (full dataset, 0.27-filtered)",
+        "xlabel": "Frame prevalence (frames with category / all infant-view frames)",
+        "xlabel_log": "log₁₀ frame prevalence (frames with category / all infant-view frames)",
         "frequency_note": (
-            "Numerator/denominator: full BabyView infant-view detections after 0.27 CLIP filter "
-            "(valid129 pool). Not the 7,018 rater-validated crop sample."
+            "Clerkin-style frame prevalence: unique frames with >=1 detection of the category, "
+            "divided by all unique frames in the 0.27-filtered infant-view pool (valid129 set). "
+            "Not the 7,018 rater-validated crop sample."
         ),
         "dispersion_note": "Y and dot size: valid7018 per-crop dispersion (7,018 crops). Dot size is not frequency.",
         "n_resid": 10,
@@ -774,10 +790,12 @@ FREQUENCY_DISPERSION_CONFIGS = {
         "dispersion_cohort": "valid85",
         "frequency_mode": "proportion",
         "renormalize_proportion": True,
-        "panel_title": "Same counts, renormalized over these 85 categories",
-        "xlabel": "Detection proportion (renormalized over these 85 categories)",
+        "log_x": True,
+        "panel_title": "Same frame prevalences, renormalized over these 85 categories",
+        "xlabel": "Frame prevalence (renormalized over these 85 categories)",
+        "xlabel_log": "log₁₀ frame prevalence (renormalized over these 85 categories)",
         "frequency_note": (
-            "Same 0.27-filtered detection counts as left panel; denominator restricted to "
+            "Same frame prevalences as left panel; values renormalized to sum to 1 over "
             "these 85 categories (44 valid129-only categories excluded)."
         ),
         "dispersion_note": "Same valid7018 per-crop dispersion and dot size as left column.",
@@ -791,11 +809,11 @@ FREQUENCY_DISPERSION_CONFIGS = {
         "dispersion_cohort": "valid85",
         "frequency_mode": "proportion",
         "renormalize_proportion": False,
-        "panel_title": "Annotation-pool frequency (exploratory; not full dataset)",
-        "xlabel": "Detection proportion (VQA/annotation pool, valid85 set)",
+        "panel_title": "Annotation-pool frame prevalence (exploratory; not full dataset)",
+        "xlabel": "Frame prevalence (VQA/annotation pool, valid85 set)",
         "frequency_note": (
-            "Exploratory only: counts from the smaller annotation/VQA detection pool "
-            "(~10k instances), not full infant-view detections."
+            "Exploratory only: frame prevalence within the rater-validated annotation frame "
+            "pool (~7k frames), not full infant-view detections."
         ),
         "dispersion_note": "Y and dot size: valid7018 per-crop dispersion (7,018 crops). Dot size is not frequency.",
         "n_resid": 10,
@@ -808,8 +826,8 @@ FREQUENCY_DISPERSION_CONFIGS = {
         "dispersion_cohort": "valid85",
         "frequency_mode": "proportion",
         "renormalize_proportion": True,
-        "panel_title": "Manuscript frequency (0.27-filtered, renorm. over 85)",
-        "xlabel": "Detection proportion (manuscript counts, renormalized over these 85 categories)",
+        "panel_title": "Manuscript frame prevalence (0.27-filtered, renorm. over 85)",
+        "xlabel": "Frame prevalence (renormalized over these 85 categories)",
         "frequency_note": (
             "Alias of full_dataset_frequency_renorm85 for backward-compatible figure stems."
         ),
@@ -837,8 +855,12 @@ def load_frequency_table(cohort: str = "valid85") -> pd.DataFrame:
     df = pd.read_csv(freq_csv)
     df["category"] = df["category"].astype(str).str.strip().str.lower()
     df["proportion"] = pd.to_numeric(df["proportion"], errors="coerce")
+    if "count_frames" in df.columns:
+        df["count_frames"] = pd.to_numeric(df["count_frames"], errors="coerce")
     if "count_instances" in df.columns:
         df["count_instances"] = pd.to_numeric(df["count_instances"], errors="coerce")
+    if "total_frames" in df.columns:
+        df["total_frames"] = pd.to_numeric(df["total_frames"], errors="coerce")
     return df
 
 
@@ -887,35 +909,47 @@ def compute_frequency_dispersion_stats(config_key: str, model: str, semantic_map
     }
 
 
+def _detection_instance_proportion(counts: pd.Series) -> pd.Series:
+    total = counts.sum()
+    if total <= 0:
+        return pd.Series(0.0, index=counts.index)
+    return counts / total
+
+
 def compute_frequency_definition_sensitivity(semantic_map: dict[str, str]) -> list[dict]:
     """Spearman rho for alternate x-axis definitions (same valid85 dispersion)."""
     v85 = load_frequency_table("valid85")
-    ms_prop = load_frequency_table("valid129_filtered")
-    ms_counts = load_frequency_table("valid129_counts")
+    ms = load_frequency_table("valid129_filtered")
     rows = []
     for model in ("clip", "dinov3"):
         disp = load_dispersion_table("valid85", model)
         gcol = f"{model}_global_dispersion"
-        base = v85[["category", "proportion", "count_instances"]].merge(
-            disp[["category", gcol]],
+        merged = v85[["category", "proportion", "count_instances"]].rename(
+            columns={"proportion": "ann_frame_prev", "count_instances": "ann_det_instances"}
+        ).merge(disp[["category", gcol]], on="category", how="inner")
+        merged = merged.merge(
+            ms[["category", "proportion", "count_instances"]].rename(
+                columns={
+                    "proportion": "full_frame_prev",
+                    "count_instances": "full_det_instances",
+                }
+            ),
             on="category",
-            how="inner",
         )
-        ms = base.merge(ms_prop[["category", "proportion"]].rename(columns={"proportion": "ms_prop129"}), on="category")
-        ms = ms.merge(
-            ms_counts[["category", "count_instances"]].rename(columns={"count_instances": "ms_count129"}),
-            on="category",
-        )
-        ms["ms_prop85"] = ms["ms_prop129"] / ms["ms_prop129"].sum()
+        merged["ann_det_prop"] = _detection_instance_proportion(merged["ann_det_instances"])
+        merged["full_det_prop"] = _detection_instance_proportion(merged["full_det_instances"])
+        merged["full_frame_prev_renorm85"] = merged["full_frame_prev"] / merged["full_frame_prev"].sum()
         variants = [
-            ("annotation_pool_proportion", "proportion"),
-            ("annotation_pool_count_instances", "count_instances"),
-            ("full_dataset_prop129_denom", "ms_prop129"),
-            ("full_dataset_prop_renorm85", "ms_prop85"),
-            ("full_dataset_raw_count129", "ms_count129"),
+            ("annotation_pool_frame_prevalence", "ann_frame_prev"),
+            ("annotation_pool_detection_proportion", "ann_det_prop"),
+            ("annotation_pool_count_instances", "ann_det_instances"),
+            ("full_dataset_frame_prevalence", "full_frame_prev"),
+            ("full_dataset_frame_prevalence_renorm85", "full_frame_prev_renorm85"),
+            ("full_dataset_detection_proportion", "full_det_prop"),
+            ("full_dataset_raw_count_instances", "full_det_instances"),
         ]
         for label, xcol in variants:
-            sub = ms.dropna(subset=[xcol, gcol])
+            sub = merged.dropna(subset=[xcol, gcol])
             rho, p = spearmanr(sub[xcol], sub[gcol])
             rows.append(
                 {
@@ -927,17 +961,34 @@ def compute_frequency_definition_sensitivity(semantic_map: dict[str, str]) -> li
                     "n_categories": int(len(sub)),
                 }
             )
-        rho_rank, _ = spearmanr(ms["proportion"], ms["ms_prop129"])
-        rows.append(
-            {
-                "model": model,
-                "frequency_definition": "rank_agreement_annotation_pool_vs_full_dataset_prop129",
-                "frequency_column": "proportion vs ms_prop129",
-                "spearman_rho": float(rho_rank),
-                "p_value": None,
-                "n_categories": int(len(ms)),
-            }
-        )
+        for label, xcol_a, xcol_b in [
+            (
+                "rank_agreement_annotation_pool_vs_full_dataset_frame_prevalence",
+                "ann_frame_prev",
+                "full_frame_prev",
+            ),
+            (
+                "rank_agreement_frame_prevalence_vs_detection_proportion_annotation_pool",
+                "ann_frame_prev",
+                "ann_det_prop",
+            ),
+            (
+                "rank_agreement_frame_prevalence_vs_detection_proportion_full_dataset",
+                "full_frame_prev",
+                "full_det_prop",
+            ),
+        ]:
+            rho_rank, _ = spearmanr(merged[xcol_a], merged[xcol_b])
+            rows.append(
+                {
+                    "model": model,
+                    "frequency_definition": label,
+                    "frequency_column": f"{xcol_a} vs {xcol_b}",
+                    "spearman_rho": float(rho_rank),
+                    "p_value": None,
+                    "n_categories": int(len(merged)),
+                }
+            )
     return rows
 
 
@@ -956,11 +1007,16 @@ def _plot_frequency_dispersion_ax(
     model: str,
     config_key: str,
     label_categories: list[str],
+    *,
+    semantic_groups_lower_left: tuple[str, ...] = (),
 ) -> dict:
     cfg = FREQUENCY_DISPERSION_CONFIGS[config_key]
     gcol = f"{model}_global_dispersion"
     xcol = _frequency_x_column(cfg)
+    log_x = bool(cfg.get("log_x", False))
     sub = df.dropna(subset=[xcol, gcol])
+    if log_x:
+        sub = sub.loc[sub[xcol] > 0].copy()
     rho, p = spearmanr(sub[xcol], sub[gcol])
     ax.scatter(
         sub[xcol],
@@ -971,11 +1027,14 @@ def _plot_frequency_dispersion_ax(
         edgecolor="white",
         linewidth=0.5,
     )
+    if log_x:
+        ax.set_xscale("log")
+    xlabel = cfg.get("xlabel_log", cfg["xlabel"]) if log_x else cfg["xlabel"]
     _add_spearman_box(ax, rho, p)
     _style_corr_axes(
         ax,
         f"{model.upper()} global dispersion",
-        cfg["xlabel"],
+        xlabel,
         f"Global dispersion ({model.upper()})",
     )
     annotate_frequency_dispersion_decoupling(
@@ -988,6 +1047,7 @@ def _plot_frequency_dispersion_ax(
         n_quad=cfg["n_quad"],
         n_extreme=cfg.get("n_extreme", 0),
         exclude_body_parts=cfg["exclude_body_parts"],
+        semantic_groups_lower_left=semantic_groups_lower_left,
     )
     footnote = cfg.get("frequency_note", "")
     if cfg.get("dispersion_note"):
@@ -1050,6 +1110,42 @@ def figure_frequency_vs_global_dispersion(
     return {"model": model, **result}
 
 
+def figure_1c_frequency_vs_global_dispersion(
+    semantic_map: dict[str, str],
+    stats: dict,
+    out_dir: Path,
+    *,
+    config_key: str = "full_dataset_frequency",
+    model: str = "dinov3",
+) -> dict:
+    """Manuscript panel C: full infant-view frame prevalence vs global dispersion."""
+    cfg = FREQUENCY_DISPERSION_CONFIGS[config_key]
+    df = build_frequency_dispersion_df(config_key, model, semantic_map)
+    fig, ax = plt.subplots(figsize=(7.2, 5.8))
+    fig.subplots_adjust(left=0.11, right=0.78, top=0.90, bottom=0.18)
+    result = _plot_frequency_dispersion_ax(
+        ax,
+        df,
+        model,
+        config_key,
+        stats.get("montage_categories_low_to_high_global", []),
+        semantic_groups_lower_left=("body_parts",),
+    )
+    add_cdi_legends(fig, df, f"{model}_n_exemplars", size_legend_title=DOT_SIZE_LEGEND_TITLE)
+    fig.suptitle(
+        "Frame prevalence vs global dispersion (full infant-view dataset)",
+        fontsize=11,
+        fontweight="bold",
+        y=0.98,
+    )
+    for ext in ("png", "pdf"):
+        path = out_dir / f"fig1C_valid7018_frequency_vs_global_dispersion.{ext}"
+        fig.savefig(path, dpi=200, bbox_inches="tight")
+        print(f"Wrote {path}")
+    plt.close(fig)
+    return {"model": model, "config_key": config_key, **result}
+
+
 def figure_frequency_vs_global_robustness_2x2(semantic_map: dict[str, str], stats: dict, out_dir: Path) -> list[dict]:
     label_categories = stats.get("montage_categories_low_to_high_global", [])
     fig, axes = plt.subplots(2, 2, figsize=(13.5, 10.8))
@@ -1072,7 +1168,7 @@ def figure_frequency_vs_global_robustness_2x2(semantic_map: dict[str, str], stat
         size_legend_title=DOT_SIZE_LEGEND_TITLE,
     )
     fig.suptitle(
-        "Frequency vs global dispersion: full infant-view detections (valid7018 variability)",
+        "Frame prevalence vs global dispersion: full infant-view (valid7018 variability)",
         fontsize=12,
         fontweight="bold",
         y=0.97,
@@ -1103,6 +1199,7 @@ def _frequency_dispersion_label_candidates(
     n_quad: int = 3,
     n_extreme: int = 2,
     exclude_body_parts: bool = True,
+    semantic_groups_lower_left: tuple[str, ...] = (),
 ) -> list[str]:
     """Pick montage categories plus outliers that illustrate freq–disp decoupling."""
     selected = [str(c).strip().lower() for c in selected_categories]
@@ -1144,6 +1241,13 @@ def _frequency_dispersion_label_candidates(
         add(low_freq.nlargest(n_quad, ycol)["category"].tolist())  # rare + variable
         add(low_freq.nsmallest(n_quad, ycol)["category"].tolist())  # rare + stable
 
+    if semantic_groups_lower_left and "cdi_semantic" in df.columns:
+        x_lo = df[xcol].quantile(0.40)
+        y_lo = df[ycol].quantile(0.45)
+        for grp in semantic_groups_lower_left:
+            mask = (df["cdi_semantic"] == grp) & (df[xcol] <= x_lo) & (df[ycol] <= y_lo)
+            add(df.loc[mask, "category"].astype(str).str.strip().str.lower().tolist())
+
     return out
 
 
@@ -1158,6 +1262,7 @@ def annotate_frequency_dispersion_decoupling(
     n_quad: int = 3,
     n_extreme: int = 2,
     exclude_body_parts: bool = True,
+    semantic_groups_lower_left: tuple[str, ...] = (),
 ) -> list[str]:
     label_cats = _frequency_dispersion_label_candidates(
         df,
@@ -1168,17 +1273,37 @@ def annotate_frequency_dispersion_decoupling(
         n_quad=n_quad,
         n_extreme=n_extreme,
         exclude_body_parts=exclude_body_parts,
+        semantic_groups_lower_left=semantic_groups_lower_left,
     )
+    lower_left_semantic: set[str] = set()
+    if semantic_groups_lower_left and "cdi_semantic" in df.columns:
+        x_lo = df[xcol].quantile(0.40)
+        y_lo = df[ycol].quantile(0.45)
+        for grp in semantic_groups_lower_left:
+            mask = (df["cdi_semantic"] == grp) & (df[xcol] <= x_lo) & (df[ycol] <= y_lo)
+            lower_left_semantic.update(df.loc[mask, "category"].astype(str).str.strip().str.lower())
+
     outlier_font = 7 if len(label_cats) > 20 else 8
+    lower_left_i = 0
     for j, cat in enumerate(label_cats):
         row = df.loc[df["category"].astype(str).str.lower() == cat]
         if row.empty:
             continue
         row = row.iloc[0]
-        ox, oy = _ANNOTATE_OFFSETS_SELECTED[j % len(_ANNOTATE_OFFSETS_SELECTED)]
-        if j >= len(selected_categories):
+        is_selected = j < len(selected_categories)
+        is_lower_left_semantic = cat in lower_left_semantic
+        if is_lower_left_semantic:
+            ox, oy = _ANNOTATE_OFFSETS_LOWER_LEFT[lower_left_i % len(_ANNOTATE_OFFSETS_LOWER_LEFT)]
+            lower_left_i += 1
+        elif is_selected:
+            ox, oy = _ANNOTATE_OFFSETS_SELECTED[j % len(_ANNOTATE_OFFSETS_SELECTED)]
+        else:
             ox, oy = _ANNOTATE_OFFSETS_OUTLIER[j % len(_ANNOTATE_OFFSETS_OUTLIER)]
-        fontsize = 9 if j < len(selected_categories) else outlier_font
+        fontsize = 9 if is_selected or is_lower_left_semantic else outlier_font
+        sem = str(row.get("cdi_semantic", "other"))
+        edge = CDI_SEMANTIC_COLORS.get(sem, "#999999") if is_lower_left_semantic else (
+            "#555555" if is_selected else "#999999"
+        )
         ax.annotate(
             row.category,
             (float(row[xcol]), float(row[ycol])),
@@ -1186,16 +1311,16 @@ def annotate_frequency_dispersion_decoupling(
             textcoords="offset points",
             fontsize=fontsize,
             fontweight="bold",
-            color="#141414" if j < len(selected_categories) else "#222222",
+            color="#141414" if is_selected or is_lower_left_semantic else "#222222",
             bbox=dict(
-                boxstyle="round,pad=0.25" if j < len(selected_categories) else "round,pad=0.2",
+                boxstyle="round,pad=0.25" if is_selected or is_lower_left_semantic else "round,pad=0.2",
                 facecolor="white",
-                edgecolor="#555555" if j < len(selected_categories) else "#999999",
-                alpha=0.93 if j < len(selected_categories) else 0.9,
+                edgecolor=edge,
+                alpha=0.93 if is_selected or is_lower_left_semantic else 0.9,
             ),
-            arrowprops=dict(arrowstyle="-", color="#666666" if j < len(selected_categories) else "#888888", lw=0.8),
+            arrowprops=dict(arrowstyle="-", color="#666666" if is_selected or is_lower_left_semantic else "#888888", lw=0.8),
             clip_on=True,
-            zorder=12 if j < len(selected_categories) else 11,
+            zorder=12 if is_selected or is_lower_left_semantic else 11,
         )
     return label_cats
 
@@ -1205,7 +1330,7 @@ ABSTRACT_FIGURE_FILES = (
     "fig1A_valid7018_montages_low_to_high_global",
     "fig1B_valid7018_tsne_dinov3",
     "fig1B_valid7018_tsne_dinov3_semantic_diverse",
-    "fig1C_valid7018_cross_model_k5",
+    "fig1C_valid7018_frequency_vs_global_dispersion",
     "fig_explore_frequency_vs_global_robustness_2x2",
 )
 
@@ -1239,17 +1364,19 @@ def publish_abstract_figures(out_dir: Path, abstract_dir: Path) -> list[Path]:
 
 
 def figure_1a_montages(
-    clip: pd.DataFrame,
+    dispersion: pd.DataFrame,
     crop_index: dict[str, list[tuple[Path, float]]] | None,
     semantic_map: dict[str, str],
     montage_cats: list[str],
     out_dir: Path,
     montage_zip_crops: dict[str, list[Image.Image]] | None = None,
+    *,
+    dispersion_model: str = "DINOv3",
     n_exemplars: int = 25,
     n_cols: int = 5,
     cell_size: tuple[int, int] = (128, 128),
 ) -> None:
-    clip_by_cat = clip.set_index("category")
+    dispersion_by_cat = dispersion.set_index("category")
     montage_images: list[tuple[str, Image.Image, str, float]] = []
 
     for cat in montage_cats:
@@ -1264,10 +1391,10 @@ def figure_1a_montages(
             continue
         montage = make_montage(imgs[: n_cols * n_cols], n_cols, cell_size)
         sem = semantic_map.get(cat, "other")
-        g = float(clip_by_cat.loc[cat, "global_dispersion"])
+        g = float(dispersion_by_cat.loc[cat, "global_dispersion"])
         montage_images.append((cat, montage, sem, g))
-        montage.save(out_dir / f"fig1A_montage_{cat}_global={g:.3f}.png")
-        montage.save(out_dir / f"fig1A_montage_{cat}_global={g:.3f}.pdf", "PDF", resolution=200)
+        montage.save(out_dir / f"fig1A_montage_{cat}_Vc={g:.3f}.png")
+        montage.save(out_dir / f"fig1A_montage_{cat}_Vc={g:.3f}.pdf", "PDF", resolution=200)
 
     if not montage_images:
         print("No montages written (crop paths missing?)")
@@ -1282,12 +1409,15 @@ def figure_1a_montages(
         ax.axis("off")
         color = CDI_SEMANTIC_COLORS.get(sem, CDI_SEMANTIC_COLORS["other"])
         ax.set_title(
-            rf"$\mathit{{{cat}}}$ | global$_{{\mathrm{{CLIP}}}}$ = {g:.2f}",
+            rf"$\mathit{{{cat}}}$ | $V_c$ = {g:.2f}",
             fontsize=9,
             color=color,
             fontweight="bold",
         )
-    fig.suptitle("Low → high global dispersion (valid7018; non-body-part categories)", fontsize=11)
+    fig.suptitle(
+        "Selected categories (low→high CLIP global dispersion; DINOv3 $V_c$ shown)",
+        fontsize=11,
+    )
     for ext in ("png", "pdf"):
         path = out_dir / f"fig1A_valid7018_montages_low_to_high_global.{ext}"
         fig.savefig(path, dpi=200, bbox_inches="tight")
@@ -1500,6 +1630,10 @@ def main() -> int:
     )
     args = p.parse_args()
 
+    from compute_frame_prevalence_tables import main as refresh_frame_prevalence_tables
+
+    refresh_frame_prevalence_tables()
+
     metrics_dir = DEFAULT_METRICS_DIR
     scratch_dir = DEFAULT_SCRATCH_DIR
     scratch_dir.mkdir(parents=True, exist_ok=True)
@@ -1526,12 +1660,13 @@ def main() -> int:
     print(f"Semantic-diverse t-SNE categories: {semantic_tsne_cats}")
 
     figure_1a_montages(
-        clip,
+        dino,
         crop_index,
         semantic_map,
         montage_cats,
         scratch_dir,
         montage_zip_crops=montage_zip_crops,
+        dispersion_model="DINOv3",
     )
     figure_1b_tsne(
         DEFAULT_EMBEDDING_ZIP,
@@ -1550,6 +1685,17 @@ def main() -> int:
         title="DINOv3 t-SNE (valid7018; one category per CDI semantic group)",
     )
     figure_1c_cross_model(plot_df, stats, scratch_dir)
+    fig1c_res = figure_1c_frequency_vs_global_dispersion(
+        semantic_map,
+        stats,
+        scratch_dir,
+        config_key="full_dataset_frequency",
+        model="dinov3",
+    )
+    print(
+        f"Figure 1C frequency vs DINOv3 global: "
+        f"rho={fig1c_res['spearman_rho']:.3f}, p={fig1c_res['p_value']:.3e}, n={fig1c_res['n_categories']}"
+    )
     for model in ("clip", "dinov3"):
         for config_key in FREQUENCY_DISPERSION_CONFIGS:
             if config_key == "valid85_manuscript_frequency":
@@ -1575,39 +1721,48 @@ def main() -> int:
     selection_csv = scratch_dir / "valid7018_figure_category_selection.csv"
     rows = []
     for i, cat in enumerate(montage_cats, start=1):
-        row = clip[clip.category == cat].iloc[0]
+        clip_row = clip[clip.category == cat].iloc[0]
+        dino_row = dino[dino.category == cat].iloc[0]
         rows.append(
             {
                 "figure": "1A",
                 "panel": i,
                 "category": cat,
                 "cdi_semantic": semantic_map.get(cat, "other"),
-                "global_dispersion_clip": row.global_dispersion,
-                "mean_knn_clip": row.mean_knn_dist,
+                "global_dispersion_clip": clip_row.global_dispersion,
+                "global_dispersion_dinov3": dino_row.global_dispersion,
+                "mean_knn_clip": clip_row.mean_knn_dist,
+                "mean_knn_dinov3": dino_row.mean_knn_dist,
             }
         )
     for i, cat in enumerate(montage_cats, start=1):
-        row = clip[clip.category == cat].iloc[0]
+        clip_row = clip[clip.category == cat].iloc[0]
+        dino_row = dino[dino.category == cat].iloc[0]
         rows.append(
             {
                 "figure": "1B_dispersion",
                 "panel": i,
                 "category": cat,
                 "cdi_semantic": semantic_map.get(cat, "other"),
-                "global_dispersion_clip": row.global_dispersion,
-                "mean_knn_clip": row.mean_knn_dist,
+                "global_dispersion_clip": clip_row.global_dispersion,
+                "global_dispersion_dinov3": dino_row.global_dispersion,
+                "mean_knn_clip": clip_row.mean_knn_dist,
+                "mean_knn_dinov3": dino_row.mean_knn_dist,
             }
         )
     for i, cat in enumerate(semantic_tsne_cats, start=1):
-        row = clip[clip.category == cat].iloc[0]
+        clip_row = clip[clip.category == cat].iloc[0]
+        dino_row = dino[dino.category == cat].iloc[0]
         rows.append(
             {
                 "figure": "1B_semantic_diverse",
                 "panel": i,
                 "category": cat,
                 "cdi_semantic": semantic_map.get(cat, "other"),
-                "global_dispersion_clip": row.global_dispersion,
-                "mean_knn_clip": row.mean_knn_dist,
+                "global_dispersion_clip": clip_row.global_dispersion,
+                "global_dispersion_dinov3": dino_row.global_dispersion,
+                "mean_knn_clip": clip_row.mean_knn_dist,
+                "mean_knn_dinov3": dino_row.mean_knn_dist,
             }
         )
     pd.DataFrame(rows).to_csv(selection_csv, index=False)

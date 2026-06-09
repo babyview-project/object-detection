@@ -41,20 +41,20 @@ writeup_examples,car,"CLIP global=19.18, DINO global=27.81",
 writeup_examples,bird,"CLIP global=19.09, DINO global=27.25",
 writeup_examples,pants,"CLIP global=16.42, DINO global=21.79",
 writeup_examples,pajamas,"CLIP global=19.29, DINO global=22.71",
-frequency_full_dataset,source,long_tailed_dist_prop_included_categories_filtered-0.27_valid129.csv,0.27-filtered infant-view detections; 129-category denominator
-frequency_full_dataset_top5,rank1_chair,proportion=0.1025,furniture_rooms
-frequency_full_dataset_top5,rank2_lamp,proportion=0.0785,household
-frequency_full_dataset_top5,rank3_table,proportion=0.0644,furniture_rooms
-frequency_full_dataset_top5,rank4_couch,proportion=0.0635,furniture_rooms
-frequency_full_dataset_top5,rank5_pillow,proportion=0.0560,household
+frequency_full_dataset,source,long_tailed_dist_prop_included_categories_filtered-0.27_valid129.csv,0.27-filtered infant-view frame prevalence (Clerkin-style)
+frequency_full_dataset_top5,rank1_chair,proportion=0.1310,furniture_rooms
+frequency_full_dataset_top5,rank2_lamp,proportion=0.1057,household
+frequency_full_dataset_top5,rank3_table,proportion=0.0943,furniture_rooms
+frequency_full_dataset_top5,rank4_couch,proportion=0.0867,furniture_rooms
+frequency_full_dataset_top5,rank5_pillow,proportion=0.0683,household
 frequency_full_dataset_bottom5,rank1_chips,proportion=0.0001,
 frequency_full_dataset_bottom5,rank2_eye,proportion=0.0001,body_parts
 frequency_full_dataset_bottom5,rank3_ankle,proportion=0.0001,
 frequency_full_dataset_bottom5,rank4_stick,proportion=0.0000,outside
 frequency_full_dataset_bottom5,rank5_sandwich,proportion=0.0000,
-frequency_vs_dispersion_full_dataset,clip,"rho=0.182, p=.095, n=85",x=full dataset detection proportion; y=valid7018 global dispersion
-frequency_vs_dispersion_full_dataset,dinov3,"rho=0.265, p=.014, n=85",x=full dataset detection proportion; y=valid7018 global dispersion
-frequency_notes,abstract_source,"Abstract frequency panels use full infant-view detections (valid129_filtered, 0.27 CLIP filter). Dispersion is always from the 7,018 rater-validated crop sample (uniform per-category sampling by design).",
+frequency_vs_dispersion_full_dataset,clip,"rho=0.180, p=.099, n=85",x=full dataset frame prevalence; y=valid7018 global dispersion
+frequency_vs_dispersion_full_dataset,dinov3,"rho=0.265, p=.014, n=85",x=full dataset frame prevalence; y=valid7018 global dispersion
+frequency_notes,abstract_source,"Abstract frequency panels use full infant-view frame prevalence (valid129_filtered, 0.27 CLIP filter). Dispersion is always from the 7,018 rater-validated crop sample (uniform per-category sampling by design).",
 frequency_notes,not_used,7018 crop counts / annotation-pool valid85 frequencies are not used in abstract panels,
 frequency_notes,montage_exclude,"Montage/t-SNE dispersion panels exclude glasses (face privacy); quintiles use clock, oven, chair, paper, book.",
 clip_lowest_local_non_body,rank1_clock,"global=15.68, local kNN=15.08",
