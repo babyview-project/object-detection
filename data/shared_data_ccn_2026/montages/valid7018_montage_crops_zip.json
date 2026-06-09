@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-06-09T03:22:56.665662+00:00",
+  "generated_utc": "2026-06-09T06:09:00.850488+00:00",
   "n_categories": 5,
   "n_exemplars_per_category": 25,
   "categories": [
-    "clock",
-    "plant",
-    "blanket",
-    "pajamas",
+    "glasses",
+    "couch",
+    "shoe",
+    "paper",
     "book"
   ],
   "n_jpegs": 125,

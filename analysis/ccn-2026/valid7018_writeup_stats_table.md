@@ -15,27 +15,27 @@ Autofilled from `valid7018/valid7018_paper_stats.json` and metric CSVs.
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| global_mean | 24.46 |  |
-| global_sd | 2.48 |  |
-| global_min | 17.7 |  |
-| global_max | 29.17 |  |
-| local_mean | 27.24 |  |
-| local_sd | 3.48 |  |
-| local_min | 17.56 |  |
-| local_max | 34.29 |  |
+| global_mean | 18.12 |  |
+| global_sd | 1.84 |  |
+| global_min | 13.1 |  |
+| global_max | 21.59 |  |
+| local_mean | 20.17 |  |
+| local_sd | 2.58 |  |
+| local_min | 13.01 |  |
+| local_max | 25.38 |  |
 
 ## dispersion_all85_DINOv3
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| global_mean | 32.08 |  |
-| global_sd | 2.39 |  |
-| global_min | 22.28 |  |
-| global_max | 38.28 |  |
-| local_mean | 37.17 |  |
-| local_sd | 3.55 |  |
-| local_min | 24.07 |  |
-| local_max | 45.81 |  |
+| global_mean | 23.36 |  |
+| global_sd | 1.76 |  |
+| global_min | 16.18 |  |
+| global_max | 27.81 |  |
+| local_mean | 27.05 |  |
+| local_sd | 2.6 |  |
+| local_min | 17.49 |  |
+| local_max | 33.29 |  |
 
 ## correlations
 
@@ -44,40 +44,40 @@ Autofilled from `valid7018/valid7018_paper_stats.json` and metric CSVs.
 | clip_within | rho=0.95, p=<.001, n=85 |  |
 | dinov3_within | rho=0.85, p=<.001, n=85 |  |
 | cross_global | rho=0.55, p=<.001, n=85 |  |
-| cross_local_knn | rho=0.63, p=<.001, n=85 |  |
+| cross_local_knn | rho=0.62, p=<.001, n=85 |  |
 
 ## montage_categories
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| glasses | CLIP global=20.98, local=21.97; DINO global=30.72, local=34.3 |  |
-| oven | CLIP global=24.13, local=27.24; DINO global=31.95, local=36.19 |  |
-| balloon | CLIP global=25.33, local=28.03; DINO global=32.63, local=38.48 |  |
-| paper | CLIP global=26.26, local=28.88; DINO global=31.48, local=37.68 |  |
-| book | CLIP global=29.17, local=34.29; DINO global=31.39, local=38.36 |  |
+| glasses | CLIP global=15.53, local=16.25; DINO global=22.32, local=24.89 |  |
+| couch | CLIP global=17.87, local=20.36; DINO global=23.13, local=27.88 |  |
+| shoe | CLIP global=18.78, local=21.62; DINO global=23.68, local=27.90 |  |
+| paper | CLIP global=19.45, local=21.37; DINO global=22.98, local=27.48 |  |
+| book | CLIP global=21.59, local=25.38; DINO global=22.88, local=27.95 |  |
 
 ## cdi_semantic_groups
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| animals | n=5; CLIP global M=24.91, z=0.18; DINO global M=34.04, z=0.82 |  |
-| body_parts | n=12; CLIP global M=20.5, z=-1.6; DINO global M=28.98, z=-1.3 |  |
-| clothing | n=13; CLIP global M=24.65, z=0.08; DINO global M=31.64, z=-0.19 |  |
-| food_drink | n=2; CLIP global M=22.83, z=-0.66; DINO global M=30.78, z=-0.54 |  |
-| furniture_rooms | n=14; CLIP global M=24.68, z=0.09; DINO global M=32.48, z=0.17 |  |
-| household | n=25; CLIP global M=25.13, z=0.27; DINO global M=32.94, z=0.36 |  |
-| outside | n=7; CLIP global M=26.01, z=0.63; DINO global M=32.28, z=0.09 |  |
-| toys | n=5; CLIP global M=27.26, z=1.13; DINO global M=32.86, z=0.33 |  |
-| vehicles | n=2; CLIP global M=25.29, z=0.33; DINO global M=33.82, z=0.73 |  |
+| toys | n=5; CLIP global M=20.21, z=1.14; DINO global M=23.99, z=0.36 |  |
+| outside | n=7; CLIP global M=19.26, z=0.62; DINO global M=23.49, z=0.08 |  |
+| vehicles | n=2; CLIP global M=18.73, z=0.33; DINO global M=24.59, z=0.70 |  |
+| household | n=25; CLIP global M=18.62, z=0.27; DINO global M=24.02, z=0.38 |  |
+| animals | n=5; CLIP global M=18.48, z=0.20; DINO global M=24.78, z=0.81 |  |
+| furniture_rooms | n=14; CLIP global M=18.26, z=0.08; DINO global M=23.60, z=0.14 |  |
+| clothing | n=13; CLIP global M=18.24, z=0.07; DINO global M=23.00, z=-0.20 |  |
+| food_drink | n=2; CLIP global M=16.91, z=-0.66; DINO global M=22.46, z=-0.51 |  |
+| body_parts | n=12; CLIP global M=15.17, z=-1.60; DINO global M=21.07, z=-1.30 |  |
 
 ## writeup_examples
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| car | CLIP global=25.89, DINO global=38.28 |  |
-| bird | CLIP global=25.73, DINO global=37.43 |  |
-| pants | CLIP global=22.19, DINO global=30.03 |  |
-| pajamas | CLIP global=26.1, DINO global=31.24 |  |
+| car | CLIP global=19.18, DINO global=27.81 |  |
+| bird | CLIP global=19.09, DINO global=27.25 |  |
+| pants | CLIP global=16.42, DINO global=21.79 |  |
+| pajamas | CLIP global=19.29, DINO global=22.71 |  |
 
 ## frequency_full_dataset
 
@@ -93,24 +93,24 @@ Autofilled from `valid7018/valid7018_paper_stats.json` and metric CSVs.
 | rank2_lamp | proportion=0.0785 | household |
 | rank3_table | proportion=0.0644 | furniture_rooms |
 | rank4_couch | proportion=0.0635 | furniture_rooms |
-| rank5_pillow | proportion=0.056 | household |
+| rank5_pillow | proportion=0.0560 | household |
 
 ## frequency_full_dataset_bottom5
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| rank1_rock | proportion=0.0001 | outside |
-| rank2_pony | proportion=0.0001 | animals |
-| rank3_swing | proportion=0.0001 | outside |
-| rank4_eye | proportion=0.0001 | body_parts |
-| rank5_stick | proportion=0.0 | outside |
+| rank1_chips | proportion=0.0001 |  |
+| rank2_eye | proportion=0.0001 | body_parts |
+| rank3_ankle | proportion=0.0001 |  |
+| rank4_stick | proportion=0.0000 | outside |
+| rank5_sandwich | proportion=0.0000 |  |
 
 ## frequency_vs_dispersion_full_dataset
 
 | Metric | Value | Notes |
 |--------|-------|-------|
 | clip | rho=0.182, p=.095, n=85 | x=full dataset detection proportion; y=valid7018 global dispersion |
-| dinov3 | rho=0.261, p=.016, n=85 | x=full dataset detection proportion; y=valid7018 global dispersion |
+| dinov3 | rho=0.265, p=.014, n=85 | x=full dataset detection proportion; y=valid7018 global dispersion |
 
 ## frequency_notes
 
@@ -123,38 +123,38 @@ Autofilled from `valid7018/valid7018_paper_stats.json` and metric CSVs.
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| rank1_clock | global=21.17, local kNN=20.39 |  |
-| rank2_glasses | global=20.98, local kNN=21.97 |  |
-| rank3_door | global=21.45, local kNN=22.91 |  |
-| rank4_butterfly | global=22.85, local kNN=23.69 |  |
-| rank5_watch | global=22.14, local kNN=23.97 |  |
+| rank1_clock | global=15.68, local kNN=15.08 |  |
+| rank2_glasses | global=15.53, local kNN=16.25 |  |
+| rank3_door | global=15.88, local kNN=16.95 |  |
+| rank4_butterfly | global=16.94, local kNN=17.54 |  |
+| rank5_watch | global=16.39, local kNN=17.75 |  |
 
 ## clip_highest_local_non_body
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| rank1_book | global=29.17, local kNN=34.29 |  |
-| rank2_tray | global=28.75, local kNN=33.79 |  |
-| rank3_toy | global=28.34, local kNN=33.32 |  |
-| rank4_swing | global=28.02, local kNN=32.56 |  |
-| rank5_box | global=27.43, local kNN=31.68 |  |
+| rank1_book | global=21.59, local kNN=25.38 |  |
+| rank2_tray | global=21.32, local kNN=25.05 |  |
+| rank3_toy | global=21.02, local kNN=24.70 |  |
+| rank4_swing | global=20.74, local kNN=24.09 |  |
+| rank5_box | global=20.32, local kNN=23.46 |  |
 
 ## dino_lowest_local_non_body
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| rank1_clock | global=32.32, local kNN=29.7 |  |
-| rank2_butterfly | global=29.88, local kNN=31.12 |  |
-| rank3_slide | global=30.07, local kNN=32.59 |  |
-| rank4_stroller | global=29.35, local kNN=32.87 |  |
-| rank5_swing | global=29.79, local kNN=33.19 |  |
+| rank1_clock | global=23.55, local kNN=21.62 |  |
+| rank2_butterfly | global=21.81, local kNN=22.69 |  |
+| rank3_slide | global=21.89, local kNN=23.70 |  |
+| rank4_stroller | global=21.36, local kNN=23.90 |  |
+| rank5_swing | global=21.65, local kNN=24.10 |  |
 
 ## dino_highest_local_non_body
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| rank1_car | global=38.28, local kNN=45.81 |  |
-| rank2_dog | global=38.12, local kNN=44.83 |  |
-| rank3_bird | global=37.43, local kNN=42.94 |  |
-| rank4_bowl | global=35.32, local kNN=42.29 |  |
-| rank5_bucket | global=34.07, local kNN=42.14 |  |
+| rank1_car | global=27.81, local kNN=33.29 |  |
+| rank2_dog | global=27.70, local kNN=32.56 |  |
+| rank3_bird | global=27.25, local kNN=31.26 |  |
+| rank4_bowl | global=25.78, local kNN=30.84 |  |
+| rank5_bucket | global=24.90, local kNN=30.76 |  |
