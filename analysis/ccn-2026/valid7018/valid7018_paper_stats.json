@@ -23,72 +23,72 @@
     "tooth"
   ],
   "clip_global_all": {
-    "mean": 24.46,
-    "sd": 2.48,
-    "min": 17.7,
-    "max": 29.17,
+    "mean": 18.12,
+    "sd": 1.84,
+    "min": 13.1,
+    "max": 21.59,
     "n": 85
   },
   "dino_global_all": {
-    "mean": 32.08,
-    "sd": 2.39,
-    "min": 22.28,
-    "max": 38.28,
+    "mean": 23.36,
+    "sd": 1.76,
+    "min": 16.18,
+    "max": 27.81,
     "n": 85
   },
   "clip_local_all": {
-    "mean": 27.24,
-    "sd": 3.48,
-    "min": 17.56,
-    "max": 34.29,
+    "mean": 20.17,
+    "sd": 2.58,
+    "min": 13.01,
+    "max": 25.38,
     "n": 85
   },
   "dino_local_all": {
-    "mean": 37.17,
-    "sd": 3.55,
-    "min": 24.07,
-    "max": 45.81,
+    "mean": 27.05,
+    "sd": 2.6,
+    "min": 17.49,
+    "max": 33.29,
     "n": 85
   },
   "clip_global_non_body": {
-    "mean": 25.11,
-    "sd": 1.73,
-    "min": 20.98,
-    "max": 29.17,
+    "mean": 18.6,
+    "sd": 1.28,
+    "min": 15.53,
+    "max": 21.59,
     "n": 73
   },
   "dino_global_non_body": {
-    "mean": 32.59,
-    "sd": 1.86,
-    "min": 29.35,
-    "max": 38.28,
+    "mean": 23.73,
+    "sd": 1.36,
+    "min": 21.36,
+    "max": 27.81,
     "n": 73
   },
   "clip_local_non_body": {
-    "mean": 28.12,
-    "sd": 2.58,
-    "min": 20.39,
-    "max": 34.29,
+    "mean": 20.82,
+    "sd": 1.91,
+    "min": 15.08,
+    "max": 25.38,
     "n": 73
   },
   "dino_local_non_body": {
-    "mean": 37.85,
-    "sd": 2.91,
-    "min": 29.7,
-    "max": 45.81,
+    "mean": 27.55,
+    "sd": 2.12,
+    "min": 21.62,
+    "max": 33.29,
     "n": 73
   },
   "montage_categories_low_to_high_global": [
     "glasses",
-    "oven",
-    "balloon",
+    "couch",
+    "shoe",
     "paper",
     "book"
   ],
   "tsne_categories": [
     "glasses",
-    "oven",
-    "balloon",
+    "couch",
+    "shoe",
     "paper",
     "book"
   ],
@@ -102,264 +102,264 @@
   "clip_lowest_local_non_body": [
     {
       "category": "clock",
-      "mean_knn_dist": 20.39064567785064,
-      "global_dispersion": 21.16579158348703
+      "mean_knn_dist": 15.084993902922053,
+      "global_dispersion": 15.68319257653264
     },
     {
       "category": "glasses",
-      "mean_knn_dist": 21.96644299465419,
-      "global_dispersion": 20.9773598600813
+      "mean_knn_dist": 16.254991498687765,
+      "global_dispersion": 15.532280023971646
     },
     {
       "category": "door",
-      "mean_knn_dist": 22.91276627433331,
-      "global_dispersion": 21.446272173144973
+      "mean_knn_dist": 16.948552199377538,
+      "global_dispersion": 15.875370984370136
     },
     {
       "category": "butterfly",
-      "mean_knn_dist": 23.69165766443435,
-      "global_dispersion": 22.85413867365436
+      "mean_knn_dist": 17.535200448530173,
+      "global_dispersion": 16.938958449698045
     },
     {
       "category": "watch",
-      "mean_knn_dist": 23.971628427090803,
-      "global_dispersion": 22.138889272276888
+      "mean_knn_dist": 17.750641728546068,
+      "global_dispersion": 16.390472049447744
     }
   ],
   "clip_highest_local_non_body": [
     {
       "category": "book",
-      "mean_knn_dist": 34.28799711398056,
-      "global_dispersion": 29.17206560048567
+      "mean_knn_dist": 25.37780122509388,
+      "global_dispersion": 21.585951937032007
     },
     {
       "category": "tray",
-      "mean_knn_dist": 33.78912666442676,
-      "global_dispersion": 28.750285777232197
+      "mean_knn_dist": 25.045879061484527,
+      "global_dispersion": 21.322155056820883
     },
     {
       "category": "toy",
-      "mean_knn_dist": 33.32094042942536,
-      "global_dispersion": 28.339083198247963
+      "mean_knn_dist": 24.702908099922823,
+      "global_dispersion": 21.02310815539333
     },
     {
       "category": "swing",
-      "mean_knn_dist": 32.55708433995119,
-      "global_dispersion": 28.02180798450552
+      "mean_knn_dist": 24.085553483983198,
+      "global_dispersion": 20.737390507075837
     },
     {
       "category": "box",
-      "mean_knn_dist": 31.67509257046777,
-      "global_dispersion": 27.43288391166408
+      "mean_knn_dist": 23.46097316306284,
+      "global_dispersion": 20.321209157730028
     }
   ],
   "dino_lowest_local_non_body": [
     {
       "category": "clock",
-      "mean_knn_dist": 29.70148248392145,
-      "global_dispersion": 32.31814191877156
+      "mean_knn_dist": 21.61727008566564,
+      "global_dispersion": 23.55178951485996
     },
     {
       "category": "butterfly",
-      "mean_knn_dist": 31.11774145123227,
-      "global_dispersion": 29.879003100633216
+      "mean_knn_dist": 22.69221230906312,
+      "global_dispersion": 21.813371575633024
     },
     {
       "category": "slide",
-      "mean_knn_dist": 32.585681725788724,
-      "global_dispersion": 30.06978559145026
+      "mean_knn_dist": 23.702512914929773,
+      "global_dispersion": 21.889133608967605
     },
     {
       "category": "stroller",
-      "mean_knn_dist": 32.86827905462489,
-      "global_dispersion": 29.354837795787272
+      "mean_knn_dist": 23.901976827736934,
+      "global_dispersion": 21.358089595859774
     },
     {
       "category": "swing",
-      "mean_knn_dist": 33.19480334429827,
-      "global_dispersion": 29.79445294844852
+      "mean_knn_dist": 24.10173690528175,
+      "global_dispersion": 21.652377058644383
     }
   ],
   "dino_highest_local_non_body": [
     {
       "category": "car",
-      "mean_knn_dist": 45.81437606126397,
-      "global_dispersion": 38.27913526096942
+      "mean_knn_dist": 33.285154904018405,
+      "global_dispersion": 27.814822497207587
     },
     {
       "category": "dog",
-      "mean_knn_dist": 44.82746874402348,
-      "global_dispersion": 38.11982530099512
+      "mean_knn_dist": 32.55731188554197,
+      "global_dispersion": 27.70226743299525
     },
     {
       "category": "bird",
-      "mean_knn_dist": 42.94277497366311,
-      "global_dispersion": 37.4286729019377
+      "mean_knn_dist": 31.26099150350338,
+      "global_dispersion": 27.25417105725679
     },
     {
       "category": "bowl",
-      "mean_knn_dist": 42.29279017539511,
-      "global_dispersion": 35.31968714804973
+      "mean_knn_dist": 30.84494348967886,
+      "global_dispersion": 25.78035293475291
     },
     {
       "category": "bucket",
-      "mean_knn_dist": 42.137134202568525,
-      "global_dispersion": 34.07430714358962
+      "mean_knn_dist": 30.76213884999459,
+      "global_dispersion": 24.902481909764894
     }
   ],
   "correlations": [
     {
       "comparison": "clip_within",
-      "spearman_rho": 0.9479382450654681,
-      "p_value": 5.2076118126068195e-43
+      "spearman_rho": 0.9452804377564978,
+      "p_value": 3.8958862850305554e-42
     },
     {
       "comparison": "dinov3_within",
-      "spearman_rho": 0.8508696501856556,
-      "p_value": 6.43265667662362e-25
+      "spearman_rho": 0.8535079147938246,
+      "p_value": 3.243829439976443e-25
     },
     {
       "comparison": "cross_global",
-      "spearman_rho": 0.545124096150088,
-      "p_value": 6.882975677965644e-08
+      "spearman_rho": 0.5510455344928669,
+      "p_value": 4.6364760147623134e-08
     },
     {
       "comparison": "cross_local_knn",
-      "spearman_rho": 0.6262849325776823,
-      "p_value": 1.4515224464321168e-10
+      "spearman_rho": 0.6233926128590972,
+      "p_value": 1.8646245416332237e-10
     }
   ],
   "cdi_semantic_summary": [
     {
       "cdi_semantic": "toys",
       "n_categories": 5,
-      "clip_global_mean": 27.261088661094853,
-      "clip_global_sd": 1.5204963204895379,
-      "dino_global_mean": 32.8629015212735,
-      "dino_global_sd": 1.372016290355268,
-      "clip_local_mean": 31.05302045338799,
-      "dino_local_mean": 38.95626428794291,
-      "clip_global_z_mean": 1.1303486722267633,
-      "dino_global_z_mean": 0.32732277856902514,
-      "clip_local_z_mean": 1.0942177036199743,
-      "dino_local_z_mean": 0.5028310968036702
+      "clip_global_mean": 20.20931549119568,
+      "clip_global_sd": 1.1084111279920976,
+      "dino_global_mean": 23.989687998614965,
+      "dino_global_sd": 1.0332654523800537,
+      "clip_local_mean": 23.007743585382407,
+      "dino_local_mean": 28.409734103866253,
+      "clip_global_z_mean": 1.139034150044025,
+      "dino_global_z_mean": 0.3604936585237146,
+      "clip_local_z_mean": 1.099328640119112,
+      "dino_local_z_mean": 0.5235403784317129
     },
     {
       "cdi_semantic": "outside",
       "n_categories": 7,
-      "clip_global_mean": 26.012336588585793,
-      "clip_global_sd": 1.65435755034214,
-      "dino_global_mean": 32.283430148734574,
-      "dino_global_sd": 2.205011953819336,
-      "clip_local_mean": 29.090163839146935,
-      "dino_local_mean": 36.52521896642616,
-      "clip_global_z_mean": 0.6258757966787829,
-      "dino_global_z_mean": 0.0852992181843908,
-      "clip_local_z_mean": 0.5306434011927331,
-      "dino_local_z_mean": -0.18119347866659963
+      "clip_global_mean": 19.262304355137193,
+      "clip_global_sd": 1.2180490454270634,
+      "dino_global_mean": 23.494892526720303,
+      "dino_global_sd": 1.5952877059698112,
+      "clip_local_mean": 21.532520572054093,
+      "dino_local_mean": 26.564028786165785,
+      "clip_global_z_mean": 0.6236729067170785,
+      "dino_global_z_mean": 0.07891643855655608,
+      "clip_local_z_mean": 0.5281859350535351,
+      "dino_local_z_mean": -0.186118010563574
     },
     {
       "cdi_semantic": "vehicles",
       "n_categories": 2,
-      "clip_global_mean": 25.286363387431983,
-      "clip_global_sd": 0.8481181299729752,
-      "dino_global_mean": 33.816986528378344,
-      "dino_global_sd": 6.310431254956213,
-      "clip_local_mean": 28.02995149958261,
-      "dino_local_mean": 39.34132755794443,
-      "clip_global_z_mean": 0.33259597242913747,
-      "dino_global_z_mean": 0.725808469617726,
-      "clip_local_z_mean": 0.22623582227961547,
-      "dino_local_z_mean": 0.6111765634474815
+      "clip_global_mean": 18.72936879519569,
+      "clip_global_sd": 0.6327733541401196,
+      "dino_global_mean": 24.58645604653368,
+      "dino_global_sd": 4.56559961885333,
+      "clip_local_mean": 20.760332321349228,
+      "dino_local_mean": 28.59356586587767,
+      "clip_global_z_mean": 0.33365062257824457,
+      "dino_global_z_mean": 0.7001012286066395,
+      "clip_local_z_mean": 0.22922795897613812,
+      "dino_local_z_mean": 0.5942221664853576
     },
     {
       "cdi_semantic": "household",
       "n_categories": 25,
-      "clip_global_mean": 25.127741071283843,
-      "clip_global_sd": 1.8586310263206045,
-      "dino_global_mean": 32.93514485979221,
-      "dino_global_sd": 1.4846696050275596,
-      "clip_local_mean": 27.855395180391362,
-      "dino_local_mean": 38.28989704570759,
-      "clip_global_z_mean": 0.268515473413389,
-      "dino_global_z_mean": 0.3574961241922325,
-      "clip_local_z_mean": 0.17611730872710588,
-      "dino_local_z_mean": 0.31533497489142054
+      "clip_global_mean": 18.616940888594918,
+      "clip_global_sd": 1.3798912592547932,
+      "dino_global_mean": 24.02119294222773,
+      "dino_global_sd": 1.0939078910552953,
+      "clip_local_mean": 20.629097451609397,
+      "dino_local_mean": 27.90289367026958,
+      "clip_global_z_mean": 0.272467618995443,
+      "dino_global_z_mean": 0.3784224289785743,
+      "clip_local_z_mean": 0.17841947929208601,
+      "dino_local_z_mean": 0.3286644347290576
     },
     {
       "cdi_semantic": "animals",
       "n_categories": 5,
-      "clip_global_mean": 24.91113266001205,
-      "clip_global_sd": 1.6425082662230286,
-      "dino_global_mean": 34.039007107863405,
-      "dino_global_sd": 3.5685424298890713,
-      "clip_local_mean": 27.256467283258207,
-      "dino_local_mean": 38.542572019222106,
-      "clip_global_z_mean": 0.18100965820172235,
-      "dino_global_z_mean": 0.8185381775413447,
-      "clip_local_z_mean": 0.004153463083931963,
-      "dino_local_z_mean": 0.38643027285254494
+      "clip_global_mean": 18.477060886375565,
+      "clip_global_sd": 1.2261415247911795,
+      "dino_global_mean": 24.78409107875574,
+      "dino_global_sd": 2.5679272487019973,
+      "clip_local_mean": 20.191899195829762,
+      "dino_local_mean": 28.03848917007374,
+      "clip_global_z_mean": 0.1963452492412931,
+      "dino_global_z_mean": 0.8125709784370414,
+      "clip_local_z_mean": 0.00915517674262598,
+      "dino_local_z_mean": 0.38079977996711556
     },
     {
       "cdi_semantic": "furniture_rooms",
       "n_categories": 14,
-      "clip_global_mean": 24.67559187257687,
-      "clip_global_sd": 1.4725061559722452,
-      "dino_global_mean": 32.47772904853568,
-      "dino_global_sd": 1.0390751130155458,
-      "clip_local_mean": 27.706597642863045,
-      "dino_local_mean": 37.40666484150115,
-      "clip_global_z_mean": 0.08585551114392052,
-      "dino_global_z_mean": 0.16645061536669203,
-      "clip_local_z_mean": 0.13339464227913475,
-      "dino_local_z_mean": 0.06681943790133095
+      "clip_global_mean": 18.263806723480364,
+      "clip_global_sd": 1.0894324835235087,
+      "dino_global_mean": 23.604396291542454,
+      "dino_global_sd": 0.7614470529429633,
+      "clip_local_mean": 20.505062900975354,
+      "dino_local_mean": 27.184890537326076,
+      "clip_global_z_mean": 0.08029283301339167,
+      "dino_global_z_mean": 0.14123262256788005,
+      "clip_local_z_mean": 0.13039865252170443,
+      "dino_local_z_mean": 0.05259818421129978
     },
     {
       "cdi_semantic": "clothing",
       "n_categories": 13,
-      "clip_global_mean": 24.65374066831705,
-      "clip_global_sd": 1.3620258314525757,
-      "dino_global_mean": 31.636172306891346,
-      "dino_global_sd": 1.0984819187434927,
-      "clip_local_mean": 28.243558691436927,
-      "dino_local_mean": 37.71434074047614,
-      "clip_global_z_mean": 0.07702802641751685,
-      "dino_global_z_mean": -0.18503621992950892,
-      "clip_local_z_mean": 0.28756660073247053,
-      "dino_local_z_mean": 0.15339037687810467
+      "clip_global_mean": 18.243806883416564,
+      "clip_global_sd": 1.0052553039751788,
+      "dino_global_mean": 22.999527399948622,
+      "dino_global_sd": 0.8145123596651711,
+      "clip_local_mean": 20.904345779037246,
+      "dino_local_mean": 27.41298434177452,
+      "clip_global_z_mean": 0.06940896686951642,
+      "dino_global_z_mean": -0.20298495947148892,
+      "clip_local_z_mean": 0.2849837566058194,
+      "dino_local_z_mean": 0.14029836053541536
     },
     {
       "cdi_semantic": "food_drink",
       "n_categories": 2,
-      "clip_global_mean": 22.82513538485651,
-      "clip_global_sd": 0.12484572009280812,
-      "dino_global_mean": 30.7806033831587,
-      "dino_global_sd": 1.7135032539436177,
-      "clip_local_mean": 25.051378439965,
-      "dino_local_mean": 35.16362508017647,
-      "clip_global_z_mean": -0.6616948841567748,
-      "dino_global_z_mean": -0.5423754206029905,
-      "clip_local_z_mean": -0.6289704226001823,
-      "dino_local_z_mean": -0.5643059084356055
+      "clip_global_mean": 16.90956233151332,
+      "clip_global_sd": 0.08075883050879466,
+      "dino_global_mean": 22.458494807614606,
+      "dino_global_sd": 1.2351796058146725,
+      "clip_local_mean": 18.546420807807614,
+      "dino_local_mean": 25.64377139554169,
+      "clip_global_z_mean": -0.6566837948618427,
+      "dino_global_z_mean": -0.5108747076894535,
+      "clip_local_z_mean": -0.6279030640596128,
+      "dino_local_z_mean": -0.5399493459497425
     },
     {
       "cdi_semantic": "body_parts",
       "n_categories": 12,
-      "clip_global_mean": 20.503327124873227,
-      "clip_global_sd": 2.6997349149210903,
-      "dino_global_mean": 28.97551802780156,
-      "dino_global_sd": 3.0008305472560064,
-      "clip_local_mean": 21.89877967991198,
-      "dino_local_mean": 32.99775515802859,
-      "clip_global_z_mean": -1.599662728351345,
-      "dino_global_z_mean": -1.2962921888939907,
-      "clip_local_z_mean": -1.5341428300696112,
-      "dino_local_z_mean": -1.1737179341631676
+      "clip_global_mean": 15.170849387432826,
+      "clip_global_sd": 1.9965028870895343,
+      "dino_global_mean": 21.07252374411937,
+      "dino_global_sd": 2.2104305899284817,
+      "clip_local_mean": 16.20060360002923,
+      "dino_local_mean": 23.991179979667574,
+      "clip_global_z_mean": -1.6028873087713518,
+      "dino_global_z_mean": -1.2996003553182593,
+      "clip_local_z_mean": -1.5361022810831815,
+      "dino_local_z_mean": -1.1753570411054415
     }
   ],
   "cdi_semantic_text": {
     "highest_global_group": "toys",
-    "highest_global_clip_z": 1.13,
+    "highest_global_clip_z": 1.14,
     "lowest_global_group": "body_parts",
     "lowest_global_clip_z": -1.6
   },
@@ -374,8 +374,8 @@
         "model": "clip",
         "frequency_column": "proportion",
         "dispersion_column": "clip_global_dispersion",
-        "spearman_rho": 0.18248974008207935,
-        "p_value": 0.09459734736483214,
+        "spearman_rho": 0.1823529411764706,
+        "p_value": 0.09484910163673936,
         "n_categories": 85
       },
       "dinov3": {
@@ -387,8 +387,8 @@
         "model": "dinov3",
         "frequency_column": "proportion",
         "dispersion_column": "dinov3_global_dispersion",
-        "spearman_rho": 0.2611686535079148,
-        "p_value": 0.015766979583955516,
+        "spearman_rho": 0.2654094195817862,
+        "p_value": 0.01409146585812018,
         "n_categories": 85
       }
     },
@@ -402,8 +402,8 @@
         "model": "clip",
         "frequency_column": "proportion",
         "dispersion_column": "clip_global_dispersion",
-        "spearman_rho": 0.18248974008207935,
-        "p_value": 0.09459734736483214,
+        "spearman_rho": 0.1823529411764706,
+        "p_value": 0.09484910163673936,
         "n_categories": 85
       },
       "dinov3": {
@@ -415,8 +415,8 @@
         "model": "dinov3",
         "frequency_column": "proportion",
         "dispersion_column": "dinov3_global_dispersion",
-        "spearman_rho": 0.2611686535079148,
-        "p_value": 0.015766979583955516,
+        "spearman_rho": 0.2654094195817862,
+        "p_value": 0.01409146585812018,
         "n_categories": 85
       }
     },
@@ -430,8 +430,8 @@
         "model": "clip",
         "frequency_column": "proportion",
         "dispersion_column": "clip_global_dispersion",
-        "spearman_rho": -0.019878520479521194,
-        "p_value": 0.8567010662007943,
+        "spearman_rho": -0.020552865569534454,
+        "p_value": 0.8518941896658565,
         "n_categories": 85
       },
       "dinov3": {
@@ -443,8 +443,8 @@
         "model": "dinov3",
         "frequency_column": "proportion",
         "dispersion_column": "dinov3_global_dispersion",
-        "spearman_rho": 0.03709875306797565,
-        "p_value": 0.7360525227614622,
+        "spearman_rho": 0.041389151539219404,
+        "p_value": 0.7068422540750385,
         "n_categories": 85
       }
     },
@@ -458,8 +458,8 @@
         "model": "clip",
         "frequency_column": "proportion",
         "dispersion_column": "clip_global_dispersion",
-        "spearman_rho": 0.18248974008207935,
-        "p_value": 0.09459734736483214,
+        "spearman_rho": 0.1823529411764706,
+        "p_value": 0.09484910163673936,
         "n_categories": 85
       },
       "dinov3": {
@@ -471,8 +471,8 @@
         "model": "dinov3",
         "frequency_column": "proportion",
         "dispersion_column": "dinov3_global_dispersion",
-        "spearman_rho": 0.2611686535079148,
-        "p_value": 0.015766979583955516,
+        "spearman_rho": 0.2654094195817862,
+        "p_value": 0.01409146585812018,
         "n_categories": 85
       }
     }
@@ -482,40 +482,40 @@
       "model": "clip",
       "frequency_definition": "annotation_pool_proportion",
       "frequency_column": "proportion",
-      "spearman_rho": -0.019878520479521194,
-      "p_value": 0.8567010662007943,
+      "spearman_rho": -0.020552865569534454,
+      "p_value": 0.8518941896658565,
       "n_categories": 85
     },
     {
       "model": "clip",
       "frequency_definition": "annotation_pool_count_instances",
       "frequency_column": "count_instances",
-      "spearman_rho": -0.019878520479521194,
-      "p_value": 0.8567010662007943,
+      "spearman_rho": -0.020552865569534454,
+      "p_value": 0.8518941896658565,
       "n_categories": 85
     },
     {
       "model": "clip",
       "frequency_definition": "full_dataset_prop129_denom",
       "frequency_column": "ms_prop129",
-      "spearman_rho": 0.18248974008207935,
-      "p_value": 0.09459734736483214,
+      "spearman_rho": 0.1823529411764706,
+      "p_value": 0.09484910163673936,
       "n_categories": 85
     },
     {
       "model": "clip",
       "frequency_definition": "full_dataset_prop_renorm85",
       "frequency_column": "ms_prop85",
-      "spearman_rho": 0.18248974008207935,
-      "p_value": 0.09459734736483214,
+      "spearman_rho": 0.1823529411764706,
+      "p_value": 0.09484910163673936,
       "n_categories": 85
     },
     {
       "model": "clip",
       "frequency_definition": "full_dataset_raw_count129",
       "frequency_column": "ms_count129",
-      "spearman_rho": 0.18248974008207935,
-      "p_value": 0.09459734736483214,
+      "spearman_rho": 0.1823529411764706,
+      "p_value": 0.09484910163673936,
       "n_categories": 85
     },
     {
@@ -530,40 +530,40 @@
       "model": "dinov3",
       "frequency_definition": "annotation_pool_proportion",
       "frequency_column": "proportion",
-      "spearman_rho": 0.03709875306797565,
-      "p_value": 0.7360525227614622,
+      "spearman_rho": 0.041389151539219404,
+      "p_value": 0.7068422540750385,
       "n_categories": 85
     },
     {
       "model": "dinov3",
       "frequency_definition": "annotation_pool_count_instances",
       "frequency_column": "count_instances",
-      "spearman_rho": 0.03709875306797565,
-      "p_value": 0.7360525227614622,
+      "spearman_rho": 0.041389151539219404,
+      "p_value": 0.7068422540750385,
       "n_categories": 85
     },
     {
       "model": "dinov3",
       "frequency_definition": "full_dataset_prop129_denom",
       "frequency_column": "ms_prop129",
-      "spearman_rho": 0.2611686535079148,
-      "p_value": 0.015766979583955516,
+      "spearman_rho": 0.2654094195817862,
+      "p_value": 0.01409146585812018,
       "n_categories": 85
     },
     {
       "model": "dinov3",
       "frequency_definition": "full_dataset_prop_renorm85",
       "frequency_column": "ms_prop85",
-      "spearman_rho": 0.2611686535079148,
-      "p_value": 0.015766979583955516,
+      "spearman_rho": 0.2654094195817862,
+      "p_value": 0.01409146585812018,
       "n_categories": 85
     },
     {
       "model": "dinov3",
       "frequency_definition": "full_dataset_raw_count129",
       "frequency_column": "ms_count129",
-      "spearman_rho": 0.2611686535079148,
-      "p_value": 0.015766979583955516,
+      "spearman_rho": 0.2654094195817862,
+      "p_value": 0.01409146585812018,
       "n_categories": 85
     },
     {

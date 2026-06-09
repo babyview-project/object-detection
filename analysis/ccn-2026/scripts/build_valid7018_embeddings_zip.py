@@ -3,8 +3,8 @@
 
 Per-crop vectors are read from ``clip_embeddings_new`` and
 ``facebook_dinov3-vitb16-pretrain-lvd1689m`` under ``BV_EMBEDDINGS_BASE``, then
-feature-wise globally normalized using mu/sigma from grouped age-month dirs
-(notebook 05; see ``valid7018_embedding_normalize.py``).
+feature-wise z-scored using mu/sigma fit on all 7,018 crops pooled across
+valid85 categories (see ``valid7018_embedding_normalize.py``).
 
 Default ``BV_EMBEDDINGS_BASE``::
   /data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings
@@ -20,6 +20,7 @@ import csv
 import io
 import json
 import os
+import shutil
 import sys
 import zipfile
 from datetime import datetime, timezone
@@ -54,7 +55,12 @@ from exemplar_set_zscore_embeddings import (  # noqa: E402
     valid85_npy_paths_by_category_from_manifest,
 )
 
-from valid7018_embedding_normalize import fit_and_save_norm_stats, load_norm_stats  # noqa: E402
+from valid7018_embedding_normalize import (  # noqa: E402
+    NORMALIZATION_ID,
+    apply_norm_stats,
+    fit_and_save_cohort_norm_stats,
+    load_norm_stats,
+)
 
 
 README_TXT = """\
@@ -65,8 +71,8 @@ BabyView CCN 2026 — valid7018 embedding archive
   - CLIP ViT-B/32 512-d vectors
   - DINOv3 ViT-B/16 768-d vectors
 
-Vectors are feature-wise globally normalized (notebook 05 stats from grouped
-age-month embeddings under BV_EMBEDDINGS_BASE), then stored as float16 .npy.
+Vectors are feature-wise z-scored: mu/sigma fit on all 7,018 per-crop vectors
+pooled across valid85 categories (cohort-internal), then stored as float16 .npy.
 
 Cohort: sampled_object_crops CSV (regular trials) ∩ per_file_precision > 0.6
         ∩ included_categories_valid85 ∩ per-class precision > 0.6
@@ -104,6 +110,16 @@ def _write_npy_to_zip(zf: zipfile.ZipFile, arcname: str, vec: np.ndarray) -> Non
     zf.writestr(arcname, buf.getvalue())
 
 
+def _save_norm_stats_to(paths: list[Path], clip_emb: dict, dino_emb: dict) -> Path:
+    primary = paths[0]
+    fit_and_save_cohort_norm_stats(clip_emb, dino_emb, primary)
+    for dst in paths[1:]:
+        if dst.resolve() != primary.resolve():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(primary, dst)
+    return primary
+
+
 def main() -> int:
     cfg = load_config()
     out_zip = Path(os.environ.get("CCN_VALID7018_ZIP", str(DEFAULT_ZIP))).expanduser()
@@ -115,19 +131,6 @@ def main() -> int:
             "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings",
         )
     ).expanduser()
-
-    norm_stats_path = DEFAULT_NORM_STATS if DEFAULT_NORM_STATS.is_file() else SHARED_NORM_STATS
-    if not norm_stats_path.is_file():
-        threshold = str(cfg.get("clip_filter_list_threshold", "0.27"))
-        print(f"Fitting norm stats → {norm_stats_path}")
-        fit_and_save_norm_stats(emb_base, norm_stats_path, threshold=threshold)
-        if norm_stats_path != DEFAULT_NORM_STATS:
-            fit_and_save_norm_stats(emb_base, DEFAULT_NORM_STATS, threshold=threshold)
-        if norm_stats_path != SHARED_NORM_STATS:
-            fit_and_save_norm_stats(emb_base, SHARED_NORM_STATS, threshold=threshold)
-    norm = load_norm_stats(norm_stats_path)
-    mu_c, sig_c = norm["clip"]
-    mu_d, sig_d = norm["dinov3"]
 
     exemplar_df = build_valid85_sampled_exemplar_table(
         CATEGORY_FILES["valid85"],
@@ -160,7 +163,9 @@ def main() -> int:
         npy_fname_map,
     )
 
-    rows: list[dict[str, str]] = []
+    rows: list[dict] = []
+    clip_emb: dict[str, list[np.ndarray]] = {}
+    dino_emb: dict[str, list[np.ndarray]] = {}
     missing_clip = 0
     missing_dino = 0
     n_listed = 0
@@ -177,19 +182,34 @@ def main() -> int:
             if dino_src is None or not Path(dino_src).is_file():
                 missing_dino += 1
                 continue
+            clip_v = _load_vec(clip_src, crop_prefix, crop_prefix_new)
+            dino_v = _load_vec(Path(dino_src), crop_prefix, crop_prefix_new)
+            idx = len(clip_emb.get(cat, []))
+            clip_emb.setdefault(cat, []).append(clip_v)
+            dino_emb.setdefault(cat, []).append(dino_v)
             rows.append(
                 {
                     "category": cat,
                     "stem": stem,
                     "clip_npy": archive_member(cat, stem, "clip"),
                     "dinov3_npy": archive_member(cat, stem, "dinov3"),
-                    "_clip_src": clip_src,
-                    "_dino_src": Path(dino_src),
+                    "_idx": idx,
                 }
             )
 
     if not rows:
         raise RuntimeError("No exemplars with both CLIP and DINOv3 files on disk.")
+
+    clip_emb_stacked = {cat: np.stack(vecs, axis=0) for cat, vecs in clip_emb.items()}
+    dino_emb_stacked = {cat: np.stack(vecs, axis=0) for cat, vecs in dino_emb.items()}
+
+    norm_stats_path = _save_norm_stats_to(
+        [DEFAULT_NORM_STATS, SHARED_NORM_STATS],
+        clip_emb_stacked,
+        dino_emb_stacked,
+    )
+    norm = load_norm_stats(norm_stats_path)
+    clip_norm, dino_norm = apply_norm_stats(clip_emb_stacked, dino_emb_stacked, norm)
 
     tmp_zip = out_zip.with_suffix(".zip.part")
     if tmp_zip.exists():
@@ -207,10 +227,9 @@ def main() -> int:
         zf.writestr("manifest.csv", buf.getvalue())
 
         for r in rows:
-            clip_v = (_load_vec(r["_clip_src"], crop_prefix, crop_prefix_new) - mu_c) / sig_c
-            dino_v = (_load_vec(r["_dino_src"], crop_prefix, crop_prefix_new) - mu_d) / sig_d
-            _write_npy_to_zip(zf, r["clip_npy"], clip_v)
-            _write_npy_to_zip(zf, r["dinov3_npy"], dino_v)
+            cat, idx = r["category"], r["_idx"]
+            _write_npy_to_zip(zf, r["clip_npy"], clip_norm[cat][idx])
+            _write_npy_to_zip(zf, r["dinov3_npy"], dino_norm[cat][idx])
 
     tmp_zip.replace(out_zip)
 
@@ -220,7 +239,7 @@ def main() -> int:
         "embeddings_base": str(emb_base),
         "clip_embeddings_dir": str(cfg["clip_embeddings_dir"]),
         "dinov3_embeddings_dir": str(cfg["dinov3_embeddings_dir"]),
-        "normalization": "featurewise_global_from_grouped_age_month",
+        "normalization": NORMALIZATION_ID,
         "norm_stats_json": str(norm_stats_path.relative_to(REPO_ROOT)),
         "n_exemplars_in_zip": len(rows),
         "n_paths_listed_cohort": n_listed,

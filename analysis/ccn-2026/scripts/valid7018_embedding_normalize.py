@@ -1,12 +1,13 @@
-"""Feature-wise global normalization for valid7018 per-crop embeddings.
+"""Feature-wise z-score normalization for the valid7018 per-crop cohort.
 
-Matches ``05_normalize_grouped_embeddings.ipynb``: compute per-dimension mean/std
-from grouped age-month ``*_month_level_avg.npy`` files (0.27-filtered, excluding
-subject 00270001), then apply ``(x - mu) / sigma`` to each valid7018 crop vector.
+Methodology (manuscript-aligned z-score, cohort-internal stats):
+  - Stack all per-crop vectors for one model across valid85 categories (N=7,018)
+  - ``mu = mean(axis=0)``, ``sigma = std(axis=0) + eps`` per embedding dimension
+  - Apply ``(x - mu) / sigma`` to each exemplar
 
-The committed ``*_filtered-0.27_normalized`` trees store already-normalized
-age-month vectors; valid7018 uses the same statistics on per-crop ``.npy``
-from ``clip_embeddings_new`` / DINO flat dirs.
+Same z-score recipe as ``zscore_rows()`` in ``exemplar_set_zscore_embeddings.py``,
+but statistics are fit on the 7,018 validated crops (not grouped age-month files
+and not z-scoring across category means).
 """
 from __future__ import annotations
 
@@ -14,89 +15,46 @@ import json
 from pathlib import Path
 
 import numpy as np
-from tqdm.auto import tqdm
 
-EXCLUDED_SUBJECT = "00270001"
-DEFAULT_THRESHOLD = "0.27"
-
-
-def grouped_embedding_dirs(emb_base: Path, threshold: str = DEFAULT_THRESHOLD) -> dict[str, Path]:
-    emb_base = emb_base.expanduser()
-    return {
-        "clip_stats_source": emb_base / f"clip_embeddings_grouped_by_age-mo_filtered-{threshold}",
-        "dinov3_stats_source": emb_base / f"dinov3_embeddings_grouped_by_age-mo_filtered-{threshold}",
-        "clip_normalized_reference": emb_base
-        / f"clip_embeddings_grouped_by_age-mo_filtered-{threshold}_normalized",
-        "dinov3_normalized_reference": emb_base
-        / f"dinov3_embeddings_grouped_by_age-mo_filtered-{threshold}_normalized",
-    }
+STATS_EPS = 1e-10
+NORMALIZATION_ID = "featurewise_zscore_within_valid7018_cohort"
 
 
-def _is_month_level_avg(path: Path) -> bool:
-    return path.suffix.lower() == ".npy" and path.stem.endswith("_month_level_avg")
+def stack_category_embeddings(category_embeddings: dict[str, np.ndarray]) -> np.ndarray:
+    """Stack per-category exemplar matrices into (n_exemplars, dim)."""
+    if not category_embeddings:
+        raise ValueError("category_embeddings is empty")
+    blocks = [
+        np.asarray(category_embeddings[cat], dtype=np.float64)
+        for cat in sorted(category_embeddings.keys())
+    ]
+    return np.vstack(blocks)
 
 
-def _subject_from_month_level_stem(stem: str) -> str:
-    parts = stem.split("_")
-    return parts[0] if parts else ""
-
-
-def fit_featurewise_stats_from_grouped_dir(
-    grouped_dir: Path,
-    exclude_subject: str = EXCLUDED_SUBJECT,
-    max_files: int | None = None,
-) -> tuple[np.ndarray, np.ndarray, dict]:
-    """Return (mu, sigma, meta) from all month-level avg .npy under grouped_dir."""
-    grouped_dir = grouped_dir.expanduser()
-    if not grouped_dir.is_dir():
-        raise FileNotFoundError(f"Grouped embedding dir not found: {grouped_dir}")
-
-    files: list[Path] = []
-    for cat_dir in sorted(grouped_dir.iterdir()):
-        if not cat_dir.is_dir():
-            continue
-        for npy in sorted(cat_dir.glob("*.npy")):
-            if not _is_month_level_avg(npy):
-                continue
-            if exclude_subject and _subject_from_month_level_stem(npy.stem) == exclude_subject:
-                continue
-            files.append(npy)
-            if max_files is not None and len(files) >= max_files:
-                break
-        if max_files is not None and len(files) >= max_files:
-            break
-
-    if not files:
-        raise RuntimeError(f"No month_level_avg .npy files under {grouped_dir}")
-
-    dim: int | None = None
-    count = 0
-    mean: np.ndarray | None = None
-    m2: np.ndarray | None = None
-
-    for path in tqdm(files, desc=f"Fit norm stats {grouped_dir.name}", unit="file"):
-        v = np.asarray(np.load(path, mmap_mode="r"), dtype=np.float64).ravel()
-        if dim is None:
-            dim = v.shape[0]
-            mean = np.zeros(dim, dtype=np.float64)
-            m2 = np.zeros(dim, dtype=np.float64)
-        count += 1
-        delta = v - mean
-        mean += delta / count
-        delta2 = v - mean
-        m2 += delta * delta2
-
-    assert mean is not None and m2 is not None and dim is not None
-    sigma = np.sqrt(m2 / max(count - 1, 1))
-    sigma = np.where(sigma > 1e-10, sigma, 1.0)
+def fit_featurewise_stats_from_matrix(X: np.ndarray) -> tuple[np.ndarray, np.ndarray, dict]:
+    """Return (mu, sigma, meta) from exemplar matrix X (n, dim)."""
+    X = np.asarray(X, dtype=np.float64)
+    if X.ndim != 2 or X.shape[0] < 1:
+        raise ValueError(f"Expected 2-D matrix with >=1 row, got {X.shape}")
+    mu = X.mean(axis=0)
+    sigma = X.std(axis=0, ddof=0) + STATS_EPS
     meta = {
-        "stats_source_dir": str(grouped_dir),
-        "n_files": count,
-        "embedding_dim": int(dim),
-        "exclude_subject": exclude_subject,
-        "file_pattern": "*_month_level_avg.npy",
+        "n_exemplars": int(X.shape[0]),
+        "embedding_dim": int(X.shape[1]),
+        "std_ddof": 0,
+        "stats_eps": STATS_EPS,
     }
-    return mean, sigma, meta
+    return mu, sigma, meta
+
+
+def fit_featurewise_stats_from_cohort(
+    category_embeddings: dict[str, np.ndarray],
+) -> tuple[np.ndarray, np.ndarray, dict]:
+    """Fit mu/sigma on all exemplars pooled across valid85 categories."""
+    X = stack_category_embeddings(category_embeddings)
+    mu, sigma, meta = fit_featurewise_stats_from_matrix(X)
+    meta["n_categories"] = int(len(category_embeddings))
+    return mu, sigma, meta
 
 
 def normalize_category_embeddings(
@@ -111,34 +69,34 @@ def normalize_category_embeddings(
     return out
 
 
-def fit_and_save_norm_stats(
-    emb_base: Path,
+def fit_and_save_cohort_norm_stats(
+    clip_emb: dict[str, np.ndarray],
+    dino_emb: dict[str, np.ndarray],
     out_path: Path,
-    threshold: str = DEFAULT_THRESHOLD,
-    exclude_subject: str = EXCLUDED_SUBJECT,
 ) -> dict:
-    dirs = grouped_embedding_dirs(emb_base, threshold=threshold)
     payload: dict = {
-        "normalization": "featurewise_global_from_grouped_age_month",
-        "threshold": threshold,
-        "exclude_subject": exclude_subject,
+        "normalization": NORMALIZATION_ID,
         "note": (
-            "mu/sigma fit on grouped age-month avg .npy (notebook 05); applied to valid7018 per-crop vectors."
+            "Per-model feature-wise z-score: mu/sigma fit on all 7,018 per-crop "
+            "vectors pooled across valid85 categories (cohort-internal)."
         ),
         "models": {},
     }
-    for model, key in [("clip", "clip_stats_source"), ("dinov3", "dinov3_stats_source")]:
-        mu, sigma, meta = fit_featurewise_stats_from_grouped_dir(
-            dirs[key], exclude_subject=exclude_subject
-        )
+    for model, emb in [("clip", clip_emb), ("dinov3", dino_emb)]:
+        mu, sigma, meta = fit_featurewise_stats_from_cohort(emb)
         payload["models"][model] = {
             **meta,
             "mu": mu.tolist(),
             "sigma": sigma.tolist(),
         }
+    out_path = out_path.expanduser()
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, indent=2))
     return payload
+
+
+# Backward-compatible alias used by build/compute scripts.
+fit_and_save_norm_stats = fit_and_save_cohort_norm_stats
 
 
 def load_norm_stats(stats_path: Path) -> dict[str, tuple[np.ndarray, np.ndarray]]:

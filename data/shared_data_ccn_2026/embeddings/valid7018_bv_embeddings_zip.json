@@ -1,16 +1,16 @@
 {
-  "generated_utc": "2026-06-09T04:39:21.355023+00:00",
+  "generated_utc": "2026-06-09T05:54:20.290158+00:00",
   "zip_path": "data/shared_data_ccn_2026/embeddings/valid7018_bv_embeddings.zip",
   "embeddings_base": "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings",
   "clip_embeddings_dir": "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/clip_embeddings_new",
   "dinov3_embeddings_dir": "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings/facebook_dinov3-vitb16-pretrain-lvd1689m",
-  "normalization": "featurewise_global_from_grouped_age_month",
-  "norm_stats_json": "data/shared_data_ccn_2026/embeddings/valid7018_embedding_norm_stats.json",
+  "normalization": "featurewise_zscore_within_valid7018_cohort",
+  "norm_stats_json": "analysis/ccn-2026/valid7018/valid7018_embedding_norm_stats.json",
   "n_exemplars_in_zip": 7018,
   "n_paths_listed_cohort": 7018,
   "n_rows_sampled_validated": 7018,
   "missing_clip": 0,
   "missing_dino": 0,
-  "zip_size_bytes": 21948269,
+  "zip_size_bytes": 21947992,
   "precision_threshold": 0.6
 }

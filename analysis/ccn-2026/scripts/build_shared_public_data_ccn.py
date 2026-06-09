@@ -246,7 +246,7 @@ Primary cohort (Methods-aligned):
   the same 7,018 rater-validated crops (`valid7018_paper_stats.json` for headline ρ)
 - `embeddings/valid7018_bv_embeddings.zip` — paired CLIP+DINO `.npy` (~20 MB;
   feature-wise globally normalized; run `build_valid7018_embeddings_zip.py`)
-- `embeddings/valid7018_embedding_norm_stats.json` — μ/σ used for normalization
+- `embeddings/valid7018_embedding_norm_stats.json` — cohort z-score μ/σ (fit on 7,018 crops)
 
 Also included:
 - Category sets, per-class validation precision, frequency tables, CDI semantic map (`inputs/`)

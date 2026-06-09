@@ -33,8 +33,8 @@ Checks Spearman ρ, category counts (7,018 exemplars / 85 categories), and per-c
 Embeddings live under ``/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings``
 (override with ``BV_EMBEDDINGS_BASE``; see ``paths.example.env``). Per-crop vectors
 from ``clip_embeddings_new`` and ``facebook_dinov3-vitb16-pretrain-lvd1689m`` are
-feature-wise globally normalized using μ/σ fit from grouped age-month dirs
-(notebook 05; ``valid7018_embedding_normalize.py``).
+feature-wise z-scored using μ/σ fit on all 7,018 crops pooled across valid85
+(``valid7018_embedding_normalize.py``).
 
 ```bash
 export BV_EMBEDDINGS_BASE=/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings

@@ -13,7 +13,7 @@ paths are resolved with case-aware lookup from the CLIP filter list (36 stems us
 in the date slot on disk but are lowercased in the annotation table).
 
 Both metrics use the **same** exemplar vectors per category (Euclidean, k=5), after
-feature-wise global normalization (notebook 05 stats from grouped age-month embeddings).
+feature-wise z-score normalization fit on all 7,018 crops pooled across valid85.
 
 Examples::
 
@@ -66,9 +66,9 @@ from exemplar_set_zscore_embeddings import (  # noqa: E402
 
 from valid7018_category_metrics import compute_category_metrics  # noqa: E402
 from valid7018_embedding_normalize import (  # noqa: E402
+    NORMALIZATION_ID,
     apply_norm_stats,
     fit_and_save_norm_stats,
-    grouped_embedding_dirs,
     load_norm_stats,
 )
 
@@ -101,7 +101,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--fit-norm-stats",
         action="store_true",
-        help="Recompute mu/sigma from grouped age-month dirs (maintainer; needs BV_EMBEDDINGS_BASE)",
+        help="Recompute mu/sigma from loaded valid7018 cohort embeddings",
     )
     p.add_argument(
         "--raw-embeddings",
@@ -121,19 +121,16 @@ def resolve_norm_stats_path(explicit: Path | None) -> Path:
     return DEFAULT_NORM_STATS
 
 
-def ensure_norm_stats(stats_path: Path, fit: bool) -> Path:
+def ensure_norm_stats(
+    stats_path: Path,
+    fit: bool,
+    clip_emb: dict[str, np.ndarray],
+    dino_emb: dict[str, np.ndarray],
+) -> Path:
     if stats_path.is_file() and not fit:
         return stats_path
-    cfg = load_config()
-    emb_base = Path(
-        os.environ.get(
-            "BV_EMBEDDINGS_BASE",
-            "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings",
-        )
-    ).expanduser()
-    threshold = cfg.get("clip_filter_list_threshold", "0.27")
-    print(f"Fitting norm stats from grouped age-month dirs under {emb_base} ...")
-    fit_and_save_norm_stats(emb_base, stats_path, threshold=str(threshold))
+    print("Fitting cohort z-score stats from loaded valid7018 embeddings ...")
+    fit_and_save_norm_stats(clip_emb, dino_emb, stats_path)
     print(f"Wrote {stats_path}")
     return stats_path
 
@@ -300,7 +297,7 @@ def run_metrics(
         "n_categories_dinov3_metrics": int(len(dino_df)),
         "n_categories_merged": int(len(merged)),
         "k": k,
-        "embedding_metric": "euclidean_featurewise_global_normalized",
+        "embedding_metric": "euclidean_valid7018_cohort_zscore",
         "global_dispersion": "mean L2 distance to category centroid",
         "local_knn": f"mean kNN distance (k={k})",
         "correlations": stats_rows,
@@ -339,7 +336,8 @@ def main() -> int:
             else str(zip_path),
             "n_exemplars_in_zip": n_zip,
             "n_rows_sampled_validated": None,
-            "embedding_metric": "euclidean_featurewise_global_normalized",
+            "embedding_metric": "euclidean_valid7018_cohort_zscore",
+            "normalization": NORMALIZATION_ID,
             "norm_stats_json": str(
                 stats_path.relative_to(REPO_ROOT) if stats_path.is_relative_to(REPO_ROOT) else stats_path
             )
@@ -403,10 +401,9 @@ def main() -> int:
             "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings",
         )
     ).expanduser()
-    grouped = grouped_embedding_dirs(emb_base, threshold=str(cfg.get("clip_filter_list_threshold", "0.27")))
 
     if not args.raw_embeddings:
-        stats_path = ensure_norm_stats(stats_path, args.fit_norm_stats)
+        stats_path = ensure_norm_stats(stats_path, args.fit_norm_stats, clip_emb, dino_emb)
         norm_stats = load_norm_stats(stats_path)
         clip_emb, dino_emb = apply_norm_stats(clip_emb, dino_emb, norm_stats)
 
@@ -416,8 +413,7 @@ def main() -> int:
         "embeddings_base": str(emb_base),
         "clip_embeddings_dir": str(cfg["clip_embeddings_dir"]),
         "dinov3_embeddings_dir": str(cfg["dinov3_embeddings_dir"]),
-        "grouped_stats_source_clip": str(grouped["clip_stats_source"]),
-        "grouped_stats_source_dinov3": str(grouped["dinov3_stats_source"]),
+        "normalization": NORMALIZATION_ID,
         "n_rows_sampled_validated": int(len(exemplar_df)),
         "n_paths_listed_clip": int(n_clip_listed),
         "n_paths_listed_dinov3": int(n_dino_listed),
@@ -430,7 +426,7 @@ def main() -> int:
         "note": (
             "7018 validated annotation rows; paired CLIP+DINOv3 per-crop .npy from "
             "clip_embeddings_new / facebook_dinov3-vitb16-pretrain-lvd1689m under BV_EMBEDDINGS_BASE; "
-            "feature-wise global norm from grouped age-month stats (notebook 05)."
+            "feature-wise z-score with mu/sigma fit on all 7018 crops across valid85."
         ),
     }
     if not args.raw_embeddings:
