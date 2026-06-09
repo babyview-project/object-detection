@@ -479,16 +479,24 @@ def write_paper_stats(
     stats["frequency_vs_global_dispersion"] = freq_check
     stats["frequency_definition_sensitivity"] = compute_frequency_definition_sensitivity(semantic_map)
     stats["frequency_plot_notes"] = {
+        "abstract_frequency_source": (
+            "Abstract frequency panels use full infant-view detections (valid129_filtered, 0.27 CLIP filter). "
+            "Dispersion is always from the 7,018 rater-validated crop sample (uniform per-category sampling by design)."
+        ),
         "dot_size_encodes": "n rater-validated crops used to estimate dispersion (not detection frequency)",
-        "manuscript_renormalization": (
-            "Manuscript panel renormalizes 0.27-filtered detection proportions over the 85 plotted categories "
-            "so the x-axis is comparable to the valid85 panel. Spearman rho is unchanged vs the 129-category denominator."
+        "renormalization_note": (
+            "Right abstract panel renormalizes 0.27-filtered detection proportions over the 85 plotted categories. "
+            "Spearman rho is unchanged vs the 129-category denominator."
+        ),
+        "annotation_pool_note": (
+            "valid85_detections uses the smaller VQA/annotation detection pool (~10k instances) — exploratory only."
         ),
         "raw_counts_note": (
             "Spearman rho is identical for proportions vs raw counts within each detection pool "
-            "(monotonic transform). Differences across panels reflect different detection pipelines, not count vs proportion."
+            "(monotonic transform). Differences across panels reflect different detection pools, not count vs proportion."
         ),
     }
+    stats["abstract_frequency_config_keys"] = list(ABSTRACT_FREQUENCY_CONFIG_KEYS)
     stats["cdi_group_n_categories"] = cdi_summary.set_index("cdi_semantic")["n_categories"].astype(int).to_dict()
 
     out_path.write_text(json.dumps(stats, indent=2))
@@ -730,17 +738,56 @@ DISPERSION_TABLE_PATHS = {
     ("valid85", "dinov3"): DEFAULT_METRICS_DIR / "bv_valid7018_dinov3_local_global_k5.csv",
 }
 
-# Cross frequency/dispersion pairings for direct comparison on the same 85 categories.
+# Cross frequency/dispersion pairings on the same 85 categories (dispersion from valid7018).
+# Abstract panels use full_dataset_* (infant-view detection pool). valid85_detections is the
+# smaller annotation/VQA pool (~10k instances) and is exploratory only — not for the abstract.
 FREQUENCY_DISPERSION_CONFIGS = {
+    "full_dataset_frequency": {
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": False,
+        "panel_title": "Infant-view frequency (full dataset, 0.27-filtered)",
+        "xlabel": "Detection proportion (0.27-filtered pool; 129-category denominator)",
+        "frequency_note": (
+            "Numerator/denominator: full BabyView infant-view detections after 0.27 CLIP filter "
+            "(valid129 pool). Not the 7,018 rater-validated crop sample."
+        ),
+        "dispersion_note": "Y and dot size: valid7018 per-crop dispersion (7,018 crops). Dot size is not frequency.",
+        "n_resid": 10,
+        "n_quad": 3,
+        "n_extreme": 2,
+        "exclude_body_parts": True,
+    },
+    "full_dataset_frequency_renorm85": {
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": True,
+        "panel_title": "Same counts, renormalized over these 85 categories",
+        "xlabel": "Detection proportion (renormalized over these 85 categories)",
+        "frequency_note": (
+            "Same 0.27-filtered detection counts as left panel; denominator restricted to "
+            "these 85 categories (44 valid129-only categories excluded)."
+        ),
+        "dispersion_note": "Same valid7018 per-crop dispersion and dot size as left column.",
+        "n_resid": 10,
+        "n_quad": 3,
+        "n_extreme": 2,
+        "exclude_body_parts": True,
+    },
     "valid85_detections": {
         "frequency_cohort": "valid85",
         "dispersion_cohort": "valid85",
         "frequency_mode": "proportion",
         "renormalize_proportion": False,
-        "panel_title": "Infant-view frequency (valid85 detections)",
-        "xlabel": "Detection proportion (valid85 category set)",
-        "frequency_note": "Numerator/denominator: valid85 infant-view detections.",
-        "dispersion_note": "Y and dot size: valid85 per-crop dispersion (7018 crops). Dot size is not frequency.",
+        "panel_title": "Annotation-pool frequency (exploratory; not full dataset)",
+        "xlabel": "Detection proportion (VQA/annotation pool, valid85 set)",
+        "frequency_note": (
+            "Exploratory only: counts from the smaller annotation/VQA detection pool "
+            "(~10k instances), not full infant-view detections."
+        ),
+        "dispersion_note": "Y and dot size: valid7018 per-crop dispersion (7,018 crops). Dot size is not frequency.",
         "n_resid": 10,
         "n_quad": 3,
         "n_extreme": 2,
@@ -754,16 +801,20 @@ FREQUENCY_DISPERSION_CONFIGS = {
         "panel_title": "Manuscript frequency (0.27-filtered, renorm. over 85)",
         "xlabel": "Detection proportion (manuscript counts, renormalized over these 85 categories)",
         "frequency_note": (
-            "Numerator: manuscript 0.27-filtered detections. "
-            "Denominator: these 85 categories only (44 valid129-only categories excluded)."
+            "Alias of full_dataset_frequency_renorm85 for backward-compatible figure stems."
         ),
-        "dispersion_note": "Same valid85 per-crop dispersion and dot size as left column.",
+        "dispersion_note": "Same valid7018 per-crop dispersion and dot size as full-dataset panels.",
         "n_resid": 10,
         "n_quad": 3,
         "n_extreme": 2,
         "exclude_body_parts": True,
     },
 }
+
+ABSTRACT_FREQUENCY_CONFIG_KEYS = (
+    "full_dataset_frequency",
+    "full_dataset_frequency_renorm85",
+)
 
 DOT_SIZE_LEGEND_TITLE = "n crops (dispersion estimate)"
 DOT_SIZE_LEGEND_NOTE = "Dot size encodes sample size for the variability estimate, not detection frequency."
@@ -847,11 +898,11 @@ def compute_frequency_definition_sensitivity(semantic_map: dict[str, str]) -> li
         )
         ms["ms_prop85"] = ms["ms_prop129"] / ms["ms_prop129"].sum()
         variants = [
-            ("valid85_proportion", "proportion"),
-            ("valid85_count_instances", "count_instances"),
-            ("manuscript_prop129_denom", "ms_prop129"),
-            ("manuscript_prop_renorm85", "ms_prop85"),
-            ("manuscript_raw_count129", "ms_count129"),
+            ("annotation_pool_proportion", "proportion"),
+            ("annotation_pool_count_instances", "count_instances"),
+            ("full_dataset_prop129_denom", "ms_prop129"),
+            ("full_dataset_prop_renorm85", "ms_prop85"),
+            ("full_dataset_raw_count129", "ms_count129"),
         ]
         for label, xcol in variants:
             sub = ms.dropna(subset=[xcol, gcol])
@@ -870,7 +921,7 @@ def compute_frequency_definition_sensitivity(semantic_map: dict[str, str]) -> li
         rows.append(
             {
                 "model": model,
-                "frequency_definition": "rank_agreement_valid85_vs_manuscript_prop129",
+                "frequency_definition": "rank_agreement_annotation_pool_vs_full_dataset_prop129",
                 "frequency_column": "proportion vs ms_prop129",
                 "spearman_rho": float(rho_rank),
                 "p_value": None,
@@ -994,7 +1045,7 @@ def figure_frequency_vs_global_robustness_2x2(semantic_map: dict[str, str], stat
     fig, axes = plt.subplots(2, 2, figsize=(13.5, 10.8))
     fig.subplots_adjust(left=0.07, right=0.82, top=0.88, bottom=0.14, wspace=0.22, hspace=0.32)
     results = []
-    config_keys = ["valid85_detections", "valid85_manuscript_frequency"]
+    config_keys = list(ABSTRACT_FREQUENCY_CONFIG_KEYS)
     for row, model in enumerate(["clip", "dinov3"]):
         for col, config_key in enumerate(config_keys):
             ax = axes[row, col]
@@ -1006,12 +1057,12 @@ def figure_frequency_vs_global_robustness_2x2(semantic_map: dict[str, str], stat
                 ax.set_title(cfg["panel_title"], fontsize=10, fontweight="bold", pad=6)
     add_cdi_legends(
         fig,
-        build_frequency_dispersion_df("valid85_detections", "clip", semantic_map),
+        build_frequency_dispersion_df("full_dataset_frequency", "clip", semantic_map),
         "clip_n_exemplars",
         size_legend_title=DOT_SIZE_LEGEND_TITLE,
     )
     fig.suptitle(
-        "Frequency vs global dispersion: infant-view vs manuscript frequency (same valid85 variability)",
+        "Frequency vs global dispersion: full infant-view detections (valid7018 variability)",
         fontsize=12,
         fontweight="bold",
         y=0.97,
@@ -1488,6 +1539,8 @@ def main() -> int:
     figure_1c_cross_model(plot_df, stats, scratch_dir)
     for model in ("clip", "dinov3"):
         for config_key in FREQUENCY_DISPERSION_CONFIGS:
+            if config_key == "valid85_manuscript_frequency":
+                continue  # alias of full_dataset_frequency_renorm85
             res = figure_frequency_vs_global_dispersion(
                 semantic_map,
                 stats,

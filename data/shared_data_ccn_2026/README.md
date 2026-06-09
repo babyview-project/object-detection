@@ -7,7 +7,8 @@ Primary cohort (Methods-aligned):
 - `valid7018/` — global + local metrics on
   the same 7,018 rater-validated crops (`valid7018_paper_stats.json` for headline ρ)
 - `embeddings/valid7018_bv_embeddings.zip` — paired CLIP+DINO `.npy` (~20 MB;
-  run `build_valid7018_embeddings_zip.py`)
+  feature-wise globally normalized; run `build_valid7018_embeddings_zip.py`)
+- `embeddings/valid7018_embedding_norm_stats.json` — μ/σ used for normalization
 
 Also included:
 - Category sets, per-class validation precision, frequency tables, CDI semantic map (`inputs/`)

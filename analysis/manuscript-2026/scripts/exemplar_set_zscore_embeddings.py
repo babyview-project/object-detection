@@ -180,6 +180,50 @@ def load_clip_filter_pair_set(filter_list_path: Path, categories_lower: set[str]
     return allowed
 
 
+def load_clip_filter_npy_fname_map(
+    filter_list_path: Path, categories_lower: set[str]
+) -> dict[tuple[str, str], str]:
+    """Map (category_lower, stem_lower) -> on-disk ``.npy`` basename (preserves case)."""
+    m: dict[tuple[str, str], str] = {}
+    if not filter_list_path.is_file():
+        raise FileNotFoundError(f"CLIP filter list not found: {filter_list_path}")
+    with filter_list_path.open("r") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            p = Path(line)
+            if p.suffix.lower() != ".npy":
+                continue
+            category = p.parent.name.strip().lower()
+            if category not in categories_lower:
+                continue
+            m[(category, p.stem.lower())] = p.name
+    return m
+
+
+def resolve_npy_path(
+    embed_root: Path,
+    cat: str,
+    stem_lower: str,
+    npy_fname_map: dict[tuple[str, str], str] | None,
+    crop_prefix: str,
+    crop_prefix_new: str,
+) -> Path:
+    fname = npy_fname_map.get((cat, stem_lower)) if npy_fname_map else None
+    if fname is None:
+        fname = f"{stem_lower}.npy"
+    subdir = resolve_category_subdir(embed_root, cat)
+    if subdir is not None:
+        pn = subdir / fname
+        if pn.is_file():
+            return remap_absolute_path(pn, crop_prefix, crop_prefix_new)
+        for npy in subdir.glob("*.npy"):
+            if npy.stem.lower() == stem_lower:
+                return remap_absolute_path(npy, crop_prefix, crop_prefix_new)
+    return remap_absolute_path(embed_root / cat / fname, crop_prefix, crop_prefix_new)
+
+
 def collect_paired_npy_paths_from_clip_filter_list(
     filter_list_path: Path,
     clip_embed_root: Path,
@@ -328,6 +372,7 @@ def valid85_npy_paths_by_category_from_manifest(
     clip_filter_pairs: set[tuple[str, str]],
     crop_prefix: str,
     crop_prefix_new: str,
+    npy_fname_map: dict[tuple[str, str], str] | None = None,
 ) -> dict[str, list[Path]]:
     d: dict[str, list[Path]] = defaultdict(list)
     for _, row in df.iterrows():
@@ -335,7 +380,9 @@ def valid85_npy_paths_by_category_from_manifest(
         stem = str(row["stem"]).strip().lower()
         if (cat, stem) not in clip_filter_pairs:
             continue
-        npy = remap_absolute_path(embed_root / cat / f"{stem}.npy", crop_prefix, crop_prefix_new)
+        npy = resolve_npy_path(
+            embed_root, cat, stem, npy_fname_map, crop_prefix, crop_prefix_new
+        )
         d[cat].append(npy)
     return {k: list(dict.fromkeys(v)) for k, v in sorted(d.items())}
 
@@ -470,6 +517,7 @@ def run_category_set(category_set: str, cfg: dict) -> None:
         )
         elig_cats = set(exemplar_df["category"].astype(str).str.strip().str.lower())
         clip_filter_pairs = load_clip_filter_pair_set(clip_filter_list_path, elig_cats)
+        npy_fname_map = load_clip_filter_npy_fname_map(clip_filter_list_path, elig_cats)
         if not cfg["babydinov3_embeddings_dir"].is_dir():
             raise FileNotFoundError(
                 f"BabyDINOv3 embeddings dir not found: {cfg['babydinov3_embeddings_dir']}"
@@ -480,6 +528,7 @@ def run_category_set(category_set: str, cfg: dict) -> None:
             clip_filter_pairs,
             crop_prefix,
             crop_prefix_new,
+            npy_fname_map,
         )
         n_paths_total = sum(len(v) for v in babydinov3_paths_by_cat.values())
         n_cat = len(babydinov3_paths_by_cat)

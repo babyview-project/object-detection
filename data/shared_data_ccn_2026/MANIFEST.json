@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-06-09T03:33:44.946546+00:00",
+  "generated_utc": "2026-06-09T05:28:18.121905+00:00",
   "description": "CCN 2026 public-shareable intermediate tables exported from this repository. Primary cohort: valid7018 (7,018 rater-validated crops). Category-level aggregates only (no per-exemplar subject_id/stem).",
   "notes": [
     "Do not redistribute Plot A/B/C images, per-exemplar CSVs, or thumbnails.",
@@ -10,6 +10,7 @@
     "README.md",
     "embeddings/valid7018_bv_embeddings.zip",
     "embeddings/valid7018_bv_embeddings_zip.json",
+    "embeddings/valid7018_embedding_norm_stats.json",
     "inputs/category_cdi_semantic_map.csv",
     "inputs/included_categories_valid129.txt",
     "inputs/included_categories_valid85.txt",

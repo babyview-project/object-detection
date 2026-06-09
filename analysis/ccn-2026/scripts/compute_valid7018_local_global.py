@@ -12,7 +12,8 @@ Cohort definition (matches manuscript ``exemplar_embedding_run.json`` for valid8
 paths are resolved with case-aware lookup from the CLIP filter list (36 stems use ``_NA_``
 in the date slot on disk but are lowercased in the annotation table).
 
-Both metrics use the **same** exemplar vectors per category (Euclidean, k=5).
+Both metrics use the **same** exemplar vectors per category (Euclidean, k=5), after
+feature-wise global normalization (notebook 05 stats from grouped age-month embeddings).
 
 Examples::
 
@@ -41,6 +42,10 @@ REPO_ROOT = CCN_DIR.parent.parent
 MANUSCRIPT_SCRIPTS = REPO_ROOT / "analysis" / "manuscript-2026" / "scripts"
 DEFAULT_OUT_DIR = CCN_DIR / "valid7018"
 DEFAULT_ZIP = REPO_ROOT / "data" / "shared_data_ccn_2026" / "embeddings" / "valid7018_bv_embeddings.zip"
+DEFAULT_NORM_STATS = CCN_DIR / "valid7018" / "valid7018_embedding_norm_stats.json"
+SHARED_NORM_STATS = (
+    REPO_ROOT / "data" / "shared_data_ccn_2026" / "embeddings" / "valid7018_embedding_norm_stats.json"
+)
 
 for p in (CCN_SCRIPTS, MANUSCRIPT_SCRIPTS, str(CCN_DIR)):
     if str(p) not in sys.path:
@@ -60,6 +65,12 @@ from exemplar_set_zscore_embeddings import (  # noqa: E402
 )
 
 from valid7018_category_metrics import compute_category_metrics  # noqa: E402
+from valid7018_embedding_normalize import (  # noqa: E402
+    apply_norm_stats,
+    fit_and_save_norm_stats,
+    grouped_embedding_dirs,
+    load_norm_stats,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -81,10 +92,53 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=Path(os.environ.get("CCN_VALID7018_OUT_DIR", str(DEFAULT_OUT_DIR))),
     )
+    p.add_argument(
+        "--norm-stats",
+        type=Path,
+        default=None,
+        help="valid7018_embedding_norm_stats.json (default: valid7018/ or shared bundle)",
+    )
+    p.add_argument(
+        "--fit-norm-stats",
+        action="store_true",
+        help="Recompute mu/sigma from grouped age-month dirs (maintainer; needs BV_EMBEDDINGS_BASE)",
+    )
+    p.add_argument(
+        "--raw-embeddings",
+        action="store_true",
+        help="Skip feature-wise normalization (debug only)",
+    )
     return p.parse_args()
 
 
-def load_raw_category_embeddings(
+def resolve_norm_stats_path(explicit: Path | None) -> Path:
+    if explicit is not None:
+        return explicit.expanduser()
+    if DEFAULT_NORM_STATS.is_file():
+        return DEFAULT_NORM_STATS
+    if SHARED_NORM_STATS.is_file():
+        return SHARED_NORM_STATS
+    return DEFAULT_NORM_STATS
+
+
+def ensure_norm_stats(stats_path: Path, fit: bool) -> Path:
+    if stats_path.is_file() and not fit:
+        return stats_path
+    cfg = load_config()
+    emb_base = Path(
+        os.environ.get(
+            "BV_EMBEDDINGS_BASE",
+            "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings",
+        )
+    ).expanduser()
+    threshold = cfg.get("clip_filter_list_threshold", "0.27")
+    print(f"Fitting norm stats from grouped age-month dirs under {emb_base} ...")
+    fit_and_save_norm_stats(emb_base, stats_path, threshold=str(threshold))
+    print(f"Wrote {stats_path}")
+    return stats_path
+
+
+def load_per_crop_category_embeddings(
     paths_by_cat: dict[str, list[Path]],
     model_label: str,
     crop_prefix: str,
@@ -246,7 +300,7 @@ def run_metrics(
         "n_categories_dinov3_metrics": int(len(dino_df)),
         "n_categories_merged": int(len(merged)),
         "k": k,
-        "embedding_metric": "euclidean_raw_vectors",
+        "embedding_metric": "euclidean_featurewise_global_normalized",
         "global_dispersion": "mean L2 distance to category centroid",
         "local_knn": f"mean kNN distance (k={k})",
         "correlations": stats_rows,
@@ -272,7 +326,7 @@ def main() -> int:
     args = parse_args()
     out_dir = args.out_dir.expanduser()
     k = args.k
-
+    stats_path = resolve_norm_stats_path(args.norm_stats)
     if args.from_zip:
         zip_path = (args.zip_path or DEFAULT_ZIP).expanduser()
         print(f"Loading from zip: {zip_path}")
@@ -285,7 +339,16 @@ def main() -> int:
             else str(zip_path),
             "n_exemplars_in_zip": n_zip,
             "n_rows_sampled_validated": None,
+            "embedding_metric": "euclidean_featurewise_global_normalized",
+            "norm_stats_json": str(
+                stats_path.relative_to(REPO_ROOT) if stats_path.is_relative_to(REPO_ROOT) else stats_path
+            )
+            if stats_path.is_file()
+            else None,
         }
+        if args.raw_embeddings:
+            base["embedding_metric"] = "euclidean_raw_vectors"
+            base.pop("norm_stats_json", None)
         return run_metrics(clip_emb, dino_emb, k, out_dir, base)
 
     cfg = load_config()
@@ -331,12 +394,30 @@ def main() -> int:
         missing_df.to_csv(miss_path, index=False)
         print(f"Wrote {miss_path} ({len(missing_df)} crops without CLIP .npy on disk)")
 
-    clip_emb = load_raw_category_embeddings(clip_paths, "CLIP", crop_prefix, crop_prefix_new)
-    dino_emb = load_raw_category_embeddings(dino_paths, "DINOv3", crop_prefix, crop_prefix_new)
+    clip_emb = load_per_crop_category_embeddings(clip_paths, "CLIP", crop_prefix, crop_prefix_new)
+    dino_emb = load_per_crop_category_embeddings(dino_paths, "DINOv3", crop_prefix, crop_prefix_new)
+
+    emb_base = Path(
+        os.environ.get(
+            "BV_EMBEDDINGS_BASE",
+            "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings",
+        )
+    ).expanduser()
+    grouped = grouped_embedding_dirs(emb_base, threshold=str(cfg.get("clip_filter_list_threshold", "0.27")))
+
+    if not args.raw_embeddings:
+        stats_path = ensure_norm_stats(stats_path, args.fit_norm_stats)
+        norm_stats = load_norm_stats(stats_path)
+        clip_emb, dino_emb = apply_norm_stats(clip_emb, dino_emb, norm_stats)
 
     base = {
         "cohort": "valid85_sampled_per_file_validated_clip_filter_list",
         "embedding_source": "cluster_npy_dirs",
+        "embeddings_base": str(emb_base),
+        "clip_embeddings_dir": str(cfg["clip_embeddings_dir"]),
+        "dinov3_embeddings_dir": str(cfg["dinov3_embeddings_dir"]),
+        "grouped_stats_source_clip": str(grouped["clip_stats_source"]),
+        "grouped_stats_source_dinov3": str(grouped["dinov3_stats_source"]),
         "n_rows_sampled_validated": int(len(exemplar_df)),
         "n_paths_listed_clip": int(n_clip_listed),
         "n_paths_listed_dinov3": int(n_dino_listed),
@@ -347,10 +428,17 @@ def main() -> int:
         "precision_threshold": cfg["precision_threshold"],
         "clip_filter_list_path": os.environ.get("BV_CLIP_FILTER_LIST", "<BV_CLIP_FILTER_LIST>"),
         "note": (
-            "7018 validated annotation rows; paired CLIP+DINOv3 .npy resolved via "
-            "case-aware lookup from the CLIP filter list."
+            "7018 validated annotation rows; paired CLIP+DINOv3 per-crop .npy from "
+            "clip_embeddings_new / facebook_dinov3-vitb16-pretrain-lvd1689m under BV_EMBEDDINGS_BASE; "
+            "feature-wise global norm from grouped age-month stats (notebook 05)."
         ),
     }
+    if not args.raw_embeddings:
+        base["norm_stats_json"] = str(
+            stats_path.relative_to(REPO_ROOT) if stats_path.is_relative_to(REPO_ROOT) else stats_path
+        )
+    else:
+        base["embedding_metric"] = "euclidean_raw_vectors"
     if not missing_df.empty:
         base["missing_embeddings_csv"] = "valid7018_missing_embeddings.csv"
 

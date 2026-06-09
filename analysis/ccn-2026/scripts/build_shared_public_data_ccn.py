@@ -205,11 +205,18 @@ def build() -> None:
     for rel in (
         "embeddings/valid7018_bv_embeddings.zip",
         "embeddings/valid7018_bv_embeddings_zip.json",
+        "embeddings/valid7018_embedding_norm_stats.json",
         "montages/valid7018_montage_crops.zip",
         "montages/valid7018_montage_crops_zip.json",
     ):
         if (SHARED_DIR / rel).is_file() and rel not in written:
             written.append(rel)
+
+    norm_src = valid7018_dir / "valid7018_embedding_norm_stats.json"
+    if norm_src.is_file():
+        _copy_file(norm_src, SHARED_DIR / "embeddings" / norm_src.name)
+        if f"embeddings/{norm_src.name}" not in written:
+            written.append(f"embeddings/{norm_src.name}")
 
     generated_utc = datetime.now(timezone.utc).isoformat()
     manifest = {
@@ -238,7 +245,8 @@ Primary cohort (Methods-aligned):
 - `valid7018/` — global + local metrics on
   the same 7,018 rater-validated crops (`valid7018_paper_stats.json` for headline ρ)
 - `embeddings/valid7018_bv_embeddings.zip` — paired CLIP+DINO `.npy` (~20 MB;
-  run `build_valid7018_embeddings_zip.py`)
+  feature-wise globally normalized; run `build_valid7018_embeddings_zip.py`)
+- `embeddings/valid7018_embedding_norm_stats.json` — μ/σ used for normalization
 
 Also included:
 - Category sets, per-class validation precision, frequency tables, CDI semantic map (`inputs/`)

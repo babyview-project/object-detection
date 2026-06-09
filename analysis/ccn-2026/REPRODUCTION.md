@@ -30,8 +30,17 @@ Checks Spearman ρ, category counts (7,018 exemplars / 85 categories), and per-c
 
 ## Maintainer (cluster paths)
 
+Embeddings live under ``/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings``
+(override with ``BV_EMBEDDINGS_BASE``; see ``paths.example.env``). Per-crop vectors
+from ``clip_embeddings_new`` and ``facebook_dinov3-vitb16-pretrain-lvd1689m`` are
+feature-wise globally normalized using μ/σ fit from grouped age-month dirs
+(notebook 05; ``valid7018_embedding_normalize.py``).
+
 ```bash
+export BV_EMBEDDINGS_BASE=/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings
 python analysis/ccn-2026/scripts/build_valid7018_embeddings_zip.py
 python analysis/ccn-2026/scripts/build_valid7018_montage_crops_zip.py
+python analysis/ccn-2026/scripts/compute_valid7018_local_global.py
+python analysis/ccn-2026/scripts/generate_valid7018_paper_figures.py
 python analysis/ccn-2026/scripts/build_shared_public_data_ccn.py
 ```
