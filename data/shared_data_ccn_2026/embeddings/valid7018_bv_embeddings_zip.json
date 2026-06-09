@@ -1,0 +1,11 @@
+{
+  "generated_utc": "2026-06-08T20:56:58.936332+00:00",
+  "zip_path": "data/shared_data_ccn_2026/embeddings/valid7018_bv_embeddings.zip",
+  "n_exemplars_in_zip": 7018,
+  "n_paths_listed_cohort": 7018,
+  "n_rows_sampled_validated": 7018,
+  "missing_clip": 0,
+  "missing_dino": 0,
+  "zip_size_bytes": 20404264,
+  "precision_threshold": 0.6
+}

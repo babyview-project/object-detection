@@ -1,0 +1,538 @@
+{
+  "n_exemplars": 7018,
+  "n_categories": 85,
+  "n_per_category": {
+    "min": 57,
+    "max": 100
+  },
+  "exclude_body_parts_from_figures": [
+    "ankle",
+    "arm",
+    "ear",
+    "eye",
+    "face",
+    "finger",
+    "foot",
+    "hair",
+    "hand",
+    "leg",
+    "mouth",
+    "neck",
+    "nose",
+    "toe",
+    "tooth"
+  ],
+  "clip_global_all": {
+    "mean": 4.84,
+    "sd": 0.5,
+    "min": 3.43,
+    "max": 5.75,
+    "n": 85
+  },
+  "dino_global_all": {
+    "mean": 11.51,
+    "sd": 0.93,
+    "min": 7.82,
+    "max": 13.56,
+    "n": 85
+  },
+  "clip_local_all": {
+    "mean": 5.26,
+    "sd": 0.68,
+    "min": 3.35,
+    "max": 6.58,
+    "n": 85
+  },
+  "dino_local_all": {
+    "mean": 13.27,
+    "sd": 1.35,
+    "min": 8.42,
+    "max": 16.25,
+    "n": 85
+  },
+  "clip_global_non_body": {
+    "mean": 4.97,
+    "sd": 0.35,
+    "min": 4.1,
+    "max": 5.75,
+    "n": 73
+  },
+  "dino_global_non_body": {
+    "mean": 11.71,
+    "sd": 0.7,
+    "min": 10.47,
+    "max": 13.56,
+    "n": 73
+  },
+  "clip_local_non_body": {
+    "mean": 5.43,
+    "sd": 0.5,
+    "min": 3.91,
+    "max": 6.58,
+    "n": 73
+  },
+  "dino_local_non_body": {
+    "mean": 13.54,
+    "sd": 1.08,
+    "min": 10.65,
+    "max": 16.25,
+    "n": 73
+  },
+  "montage_categories_low_to_high_global": [
+    "clock",
+    "plant",
+    "blanket",
+    "pajamas",
+    "book"
+  ],
+  "tsne_categories": [
+    "clock",
+    "plant",
+    "blanket",
+    "pajamas",
+    "book"
+  ],
+  "tsne_categories_semantic_diverse": [
+    "pillow",
+    "sweater",
+    "doll",
+    "window",
+    "slide"
+  ],
+  "clip_lowest_local_non_body": [
+    {
+      "category": "clock",
+      "mean_knn_dist": 3.9104939051554592,
+      "global_dispersion": 4.096582569217959
+    },
+    {
+      "category": "glasses",
+      "mean_knn_dist": 4.291793558875709,
+      "global_dispersion": 4.188541090092155
+    },
+    {
+      "category": "door",
+      "mean_knn_dist": 4.481277477119241,
+      "global_dispersion": 4.3290699890861895
+    },
+    {
+      "category": "butterfly",
+      "mean_knn_dist": 4.54115547166684,
+      "global_dispersion": 4.455782582597099
+    },
+    {
+      "category": "watch",
+      "mean_knn_dist": 4.557165966982784,
+      "global_dispersion": 4.286129124452962
+    }
+  ],
+  "clip_highest_local_non_body": [
+    {
+      "category": "book",
+      "mean_knn_dist": 6.57585319513429,
+      "global_dispersion": 5.749178541411768
+    },
+    {
+      "category": "tray",
+      "mean_knn_dist": 6.456326070195519,
+      "global_dispersion": 5.631521292261409
+    },
+    {
+      "category": "swing",
+      "mean_knn_dist": 6.389151228263864,
+      "global_dispersion": 5.671606013950006
+    },
+    {
+      "category": "toy",
+      "mean_knn_dist": 6.290808693747253,
+      "global_dispersion": 5.45486358202138
+    },
+    {
+      "category": "table",
+      "mean_knn_dist": 6.116749499794716,
+      "global_dispersion": 5.583132706111472
+    }
+  ],
+  "dino_lowest_local_non_body": [
+    {
+      "category": "clock",
+      "mean_knn_dist": 10.648626204091949,
+      "global_dispersion": 11.67358318449032
+    },
+    {
+      "category": "butterfly",
+      "mean_knn_dist": 11.223173354324922,
+      "global_dispersion": 10.848291522339542
+    },
+    {
+      "category": "slide",
+      "mean_knn_dist": 11.654858142462304,
+      "global_dispersion": 10.8004642796545
+    },
+    {
+      "category": "stroller",
+      "mean_knn_dist": 11.67410177254795,
+      "global_dispersion": 10.467772187786254
+    },
+    {
+      "category": "swing",
+      "mean_knn_dist": 11.850432308208962,
+      "global_dispersion": 10.695969990386104
+    }
+  ],
+  "dino_highest_local_non_body": [
+    {
+      "category": "car",
+      "mean_knn_dist": 16.247975561319674,
+      "global_dispersion": 13.559629492007382
+    },
+    {
+      "category": "dog",
+      "mean_knn_dist": 15.867276398703652,
+      "global_dispersion": 13.555837004710275
+    },
+    {
+      "category": "bird",
+      "mean_knn_dist": 15.435825844753898,
+      "global_dispersion": 13.472599749770918
+    },
+    {
+      "category": "bucket",
+      "mean_knn_dist": 15.339455825915245,
+      "global_dispersion": 12.471653404650954
+    },
+    {
+      "category": "bowl",
+      "mean_knn_dist": 15.293913171277165,
+      "global_dispersion": 12.843262041091291
+    }
+  ],
+  "correlations": [
+    {
+      "comparison": "clip_within",
+      "spearman_rho": 0.9499706859487981,
+      "p_value": 1.0394803430562627e-43
+    },
+    {
+      "comparison": "dinov3_within",
+      "spearman_rho": 0.8748876294703929,
+      "p_value": 7.311752034597505e-28
+    },
+    {
+      "comparison": "cross_global",
+      "spearman_rho": 0.4824115692788743,
+      "p_value": 2.9359620081271415e-06
+    },
+    {
+      "comparison": "cross_local_knn",
+      "spearman_rho": 0.5874145006839945,
+      "p_value": 3.430892970168506e-09
+    }
+  ],
+  "cdi_semantic_summary": [
+    {
+      "cdi_semantic": "toys",
+      "n_categories": 5,
+      "clip_global_mean": 5.318876882834624,
+      "clip_global_sd": 0.29275946488752097,
+      "dino_global_mean": 11.939813605230789,
+      "dino_global_sd": 0.5588159618578473,
+      "clip_local_mean": 5.925065308773184,
+      "dino_local_mean": 14.076421206314908,
+      "clip_global_z_mean": 0.9502294860271453,
+      "dino_global_z_mean": 0.4684373577424258,
+      "clip_local_z_mean": 0.9730549923146314,
+      "dino_local_z_mean": 0.5958736711349242
+    },
+    {
+      "cdi_semantic": "outside",
+      "n_categories": 7,
+      "clip_global_mean": 5.133877451685947,
+      "clip_global_sd": 0.38799763501429246,
+      "dino_global_mean": 11.55007862948749,
+      "dino_global_sd": 0.7145699368635382,
+      "clip_local_mean": 5.624509727276061,
+      "dino_local_mean": 13.014532903583605,
+      "clip_global_z_mean": 0.5838628658997848,
+      "dino_global_z_mean": 0.04833684515232125,
+      "clip_local_z_mean": 0.5306781135598216,
+      "dino_local_z_mean": -0.191867700908357
+    },
+    {
+      "cdi_semantic": "vehicles",
+      "n_categories": 2,
+      "clip_global_mean": 5.014062637060308,
+      "clip_global_sd": 0.10817592226358688,
+      "dino_global_mean": 12.013700839896817,
+      "dino_global_sd": 2.1862732662759177,
+      "clip_local_mean": 5.412120141990332,
+      "dino_local_mean": 13.961038666933812,
+      "clip_global_z_mean": 0.34658565697526306,
+      "dino_global_z_mean": 0.5480813904543116,
+      "clip_local_z_mean": 0.21806957256811374,
+      "dino_local_z_mean": 0.5102793580154377
+    },
+    {
+      "cdi_semantic": "furniture_rooms",
+      "n_categories": 14,
+      "clip_global_mean": 4.9598764833671805,
+      "clip_global_sd": 0.305803921664326,
+      "dino_global_mean": 11.54490013351393,
+      "dino_global_sd": 0.4254699313965573,
+      "clip_local_mean": 5.409546454127585,
+      "dino_local_mean": 13.255878012310601,
+      "clip_global_z_mean": 0.23927722979259572,
+      "dino_global_z_mean": 0.04275487548488137,
+      "clip_local_z_mean": 0.21428145458361417,
+      "dino_local_z_mean": -0.0128304833445757
+    },
+    {
+      "cdi_semantic": "household",
+      "n_categories": 25,
+      "clip_global_mean": 4.951079824343014,
+      "clip_global_sd": 0.37497153526756594,
+      "dino_global_mean": 11.926945884456178,
+      "dino_global_sd": 0.6107163558551221,
+      "clip_local_mean": 5.358325842167098,
+      "dino_local_mean": 13.794669970657747,
+      "clip_global_z_mean": 0.2218566236043168,
+      "dino_global_z_mean": 0.4545670704196857,
+      "clip_local_z_mean": 0.13889169028735904,
+      "dino_local_z_mean": 0.38686194703871835
+    },
+    {
+      "cdi_semantic": "clothing",
+      "n_categories": 13,
+      "clip_global_mean": 4.931961281909269,
+      "clip_global_sd": 0.29546912726435265,
+      "dino_global_mean": 11.296393784734802,
+      "dino_global_sd": 0.43068810768728405,
+      "clip_local_mean": 5.515440097765057,
+      "dino_local_mean": 13.408827664331255,
+      "clip_global_z_mean": 0.18399490841026622,
+      "dino_global_z_mean": -0.22511342220870004,
+      "clip_local_z_mean": 0.37014247476156686,
+      "dino_local_z_mean": 0.10063226827100423
+    },
+    {
+      "cdi_semantic": "animals",
+      "n_categories": 5,
+      "clip_global_mean": 4.85086815522245,
+      "clip_global_sd": 0.3222484691873577,
+      "dino_global_mean": 12.206107886774102,
+      "dino_global_sd": 1.2325146007258478,
+      "clip_local_mean": 5.198470074336784,
+      "dino_local_mean": 13.760224640473785,
+      "clip_global_z_mean": 0.023400821415839723,
+      "dino_global_z_mean": 0.7554795046854961,
+      "clip_local_z_mean": -0.09639422678486909,
+      "dino_local_z_mean": 0.3613093426924748
+    },
+    {
+      "cdi_semantic": "food_drink",
+      "n_categories": 2,
+      "clip_global_mean": 4.391964538489915,
+      "clip_global_sd": 0.011229674347106748,
+      "dino_global_mean": 11.196419533685564,
+      "dino_global_sd": 0.5616129381187723,
+      "clip_local_mean": 4.712734875659713,
+      "dino_local_mean": 12.752617590553369,
+      "clip_global_z_mean": -0.8853963893788503,
+      "dino_global_z_mean": -0.33287699675444726,
+      "clip_local_z_mean": -0.8113302796166416,
+      "dino_local_z_mean": -0.3861645280933825
+    },
+    {
+      "cdi_semantic": "body_parts",
+      "n_categories": 12,
+      "clip_global_mean": 4.032559457854078,
+      "clip_global_sd": 0.5600723781807669,
+      "dino_global_mean": 10.274105279352801,
+      "dino_global_sd": 1.203598331530837,
+      "clip_local_mean": 4.233770117068618,
+      "dino_local_mean": 11.64530771536291,
+      "clip_global_z_mean": -1.5971500625203232,
+      "dino_global_z_mean": -1.3270517953477465,
+      "clip_local_z_mean": -1.5163011668104567,
+      "dino_local_z_mean": -1.207601018274143
+    }
+  ],
+  "cdi_semantic_text": {
+    "highest_global_group": "toys",
+    "highest_global_clip_z": 0.95,
+    "lowest_global_group": "body_parts",
+    "lowest_global_clip_z": -1.6
+  },
+  "frequency_vs_global_dispersion": {
+    "valid85_detections": {
+      "clip": {
+        "config_key": "valid85_detections",
+        "frequency_cohort": "valid85",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": false,
+        "model": "clip",
+        "frequency_column": "proportion",
+        "dispersion_column": "clip_global_dispersion",
+        "spearman_rho": 0.01208934603400576,
+        "p_value": 0.9125585031782579,
+        "n_categories": 85
+      },
+      "dinov3": {
+        "config_key": "valid85_detections",
+        "frequency_cohort": "valid85",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": false,
+        "model": "dinov3",
+        "frequency_column": "proportion",
+        "dispersion_column": "dinov3_global_dispersion",
+        "spearman_rho": 0.028097712083885663,
+        "p_value": 0.7985200285340205,
+        "n_categories": 85
+      }
+    },
+    "valid85_manuscript_frequency": {
+      "clip": {
+        "config_key": "valid85_manuscript_frequency",
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": true,
+        "model": "clip",
+        "frequency_column": "proportion",
+        "dispersion_column": "clip_global_dispersion",
+        "spearman_rho": 0.2180379128395544,
+        "p_value": 0.0450021218179837,
+        "n_categories": 85
+      },
+      "dinov3": {
+        "config_key": "valid85_manuscript_frequency",
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": true,
+        "model": "dinov3",
+        "frequency_column": "proportion",
+        "dispersion_column": "dinov3_global_dispersion",
+        "spearman_rho": 0.2624193863591949,
+        "p_value": 0.015255802481361087,
+        "n_categories": 85
+      }
+    }
+  },
+  "frequency_definition_sensitivity": [
+    {
+      "model": "clip",
+      "frequency_definition": "valid85_proportion",
+      "frequency_column": "proportion",
+      "spearman_rho": 0.01208934603400576,
+      "p_value": 0.9125585031782579,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "valid85_count_instances",
+      "frequency_column": "count_instances",
+      "spearman_rho": 0.01208934603400576,
+      "p_value": 0.9125585031782579,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "manuscript_prop129_denom",
+      "frequency_column": "ms_prop129",
+      "spearman_rho": 0.2180379128395544,
+      "p_value": 0.0450021218179837,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "manuscript_prop_renorm85",
+      "frequency_column": "ms_prop85",
+      "spearman_rho": 0.2180379128395544,
+      "p_value": 0.0450021218179837,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "manuscript_raw_count129",
+      "frequency_column": "ms_count129",
+      "spearman_rho": 0.2180379128395544,
+      "p_value": 0.0450021218179837,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "rank_agreement_valid85_vs_manuscript_prop129",
+      "frequency_column": "proportion vs ms_prop129",
+      "spearman_rho": 0.8275484759704704,
+      "p_value": null,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "valid85_proportion",
+      "frequency_column": "proportion",
+      "spearman_rho": 0.028097712083885663,
+      "p_value": 0.7985200285340205,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "valid85_count_instances",
+      "frequency_column": "count_instances",
+      "spearman_rho": 0.028097712083885663,
+      "p_value": 0.7985200285340205,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "manuscript_prop129_denom",
+      "frequency_column": "ms_prop129",
+      "spearman_rho": 0.2624193863591949,
+      "p_value": 0.015255802481361087,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "manuscript_prop_renorm85",
+      "frequency_column": "ms_prop85",
+      "spearman_rho": 0.2624193863591949,
+      "p_value": 0.015255802481361087,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "manuscript_raw_count129",
+      "frequency_column": "ms_count129",
+      "spearman_rho": 0.2624193863591949,
+      "p_value": 0.015255802481361087,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "rank_agreement_valid85_vs_manuscript_prop129",
+      "frequency_column": "proportion vs ms_prop129",
+      "spearman_rho": 0.8275484759704704,
+      "p_value": null,
+      "n_categories": 85
+    }
+  ],
+  "frequency_plot_notes": {
+    "dot_size_encodes": "n rater-validated crops used to estimate dispersion (not detection frequency)",
+    "manuscript_renormalization": "Manuscript panel renormalizes 0.27-filtered detection proportions over the 85 plotted categories so the x-axis is comparable to the valid85 panel. Spearman rho is unchanged vs the 129-category denominator.",
+    "raw_counts_note": "Spearman rho is identical for proportions vs raw counts within each detection pool (monotonic transform). Differences across panels reflect different detection pipelines, not count vs proportion."
+  },
+  "cdi_group_n_categories": {
+    "toys": 5,
+    "outside": 7,
+    "vehicles": 2,
+    "furniture_rooms": 14,
+    "household": 25,
+    "clothing": 13,
+    "animals": 5,
+    "food_drink": 2,
+    "body_parts": 12
+  }
+}

@@ -1,0 +1,35 @@
+name: CCN valid7018 reproduction
+
+on:
+  push:
+    paths:
+      - "analysis/ccn-2026/**"
+      - "data/shared_data_ccn_2026/**"
+      - ".github/workflows/ccn-valid7018.yml"
+  pull_request:
+    paths:
+      - "analysis/ccn-2026/**"
+      - "data/shared_data_ccn_2026/**"
+      - ".github/workflows/ccn-valid7018.yml"
+
+jobs:
+  verify-from-zip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+          cache-dependency-path: analysis/ccn-2026/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r analysis/ccn-2026/requirements.txt
+
+      - name: Verify metrics match committed reference
+        run: python analysis/ccn-2026/scripts/verify_valid7018_reproduction.py
+
+      - name: Verify figure pipeline (scratch only)
+        run: python analysis/ccn-2026/scripts/verify_valid7018_reproduction.py --with-figures

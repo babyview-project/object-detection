@@ -2,12 +2,12 @@
 """
 Build anonymized, public-shareable intermediate data for the CCN 2026 poster.
 
-This script exports only *category-level* aggregates (Tier A) into:
+This script exports category-level aggregates (Tier A) into:
     data/shared_data_ccn_2026/
 
-It intentionally excludes:
-- per-exemplar tables (contain `subject_id` and `stem` / file-stem-like fields)
-- images / montages / thumbnails / t-SNE PNG/PDFs
+Primary cohort: valid7018/ (7,018 rater-validated crops, same global+local pool).
+
+Legacy poster-pool Plot B/C tables are included only when present locally.
 
 Run from the repo root (object-detection/):
     python analysis/ccn-2026/scripts/build_shared_public_data_ccn.py
@@ -40,13 +40,7 @@ def _write_text(dst: Path, text: str) -> None:
 
 
 def _assert_columns_safe_csv(path: Path) -> None:
-    """
-    Hard safety check for accidentally exporting per-exemplar tables.
-
-    If a future CCN output changes naming or layout, this makes sure we fail
-    fast instead of producing an unsafe public bundle.
-    """
-    # Only read headers + small prefix; we only need to check column names.
+    """Fail fast if a CSV looks like a per-exemplar export."""
     df = pd.read_csv(path, nrows=3)
     lowered = {c.lower() for c in df.columns}
     forbidden = {"subject_id", "stem", "processed_id", "file_stem"}
@@ -88,61 +82,61 @@ def _export_glob_csv(glob_root: Path, pattern: str, rel_dir: str) -> list[str]:
     return written
 
 
+def _export_json_files(src_dir: Path, names: list[str], rel_dir: str) -> list[str]:
+    written: list[str] = []
+    for name in names:
+        src = src_dir / name
+        if not src.is_file():
+            continue
+        dst = SHARED_DIR / rel_dir / name
+        _copy_file(src, dst)
+        written.append(f"{rel_dir}/{name}")
+    return written
+
+
 def build() -> None:
+    binary_stash: Path | None = None
     if SHARED_DIR.exists():
+        for sub in ("embeddings", "montages"):
+            src = SHARED_DIR / sub
+            if src.is_dir() and any(src.iterdir()):
+                if binary_stash is None:
+                    binary_stash = SHARED_DIR.parent / ".shared_data_ccn_2026_binary_stash"
+                    if binary_stash.exists():
+                        shutil.rmtree(binary_stash)
+                    binary_stash.mkdir(parents=True)
+                shutil.copytree(src, binary_stash / sub)
         shutil.rmtree(SHARED_DIR)
     SHARED_DIR.mkdir(parents=True, exist_ok=True)
+    if binary_stash is not None and binary_stash.is_dir():
+        for sub in ("embeddings", "montages"):
+            src = binary_stash / sub
+            if src.is_dir():
+                shutil.copytree(src, SHARED_DIR / sub)
+        shutil.rmtree(binary_stash)
 
-    # --- Tier A: category-level summaries (Plot B and Plot C) ---
-    plotb_dir = (
-        CCN_DIR / "plotB_tsne_distance_to_centroid_outputs_20260402"
-    )  # preferred newer run
-    plotc_dir = CCN_DIR / "plotC_knn_diversity_outputs"
-
-    written: list[str] = []
-
-    written.append(
-        "README.md"
-    )
-
-    plotb_rel = "plotB_tsne_distance_to_centroid_outputs_20260402"
-    written.extend(
-        _export_csv_bundle(
-            expected_srcs=[
-                plotb_dir / "bv-to-bv-centroid_distance_clip_summary.csv",
-                plotb_dir / "bv-to-bv-centroid_distance_dinov3_summary.csv",
-                plotb_dir / "bv-to-bv-centroid_distance_clip_vs_dinov3_comparison.csv",
-            ],
-            rel_dir=plotb_rel,
+    valid7018_dir = CCN_DIR / "valid7018"
+    if not valid7018_dir.is_dir():
+        raise FileNotFoundError(
+            "Missing valid7018/ — run compute_valid7018_local_global.py first."
         )
-    )
 
-    plotc_rel = "plotC_knn_diversity_outputs"
-    written.extend(
-        _export_csv_bundle(
-            expected_srcs=[
-                plotc_dir / "bv_within_category_knn_clip_k5_summary.csv",
-                plotc_dir / "bv_within_category_knn_dinov3_k5_summary.csv",
-                plotc_dir / "bv_within_category_knn_clip_vs_dinov3_k5_comparison.csv",
-                # CCN extremes & overlap lists (category name only)
-                plotc_dir / "ccn2026_local_global_extreme_categories_clip_dino.csv",
-                plotc_dir / "ccn2026_local_global_extreme_categories_things_clip_dino.csv",
-                plotc_dir
-                / "ccn2026_local_global_overlap_categories_used_for_tsne_2x2.csv",
-                # THINGS-vs-embedding availability counts (category-level)
-                CCN_DIR / "things_image_vs_embedding_counts.csv",
-            ],
-            rel_dir=plotc_rel,
-        )
-    )
+    written: list[str] = ["README.md"]
 
-    # THINGS/BV metric tables from the newer embedding rerun.
-    things_metrics_dir = plotc_dir / "new_things_embeddings_20260428"
+    # --- Primary: valid7018 same-cohort metrics ---
+    valid7018_rel = "valid7018"
     written.extend(
         _export_glob_csv(
-            glob_root=things_metrics_dir,
+            glob_root=valid7018_dir,
             pattern="*.csv",
-            rel_dir=f"{plotc_rel}/new_things_embeddings_20260428",
+            rel_dir=valid7018_rel,
+        )
+    )
+    written.extend(
+        _export_json_files(
+            valid7018_dir,
+            ["valid7018_paper_stats.json", "valid7018_run.json"],
+            valid7018_rel,
         )
     )
 
@@ -172,18 +166,63 @@ def build() -> None:
         ]
     )
 
-    # --- Manifest + README ---
+    # Frequency + semantic inputs for abstract frequency plots (category-level only).
+    freq_exports: list[tuple[Path, str]] = [
+        (
+            DATA_DIR / "long_tailed_dist_prop_included_categories_valid85.csv",
+            "long_tailed_dist_prop_included_categories_valid85.csv",
+        ),
+        (
+            DATA_DIR / "shared_data_manuscript_2026" / "inputs" / "long_tailed_dist_prop_included_categories_filtered-0.27_valid129.csv",
+            "long_tailed_dist_prop_included_categories_filtered-0.27_valid129.csv",
+        ),
+        (
+            DATA_DIR / "shared_data_manuscript_2026" / "inputs" / "long_tailed_dist_prop_included_categories_valid129.csv",
+            "long_tailed_dist_prop_included_categories_valid129.csv",
+        ),
+    ]
+    for src, name in freq_exports:
+        if not src.is_file():
+            raise FileNotFoundError(f"Missing frequency table for CCN bundle: {src}")
+        _assert_columns_safe_csv(src)
+        _copy_file(src, SHARED_DIR / cat_rel / name)
+        written.append(f"{cat_rel}/{name}")
+
+    sem_src = DATA_DIR / "long_tailed_dist_prop_included_categories.csv"
+    if sem_src.is_file():
+        sem_df = pd.read_csv(sem_src, usecols=["category", "cdi_semantic"])
+        sem_dst = SHARED_DIR / cat_rel / "category_cdi_semantic_map.csv"
+        sem_dst.parent.mkdir(parents=True, exist_ok=True)
+        sem_df.to_csv(sem_dst, index=False)
+        written.append(f"{cat_rel}/category_cdi_semantic_map.csv")
+
+    fig_sel = valid7018_dir / "figures" / "valid7018_figure_category_selection.csv"
+    if fig_sel.is_file():
+        _copy_file(fig_sel, SHARED_DIR / valid7018_rel / "figures" / fig_sel.name)
+        written.append(f"{valid7018_rel}/figures/{fig_sel.name}")
+
+    # Optional: embedding + montage zips (built separately).
+    for rel in (
+        "embeddings/valid7018_bv_embeddings.zip",
+        "embeddings/valid7018_bv_embeddings_zip.json",
+        "montages/valid7018_montage_crops.zip",
+        "montages/valid7018_montage_crops_zip.json",
+    ):
+        if (SHARED_DIR / rel).is_file() and rel not in written:
+            written.append(rel)
+
     generated_utc = datetime.now(timezone.utc).isoformat()
     manifest = {
         "generated_utc": generated_utc,
         "description": (
             "CCN 2026 public-shareable intermediate tables exported from this "
-            "repository. This bundle contains only Tier A category-level aggregates "
-            "(no per-exemplar subject_id/stem fields)."
+            "repository. Primary cohort: valid7018 (7,018 rater-validated "
+            "crops). Category-level aggregates only (no per-exemplar subject_id/stem)."
         ),
         "notes": [
             "Do not redistribute Plot A/B/C images, per-exemplar CSVs, or thumbnails.",
             "Per-exemplar tables contain subject/file-stem-like identifiers and are excluded.",
+            "Legacy poster-pool Plot B/C tables are local-only under analysis/ccn-2026/ (not in this bundle).",
         ],
         "files": sorted(set(written)),
     }
@@ -192,26 +231,28 @@ def build() -> None:
     readme = """\
 # CCN 2026 — shared public data (category-level aggregates)
 
-This directory contains Tier A intermediate tables for the CCN 2026 poster analyses
-(exemplar variability).
+This directory contains Tier A intermediate tables for the CCN 2026 exemplar
+variability analyses.
 
-What’s included:
-- Plot B: BV→BV centroid distance *summary* CSVs (category-level)
-- Plot C: within-category kNN diversity *summary* CSVs and CLIP/DINO comparisons
-- CCN local/global extremes and overlap lists (category names)
-- THINGS/BV metric tables (category-level)
-- Category sets and per-class validation precision table
+Primary cohort (Methods-aligned):
+- `valid7018/` — global + local metrics on
+  the same 7,018 rater-validated crops (`valid7018_paper_stats.json` for headline ρ)
+- `embeddings/valid7018_bv_embeddings.zip` — paired CLIP+DINO `.npy` (~20 MB;
+  run `build_valid7018_embeddings_zip.py`)
 
-What’s intentionally excluded:
-- Plot B/C per-exemplar CSVs (these include `subject_id` and `stem`-like fields)
-- any images, montages, or thumbnails
+Also included:
+- Category sets, per-class validation precision, frequency tables, CDI semantic map (`inputs/`)
+- `montages/valid7018_montage_crops.zip` — JPEG thumbnails for abstract Figure 1A
+
+Excluded:
+- Plot B/C per-exemplar CSVs (`subject_id`, `stem`-like fields)
+- Full-resolution crop paths; only anonymized montage JPEGs are bundled
 
 Generated by:
 `python analysis/ccn-2026/scripts/build_shared_public_data_ccn.py`
 """
     _write_text(SHARED_DIR / "README.md", readme)
 
-    # Update MANIFEST after README creation.
     manifest["files"] = sorted(set(manifest["files"] + ["README.md"]))
     (SHARED_DIR / "MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
@@ -221,4 +262,3 @@ Generated by:
 
 if __name__ == "__main__":
     build()
-

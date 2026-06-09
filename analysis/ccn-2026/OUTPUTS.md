@@ -1,69 +1,34 @@
 # CCN 2026 — outputs reference
 
-Generated artifacts are grouped by plot letter or script. Prefer **dated** Plot B folder `plotB_tsne_distance_to_centroid_outputs_20260402/` over `*_20260401/` unless you are reproducing an older run.
+## Metrics — `valid7018/` (in git)
 
-## Plot A — [`plotA_category_montages_low_to_high/`](plotA_category_montages_low_to_high/)
-
-| File pattern | Description |
-|--------------|-------------|
-| `exemplar_montage_*_{category}_dist=*.png` / `.pdf` | Single-category montage (25 exemplars) |
-| `exemplar_montage_combined_*_horizontal.svg` | Multi-category strip for poster |
-| `plotA_selected_categories_low_to_high_variability.csv` | Selected categories, ranks, mean distances |
-
-## Plot B — `plotB_tsne_distance_to_centroid_outputs_20260402/`
-
-| File pattern | Description |
-|--------------|-------------|
-| `bv-to-bv-centroid_distance_{clip,dinov3}_summary.csv` | Per-category `mean_bv_to_bv_centroid`, `std`, `n_bv` |
-| `bv-to-bv-centroid_distance_{clip,dinov3}_per_exemplar.csv` | Per crop: `dist_to_bv_centroid`, ids, stem |
-| `bv-to-bv-centroid_distance_{clip}_tsne_by_category/` | Per-category t-SNE PNG/PDF |
-| `*_clip_vs_dinov3_tsne_joint_side_by_side/` | Joint multi-category t-SNE panels |
-
-Legacy joint BV–THINGS runs: `bv_to_things_centroid_{clip,dinov3}_tsne_by_category/` (superseded for CCN poster by BV-only notebook 02).
-
-## Plot C — [`plotC_knn_diversity_outputs/`](plotC_knn_diversity_outputs/)
-
-| Path / file | Description |
-|-------------|-------------|
-| `bv_within_category_knn_{clip,dinov3}_k5_summary.csv` | Category-level mean kNN distance |
-| `bv_within_category_knn_clip_vs_dinov3_k5_comparison.csv` | CLIP vs DINO per category |
-| `ccn2026_variability_2x2_panel.png` | Main 2×2 variability figure |
-| `ccn2026_local_global_extreme_categories_clip_dino.csv` | Extreme category lists (CLIP & DINO) |
-| `ccn2026_local_global_extremes_tsne_overlap_2x2.png` | t-SNE panel for overlap extremes |
-| `new_things_embeddings_20260428/` | THINGS metrics **valid129**, used by `scripts/generate_things_plotabc_and_bv_comparisons.py` |
-| `new_things_embeddings_valid85_20260428/` | Same for **valid85** |
-| `original_embeddings_rerun/` | Metrics from raw on-disk embeddings |
-| `zscore_rerun/` | Metrics from z-scored exemplar CSVs |
-
-Human-readable extreme lists (legacy): [`old_plots/plotC_knn_diversity_outputs/ccn2026_local_global_extreme_categories_clip_dino.md`](old_plots/plotC_knn_diversity_outputs/ccn2026_local_global_extreme_categories_clip_dino.md)
-
-## THINGS comparisons — `plot_things_and_bv_comparisons_outputs/`
-
-Produced by [`scripts/generate_things_plotabc_and_bv_comparisons.py`](scripts/generate_things_plotabc_and_bv_comparisons.py). Includes Plot A/B/C analogs for THINGS, BV–THINGS scatter panels, correlation 2×2 figures, and `bv_vs_things_paired_stats_summary.csv`.
-
-Variant: `plot_things_and_bv_comparisons_outputs_valid85/` (valid85 category set).
-
-## Plot E — [`plotE_invalid_exemplar_montages_per_category/`](plotE_invalid_exemplar_montages_per_category/)
+From `scripts/compute_valid7018_local_global.py`:
 
 | File | Description |
 |------|-------------|
-| `invalid_exemplar_counts_by_category.csv` | Counts of failed per-file precision crops |
-| `invalid_exemplar_montage_manifest.csv` | Paths to per-category montage PNG/PDF |
-| `invalid_montage_{category}.png` | Montage of invalid exemplars |
+| `bv_valid7018_{clip,dinov3}_local_global_k5.csv` | Per-category global dispersion + mean kNN |
+| `bv_valid7018_clip_vs_dinov3_local_global_k5.csv` | CLIP vs DINO per category |
+| `bv_valid7018_correlations_k5.csv` | Headline Spearman ρ |
+| `valid7018_paper_stats.json` | Category picks + autofilled statistics |
+| `valid7018_run.json` | Run metadata |
 
-## Interactive — [`tsne_datapage/`](tsne_datapage/)
+## Scratch figures — `valid7018/figures/` (gitignored)
 
-| File | Description |
-|------|-------------|
-| `index.html` | Browser UI |
-| `manifest.json` | Category coordinates + exemplar thumbnails |
-| `thumbs/` | Cached crop thumbnails (large) |
+All regenerated PNG/PDF variants from `generate_valid7018_paper_figures.py`, including exploratory frequency panels.
 
-## Archive & legacy — do not use for new runs
+## Abstract panels — `abstract_figures/` (in git)
 
-| Location | Notes |
-|----------|--------|
-| [`archive/`](archive/) | Large one-off exports (executed notebook 03, combined poster PNG) |
-| [`old_plots/`](old_plots/) | ~600 MB of superseded Plot A/B/C outputs and label sidecars |
+Subset copied by `publish_abstract_figures()`:
 
-To reclaim disk space after verifying newer outputs, you may delete `old_plots/` and duplicate `plotB_*_20260401/` trees locally (not required for rerunning notebooks).
+| File | Panel |
+|------|-------|
+| `fig1A_valid7018_montages_low_to_high_global.*` | Montages (clock → book) |
+| `fig1B_valid7018_tsne_dinov3.*` | DINOv3 t-SNE aligned with montage categories |
+| `fig1B_valid7018_tsne_dinov3_semantic_diverse.*` | Alternative t-SNE (one per CDI semantic group) |
+| `fig1C_valid7018_cross_model_k5.*` | Cross-model global/local scatter |
+| `fig_explore_frequency_vs_global_robustness_2x2.*` | Frequency vs dispersion |
+| `valid7018_figure_category_selection.csv` | Category picks for panels A/B |
+
+## Public bundle — `data/shared_data_ccn_2026/`
+
+Mirror of `valid7018/` metrics plus `embeddings/`, `montages/`, and `inputs/`.

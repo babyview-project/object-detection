@@ -1,31 +1,32 @@
 {
-  "generated_utc": "2026-06-02T06:15:04.185219+00:00",
-  "description": "CCN 2026 public-shareable intermediate tables exported from this repository. This bundle contains only Tier A category-level aggregates (no per-exemplar subject_id/stem fields).",
+  "generated_utc": "2026-06-09T03:33:44.946546+00:00",
+  "description": "CCN 2026 public-shareable intermediate tables exported from this repository. Primary cohort: valid7018 (7,018 rater-validated crops). Category-level aggregates only (no per-exemplar subject_id/stem).",
   "notes": [
     "Do not redistribute Plot A/B/C images, per-exemplar CSVs, or thumbnails.",
-    "Per-exemplar tables contain subject/file-stem-like identifiers and are excluded."
+    "Per-exemplar tables contain subject/file-stem-like identifiers and are excluded.",
+    "Legacy poster-pool Plot B/C tables are local-only under analysis/ccn-2026/ (not in this bundle)."
   ],
   "files": [
     "README.md",
+    "embeddings/valid7018_bv_embeddings.zip",
+    "embeddings/valid7018_bv_embeddings_zip.json",
+    "inputs/category_cdi_semantic_map.csv",
     "inputs/included_categories_valid129.txt",
     "inputs/included_categories_valid85.txt",
+    "inputs/long_tailed_dist_prop_included_categories_filtered-0.27_valid129.csv",
+    "inputs/long_tailed_dist_prop_included_categories_valid129.csv",
+    "inputs/long_tailed_dist_prop_included_categories_valid85.csv",
     "inputs/per_class_validation_data.csv",
-    "plotB_tsne_distance_to_centroid_outputs_20260402/bv-to-bv-centroid_distance_clip_summary.csv",
-    "plotB_tsne_distance_to_centroid_outputs_20260402/bv-to-bv-centroid_distance_clip_vs_dinov3_comparison.csv",
-    "plotB_tsne_distance_to_centroid_outputs_20260402/bv-to-bv-centroid_distance_dinov3_summary.csv",
-    "plotC_knn_diversity_outputs/bv_within_category_knn_clip_k5_summary.csv",
-    "plotC_knn_diversity_outputs/bv_within_category_knn_clip_vs_dinov3_k5_comparison.csv",
-    "plotC_knn_diversity_outputs/bv_within_category_knn_dinov3_k5_summary.csv",
-    "plotC_knn_diversity_outputs/ccn2026_local_global_extreme_categories_clip_dino.csv",
-    "plotC_knn_diversity_outputs/ccn2026_local_global_extreme_categories_things_clip_dino.csv",
-    "plotC_knn_diversity_outputs/ccn2026_local_global_overlap_categories_used_for_tsne_2x2.csv",
-    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/bv_clip_local_global_k5_valid129.csv",
-    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/bv_dinov3_local_global_k5_valid129.csv",
-    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_clip_local_global_k5_valid129.csv",
-    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_dinov3_local_global_k5_valid129.csv",
-    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_vs_bv_clip_local_global_k5_valid129.csv",
-    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_vs_bv_dinov3_local_global_k5_valid129.csv",
-    "plotC_knn_diversity_outputs/new_things_embeddings_20260428/things_vs_bv_metric_summary_k5_valid129.csv",
-    "plotC_knn_diversity_outputs/things_image_vs_embedding_counts.csv"
+    "montages/valid7018_montage_crops.zip",
+    "montages/valid7018_montage_crops_zip.json",
+    "valid7018/bv_valid7018_clip_local_global_k5.csv",
+    "valid7018/bv_valid7018_clip_vs_dinov3_local_global_k5.csv",
+    "valid7018/bv_valid7018_correlations_k5.csv",
+    "valid7018/bv_valid7018_dinov3_local_global_k5.csv",
+    "valid7018/bv_valid7018_n_exemplars_by_category.csv",
+    "valid7018/figures/valid7018_figure_category_selection.csv",
+    "valid7018/valid7018_cdi_semantic_summary.csv",
+    "valid7018/valid7018_paper_stats.json",
+    "valid7018/valid7018_run.json"
   ]
 }

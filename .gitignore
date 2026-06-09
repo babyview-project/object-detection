@@ -20,22 +20,9 @@ analysis/manuscript-2026/results_preprint_autofilled_backup.tex
 analysis/manuscript-2026/results_preprint_numbers_autofill.txt
 analysis/manuscript-2026/results_preprint_numbers_table.csv
 analysis/manuscript-2026/results_preprint.tex
-# CCN 2026 — source + docs in git; large / redundant outputs local only
-analysis/ccn-2026/ccn_2026_abstract.pdf
-analysis/ccn-2026/old_plots/
-analysis/ccn-2026/archive/
-analysis/ccn-2026/plotB_tsne_distance_to_centroid_outputs*/
-analysis/ccn-2026/bv_to_things_centroid_*_tsne_by_category/
-analysis/ccn-2026/plotA_category_montages_low_to_high/
-analysis/ccn-2026/plotE_invalid_exemplar_montages_per_category/
-analysis/ccn-2026/plot_things_and_bv_comparisons_outputs*/
-analysis/ccn-2026/tsne_datapage/
-analysis/ccn-2026/plotC_knn_diversity_outputs/**/*.png
-analysis/ccn-2026/plotC_knn_diversity_outputs/**/*.pdf
-analysis/ccn-2026/plotC_knn_diversity_outputs/original_embeddings_rerun/
-analysis/ccn-2026/plotC_knn_diversity_outputs/zscore_rerun/
-analysis/ccn-2026/plotC_knn_diversity_outputs/new_things_embeddings_valid85_20260428/
-analysis/ccn-2026/combined_plot*.png
+# CCN 2026 — valid7018 pipeline; abstract_figures/ and valid7018/*.csv|json are in git
+analysis/ccn-2026/447_Variability_in_Young_Child*
+analysis/ccn-2026/valid7018/figures/
 
 # Manuscript 2026 — submission PDF, figures, logs, Tier-B embeddings, exploratory images
 analysis/manuscript-2026/logs/
