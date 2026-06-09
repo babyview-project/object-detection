@@ -79,16 +79,16 @@
     "n": 73
   },
   "montage_categories_low_to_high_global": [
-    "glasses",
-    "couch",
-    "shoe",
+    "clock",
+    "oven",
+    "chair",
     "paper",
     "book"
   ],
   "tsne_categories": [
-    "glasses",
-    "couch",
-    "shoe",
+    "clock",
+    "oven",
+    "chair",
     "paper",
     "book"
   ],

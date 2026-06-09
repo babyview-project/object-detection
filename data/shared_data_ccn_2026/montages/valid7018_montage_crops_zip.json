@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-06-09T06:09:00.850488+00:00",
+  "generated_utc": "2026-06-09T06:25:02.297383+00:00",
   "n_categories": 5,
   "n_exemplars_per_category": 25,
   "categories": [
-    "glasses",
-    "couch",
-    "shoe",
+    "clock",
+    "oven",
+    "chair",
     "paper",
     "book"
   ],

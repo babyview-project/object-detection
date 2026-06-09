@@ -50,9 +50,9 @@ Autofilled from `valid7018/valid7018_paper_stats.json` and metric CSVs.
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| glasses | CLIP global=15.53, local=16.25; DINO global=22.32, local=24.89 |  |
-| couch | CLIP global=17.87, local=20.36; DINO global=23.13, local=27.88 |  |
-| shoe | CLIP global=18.78, local=21.62; DINO global=23.68, local=27.90 |  |
+| clock | CLIP global=15.68, local=15.08; DINO global=23.55, local=21.62 |  |
+| oven | CLIP global=17.87, local=20.17; DINO global=23.21, local=26.28 |  |
+| chair | CLIP global=18.79, local=20.83; DINO global=25.53, local=29.23 |  |
 | paper | CLIP global=19.45, local=21.37; DINO global=22.98, local=27.48 |  |
 | book | CLIP global=21.59, local=25.38; DINO global=22.88, local=27.95 |  |
 
@@ -118,6 +118,7 @@ Autofilled from `valid7018/valid7018_paper_stats.json` and metric CSVs.
 |--------|-------|-------|
 | abstract_source | Abstract frequency panels use full infant-view detections (valid129_filtered, 0.27 CLIP filter). Dispersion is always from the 7,018 rater-validated crop sample (uniform per-category sampling by design). |  |
 | not_used | 7018 crop counts / annotation-pool valid85 frequencies are not used in abstract panels |  |
+| montage_exclude | Montage/t-SNE dispersion panels exclude glasses (face privacy); quintiles use clock, oven, chair, paper, book. |  |
 
 ## clip_lowest_local_non_body
 

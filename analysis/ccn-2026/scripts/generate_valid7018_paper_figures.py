@@ -73,6 +73,9 @@ BODY_PART_CATEGORIES = frozenset(
     }
 )
 
+# Montage panels: exclude categories whose exemplars routinely show faces (privacy).
+MONTAGE_EXCLUDE_CATEGORIES = frozenset({"glasses"})
+
 CDI_SEMANTIC_COLORS = {
     "animals": "#4DB8A8",
     "body_parts": "#E87A5F",
@@ -304,6 +307,10 @@ def filter_non_body(df: pd.DataFrame) -> pd.DataFrame:
     return df[~df["category"].isin(BODY_PART_CATEGORIES)].copy()
 
 
+def filter_for_montage(df: pd.DataFrame) -> pd.DataFrame:
+    return df[~df["category"].isin(BODY_PART_CATEGORIES | MONTAGE_EXCLUDE_CATEGORIES)].copy()
+
+
 def select_evenly_spaced(categories: list[str], n: int) -> list[str]:
     if len(categories) < n:
         raise ValueError(f"Need at least {n} categories, got {len(categories)}")
@@ -426,7 +433,10 @@ def write_paper_stats(
         "clip_local_non_body": summ(clip_nb.mean_knn_dist),
         "dino_local_non_body": summ(dino_nb.mean_knn_dist),
         "montage_categories_low_to_high_global": select_evenly_spaced(
-            clip_nb.sort_values("global_dispersion")["category"].tolist(), 5
+            filter_for_montage(clip)
+            .sort_values("global_dispersion")["category"]
+            .tolist(),
+            5,
         ),
     }
     stats["tsne_categories"] = list(stats["montage_categories_low_to_high_global"])
@@ -1271,7 +1281,12 @@ def figure_1a_montages(
         ax.imshow(montage)
         ax.axis("off")
         color = CDI_SEMANTIC_COLORS.get(sem, CDI_SEMANTIC_COLORS["other"])
-        ax.set_title(f"{cat}\n(global={g:.2f})", fontsize=9, color=color, fontweight="bold")
+        ax.set_title(
+            rf"$\mathit{{{cat}}}$ | global$_{{\mathrm{{CLIP}}}}$ = {g:.2f}",
+            fontsize=9,
+            color=color,
+            fontweight="bold",
+        )
     fig.suptitle("Low → high global dispersion (valid7018; non-body-part categories)", fontsize=11)
     for ext in ("png", "pdf"):
         path = out_dir / f"fig1A_valid7018_montages_low_to_high_global.{ext}"
@@ -1316,10 +1331,8 @@ def figure_1b_tsne(
         print("Skip t-SNE: not enough categories/embeddings")
         return
 
+    # Use cohort z-scored embeddings as stored (no extra standardization before t-SNE).
     X_all = np.vstack([s["X"] for s in specs])
-    mean, std = X_all.mean(axis=0), X_all.std(axis=0)
-    std = np.where(std > 1e-8, std, 1.0)
-    X_all = (X_all - mean) / std
 
     perplexity = min(30.0, max(5.0, (len(X_all) - 1) // 3))
     xy = TSNE(
