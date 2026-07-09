@@ -2,12 +2,12 @@
 CATEGORY EMBEDDING CORRELATION RESULTS
 ============================================================
 
-CSV File 1: bv_things_comp_12252025/bv_dinov3_filtered_zscored_hierarchical_163cats/normalized_filtered_embeddings_alphabetical.csv
-CSV File 2: bv_things_comp_12252025/things_dinov3_filtered_zscored_hierarchical_163cats/normalized_filtered_embeddings_alphabetical.csv
+CSV File 1: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/vss-2026/bv_things_comp_12252025/bv_dinov3_filtered_zscored_hierarchical_163cats/normalized_filtered_embeddings_alphabetical.csv
+CSV File 2: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/vss-2026/bv_things_comp_12252025/things_dinov3_filtered_zscored_hierarchical_163cats/normalized_filtered_embeddings_alphabetical.csv
 
 Categories 1: 163, Embedding dim: 768
 Categories 2: 163, Embedding dim: 768
-Category include file: ../../data/things_bv_overlap_categories_exclude_zero_precisions.txt
+Category include file: /home/j7yang/babyview-projects/vss2026/object-detection/data/things_bv_overlap_categories_exclude_zero_precisions.txt
 Matching categories: 163
 
 ============================================================

@@ -1,0 +1,22 @@
+Top 20 Most Dissimilar Category Pairs:
+============================================================
+vacuum <-> egg: 1.4142
+vacuum <-> potato: 1.4069
+vacuum <-> bread: 1.4063
+pajamas <-> cookie: 1.4063
+vacuum <-> pickle: 1.4038
+bib <-> pencil: 1.3981
+bed <-> strawberry: 1.3972
+pajamas <-> soap: 1.3938
+bed <-> apple: 1.3911
+blanket <-> apple: 1.3873
+couch <-> strawberry: 1.3853
+vacuum <-> cookie: 1.3852
+pajamas <-> pickle: 1.3848
+pajamas <-> bread: 1.3821
+bed <-> cookie: 1.3814
+couch <-> cookie: 1.3807
+jacket <-> cookie: 1.3790
+pajamas <-> apple: 1.3766
+shirt <-> cookie: 1.3762
+bed <-> pickle: 1.3754

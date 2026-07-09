@@ -1,0 +1,7 @@
+{
+  "embed_model": "dinov3",
+  "category_set": "valid129",
+  "use_manifest_filter": true,
+  "max_exemplars_per_category": 32,
+  "n_categories_dirs": 129
+}

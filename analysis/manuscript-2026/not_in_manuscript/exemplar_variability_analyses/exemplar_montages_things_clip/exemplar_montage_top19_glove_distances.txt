@@ -1,0 +1,13 @@
+dist_to_centroid (left-to-right, top-to-bottom)
+4.1
+4.5
+4.6
+4.7
+4.7
+4.7
+5.0
+5.1
+5.3
+5.7
+6.3
+7.6

@@ -1,0 +1,20 @@
+{
+  "embed_model": "dinov3",
+  "category_set": "valid129",
+  "embed_dim": 768,
+  "n_global_windows": 42,
+  "n_category_windows": 284,
+  "n_global_edges": 33,
+  "n_category_edges": 220,
+  "pilot_categories": [
+    "ball",
+    "book",
+    "bottle",
+    "chair",
+    "cup",
+    "face",
+    "hand",
+    "toy"
+  ],
+  "top_n": 8
+}

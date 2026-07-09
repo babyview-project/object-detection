@@ -1,0 +1,557 @@
+---
+title: "BabyView Objects Prolific Validation"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    self-contained: true
+execute:
+  warning: false
+  message: false
+---
+
+```{r setup}
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(irr)
+library(here)
+library(ggrepel)
+
+OOD_CLASSES <- c("__OOD_BV_CROP__", "__OOD_SYNTHETIC__")
+
+theme_set(
+  theme_minimal(base_size = 12) +
+    theme(
+      plot.title    = element_text(hjust = 0.5, face = "bold", size = 13),
+      plot.subtitle = element_text(hjust = 0.5, color = "gray40", size = 10),
+      strip.text    = element_text(face = "bold")
+    )
+)
+```
+
+```{r load-data}
+workers <- read.csv(here("data/prolific_validation/worker_indexes.csv")) |> filter(status == "complete") |> pull(worker_id)
+df_raw <- read.csv(here("data/prolific_validation/prolific_annotations.csv")) |>
+  filter(!class %in% OOD_CLASSES) |>
+  mutate(
+    order_index   = as.integer(order_index),
+    reaction_time = as.numeric(reaction_time)
+  ) |>
+  mutate(
+    rater = {
+      long_ids <- unique(worker_id[nchar(worker_id) > 10])
+      id_to_label <- setNames(
+        paste0("rater", seq_along(long_ids)),
+        long_ids
+      )
+      ifelse(nchar(worker_id) > 10, id_to_label[worker_id], NA_character_)
+    }
+  ) |>
+  filter(!is.na(rater))
+
+invalid <- df_raw |>
+  filter(trial_type == "invalid_drawing") |>
+  distinct(rater, trial_type, class)
+
+other <- df_raw |>
+  filter(trial_type != "invalid_drawing") 
+
+annotation_count <- bind_rows(invalid, other) |>
+  count(rater, trial_type)
+
+df_filtered <- df_raw |>
+  filter(worker_id %in% workers)
+
+# Ground-truth universe: the canonical (class, filename) pairs both raters evaluated.
+# Both raters saw shuffled_index == 1. Note: categories do NOT all have 25 images —
+# n_total varies per category and is computed from this table.
+all_annotations <- read.csv(here("data/prolific_validation/object_files.csv")) |>
+  filter(!class %in% OOD_CLASSES) |>
+  select(class, filename, shuffled_index) 
+
+# True denominator per category — varies, do not assume 25
+images_per_cat <- all_annotations |>
+  count(class, shuffled_index, name = "n_total")
+
+invalid_df <- df_filtered |> filter(trial_type == "invalid_drawing")
+attn_df    <- df_filtered |> filter(trial_type == "attention_check")
+```
+
+# Overview
+
+```{r overview-table}
+df_filtered |>
+  count(rater, trial_type) |>
+  pivot_wider(names_from = trial_type, values_from = n, values_fill = 0) |>
+  rename(
+    Rater              = rater,
+    `Invalid drawings` = invalid_drawing,
+    `Attention checks` = attention_check
+  ) |>
+  knitr::kable(caption = "Rows per rater by trial type")
+
+images_per_cat |>
+  summarise(
+    `# categories`  = n(),
+    `Min images`    = min(n_total),
+    `Max images`    = max(n_total),
+    `Median images` = median(n_total),
+    `Mean images`   = round(mean(n_total), 1)
+  ) |>
+  knitr::kable(caption = "Ground-truth universe summary (annotations.csv, shuffled_index == 1)")
+```
+we don't include any raters with >20 attention check misses.
+
+# 1. Invalid Image Rate per Category
+
+The denominator for each category is `n_total` from `all_annotations` — the actual number of
+images in that category's ground-truth bucket, which varies across categories.
+
+```{r invalid-rate-compute}
+n_invalid_per_rater <- invalid_df |>
+  group_by(rater, class) |>
+  summarise(n_invalid = n_distinct(filename), .groups = "drop")
+
+# Join true denominator; categories a rater marked 0 invalid won't appear above,
+# All raters that exist in the data
+raters <- df_filtered |> distinct(rater, shuffled_index)
+
+# Full grid: every rater × every category in the annotation universe
+full_grid <- raters |>
+  cross_join(images_per_cat |> distinct(class)) # <-- ground truth universe
+
+invalid_rate <- full_grid |>
+  left_join(n_invalid_per_rater, by = c("rater", "class")) |>
+  replace_na(list(n_invalid = 0L)) |>
+  left_join(images_per_cat, by = c("class", "shuffled_index")) |>
+  mutate(prop_invalid = n_invalid / n_total) 
+
+
+avg_valid <- invalid_rate |>
+  group_by(rater) |>
+  summarise(
+    mean_n    = round(mean(n_invalid), 2),
+    mean_prop = round(1 - mean(prop_invalid), 3),
+    sd_prop   = round(sd(prop_invalid), 3),
+    shuffled_index = first(shuffled_index),
+    .groups   = "drop"
+  ) |>   arrange(shuffled_index)
+
+avg_valid |>
+  knitr::kable(
+    caption   = "Average valid image proportion per rater first summarized within category",
+    col.names = c("Rater", "Mean # invalid", "Mean proportion valid", "SD proportion valid", "Shuffled bucket")
+  )
+```
+
+
+
+
+```{r invalid-rate-bar, fig.height=16, fig.width=11}
+class_avgs_per_bucket <- invalid_rate |>
+  group_by(class, shuffled_index) |>
+  summarise(mean_prop = mean(prop_invalid), .groups = "drop") 
+class_avgs <- class_avgs_per_bucket |>  group_by(class) |>
+  summarize(mean_prop = mean(mean_prop)) 
+
+cat_order <- class_avgs |>
+  arrange(desc(mean_prop)) |>
+  pull(class)
+
+class_avgs_per_bucket |>
+  mutate(class = factor(class, levels = rev(cat_order))) |>
+  ggplot(aes(x = mean_prop, y = class, group = shuffled_index, fill = factor(shuffled_index))) +
+  geom_col(position = position_dodge(0.7), width = 0.6, alpha = 0.85) +
+  geom_vline(xintercept = 0.5, linetype = "dashed", color = "firebrick", linewidth = 0.5) +
+  scale_x_continuous(labels = percent_format(), limits = c(0, 1.05)) +
+  scale_fill_discrete() +
+  labs(
+    title    = "Invalid Image Rate per Category",
+    subtitle = "Dashed line = 50% threshold; denominator = actual # images per category",
+    x        = "Proportion marked invalid",
+    y        = NULL,
+    fill     = NULL
+  ) +
+  theme(
+    legend.position = "top",
+    axis.text.y     = element_text(size = 7)
+  )
+```
+
+```{r}
+class_avgs_at_n <- class_avgs |>
+  mutate(precision = 1 - mean_prop) |>
+  arrange(desc(precision)) |>
+  mutate(
+    rank         = row_number(),
+    cumulative_precision = cummean(precision)
+  )
+
+threshold_precision <- 0.5
+threshold_precision_n <- class_avgs_at_n |> filter(precision >= threshold_precision) |> slice_max(rank) |> pull(rank)
+threshold_cumulative_precision <- round(class_avgs_at_n |> filter(rank == threshold_precision_n) |> pull(cumulative_precision), 2)
+ggplot(class_avgs_at_n, aes(x = rank, y = precision)) +
+  geom_line(linewidth = 1, color = "steelblue") +
+  geom_hline(yintercept = threshold_precision, linetype = "dashed", color = "firebrick") +
+  geom_vline(xintercept = threshold_precision_n, linetype = "dashed", color = "firebrick") +
+    annotate("label", x = threshold_precision_n, y = 0.42,
+           label = paste0("N = ", threshold_precision_n), color = "firebrick", size = 3.5) +
+  labs(title = "Mean precision per category", x = NULL, y = "Mean precision") +
+  theme(axis.text.y = element_text(size = 7))
+
+threshold   <- 0.8
+threshold_cumulative <- class_avgs_at_n |> filter(cumulative_precision >= threshold) |> slice_max(rank) |> pull(rank)
+
+ggplot(class_avgs_at_n, aes(x = rank, y = cumulative_precision)) +
+  geom_line(linewidth = 1, color = "steelblue") +
+  geom_point(size = 1.5, color = "steelblue") +
+  geom_hline(yintercept = threshold, linetype = "dashed", color = "darkgreen") +
+  geom_vline(xintercept = threshold_cumulative, linetype = "dashed", color = "darkgreen") +
+  annotate("label", x = threshold_cumulative, y = 0.42,
+           label = paste0("N = ", threshold_cumulative), color = "darkgreen", size = 3.5) +
+  geom_hline(yintercept = threshold_cumulative_precision, linetype = "dashed", color = "firebrick") +
+  geom_vline(xintercept = threshold_precision_n, linetype = "dashed", color = "firebrick") +
+    annotate("label", x = threshold_precision_n, y = 0.42,
+           label = paste0("N = ", threshold_precision_n), color = "firebrick", size = 3.5) +
+    annotate("label", x = 20, y = threshold_cumulative_precision,
+           label = paste0("all classes precision > 0.5, \n total precision = ", threshold_cumulative_precision), color = "firebrick", size = 3.5) +
+  scale_y_continuous(limits = c(0.4, NA)) +
+  labs(
+    title = "Cumulative average precision (top N categories)",
+    x     = "N categories (sorted by precision desc)",
+    y     = "Cumulative precision"
+  )
+```
+
+
+# 2. Inter-Rater Reliability (IRR)
+```{r}
+#
+# Each shuffled_index bucket has 2–3 raters assigned exclusively to it.
+# We compute all pairwise Cohen's kappa within each bucket, then average.
+
+# Helper: all pairwise kappa for a set of rater columns in a wide df
+pairwise_kappa <- function(wide_df, rater_cols) {
+  pairs <- combn(rater_cols, 2, simplify = FALSE)
+  map_dfr(pairs, function(p) {
+    mat <- wide_df |> select(all_of(p)) |> as.matrix()
+    k   <- tryCatch(kappa2(mat)$value, error = \(e) NA_real_)
+    z   <- tryCatch(kappa2(mat)$statistic, error = \(e) NA_real_)
+    pa  <- mean(wide_df[[p[1]]] == wide_df[[p[2]]])
+    tibble(r1 = p[1], r2 = p[2], kappa = k, z = z, pct_agree = pa,
+           n = nrow(wide_df))
+  })
+}
+
+# ── Build per-bucket IRR data ─────────────────────────────────────────────────
+
+bucket_irr_results <- map(1:4, function(idx) {
+  
+  bucket_raters <- invalid_df |>
+    filter(shuffled_index == idx) |>
+    distinct(rater) |>
+    pull(rater)
+  
+  uni <- all_annotations |>
+    filter(shuffled_index == idx)
+  
+  wide <- reduce(bucket_raters, function(df, r) {
+    col  <- sym(r)
+    flag <- invalid_df |>
+      filter(rater == r, shuffled_index == idx) |>
+      select(class, filename, shuffled_index) |>
+      distinct() |>
+      mutate(!!col := 1L)
+    left_join(df, flag, by = c("class", "filename", "shuffled_index"))
+  }, .init = uni) |>
+    mutate(across(all_of(bucket_raters), \(x) replace_na(x, 0L)))
+  
+  bucket_irr <- pairwise_kappa(wide, bucket_raters) |>
+    mutate(shuffled_index = idx)
+  
+  list(raters = bucket_raters, irr = bucket_irr, wide = wide)
+})
+
+# Then extract each piece:
+bucket_irr <- map_dfr(bucket_irr_results, "irr")
+bucket_wide <- map_dfr(bucket_irr_results, "wide")
+bucket_raters <- map(bucket_irr_results, "raters")
+  
+# ── 2a. Overall kappa per bucket, then grand average ─────────────────────────
+bucket_summary <- bucket_irr |>
+  group_by(shuffled_index) |>
+  summarise(
+    n_pairs     = n(),
+    n_images    = first(n),
+    mean_kappa  = mean(kappa, na.rm = TRUE),
+    mean_agree  = mean(pct_agree, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+grand <- bucket_summary |>
+  summarise(
+    shuffled_index = "Grand avg",
+    n_pairs        = sum(n_pairs),
+    mean_kappa     = weighted.mean(mean_kappa, n_images),  # n_images still vector here
+    mean_agree     = weighted.mean(mean_agree, n_images),  # same
+    n_images       = sum(n_images)                         # collapse LAST
+  )
+
+bind_rows(
+  bucket_summary |> mutate(shuffled_index = as.character(shuffled_index)),
+  grand
+) |>
+  knitr::kable(
+    digits  = 3,
+    caption = "Overall IRR per shuffled_index bucket (all-pairwise kappa, weighted grand avg)"
+  )
+```
+
+## 2b per-category kappa
+```{r}
+
+cat_irr <- map_dfr(1:4, function(idx) {
+  
+  bucket_raters <- invalid_df |>
+    filter(shuffled_index == idx) |>
+    distinct(rater) |>
+    pull(rater)
+  
+  uni <- all_annotations |> filter(shuffled_index == idx)
+  
+  wide <- reduce(bucket_raters, function(df, r) {
+    col  <- sym(r)
+    flag <- invalid_df |>
+      filter(rater == r, shuffled_index == idx) |>
+      select(class, filename, shuffled_index) |>
+      distinct() |>
+      mutate(!!col := 1L)
+    left_join(df, flag, by = c("class", "filename", "shuffled_index"))
+  }, .init = uni) |>
+    mutate(across(all_of(bucket_raters), \(x) replace_na(x, 0L)))
+  
+  pairs <- combn(bucket_raters, 2, simplify = FALSE)
+  
+  map_dfr(pairs, function(p) {
+    wide |>
+      group_by(class) |>
+      summarise(
+        n_total   = n(),
+        n_r1      = sum(.data[[p[1]]]),
+        n_r2      = sum(.data[[p[2]]]),
+        pct_agree = mean(.data[[p[1]]] == .data[[p[2]]]),
+        kappa     = tryCatch(
+          kappa2(cbind(.data[[p[1]]], .data[[p[2]]]))$value,
+          error = \(e) NA_real_
+        ),
+        .groups = "drop"
+      ) |>
+      mutate(shuffled_index = idx, r1 = p[1], r2 = p[2])
+  })
+}) |> mutate(kappa= ifelse(is.na(kappa), 1, kappa))
+
+# Average kappa per category across all pairs/buckets
+kappa_per_cat_bucket <- cat_irr |>
+  group_by(class, shuffled_index) |>
+  summarise(
+    n_total   = mean(n_total), 
+    kappa     = mean(kappa, na.rm = TRUE),
+    pct_agree = mean(pct_agree, na.rm = TRUE),
+    n_pairs   = n(),
+    .groups   = "drop"
+  ) 
+
+kappa_per_cat <- kappa_per_cat_bucket |>
+  group_by(class) |>
+  summarise(
+    n_total   = sum(n_total),      # total images seen across all pairs
+    kappa     = mean(kappa, na.rm = TRUE),
+    pct_agree = mean(pct_agree, na.rm = TRUE),
+    n_pairs   = sum(n_pairs), 
+    .groups   = "drop"
+  ) 
+
+# Heatmap: top 10 + bottom 15
+kappa_per_cat |>
+  filter(!is.na(kappa), kappa != 0) |>
+  { \(d) bind_rows(slice_max(d, kappa, n = 10), slice_min(d, kappa, n = 15)) }() |>
+  distinct(class, .keep_all = TRUE) |>
+  mutate(class = fct_reorder(class, kappa)) |>
+  ggplot(aes(x = 1, y = class, fill = kappa)) +
+  geom_tile(color = "white", linewidth = 0.3) +
+  geom_text(aes(label = round(kappa, 2)), size = 4) +
+  scale_fill_gradient2(
+    low = "#D73027", mid = "white", high = "#1A9850",
+    midpoint = 0, limits = c(-1, 1), name = "κ"
+  ) +
+  scale_x_continuous(breaks = NULL) +
+  labs(
+    title    = "Per-Category Cohen's κ (Top 10 & Bottom 15, avg across buckets & pairs)",
+    subtitle = "Green = high agreement, Red = systematic disagreement",
+    x = NULL, y = NULL
+  ) +
+  theme(axis.text.y = element_text(size = 14), axis.ticks = element_blank())
+```
+
+## 2c. Confusion matrix 
+```{r}
+# For a multi-rater confusion matrix we use each pairwise combination as a row.
+bucket_irr_long <- map_dfr(1:4, function(idx) {
+  
+  bucket_raters <- invalid_df |>
+    filter(shuffled_index == idx) |>
+    distinct(rater) |>
+    pull(rater)
+  
+  uni <- all_annotations |> filter(shuffled_index == idx)
+  
+  wide <- reduce(bucket_raters, function(df, r) {
+    col  <- sym(r)
+    flag <- invalid_df |>
+      filter(rater == r, shuffled_index == idx) |>
+      select(class, filename, shuffled_index) |>
+      distinct() |>
+      mutate(!!col := 1L)
+    left_join(df, flag, by = c("class", "filename", "shuffled_index"))
+  }, .init = uni) |>
+    mutate(across(all_of(bucket_raters), \(x) replace_na(x, 0L)))
+  
+  pairs <- combn(bucket_raters, 2, simplify = FALSE)
+  map_dfr(pairs, function(p) {
+    wide |> transmute(r1 = .data[[p[1]]], r2 = .data[[p[2]]],
+                      shuffled_index = idx)
+  })
+})
+
+bucket_irr_long |>
+  mutate(
+    r1_label = if_else(r1 == 1L, "Invalid", "Valid"),
+    r2_label = if_else(r2 == 1L, "Invalid", "Valid")
+  ) |>
+  count(r1_label, r2_label) |>
+  group_by(r1_label) |>
+  mutate(prop = n / sum(n)) |>
+  ungroup() |>
+  ggplot(aes(x = r2_label, y = r1_label, fill = prop)) +
+  geom_tile(color = "gray80", linewidth = 0.5) +
+  geom_text(aes(label = paste0(n, "\n(", percent(prop, 1), ")")),
+            size = 4, lineheight = 1.3) +
+  scale_fill_gradient(low = "white", high = "steelblue", name = "Row\nprop.") +
+  labs(
+    title    = "Rater Agreement Confusion Matrix (all pairs, all buckets)",
+    subtitle = "Each pairwise comparison contributes rows; row = rater in r1 role",
+    x = "Rater 2 (role)", y = "Rater 1 (role)"
+  ) +
+  coord_fixed()
+```
+```{r invalid-rate-cat, fig.height=16, fig.width=11}
+# ── 2d. Invalid count heatmap — per bucket ────────────────────────────────────
+# Show mean invalid prop per category per bucket (averaged across raters in bucket)
+invalid_prop_by_bucket <- cat_irr |>
+  group_by(class, shuffled_index) |>
+  summarise(
+    n_total    = first(n_total),
+    mean_n_inv = mean(c(n_r1, n_r2), na.rm = TRUE),   # avg across pairs
+    prop       = mean_n_inv / n_total,
+    .groups    = "drop"
+  ) |>
+  group_by(class) |>
+  mutate(mean_prop = mean(prop, na.rm = TRUE)) |>
+  ungroup() |>
+  mutate(class = fct_reorder(class, mean_prop))
+
+top_bottom_cats <- bind_rows(
+  slice_max(distinct(invalid_prop_by_bucket, class, mean_prop), mean_prop, n = 25),
+  slice_min(distinct(invalid_prop_by_bucket, class, mean_prop), mean_prop, n = 25)
+) |> pull(class)
+
+invalid_prop_by_bucket |>
+  filter(class %in% top_bottom_cats) |>
+  mutate(bucket_label = paste0("Bucket ", shuffled_index)) |>
+  ggplot(aes(x = bucket_label, y = class, fill = prop)) +
+  geom_tile(color = "white", linewidth = 0.3) +
+  geom_text(aes(label = paste0(round(mean_n_inv), "/", n_total)), size = 3.5) +
+  scale_fill_gradient(
+    low = "#F7F7F7", high = "#D73027",
+    name = "prop\ninvalid"
+  ) +
+  labs(
+    title    = "Invalid Rate per Category per Bucket (Top & Bottom 25)",
+    subtitle = "Labels = avg_n_invalid / n_total; averaged across raters within bucket",
+    x = NULL, y = NULL
+  ) +
+  theme(axis.text.y = element_text(size = 11), axis.ticks = element_blank())
+```
+
+---
+
+# 3. Time-Series: order_index vs. Invalid Images
+
+## 3a. Invalid Images Over Time
+
+```{r timeseries-invalid, fig.width=11, fig.height=5}
+invalid_per_block <- invalid_df |>
+  group_by(rater, order_index) |>
+  summarise(n_invalid = n_distinct(filename), .groups = "drop")
+
+attn_per_block <- attn_df |>
+  group_by(rater, order_index) |>
+  summarise(n_attn = n(), .groups = "drop")
+
+ggplot(invalid_per_block, aes(x = order_index, y = n_invalid, color = rater)) +
+  geom_point(alpha = 0.45, size = 1.5) +
+  geom_smooth(method = "loess", span = 0.35, se = TRUE, linewidth = 1.1, alpha=0.2) +
+  scale_color_manual(values = c("Rater 1" = "#4393C3", "Rater 2" = "#D6604D")) +
+  labs(
+    title    = "Invalid Images per Block Over Time",
+    subtitle = "Each point = one category block; ribbon = loess ± SE",
+    x = "Order index (block number)", y = "# images marked invalid", color = NULL
+  ) +
+  theme(legend.position = "top")
+```
+
+
+investigating the hard attention check fails 
+```{r}
+attn_df |> group_by(rater, order_index, class, filename) |> summarize(n = n()) |> filter(n >= 4)
+```
+table was hard, updated.
+
+
+# output dfs/summary
+## per class
+```{r}
+per_class <- class_avgs_at_n |>
+  transmute(class, precision = round(precision,4), rank, cumulative_precision=round(cumulative_precision, 4), n_images = 100)
+
+per_bucket <- class_avgs_per_bucket |>
+  transmute(class, shuffled_index, precision = round(1 - mean_prop, 4)) |>
+  pivot_wider(names_from=shuffled_index, values_from = precision, names_prefix = "precision_bucket_") 
+
+irr_per_class <- kappa_per_cat |>
+  transmute(class, kappa = round(kappa,4), pct_agree = round(pct_agree, 4), n_pair_raters = n_pairs)
+  
+per_class_data <- per_class |> left_join(per_bucket) |> left_join(irr_per_class)
+write.csv(per_class_data, here("data/prolific_validation/per_class_validation_data.csv"))
+```
+
+## per file
+```{r}
+per_file_precision <- bucket_wide |> pivot_longer(starts_with("rater"), names_to="rater", values_to="rater_code") |> filter(!is.na(rater_code)) |> group_by(filename, class) |>
+  summarize(precision = round(mean(rater_code), 4), raters = n())
+write.csv(per_file_precision, here("data/prolific_validation/per_file_precision_data.csv"))
+```
+
+## summary stats
+```{r}
+per_class_data |> summarize(precision = round(mean(precision),4), `Average Cohen's kappa across raters` = round(mean(kappa),4), `Percent agreement between raters` = round(mean(pct_agree),4), `Number of total images` = sum(n_images)) |> knitr::kable(caption = "Summary stats")
+```
+
+
+does precision correlate with reliability?
+```{r}
+cor.test(per_class_data$precision, per_class_data$kappa)
+```
+it does not.

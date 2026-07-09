@@ -1,0 +1,11 @@
+category,weighted_count,precision,cdi_semantic
+chair,239426.1615,0.9133,furniture_rooms
+lamp,157210.6599,0.7833,household
+couch,150547.9752,0.9267,furniture_rooms
+table,145516.6086,0.8833,furniture_rooms
+pillow,117364.14,0.82,household
+toy,101494.2594,0.9833,toys
+cup,84096.0,0.8,household
+bowl,70342.1862,0.8333,household
+plate,67411.16,0.92,household
+bed,60656.1788,0.7133,furniture_rooms

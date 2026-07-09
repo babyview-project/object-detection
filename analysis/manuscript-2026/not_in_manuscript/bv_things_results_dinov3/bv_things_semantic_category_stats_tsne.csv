@@ -1,0 +1,10 @@
+cdi_category,displacement_mean,displacement_std,n_words,displacement_median,direction_alignment,displacement_cv,magnitude_consistency
+clothing,15.0909,8.2856,21,15.6991,0.453,0.549,0.6456
+toys,14.4773,16.1391,11,1.7098,0.4963,1.1148,0.4729
+outside,11.0789,11.2616,16,9.7754,0.4239,1.0165,0.4959
+household,10.388,10.0675,39,5.2623,0.3512,0.9691,0.5078
+vehicles,8.7013,9.7149,13,4.3432,0.6617,1.1165,0.4725
+food_drink,8.3059,8.0343,47,3.9631,0.442,0.9673,0.5083
+body_parts,7.338,8.5605,14,3.9514,0.2735,1.1666,0.4616
+animals,7.1736,5.6402,28,6.5112,0.8356,0.7862,0.5598
+furniture_rooms,4.7517,6.3675,16,1.2523,0.289,1.34,0.4274

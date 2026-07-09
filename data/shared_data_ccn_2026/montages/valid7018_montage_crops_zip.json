@@ -1,0 +1,17 @@
+{
+  "generated_utc": "2026-06-09T06:25:02.297383+00:00",
+  "n_categories": 5,
+  "n_exemplars_per_category": 25,
+  "categories": [
+    "clock",
+    "oven",
+    "chair",
+    "paper",
+    "book"
+  ],
+  "n_jpegs": 125,
+  "cell_size": [
+    128,
+    128
+  ]
+}

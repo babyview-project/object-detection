@@ -1,0 +1,32 @@
+{
+  "embed_model": "dinov3",
+  "category_set": "valid129",
+  "embed_dim": 768,
+  "n_global_windows": 108,
+  "n_category_windows": 1982,
+  "n_global_edges": 96,
+  "n_category_edges": 1720,
+  "pilot_categories": [
+    "bed",
+    "book",
+    "bottle",
+    "bowl",
+    "box",
+    "bucket",
+    "chair",
+    "couch",
+    "cup",
+    "door",
+    "glasses",
+    "hand",
+    "lamp",
+    "pillow",
+    "plate",
+    "refrigerator",
+    "sink",
+    "table",
+    "toy",
+    "window"
+  ],
+  "top_n": 8
+}

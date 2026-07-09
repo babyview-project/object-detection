@@ -1,0 +1,3 @@
+space,mean_pairwise_rdm_correlation,n_subjects,n_pairs
+full,0.6817489622273666,31,465
+pca_subspace,0.6808954940447168,31,465

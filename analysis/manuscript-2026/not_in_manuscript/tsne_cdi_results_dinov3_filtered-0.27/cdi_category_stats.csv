@@ -1,0 +1,10 @@
+cdi_category,num_classes,total_exemplars
+animals,19,3318
+body_parts,14,2986
+clothing,19,4699
+food_drink,30,5094
+furniture_rooms,15,3856
+household,36,8960
+outside,13,2211
+toys,9,2157
+vehicles,8,1269

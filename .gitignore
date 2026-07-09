@@ -15,3 +15,32 @@ yoloe/pretrain
 *.udpipe
 *_trans*.csv
 **/__pycache__/
+analysis/manuscript-2026/BV_Objects_Manuscript_Submission*.pdf
+analysis/manuscript-2026/results_preprint_autofilled_backup.tex
+analysis/manuscript-2026/results_preprint_numbers_autofill.txt
+analysis/manuscript-2026/results_preprint_numbers_table.csv
+analysis/manuscript-2026/results_preprint.tex
+# CCN 2026 — valid7018 pipeline; abstract_figures/ and valid7018/*.csv|json are in git
+analysis/ccn-2026/447_Variability_in_Young_Child*
+analysis/ccn-2026/valid7018/figures/
+
+# Manuscript 2026 — submission PDF, figures, logs, Tier-B embeddings, exploratory images
+analysis/manuscript-2026/logs/
+analysis/manuscript-2026/exemplar_set_embeddings/
+analysis/manuscript-2026/main_results_*/figures/
+analysis/manuscript-2026/supplemental_results_*/figures/
+analysis/manuscript-2026/not_in_manuscript/**/*.png
+analysis/manuscript-2026/not_in_manuscript/**/*.pdf
+analysis/manuscript-2026/not_in_manuscript/**/*.svg
+analysis/manuscript-2026/not_in_manuscript/clutter_proxy_exploration/results/
+# Exploratory t-SNE/UMAP figures (keep tsne_cdi_coordinates.csv etc.)
+analysis/manuscript-2026/tsne_cdi_results*/*.png
+analysis/manuscript-2026/tsne_cdi_results*/*.pdf
+analysis/manuscript-2026/umap_cdi_results*/*.png
+analysis/manuscript-2026/umap_cdi_results*/*.pdf
+analysis/manuscript-2026/**/tsne_cdi_results*/*.png
+analysis/manuscript-2026/**/tsne_cdi_results*/*.pdf
+analysis/manuscript-2026/**/umap_cdi_results*/*.png
+analysis/manuscript-2026/**/umap_cdi_results*/*.pdf
+analysis/manuscript-2026/results_*
+analysis/manuscript-2026/paths.local.env

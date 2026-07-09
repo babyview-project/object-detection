@@ -1,0 +1,13 @@
+dist_to_THINGS_centroid (left-to-right, top-to-bottom)
+49.9
+47.2
+44.1
+42.8
+41.6
+39.7
+38.0
+37.9
+37.7
+37.6
+37.0
+36.3

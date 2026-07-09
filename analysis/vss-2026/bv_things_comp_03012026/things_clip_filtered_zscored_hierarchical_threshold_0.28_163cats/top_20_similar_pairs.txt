@@ -1,0 +1,22 @@
+Top 20 Most Similar Category Pairs:
+============================================================
+foot <-> ankle: 0.1287
+broom <-> mop: 0.1456
+foot <-> toe: 0.1594
+bathtub <-> shower: 0.2006
+mouth <-> nose: 0.2104
+horse <-> pony: 0.2117
+sink <-> bathtub: 0.2241
+dish <-> plate: 0.2496
+finger <-> hand: 0.2717
+pen <-> pencil: 0.2758
+zebra <-> giraffe: 0.2785
+ankle <-> toe: 0.2919
+pencil <-> crayon: 0.3037
+shorts <-> pants: 0.3067
+slide <-> swing: 0.3129
+shirt <-> jacket: 0.3176
+refrigerator <-> oven: 0.3223
+muffin <-> cookie: 0.3298
+fork <-> spoon: 0.3308
+sink <-> shower: 0.3365

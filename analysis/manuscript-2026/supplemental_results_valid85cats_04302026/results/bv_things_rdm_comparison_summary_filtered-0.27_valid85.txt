@@ -1,0 +1,26 @@
+BV vs THINGS RDM comparison summary (run=valid85)
+
+Included categories file: /home/j7yang/babyview-projects/vss2026/object-detection/data/included_categories_valid85.txt
+Threshold: 0.27
+
+Model: clip
+  n_categories: 85
+  n_pairs: 3570
+  pearson_r: 0.702888 (p=0.000e+00)
+  spearman_r: 0.574390 (p=1.483e-312)
+  kendall_r: 0.410494 (p=5.139e-296)
+  mae: 0.105944
+  rmse: 0.134988
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/supplemental_results_valid85cats_04302026/figures/bv_things_rdm_comparison_clip_cdi_clustered_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/supplemental_results_valid85cats_04302026/figures/bv_things_rdm_comparison_clip_cdi_clustered_filtered-0.pdf
+
+Model: dinov3
+  n_categories: 85
+  n_pairs: 3570
+  pearson_r: 0.624011 (p=0.000e+00)
+  spearman_r: 0.454278 (p=2.443e-181)
+  kendall_r: 0.316904 (p=2.818e-177)
+  mae: 0.088970
+  rmse: 0.119250
+  figure_png: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/supplemental_results_valid85cats_04302026/figures/bv_things_rdm_comparison_dinov3_cdi_clustered_filtered-0.png
+  figure_pdf: /home/j7yang/babyview-projects/vss2026/object-detection/analysis/preprint-2026/supplemental_results_valid85cats_04302026/figures/bv_things_rdm_comparison_dinov3_cdi_clustered_filtered-0.pdf

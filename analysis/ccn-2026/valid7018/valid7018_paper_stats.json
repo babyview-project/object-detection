@@ -1,0 +1,665 @@
+{
+  "n_exemplars": 7018,
+  "n_categories": 85,
+  "n_per_category": {
+    "min": 57,
+    "max": 100
+  },
+  "exclude_body_parts_from_figures": [
+    "ankle",
+    "arm",
+    "ear",
+    "eye",
+    "face",
+    "finger",
+    "foot",
+    "hair",
+    "hand",
+    "leg",
+    "mouth",
+    "neck",
+    "nose",
+    "toe",
+    "tooth"
+  ],
+  "clip_global_all": {
+    "mean": 18.12,
+    "sd": 1.84,
+    "min": 13.1,
+    "max": 21.59,
+    "n": 85
+  },
+  "dino_global_all": {
+    "mean": 23.36,
+    "sd": 1.76,
+    "min": 16.18,
+    "max": 27.81,
+    "n": 85
+  },
+  "clip_local_all": {
+    "mean": 20.17,
+    "sd": 2.58,
+    "min": 13.01,
+    "max": 25.38,
+    "n": 85
+  },
+  "dino_local_all": {
+    "mean": 27.05,
+    "sd": 2.6,
+    "min": 17.49,
+    "max": 33.29,
+    "n": 85
+  },
+  "clip_global_non_body": {
+    "mean": 18.6,
+    "sd": 1.28,
+    "min": 15.53,
+    "max": 21.59,
+    "n": 73
+  },
+  "dino_global_non_body": {
+    "mean": 23.73,
+    "sd": 1.36,
+    "min": 21.36,
+    "max": 27.81,
+    "n": 73
+  },
+  "clip_local_non_body": {
+    "mean": 20.82,
+    "sd": 1.91,
+    "min": 15.08,
+    "max": 25.38,
+    "n": 73
+  },
+  "dino_local_non_body": {
+    "mean": 27.55,
+    "sd": 2.12,
+    "min": 21.62,
+    "max": 33.29,
+    "n": 73
+  },
+  "montage_categories_low_to_high_global": [
+    "clock",
+    "oven",
+    "chair",
+    "paper",
+    "book"
+  ],
+  "tsne_categories": [
+    "clock",
+    "oven",
+    "chair",
+    "paper",
+    "book"
+  ],
+  "tsne_categories_semantic_diverse": [
+    "jar",
+    "dress",
+    "doll",
+    "sink",
+    "stick"
+  ],
+  "clip_lowest_local_non_body": [
+    {
+      "category": "clock",
+      "mean_knn_dist": 15.084993902922053,
+      "global_dispersion": 15.68319257653264
+    },
+    {
+      "category": "glasses",
+      "mean_knn_dist": 16.254991498687765,
+      "global_dispersion": 15.532280023971646
+    },
+    {
+      "category": "door",
+      "mean_knn_dist": 16.948552199377538,
+      "global_dispersion": 15.875370984370136
+    },
+    {
+      "category": "butterfly",
+      "mean_knn_dist": 17.535200448530173,
+      "global_dispersion": 16.938958449698045
+    },
+    {
+      "category": "watch",
+      "mean_knn_dist": 17.750641728546068,
+      "global_dispersion": 16.390472049447744
+    }
+  ],
+  "clip_highest_local_non_body": [
+    {
+      "category": "book",
+      "mean_knn_dist": 25.37780122509388,
+      "global_dispersion": 21.585951937032007
+    },
+    {
+      "category": "tray",
+      "mean_knn_dist": 25.045879061484527,
+      "global_dispersion": 21.322155056820883
+    },
+    {
+      "category": "toy",
+      "mean_knn_dist": 24.702908099922823,
+      "global_dispersion": 21.02310815539333
+    },
+    {
+      "category": "swing",
+      "mean_knn_dist": 24.085553483983198,
+      "global_dispersion": 20.737390507075837
+    },
+    {
+      "category": "box",
+      "mean_knn_dist": 23.46097316306284,
+      "global_dispersion": 20.321209157730028
+    }
+  ],
+  "dino_lowest_local_non_body": [
+    {
+      "category": "clock",
+      "mean_knn_dist": 21.61727008566564,
+      "global_dispersion": 23.55178951485996
+    },
+    {
+      "category": "butterfly",
+      "mean_knn_dist": 22.69221230906312,
+      "global_dispersion": 21.813371575633024
+    },
+    {
+      "category": "slide",
+      "mean_knn_dist": 23.702512914929773,
+      "global_dispersion": 21.889133608967605
+    },
+    {
+      "category": "stroller",
+      "mean_knn_dist": 23.901976827736934,
+      "global_dispersion": 21.358089595859774
+    },
+    {
+      "category": "swing",
+      "mean_knn_dist": 24.10173690528175,
+      "global_dispersion": 21.652377058644383
+    }
+  ],
+  "dino_highest_local_non_body": [
+    {
+      "category": "car",
+      "mean_knn_dist": 33.285154904018405,
+      "global_dispersion": 27.814822497207587
+    },
+    {
+      "category": "dog",
+      "mean_knn_dist": 32.55731188554197,
+      "global_dispersion": 27.70226743299525
+    },
+    {
+      "category": "bird",
+      "mean_knn_dist": 31.26099150350338,
+      "global_dispersion": 27.25417105725679
+    },
+    {
+      "category": "bowl",
+      "mean_knn_dist": 30.84494348967886,
+      "global_dispersion": 25.78035293475291
+    },
+    {
+      "category": "bucket",
+      "mean_knn_dist": 30.76213884999459,
+      "global_dispersion": 24.902481909764894
+    }
+  ],
+  "correlations": [
+    {
+      "comparison": "clip_within",
+      "spearman_rho": 0.9452804377564978,
+      "p_value": 3.8958862850305554e-42
+    },
+    {
+      "comparison": "dinov3_within",
+      "spearman_rho": 0.8535079147938246,
+      "p_value": 3.243829439976443e-25
+    },
+    {
+      "comparison": "cross_global",
+      "spearman_rho": 0.5510455344928669,
+      "p_value": 4.6364760147623134e-08
+    },
+    {
+      "comparison": "cross_local_knn",
+      "spearman_rho": 0.6233926128590972,
+      "p_value": 1.8646245416332237e-10
+    }
+  ],
+  "cdi_semantic_summary": [
+    {
+      "cdi_semantic": "toys",
+      "n_categories": 5,
+      "clip_global_mean": 20.20931549119568,
+      "clip_global_sd": 1.1084111279920976,
+      "dino_global_mean": 23.989687998614965,
+      "dino_global_sd": 1.0332654523800537,
+      "clip_local_mean": 23.007743585382407,
+      "dino_local_mean": 28.409734103866253,
+      "clip_global_z_mean": 1.139034150044025,
+      "dino_global_z_mean": 0.3604936585237146,
+      "clip_local_z_mean": 1.099328640119112,
+      "dino_local_z_mean": 0.5235403784317129
+    },
+    {
+      "cdi_semantic": "outside",
+      "n_categories": 7,
+      "clip_global_mean": 19.262304355137193,
+      "clip_global_sd": 1.2180490454270634,
+      "dino_global_mean": 23.494892526720303,
+      "dino_global_sd": 1.5952877059698112,
+      "clip_local_mean": 21.532520572054093,
+      "dino_local_mean": 26.564028786165785,
+      "clip_global_z_mean": 0.6236729067170785,
+      "dino_global_z_mean": 0.07891643855655608,
+      "clip_local_z_mean": 0.5281859350535351,
+      "dino_local_z_mean": -0.186118010563574
+    },
+    {
+      "cdi_semantic": "vehicles",
+      "n_categories": 2,
+      "clip_global_mean": 18.72936879519569,
+      "clip_global_sd": 0.6327733541401196,
+      "dino_global_mean": 24.58645604653368,
+      "dino_global_sd": 4.56559961885333,
+      "clip_local_mean": 20.760332321349228,
+      "dino_local_mean": 28.59356586587767,
+      "clip_global_z_mean": 0.33365062257824457,
+      "dino_global_z_mean": 0.7001012286066395,
+      "clip_local_z_mean": 0.22922795897613812,
+      "dino_local_z_mean": 0.5942221664853576
+    },
+    {
+      "cdi_semantic": "household",
+      "n_categories": 25,
+      "clip_global_mean": 18.616940888594918,
+      "clip_global_sd": 1.3798912592547932,
+      "dino_global_mean": 24.02119294222773,
+      "dino_global_sd": 1.0939078910552953,
+      "clip_local_mean": 20.629097451609397,
+      "dino_local_mean": 27.90289367026958,
+      "clip_global_z_mean": 0.272467618995443,
+      "dino_global_z_mean": 0.3784224289785743,
+      "clip_local_z_mean": 0.17841947929208601,
+      "dino_local_z_mean": 0.3286644347290576
+    },
+    {
+      "cdi_semantic": "animals",
+      "n_categories": 5,
+      "clip_global_mean": 18.477060886375565,
+      "clip_global_sd": 1.2261415247911795,
+      "dino_global_mean": 24.78409107875574,
+      "dino_global_sd": 2.5679272487019973,
+      "clip_local_mean": 20.191899195829762,
+      "dino_local_mean": 28.03848917007374,
+      "clip_global_z_mean": 0.1963452492412931,
+      "dino_global_z_mean": 0.8125709784370414,
+      "clip_local_z_mean": 0.00915517674262598,
+      "dino_local_z_mean": 0.38079977996711556
+    },
+    {
+      "cdi_semantic": "furniture_rooms",
+      "n_categories": 14,
+      "clip_global_mean": 18.263806723480364,
+      "clip_global_sd": 1.0894324835235087,
+      "dino_global_mean": 23.604396291542454,
+      "dino_global_sd": 0.7614470529429633,
+      "clip_local_mean": 20.505062900975354,
+      "dino_local_mean": 27.184890537326076,
+      "clip_global_z_mean": 0.08029283301339167,
+      "dino_global_z_mean": 0.14123262256788005,
+      "clip_local_z_mean": 0.13039865252170443,
+      "dino_local_z_mean": 0.05259818421129978
+    },
+    {
+      "cdi_semantic": "clothing",
+      "n_categories": 13,
+      "clip_global_mean": 18.243806883416564,
+      "clip_global_sd": 1.0052553039751788,
+      "dino_global_mean": 22.999527399948622,
+      "dino_global_sd": 0.8145123596651711,
+      "clip_local_mean": 20.904345779037246,
+      "dino_local_mean": 27.41298434177452,
+      "clip_global_z_mean": 0.06940896686951642,
+      "dino_global_z_mean": -0.20298495947148892,
+      "clip_local_z_mean": 0.2849837566058194,
+      "dino_local_z_mean": 0.14029836053541536
+    },
+    {
+      "cdi_semantic": "food_drink",
+      "n_categories": 2,
+      "clip_global_mean": 16.90956233151332,
+      "clip_global_sd": 0.08075883050879466,
+      "dino_global_mean": 22.458494807614606,
+      "dino_global_sd": 1.2351796058146725,
+      "clip_local_mean": 18.546420807807614,
+      "dino_local_mean": 25.64377139554169,
+      "clip_global_z_mean": -0.6566837948618427,
+      "dino_global_z_mean": -0.5108747076894535,
+      "clip_local_z_mean": -0.6279030640596128,
+      "dino_local_z_mean": -0.5399493459497425
+    },
+    {
+      "cdi_semantic": "body_parts",
+      "n_categories": 12,
+      "clip_global_mean": 15.170849387432826,
+      "clip_global_sd": 1.9965028870895343,
+      "dino_global_mean": 21.07252374411937,
+      "dino_global_sd": 2.2104305899284817,
+      "clip_local_mean": 16.20060360002923,
+      "dino_local_mean": 23.991179979667574,
+      "clip_global_z_mean": -1.6028873087713518,
+      "dino_global_z_mean": -1.2996003553182593,
+      "clip_local_z_mean": -1.5361022810831815,
+      "dino_local_z_mean": -1.1753570411054415
+    }
+  ],
+  "cdi_semantic_text": {
+    "highest_global_group": "toys",
+    "highest_global_clip_z": 1.14,
+    "lowest_global_group": "body_parts",
+    "lowest_global_clip_z": -1.6
+  },
+  "frequency_vs_global_dispersion": {
+    "full_dataset_frequency": {
+      "clip": {
+        "config_key": "full_dataset_frequency",
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": false,
+        "model": "clip",
+        "frequency_column": "proportion",
+        "dispersion_column": "clip_global_dispersion",
+        "spearman_rho": 0.18022278678913425,
+        "p_value": 0.09883766033901735,
+        "n_categories": 85
+      },
+      "dinov3": {
+        "config_key": "full_dataset_frequency",
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": false,
+        "model": "dinov3",
+        "frequency_column": "proportion",
+        "dispersion_column": "dinov3_global_dispersion",
+        "spearman_rho": 0.26542896228258744,
+        "p_value": 0.014084116449459625,
+        "n_categories": 85
+      }
+    },
+    "full_dataset_frequency_renorm85": {
+      "clip": {
+        "config_key": "full_dataset_frequency_renorm85",
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": true,
+        "model": "clip",
+        "frequency_column": "proportion",
+        "dispersion_column": "clip_global_dispersion",
+        "spearman_rho": 0.18022278678913425,
+        "p_value": 0.09883766033901735,
+        "n_categories": 85
+      },
+      "dinov3": {
+        "config_key": "full_dataset_frequency_renorm85",
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": true,
+        "model": "dinov3",
+        "frequency_column": "proportion",
+        "dispersion_column": "dinov3_global_dispersion",
+        "spearman_rho": 0.26542896228258744,
+        "p_value": 0.014084116449459625,
+        "n_categories": 85
+      }
+    },
+    "valid85_detections": {
+      "clip": {
+        "config_key": "valid85_detections",
+        "frequency_cohort": "valid85",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": false,
+        "model": "clip",
+        "frequency_column": "proportion",
+        "dispersion_column": "clip_global_dispersion",
+        "spearman_rho": 0.01424892638500355,
+        "p_value": 0.8970173585137132,
+        "n_categories": 85
+      },
+      "dinov3": {
+        "config_key": "valid85_detections",
+        "frequency_cohort": "valid85",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": false,
+        "model": "dinov3",
+        "frequency_column": "proportion",
+        "dispersion_column": "dinov3_global_dispersion",
+        "spearman_rho": 0.03334522416024149,
+        "p_value": 0.761920232258869,
+        "n_categories": 85
+      }
+    },
+    "valid85_manuscript_frequency": {
+      "clip": {
+        "config_key": "valid85_manuscript_frequency",
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": true,
+        "model": "clip",
+        "frequency_column": "proportion",
+        "dispersion_column": "clip_global_dispersion",
+        "spearman_rho": 0.18022278678913425,
+        "p_value": 0.09883766033901735,
+        "n_categories": 85
+      },
+      "dinov3": {
+        "config_key": "valid85_manuscript_frequency",
+        "frequency_cohort": "valid129_filtered",
+        "dispersion_cohort": "valid85",
+        "frequency_mode": "proportion",
+        "renormalize_proportion": true,
+        "model": "dinov3",
+        "frequency_column": "proportion",
+        "dispersion_column": "dinov3_global_dispersion",
+        "spearman_rho": 0.26542896228258744,
+        "p_value": 0.014084116449459625,
+        "n_categories": 85
+      }
+    }
+  },
+  "frequency_definition_sensitivity": [
+    {
+      "model": "clip",
+      "frequency_definition": "annotation_pool_frame_prevalence",
+      "frequency_column": "ann_frame_prev",
+      "spearman_rho": 0.01424892638500355,
+      "p_value": 0.8970173585137132,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "annotation_pool_detection_proportion",
+      "frequency_column": "ann_det_prop",
+      "spearman_rho": -0.014767468862990105,
+      "p_value": 0.8932912771812964,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "annotation_pool_count_instances",
+      "frequency_column": "ann_det_instances",
+      "spearman_rho": -0.014767468862990105,
+      "p_value": 0.8932912771812964,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "full_dataset_frame_prevalence",
+      "frequency_column": "full_frame_prev",
+      "spearman_rho": 0.18022278678913425,
+      "p_value": 0.09883766033901735,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "full_dataset_frame_prevalence_renorm85",
+      "frequency_column": "full_frame_prev_renorm85",
+      "spearman_rho": 0.18022278678913425,
+      "p_value": 0.09883766033901735,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "full_dataset_detection_proportion",
+      "frequency_column": "full_det_prop",
+      "spearman_rho": 0.1823529411764706,
+      "p_value": 0.09484910163673936,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "full_dataset_raw_count_instances",
+      "frequency_column": "full_det_instances",
+      "spearman_rho": 0.1823529411764706,
+      "p_value": 0.09484910163673936,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "rank_agreement_annotation_pool_vs_full_dataset_frame_prevalence",
+      "frequency_column": "ann_frame_prev vs full_frame_prev",
+      "spearman_rho": 0.8247176953207678,
+      "p_value": null,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "rank_agreement_frame_prevalence_vs_detection_proportion_annotation_pool",
+      "frequency_column": "ann_frame_prev vs ann_det_prop",
+      "spearman_rho": 0.9915838252792287,
+      "p_value": null,
+      "n_categories": 85
+    },
+    {
+      "model": "clip",
+      "frequency_definition": "rank_agreement_frame_prevalence_vs_detection_proportion_full_dataset",
+      "frequency_column": "full_frame_prev vs full_det_prop",
+      "spearman_rho": 0.9995309751807698,
+      "p_value": null,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "annotation_pool_frame_prevalence",
+      "frequency_column": "ann_frame_prev",
+      "spearman_rho": 0.03334522416024149,
+      "p_value": 0.761920232258869,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "annotation_pool_detection_proportion",
+      "frequency_column": "ann_det_prop",
+      "spearman_rho": 0.04243570470092855,
+      "p_value": 0.6997789785695737,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "annotation_pool_count_instances",
+      "frequency_column": "ann_det_instances",
+      "spearman_rho": 0.04243570470092855,
+      "p_value": 0.6997789785695737,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "full_dataset_frame_prevalence",
+      "frequency_column": "full_frame_prev",
+      "spearman_rho": 0.26542896228258744,
+      "p_value": 0.014084116449459625,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "full_dataset_frame_prevalence_renorm85",
+      "frequency_column": "full_frame_prev_renorm85",
+      "spearman_rho": 0.26542896228258744,
+      "p_value": 0.014084116449459625,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "full_dataset_detection_proportion",
+      "frequency_column": "full_det_prop",
+      "spearman_rho": 0.2654094195817862,
+      "p_value": 0.01409146585812018,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "full_dataset_raw_count_instances",
+      "frequency_column": "full_det_instances",
+      "spearman_rho": 0.2654094195817862,
+      "p_value": 0.01409146585812018,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "rank_agreement_annotation_pool_vs_full_dataset_frame_prevalence",
+      "frequency_column": "ann_frame_prev vs full_frame_prev",
+      "spearman_rho": 0.8247176953207678,
+      "p_value": null,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "rank_agreement_frame_prevalence_vs_detection_proportion_annotation_pool",
+      "frequency_column": "ann_frame_prev vs ann_det_prop",
+      "spearman_rho": 0.9915838252792287,
+      "p_value": null,
+      "n_categories": 85
+    },
+    {
+      "model": "dinov3",
+      "frequency_definition": "rank_agreement_frame_prevalence_vs_detection_proportion_full_dataset",
+      "frequency_column": "full_frame_prev vs full_det_prop",
+      "spearman_rho": 0.9995309751807698,
+      "p_value": null,
+      "n_categories": 85
+    }
+  ],
+  "frequency_plot_notes": {
+    "frequency_definition": "Frame prevalence (Clerkin-style): unique frames with >=1 detection of the category / total unique frames in the pool.",
+    "abstract_frequency_source": "Abstract frequency panels use full infant-view frame prevalence (valid129_filtered, 0.27 CLIP filter). Dispersion is always from the 7,018 rater-validated crop sample (uniform per-category sampling by design).",
+    "dot_size_encodes": "n rater-validated crops used to estimate dispersion (not frame prevalence)",
+    "renormalization_note": "Right abstract panel renormalizes frame prevalences over the 85 plotted categories. Spearman rho is unchanged vs the unrenormalized full-dataset prevalences.",
+    "annotation_pool_note": "valid85_detections uses frame prevalence within the rater-validated annotation frame pool \u2014 exploratory only.",
+    "legacy_detection_proportion_note": "Detection-instance proportions (old definition) are retained as count_instances in CSVs for sensitivity checks."
+  },
+  "abstract_frequency_config_keys": [
+    "full_dataset_frequency",
+    "full_dataset_frequency_renorm85"
+  ],
+  "cdi_group_n_categories": {
+    "toys": 5,
+    "outside": 7,
+    "vehicles": 2,
+    "household": 25,
+    "animals": 5,
+    "furniture_rooms": 14,
+    "clothing": 13,
+    "food_drink": 2,
+    "body_parts": 12
+  }
+}

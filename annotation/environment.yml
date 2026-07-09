@@ -1,0 +1,19 @@
+# Conda environment for the crop annotation tool.
+# From repo root:
+#   conda env create -f annotation/environment.yml
+#   conda activate crop-annotation
+#   cd annotation && python annotate_crops.py
+#
+# Or with pip only (see requirements.txt):
+#   python -m venv .venv && source .venv/bin/activate  # or Windows: .venv\Scripts\activate
+#   pip install -r annotation/requirements.txt
+
+name: crop-annotation
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.9
+  - pip
+  - pip:
+    - Pillow>=9.0.0

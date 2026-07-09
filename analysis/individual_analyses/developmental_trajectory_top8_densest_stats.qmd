@@ -1,0 +1,298 @@
+---
+title: "Developmental Trajectory Top 8 Densest — Stats & Visualization (R)"
+author: "From notebook 12 outputs"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    theme: flatly
+execute:
+  warning: false
+  message: false
+---
+
+## Setup and data paths
+
+Data are CSVs exported by notebook 12 (`12_developmental_trajectory_top8_densest.ipynb`). Paths are relative to this file. **Render from** `analysis/individual_analyses/` so that `developmental_trajectory_top8_densest/` is found (e.g. `quarto render developmental_trajectory_top8_densest_stats.qmd`).
+
+```{r setup}
+#| label: setup
+library(tidyverse)
+library(broom)
+library(broom.mixed)
+
+# Optional: for mixed-effects models and bootstrap CIs
+if (requireNamespace("lme4", quietly = TRUE)) library(lme4)
+if (requireNamespace("boot", quietly = TRUE)) library(boot)
+
+data_dir <- "developmental_trajectory_top8_densest"
+# If rendering from repo root or elsewhere, adjust:
+if (!dir.exists(data_dir)) data_dir <- file.path("analysis", "individual_analyses", data_dir)
+stopifnot("Data directory not found" = dir.exists(data_dir))
+```
+
+## Load CSVs
+
+```{r load-data}
+#| label: load-data
+mm       <- read_csv(file.path(data_dir, "month_to_month_correlations.csv"), show_col_types = FALSE)
+yv       <- read_csv(file.path(data_dir, "youngest_vs_later_month_correlations.csv"), show_col_types = FALSE)
+mm_top50 <- read_csv(file.path(data_dir, "month_to_month_correlations_top50.csv"), show_col_types = FALSE)
+yv_top50 <- read_csv(file.path(data_dir, "youngest_vs_later_month_correlations_top50.csv"), show_col_types = FALSE)
+fixed     <- read_csv(file.path(data_dir, "subject_fixed_categories_all.csv"), show_col_types = FALSE)
+smooth_mm <- read_csv(file.path(data_dir, "smooth_trajectory_month_to_month.csv"), show_col_types = FALSE)
+smooth_yv <- read_csv(file.path(data_dir, "smooth_youngest_vs_later.csv"), show_col_types = FALSE)
+hours     <- read_csv(file.path(data_dir, "hours_per_subject_age_mo.csv"), show_col_types = FALSE)
+
+# Standard error -> approximate 95% CI (assuming normality of correlation scale)
+mm       <- mm       %>% mutate(ci_lo = correlation - 1.96 * cor_se, ci_hi = correlation + 1.96 * cor_se)
+yv       <- yv       %>% mutate(ci_lo = correlation - 1.96 * cor_se, ci_hi = correlation + 1.96 * cor_se)
+mm_top50 <- mm_top50 %>% mutate(ci_lo = correlation - 1.96 * cor_se, ci_hi = correlation + 1.96 * cor_se)
+yv_top50 <- yv_top50 %>% mutate(ci_lo = correlation - 1.96 * cor_se, ci_hi = correlation + 1.96 * cor_se)
+
+n_subj <- n_distinct(mm$subject_id)
+```
+
+- **Month-to-month**: `r nrow(mm)` rows (consecutive-month RDM correlations).
+- **Youngest vs later**: `r nrow(yv)` rows (youngest-month RDM vs each later month).
+- **Subjects**: `r n_subj` (top 8 densest).
+
+## Descriptive summary
+
+```{r summary}
+#| label: summary
+# By subject: mean correlation and age range
+mm %>%
+  group_by(subject_id) %>%
+  summarise(
+    n_transitions = n(),
+    mean_corr = mean(correlation),
+    sd_corr = sd(correlation),
+    age_min = min(age_from),
+    age_max = max(age_to),
+    .groups = "drop"
+  ) %>%
+  knitr::kable(digits = 3)
+```
+
+## Statistical tests
+
+### 1. Month-to-month: does correlation depend on age?
+
+We fit a linear mixed model: correlation ~ age_midpoint + (1 | subject_id) to test the effect of age while accounting for repeated measures per subject.
+
+```{r test-mm-age}
+#| label: test-mm-age
+fit_mm <- lm(correlation ~ age_midpoint, data = mm)
+summary(fit_mm)
+confint(fit_mm)
+```
+
+**With random subject intercept** (if `lme4` available):
+
+```{r test-mm-mixed}
+#| label: test-mm-mixed
+if (requireNamespace("lme4", quietly = TRUE)) {
+  fit_mm_mixed <- lme4::lmer(correlation ~ age_midpoint + (1 | subject_id), data = mm)
+  summary(fit_mm_mixed)
+  cat("\n--- 95% CI (profile) ---\n")
+  print(confint(fit_mm_mixed, method = "Wald"))
+} else {
+  cat("lme4 not installed; using OLS only.\n")
+}
+```
+
+### 2. Youngest vs later: does correlation with youngest month decrease with age gap?
+
+Predict correlation from `age_compared` (and optionally `age_youngest`). Clustering by subject.
+
+```{r test-yv-age}
+#| label: test-yv-age
+fit_yv <- lm(correlation ~ age_compared, data = yv)
+summary(fit_yv)
+confint(fit_yv)
+```
+
+```{r test-yv-mixed}
+#| label: test-yv-mixed
+if (requireNamespace("lme4", quietly = TRUE)) {
+  fit_yv_mixed <- lme4::lmer(correlation ~ age_compared + (1 | subject_id), data = yv)
+  summary(fit_yv_mixed)
+  cat("\n--- 95% CI (Wald) ---\n")
+  print(confint(fit_yv_mixed, method = "Wald"))
+}
+```
+
+### 3. All-categories vs top-50 (month-to-month)
+
+Compare mean correlation (or trajectory) between full set and top-50. We have separate files; we can compare at overlapping (subject, age) points.
+
+```{r compare-all-vs-top50}
+#| label: compare-all-vs-top50
+# Join month-to-month all vs top50 on subject_id, age_from, age_to
+both_mm <- mm %>%
+  select(subject_id, age_from, age_to, age_midpoint, correlation, cor_se) %>%
+  rename(corr_all = correlation, cor_se_all = cor_se) %>%
+  inner_join(
+    mm_top50 %>% select(subject_id, age_from, age_to, correlation, cor_se) %>%
+      rename(corr_top50 = correlation, cor_se_top50 = cor_se),
+    by = c("subject_id", "age_from", "age_to")
+  )
+# Paired t-test: is top50 systematically higher?
+with(both_mm, t.test(corr_top50, corr_all, paired = TRUE))
+# Mean difference with 95% CI
+both_mm %>%
+  mutate(diff = corr_top50 - corr_all) %>%
+  summarise(
+    mean_diff = mean(diff),
+    se_diff = sd(diff) / sqrt(n()),
+    ci_lo = mean_diff - 1.96 * se_diff,
+    ci_hi = mean_diff + 1.96 * se_diff
+  ) %>%
+  knitr::kable(digits = 4)
+```
+
+## Visualizations with confidence intervals
+
+### 4. Month-to-month: correlation vs age (raw + smooth with CI)
+
+Raw points with pointwise 95% CI (from `cor_se`); smooth trajectory uses precomputed `smooth_trajectory_month_to_month.csv` which has `pred`, `ci_lo`, `ci_hi` for "overall".
+
+```{r fig-mm-raw}
+#| label: fig-mm-raw
+#| fig-cap: "Consecutive-month RDM correlation vs age midpoint. Points = one per (subject, transition); error bars = 95% CI from cor_se."
+#| fig-width: 8
+#| fig-height: 5
+p_mm_raw <- ggplot() +
+  geom_errorbar(
+    data = mm,
+    aes(x = age_midpoint, y = correlation, ymin = ci_lo, ymax = ci_hi, color = subject_id),
+    width = 0.15, linewidth = 0.3, alpha = 0.6
+  ) +
+  geom_point(data = mm, aes(x = age_midpoint, y = correlation, color = subject_id), size = 1.5, alpha = 0.8) +
+  geom_line(data = mm, aes(x = age_midpoint, y = correlation, color = subject_id), linewidth = 0.4, alpha = 0.7) +
+  scale_color_viridis_d(option = "turbo", end = 0.9) +
+  labs(x = "Age midpoint (months)", y = "RDM correlation (consecutive months)", color = "Subject") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "right")
+p_mm_raw
+```
+
+```{r fig-mm-smooth}
+#| label: fig-mm-smooth
+#| fig-cap: "Overall smooth trajectory with 95% CI (from notebook 12 smooth fit)."
+#| fig-width: 8
+#| fig-height: 5
+smooth_overall_mm <- smooth_mm %>% filter(subject_id == "overall")
+ggplot() +
+  geom_ribbon(
+    data = smooth_overall_mm,
+    aes(x = age, ymin = ci_lo, ymax = ci_hi),
+    fill = "steelblue", alpha = 0.35
+  ) +
+  geom_line(data = smooth_overall_mm, aes(x = age, y = pred), color = "steelblue", linewidth = 1.1) +
+  geom_point(data = mm, aes(x = age_midpoint, y = correlation), alpha = 0.25, size = 1) +
+  labs(x = "Age (months)", y = "RDM correlation (consecutive months)") +
+  theme_minimal(base_size = 12)
+```
+
+### 5. Youngest vs later month: correlation vs age compared (raw + smooth with CI)
+
+```{r fig-yv-raw}
+#| label: fig-yv-raw
+#| fig-cap: "Correlation of each month's RDM with the youngest month's RDM. Points = one per (subject, age_compared); error bars = 95% CI."
+#| fig-width: 8
+#| fig-height: 5
+p_yv_raw <- ggplot() +
+  geom_errorbar(
+    data = yv,
+    aes(x = age_compared, y = correlation, ymin = ci_lo, ymax = ci_hi, color = subject_id),
+    width = 0.15, linewidth = 0.3, alpha = 0.6
+  ) +
+  geom_point(data = yv, aes(x = age_compared, y = correlation, color = subject_id), size = 1.5, alpha = 0.8) +
+  geom_line(data = yv, aes(x = age_compared, y = correlation, color = subject_id), linewidth = 0.4, alpha = 0.7) +
+  scale_color_viridis_d(option = "turbo", end = 0.9) +
+  labs(x = "Age (months)", y = "Correlation with youngest month RDM", color = "Subject") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "right")
+p_yv_raw
+```
+
+```{r fig-yv-smooth}
+#| label: fig-yv-smooth
+#| fig-cap: "Overall smooth trajectory (youngest vs later) with 95% CI."
+#| fig-width: 8
+#| fig-height: 5
+smooth_overall_yv <- smooth_yv %>% filter(subject_id == "overall")
+ggplot() +
+  geom_ribbon(
+    data = smooth_overall_yv,
+    aes(x = age, ymin = ci_lo, ymax = ci_hi),
+    fill = "darkorange", alpha = 0.35
+  ) +
+  geom_line(data = smooth_overall_yv, aes(x = age, y = pred), color = "darkorange", linewidth = 1.1) +
+  geom_point(data = yv, aes(x = age_compared, y = correlation), alpha = 0.25, size = 1) +
+  labs(x = "Age (months)", y = "Correlation with youngest month RDM") +
+  theme_minimal(base_size = 12)
+```
+
+### 6. All-categories vs top-50 (month-to-month) with CI
+
+```{r fig-compare-mm}
+#| label: fig-compare-mm
+#| fig-cap: "Month-to-month correlation: all categories vs top-50. Mean trajectory with 95% CI by age bin."
+#| fig-width: 8
+#| fig-height: 5
+# Aggregate by age_midpoint: mean and CI across subjects
+summ_all <- mm %>%
+  group_by(age_midpoint) %>%
+  summarise(
+    mean_corr = mean(correlation),
+    se = sd(correlation) / sqrt(n()),
+    ci_lo = mean_corr - 1.96 * se,
+    ci_hi = mean_corr + 1.96 * se,
+    set = "all",
+    .groups = "drop"
+  )
+summ_top50 <- mm_top50 %>%
+  group_by(age_midpoint) %>%
+  summarise(
+    mean_corr = mean(correlation),
+    se = sd(correlation) / sqrt(n()),
+    ci_lo = mean_corr - 1.96 * se,
+    ci_hi = mean_corr + 1.96 * se,
+    set = "top50",
+    .groups = "drop"
+  )
+bind_rows(summ_all, summ_top50) %>%
+  ggplot(aes(x = age_midpoint, y = mean_corr, color = set, fill = set)) +
+  geom_ribbon(aes(ymin = ci_lo, ymax = ci_hi), alpha = 0.25, color = NA) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  scale_color_manual(values = c(all = "steelblue", top50 = "coral2")) +
+  scale_fill_manual(values = c(all = "steelblue", top50 = "coral2")) +
+  labs(x = "Age midpoint (months)", y = "Mean RDM correlation", color = "Category set", fill = "Category set") +
+  theme_minimal(base_size = 12)
+```
+
+### 7. Fixed category set size per subject
+
+```{r fig-fixed-cats}
+#| label: fig-fixed-cats
+#| fig-cap: "Number of common categories used for each subject (fixed set across age)."
+fixed %>%
+  ggplot(aes(x = reorder(subject_id, -n_fixed_categories), y = n_fixed_categories, fill = subject_id)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_viridis_d(option = "turbo", end = 0.9) +
+  labs(x = "Subject", y = "Number of fixed categories") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Session info
+
+```{r session-info}
+#| label: session-info
+sessionInfo()
+```

@@ -1,0 +1,53 @@
+Cross-model RDM correlations (lower triangle, run=valid129)
+
+Included categories file: /home/j7yang/babyview-projects/vss2026/object-detection/data/included_categories_valid129.txt
+Threshold: 0.27
+n_common_categories: 129
+
+Dataset: bv (clip vs dinov3)
+  n_pairs: 8256
+  pearson_r: 0.906720 (p=0.000e+00)
+  spearman_r: 0.874157 (p=0.000e+00)
+  kendall_r: 0.695030 (p=0.000e+00)
+  mae: 0.071626
+  rmse: 0.090522
+
+Dataset: bv (clip vs babydinov3)
+  n_pairs: 8256
+  pearson_r: 0.873894 (p=0.000e+00)
+  spearman_r: 0.848381 (p=0.000e+00)
+  kendall_r: 0.659791 (p=0.000e+00)
+  mae: 0.081074
+  rmse: 0.101897
+
+Dataset: bv (dinov3 vs babydinov3)
+  n_pairs: 8256
+  pearson_r: 0.838301 (p=0.000e+00)
+  spearman_r: 0.813648 (p=0.000e+00)
+  kendall_r: 0.621622 (p=0.000e+00)
+  mae: 0.086938
+  rmse: 0.109286
+
+Dataset: things (clip vs dinov3)
+  n_pairs: 8256
+  pearson_r: 0.678917 (p=0.000e+00)
+  spearman_r: 0.487330 (p=0.000e+00)
+  kendall_r: 0.341569 (p=0.000e+00)
+  mae: 0.074328
+  rmse: 0.096420
+
+Dataset: things (clip vs babydinov3)
+  n_pairs: 8256
+  pearson_r: 0.660130 (p=0.000e+00)
+  spearman_r: 0.544483 (p=0.000e+00)
+  kendall_r: 0.382214 (p=0.000e+00)
+  mae: 0.083179
+  rmse: 0.105595
+
+Dataset: things (dinov3 vs babydinov3)
+  n_pairs: 8256
+  pearson_r: 0.537491 (p=0.000e+00)
+  spearman_r: 0.411000 (p=0.000e+00)
+  kendall_r: 0.282653 (p=0.000e+00)
+  mae: 0.082514
+  rmse: 0.107094

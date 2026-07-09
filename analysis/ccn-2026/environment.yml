@@ -1,0 +1,21 @@
+# Slim conda env for the CCN 2026 valid7018 pipeline (clone-safe --from-zip).
+#
+# From repo root:
+#   conda env create -f analysis/ccn-2026/environment.yml
+#   conda activate ccn-valid7018
+#   bash analysis/ccn-2026/run_valid7018_from_zip.sh
+#
+# The lab's vislearnlabpy env also works; versions here match a verified run.
+
+name: ccn-valid7018
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=2.2.4
+  - pandas=2.3.2
+  - scipy=1.16.2
+  - scikit-learn=1.7.1
+  - matplotlib=3.10.6
+  - pillow>=10.0
+  - tqdm>=4.66

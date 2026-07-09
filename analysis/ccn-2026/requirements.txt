@@ -1,0 +1,8 @@
+# Pip fallback for CI / venv (see environment.yml for conda).
+numpy==2.2.4
+pandas==2.3.2
+scipy==1.16.2
+scikit-learn==1.7.1
+matplotlib==3.10.6
+Pillow>=10.0.0
+tqdm>=4.66.0
