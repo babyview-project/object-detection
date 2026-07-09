@@ -9,6 +9,7 @@ from model import _set_seed, get_model_and_processor, get_model_response, conver
 
 """
 cd /ccn2/u/khaiaw/Code/babyview-pose/object-detection/video-qa
+conda activate babyview-pose
 python unconstrained_questions.py
 In-progress (!) code for using a VQA model to get unconstrained labels for categories from videos.
 """
@@ -19,20 +20,57 @@ num_processes = 8
 
 overall_video_dir = '/ccn2/dataset/babyview/unzip_2025_10s_videos_256p/'
 out_vis_dir = './vis_model_predictions/'
-out_vis_dir = os.path.join(out_vis_dir, 'unconstrained_activities')
+out_vis_dir = os.path.join(out_vis_dir, '2025_10_23/')
+
+base_prompt_num = 'V3'
+annotation_type = 'posture'
+annotation_num = 'V1'
+
+annotation_type_to_key_list = {
+    'child_activity': 'Child activity',
+    'adult_activity': 'Adult activity',
+    'posture': 'Posture',
+}
+
+key_list = [annotation_type_to_key_list[annotation_type]]
+out_vis_dir = os.path.join(out_vis_dir, f'base_{base_prompt_num}_{annotation_type}_annotation_{annotation_num}')
+
 side_by_side_vis_dir = os.path.join(out_vis_dir, 'side_by_side')
 if os.path.exists(out_vis_dir):
     shutil.rmtree(out_vis_dir)
 os.makedirs(out_vis_dir, exist_ok=True)
 os.makedirs(side_by_side_vis_dir, exist_ok=True)
 
-key_list = [
-    'Location',
-    'Activity',
-]
+
+base_prompts = {
+    "V3": "This is a video from a camera mounted on the head of a young child. ",
+    "V4": "Imagine that you are a young child, and this video reflects what you are seeing and doing. ",
+    "V5": "Strictly consider the camera as being worn by a young child at home. ",
+}
+
+annotation_dict = {
+    'child_activity': {
+        'V1': 'What activity is the child doing?',
+        'V2': 'What activity is the wearer of the camera doing?',
+    },
+    'adult_activity': {
+        'V1': 'What activity is the adult(s) doing? If there are no adults, respond with none',
+        'V2': 'What is the general activity that the other people in the scene are doing? If there are no other people, respond with none',
+    },
+    'posture': {
+        'V1': 'What is the body posture of the child?',
+        'V2': 'What is the body posture of the wearer of the camera?',
+    }
+}
 
 def create_question():
-    question = "This a video from the point-of-view of a camera mounted on a child's head. Respond strictly only in this format with both keys and values: "
+    # question = "This a video from the point-of-view of a camera mounted on a child's head. Respond strictly only in this format with both keys and values: "
+    # question = "This is a video from a camera mounted on the head of a young child. "
+    question = ""
+    question += f'{base_prompts[base_prompt_num]} '
+    question += f'{annotation_dict[annotation_type][annotation_num]} '
+    
+    question += "Respond strictly only in this format with this key and value: "
     for key in key_list:
         question += f"{key}: ... || "
     return question
@@ -45,6 +83,7 @@ def get_model_responses_for_video_sublist(video_dir_sublist):
     
     for dir_num, video_dir in enumerate(video_dir_sublist):
         video_files = [f for f in os.listdir(video_dir) if f.endswith('.mp4')]
+        video_files = video_files[:3]
         if len(video_files) == 0:
             continue
         
@@ -93,7 +132,7 @@ def get_model_responses_for_video_sublist(video_dir_sublist):
         
         out_df = out_df.sort_values(by='video_id').reset_index(drop=True) # sort by video_id
         out_df_path = os.path.join(out_vis_dir, os.path.basename(video_dir) + '.csv')
-        out_df.to_csv(out_df_path, index=False)
+        # out_df.to_csv(out_df_path, index=False)
 
 if __name__ == "__main__":
     # For each directory, randomly select a video file
