@@ -424,12 +424,27 @@ def create_image_embedding(image_path, out_dir, backend, save_dtype='float16'):
     # Preprocess and run the model. One forward pass yields every requested variant.
     embeddings = backend.encode(img)
 
-    # Save one .npy per variant
+    # Save one .npy per variant, atomically: np.save straight to the final path leaves a
+    # truncated (or 0-byte) file if the process dies mid-write, and the skip check above
+    # would then treat that corpse as "done" forever. Write to a temp file in the same
+    # directory, then os.replace (atomic within a filesystem).
     torch_dtype = torch.float16 if save_dtype == 'float16' else torch.float32
     for suffix, vec in embeddings.items():
-        if os.path.exists(out_paths[suffix]):
+        out_path = out_paths[suffix]
+        if os.path.exists(out_path):
             continue
-        np.save(out_paths[suffix], vec.detach().to(torch_dtype).cpu().numpy())
+        arr = vec.detach().to(torch_dtype).cpu().numpy()
+        tmp = f'{out_path}.tmp{os.getpid()}'
+        try:
+            with open(tmp, 'wb') as fh:
+                np.save(fh, arr)
+                fh.flush()
+                os.fsync(fh.fileno())
+            os.replace(tmp, out_path)
+        except BaseException:
+            if os.path.exists(tmp):
+                os.unlink(tmp)
+            raise
 
 # ------------------------- Ray worker ----------------------------------------
 @ray.remote(max_retries=-1)
