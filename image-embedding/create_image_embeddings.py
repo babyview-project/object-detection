@@ -112,8 +112,9 @@ def get_args():
                         default='facebook/dinov2-base',
                         choices=HF_POOLED_MODELS + VJEPA2_MODELS + ZWM_MODELS,
                         help='Hugging Face model id')
-    parser.add_argument('--input_image_dir', type=str, required=True,
-                        help='Directory of input images (jpg/png), searched recursively')
+    parser.add_argument('--input_image_dir', type=str, default=None,
+                        help='Directory of input images (jpg/png), searched recursively. '
+                             'Not needed (and ignored) when --image_manifest_csv is given.')
     parser.add_argument('--out_dir', type=str, required=True,
                         help='Directory to save output .npy embeddings')
     parser.add_argument('--num_processes', type=int, default=8,
@@ -142,7 +143,55 @@ def get_args():
     parser.add_argument('--gpus_per_worker', type=float, default=0.125,
                         help='GPU fraction per Ray worker. ZWM-1b needs a bigger slice (0.25); '
                              'each worker torch.loads a 3.8GB checkpoint into CPU RAM too.')
+    parser.add_argument('--grid4x4', action='store_true',
+                        help='Also emit a 4x4 region grid: adaptive-avg-pool the patch tokens to '
+                             '4x4 (16 vectors) instead of mean-pooling to 1. Enables the region-MIL '
+                             'head (16 grid cells + the existing global mean = 17 regions). Each '
+                             'file becomes [16, D] instead of [D]. For pooled models -> _grid4x4/; '
+                             'for multi-layer models -> _layer<L>_grid4x4/.')
+    parser.add_argument('--grid4x4_layers', type=int, nargs='+', default=None,
+                        help='For multi-layer models, restrict --grid4x4 to these layers (a subset '
+                             'of --layers; any not already requested are added). Default: every '
+                             'layer in --layers. Ignored for pooled (DINO) models.')
+    parser.add_argument('--image_manifest_csv', type=str, default=None,
+                        help='CSV with columns image_id,path[,set]. Use image_id and path straight '
+                             'from the CSV instead of deriving the id from the path. Needed when '
+                             'ids do not follow <parent>_<stem> (e.g. the eval set, where files sit '
+                             'flat in images/ but ids are airplane_00000). Overrides '
+                             '--input_image_dir / --image_id_file.')
+    parser.add_argument('--manifest_set', type=str, default=None,
+                        help='With --image_manifest_csv, keep only rows whose "set" column equals '
+                             'this. Needed because image_ids collide across sets (e.g. ball_00000 '
+                             'in both konkle_test and levante_vocab) -- run once per set into its '
+                             'own --out_dir so nothing overwrites.')
     return parser.parse_args()
+
+def grid4x4_pool(toks):
+    """toks: [1, N, D] (already layer-normed) row-major patch tokens, N a perfect square.
+    Returns [16, D]: the patch grid adaptive-avg-pooled to 4x4, row-major (top row L->R first).
+    Parallels the mean-pool readout (mean of the same layer-normed tokens); grid keeps location."""
+    B, N, D = toks.shape
+    g = int(round(N ** 0.5))
+    if g * g != N:
+        raise RuntimeError(f'patch count {N} is not a perfect square; cannot form a grid')
+    x = toks.reshape(B, g, g, D).permute(0, 3, 1, 2)        # [1, D, g, g]
+    x = F.adaptive_avg_pool2d(x, 4)                          # [1, D, 4, 4]
+    return x.reshape(B, D, 16).permute(0, 2, 1).squeeze(0)   # [16, D]
+
+def resolve_grid_layers(grid4x4, grid4x4_layers, layers, n_blocks):
+    """Which layers additionally get a _grid4x4 readout. Returns (grid_set, layers_union).
+
+    grid layers must be computed, so any grid layer not already in `layers` is unioned in.
+    """
+    if not grid4x4:
+        return set(), layers
+    if not grid4x4_layers:
+        return set(layers), layers
+    bad = [l for l in grid4x4_layers if not -1 <= l < n_blocks]
+    if bad:
+        raise ValueError(f'--grid4x4_layers {bad} out of range for a {n_blocks}-block model')
+    gl = {n_blocks - 1 if l == -1 else l for l in grid4x4_layers}
+    return gl, sorted(set(layers) | gl)
 
 # Evenly spaced through depth, plus the final block. Mirrors the LAYERS sweep in the ZWM
 # spelke-seg evals (0 4 8 12 16 20 23 for 24 blocks; 0 8 16 24 32 40 47 for 48).
@@ -187,7 +236,7 @@ class HFPooledBackend:
     and ZWM, which have no CLS token. Both come from the same forward pass.
     """
 
-    def __init__(self, model_name):
+    def __init__(self, model_name, grid4x4=False):
         # AutoImageProcessor handles resize/normalize for DINOv3
         self.processor = AutoImageProcessor.from_pretrained(model_name)
         # Use bfloat16 by default per HF docs (works well on modern GPUs). Each Ray worker
@@ -200,8 +249,9 @@ class HFPooledBackend:
         ).to('cuda')
         self.model.eval()
         self.patch_size = self.model.config.patch_size
+        self.grid4x4 = grid4x4
         self.tag = model_name.replace('/', '_')
-        self.variants = ['', '_meanpatch']
+        self.variants = ['', '_meanpatch'] + (['_grid4x4'] if grid4x4 else [])
 
     def encode(self, img):
         inputs = self.processor(images=img, return_tensors="pt").to(self.model.device)
@@ -219,11 +269,14 @@ class HFPooledBackend:
         # Same readout as the pooler-less backends: parameter-free LayerNorm, mean over patches.
         patches = F.layer_norm(patches.float(), (patches.shape[-1],))
 
-        return {
+        out = {
             # (shape: [1, hidden_size]) → [hidden_size]
             '': outputs.pooler_output.squeeze(0),
             '_meanpatch': patches.mean(dim=1).squeeze(0),
         }
+        if self.grid4x4:
+            out['_grid4x4'] = grid4x4_pool(patches)   # [16, D]
+        return out
 
 
 class VJEPA2Backend:
@@ -236,7 +289,7 @@ class VJEPA2Backend:
     information.) Patch tokens are then mean-pooled at each requested block.
     """
 
-    def __init__(self, model_name, layers=None):
+    def __init__(self, model_name, layers=None, grid4x4=False, grid4x4_layers=None):
         from transformers import AutoVideoProcessor, VJEPA2Model
         self.processor = AutoVideoProcessor.from_pretrained(model_name)
         self.model = VJEPA2Model.from_pretrained(
@@ -247,8 +300,11 @@ class VJEPA2Backend:
         self.num_frames = cfg.tubelet_size          # -> t_feat = 1 (purely spatial)
         self.patch_size = cfg.patch_size
         self.layers = resolve_layers(layers, self.n_blocks)
+        self.grid_layers, self.layers = resolve_grid_layers(
+            grid4x4, grid4x4_layers, self.layers, self.n_blocks)
         self.tag = model_name.replace('/', '_')
-        self.variants = [f'_layer{l}' for l in self.layers]
+        self.variants = [f'_layer{l}' for l in self.layers] + \
+                        [f'_layer{l}_grid4x4' for l in self.layers if l in self.grid_layers]
 
     def encode(self, img):
         inputs = self.processor(img, return_tensors='pt')
@@ -279,6 +335,8 @@ class VJEPA2Backend:
             # Parameter-free LayerNorm so depths are comparable (matches the ZWM evals).
             toks = F.layer_norm(toks.float(), (toks.shape[-1],))
             out[f'_layer{l}'] = toks.mean(dim=1).squeeze(0)          # mean over patch tokens
+            if l in self.grid_layers:
+                out[f'_layer{l}_grid4x4'] = grid4x4_pool(toks)      # [16, D]
         return out
 
 
@@ -291,7 +349,7 @@ class ZWMBackend:
     ZWM/scripts/eval/segments/supplementary/eval_spelke_seg_feature_nn.py. Patch tokens
     are then mean-pooled at each requested block."""
 
-    def __init__(self, model_name, layers=None, device='cuda'):
+    def __init__(self, model_name, layers=None, grid4x4=False, grid4x4_layers=None, device='cuda'):
         if ZWM_REPO_ROOT not in sys.path:
             sys.path.insert(0, ZWM_REPO_ROOT)
         from zwm.zwm_predictor import ZWMPredictor
@@ -312,8 +370,11 @@ class ZWMBackend:
         self.num_patches = (cfg.resolution // cfg.patch_size) ** 2
         self.n_blocks = len(self.predictor.model.transformer.h)
         self.layers = resolve_layers(layers, self.n_blocks)
+        self.grid_layers, self.layers = resolve_grid_layers(
+            grid4x4, grid4x4_layers, self.layers, self.n_blocks)
         self.tag = model_name.replace('/', '_')
-        self.variants = [f'_layer{l}' for l in self.layers]
+        self.variants = [f'_layer{l}' for l in self.layers] + \
+                        [f'_layer{l}_grid4x4' for l in self.layers if l in self.grid_layers]
 
     def _frame_to_patches(self, img):
         cfg = self.predictor.model.config
@@ -344,25 +405,22 @@ class ZWMBackend:
                     # The last block is read out after the model's own final norm, matching
                     # V-JEPA2's last_hidden_state (and the ZWM eval's `-1`).
                     feats = model.transformer.ln_f(h) if i == self.n_blocks - 1 else h
-                    out[f'_layer{i}'] = self._pool(feats)
+                    toks = F.layer_norm(feats.float(), (feats.shape[-1],))
+                    out[f'_layer{i}'] = toks.mean(dim=1).squeeze(0)   # mean over patch tokens
+                    if i in self.grid_layers:
+                        out[f'_layer{i}_grid4x4'] = grid4x4_pool(toks)  # [16, D]
                 if i == last_needed:
                     break
         return out
 
-    @staticmethod
-    def _pool(h):
-        # Parameter-free LayerNorm so depths are comparable (matches the ZWM evals),
-        # then mean over patch tokens.
-        return F.layer_norm(h.float(), (h.shape[-1],)).mean(dim=1).squeeze(0)
 
-
-def build_backend(model_name, layers=None):
+def build_backend(model_name, layers=None, grid4x4=False, grid4x4_layers=None):
     if model_name in HF_POOLED_MODELS:
-        return HFPooledBackend(model_name)
+        return HFPooledBackend(model_name, grid4x4=grid4x4)
     if model_name in VJEPA2_MODELS:
-        return VJEPA2Backend(model_name, layers)
+        return VJEPA2Backend(model_name, layers, grid4x4=grid4x4, grid4x4_layers=grid4x4_layers)
     if model_name in ZWM_MODELS:
-        return ZWMBackend(model_name, layers)
+        return ZWMBackend(model_name, layers, grid4x4=grid4x4, grid4x4_layers=grid4x4_layers)
     raise ValueError(f'Unknown model: {model_name}')
 
 # ----------------------- Core embedding fn -----------------------------------
@@ -373,8 +431,9 @@ def image_id_of(image_path):
     return f"{parent}_{stem}"
 
 @torch.inference_mode()
-def create_image_embedding(image_path, out_dir, backend, save_dtype='float16'):
-    image_id = image_id_of(image_path)
+def create_image_embedding(image_path, out_dir, backend, save_dtype='float16', image_id=None):
+    if image_id is None:
+        image_id = image_id_of(image_path)
 
     # One output dir per variant: <model_tag>/ for pooled models, and a sibling
     # <model_tag>_layer<L>/ per layer for the multi-layer ones.
@@ -448,11 +507,13 @@ def create_image_embedding(image_path, out_dir, backend, save_dtype='float16'):
 
 # ------------------------- Ray worker ----------------------------------------
 @ray.remote(max_retries=-1)
-def process_list_of_images(model_name, image_paths, out_dir, save_dtype, layers):
-    backend = build_backend(model_name, layers)
-    for p in image_paths:
+def process_list_of_images(model_name, items, out_dir, save_dtype, layers,
+                           grid4x4=False, grid4x4_layers=None):
+    # items: list of (path, image_id). image_id is None to derive it from the path.
+    backend = build_backend(model_name, layers, grid4x4=grid4x4, grid4x4_layers=grid4x4_layers)
+    for p, iid in items:
         try:
-            create_image_embedding(p, out_dir, backend, save_dtype=save_dtype)
+            create_image_embedding(p, out_dir, backend, save_dtype=save_dtype, image_id=iid)
         except Exception as e:
             print(f'[ERROR] {p}: {e}')
 
@@ -480,47 +541,86 @@ def collect_videos(root):
                     files.append(os.path.join(dirpath, fname))
     return files
 
+def load_manifest_items(csv_path, set_filter=None):
+    """Read image_id,path[,set] rows -> list of (path, image_id). Ids come straight from
+    the CSV, so files needn't follow the <parent>_<stem> naming rule. If set_filter is given,
+    keep only rows whose 'set' column matches (ids collide across sets, so each set is a run)."""
+    import csv
+    items = []
+    with open(csv_path) as fh:
+        reader = csv.DictReader(fh)
+        for row in reader:
+            if set_filter is not None and row.get('set') != set_filter:
+                continue
+            items.append((row['path'], row['image_id']))
+    if not items:
+        raise SystemExit(f'[FATAL] no rows in {csv_path}' +
+                         (f' with set={set_filter}' if set_filter else ''))
+    # ids must be unique or files overwrite each other
+    ids = [i for _, i in items]
+    if len(set(ids)) != len(ids):
+        import collections
+        dup = [k for k, c in collections.Counter(ids).items() if c > 1]
+        raise SystemExit(f'[FATAL] {len(dup)} duplicate image_ids (e.g. {dup[:3]}); '
+                         f'pass --manifest_set to split by set')
+    missing = [p for p, _ in items if not os.path.exists(p)]
+    if missing:
+        raise SystemExit(f'[FATAL] {len(missing)} of {len(items)} manifest paths do not exist '
+                         f'(first: {missing[0]})')
+    return items
+
 if __name__ == "__main__":
     args = get_args()
     print(args)
 
-    if args.data_type == 'images':
-        image_files = collect_images(args.input_image_dir)
-    elif args.data_type == 'videos':
-        image_files = collect_videos(args.input_image_dir)
-    print(f'Found {len(image_files)} images/videos in {args.input_image_dir}')
-    if len(image_files) == 0:
-        sys.exit(0)
+    if args.image_manifest_csv:
+        # Explicit (image_id, path) pairs; no id derivation, no --input_image_dir walk.
+        items = load_manifest_items(args.image_manifest_csv, set_filter=args.manifest_set)
+        print(f'Loaded {len(items)} (image_id, path) rows from {args.image_manifest_csv}' +
+              (f' [set={args.manifest_set}]' if args.manifest_set else ''))
+    else:
+        if not args.input_image_dir:
+            raise SystemExit('[FATAL] need --input_image_dir (or --image_manifest_csv)')
+        if args.data_type == 'images':
+            image_files = collect_images(args.input_image_dir)
+        elif args.data_type == 'videos':
+            image_files = collect_videos(args.input_image_dir)
+        print(f'Found {len(image_files)} images/videos in {args.input_image_dir}')
+        if len(image_files) == 0:
+            sys.exit(0)
 
-    if args.image_id_file:
-        with open(args.image_id_file) as fh:
-            want = {line.strip() for line in fh if line.strip()}
-        before = len(image_files)
-        image_files = [p for p in image_files if image_id_of(p) in want]
-        print(f'Restricted {before} -> {len(image_files)} images '
-              f'matching {len(want)} ids from {args.image_id_file}')
-        missing = len(want) - len(image_files)
-        if missing:
-            # Fail loudly: a silently short set would break paired cross-model comparisons.
-            raise SystemExit(f'[FATAL] {missing} of {len(want)} ids have no matching source image')
+        if args.image_id_file:
+            with open(args.image_id_file) as fh:
+                want = {line.strip() for line in fh if line.strip()}
+            before = len(image_files)
+            image_files = [p for p in image_files if image_id_of(p) in want]
+            print(f'Restricted {before} -> {len(image_files)} images '
+                  f'matching {len(want)} ids from {args.image_id_file}')
+            missing = len(want) - len(image_files)
+            if missing:
+                # Fail loudly: a short set would break paired cross-model comparisons.
+                raise SystemExit(f'[FATAL] {missing} of {len(want)} ids have no matching source image')
+
+        # id=None -> derived from path inside create_image_embedding
+        items = [(p, None) for p in image_files]
 
     # Shuffle for load balance across Ray chunks (adjacent frames of one video are similar).
-    np.random.shuffle(image_files)
-    if args.image_id_file:
+    np.random.shuffle(items)
+    if args.image_id_file or args.image_manifest_csv:
         # The manifest IS the set. Truncating here would silently drop frames (the default
         # --max_images is smaller than the manifest), breaking paired cross-model comparison.
-        if args.max_images < len(image_files):
-            print(f'[INFO] ignoring --max_images {args.max_images}; --image_id_file pins '
-                  f'{len(image_files)} images')
+        if args.max_images < len(items):
+            print(f'[INFO] ignoring --max_images {args.max_images}; manifest pins {len(items)} images')
     else:
-        image_files = image_files[:args.max_images]
+        items = items[:args.max_images]
 
     if args.debug:
         # Single-process debug
-        backend = build_backend(args.model_name, args.layers)
+        backend = build_backend(args.model_name, args.layers,
+                                grid4x4=args.grid4x4, grid4x4_layers=args.grid4x4_layers)
         print(f'Backend {type(backend).__name__} tag={backend.tag} variants={backend.variants}')
-        for p in image_files[:5]:
-            create_image_embedding(p, args.out_dir, backend, save_dtype=args.save_dtype)
+        for p, iid in items[:5]:
+            create_image_embedding(p, args.out_dir, backend, save_dtype=args.save_dtype, image_id=iid)
         print('Debug run complete.')
         sys.exit(0)
 
@@ -530,13 +630,14 @@ if __name__ == "__main__":
     ray_tmp = os.environ.get('RAY_TMPDIR')
     ray.init(ignore_reinit_error=True, _temp_dir=ray_tmp if ray_tmp else None)
     try:
-        chunk_size = max(1, len(image_files) // args.num_processes + 1)
-        chunks = [image_files[i:i + chunk_size] for i in range(0, len(image_files), chunk_size)]
+        chunk_size = max(1, len(items) // args.num_processes + 1)
+        chunks = [items[i:i + chunk_size] for i in range(0, len(items), chunk_size)]
 
         worker = process_list_of_images.options(num_gpus=args.gpus_per_worker)
         tasks = [
             worker.remote(
-                args.model_name, chunk, args.out_dir, args.save_dtype, args.layers
+                args.model_name, chunk, args.out_dir, args.save_dtype, args.layers,
+                args.grid4x4, args.grid4x4_layers
             )
             for chunk in chunks
         ]
