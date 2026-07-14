@@ -83,17 +83,17 @@ Autofilled from `valid7018/valid7018_paper_stats.json` and metric CSVs.
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| source | long_tailed_dist_prop_included_categories_filtered-0.27_valid129.csv | 0.27-filtered infant-view detections; 129-category denominator |
+| source | long_tailed_dist_prop_included_categories_filtered-0.27_valid129.csv | 0.27-filtered infant-view frame prevalence (Clerkin-style) |
 
 ## frequency_full_dataset_top5
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| rank1_chair | proportion=0.1025 | furniture_rooms |
-| rank2_lamp | proportion=0.0785 | household |
-| rank3_table | proportion=0.0644 | furniture_rooms |
-| rank4_couch | proportion=0.0635 | furniture_rooms |
-| rank5_pillow | proportion=0.0560 | household |
+| rank1_chair | proportion=0.1310 | furniture_rooms |
+| rank2_lamp | proportion=0.1057 | household |
+| rank3_table | proportion=0.0943 | furniture_rooms |
+| rank4_couch | proportion=0.0867 | furniture_rooms |
+| rank5_pillow | proportion=0.0683 | household |
 
 ## frequency_full_dataset_bottom5
 
@@ -109,8 +109,8 @@ Autofilled from `valid7018/valid7018_paper_stats.json` and metric CSVs.
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| clip | rho=0.182, p=.095, n=85 | x=full dataset detection proportion; y=valid7018 global dispersion |
-| dinov3 | rho=0.265, p=.014, n=85 | x=full dataset detection proportion; y=valid7018 global dispersion |
+| clip | rho=0.180, p=.099, n=85 | x=full dataset frame prevalence; y=valid7018 global dispersion |
+| dinov3 | rho=0.265, p=.014, n=85 | x=full dataset frame prevalence; y=valid7018 global dispersion |
 
 ## frequency_notes
 

@@ -132,7 +132,7 @@ Headless helpers: `./run_exemplar_embedding_stage.sh`, `./run_06_zscore_tmux.sh`
 | RDM structure (CLIP / DINOv3) | `bv_things_rdm_comparison_*`, clustered PDFs in `figures/` | `03` |
 | CDI cluster within/between | `cluster_within_between_*`, `bv_vs_things_cluster_strength_*` | `05` |
 | Binary semantic template control | `binary_template_vs_real_rdm_correlations_valid129.csv` | `compute_binary_template_correlations.py` |
-| Top-8 RDM agreement | `individual_rdm_pairwise_*_top8_densest_*` (anonymized in `data/shared_data_manuscript_2026/`) | `04` |
+| Top-8 RDM agreement (Spearman ρ headline) | `individual_rdm_pairwise_*_top8_densest_*` (anonymized in `data/shared_data_manuscript_2026/`) | `04` |
 | DINOv3 vs BabyDINOv3 | `dinov3_vs_babydinov3_*`, UMAP coords | `compare_dinov3_vs_babydinov3.py`, `plot_things_dinov3_vs_babydinov3_umap.py` |
 | Animal depiction supplement | `animal_depiction_label_proportions_by_category.csv` | `10` (aggregate also in `data/shared_data_manuscript_2026/inputs/`) |
 

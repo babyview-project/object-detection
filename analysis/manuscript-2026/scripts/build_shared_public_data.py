@@ -183,7 +183,7 @@ MAIN_RESULT_GLOBS = (
     "dinov3_vs_babydinov3_*_valid129.csv",
     "things_dinov3_vs_babydinov3_umap_cdi_valid129_coords.csv",
     "clip_threshold_sensitivity_valid129.csv",
-    "precision_vs_detection_proportion_*_valid129.csv",
+    "precision_vs_frame_prevalence_*_valid129.csv",
     "precision_sensitivity_*_valid129.csv",
 )
 

@@ -77,3 +77,7 @@ dino_highest_local_non_body,rank2_dog,"global=27.70, local kNN=32.56",
 dino_highest_local_non_body,rank3_bird,"global=27.25, local kNN=31.26",
 dino_highest_local_non_body,rank4_bowl,"global=25.78, local kNN=30.84",
 dino_highest_local_non_body,rank5_bucket,"global=24.90, local kNN=30.76",
+yoloe_vqa_correlation,definition,frame prevalence both sides,log-log Pearson on overlapping categories
+yoloe_vqa_correlation,all_overlap,r=0.720, n=99,p=4.48e-17; Spearman rho=0.726
+yoloe_vqa_correlation,valid85_overlap,r=0.690, n=70,p=3.84e-11; high-precision YOLOE subset
+yoloe_vqa_correlation,legacy_detection_proportion,r=0.721, n=99,sensitivity: old YOLOE detection-instance proportion vs VQA frame prevalence

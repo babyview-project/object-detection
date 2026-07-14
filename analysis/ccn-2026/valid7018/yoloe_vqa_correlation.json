@@ -1,0 +1,36 @@
+{
+  "frequency_definition": "frame_prevalence",
+  "vqa_source": "data/shared_data_manuscript_2026/vqa_detections/unconstrained_objects/vqa_object_counts.csv",
+  "yoloe_source": "data/long_tailed_dist_prop_included_categories_filtered-0.27_valid129.csv",
+  "overlap_source": "data/shared_data_manuscript_2026/vqa_detections/unconstrained_objects/all_objects.csv",
+  "all_overlap": {
+    "n_categories": 99,
+    "log_log_pearson_r": 0.7200758607587356,
+    "log_log_pearson_p": 4.4831997480046747e-17,
+    "spearman_rho": 0.7257529357434068,
+    "spearman_p": 1.9325805285521485e-17,
+    "log_log_slope": 0.5125382654819574,
+    "log_log_intercept": -2.428727256624458,
+    "outlier_threshold_residual": 1.7719433465776948
+  },
+  "valid85_overlap": {
+    "n_categories": 70,
+    "log_log_pearson_r": 0.6902128082443679,
+    "log_log_pearson_p": 3.843202815464705e-11,
+    "spearman_rho": 0.705033203994827,
+    "spearman_p": 9.572182508066637e-12,
+    "log_log_slope": 0.48941251593681717,
+    "log_log_intercept": -2.4511391164419987,
+    "outlier_threshold_residual": 1.8771096445985112
+  },
+  "legacy_yoloe_detection_proportion": {
+    "n_categories": 99,
+    "log_log_pearson_r": 0.7207514825959709,
+    "log_log_pearson_p": 4.060393768798447e-17,
+    "spearman_rho": 0.7271074255121005,
+    "spearman_p": 1.5761405082709436e-17,
+    "log_log_slope": 0.518711066090441,
+    "log_log_intercept": -2.7147412600090157,
+    "outlier_threshold_residual": 1.797442233868203
+  }
+}
