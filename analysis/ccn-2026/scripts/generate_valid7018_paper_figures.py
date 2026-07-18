@@ -53,28 +53,10 @@ from exemplar_set_zscore_embeddings import (  # noqa: E402
     load_config,
 )
 
-BODY_PART_CATEGORIES = frozenset(
-    {
-        "ankle",
-        "arm",
-        "ear",
-        "eye",
-        "face",
-        "finger",
-        "foot",
-        "hair",
-        "hand",
-        "leg",
-        "mouth",
-        "neck",
-        "nose",
-        "toe",
-        "tooth",
-    }
+from valid7018_category_filters import (  # noqa: E402
+    BODY_PART_CATEGORIES,
+    MONTAGE_EXCLUDE_CATEGORIES,
 )
-
-# Montage panels: exclude categories whose exemplars routinely show faces (privacy).
-MONTAGE_EXCLUDE_CATEGORIES = frozenset({"glasses"})
 
 CDI_SEMANTIC_COLORS = {
     "animals": "#4DB8A8",
@@ -1631,8 +1613,10 @@ def main() -> int:
     args = p.parse_args()
 
     from compute_frame_prevalence_tables import main as refresh_frame_prevalence_tables
+    from compute_yoloe_vqa_correlation import main as refresh_yoloe_vqa_correlation
 
     refresh_frame_prevalence_tables()
+    refresh_yoloe_vqa_correlation()
 
     metrics_dir = DEFAULT_METRICS_DIR
     scratch_dir = DEFAULT_SCRATCH_DIR

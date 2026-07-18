@@ -1,13 +1,15 @@
 {
-  "generated_utc": "2026-06-09T05:28:18.121905+00:00",
-  "description": "CCN 2026 public-shareable intermediate tables exported from this repository. Primary cohort: valid7018 (7,018 rater-validated crops). Category-level aggregates only (no per-exemplar subject_id/stem).",
+  "generated_utc": "2026-07-18T01:01:03.638993+00:00",
+  "description": "CCN 2026 shared intermediate data for the valid7018 cohort (7,018 rater-validated crops): category-level metrics plus paired per-crop embeddings and JPEG crops.",
   "notes": [
-    "Do not redistribute Plot A/B/C images, per-exemplar CSVs, or thumbnails.",
-    "Per-exemplar tables contain subject/file-stem-like identifiers and are excluded.",
+    "Crop and embedding zips use category/stem filenames aligned 1:1.",
+    "Montage zip remains a Figure-1A thumbnail subset only.",
     "Legacy poster-pool Plot B/C tables are local-only under analysis/ccn-2026/ (not in this bundle)."
   ],
   "files": [
     "README.md",
+    "crops/valid7018_crops.zip",
+    "crops/valid7018_crops_zip.json",
     "embeddings/valid7018_bv_embeddings.zip",
     "embeddings/valid7018_bv_embeddings_zip.json",
     "embeddings/valid7018_embedding_norm_stats.json",
@@ -20,6 +22,11 @@
     "inputs/per_class_validation_data.csv",
     "montages/valid7018_montage_crops.zip",
     "montages/valid7018_montage_crops_zip.json",
+    "public/README.md",
+    "public/crops/valid7018_public_crops.zip",
+    "public/embeddings/valid7018_embedding_norm_stats.json",
+    "public/embeddings/valid7018_public_embeddings.zip",
+    "public/valid7018_public_release.json",
     "valid7018/bv_valid7018_clip_local_global_k5.csv",
     "valid7018/bv_valid7018_clip_vs_dinov3_local_global_k5.csv",
     "valid7018/bv_valid7018_correlations_k5.csv",
@@ -28,6 +35,7 @@
     "valid7018/figures/valid7018_figure_category_selection.csv",
     "valid7018/valid7018_cdi_semantic_summary.csv",
     "valid7018/valid7018_paper_stats.json",
-    "valid7018/valid7018_run.json"
+    "valid7018/valid7018_run.json",
+    "valid7018/yoloe_vqa_correlation_by_category.csv"
   ]
 }
