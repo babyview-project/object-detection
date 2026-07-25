@@ -22,7 +22,7 @@ Subset copied by `publish_abstract_figures()`:
 
 | File | Panel |
 |------|-------|
-| `fig1A_valid7018_montages_low_to_high_global.*` | Montages (clock → book) |
+| `fig1A_valid7018_montages_low_to_high_global.*` | Montages (18 cats, 2×9; clock → book) |
 | `fig1B_valid7018_tsne_dinov3.*` | DINOv3 t-SNE aligned with montage categories |
 | `fig1B_valid7018_tsne_dinov3_semantic_diverse.*` | Alternative t-SNE (one per CDI semantic group) |
 | `fig1C_valid7018_cross_model_k5.*` | Cross-model global/local scatter |
@@ -32,3 +32,6 @@ Subset copied by `publish_abstract_figures()`:
 ## Public bundle — `data/shared_data_ccn_2026/`
 
 Mirror of `valid7018/` metrics plus `embeddings/`, `montages/`, and `inputs/`.
+After regenerating `analysis/ccn-2026/valid7018/`, re-export with
+`scripts/build_shared_public_data_ccn.py` so the shared CSVs stay consistent
+with the embedding zip (cohort z-score normalization).

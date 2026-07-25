@@ -2,6 +2,9 @@
 
 Paired crop JPEGs + CLIP/DINOv3 embeddings with sensitive categories removed.
 
+CLIP checkpoint: OpenAI **`ViT-B-32-quickgelu`** (512-d). DINOv3:
+`facebook/dinov3-vitb16-pretrain-lvd1689m` (768-d).
+
 ## Exclusions
 
 Body parts (15 labels): ankle, arm, ear, eye, face, finger, foot, hair, hand, leg, mouth, neck, nose, toe, tooth

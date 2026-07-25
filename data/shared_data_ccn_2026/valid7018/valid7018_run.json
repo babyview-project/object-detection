@@ -4,7 +4,8 @@
   "zip_path": "data/shared_data_ccn_2026/embeddings/valid7018_bv_embeddings.zip",
   "n_exemplars_in_zip": 7018,
   "n_rows_sampled_validated": null,
-  "embedding_metric": "euclidean_featurewise_global_normalized",
+  "embedding_metric": "euclidean_valid7018_cohort_zscore",
+  "normalization": "featurewise_zscore_within_valid7018_cohort",
   "norm_stats_json": "analysis/ccn-2026/valid7018/valid7018_embedding_norm_stats.json",
   "n_exemplars_loaded_clip": 7018,
   "n_exemplars_loaded_dinov3": 7018,
@@ -17,26 +18,26 @@
   "correlations": [
     {
       "comparison": "clip_within",
-      "spearman_rho": 0.9479382450654681,
-      "p_value": 5.2076118126068195e-43,
+      "spearman_rho": 0.9452804377564978,
+      "p_value": 3.8958862850305554e-42,
       "n_categories": 85
     },
     {
       "comparison": "dinov3_within",
-      "spearman_rho": 0.8508696501856556,
-      "p_value": 6.43265667662362e-25,
+      "spearman_rho": 0.8535079147938246,
+      "p_value": 3.243829439976443e-25,
       "n_categories": 85
     },
     {
       "comparison": "cross_global",
-      "spearman_rho": 0.545124096150088,
-      "p_value": 6.882975677965644e-08,
+      "spearman_rho": 0.5510455344928669,
+      "p_value": 4.6364760147623134e-08,
       "n_categories": 85
     },
     {
       "comparison": "cross_local_knn",
-      "spearman_rho": 0.6262849325776823,
-      "p_value": 1.4515224464321168e-10,
+      "spearman_rho": 0.6233926128590972,
+      "p_value": 1.8646245416332237e-10,
       "n_categories": 85
     }
   ],

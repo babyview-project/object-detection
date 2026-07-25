@@ -2,6 +2,8 @@
 
 Analysis for the **CCN 2026** extended abstract: global and local within-category dispersion on **7,018** rater-validated BabyView object crops (85 CDI noun categories), using paired CLIP and DINOv3 embeddings.
 
+**Models:** CLIP = OpenAI `ViT-B-32-quickgelu` (512-d; not LAION); DINOv3 = `facebook/dinov3-vitb16-pretrain-lvd1689m` (768-d). Per-crop vectors are feature-wise z-scored on the 7,018-crop cohort.
+
 ## Output layout
 
 | Path | Contents | In git? |

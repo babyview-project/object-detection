@@ -1,15 +1,15 @@
 {
-  "generated_utc": "2026-07-18T01:01:03.638993+00:00",
-  "description": "CCN 2026 shared intermediate data for the valid7018 cohort (7,018 rater-validated crops): category-level metrics plus paired per-crop embeddings and JPEG crops.",
+  "generated_utc": "2026-07-25T21:18:33.719445+00:00",
+  "description": "CCN 2026 shared intermediate data for the valid7018 cohort (7,018 rater-validated crops): category-level metrics plus paired per-crop embeddings and JPEG crops. Metrics match analysis/ccn-2026/valid7018/ (cohort-internal feature-wise z-score normalization).",
   "notes": [
+    "valid7018/ metric CSVs are exported from analysis/ccn-2026/valid7018/ after cohort z-score normalization.",
     "Crop and embedding zips use category/stem filenames aligned 1:1.",
     "Montage zip remains a Figure-1A thumbnail subset only.",
-    "Legacy poster-pool Plot B/C tables are local-only under analysis/ccn-2026/ (not in this bundle)."
+    "CLIP embeddings are OpenAI ViT-B-32-quickgelu (512-d); DINOv3 is ViT-B/16 (768-d)."
   ],
   "files": [
+    "MANIFEST.json",
     "README.md",
-    "crops/valid7018_crops.zip",
-    "crops/valid7018_crops_zip.json",
     "embeddings/valid7018_bv_embeddings.zip",
     "embeddings/valid7018_bv_embeddings_zip.json",
     "embeddings/valid7018_embedding_norm_stats.json",
@@ -34,6 +34,7 @@
     "valid7018/bv_valid7018_n_exemplars_by_category.csv",
     "valid7018/figures/valid7018_figure_category_selection.csv",
     "valid7018/valid7018_cdi_semantic_summary.csv",
+    "valid7018/valid7018_embedding_norm_stats.json",
     "valid7018/valid7018_paper_stats.json",
     "valid7018/valid7018_run.json",
     "valid7018/yoloe_vqa_correlation_by_category.csv"

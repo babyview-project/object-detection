@@ -12,5 +12,8 @@
   "missing_clip": 0,
   "missing_dino": 0,
   "zip_size_bytes": 21947992,
-  "precision_threshold": 0.6
+  "precision_threshold": 0.6,
+  "clip_checkpoint": "openai/ViT-B-32-quickgelu",
+  "clip_notes": "OpenAI CLIP ViT-B/32 with quickgelu (not LAION-2B weights).",
+  "dinov3_checkpoint": "facebook/dinov3-vitb16-pretrain-lvd1689m"
 }

@@ -68,8 +68,8 @@ BabyView CCN 2026 — valid7018 embedding archive
 ===============================================
 
 ~7,018 human-validated object crops (85 categories), each with paired:
-  - CLIP ViT-B/32 512-d vectors
-  - DINOv3 ViT-B/16 768-d vectors
+  - CLIP OpenAI ViT-B-32-quickgelu 512-d vectors (not LAION)
+  - DINOv3 ViT-B/16 768-d vectors (facebook/dinov3-vitb16-pretrain-lvd1689m)
 
 Vectors are feature-wise z-scored: mu/sigma fit on all 7,018 per-crop vectors
 pooled across valid85 categories (cohort-internal), then stored as float16 .npy.

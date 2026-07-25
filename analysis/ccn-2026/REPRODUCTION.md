@@ -32,9 +32,14 @@ Checks Spearman ρ, category counts (7,018 exemplars / 85 categories), and per-c
 
 Embeddings live under ``/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings``
 (override with ``BV_EMBEDDINGS_BASE``; see ``paths.example.env``). Per-crop vectors
-from ``clip_embeddings_new`` and ``facebook_dinov3-vitb16-pretrain-lvd1689m`` are
-feature-wise z-scored using μ/σ fit on all 7,018 crops pooled across valid85
-(``valid7018_embedding_normalize.py``).
+from ``clip_embeddings_new`` (OpenAI **ViT-B-32-quickgelu**) and
+``facebook_dinov3-vitb16-pretrain-lvd1689m`` are feature-wise z-scored using μ/σ
+fit on all 7,018 crops pooled across valid85 (``valid7018_embedding_normalize.py``).
+
+After regenerating ``analysis/ccn-2026/valid7018/``, re-export the shared bundle
+so ``data/shared_data_ccn_2026/valid7018/`` stays consistent with the embeddings::
+
+  python analysis/ccn-2026/scripts/build_shared_public_data_ccn.py
 
 ```bash
 export BV_EMBEDDINGS_BASE=/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings
