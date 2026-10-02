@@ -1,0 +1,674 @@
+{
+ "anchors": {
+  "airplane": [
+   "airplane.n.01",
+   "warplane.n.01"
+  ],
+  "alligator": [
+   "alligator.n.02"
+  ],
+  "animal": [
+   "animal.n.01"
+  ],
+  "ant": [
+   "ant.n.01"
+  ],
+  "apple": [
+   "apple.n.01"
+  ],
+  "ball": [
+   "ball.n.01"
+  ],
+  "balloon": [
+   "balloon.n.01"
+  ],
+  "banana": [
+   "banana.n.02"
+  ],
+  "basket": [
+   "basket.n.01"
+  ],
+  "bathtub": [
+   "bathtub.n.01"
+  ],
+  "bear": [
+   "bear.n.01"
+  ],
+  "bed": [
+   "bed.n.01"
+  ],
+  "bee": [
+   "bee.n.01"
+  ],
+  "bench": [
+   "bench.n.01"
+  ],
+  "bib": [
+   "bib.n.01",
+   "bib.n.02"
+  ],
+  "bicycle": [
+   "bicycle.n.01"
+  ],
+  "bird": [
+   "bird.n.01"
+  ],
+  "blanket": [
+   "blanket.n.01",
+   "quilt.n.01"
+  ],
+  "boat": [
+   "boat.n.01"
+  ],
+  "boots": [
+   "boot.n.01"
+  ],
+  "bottle": [
+   "bottle.n.01"
+  ],
+  "bowl": [
+   "bowl.n.03"
+  ],
+  "box": [
+   "box.n.01"
+  ],
+  "bread": [
+   "bread.n.01"
+  ],
+  "broom": [
+   "broom.n.01"
+  ],
+  "brush": [
+   "brush.n.02"
+  ],
+  "bubbles": [
+   "bubble.n.01"
+  ],
+  "bucket": [
+   "bucket.n.01"
+  ],
+  "bug": [
+   "insect.n.01"
+  ],
+  "bunny": [
+   "rabbit.n.01"
+  ],
+  "bus": [
+   "bus.n.01"
+  ],
+  "butterfly": [
+   "butterfly.n.01"
+  ],
+  "camera": [
+   "camera.n.01"
+  ],
+  "can": [
+   "can.n.01"
+  ],
+  "car": [
+   "car.n.01"
+  ],
+  "cat": [
+   "cat.n.01"
+  ],
+  "chair": [
+   "chair.n.01"
+  ],
+  "chicken": [
+   "cock.n.05",
+   "hen.n.02",
+   "chicken.n.02"
+  ],
+  "clock": [
+   "clock.n.01"
+  ],
+  "closet": [
+   "wardrobe.n.01",
+   "cupboard.n.01"
+  ],
+  "coat": [
+   "coat.n.01"
+  ],
+  "coffee": [
+   "coffee.n.01"
+  ],
+  "corn": [
+   "corn.n.02",
+   "corn.n.03"
+  ],
+  "couch": [
+   "sofa.n.01"
+  ],
+  "cow": [
+   "cattle.n.01"
+  ],
+  "cracker": [
+   "cracker.n.01"
+  ],
+  "crib": [
+   "crib.n.01"
+  ],
+  "cup": [
+   "cup.n.01",
+   "cup.n.06",
+   "mug.n.04"
+  ],
+  "diaper": [
+   "diaper.n.01"
+  ],
+  "dish": [
+   "dish.n.01"
+  ],
+  "dog": [
+   "dog.n.01"
+  ],
+  "door": [
+   "door.n.01"
+  ],
+  "dress": [
+   "dress.n.01"
+  ],
+  "drink": [
+   "beverage.n.01"
+  ],
+  "duck": [
+   "duck.n.01"
+  ],
+  "elephant": [
+   "elephant.n.01"
+  ],
+  "firetruck": [
+   "fire_engine.n.01"
+  ],
+  "fish": [
+   "fish.n.01"
+  ],
+  "flower": [
+   "flower.n.01",
+   "flower_arrangement.n.01",
+   "bouquet.n.01"
+  ],
+  "food": [
+   "food.n.01",
+   "food.n.02"
+  ],
+  "frog": [
+   "frog.n.01"
+  ],
+  "glass": [
+   "glass.n.02"
+  ],
+  "glasses": [
+   "spectacles.n.01"
+  ],
+  "glove": [
+   "glove.n.02",
+   "baseball_glove.n.01"
+  ],
+  "goose": [
+   "goose.n.01"
+  ],
+  "hamburger": [
+   "hamburger.n.01"
+  ],
+  "hammer": [
+   "hammer.n.02"
+  ],
+  "hat": [
+   "hat.n.01"
+  ],
+  "hen": [
+   "hen.n.02"
+  ],
+  "horse": [
+   "horse.n.01"
+  ],
+  "jeans": [
+   "jean.n.01"
+  ],
+  "knife": [
+   "knife.n.01"
+  ],
+  "lamp": [
+   "lamp.n.02"
+  ],
+  "light": [
+   "lamp.n.01",
+   "lamp.n.02",
+   "light.n.02"
+  ],
+  "lion": [
+   "lion.n.01"
+  ],
+  "mitten": [
+   "mitten.n.01"
+  ],
+  "monkey": [
+   "monkey.n.01"
+  ],
+  "mop": [
+   "swab.n.02"
+  ],
+  "motorcycle": [
+   "motorcycle.n.01"
+  ],
+  "nail": [
+   "nail.n.02"
+  ],
+  "necklace": [
+   "necklace.n.01"
+  ],
+  "orange": [
+   "orange.n.01"
+  ],
+  "oven": [
+   "oven.n.01",
+   "microwave.n.02"
+  ],
+  "owl": [
+   "owl.n.01"
+  ],
+  "pajamas": [
+   "pajama.n.02"
+  ],
+  "pants": [
+   "trouser.n.01"
+  ],
+  "paper": [
+   "paper.n.01"
+  ],
+  "pen": [
+   "pen.n.01"
+  ],
+  "penguin": [
+   "penguin.n.01"
+  ],
+  "person": [
+   "person.n.01"
+  ],
+  "pig": [
+   "hog.n.03"
+  ],
+  "pillow": [
+   "pillow.n.01"
+  ],
+  "pizza": [
+   "pizza.n.01"
+  ],
+  "plant": [
+   "flower.n.01"
+  ],
+  "plate": [
+   "plate.n.08",
+   "plate.n.04"
+  ],
+  "popsicle": [
+   "ice_lolly.n.01"
+  ],
+  "potato": [
+   "potato.n.01"
+  ],
+  "pretzel": [
+   "pretzel.n.01"
+  ],
+  "purse": [
+   "purse.n.03",
+   "bag.n.04"
+  ],
+  "puzzle": [
+   "puzzle.n.02"
+  ],
+  "radio": [
+   "radio.n.03",
+   "radio_receiver.n.01"
+  ],
+  "refrigerator": [
+   "refrigerator.n.01"
+  ],
+  "roof": [
+   "roof.n.01"
+  ],
+  "rooster": [
+   "cock.n.05",
+   "cock.n.04"
+  ],
+  "sandwich": [
+   "sandwich.n.01"
+  ],
+  "sauce": [
+   "sauce.n.01"
+  ],
+  "scarf": [
+   "scarf.n.01"
+  ],
+  "sheep": [
+   "sheep.n.01"
+  ],
+  "shirt": [
+   "shirt.n.01"
+  ],
+  "shoe": [
+   "shoe.n.01"
+  ],
+  "shovel": [
+   "shovel.n.01"
+  ],
+  "sink": [
+   "sink.n.01",
+   "washbasin.n.02"
+  ],
+  "sled": [
+   "sled.n.01"
+  ],
+  "sneaker": [
+   "gym_shoe.n.01",
+   "running_shoe.n.01"
+  ],
+  "sock": [
+   "sock.n.01"
+  ],
+  "soup": [
+   "soup.n.01"
+  ],
+  "spoon": [
+   "spoon.n.01"
+  ],
+  "squirrel": [
+   "squirrel.n.01"
+  ],
+  "stove": [
+   "stove.n.02",
+   "stove.n.01"
+  ],
+  "strawberry": [
+   "strawberry.n.01"
+  ],
+  "sweater": [
+   "sweater.n.01"
+  ],
+  "swing": [
+   "swing.n.02"
+  ],
+  "table": [
+   "table.n.02",
+   "table.n.03"
+  ],
+  "teddybear": [
+   "teddy.n.01"
+  ],
+  "telephone": [
+   "telephone.n.01"
+  ],
+  "tiger": [
+   "tiger.n.02"
+  ],
+  "tissue": [
+   "tissue.n.02"
+  ],
+  "towel": [
+   "towel.n.01"
+  ],
+  "toy": [
+   "plaything.n.01",
+   "toy.n.03"
+  ],
+  "tractor": [
+   "tractor.n.01"
+  ],
+  "train": [
+   "train.n.01",
+   "locomotive.n.01",
+   "car.n.02"
+  ],
+  "tray": [
+   "tray.n.01"
+  ],
+  "tricycle": [
+   "tricycle.n.01"
+  ],
+  "truck": [
+   "truck.n.01"
+  ],
+  "turtle": [
+   "turtle.n.02"
+  ],
+  "tv": [
+   "television.n.02",
+   "television_receiver.n.01"
+  ],
+  "vacuum": [
+   "vacuum.n.04"
+  ],
+  "watch": [
+   "watch.n.01"
+  ],
+  "wolf": [
+   "wolf.n.01"
+  ],
+  "zebra": [
+   "zebra.n.01"
+  ],
+  "belt": [
+   "belt.n.02"
+  ],
+  "book": [
+   "book.n.01"
+  ],
+  "carrot": [
+   "carrot.n.01"
+  ],
+  "chips": [
+   "chip.n.04"
+  ],
+  "cookie": [
+   "cookie.n.01"
+  ],
+  "doll": [
+   "doll.n.01"
+  ],
+  "drawer": [
+   "drawer.n.01"
+  ],
+  "egg": [
+   "egg.n.02"
+  ],
+  "fork": [
+   "fork.n.01"
+  ],
+  "hose": [
+   "hose.n.03"
+  ],
+  "jacket": [
+   "jacket.n.01"
+  ],
+  "jar": [
+   "jar.n.01"
+  ],
+  "ladder": [
+   "ladder.n.01"
+  ],
+  "melon": [
+   "melon.n.01"
+  ],
+  "milk": [
+   "milk.n.01"
+  ],
+  "muffin": [
+   "muffin.n.01"
+  ],
+  "napkin": [
+   "napkin.n.01"
+  ],
+  "pickle": [
+   "pickle.n.01"
+  ],
+  "pony": [
+   "pony.n.05"
+  ],
+  "pumpkin": [
+   "pumpkin.n.02"
+  ],
+  "scissors": [
+   "scissors.n.01"
+  ],
+  "shorts": [
+   "short_pants.n.01"
+  ],
+  "shower": [
+   "shower.n.01"
+  ],
+  "slide": [
+   "chute.n.02"
+  ],
+  "slipper": [
+   "slipper.n.01"
+  ],
+  "soap": [
+   "soap.n.01"
+  ],
+  "stroller": [
+   "baby_buggy.n.01"
+  ],
+  "tape": [
+   "tape.n.01"
+  ],
+  "toothbrush": [
+   "toothbrush.n.01"
+  ],
+  "beads": [
+   "bead.n.01"
+  ],
+  "butter": [
+   "butter.n.01"
+  ],
+  "button": [
+   "button.n.01"
+  ],
+  "cake": [
+   "cake.n.03"
+  ],
+  "crayon": [
+   "crayon.n.01"
+  ],
+  "deer": [
+   "deer.n.01"
+  ],
+  "donkey": [
+   "domestic_ass.n.01"
+  ],
+  "flag": [
+   "flag.n.01"
+  ],
+  "giraffe": [
+   "giraffe.n.01"
+  ],
+  "grapes": [
+   "grape.n.01"
+  ],
+  "helicopter": [
+   "helicopter.n.01"
+  ],
+  "key": [
+   "key.n.01"
+  ],
+  "kitty": [
+   "kitten.n.01"
+  ],
+  "lamb": [
+   "lamb.n.01"
+  ],
+  "lollipop": [
+   "lollipop.n.02"
+  ],
+  "money": [
+   "money.n.03"
+  ],
+  "pancake": [
+   "pancake.n.01"
+  ],
+  "pastry": [
+   "pastry.n.02"
+  ],
+  "peas": [
+   "pea.n.01"
+  ],
+  "pencil": [
+   "pencil.n.01"
+  ],
+  "puppy": [
+   "puppy.n.01"
+  ],
+  "snowman": [
+   "snowman.n.01"
+  ],
+  "soda": [
+   "pop.n.02"
+  ],
+  "tights": [
+   "tights.n.01"
+  ],
+  "toast": [
+   "toast.n.01"
+  ],
+  "yogurt": [
+   "yogurt.n.01"
+  ]
+ },
+ "exclude": {
+  "ball": {
+   "punching_bag.n.02": "punching bag, not a ball"
+  },
+  "bread": {
+   "meat_loaf.n.01": "WordNet files meat loaf under loaf/bread"
+  },
+  "dish": {
+   "petri_dish.n.01": "lab glassware"
+  },
+  "drink": {
+   "cup.n.06": "ImageNet 'cup' images show the container (mapped to cup)"
+  },
+  "food": {
+   "menu.n.02": "a menu, not food",
+   "hay.n.01": "animal fodder",
+   "cup.n.06": "ImageNet 'cup' images show the container (mapped to cup)"
+  },
+  "oven": {
+   "dutch_oven.n.01": "a cooking pot"
+  },
+  "truck": {
+   "minivan.n.01": "passenger vehicle; kept under car"
+  },
+  "bed": {
+   "hammock.n.02": "hammock"
+  },
+  "cat": {
+   "cougar.n.01": "wild cat"
+  },
+  "box": {
+   "cash_register.n.01": "cash register",
+   "window_box.n.01": "planter"
+  },
+  "jar": {
+   "vase.n.01": "vase",
+   "crock.n.03": "crock pot (cooker)",
+   "urn.n.01": "urn"
+  },
+  "nail": {
+   "thumbtack.n.01": "thumbtack, not a nail"
+  },
+  "refrigerator": {
+   "cooler.n.01": "portable cooler"
+  },
+  "toy": {
+   "kite.n.03": "kite (13k sky kites would dominate)",
+   "frisbee.n.01": "sports frisbee"
+  }
+ },
+ "notes": {
+  "cat": "LVIS cat is cat.n.01 (ImageNet anchor domestic_cat.n.01 is below it)",
+  "plant": "anchored on flower.n.01 as for ImageNet; plant.n.02 pools vegetables in LVIS",
+  "toy": "plaything.n.01 + LVIS generic toy (toy.n.03), minus kite/frisbee",
+  "flower": "flower arrangements and bouquets added",
+  "glove": "baseball glove added: not a hyponym of glove.n.02"
+ }
+}

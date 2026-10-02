@@ -1,0 +1,379 @@
+dataset,cdi_category,anchor_synset,anchor_origin,anchor_definition,cdi_semantic,in_valid129,in_valid85
+imagenet,airplane,airplane.n.01,first_sense,an aircraft that has a fixed wing and is powered by propellers or jets,vehicles,False,False
+imagenet,airplane,warplane.n.01,added,an aircraft designed and used for combat,vehicles,False,False
+imagenet,alligator,alligator.n.02,other_sense,either of two amphibious reptiles related to crocodiles but with shorter broader snouts,animals,True,False
+imagenet,animal,animal.n.01,first_sense,a living organism characterized by voluntary movement,animals,False,False
+imagenet,ant,ant.n.01,first_sense,social insect living in organized colonies; characteristically the males and fertile queen have wings during breeding season; wingless sterile females are the workers,animals,False,False
+imagenet,apple,apple.n.01,first_sense,fruit with red or yellow or green skin and sweet to tart crisp whitish flesh,food_drink,True,True
+imagenet,ball,ball.n.01,first_sense,round object that is hit or thrown or kicked in games,toys,True,True
+imagenet,balloon,balloon.n.01,first_sense,large tough nonrigid bag filled with gas or heated air,toys,True,True
+imagenet,banana,banana.n.02,other_sense,elongated crescent-shaped yellow fruit with soft sweet flesh,food_drink,True,False
+imagenet,basket,basket.n.01,first_sense,a container that is usually woven and has handles,household,True,True
+imagenet,bathtub,bathtub.n.01,first_sense,a relatively large open container that you fill with water and use to wash the body,furniture_rooms,True,False
+imagenet,bear,bear.n.01,first_sense,massive plantigrade carnivorous or omnivorous mammals with long shaggy coats and strong claws,animals,False,False
+imagenet,bed,bed.n.01,first_sense,a piece of furniture that provides a place to sleep,furniture_rooms,True,True
+imagenet,bee,bee.n.01,first_sense,any of numerous hairy-bodied insects including social and solitary species,animals,False,False
+imagenet,bench,bench.n.01,first_sense,a long seat for more than one person,furniture_rooms,True,True
+imagenet,bib,bib.n.01,first_sense,top part of an apron; covering the chest,clothing,True,False
+imagenet,bicycle,bicycle.n.01,first_sense,a wheeled vehicle that has two wheels and is moved by foot pedals,vehicles,False,False
+imagenet,bird,bird.n.01,first_sense,warm-blooded egg-laying vertebrates characterized by feathers and forelimbs modified as wings,animals,True,True
+imagenet,blanket,blanket.n.01,first_sense,bedding that keeps a person warm in bed,household,True,True
+imagenet,blanket,quilt.n.01,added,bedding made of two layers of cloth filled with stuffing and stitched together,household,True,True
+imagenet,boat,boat.n.01,first_sense,a small vessel for travel on water,vehicles,False,False
+imagenet,boots,boot.n.01,first_sense,footwear that covers the whole foot and lower leg,clothing,False,False
+imagenet,bottle,bottle.n.01,first_sense,a glass or plastic vessel used for storing drinks or other liquids; typically cylindrical without handles and with a narrow neck that can be plugged or capped,household,True,True
+imagenet,bowl,bowl.n.03,other_sense,a dish that is round and open at the top for serving foods,household,True,True
+imagenet,box,box.n.01,first_sense,a (usually rectangular) container; may have a lid,household,True,True
+imagenet,bread,bread.n.01,first_sense,food made from dough of flour or meal and usually raised with yeast or baking powder and then baked,food_drink,True,False
+imagenet,broom,broom.n.01,first_sense,a cleaning implement for sweeping; bundle of straws or twigs attached to a long handle,household,True,False
+imagenet,brush,brush.n.02,other_sense,an implement that has hairs or bristles firmly set into a handle,household,False,False
+imagenet,bubbles,bubble.n.01,first_sense,"a hollow globule of gas (e.g., air or carbon dioxide)",toys,False,False
+imagenet,bucket,bucket.n.01,first_sense,a roughly cylindrical vessel that is open at the top,household,True,True
+imagenet,bug,insect.n.01,added,small air-breathing arthropod,animals,False,False
+imagenet,bunny,rabbit.n.01,added,any of various burrowing animals of the family Leporidae having long ears and short tails; some domesticated and raised for pets or food,animals,False,False
+imagenet,bus,bus.n.01,first_sense,a vehicle carrying many passengers; used for public transport,vehicles,False,False
+imagenet,butterfly,butterfly.n.01,first_sense,diurnal insect typically having a slender body with knobbed antennae and broad colorful wings,animals,True,True
+imagenet,camera,camera.n.01,first_sense,equipment for taking photographs (usually consisting of a lightproof box with a lens at one end and light-sensitive film at the other),household,False,False
+imagenet,can,can.n.01,first_sense,airtight sealed metal container for food or drink or paint etc.,household,True,True
+imagenet,car,car.n.01,first_sense,a motor vehicle with four wheels; usually propelled by an internal combustion engine,vehicles,True,True
+imagenet,cat,domestic_cat.n.01,added,any domesticated member of the genus Felis,animals,True,True
+imagenet,chair,chair.n.01,first_sense,"a seat for one person, with a support for the back",furniture_rooms,True,True
+imagenet,chicken,cock.n.05,added,adult male bird,food_drink,False,False
+imagenet,chicken,hen.n.02,added,adult female bird,food_drink,False,False
+imagenet,clock,clock.n.01,first_sense,a timepiece that shows the time of day,household,True,True
+imagenet,closet,wardrobe.n.01,other_sense,a tall piece of furniture that provides storage space for clothes; has a door and rails or hooks for hanging clothes,furniture_rooms,True,True
+imagenet,coat,coat.n.01,first_sense,an outer garment that has sleeves and covers the body from shoulder down; worn outdoors,clothing,False,False
+imagenet,coffee,coffee.n.01,first_sense,a beverage consisting of an infusion of ground coffee beans,food_drink,True,False
+imagenet,corn,corn.n.02,other_sense,the dried grains or kernels or corn used as animal feed or ground for meal,food_drink,True,False
+imagenet,couch,sofa.n.01,first_sense,an upholstered seat for more than one person,furniture_rooms,True,True
+imagenet,cow,cattle.n.01,added,domesticated bovine animals as a group regardless of sex or age; ; ; - Bible,animals,False,False
+imagenet,cracker,cracker.n.01,first_sense,a thin crisp wafer made of flour and water with or without leavening and shortening; unsweetened or semisweet,food_drink,True,True
+imagenet,crib,crib.n.01,first_sense,baby bed with high sides made of slats,furniture_rooms,True,True
+imagenet,cup,cup.n.01,first_sense,a small open container usually used for drinking; usually has a handle,household,True,True
+imagenet,cup,cup.n.06,other_sense,a punch served in a pitcher instead of a punch bowl,household,True,True
+imagenet,cup,mug.n.04,added,with handle and usually cylindrical,household,True,True
+imagenet,diaper,diaper.n.01,first_sense,garment consisting of a folded cloth drawn up between the legs and fastened at the waist; worn by infants to catch excrement,clothing,False,False
+imagenet,dish,dish.n.01,first_sense,a piece of dishware normally used as a container for holding or serving food,household,True,True
+imagenet,dog,dog.n.01,first_sense,a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since prehistoric times; occurs in many breeds,animals,True,True
+imagenet,door,door.n.01,first_sense,a swinging or sliding barrier that will close the entrance to a room or building or vehicle,furniture_rooms,True,True
+imagenet,dress,dress.n.01,first_sense,a one-piece garment for a woman; has skirt and bodice,clothing,True,True
+imagenet,drink,beverage.n.01,other_sense,any liquid suitable for drinking,food_drink,False,False
+imagenet,duck,duck.n.01,first_sense,small wild or domesticated web-footed broad-billed swimming bird usually having a depressed body and short legs,animals,False,False
+imagenet,elephant,elephant.n.01,first_sense,five-toed pachyderm,animals,False,False
+imagenet,firetruck,fire_engine.n.01,added,any of various large trucks that carry firemen and equipment to the site of a fire,vehicles,False,False
+imagenet,fish,fish.n.01,first_sense,any of various mostly cold-blooded aquatic vertebrates usually having scales and breathing through gills,food_drink,True,False
+imagenet,flower,flower.n.01,first_sense,a plant cultivated for its blooms or blossoms,outside,True,True
+imagenet,food,food.n.01,first_sense,any substance that can be metabolized by an animal to give energy and build tissue,food_drink,False,False
+imagenet,food,food.n.02,other_sense,any solid substance (as opposed to liquid) that is used as a source of nourishment,food_drink,False,False
+imagenet,frog,frog.n.01,first_sense,any of various tailless stout-bodied amphibians with long hind limbs for leaping; semiaquatic and terrestrial species,animals,True,False
+imagenet,glass,glass.n.02,other_sense,a container for holding liquids while drinking,household,True,True
+imagenet,glasses,spectacles.n.01,first_sense,optical instrument consisting of a frame that holds a pair of lenses for correcting defective vision,household,True,True
+imagenet,glove,glove.n.02,other_sense,handwear: covers the hand and wrist,clothing,True,False
+imagenet,goose,goose.n.01,first_sense,web-footed long-necked typically gregarious migratory aquatic birds usually larger and less aquatic than ducks,animals,False,False
+imagenet,hamburger,hamburger.n.01,first_sense,"a sandwich consisting of a fried cake of minced beef served on a bun, often with other ingredients",food_drink,True,False
+imagenet,hammer,hammer.n.02,other_sense,a hand tool with a heavy rigid head and a handle; used to deliver an impulsive force by striking,household,False,False
+imagenet,hat,hat.n.01,first_sense,headdress that protects the head from bad weather; has shaped crown and usually a brim,clothing,True,True
+imagenet,hen,hen.n.02,other_sense,adult female bird,animals,False,False
+imagenet,horse,horse.n.01,first_sense,solid-hoofed herbivorous quadruped domesticated since prehistoric times,animals,False,False
+imagenet,jeans,jean.n.01,first_sense,(usually plural) close-fitting trousers of heavy denim for manual work or casual wear,clothing,True,True
+imagenet,knife,knife.n.01,first_sense,edge tool used as a cutting instrument; has a pointed blade with a sharp edge and a handle,household,False,False
+imagenet,lamp,lamp.n.02,other_sense,a piece of furniture holding one or more electric light bulbs,household,True,True
+imagenet,light,lamp.n.01,added,an artificial source of visible illumination,household,False,False
+imagenet,light,lamp.n.02,added,a piece of furniture holding one or more electric light bulbs,household,False,False
+imagenet,light,light.n.02,other_sense,any device serving as a source of illumination,household,False,False
+imagenet,lion,lion.n.01,first_sense,large gregarious predatory feline of Africa and India having a tawny coat with a shaggy mane in the male,animals,False,False
+imagenet,mitten,mitten.n.01,first_sense,glove that encases the thumb separately and the other four fingers together,clothing,True,False
+imagenet,monkey,monkey.n.01,first_sense,any of various long-tailed primates (excluding the prosimians),animals,False,False
+imagenet,mop,swab.n.02,first_sense,cleaning implement consisting of absorbent material fastened to a handle; for cleaning floors,household,False,False
+imagenet,motorcycle,motorcycle.n.01,first_sense,a motor vehicle with two wheels and a strong frame,vehicles,True,False
+imagenet,nail,nail.n.02,other_sense,a thin pointed piece of metal that is hammered into materials as a fastener,household,True,False
+imagenet,necklace,necklace.n.01,first_sense,jewelry consisting of a cord or chain (often bearing gems) worn about the neck as an ornament (especially by women),clothing,True,True
+imagenet,orange,orange.n.01,first_sense,round yellow to orange fruit of any of several citrus trees,food_drink,True,False
+imagenet,oven,oven.n.01,first_sense,kitchen appliance used for baking or roasting,furniture_rooms,True,True
+imagenet,oven,microwave.n.02,added,kitchen appliance that cooks food by passing an electromagnetic wave through it; heat results from the absorption of energy by the water molecules in the food,furniture_rooms,True,True
+imagenet,owl,owl.n.01,first_sense,nocturnal bird of prey with hawk-like beak and claws and large head with front-facing eyes,animals,False,False
+imagenet,pajamas,pajama.n.02,other_sense,(usually plural) loose-fitting nightclothes worn for sleeping or lounging; have a jacket top and trousers,clothing,True,True
+imagenet,pants,trouser.n.01,other_sense,"(usually in the plural) a garment extending from the waist to the knee or ankle, covering each leg separately",clothing,True,True
+imagenet,paper,paper.n.01,first_sense,a material made of cellulose pulp derived mainly from wood or rags or certain grasses,household,True,True
+imagenet,pen,pen.n.01,first_sense,a writing implement with a point from which ink flows,toys,False,False
+imagenet,penguin,penguin.n.01,first_sense,short-legged flightless birds of cold southern especially Antarctic regions having webbed feet and wings modified as flippers,animals,False,False
+imagenet,person,person.n.01,first_sense,a human being,people,False,False
+imagenet,pig,hog.n.03,first_sense,domestic swine,animals,False,False
+imagenet,pillow,pillow.n.01,first_sense,a cushion to support the head of a sleeping person,household,True,True
+imagenet,pizza,pizza.n.01,first_sense,Italian open pie made of thin bread dough spread with a spiced mixture of e.g. tomato sauce and cheese,food_drink,True,False
+imagenet,plant,plant.n.02,other_sense,(botany) a living organism lacking the power of locomotion,household,True,True
+imagenet,plate,plate.n.08,other_sense,a main course served on a plate,household,True,True
+imagenet,popsicle,ice_lolly.n.01,first_sense,ice cream or water ice on a small wooden stick,food_drink,False,False
+imagenet,potato,potato.n.01,first_sense,an edible tuber native to South America; a staple food of Ireland,food_drink,False,False
+imagenet,pretzel,pretzel.n.01,first_sense,glazed and salted cracker typically in the shape of a loose knot,food_drink,False,False
+imagenet,purse,purse.n.03,other_sense,a small bag for carrying money,household,True,True
+imagenet,puzzle,puzzle.n.02,other_sense,a game that tests your ingenuity,toys,False,False
+imagenet,radio,radio.n.03,other_sense,a communication system based on broadcasting electromagnetic waves,household,True,False
+imagenet,refrigerator,refrigerator.n.01,first_sense,white goods in which food can be stored at low temperatures,furniture_rooms,True,True
+imagenet,roof,roof.n.01,first_sense,a protective covering that covers or forms the top of a building,outside,False,False
+imagenet,rooster,cock.n.05,added,adult male bird,animals,False,False
+imagenet,sandwich,sandwich.n.01,first_sense,two (or more) slices of bread with a filling between them,food_drink,True,False
+imagenet,sauce,sauce.n.01,first_sense,flavorful relish or dressing or topping served as an accompaniment to food,food_drink,False,False
+imagenet,scarf,scarf.n.01,first_sense,a garment worn around the head or neck or shoulders for warmth or decoration,clothing,True,True
+imagenet,sheep,sheep.n.01,first_sense,woolly usually horned ruminant mammal related to the goat,animals,False,False
+imagenet,shirt,shirt.n.01,first_sense,a garment worn on the upper half of the body,clothing,True,True
+imagenet,shoe,shoe.n.01,first_sense,footwear shaped to fit the foot (below the ankle) with a flexible upper of leather or plastic and a sole and heel of heavier material,clothing,True,True
+imagenet,shovel,shovel.n.01,first_sense,a hand tool for lifting loose material; consists of a curved container or scoop and a handle,outside,True,False
+imagenet,sink,sink.n.01,first_sense,plumbing fixture consisting of a water basin fixed to a wall or floor and having a drainpipe,furniture_rooms,True,True
+imagenet,sink,washbasin.n.02,added,a basin for washing the hands (`wash-hand basin' is a British expression),furniture_rooms,True,True
+imagenet,sled,sled.n.01,first_sense,a vehicle mounted on runners and pulled by horses or dogs; for transportation over snow,vehicles,False,False
+imagenet,sneaker,gym_shoe.n.01,first_sense,a canvas shoe with a pliable rubber sole,clothing,False,False
+imagenet,sneaker,running_shoe.n.01,added,a light comfortable shoe designed for running,clothing,False,False
+imagenet,sock,sock.n.01,first_sense,hosiery consisting of a cloth covering for the foot; worn inside the shoe; reaches to between the ankle and the knee,clothing,True,True
+imagenet,soup,soup.n.01,first_sense,liquid food especially of meat or fish or vegetable stock often containing pieces of solid food,food_drink,True,False
+imagenet,spoon,spoon.n.01,first_sense,a piece of cutlery with a shallow bowl-shaped container and a handle; used to stir or serve or take up food,household,True,False
+imagenet,squirrel,squirrel.n.01,first_sense,a kind of arboreal rodent having a long bushy tail,animals,False,False
+imagenet,stove,stove.n.02,other_sense,any heating apparatus,furniture_rooms,False,False
+imagenet,strawberry,strawberry.n.01,first_sense,sweet fleshy red fruit,food_drink,True,False
+imagenet,sweater,sweater.n.01,first_sense,a crocheted or knitted garment covering the upper part of the body,clothing,True,True
+imagenet,swing,swing.n.02,other_sense,mechanical device used as a plaything to support someone swinging back and forth,outside,True,True
+imagenet,table,table.n.02,other_sense,a piece of furniture having a smooth flat top that is usually supported by one or more vertical legs,furniture_rooms,True,True
+imagenet,table,table.n.03,other_sense,a piece of furniture with tableware for a meal laid out on it,furniture_rooms,True,True
+imagenet,teddybear,teddy.n.01,added,plaything consisting of a child's toy bear (usually plush and stuffed with soft materials),animals,False,False
+imagenet,telephone,telephone.n.01,first_sense,electronic equipment that converts sound into electrical signals that can be transmitted over distances and then converts received signals back into sounds,household,False,False
+imagenet,tiger,tiger.n.02,other_sense,large feline of forests in most of Asia having a tawny coat with black stripes; endangered,animals,False,False
+imagenet,tissue,tissue.n.02,other_sense,a soft thin (usually translucent) paper,household,False,False
+imagenet,towel,towel.n.01,first_sense,a rectangular piece of absorbent cloth (or paper) for drying or wiping,household,True,True
+imagenet,toy,plaything.n.01,first_sense,an artifact designed to be played with,toys,True,True
+imagenet,tractor,tractor.n.01,first_sense,a wheeled vehicle with large wheels; used in farming and other applications,vehicles,False,False
+imagenet,train,train.n.01,first_sense,public transport provided by a line of railway cars coupled together and drawn by a locomotive,vehicles,False,False
+imagenet,train,locomotive.n.01,added,a wheeled vehicle consisting of a self-propelled engine that is used to draw trains along railway tracks,vehicles,False,False
+imagenet,train,car.n.02,added,a wheeled vehicle adapted to the rails of railroad,vehicles,False,False
+imagenet,tray,tray.n.01,first_sense,an open receptacle for holding or displaying or serving articles or food,household,True,True
+imagenet,tricycle,tricycle.n.01,first_sense,a vehicle with three wheels that is moved by foot pedals,vehicles,False,False
+imagenet,truck,truck.n.01,first_sense,an automotive vehicle suitable for hauling,vehicles,False,False
+imagenet,turtle,turtle.n.02,other_sense,any of various aquatic and land reptiles having a bony shell and flipper-like limbs for swimming,animals,False,False
+imagenet,tv,television.n.02,added,a telecommunication system that transmits images of objects (stationary or moving) between distant points,furniture_rooms,False,False
+imagenet,tv,television_receiver.n.01,other_sense,an electronic device that receives television signals and displays them on a screen,furniture_rooms,False,False
+imagenet,vacuum,vacuum.n.04,other_sense,an electrical home appliance that cleans by suction,household,True,True
+imagenet,watch,watch.n.01,first_sense,a small portable timepiece,household,True,True
+imagenet,wolf,wolf.n.01,first_sense,any of various predatory carnivorous canine mammals of North America and Eurasia that usually hunt in packs,animals,False,False
+imagenet,zebra,zebra.n.01,first_sense,any of several fleet black-and-white striped African equines,animals,False,False
+lvis,airplane,airplane.n.01,first_sense,an aircraft that has a fixed wing and is powered by propellers or jets,vehicles,False,False
+lvis,airplane,warplane.n.01,added,an aircraft designed and used for combat,vehicles,False,False
+lvis,alligator,alligator.n.02,other_sense,either of two amphibious reptiles related to crocodiles but with shorter broader snouts,animals,True,False
+lvis,animal,animal.n.01,first_sense,a living organism characterized by voluntary movement,animals,False,False
+lvis,ant,ant.n.01,first_sense,social insect living in organized colonies; characteristically the males and fertile queen have wings during breeding season; wingless sterile females are the workers,animals,False,False
+lvis,apple,apple.n.01,first_sense,fruit with red or yellow or green skin and sweet to tart crisp whitish flesh,food_drink,True,True
+lvis,ball,ball.n.01,first_sense,round object that is hit or thrown or kicked in games,toys,True,True
+lvis,balloon,balloon.n.01,first_sense,large tough nonrigid bag filled with gas or heated air,toys,True,True
+lvis,banana,banana.n.02,other_sense,elongated crescent-shaped yellow fruit with soft sweet flesh,food_drink,True,False
+lvis,basket,basket.n.01,first_sense,a container that is usually woven and has handles,household,True,True
+lvis,bathtub,bathtub.n.01,first_sense,a relatively large open container that you fill with water and use to wash the body,furniture_rooms,True,False
+lvis,bear,bear.n.01,first_sense,massive plantigrade carnivorous or omnivorous mammals with long shaggy coats and strong claws,animals,False,False
+lvis,bed,bed.n.01,first_sense,a piece of furniture that provides a place to sleep,furniture_rooms,True,True
+lvis,bee,bee.n.01,first_sense,any of numerous hairy-bodied insects including social and solitary species,animals,False,False
+lvis,bench,bench.n.01,first_sense,a long seat for more than one person,furniture_rooms,True,True
+lvis,bib,bib.n.01,first_sense,top part of an apron; covering the chest,clothing,True,False
+lvis,bib,bib.n.02,other_sense,a napkin tied under the chin of a child while eating,clothing,True,False
+lvis,bicycle,bicycle.n.01,first_sense,a wheeled vehicle that has two wheels and is moved by foot pedals,vehicles,False,False
+lvis,bird,bird.n.01,first_sense,warm-blooded egg-laying vertebrates characterized by feathers and forelimbs modified as wings,animals,True,True
+lvis,blanket,blanket.n.01,first_sense,bedding that keeps a person warm in bed,household,True,True
+lvis,blanket,quilt.n.01,added,bedding made of two layers of cloth filled with stuffing and stitched together,household,True,True
+lvis,boat,boat.n.01,first_sense,a small vessel for travel on water,vehicles,False,False
+lvis,boots,boot.n.01,first_sense,footwear that covers the whole foot and lower leg,clothing,False,False
+lvis,bottle,bottle.n.01,first_sense,a glass or plastic vessel used for storing drinks or other liquids; typically cylindrical without handles and with a narrow neck that can be plugged or capped,household,True,True
+lvis,bowl,bowl.n.03,other_sense,a dish that is round and open at the top for serving foods,household,True,True
+lvis,box,box.n.01,first_sense,a (usually rectangular) container; may have a lid,household,True,True
+lvis,bread,bread.n.01,first_sense,food made from dough of flour or meal and usually raised with yeast or baking powder and then baked,food_drink,True,False
+lvis,broom,broom.n.01,first_sense,a cleaning implement for sweeping; bundle of straws or twigs attached to a long handle,household,True,False
+lvis,brush,brush.n.02,other_sense,an implement that has hairs or bristles firmly set into a handle,household,False,False
+lvis,bubbles,bubble.n.01,first_sense,"a hollow globule of gas (e.g., air or carbon dioxide)",toys,False,False
+lvis,bucket,bucket.n.01,first_sense,a roughly cylindrical vessel that is open at the top,household,True,True
+lvis,bug,insect.n.01,added,small air-breathing arthropod,animals,False,False
+lvis,bunny,rabbit.n.01,added,any of various burrowing animals of the family Leporidae having long ears and short tails; some domesticated and raised for pets or food,animals,False,False
+lvis,bus,bus.n.01,first_sense,a vehicle carrying many passengers; used for public transport,vehicles,False,False
+lvis,butterfly,butterfly.n.01,first_sense,diurnal insect typically having a slender body with knobbed antennae and broad colorful wings,animals,True,True
+lvis,camera,camera.n.01,first_sense,equipment for taking photographs (usually consisting of a lightproof box with a lens at one end and light-sensitive film at the other),household,False,False
+lvis,can,can.n.01,first_sense,airtight sealed metal container for food or drink or paint etc.,household,True,True
+lvis,car,car.n.01,first_sense,a motor vehicle with four wheels; usually propelled by an internal combustion engine,vehicles,True,True
+lvis,cat,cat.n.01,first_sense,feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats,animals,True,True
+lvis,chair,chair.n.01,first_sense,"a seat for one person, with a support for the back",furniture_rooms,True,True
+lvis,chicken,cock.n.05,added,adult male bird,food_drink,False,False
+lvis,chicken,hen.n.02,added,adult female bird,food_drink,False,False
+lvis,chicken,chicken.n.02,other_sense,a domestic fowl bred for flesh or eggs; believed to have been developed from the red jungle fowl,food_drink,False,False
+lvis,clock,clock.n.01,first_sense,a timepiece that shows the time of day,household,True,True
+lvis,closet,wardrobe.n.01,other_sense,a tall piece of furniture that provides storage space for clothes; has a door and rails or hooks for hanging clothes,furniture_rooms,True,True
+lvis,closet,cupboard.n.01,first_sense,a small room (or recess) or cabinet used for storage space,furniture_rooms,True,True
+lvis,coat,coat.n.01,first_sense,an outer garment that has sleeves and covers the body from shoulder down; worn outdoors,clothing,False,False
+lvis,coffee,coffee.n.01,first_sense,a beverage consisting of an infusion of ground coffee beans,food_drink,True,False
+lvis,corn,corn.n.02,other_sense,the dried grains or kernels or corn used as animal feed or ground for meal,food_drink,True,False
+lvis,corn,corn.n.03,other_sense,ears of corn that can be prepared and served for human food,food_drink,True,False
+lvis,couch,sofa.n.01,first_sense,an upholstered seat for more than one person,furniture_rooms,True,True
+lvis,cow,cattle.n.01,added,domesticated bovine animals as a group regardless of sex or age; ; ; - Bible,animals,False,False
+lvis,cracker,cracker.n.01,first_sense,a thin crisp wafer made of flour and water with or without leavening and shortening; unsweetened or semisweet,food_drink,True,True
+lvis,crib,crib.n.01,first_sense,baby bed with high sides made of slats,furniture_rooms,True,True
+lvis,cup,cup.n.01,first_sense,a small open container usually used for drinking; usually has a handle,household,True,True
+lvis,cup,cup.n.06,other_sense,a punch served in a pitcher instead of a punch bowl,household,True,True
+lvis,cup,mug.n.04,added,with handle and usually cylindrical,household,True,True
+lvis,diaper,diaper.n.01,first_sense,garment consisting of a folded cloth drawn up between the legs and fastened at the waist; worn by infants to catch excrement,clothing,False,False
+lvis,dish,dish.n.01,first_sense,a piece of dishware normally used as a container for holding or serving food,household,True,True
+lvis,dog,dog.n.01,first_sense,a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since prehistoric times; occurs in many breeds,animals,True,True
+lvis,door,door.n.01,first_sense,a swinging or sliding barrier that will close the entrance to a room or building or vehicle,furniture_rooms,True,True
+lvis,dress,dress.n.01,first_sense,a one-piece garment for a woman; has skirt and bodice,clothing,True,True
+lvis,drink,beverage.n.01,other_sense,any liquid suitable for drinking,food_drink,False,False
+lvis,duck,duck.n.01,first_sense,small wild or domesticated web-footed broad-billed swimming bird usually having a depressed body and short legs,animals,False,False
+lvis,elephant,elephant.n.01,first_sense,five-toed pachyderm,animals,False,False
+lvis,firetruck,fire_engine.n.01,added,any of various large trucks that carry firemen and equipment to the site of a fire,vehicles,False,False
+lvis,fish,fish.n.01,first_sense,any of various mostly cold-blooded aquatic vertebrates usually having scales and breathing through gills,food_drink,True,False
+lvis,flower,flower.n.01,first_sense,a plant cultivated for its blooms or blossoms,outside,True,True
+lvis,flower,flower_arrangement.n.01,added,a decorative arrangement of flowers,outside,True,True
+lvis,flower,bouquet.n.01,added,an arrangement of flowers that is usually given as a present,outside,True,True
+lvis,food,food.n.01,first_sense,any substance that can be metabolized by an animal to give energy and build tissue,food_drink,False,False
+lvis,food,food.n.02,other_sense,any solid substance (as opposed to liquid) that is used as a source of nourishment,food_drink,False,False
+lvis,frog,frog.n.01,first_sense,any of various tailless stout-bodied amphibians with long hind limbs for leaping; semiaquatic and terrestrial species,animals,True,False
+lvis,glass,glass.n.02,other_sense,a container for holding liquids while drinking,household,True,True
+lvis,glasses,spectacles.n.01,first_sense,optical instrument consisting of a frame that holds a pair of lenses for correcting defective vision,household,True,True
+lvis,glove,glove.n.02,other_sense,handwear: covers the hand and wrist,clothing,True,False
+lvis,glove,baseball_glove.n.01,first_sense,the handwear used by fielders in playing baseball,clothing,True,False
+lvis,goose,goose.n.01,first_sense,web-footed long-necked typically gregarious migratory aquatic birds usually larger and less aquatic than ducks,animals,False,False
+lvis,hamburger,hamburger.n.01,first_sense,"a sandwich consisting of a fried cake of minced beef served on a bun, often with other ingredients",food_drink,True,False
+lvis,hammer,hammer.n.02,other_sense,a hand tool with a heavy rigid head and a handle; used to deliver an impulsive force by striking,household,False,False
+lvis,hat,hat.n.01,first_sense,headdress that protects the head from bad weather; has shaped crown and usually a brim,clothing,True,True
+lvis,hen,hen.n.02,other_sense,adult female bird,animals,False,False
+lvis,horse,horse.n.01,first_sense,solid-hoofed herbivorous quadruped domesticated since prehistoric times,animals,False,False
+lvis,jeans,jean.n.01,first_sense,(usually plural) close-fitting trousers of heavy denim for manual work or casual wear,clothing,True,True
+lvis,knife,knife.n.01,first_sense,edge tool used as a cutting instrument; has a pointed blade with a sharp edge and a handle,household,False,False
+lvis,lamp,lamp.n.02,other_sense,a piece of furniture holding one or more electric light bulbs,household,True,True
+lvis,light,lamp.n.01,added,an artificial source of visible illumination,household,False,False
+lvis,light,lamp.n.02,added,a piece of furniture holding one or more electric light bulbs,household,False,False
+lvis,light,light.n.02,other_sense,any device serving as a source of illumination,household,False,False
+lvis,lion,lion.n.01,first_sense,large gregarious predatory feline of Africa and India having a tawny coat with a shaggy mane in the male,animals,False,False
+lvis,mitten,mitten.n.01,first_sense,glove that encases the thumb separately and the other four fingers together,clothing,True,False
+lvis,monkey,monkey.n.01,first_sense,any of various long-tailed primates (excluding the prosimians),animals,False,False
+lvis,mop,swab.n.02,first_sense,cleaning implement consisting of absorbent material fastened to a handle; for cleaning floors,household,False,False
+lvis,motorcycle,motorcycle.n.01,first_sense,a motor vehicle with two wheels and a strong frame,vehicles,True,False
+lvis,nail,nail.n.02,other_sense,a thin pointed piece of metal that is hammered into materials as a fastener,household,True,False
+lvis,necklace,necklace.n.01,first_sense,jewelry consisting of a cord or chain (often bearing gems) worn about the neck as an ornament (especially by women),clothing,True,True
+lvis,orange,orange.n.01,first_sense,round yellow to orange fruit of any of several citrus trees,food_drink,True,False
+lvis,oven,oven.n.01,first_sense,kitchen appliance used for baking or roasting,furniture_rooms,True,True
+lvis,oven,microwave.n.02,added,kitchen appliance that cooks food by passing an electromagnetic wave through it; heat results from the absorption of energy by the water molecules in the food,furniture_rooms,True,True
+lvis,owl,owl.n.01,first_sense,nocturnal bird of prey with hawk-like beak and claws and large head with front-facing eyes,animals,False,False
+lvis,pajamas,pajama.n.02,other_sense,(usually plural) loose-fitting nightclothes worn for sleeping or lounging; have a jacket top and trousers,clothing,True,True
+lvis,pants,trouser.n.01,other_sense,"(usually in the plural) a garment extending from the waist to the knee or ankle, covering each leg separately",clothing,True,True
+lvis,paper,paper.n.01,first_sense,a material made of cellulose pulp derived mainly from wood or rags or certain grasses,household,True,True
+lvis,pen,pen.n.01,first_sense,a writing implement with a point from which ink flows,toys,False,False
+lvis,penguin,penguin.n.01,first_sense,short-legged flightless birds of cold southern especially Antarctic regions having webbed feet and wings modified as flippers,animals,False,False
+lvis,person,person.n.01,first_sense,a human being,people,False,False
+lvis,pig,hog.n.03,first_sense,domestic swine,animals,False,False
+lvis,pillow,pillow.n.01,first_sense,a cushion to support the head of a sleeping person,household,True,True
+lvis,pizza,pizza.n.01,first_sense,Italian open pie made of thin bread dough spread with a spiced mixture of e.g. tomato sauce and cheese,food_drink,True,False
+lvis,plant,flower.n.01,added,a plant cultivated for its blooms or blossoms,household,True,True
+lvis,plate,plate.n.08,other_sense,a main course served on a plate,household,True,True
+lvis,plate,plate.n.04,other_sense,dish on which food is served or from which food is eaten,household,True,True
+lvis,popsicle,ice_lolly.n.01,first_sense,ice cream or water ice on a small wooden stick,food_drink,False,False
+lvis,potato,potato.n.01,first_sense,an edible tuber native to South America; a staple food of Ireland,food_drink,False,False
+lvis,pretzel,pretzel.n.01,first_sense,glazed and salted cracker typically in the shape of a loose knot,food_drink,False,False
+lvis,purse,purse.n.03,other_sense,a small bag for carrying money,household,True,True
+lvis,purse,bag.n.04,first_sense,a container used for carrying money and small personal items or accessories (especially by women),household,True,True
+lvis,puzzle,puzzle.n.02,other_sense,a game that tests your ingenuity,toys,False,False
+lvis,radio,radio.n.03,other_sense,a communication system based on broadcasting electromagnetic waves,household,True,False
+lvis,radio,radio_receiver.n.01,other_sense,an electronic receiver that detects and demodulates and amplifies transmitted signals,household,True,False
+lvis,refrigerator,refrigerator.n.01,first_sense,white goods in which food can be stored at low temperatures,furniture_rooms,True,True
+lvis,roof,roof.n.01,first_sense,a protective covering that covers or forms the top of a building,outside,False,False
+lvis,rooster,cock.n.05,added,adult male bird,animals,False,False
+lvis,rooster,cock.n.04,first_sense,adult male chicken,animals,False,False
+lvis,sandwich,sandwich.n.01,first_sense,two (or more) slices of bread with a filling between them,food_drink,True,False
+lvis,sauce,sauce.n.01,first_sense,flavorful relish or dressing or topping served as an accompaniment to food,food_drink,False,False
+lvis,scarf,scarf.n.01,first_sense,a garment worn around the head or neck or shoulders for warmth or decoration,clothing,True,True
+lvis,sheep,sheep.n.01,first_sense,woolly usually horned ruminant mammal related to the goat,animals,False,False
+lvis,shirt,shirt.n.01,first_sense,a garment worn on the upper half of the body,clothing,True,True
+lvis,shoe,shoe.n.01,first_sense,footwear shaped to fit the foot (below the ankle) with a flexible upper of leather or plastic and a sole and heel of heavier material,clothing,True,True
+lvis,shovel,shovel.n.01,first_sense,a hand tool for lifting loose material; consists of a curved container or scoop and a handle,outside,True,False
+lvis,sink,sink.n.01,first_sense,plumbing fixture consisting of a water basin fixed to a wall or floor and having a drainpipe,furniture_rooms,True,True
+lvis,sink,washbasin.n.02,added,a basin for washing the hands (`wash-hand basin' is a British expression),furniture_rooms,True,True
+lvis,sled,sled.n.01,first_sense,a vehicle mounted on runners and pulled by horses or dogs; for transportation over snow,vehicles,False,False
+lvis,sneaker,gym_shoe.n.01,first_sense,a canvas shoe with a pliable rubber sole,clothing,False,False
+lvis,sneaker,running_shoe.n.01,added,a light comfortable shoe designed for running,clothing,False,False
+lvis,sock,sock.n.01,first_sense,hosiery consisting of a cloth covering for the foot; worn inside the shoe; reaches to between the ankle and the knee,clothing,True,True
+lvis,soup,soup.n.01,first_sense,liquid food especially of meat or fish or vegetable stock often containing pieces of solid food,food_drink,True,False
+lvis,spoon,spoon.n.01,first_sense,a piece of cutlery with a shallow bowl-shaped container and a handle; used to stir or serve or take up food,household,True,False
+lvis,squirrel,squirrel.n.01,first_sense,a kind of arboreal rodent having a long bushy tail,animals,False,False
+lvis,stove,stove.n.02,other_sense,any heating apparatus,furniture_rooms,False,False
+lvis,stove,stove.n.01,first_sense,a kitchen appliance used for cooking food,furniture_rooms,False,False
+lvis,strawberry,strawberry.n.01,first_sense,sweet fleshy red fruit,food_drink,True,False
+lvis,sweater,sweater.n.01,first_sense,a crocheted or knitted garment covering the upper part of the body,clothing,True,True
+lvis,swing,swing.n.02,other_sense,mechanical device used as a plaything to support someone swinging back and forth,outside,True,True
+lvis,table,table.n.02,other_sense,a piece of furniture having a smooth flat top that is usually supported by one or more vertical legs,furniture_rooms,True,True
+lvis,table,table.n.03,other_sense,a piece of furniture with tableware for a meal laid out on it,furniture_rooms,True,True
+lvis,teddybear,teddy.n.01,added,plaything consisting of a child's toy bear (usually plush and stuffed with soft materials),animals,False,False
+lvis,telephone,telephone.n.01,first_sense,electronic equipment that converts sound into electrical signals that can be transmitted over distances and then converts received signals back into sounds,household,False,False
+lvis,tiger,tiger.n.02,other_sense,large feline of forests in most of Asia having a tawny coat with black stripes; endangered,animals,False,False
+lvis,tissue,tissue.n.02,other_sense,a soft thin (usually translucent) paper,household,False,False
+lvis,towel,towel.n.01,first_sense,a rectangular piece of absorbent cloth (or paper) for drying or wiping,household,True,True
+lvis,toy,plaything.n.01,first_sense,an artifact designed to be played with,toys,True,True
+lvis,toy,toy.n.03,other_sense,a device regarded as providing amusement,toys,True,True
+lvis,tractor,tractor.n.01,first_sense,a wheeled vehicle with large wheels; used in farming and other applications,vehicles,False,False
+lvis,train,train.n.01,first_sense,public transport provided by a line of railway cars coupled together and drawn by a locomotive,vehicles,False,False
+lvis,train,locomotive.n.01,added,a wheeled vehicle consisting of a self-propelled engine that is used to draw trains along railway tracks,vehicles,False,False
+lvis,train,car.n.02,added,a wheeled vehicle adapted to the rails of railroad,vehicles,False,False
+lvis,tray,tray.n.01,first_sense,an open receptacle for holding or displaying or serving articles or food,household,True,True
+lvis,tricycle,tricycle.n.01,first_sense,a vehicle with three wheels that is moved by foot pedals,vehicles,False,False
+lvis,truck,truck.n.01,first_sense,an automotive vehicle suitable for hauling,vehicles,False,False
+lvis,turtle,turtle.n.02,other_sense,any of various aquatic and land reptiles having a bony shell and flipper-like limbs for swimming,animals,False,False
+lvis,tv,television.n.02,added,a telecommunication system that transmits images of objects (stationary or moving) between distant points,furniture_rooms,False,False
+lvis,tv,television_receiver.n.01,other_sense,an electronic device that receives television signals and displays them on a screen,furniture_rooms,False,False
+lvis,vacuum,vacuum.n.04,other_sense,an electrical home appliance that cleans by suction,household,True,True
+lvis,watch,watch.n.01,first_sense,a small portable timepiece,household,True,True
+lvis,wolf,wolf.n.01,first_sense,any of various predatory carnivorous canine mammals of North America and Eurasia that usually hunt in packs,animals,False,False
+lvis,zebra,zebra.n.01,first_sense,any of several fleet black-and-white striped African equines,animals,False,False
+lvis,belt,belt.n.02,other_sense,a band to tie or buckle around the body (usually at the waist),clothing,True,False
+lvis,book,book.n.01,first_sense,a written work or composition that has been published (printed on pages bound together),toys,True,True
+lvis,carrot,carrot.n.01,first_sense,deep orange edible root of the cultivated carrot plant,food_drink,True,False
+lvis,chips,chip.n.04,other_sense,a thin crisp slice of potato fried in deep fat,food_drink,True,False
+lvis,cookie,cookie.n.01,first_sense,any of various small flat sweet cakes (`biscuit' is the British term),food_drink,True,False
+lvis,doll,doll.n.01,first_sense,a small replica of a person; used as a toy,toys,True,True
+lvis,drawer,drawer.n.01,first_sense,a boxlike container in a piece of furniture; made so as to slide in and out,furniture_rooms,True,True
+lvis,egg,egg.n.02,other_sense,oval reproductive body of a fowl (especially a hen) used as food,food_drink,True,False
+lvis,fork,fork.n.01,first_sense,cutlery used for serving and eating food,household,True,True
+lvis,hose,hose.n.03,other_sense,a flexible pipe for conveying a liquid or gas,outside,True,False
+lvis,jacket,jacket.n.01,first_sense,a short coat,clothing,True,True
+lvis,jar,jar.n.01,first_sense,a vessel (usually cylindrical) with a wide mouth and without handles,household,True,True
+lvis,ladder,ladder.n.01,first_sense,steps consisting of two parallel members connected by rungs; for climbing up or down,outside,True,False
+lvis,melon,melon.n.01,first_sense,any of numerous fruits of the gourd family having a hard rind and sweet juicy flesh,food_drink,True,False
+lvis,milk,milk.n.01,first_sense,a white nutritious liquid secreted by mammals and used as food by human beings,food_drink,True,False
+lvis,muffin,muffin.n.01,first_sense,a sweet quick bread baked in a cup-shaped pan,food_drink,True,False
+lvis,napkin,napkin.n.01,first_sense,a small piece of table linen that is used to wipe the mouth and to cover the lap in order to protect clothing,household,True,True
+lvis,pickle,pickle.n.01,first_sense,vegetables (especially cucumbers) preserved in brine or vinegar,food_drink,True,False
+lvis,pony,pony.n.05,other_sense,any of various breeds of small gentle horses usually less than five feet high at the shoulder,animals,True,True
+lvis,pumpkin,pumpkin.n.02,other_sense,usually large pulpy deep-yellow round fruit of the squash family maturing in late summer or early autumn,food_drink,True,False
+lvis,scissors,scissors.n.01,first_sense,an edge tool having two crossed pivoting blades,household,True,False
+lvis,shorts,short_pants.n.01,first_sense,trousers that end at or above the knee,clothing,True,True
+lvis,shower,shower.n.01,first_sense,a plumbing fixture that sprays water over you,furniture_rooms,True,True
+lvis,slide,chute.n.02,other_sense,sloping channel through which things can descend,outside,True,True
+lvis,slipper,slipper.n.01,first_sense,low footwear that can be slipped on and off easily; usually worn indoors,clothing,True,False
+lvis,soap,soap.n.01,first_sense,a cleansing agent made from the salts of vegetable or animal fats,household,True,False
+lvis,stroller,baby_buggy.n.01,other_sense,a small vehicle with four wheels in which a baby or child is pushed around,vehicles,True,True
+lvis,tape,tape.n.01,first_sense,a long thin piece of cloth or paper as used for binding or fastening,household,True,False
+lvis,toothbrush,toothbrush.n.01,first_sense,small brush; has long handle; used to clean teeth,household,True,False
+lvis,beads,bead.n.01,other_sense,a small ball with a hole through the middle,clothing,False,False
+lvis,butter,butter.n.01,first_sense,an edible emulsion of fat globules made by churning milk or cream; for cooking and table use,food_drink,False,False
+lvis,button,button.n.01,first_sense,a round fastener sewn to shirts and coats etc to fit through buttonholes,clothing,False,False
+lvis,cake,cake.n.03,other_sense,"baked goods made from or based on a mixture of flour, sugar, eggs, and fat",food_drink,False,False
+lvis,crayon,crayon.n.01,first_sense,writing implement consisting of a colored stick of composition wax used for writing and drawing,toys,False,False
+lvis,deer,deer.n.01,first_sense,distinguished from Bovidae by the male's having solid deciduous antlers,animals,False,False
+lvis,donkey,domestic_ass.n.01,other_sense,domestic beast of burden descended from the African wild ass; patient but stubborn,animals,False,False
+lvis,flag,flag.n.01,first_sense,emblem usually consisting of a rectangular piece of cloth of distinctive design,outside,False,False
+lvis,giraffe,giraffe.n.01,first_sense,tallest living quadruped; having a spotted coat and small horns and very long neck and legs; of savannahs of tropical Africa,animals,False,False
+lvis,grapes,grape.n.01,first_sense,any of various juicy fruit of the genus Vitis with green or purple skins; grow in clusters,food_drink,False,False
+lvis,helicopter,helicopter.n.01,first_sense,an aircraft without wings that obtains its lift from the rotation of overhead blades,vehicles,False,False
+lvis,key,key.n.01,first_sense,metal device shaped in such a way that when it is inserted into the appropriate lock the lock's mechanism can be rotated,household,False,False
+lvis,kitty,kitten.n.01,other_sense,young domestic cat,animals,False,False
+lvis,lamb,lamb.n.01,first_sense,young sheep,animals,False,False
+lvis,lollipop,lollipop.n.02,other_sense,hard candy on a stick,food_drink,False,False
+lvis,money,money.n.03,other_sense,the official currency issued by a government or national bank,household,False,False
+lvis,pancake,pancake.n.01,first_sense,a flat cake of thin batter fried on both sides on a griddle,food_drink,False,False
+lvis,pastry,pastry.n.02,other_sense,any of various baked foods made of dough or batter,food_drink,False,False
+lvis,peas,pea.n.01,first_sense,seed of a pea plant used for food,food_drink,False,False
+lvis,pencil,pencil.n.01,first_sense,a thin cylindrical pointed writing implement; a rod of marking substance encased in wood,toys,False,False
+lvis,puppy,puppy.n.01,first_sense,a young dog,animals,False,False
+lvis,snowman,snowman.n.01,first_sense,a figure of a person made of packed snow,outside,False,False
+lvis,soda,pop.n.02,other_sense,a sweet drink containing carbonated water and flavoring,food_drink,False,False
+lvis,tights,tights.n.01,first_sense,skintight knit hose covering the body from the waist to the feet worn by acrobats and dancers and as stockings by women and girls,clothing,False,False
+lvis,toast,toast.n.01,first_sense,slices of bread that have been toasted,food_drink,False,False
+lvis,yogurt,yogurt.n.01,first_sense,a custard-like food made from curdled milk,food_drink,False,False

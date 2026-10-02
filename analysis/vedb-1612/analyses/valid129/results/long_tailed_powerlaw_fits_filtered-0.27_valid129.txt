@@ -1,0 +1,11 @@
+               distribution semantic_category  n_points    alpha  intercept_log   coef_c   r2_log  rmse_log
+overall_included_categories               all       128 2.033036       1.864971 6.455749 0.737074  1.135361
+           semantic_animals           animals         7 2.214778      -5.543413 0.003913 0.768002  0.771777
+        semantic_body_parts        body_parts        12 3.564050      -1.084624 0.338029 0.906259  0.829501
+          semantic_clothing          clothing        18 1.816586      -2.015618 0.133238 0.752093  0.812721
+        semantic_food_drink        food_drink        23 1.991827      -2.969434 0.051332 0.760429  0.903654
+   semantic_furniture_rooms   furniture_rooms        15 2.471184      -0.252714 0.776690 0.696008  1.233784
+         semantic_household         household        34 1.516673      -0.910365 0.402377 0.745031  0.752433
+           semantic_outside           outside        11 2.540578      -2.740582 0.064533 0.940356  0.454564
+              semantic_toys              toys         5 3.094255      -2.300562 0.100202 0.619128  1.379501
+          semantic_vehicles          vehicles         3 3.986612      -2.988388 0.050369 0.989491  0.186364

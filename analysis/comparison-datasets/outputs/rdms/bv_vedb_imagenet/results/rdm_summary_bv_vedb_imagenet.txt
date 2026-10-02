@@ -1,0 +1,12 @@
+BV vs VEDB vs ImageNet RDMs (n=75 shared categories)
+
+clip:
+  BV-VEDB: Spearman=0.826 [0.773, 0.870], perm p=0.0002
+  BV-ImageNet: Spearman=0.620 [0.544, 0.690], perm p=0.0002
+  VEDB-ImageNet: Spearman=0.611 [0.532, 0.687], perm p=0.0002
+  rho(BV-VEDB) - rho(BV-ImageNet) = 0.205 [0.143, 0.276]
+dinov3:
+  BV-VEDB: Spearman=0.774 [0.719, 0.823], perm p=0.0002
+  BV-ImageNet: Spearman=0.429 [0.350, 0.498], perm p=0.0002
+  VEDB-ImageNet: Spearman=0.376 [0.295, 0.446], perm p=0.0002
+  rho(BV-VEDB) - rho(BV-ImageNet) = 0.344 [0.268, 0.419]

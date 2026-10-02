@@ -1,0 +1,13 @@
+# Regenerable or large outputs (the notebooks in notebooks/ rebuild them; see README.md).
+# Kept in git: results/ tables, figures/, and the small mapping/audit tables.
+outputs/exemplar_sets/
+outputs/montages/
+outputs/mapping/*.npz
+outputs/mapping/lvis_crop_manifest.csv
+outputs/mapping/lvis_crop_metadata.csv.gz
+outputs/mapping/*.log
+data_prep/logs/
+__pycache__/
+
+# The repo ignores *.html; notebook 02 needs this template (the generated outputs/mapping/mapping_audit.html stays ignored).
+!notebooks/mapping_audit_template.html

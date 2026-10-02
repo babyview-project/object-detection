@@ -82,6 +82,8 @@ Category lists used in the paper: [`data/included_categories_valid129.txt`](data
 | **[`analysis/ccn-2026/`](analysis/ccn-2026/)** | CCN 2026 poster — exemplar variability (Plots A–C, kNN, THINGS) | [`README.md`](analysis/ccn-2026/README.md), [`SCRIPTS.md`](analysis/ccn-2026/SCRIPTS.md), [`OUTPUTS.md`](analysis/ccn-2026/OUTPUTS.md) |
 | **[`analysis/vss-2026/`](analysis/vss-2026/)** | VSS 2026 — group RDM / embedding pipeline (CLIP, DINOv3) | [`README.md`](analysis/vss-2026/README.md) |
 | **[`analysis/individual_analyses/`](analysis/individual_analyses/)** | Per-child RDMs & developmental trajectories | [`README_notebooks_05_06_07.md`](analysis/individual_analyses/README_notebooks_05_06_07.md), [`README_pca_subspace_stability.md`](analysis/individual_analyses/README_pca_subspace_stability.md), [`clip_dino_rdm_correlations/README.md`](analysis/individual_analyses/clip_dino_rdm_correlations/README.md) |
+| **[`analysis/vedb-1612/`](analysis/vedb-1612/)** | VEDB 80-session world subset — same frame / YOLOE / CLIP / DINOv3 pipeline | [`README.md`](analysis/vedb-1612/README.md) |
+| **[`analysis/comparison-datasets/`](analysis/comparison-datasets/)** | ImageNet-1k and LVIS v1 as comparison datasets (WordNet mapping onto CDI words, BV vs ImageNet / LVIS / THINGS / VEDB) | [`README.md`](analysis/comparison-datasets/README.md) |
 | **[`analysis/developmental_trend_analysis_R/`](analysis/developmental_trend_analysis_R/)** | R / Quarto developmental stats | [`data/README_data_csvs.md`](analysis/developmental_trend_analysis_R/data/README_data_csvs.md) |
 
 CCN variability code also appears under [`analysis/manuscript-2026/not_in_manuscript/exemplar_variability_analyses/`](analysis/manuscript-2026/not_in_manuscript/exemplar_variability_analyses/).
@@ -149,6 +151,8 @@ object-detection/
     ├── ccn-2026/                      ← CCN poster variability
     ├── vss-2026/                      ← group RDM pipeline
     ├── individual_analyses/           ← per-child / developmental
+    ├── vedb-1612/                     ← VEDB world subset (80 sessions)
+    ├── comparison-datasets/           ← ImageNet-1k + LVIS v1 vs BabyView
     └── developmental_trend_analysis_R/
 ```
 

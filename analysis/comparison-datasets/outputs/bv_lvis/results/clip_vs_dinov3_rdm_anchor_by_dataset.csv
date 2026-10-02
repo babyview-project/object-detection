@@ -1,0 +1,7 @@
+category_set,dataset,spearman_clip_vs_dinov3
+lvis_hyponym105,bv,0.8887669135348705
+lvis_hyponym105,things,0.5114581652420767
+lvis_hyponym105,lvis,0.8699680687638126
+lvis_exclusive104,bv,0.895076471614138
+lvis_exclusive104,things,0.5137495800670964
+lvis_exclusive104,lvis,0.8697279204361692

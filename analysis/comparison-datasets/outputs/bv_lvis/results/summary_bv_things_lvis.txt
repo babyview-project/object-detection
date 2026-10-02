@@ -1,0 +1,31 @@
+BV vs LVIS vs THINGS (n_perm=5000, n_boot=2000, seed=2026)
+
+== lvis_hyponym105
+  clip: n_categories=105
+    RDM bv vs lvis: Spearman=0.492 [0.404, 0.582], perm p=0.0002
+    RDM bv vs things: Spearman=0.596 [0.533, 0.661], perm p=0.0002
+    RDM things vs lvis: Spearman=0.410 [0.339, 0.490], perm p=0.0002
+    RDM bv-lvis vs minus bv-things: Spearman=-0.104 [-0.191, -0.022]
+    category cosine mean: BV-LVIS=0.616, BV-THINGS=0.611, THINGS-LVIS=0.490  (Wilcoxon BV-LVIS vs BV-THINGS p=0.128)
+  dinov3: n_categories=105
+    RDM bv vs lvis: Spearman=0.527 [0.454, 0.599], perm p=0.0002
+    RDM bv vs things: Spearman=0.409 [0.352, 0.461], perm p=0.0002
+    RDM things vs lvis: Spearman=0.347 [0.289, 0.402], perm p=0.0002
+    RDM bv-lvis vs minus bv-things: Spearman=0.118 [0.045, 0.197]
+    category cosine mean: BV-LVIS=0.621, BV-THINGS=0.480, THINGS-LVIS=0.464  (Wilcoxon BV-LVIS vs BV-THINGS p=2.7e-10)
+  CLIP vs DINOv3 RDM Spearman: BV=0.889, THINGS=0.511, LVIS=0.870
+
+== lvis_exclusive104
+  clip: n_categories=104
+    RDM bv vs lvis: Spearman=0.486 [0.398, 0.571], perm p=0.0002
+    RDM bv vs things: Spearman=0.598 [0.535, 0.663], perm p=0.0002
+    RDM things vs lvis: Spearman=0.405 [0.331, 0.478], perm p=0.0002
+    RDM bv-lvis vs minus bv-things: Spearman=-0.112 [-0.196, -0.027]
+    category cosine mean: BV-LVIS=0.616, BV-THINGS=0.612, THINGS-LVIS=0.490  (Wilcoxon BV-LVIS vs BV-THINGS p=0.123)
+  dinov3: n_categories=104
+    RDM bv vs lvis: Spearman=0.530 [0.459, 0.600], perm p=0.0002
+    RDM bv vs things: Spearman=0.414 [0.359, 0.468], perm p=0.0002
+    RDM things vs lvis: Spearman=0.348 [0.289, 0.408], perm p=0.0002
+    RDM bv-lvis vs minus bv-things: Spearman=0.116 [0.041, 0.195]
+    category cosine mean: BV-LVIS=0.626, BV-THINGS=0.483, THINGS-LVIS=0.468  (Wilcoxon BV-LVIS vs BV-THINGS p=2.61e-10)
+  CLIP vs DINOv3 RDM Spearman: BV=0.895, THINGS=0.514, LVIS=0.870

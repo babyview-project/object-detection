@@ -1,0 +1,931 @@
+cdi_category,wnid,imagenet_synset,imagenet_label,anchor_synset,hypernym_distance,n_train,n_val,most_specific,cdi_semantic
+airplane,n04552348,warplane.n.01,"warplane, military plane",warplane.n.01,0,1300,50,True,vehicles
+airplane,n02690373,airliner.n.01,airliner,airplane.n.01,1,1300,50,True,vehicles
+alligator,n01698640,american_alligator.n.01,"American alligator, Alligator mississipiensis",alligator.n.02,1,1300,50,True,animals
+animal,n01768244,trilobite.n.01,trilobite,animal.n.01,3,1300,50,True,animals
+animal,n01784675,centipede.n.01,centipede,animal.n.01,3,1300,50,True,animals
+animal,n01910747,jellyfish.n.02,jellyfish,animal.n.01,3,1300,50,True,animals
+animal,n01924916,flatworm.n.01,"flatworm, platyhelminth",animal.n.01,3,1300,50,True,animals
+animal,n01930112,nematode.n.01,"nematode, nematode worm, roundworm",animal.n.01,3,1300,50,True,animals
+animal,n01955084,chiton.n.02,"chiton, coat-of-mail shell, sea cradle, polyplacophore",animal.n.01,3,1300,50,True,animals
+animal,n02091032,italian_greyhound.n.01,Italian greyhound,animal.n.01,3,1300,50,True,animals
+animal,n02091134,whippet.n.01,whippet,animal.n.01,3,1300,50,True,animals
+animal,n02110341,dalmatian.n.02,"dalmatian, coach dog, carriage dog",animal.n.01,3,1300,50,False,animals
+animal,n02110806,basenji.n.01,basenji,animal.n.01,3,1300,50,False,animals
+animal,n02110958,pug.n.01,"pug, pug-dog",animal.n.01,3,1300,50,False,animals
+animal,n02111129,leonberg.n.01,Leonberg,animal.n.01,3,1300,50,False,animals
+animal,n02111277,newfoundland.n.01,"Newfoundland, Newfoundland dog",animal.n.01,3,1300,50,False,animals
+animal,n02111500,great_pyrenees.n.01,Great Pyrenees,animal.n.01,3,1300,50,False,animals
+animal,n02113978,mexican_hairless.n.01,Mexican hairless,animal.n.01,3,755,50,False,animals
+animal,n02123045,tabby.n.01,"tabby, tabby cat",animal.n.01,3,1300,50,False,animals
+animal,n02123159,tiger_cat.n.02,tiger cat,animal.n.01,3,1300,50,False,animals
+animal,n02123394,persian_cat.n.01,Persian cat,animal.n.01,3,1300,50,False,animals
+animal,n02123597,siamese_cat.n.01,"Siamese cat, Siamese",animal.n.01,3,1300,50,False,animals
+animal,n02124075,egyptian_cat.n.01,Egyptian cat,animal.n.01,3,1300,50,False,animals
+animal,n02317335,starfish.n.01,"starfish, sea star",animal.n.01,3,1300,50,True,animals
+animal,n02319095,sea_urchin.n.01,sea urchin,animal.n.01,3,1300,50,True,animals
+animal,n02321529,sea_cucumber.n.01,"sea cucumber, holothurian",animal.n.01,3,1300,50,True,animals
+animal,n01514668,cock.n.05,cock,animal.n.01,4,1300,50,False,animals
+animal,n01514859,hen.n.02,hen,animal.n.01,4,1300,50,False,animals
+animal,n01770081,harvestman.n.01,"harvestman, daddy longlegs, Phalangium opilio",animal.n.01,4,1300,50,True,animals
+animal,n01770393,scorpion.n.03,scorpion,animal.n.01,4,1300,50,True,animals
+animal,n01795545,black_grouse.n.01,black grouse,animal.n.01,4,1300,50,True,animals
+animal,n01796340,ptarmigan.n.01,ptarmigan,animal.n.01,4,1300,50,True,animals
+animal,n01797886,ruffed_grouse.n.01,"ruffed grouse, partridge, Bonasa umbellus",animal.n.01,4,1300,50,True,animals
+animal,n01798484,prairie_chicken.n.01,"prairie chicken, prairie grouse, prairie fowl",animal.n.01,4,1300,50,True,animals
+animal,n01806567,quail.n.02,quail,animal.n.01,4,1300,50,True,animals
+animal,n01807496,partridge.n.03,partridge,animal.n.01,4,1300,50,True,animals
+animal,n01871265,tusker.n.01,tusker,animal.n.01,4,1300,50,True,animals
+animal,n01914609,sea_anemone.n.01,"sea anemone, anemone",animal.n.01,4,1300,50,True,animals
+animal,n01943899,conch.n.01,conch,animal.n.01,4,1300,50,True,animals
+animal,n01944390,snail.n.01,snail,animal.n.01,4,1300,50,True,animals
+animal,n01945685,slug.n.07,slug,animal.n.01,4,1300,50,True,animals
+animal,n01950731,sea_slug.n.01,"sea slug, nudibranch",animal.n.01,4,1300,50,True,animals
+animal,n01968897,chambered_nautilus.n.01,"chambered nautilus, pearly nautilus, nautilus",animal.n.01,4,1300,50,True,animals
+animal,n02085620,chihuahua.n.03,Chihuahua,animal.n.01,4,1300,50,False,animals
+animal,n02085782,japanese_spaniel.n.01,Japanese spaniel,animal.n.01,4,772,50,False,animals
+animal,n02085936,maltese_dog.n.01,"Maltese dog, Maltese terrier, Maltese",animal.n.01,4,1300,50,False,animals
+animal,n02086079,pekinese.n.01,"Pekinese, Pekingese, Peke",animal.n.01,4,1300,50,False,animals
+animal,n02086240,shih-tzu.n.01,Shih-Tzu,animal.n.01,4,1300,50,False,animals
+animal,n02087046,toy_terrier.n.01,toy terrier,animal.n.01,4,860,50,False,animals
+animal,n02087394,rhodesian_ridgeback.n.01,Rhodesian ridgeback,animal.n.01,4,1300,50,False,animals
+animal,n02108089,boxer.n.04,boxer,animal.n.01,4,1300,50,False,animals
+animal,n02108422,bull_mastiff.n.01,bull mastiff,animal.n.01,4,1300,50,False,animals
+animal,n02109047,great_dane.n.01,Great Dane,animal.n.01,4,1300,50,False,animals
+animal,n02109525,saint_bernard.n.01,"Saint Bernard, St Bernard",animal.n.01,4,1300,50,False,animals
+animal,n02109961,eskimo_dog.n.01,"Eskimo dog, husky",animal.n.01,4,1300,50,False,animals
+animal,n02111889,samoyed.n.03,"Samoyed, Samoyede",animal.n.01,4,1300,50,False,animals
+animal,n02112018,pomeranian.n.01,Pomeranian,animal.n.01,4,1300,50,False,animals
+animal,n02112137,chow.n.03,"chow, chow chow",animal.n.01,4,1300,50,False,animals
+animal,n02112350,keeshond.n.01,keeshond,animal.n.01,4,1300,50,False,animals
+animal,n02112706,brabancon_griffon.n.01,Brabancon griffon,animal.n.01,4,1070,50,False,animals
+animal,n02113023,pembroke.n.01,"Pembroke, Pembroke Welsh corgi",animal.n.01,4,1300,50,False,animals
+animal,n02113186,cardigan.n.02,"Cardigan, Cardigan Welsh corgi",animal.n.01,4,1300,50,False,animals
+animal,n02113624,toy_poodle.n.01,toy poodle,animal.n.01,4,1300,50,False,animals
+animal,n02113712,miniature_poodle.n.01,miniature poodle,animal.n.01,4,1300,50,False,animals
+animal,n02113799,standard_poodle.n.01,standard poodle,animal.n.01,4,1300,50,False,animals
+animal,n01518878,ostrich.n.02,"ostrich, Struthio camelus",animal.n.01,5,1300,50,False,animals
+animal,n01616318,vulture.n.01,vulture,animal.n.01,5,1300,50,False,animals
+animal,n01629819,european_fire_salamander.n.01,"European fire salamander, Salamandra salamandra",animal.n.01,5,1300,50,True,animals
+animal,n01644373,tree_frog.n.02,"tree frog, tree-frog",animal.n.01,5,1300,50,False,animals
+animal,n01644900,tailed_frog.n.01,"tailed frog, bell toad, ribbed toad, tailed toad, Ascaphus trui",animal.n.01,5,1300,50,False,animals
+animal,n01773157,black_and_gold_garden_spider.n.01,"black and gold garden spider, Argiope aurantia",animal.n.01,5,1300,50,True,animals
+animal,n01773549,barn_spider.n.01,"barn spider, Araneus cavaticus",animal.n.01,5,1300,50,True,animals
+animal,n01773797,garden_spider.n.01,"garden spider, Aranea diademata",animal.n.01,5,1300,50,True,animals
+animal,n01774384,black_widow.n.01,"black widow, Latrodectus mactans",animal.n.01,5,1300,50,True,animals
+animal,n01774750,tarantula.n.02,tarantula,animal.n.01,5,1300,50,True,animals
+animal,n01775062,wolf_spider.n.01,"wolf spider, hunting spider",animal.n.01,5,1300,50,True,animals
+animal,n01776313,tick.n.02,tick,animal.n.01,5,1300,50,True,animals
+animal,n01817953,african_grey.n.01,"African grey, African gray, Psittacus erithacus",animal.n.01,5,1300,50,False,animals
+animal,n01818515,macaw.n.01,macaw,animal.n.01,5,1300,50,False,animals
+animal,n01828970,bee_eater.n.01,bee eater,animal.n.01,5,1300,50,False,animals
+animal,n01829413,hornbill.n.01,hornbill,animal.n.01,5,1300,50,False,animals
+animal,n01833805,hummingbird.n.01,hummingbird,animal.n.01,5,1300,50,False,animals
+animal,n01843065,jacamar.n.01,jacamar,animal.n.01,5,1300,50,False,animals
+animal,n01843383,toucan.n.01,toucan,animal.n.01,5,1300,50,False,animals
+animal,n01985128,crayfish.n.03,"crayfish, crawfish, crawdad, crawdaddy",animal.n.01,5,1300,50,True,animals
+animal,n01986214,hermit_crab.n.01,hermit crab,animal.n.01,5,1300,50,True,animals
+animal,n01990800,isopod.n.01,isopod,animal.n.01,5,1300,50,True,animals
+animal,n02086910,papillon.n.01,papillon,animal.n.01,5,1300,50,False,animals
+animal,n02088094,afghan_hound.n.01,"Afghan hound, Afghan",animal.n.01,5,1300,50,False,animals
+animal,n02088238,basset.n.01,"basset, basset hound",animal.n.01,5,1300,50,False,animals
+animal,n02088364,beagle.n.01,beagle,animal.n.01,5,1300,50,False,animals
+animal,n02088466,bloodhound.n.01,"bloodhound, sleuthhound",animal.n.01,5,1300,50,False,animals
+animal,n02088632,bluetick.n.01,bluetick,animal.n.01,5,1136,50,False,animals
+animal,n02090379,redbone.n.01,redbone,animal.n.01,5,1290,50,False,animals
+animal,n02091244,ibizan_hound.n.01,"Ibizan hound, Ibizan Podenco",animal.n.01,5,1300,50,False,animals
+animal,n02091467,norwegian_elkhound.n.01,"Norwegian elkhound, elkhound",animal.n.01,5,1300,50,False,animals
+animal,n02091635,otterhound.n.01,"otterhound, otter hound",animal.n.01,5,738,50,False,animals
+animal,n02091831,saluki.n.01,"Saluki, gazelle hound",animal.n.01,5,1300,50,False,animals
+animal,n02092002,scottish_deerhound.n.01,"Scottish deerhound, deerhound",animal.n.01,5,1300,50,False,animals
+animal,n02092339,weimaraner.n.01,Weimaraner,animal.n.01,5,1300,50,False,animals
+animal,n02093647,bedlington_terrier.n.01,Bedlington terrier,animal.n.01,5,1258,50,False,animals
+animal,n02093754,border_terrier.n.01,Border terrier,animal.n.01,5,1300,50,False,animals
+animal,n02093859,kerry_blue_terrier.n.01,Kerry blue terrier,animal.n.01,5,1273,50,False,animals
+animal,n02093991,irish_terrier.n.01,Irish terrier,animal.n.01,5,1300,50,False,animals
+animal,n02094114,norfolk_terrier.n.01,Norfolk terrier,animal.n.01,5,1300,50,False,animals
+animal,n02094258,norwich_terrier.n.01,Norwich terrier,animal.n.01,5,1300,50,False,animals
+animal,n02094433,yorkshire_terrier.n.01,Yorkshire terrier,animal.n.01,5,1300,50,False,animals
+animal,n02096051,airedale.n.01,"Airedale, Airedale terrier",animal.n.01,5,1300,50,False,animals
+animal,n02096177,cairn.n.02,"cairn, cairn terrier",animal.n.01,5,1300,50,False,animals
+animal,n02096294,australian_terrier.n.01,Australian terrier,animal.n.01,5,1300,50,False,animals
+animal,n02096437,dandie_dinmont.n.01,"Dandie Dinmont, Dandie Dinmont terrier",animal.n.01,5,1156,50,False,animals
+animal,n02096585,boston_bull.n.01,"Boston bull, Boston terrier",animal.n.01,5,1300,50,False,animals
+animal,n02097298,scotch_terrier.n.01,"Scotch terrier, Scottish terrier, Scottie",animal.n.01,5,1300,50,False,animals
+animal,n02097474,tibetan_terrier.n.01,"Tibetan terrier, chrysanthemum dog",animal.n.01,5,1300,50,False,animals
+animal,n02097658,silky_terrier.n.01,"silky terrier, Sydney silky",animal.n.01,5,1300,50,False,animals
+animal,n02098105,soft-coated_wheaten_terrier.n.01,soft-coated wheaten terrier,animal.n.01,5,1300,50,False,animals
+animal,n02098286,west_highland_white_terrier.n.01,West Highland white terrier,animal.n.01,5,1300,50,False,animals
+animal,n02098413,lhasa.n.02,"Lhasa, Lhasa apso",animal.n.01,5,1300,50,False,animals
+animal,n02104029,kuvasz.n.01,kuvasz,animal.n.01,5,1300,50,False,animals
+animal,n02104365,schipperke.n.01,schipperke,animal.n.01,5,1300,50,False,animals
+animal,n02105251,briard.n.01,briard,animal.n.01,5,1300,50,False,animals
+animal,n02105412,kelpie.n.02,kelpie,animal.n.01,5,1300,50,False,animals
+animal,n02105505,komondor.n.01,komondor,animal.n.01,5,1300,50,False,animals
+animal,n02105641,old_english_sheepdog.n.01,"Old English sheepdog, bobtail",animal.n.01,5,1300,50,False,animals
+animal,n02105855,shetland_sheepdog.n.01,"Shetland sheepdog, Shetland sheep dog, Shetland",animal.n.01,5,1300,50,False,animals
+animal,n02106030,collie.n.01,collie,animal.n.01,5,1300,50,False,animals
+animal,n02106166,border_collie.n.01,Border collie,animal.n.01,5,1300,50,False,animals
+animal,n02106382,bouvier_des_flandres.n.01,"Bouvier des Flandres, Bouviers des Flandres",animal.n.01,5,1300,50,False,animals
+animal,n02106550,rottweiler.n.01,Rottweiler,animal.n.01,5,1300,50,False,animals
+animal,n02106662,german_shepherd.n.01,"German shepherd, German shepherd dog, German police dog, alsatian",animal.n.01,5,1300,50,False,animals
+animal,n02107574,greater_swiss_mountain_dog.n.01,Greater Swiss Mountain dog,animal.n.01,5,1300,50,False,animals
+animal,n02107683,bernese_mountain_dog.n.01,Bernese mountain dog,animal.n.01,5,1300,50,False,animals
+animal,n02107908,appenzeller.n.01,Appenzeller,animal.n.01,5,1300,50,False,animals
+animal,n02108000,entlebucher.n.01,EntleBucher,animal.n.01,5,1300,50,False,animals
+animal,n02108551,tibetan_mastiff.n.01,Tibetan mastiff,animal.n.01,5,1300,50,False,animals
+animal,n02108915,french_bulldog.n.01,French bulldog,animal.n.01,5,1300,50,False,animals
+animal,n02110063,malamute.n.01,"malamute, malemute, Alaskan malamute",animal.n.01,5,1300,50,False,animals
+animal,n02110185,siberian_husky.n.01,Siberian husky,animal.n.01,5,1300,50,False,animals
+animal,n02165105,tiger_beetle.n.01,tiger beetle,animal.n.01,5,1300,50,False,animals
+animal,n02165456,ladybug.n.01,"ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle",animal.n.01,5,1300,50,False,animals
+animal,n02167151,ground_beetle.n.01,"ground beetle, carabid beetle",animal.n.01,5,1300,50,False,animals
+animal,n02168699,long-horned_beetle.n.01,"long-horned beetle, longicorn, longicorn beetle",animal.n.01,5,1300,50,False,animals
+animal,n02169497,leaf_beetle.n.01,"leaf beetle, chrysomelid",animal.n.01,5,1300,50,False,animals
+animal,n02177972,weevil.n.01,weevil,animal.n.01,5,1300,50,False,animals
+animal,n02190166,fly.n.01,fly,animal.n.01,5,1300,50,False,animals
+animal,n02206856,bee.n.01,bee,animal.n.01,5,1300,50,False,animals
+animal,n02219486,ant.n.01,"ant, emmet, pismire",animal.n.01,5,1300,50,False,animals
+animal,n02226429,grasshopper.n.01,"grasshopper, hopper",animal.n.01,5,1300,50,False,animals
+animal,n02229544,cricket.n.01,cricket,animal.n.01,5,1300,50,False,animals
+animal,n02231487,walking_stick.n.02,"walking stick, walkingstick, stick insect",animal.n.01,5,1300,50,False,animals
+animal,n02233338,cockroach.n.01,"cockroach, roach",animal.n.01,5,1300,50,False,animals
+animal,n02236044,mantis.n.01,"mantis, mantid",animal.n.01,5,1300,50,False,animals
+animal,n02256656,cicada.n.01,"cicada, cicala",animal.n.01,5,1300,50,False,animals
+animal,n02259212,leafhopper.n.01,leafhopper,animal.n.01,5,1300,50,False,animals
+animal,n02264363,lacewing.n.01,"lacewing, lacewing fly",animal.n.01,5,1300,50,False,animals
+animal,n02268443,dragonfly.n.01,"dragonfly, darning needle, devil's darning needle, sewing needle, snake feeder, snake doctor, mosquito hawk, skeeter hawk",animal.n.01,5,1300,50,False,animals
+animal,n02268853,damselfly.n.01,damselfly,animal.n.01,5,1300,50,False,animals
+animal,n01601694,water_ouzel.n.01,"water ouzel, dipper",animal.n.01,6,1300,50,False,animals
+animal,n01608432,kite.n.04,kite,animal.n.01,6,1300,50,False,animals
+animal,n01614925,bald_eagle.n.01,"bald eagle, American eagle, Haliaeetus leucocephalus",animal.n.01,6,1300,50,False,animals
+animal,n01622779,great_grey_owl.n.01,"great grey owl, great gray owl, Strix nebulosa",animal.n.01,6,1300,50,False,animals
+animal,n01630670,common_newt.n.01,"common newt, Triturus vulgaris",animal.n.01,6,1300,50,True,animals
+animal,n01631663,eft.n.01,eft,animal.n.01,6,1300,50,True,animals
+animal,n01632458,spotted_salamander.n.01,"spotted salamander, Ambystoma maculatum",animal.n.01,6,1300,50,True,animals
+animal,n01632777,axolotl.n.01,"axolotl, mud puppy, Ambystoma mexicanum",animal.n.01,6,1300,50,True,animals
+animal,n01641577,bullfrog.n.01,"bullfrog, Rana catesbeiana",animal.n.01,6,1300,50,False,animals
+animal,n01751748,sea_snake.n.01,sea snake,animal.n.01,6,1300,50,True,animals
+animal,n01806143,peacock.n.02,peacock,animal.n.01,6,1300,50,True,animals
+animal,n01819313,sulphur-crested_cockatoo.n.01,"sulphur-crested cockatoo, Kakatoe galerita, Cacatua galerita",animal.n.01,6,1300,50,False,animals
+animal,n01820546,lorikeet.n.01,lorikeet,animal.n.01,6,1300,50,False,animals
+animal,n01824575,coucal.n.01,coucal,animal.n.01,6,1300,50,False,animals
+animal,n01860187,black_swan.n.01,"black swan, Cygnus atratus",animal.n.01,6,1300,50,False,animals
+animal,n01872401,echidna.n.02,"echidna, spiny anteater, anteater",animal.n.01,6,1300,50,True,animals
+animal,n01873310,platypus.n.01,"platypus, duckbill, duckbilled platypus, duck-billed platypus, Ornithorhynchus anatinus",animal.n.01,6,1272,50,True,animals
+animal,n01883070,wombat.n.01,wombat,animal.n.01,6,1300,50,True,animals
+animal,n01917289,brain_coral.n.01,brain coral,animal.n.01,6,1300,50,True,animals
+animal,n01978287,dungeness_crab.n.02,"Dungeness crab, Cancer magister",animal.n.01,6,1300,50,True,animals
+animal,n01978455,rock_crab.n.01,"rock crab, Cancer irroratus",animal.n.01,6,1300,50,True,animals
+animal,n01980166,fiddler_crab.n.01,fiddler crab,animal.n.01,6,1300,50,True,animals
+animal,n01981276,king_crab.n.03,"king crab, Alaska crab, Alaskan king crab, Alaska king crab, Paralithodes camtschatica",animal.n.01,6,1300,50,True,animals
+animal,n01984695,spiny_lobster.n.02,"spiny lobster, langouste, rock lobster, crawfish, crayfish, sea crawfish",animal.n.01,6,1300,50,True,animals
+animal,n02006656,spoonbill.n.01,spoonbill,animal.n.01,6,1300,50,False,animals
+animal,n02007558,flamingo.n.01,flamingo,animal.n.01,6,1300,50,False,animals
+animal,n02012849,crane.n.05,crane,animal.n.01,6,1300,50,False,animals
+animal,n02013706,limpkin.n.01,"limpkin, Aramus pictus",animal.n.01,6,1300,50,False,animals
+animal,n02018795,bustard.n.01,bustard,animal.n.01,6,1300,50,False,animals
+animal,n02086646,blenheim_spaniel.n.01,Blenheim spaniel,animal.n.01,6,1300,50,False,animals
+animal,n02089078,black-and-tan_coonhound.n.01,black-and-tan coonhound,animal.n.01,6,732,50,False,animals
+animal,n02089867,walker_hound.n.01,"Walker hound, Walker foxhound",animal.n.01,6,1025,50,False,animals
+animal,n02089973,english_foxhound.n.01,English foxhound,animal.n.01,6,754,50,False,animals
+animal,n02090622,borzoi.n.01,"borzoi, Russian wolfhound",animal.n.01,6,1300,50,False,animals
+animal,n02090721,irish_wolfhound.n.01,Irish wolfhound,animal.n.01,6,1300,50,False,animals
+animal,n02093256,staffordshire_bullterrier.n.01,"Staffordshire bullterrier, Staffordshire bull terrier",animal.n.01,6,1300,50,False,animals
+animal,n02093428,american_staffordshire_terrier.n.01,"American Staffordshire terrier, Staffordshire terrier, American pit bull terrier, pit bull terrier",animal.n.01,6,1300,50,False,animals
+animal,n02095314,wire-haired_fox_terrier.n.01,wire-haired fox terrier,animal.n.01,6,977,50,False,animals
+animal,n02095570,lakeland_terrier.n.01,Lakeland terrier,animal.n.01,6,1300,50,False,animals
+animal,n02097047,miniature_schnauzer.n.01,miniature schnauzer,animal.n.01,6,1300,50,False,animals
+animal,n02097130,giant_schnauzer.n.01,giant schnauzer,animal.n.01,6,1300,50,False,animals
+animal,n02097209,standard_schnauzer.n.01,standard schnauzer,animal.n.01,6,1300,50,False,animals
+animal,n02099267,flat-coated_retriever.n.01,flat-coated retriever,animal.n.01,6,1300,50,False,animals
+animal,n02099429,curly-coated_retriever.n.01,curly-coated retriever,animal.n.01,6,1218,50,False,animals
+animal,n02099601,golden_retriever.n.01,golden retriever,animal.n.01,6,1300,50,False,animals
+animal,n02099712,labrador_retriever.n.01,Labrador retriever,animal.n.01,6,1300,50,False,animals
+animal,n02099849,chesapeake_bay_retriever.n.01,Chesapeake Bay retriever,animal.n.01,6,1300,50,False,animals
+animal,n02100236,german_short-haired_pointer.n.01,German short-haired pointer,animal.n.01,6,1300,50,False,animals
+animal,n02100583,vizsla.n.01,"vizsla, Hungarian pointer",animal.n.01,6,1300,50,False,animals
+animal,n02100735,english_setter.n.01,English setter,animal.n.01,6,1300,50,False,animals
+animal,n02100877,irish_setter.n.01,"Irish setter, red setter",animal.n.01,6,1300,50,False,animals
+animal,n02101006,gordon_setter.n.01,Gordon setter,animal.n.01,6,1300,50,False,animals
+animal,n02101388,brittany_spaniel.n.01,Brittany spaniel,animal.n.01,6,1300,50,False,animals
+animal,n02101556,clumber.n.01,"clumber, clumber spaniel",animal.n.01,6,1300,50,False,animals
+animal,n02102318,cocker_spaniel.n.01,"cocker spaniel, English cocker spaniel, cocker",animal.n.01,6,1300,50,False,animals
+animal,n02102480,sussex_spaniel.n.01,Sussex spaniel,animal.n.01,6,1300,50,False,animals
+animal,n02105056,groenendael.n.01,groenendael,animal.n.01,6,1300,50,False,animals
+animal,n02105162,malinois.n.01,malinois,animal.n.01,6,1300,50,False,animals
+animal,n02107142,doberman.n.01,"Doberman, Doberman pinscher",animal.n.01,6,1300,50,False,animals
+animal,n02107312,miniature_pinscher.n.01,miniature pinscher,animal.n.01,6,1300,50,False,animals
+animal,n02110627,affenpinscher.n.01,"affenpinscher, monkey pinscher, monkey dog",animal.n.01,6,954,50,False,animals
+animal,n02277742,ringlet.n.04,"ringlet, ringlet butterfly",animal.n.01,6,1300,50,False,animals
+animal,n02281406,sulphur_butterfly.n.01,"sulphur butterfly, sulfur butterfly",animal.n.01,6,1300,50,False,animals
+animal,n02281787,lycaenid.n.01,"lycaenid, lycaenid butterfly",animal.n.01,6,1300,50,False,animals
+animal,n02342885,hamster.n.01,hamster,animal.n.01,6,1300,50,True,animals
+animal,n02346627,porcupine.n.01,"porcupine, hedgehog",animal.n.01,6,1300,50,True,animals
+animal,n02361337,marmot.n.01,marmot,animal.n.01,6,1300,50,True,animals
+animal,n02363005,beaver.n.07,beaver,animal.n.01,6,1300,50,True,animals
+animal,n02454379,armadillo.n.01,armadillo,animal.n.01,6,1300,50,True,animals
+animal,n02514041,barracouta.n.01,"barracouta, snoek",animal.n.01,6,1300,50,False,animals
+animal,n01530575,brambling.n.01,"brambling, Fringilla montifringilla",animal.n.01,7,1300,50,False,animals
+animal,n01531178,goldfinch.n.02,"goldfinch, Carduelis carduelis",animal.n.01,7,1300,50,False,animals
+animal,n01532829,house_finch.n.01,"house finch, linnet, Carpodacus mexicanus",animal.n.01,7,1300,50,False,animals
+animal,n01534433,junco.n.01,"junco, snowbird",animal.n.01,7,1300,50,False,animals
+animal,n01558993,robin.n.02,"robin, American robin, Turdus migratorius",animal.n.01,7,1300,50,False,animals
+animal,n01580077,jay.n.02,jay,animal.n.01,7,1300,50,False,animals
+animal,n01582220,magpie.n.01,magpie,animal.n.01,7,1300,50,False,animals
+animal,n01592084,chickadee.n.01,chickadee,animal.n.01,7,1300,50,False,animals
+animal,n01667114,mud_turtle.n.01,mud turtle,animal.n.01,7,1300,50,False,animals
+animal,n01667778,terrapin.n.01,terrapin,animal.n.01,7,1300,50,False,animals
+animal,n01669191,box_turtle.n.01,"box turtle, box tortoise",animal.n.01,7,1300,50,False,animals
+animal,n01697457,african_crocodile.n.01,"African crocodile, Nile crocodile, Crocodylus niloticus",animal.n.01,7,1300,50,True,animals
+animal,n01698640,american_alligator.n.01,"American alligator, Alligator mississipiensis",animal.n.01,7,1300,50,False,animals
+animal,n01728572,thunder_snake.n.01,"thunder snake, worm snake, Carphophis amoenus",animal.n.01,7,1300,50,True,animals
+animal,n01728920,ringneck_snake.n.01,"ringneck snake, ring-necked snake, ring snake",animal.n.01,7,1300,50,True,animals
+animal,n01729322,hognose_snake.n.01,"hognose snake, puff adder, sand viper",animal.n.01,7,1300,50,True,animals
+animal,n01729977,green_snake.n.02,"green snake, grass snake",animal.n.01,7,1300,50,True,animals
+animal,n01734418,king_snake.n.01,"king snake, kingsnake",animal.n.01,7,1300,50,True,animals
+animal,n01735189,garter_snake.n.01,"garter snake, grass snake",animal.n.01,7,1300,50,True,animals
+animal,n01737021,water_snake.n.01,water snake,animal.n.01,7,1300,50,True,animals
+animal,n01739381,vine_snake.n.01,vine snake,animal.n.01,7,1300,50,True,animals
+animal,n01740131,night_snake.n.01,"night snake, Hypsiglena torquata",animal.n.01,7,1300,50,True,animals
+animal,n01753488,horned_viper.n.01,"horned viper, cerastes, sand viper, horned asp, Cerastes cornutus",animal.n.01,7,1300,50,True,animals
+animal,n01855672,goose.n.01,goose,animal.n.01,7,1300,50,False,animals
+animal,n01877812,wallaby.n.01,"wallaby, brush kangaroo",animal.n.01,7,1300,50,True,animals
+animal,n01882714,koala.n.01,"koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus",animal.n.01,7,1300,50,True,animals
+animal,n01983481,american_lobster.n.02,"American lobster, Northern lobster, Maine lobster, Homarus americanus",animal.n.01,7,1300,50,True,animals
+animal,n02002556,white_stork.n.01,"white stork, Ciconia ciconia",animal.n.01,7,1300,50,False,animals
+animal,n02002724,black_stork.n.01,"black stork, Ciconia nigra",animal.n.01,7,1300,50,False,animals
+animal,n02009229,little_blue_heron.n.01,"little blue heron, Egretta caerulea",animal.n.01,7,1300,50,False,animals
+animal,n02011460,bittern.n.01,bittern,animal.n.01,7,1300,50,False,animals
+animal,n02017213,european_gallinule.n.01,"European gallinule, Porphyrio porphyrio",animal.n.01,7,1300,50,False,animals
+animal,n02037110,oystercatcher.n.01,"oystercatcher, oyster catcher",animal.n.01,7,1300,50,False,animals
+animal,n02051845,pelican.n.01,pelican,animal.n.01,7,1300,50,False,animals
+animal,n02058221,albatross.n.02,"albatross, mollymawk",animal.n.01,7,1300,50,False,animals
+animal,n02074367,dugong.n.01,"dugong, Dugong dugon",animal.n.01,7,1300,50,True,animals
+animal,n02095889,sealyham_terrier.n.01,"Sealyham terrier, Sealyham",animal.n.01,7,936,50,False,animals
+animal,n02102040,english_springer.n.01,"English springer, English springer spaniel",animal.n.01,7,1300,50,False,animals
+animal,n02102177,welsh_springer_spaniel.n.01,Welsh springer spaniel,animal.n.01,7,1300,50,False,animals
+animal,n02102973,irish_water_spaniel.n.01,Irish water spaniel,animal.n.01,7,969,50,False,animals
+animal,n02117135,hyena.n.01,"hyena, hyaena",animal.n.01,7,1300,50,True,animals
+animal,n02132136,brown_bear.n.01,"brown bear, bruin, Ursus arctos",animal.n.01,7,1300,50,False,animals
+animal,n02133161,american_black_bear.n.01,"American black bear, black bear, Ursus americanus, Euarctos americanus",animal.n.01,7,1300,50,False,animals
+animal,n02134084,ice_bear.n.01,"ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus",animal.n.01,7,1300,50,False,animals
+animal,n02134418,sloth_bear.n.01,"sloth bear, Melursus ursinus, Ursus ursinus",animal.n.01,7,1300,50,False,animals
+animal,n02137549,mongoose.n.01,mongoose,animal.n.01,7,1300,50,True,animals
+animal,n02138441,meerkat.n.01,"meerkat, mierkat",animal.n.01,7,1300,50,True,animals
+animal,n02172182,dung_beetle.n.01,dung beetle,animal.n.01,7,1300,50,False,animals
+animal,n02174001,rhinoceros_beetle.n.01,rhinoceros beetle,animal.n.01,7,1300,50,False,animals
+animal,n02276258,admiral.n.02,admiral,animal.n.01,7,1300,50,False,animals
+animal,n02279972,monarch.n.02,"monarch, monarch butterfly, milkweed butterfly, Danaus plexippus",animal.n.01,7,1300,50,False,animals
+animal,n02280649,cabbage_butterfly.n.01,cabbage butterfly,animal.n.01,7,1300,50,False,animals
+animal,n02326432,hare.n.01,hare,animal.n.01,7,1300,50,True,animals
+animal,n02364673,guinea_pig.n.02,"guinea pig, Cavia cobaya",animal.n.01,7,1300,50,True,animals
+animal,n02398521,hippopotamus.n.01,"hippopotamus, hippo, river horse, Hippopotamus amphibius",animal.n.01,7,1300,50,True,animals
+animal,n02437616,llama.n.01,llama,animal.n.01,7,1300,50,True,animals
+animal,n02441942,weasel.n.02,weasel,animal.n.01,7,1300,50,True,animals
+animal,n02442845,mink.n.03,mink,animal.n.01,7,1300,50,True,animals
+animal,n02443114,polecat.n.02,"polecat, fitch, foulmart, foumart, Mustela putorius",animal.n.01,7,1300,50,True,animals
+animal,n02443484,black-footed_ferret.n.01,"black-footed ferret, ferret, Mustela nigripes",animal.n.01,7,1300,50,True,animals
+animal,n02444819,otter.n.02,otter,animal.n.01,7,1300,50,True,animals
+animal,n02445715,skunk.n.04,"skunk, polecat, wood pussy",animal.n.01,7,1300,50,True,animals
+animal,n02447366,badger.n.02,badger,animal.n.01,7,1300,50,True,animals
+animal,n02457408,three-toed_sloth.n.01,"three-toed sloth, ai, Bradypus tridactylus",animal.n.01,7,1300,50,True,animals
+animal,n02497673,madagascar_cat.n.01,"Madagascar cat, ring-tailed lemur, Lemur catta",animal.n.01,7,1300,50,True,animals
+animal,n02500267,indri.n.01,"indri, indris, Indri indri, Indri brevicaudatus",animal.n.01,7,1300,50,True,animals
+animal,n02504013,indian_elephant.n.01,"Indian elephant, Elephas maximus",animal.n.01,7,1300,50,False,animals
+animal,n02504458,african_elephant.n.01,"African elephant, Loxodonta africana",animal.n.01,7,1300,50,False,animals
+animal,n02509815,lesser_panda.n.01,"lesser panda, red panda, panda, bear cat, cat bear, Ailurus fulgens",animal.n.01,7,1300,50,True,animals
+animal,n02510455,giant_panda.n.01,"giant panda, panda, panda bear, coon bear, Ailuropoda melanoleuca",animal.n.01,7,1300,50,True,animals
+animal,n02536864,coho.n.02,"coho, cohoe, coho salmon, blue jack, silver salmon, Oncorhynchus kisutch",animal.n.01,7,1300,50,False,animals
+animal,n01494475,hammerhead.n.03,"hammerhead, hammerhead shark",animal.n.01,8,1300,50,False,animals
+animal,n01496331,electric_ray.n.01,"electric ray, crampfish, numbfish, torpedo",animal.n.01,8,1300,50,False,animals
+animal,n01498041,stingray.n.01,stingray,animal.n.01,8,1300,50,False,animals
+animal,n01537544,indigo_bunting.n.01,"indigo bunting, indigo finch, indigo bird, Passerina cyanea",animal.n.01,8,1300,50,False,animals
+animal,n01560419,bulbul.n.01,bulbul,animal.n.01,8,1300,50,False,animals
+animal,n01664065,loggerhead.n.02,"loggerhead, loggerhead turtle, Caretta caretta",animal.n.01,8,1300,50,False,animals
+animal,n01665541,leatherback_turtle.n.01,"leatherback turtle, leatherback, leathery turtle, Dermochelys coriacea",animal.n.01,8,1300,50,False,animals
+animal,n01675722,banded_gecko.n.01,banded gecko,animal.n.01,8,1300,50,True,animals
+animal,n01677366,common_iguana.n.01,"common iguana, iguana, Iguana iguana",animal.n.01,8,1300,50,True,animals
+animal,n01682714,american_chameleon.n.01,"American chameleon, anole, Anolis carolinensis",animal.n.01,8,1300,50,True,animals
+animal,n01685808,whiptail.n.01,"whiptail, whiptail lizard",animal.n.01,8,1300,50,True,animals
+animal,n01687978,agama.n.01,agama,animal.n.01,8,1300,50,True,animals
+animal,n01688243,frilled_lizard.n.01,"frilled lizard, Chlamydosaurus kingi",animal.n.01,8,1117,50,True,animals
+animal,n01689811,alligator_lizard.n.01,alligator lizard,animal.n.01,8,1300,50,True,animals
+animal,n01692333,gila_monster.n.01,"Gila monster, Heloderma suspectum",animal.n.01,8,1300,50,True,animals
+animal,n01693334,green_lizard.n.01,"green lizard, Lacerta viridis",animal.n.01,8,1300,50,True,animals
+animal,n01694178,african_chameleon.n.01,"African chameleon, Chamaeleo chamaeleon",animal.n.01,8,1300,50,True,animals
+animal,n01695060,komodo_dragon.n.01,"Komodo dragon, Komodo lizard, dragon lizard, giant lizard, Varanus komodoensis",animal.n.01,8,1300,50,True,animals
+animal,n01742172,boa_constrictor.n.01,"boa constrictor, Constrictor constrictor",animal.n.01,8,1300,50,True,animals
+animal,n01748264,indian_cobra.n.01,"Indian cobra, Naja naja",animal.n.01,8,1300,50,True,animals
+animal,n01847000,drake.n.02,drake,animal.n.01,8,1300,50,False,animals
+animal,n02009912,american_egret.n.01,"American egret, great white heron, Egretta albus",animal.n.01,8,1300,50,False,animals
+animal,n02018207,american_coot.n.01,"American coot, marsh hen, mud hen, water hen, Fulica americana",animal.n.01,8,1300,50,False,animals
+animal,n02027492,red-backed_sandpiper.n.01,"red-backed sandpiper, dunlin, Erolia alpina",animal.n.01,8,1300,50,False,animals
+animal,n02028035,redshank.n.01,"redshank, Tringa totanus",animal.n.01,8,1300,50,False,animals
+animal,n02033041,dowitcher.n.01,dowitcher,animal.n.01,8,1300,50,False,animals
+animal,n02056570,king_penguin.n.01,"king penguin, Aptenodytes patagonica",animal.n.01,8,1300,50,False,animals
+animal,n02114367,timber_wolf.n.01,"timber wolf, grey wolf, gray wolf, Canis lupus",animal.n.01,8,1300,50,False,animals
+animal,n02114548,white_wolf.n.01,"white wolf, Arctic wolf, Canis lupus tundrarum",animal.n.01,8,1300,50,False,animals
+animal,n02114712,red_wolf.n.01,"red wolf, maned wolf, Canis rufus, Canis niger",animal.n.01,8,1300,50,False,animals
+animal,n02114855,coyote.n.01,"coyote, prairie wolf, brush wolf, Canis latrans",animal.n.01,8,1300,50,False,animals
+animal,n02115641,dingo.n.01,"dingo, warrigal, warragal, Canis dingo",animal.n.01,8,1300,50,True,animals
+animal,n02115913,dhole.n.01,"dhole, Cuon alpinus",animal.n.01,8,1300,50,True,animals
+animal,n02116738,african_hunting_dog.n.01,"African hunting dog, hyena dog, Cape hunting dog, Lycaon pictus",animal.n.01,8,1300,50,True,animals
+animal,n02119022,red_fox.n.03,"red fox, Vulpes vulpes",animal.n.01,8,1300,50,True,animals
+animal,n02119789,kit_fox.n.01,"kit fox, Vulpes macrotis",animal.n.01,8,1300,50,True,animals
+animal,n02120079,arctic_fox.n.01,"Arctic fox, white fox, Alopex lagopus",animal.n.01,8,1300,50,True,animals
+animal,n02120505,grey_fox.n.01,"grey fox, gray fox, Urocyon cinereoargenteus",animal.n.01,8,1300,50,True,animals
+animal,n02128385,leopard.n.02,"leopard, Panthera pardus",animal.n.01,8,1300,50,True,animals
+animal,n02128757,snow_leopard.n.01,"snow leopard, ounce, Panthera uncia",animal.n.01,8,1300,50,True,animals
+animal,n02128925,jaguar.n.01,"jaguar, panther, Panthera onca, Felis onca",animal.n.01,8,1300,50,True,animals
+animal,n02129165,lion.n.01,"lion, king of beasts, Panthera leo",animal.n.01,8,1300,50,False,animals
+animal,n02129604,tiger.n.02,"tiger, Panthera tigris",animal.n.01,8,1300,50,False,animals
+animal,n02130308,cheetah.n.01,"cheetah, chetah, Acinonyx jubatus",animal.n.01,8,1300,50,True,animals
+animal,n02325366,wood_rabbit.n.01,"wood rabbit, cottontail, cottontail rabbit",animal.n.01,8,1300,50,False,animals
+animal,n02328150,angora.n.03,"Angora, Angora rabbit",animal.n.01,8,1300,50,False,animals
+animal,n02356798,fox_squirrel.n.01,"fox squirrel, eastern fox squirrel, Sciurus niger",animal.n.01,8,1206,50,False,animals
+animal,n02391049,zebra.n.01,zebra,animal.n.01,8,1300,50,False,animals
+animal,n02395406,hog.n.03,"hog, pig, grunter, squealer, Sus scrofa",animal.n.01,8,1300,50,False,animals
+animal,n02396427,wild_boar.n.01,"wild boar, boar, Sus scrofa",animal.n.01,8,1300,50,True,animals
+animal,n02397096,warthog.n.01,warthog,animal.n.01,8,1300,50,True,animals
+animal,n02437312,arabian_camel.n.01,"Arabian camel, dromedary, Camelus dromedarius",animal.n.01,8,1300,50,True,animals
+animal,n02484975,guenon.n.01,"guenon, guenon monkey",animal.n.01,8,1300,50,False,animals
+animal,n02486261,patas.n.01,"patas, hussar monkey, Erythrocebus patas",animal.n.01,8,1300,50,False,animals
+animal,n02486410,baboon.n.01,baboon,animal.n.01,8,1300,50,False,animals
+animal,n02487347,macaque.n.01,macaque,animal.n.01,8,1300,50,False,animals
+animal,n02488291,langur.n.01,langur,animal.n.01,8,1300,50,False,animals
+animal,n02488702,colobus.n.01,"colobus, colobus monkey",animal.n.01,8,1300,50,False,animals
+animal,n02489166,proboscis_monkey.n.01,"proboscis monkey, Nasalis larvatus",animal.n.01,8,1300,50,False,animals
+animal,n02490219,marmoset.n.01,marmoset,animal.n.01,8,1300,50,False,animals
+animal,n02492035,capuchin.n.02,"capuchin, ringtail, Cebus capucinus",animal.n.01,8,1300,50,False,animals
+animal,n02492660,howler_monkey.n.01,"howler monkey, howler",animal.n.01,8,1300,50,False,animals
+animal,n02493509,titi.n.03,"titi, titi monkey",animal.n.01,8,1300,50,False,animals
+animal,n02493793,spider_monkey.n.01,"spider monkey, Ateles geoffroyi",animal.n.01,8,1300,50,False,animals
+animal,n02494079,squirrel_monkey.n.01,"squirrel monkey, Saimiri sciureus",animal.n.01,8,1300,50,False,animals
+animal,n02526121,eel.n.02,eel,animal.n.01,8,1165,50,False,animals
+animal,n02640242,sturgeon.n.01,sturgeon,animal.n.01,8,1300,50,False,animals
+animal,n02641379,gar.n.01,"gar, garfish, garpike, billfish, Lepisosteus osseus",animal.n.01,8,1300,50,False,animals
+animal,n01484850,great_white_shark.n.01,"great white shark, white shark, man-eater, man-eating shark, Carcharodon carcharias",animal.n.01,9,1300,50,False,animals
+animal,n01491361,tiger_shark.n.01,"tiger shark, Galeocerdo cuvieri",animal.n.01,9,1300,50,False,animals
+animal,n01704323,triceratops.n.01,triceratops,animal.n.01,9,1266,50,True,animals
+animal,n01744401,rock_python.n.01,"rock python, rock snake, Python sebae",animal.n.01,9,1071,50,True,animals
+animal,n01749939,green_mamba.n.01,green mamba,animal.n.01,9,1300,50,True,animals
+animal,n01755581,diamondback.n.01,"diamondback, diamondback rattlesnake, Crotalus adamanteus",animal.n.01,9,1300,50,True,animals
+animal,n01756291,sidewinder.n.01,"sidewinder, horned rattlesnake, Crotalus cerastes",animal.n.01,9,1300,50,True,animals
+animal,n02025239,ruddy_turnstone.n.01,"ruddy turnstone, Arenaria interpres",animal.n.01,9,1300,50,False,animals
+animal,n02066245,grey_whale.n.01,"grey whale, gray whale, devilfish, Eschrichtius gibbosus, Eschrichtius robustus",animal.n.01,9,1150,50,True,animals
+animal,n02077923,sea_lion.n.01,sea lion,animal.n.01,9,1300,50,True,animals
+animal,n02125311,cougar.n.01,"cougar, puma, catamount, mountain lion, painter, panther, Felis concolor",animal.n.01,9,1300,50,True,animals
+animal,n02127052,lynx.n.02,"lynx, catamount",animal.n.01,9,1300,50,True,animals
+animal,n02389026,sorrel.n.05,sorrel,animal.n.01,9,1300,50,False,animals
+animal,n02410509,bison.n.01,bison,animal.n.01,9,1300,50,True,animals
+animal,n02480495,orangutan.n.01,"orangutan, orang, orangutang, Pongo pygmaeus",animal.n.01,9,1300,50,True,animals
+animal,n02480855,gorilla.n.01,"gorilla, Gorilla gorilla",animal.n.01,9,1300,50,True,animals
+animal,n02481823,chimpanzee.n.01,"chimpanzee, chimp, Pan troglodytes",animal.n.01,9,1300,50,True,animals
+animal,n02483362,gibbon.n.02,"gibbon, Hylobates lar",animal.n.01,9,1300,50,True,animals
+animal,n02483708,siamang.n.01,"siamang, Hylobates syndactylus, Symphalangus syndactylus",animal.n.01,9,1300,50,True,animals
+animal,n02655020,puffer.n.02,"puffer, pufferfish, blowfish, globefish",animal.n.01,9,1300,50,False,animals
+animal,n01440764,tench.n.01,"tench, Tinca tinca",animal.n.01,10,1300,50,False,animals
+animal,n01443537,goldfish.n.01,"goldfish, Carassius auratus",animal.n.01,10,1300,50,False,animals
+animal,n01855032,red-breasted_merganser.n.01,"red-breasted merganser, Mergus serrator",animal.n.01,10,1141,50,False,animals
+animal,n02071294,killer_whale.n.01,"killer whale, killer, orca, grampus, sea wolf, Orcinus orca",animal.n.01,10,1300,50,True,animals
+animal,n02408429,water_buffalo.n.01,"water buffalo, water ox, Asiatic buffalo, Bubalus bubalis",animal.n.01,10,1300,50,True,animals
+animal,n02412080,ram.n.05,"ram, tup",animal.n.01,10,1300,50,False,animals
+animal,n02422106,hartebeest.n.01,hartebeest,animal.n.01,10,1300,50,True,animals
+animal,n02422699,impala.n.01,"impala, Aepyceros melampus",animal.n.01,10,1300,50,True,animals
+animal,n02423022,gazelle.n.01,gazelle,animal.n.01,10,1300,50,True,animals
+animal,n02606052,rock_beauty.n.01,"rock beauty, Holocanthus tricolor",animal.n.01,10,969,50,False,animals
+animal,n02607072,anemone_fish.n.01,anemone fish,animal.n.01,10,1300,50,False,animals
+animal,n02643566,lionfish.n.01,lionfish,animal.n.01,10,1300,50,False,animals
+animal,n02403003,ox.n.01,ox,animal.n.01,11,1300,50,False,animals
+animal,n02415577,bighorn.n.02,"bighorn, bighorn sheep, cimarron, Rocky Mountain bighorn, Rocky Mountain sheep, Ovis canadensis",animal.n.01,11,1300,50,True,animals
+animal,n02417914,ibex.n.01,"ibex, Capra ibex",animal.n.01,11,1300,50,True,animals
+ant,n02219486,ant.n.01,"ant, emmet, pismire",ant.n.01,0,1300,50,True,animals
+apple,n07742313,granny_smith.n.01,Granny Smith,apple.n.01,2,1300,50,True,food_drink
+ball,n02799071,baseball.n.02,baseball,ball.n.01,1,1300,50,True,toys
+ball,n02802426,basketball.n.02,basketball,ball.n.01,1,1300,50,True,toys
+ball,n03134739,croquet_ball.n.01,croquet ball,ball.n.01,1,1300,50,True,toys
+ball,n03445777,golf_ball.n.01,golf ball,ball.n.01,1,1300,50,True,toys
+ball,n03942813,ping-pong_ball.n.01,ping-pong ball,ball.n.01,1,1282,50,True,toys
+ball,n04118538,rugby_ball.n.01,rugby ball,ball.n.01,1,1300,50,True,toys
+ball,n04254680,soccer_ball.n.01,soccer ball,ball.n.01,1,1300,50,True,toys
+ball,n04409515,tennis_ball.n.01,tennis ball,ball.n.01,1,1300,50,True,toys
+ball,n04540053,volleyball.n.02,volleyball,ball.n.01,1,1300,50,True,toys
+balloon,n02782093,balloon.n.01,balloon,balloon.n.01,0,1300,50,True,toys
+banana,n07753592,banana.n.02,banana,banana.n.02,0,1300,50,True,food_drink
+basket,n03482405,hamper.n.02,hamper,basket.n.01,1,1300,50,True,household
+basket,n04204238,shopping_basket.n.01,shopping basket,basket.n.01,1,1300,50,True,household
+bathtub,n02808440,bathtub.n.01,"bathtub, bathing tub, bath, tub",bathtub.n.01,0,1300,50,True,furniture_rooms
+bear,n02132136,brown_bear.n.01,"brown bear, bruin, Ursus arctos",bear.n.01,1,1300,50,True,animals
+bear,n02133161,american_black_bear.n.01,"American black bear, black bear, Ursus americanus, Euarctos americanus",bear.n.01,1,1300,50,True,animals
+bear,n02134084,ice_bear.n.01,"ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus",bear.n.01,1,1300,50,True,animals
+bear,n02134418,sloth_bear.n.01,"sloth bear, Melursus ursinus, Ursus ursinus",bear.n.01,1,1300,50,True,animals
+bed,n03388549,four-poster.n.01,four-poster,bed.n.01,1,1300,50,True,furniture_rooms
+bee,n02206856,bee.n.01,bee,bee.n.01,0,1300,50,True,animals
+bench,n03891251,park_bench.n.01,park bench,bench.n.01,1,1300,50,True,furniture_rooms
+bib,n02834397,bib.n.01,bib,bib.n.01,0,1300,50,True,clothing
+bicycle,n02835271,bicycle-built-for-two.n.01,"bicycle-built-for-two, tandem bicycle, tandem",bicycle.n.01,1,1300,50,True,vehicles
+bicycle,n03792782,mountain_bike.n.01,"mountain bike, all-terrain bike, off-roader",bicycle.n.01,1,1300,50,True,vehicles
+bird,n01514668,cock.n.05,cock,bird.n.01,1,1300,50,False,animals
+bird,n01514859,hen.n.02,hen,bird.n.01,1,1300,50,False,animals
+bird,n01518878,ostrich.n.02,"ostrich, Struthio camelus",bird.n.01,2,1300,50,True,animals
+bird,n01616318,vulture.n.01,vulture,bird.n.01,2,1300,50,True,animals
+bird,n01817953,african_grey.n.01,"African grey, African gray, Psittacus erithacus",bird.n.01,2,1300,50,True,animals
+bird,n01818515,macaw.n.01,macaw,bird.n.01,2,1300,50,True,animals
+bird,n01828970,bee_eater.n.01,bee eater,bird.n.01,2,1300,50,True,animals
+bird,n01829413,hornbill.n.01,hornbill,bird.n.01,2,1300,50,True,animals
+bird,n01833805,hummingbird.n.01,hummingbird,bird.n.01,2,1300,50,True,animals
+bird,n01843065,jacamar.n.01,jacamar,bird.n.01,2,1300,50,True,animals
+bird,n01843383,toucan.n.01,toucan,bird.n.01,2,1300,50,True,animals
+bird,n01601694,water_ouzel.n.01,"water ouzel, dipper",bird.n.01,3,1300,50,True,animals
+bird,n01608432,kite.n.04,kite,bird.n.01,3,1300,50,True,animals
+bird,n01614925,bald_eagle.n.01,"bald eagle, American eagle, Haliaeetus leucocephalus",bird.n.01,3,1300,50,True,animals
+bird,n01622779,great_grey_owl.n.01,"great grey owl, great gray owl, Strix nebulosa",bird.n.01,3,1300,50,False,animals
+bird,n01819313,sulphur-crested_cockatoo.n.01,"sulphur-crested cockatoo, Kakatoe galerita, Cacatua galerita",bird.n.01,3,1300,50,True,animals
+bird,n01820546,lorikeet.n.01,lorikeet,bird.n.01,3,1300,50,True,animals
+bird,n01824575,coucal.n.01,coucal,bird.n.01,3,1300,50,True,animals
+bird,n01860187,black_swan.n.01,"black swan, Cygnus atratus",bird.n.01,3,1300,50,True,animals
+bird,n02006656,spoonbill.n.01,spoonbill,bird.n.01,3,1300,50,True,animals
+bird,n02007558,flamingo.n.01,flamingo,bird.n.01,3,1300,50,True,animals
+bird,n02012849,crane.n.05,crane,bird.n.01,3,1300,50,True,animals
+bird,n02013706,limpkin.n.01,"limpkin, Aramus pictus",bird.n.01,3,1300,50,True,animals
+bird,n02018795,bustard.n.01,bustard,bird.n.01,3,1300,50,True,animals
+bird,n01530575,brambling.n.01,"brambling, Fringilla montifringilla",bird.n.01,4,1300,50,True,animals
+bird,n01531178,goldfinch.n.02,"goldfinch, Carduelis carduelis",bird.n.01,4,1300,50,True,animals
+bird,n01532829,house_finch.n.01,"house finch, linnet, Carpodacus mexicanus",bird.n.01,4,1300,50,True,animals
+bird,n01534433,junco.n.01,"junco, snowbird",bird.n.01,4,1300,50,True,animals
+bird,n01558993,robin.n.02,"robin, American robin, Turdus migratorius",bird.n.01,4,1300,50,True,animals
+bird,n01580077,jay.n.02,jay,bird.n.01,4,1300,50,True,animals
+bird,n01582220,magpie.n.01,magpie,bird.n.01,4,1300,50,True,animals
+bird,n01592084,chickadee.n.01,chickadee,bird.n.01,4,1300,50,True,animals
+bird,n01795545,black_grouse.n.01,black grouse,bird.n.01,4,1300,50,True,animals
+bird,n01796340,ptarmigan.n.01,ptarmigan,bird.n.01,4,1300,50,True,animals
+bird,n01797886,ruffed_grouse.n.01,"ruffed grouse, partridge, Bonasa umbellus",bird.n.01,4,1300,50,True,animals
+bird,n01798484,prairie_chicken.n.01,"prairie chicken, prairie grouse, prairie fowl",bird.n.01,4,1300,50,True,animals
+bird,n01806567,quail.n.02,quail,bird.n.01,4,1300,50,True,animals
+bird,n01807496,partridge.n.03,partridge,bird.n.01,4,1300,50,True,animals
+bird,n01855672,goose.n.01,goose,bird.n.01,4,1300,50,False,animals
+bird,n02002556,white_stork.n.01,"white stork, Ciconia ciconia",bird.n.01,4,1300,50,True,animals
+bird,n02002724,black_stork.n.01,"black stork, Ciconia nigra",bird.n.01,4,1300,50,True,animals
+bird,n02009229,little_blue_heron.n.01,"little blue heron, Egretta caerulea",bird.n.01,4,1300,50,True,animals
+bird,n02011460,bittern.n.01,bittern,bird.n.01,4,1300,50,True,animals
+bird,n02017213,european_gallinule.n.01,"European gallinule, Porphyrio porphyrio",bird.n.01,4,1300,50,True,animals
+bird,n02037110,oystercatcher.n.01,"oystercatcher, oyster catcher",bird.n.01,4,1300,50,True,animals
+bird,n02051845,pelican.n.01,pelican,bird.n.01,4,1300,50,True,animals
+bird,n02058221,albatross.n.02,"albatross, mollymawk",bird.n.01,4,1300,50,True,animals
+bird,n01537544,indigo_bunting.n.01,"indigo bunting, indigo finch, indigo bird, Passerina cyanea",bird.n.01,5,1300,50,True,animals
+bird,n01560419,bulbul.n.01,bulbul,bird.n.01,5,1300,50,True,animals
+bird,n01847000,drake.n.02,drake,bird.n.01,5,1300,50,False,animals
+bird,n02009912,american_egret.n.01,"American egret, great white heron, Egretta albus",bird.n.01,5,1300,50,True,animals
+bird,n02018207,american_coot.n.01,"American coot, marsh hen, mud hen, water hen, Fulica americana",bird.n.01,5,1300,50,True,animals
+bird,n02027492,red-backed_sandpiper.n.01,"red-backed sandpiper, dunlin, Erolia alpina",bird.n.01,5,1300,50,True,animals
+bird,n02028035,redshank.n.01,"redshank, Tringa totanus",bird.n.01,5,1300,50,True,animals
+bird,n02033041,dowitcher.n.01,dowitcher,bird.n.01,5,1300,50,True,animals
+bird,n02056570,king_penguin.n.01,"king penguin, Aptenodytes patagonica",bird.n.01,5,1300,50,False,animals
+bird,n01806143,peacock.n.02,peacock,bird.n.01,6,1300,50,True,animals
+bird,n02025239,ruddy_turnstone.n.01,"ruddy turnstone, Arenaria interpres",bird.n.01,6,1300,50,True,animals
+bird,n01855032,red-breasted_merganser.n.01,"red-breasted merganser, Mergus serrator",bird.n.01,7,1141,50,False,animals
+blanket,n04033995,quilt.n.01,"quilt, comforter, comfort, puff",quilt.n.01,0,1300,50,True,household
+boat,n03344393,fireboat.n.01,fireboat,boat.n.01,1,1300,50,True,vehicles
+boat,n03447447,gondola.n.02,gondola,boat.n.01,1,1300,50,True,vehicles
+boat,n02951358,canoe.n.01,canoe,boat.n.01,2,1300,50,True,vehicles
+boat,n03662601,lifeboat.n.01,lifeboat,boat.n.01,2,1300,50,True,vehicles
+boat,n04273569,speedboat.n.01,speedboat,boat.n.01,2,1300,50,True,vehicles
+boat,n04612504,yawl.n.01,yawl,boat.n.01,2,1206,50,True,vehicles
+boots,n03124043,cowboy_boot.n.01,cowboy boot,boot.n.01,1,1300,50,True,clothing
+bottle,n02823428,beer_bottle.n.01,beer bottle,bottle.n.01,1,1300,50,True,household
+bottle,n03937543,pill_bottle.n.01,pill bottle,bottle.n.01,1,1300,50,True,household
+bottle,n03983396,pop_bottle.n.01,"pop bottle, soda bottle",bottle.n.01,1,1300,50,True,household
+bottle,n04557648,water_bottle.n.01,water bottle,bottle.n.01,1,1300,50,True,household
+bottle,n04591713,wine_bottle.n.01,wine bottle,bottle.n.01,1,1300,50,True,household
+bottle,n04560804,water_jug.n.01,water jug,bottle.n.01,2,1300,50,True,household
+bottle,n04579145,whiskey_jug.n.01,whiskey jug,bottle.n.01,2,1055,50,True,household
+bowl,n03775546,mixing_bowl.n.01,mixing bowl,bowl.n.03,1,1300,50,True,household
+bowl,n04263257,soup_bowl.n.01,soup bowl,bowl.n.03,1,1300,50,True,household
+box,n02971356,carton.n.02,carton,box.n.01,1,1300,50,True,household
+box,n03014705,chest.n.02,chest,box.n.01,1,1300,50,True,household
+box,n03127925,crate.n.01,crate,box.n.01,1,1300,50,True,household
+box,n03710193,mailbox.n.01,"mailbox, letter box",box.n.01,1,1300,50,True,household
+box,n03908618,pencil_box.n.01,"pencil box, pencil case",box.n.01,1,1300,50,True,household
+box,n04125021,safe.n.01,safe,box.n.01,2,1029,50,True,household
+bread,n07684084,french_loaf.n.01,French loaf,bread.n.01,2,1300,50,True,food_drink
+bread,n07693725,bagel.n.01,"bagel, beigel",bread.n.01,2,1300,50,True,food_drink
+bread,n07695742,pretzel.n.01,pretzel,bread.n.01,2,1300,50,False,food_drink
+broom,n02906734,broom.n.01,broom,broom.n.01,0,1300,50,True,household
+brush,n03876231,paintbrush.n.01,paintbrush,brush.n.02,1,1300,50,True,household
+bubbles,n09229709,bubble.n.01,bubble,bubble.n.01,0,1300,50,True,toys
+bucket,n02909870,bucket.n.01,"bucket, pail",bucket.n.01,0,1300,50,True,household
+bug,n02165105,tiger_beetle.n.01,tiger beetle,insect.n.01,2,1300,50,True,animals
+bug,n02165456,ladybug.n.01,"ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle",insect.n.01,2,1300,50,True,animals
+bug,n02167151,ground_beetle.n.01,"ground beetle, carabid beetle",insect.n.01,2,1300,50,True,animals
+bug,n02168699,long-horned_beetle.n.01,"long-horned beetle, longicorn, longicorn beetle",insect.n.01,2,1300,50,True,animals
+bug,n02169497,leaf_beetle.n.01,"leaf beetle, chrysomelid",insect.n.01,2,1300,50,True,animals
+bug,n02177972,weevil.n.01,weevil,insect.n.01,2,1300,50,True,animals
+bug,n02190166,fly.n.01,fly,insect.n.01,2,1300,50,True,animals
+bug,n02206856,bee.n.01,bee,insect.n.01,2,1300,50,False,animals
+bug,n02219486,ant.n.01,"ant, emmet, pismire",insect.n.01,2,1300,50,False,animals
+bug,n02226429,grasshopper.n.01,"grasshopper, hopper",insect.n.01,2,1300,50,True,animals
+bug,n02229544,cricket.n.01,cricket,insect.n.01,2,1300,50,True,animals
+bug,n02231487,walking_stick.n.02,"walking stick, walkingstick, stick insect",insect.n.01,2,1300,50,True,animals
+bug,n02233338,cockroach.n.01,"cockroach, roach",insect.n.01,2,1300,50,True,animals
+bug,n02236044,mantis.n.01,"mantis, mantid",insect.n.01,2,1300,50,True,animals
+bug,n02256656,cicada.n.01,"cicada, cicala",insect.n.01,2,1300,50,True,animals
+bug,n02259212,leafhopper.n.01,leafhopper,insect.n.01,2,1300,50,True,animals
+bug,n02264363,lacewing.n.01,"lacewing, lacewing fly",insect.n.01,2,1300,50,True,animals
+bug,n02268443,dragonfly.n.01,"dragonfly, darning needle, devil's darning needle, sewing needle, snake feeder, snake doctor, mosquito hawk, skeeter hawk",insect.n.01,2,1300,50,True,animals
+bug,n02268853,damselfly.n.01,damselfly,insect.n.01,2,1300,50,True,animals
+bug,n02277742,ringlet.n.04,"ringlet, ringlet butterfly",insect.n.01,3,1300,50,False,animals
+bug,n02281406,sulphur_butterfly.n.01,"sulphur butterfly, sulfur butterfly",insect.n.01,3,1300,50,False,animals
+bug,n02281787,lycaenid.n.01,"lycaenid, lycaenid butterfly",insect.n.01,3,1300,50,False,animals
+bug,n02172182,dung_beetle.n.01,dung beetle,insect.n.01,4,1300,50,True,animals
+bug,n02174001,rhinoceros_beetle.n.01,rhinoceros beetle,insect.n.01,4,1300,50,True,animals
+bug,n02276258,admiral.n.02,admiral,insect.n.01,4,1300,50,False,animals
+bug,n02279972,monarch.n.02,"monarch, monarch butterfly, milkweed butterfly, Danaus plexippus",insect.n.01,4,1300,50,False,animals
+bug,n02280649,cabbage_butterfly.n.01,cabbage butterfly,insect.n.01,4,1300,50,False,animals
+bunny,n02325366,wood_rabbit.n.01,"wood rabbit, cottontail, cottontail rabbit",rabbit.n.01,1,1300,50,True,animals
+bunny,n02328150,angora.n.03,"Angora, Angora rabbit",rabbit.n.01,1,1300,50,True,animals
+bus,n03769881,minibus.n.01,minibus,bus.n.01,1,1300,50,True,vehicles
+bus,n04146614,school_bus.n.01,school bus,bus.n.01,1,1300,50,True,vehicles
+bus,n04487081,trolleybus.n.01,"trolleybus, trolley coach, trackless trolley",bus.n.01,1,1300,50,True,vehicles
+butterfly,n02277742,ringlet.n.04,"ringlet, ringlet butterfly",butterfly.n.01,1,1300,50,True,animals
+butterfly,n02281406,sulphur_butterfly.n.01,"sulphur butterfly, sulfur butterfly",butterfly.n.01,1,1300,50,True,animals
+butterfly,n02281787,lycaenid.n.01,"lycaenid, lycaenid butterfly",butterfly.n.01,1,1300,50,True,animals
+butterfly,n02276258,admiral.n.02,admiral,butterfly.n.01,2,1300,50,True,animals
+butterfly,n02279972,monarch.n.02,"monarch, monarch butterfly, milkweed butterfly, Danaus plexippus",butterfly.n.01,2,1300,50,True,animals
+butterfly,n02280649,cabbage_butterfly.n.01,cabbage butterfly,butterfly.n.01,2,1300,50,True,animals
+camera,n03976467,polaroid_camera.n.01,"Polaroid camera, Polaroid Land camera",camera.n.01,1,1300,50,True,household
+camera,n04069434,reflex_camera.n.01,reflex camera,camera.n.01,1,1300,50,True,household
+can,n03764736,milk_can.n.01,milk can,can.n.01,1,1097,50,True,household
+car,n02701002,ambulance.n.01,ambulance,car.n.01,1,1300,50,True,vehicles
+car,n02814533,beach_wagon.n.01,"beach wagon, station wagon, wagon, estate car, beach waggon, station waggon, waggon",car.n.01,1,1300,50,True,vehicles
+car,n02930766,cab.n.03,"cab, hack, taxi, taxicab",car.n.01,1,1300,50,True,vehicles
+car,n03100240,convertible.n.01,convertible,car.n.01,1,1300,50,True,vehicles
+car,n03594945,jeep.n.01,"jeep, landrover",car.n.01,1,1300,50,True,vehicles
+car,n03670208,limousine.n.01,"limousine, limo",car.n.01,1,1300,50,True,vehicles
+car,n03770679,minivan.n.01,minivan,car.n.01,1,1300,50,True,vehicles
+car,n03777568,model_t.n.01,Model T,car.n.01,1,1300,50,True,vehicles
+car,n04037443,racer.n.02,"racer, race car, racing car",car.n.01,1,1300,50,True,vehicles
+car,n04285008,sports_car.n.01,"sports car, sport car",car.n.01,1,1300,50,True,vehicles
+cat,n02123045,tabby.n.01,"tabby, tabby cat",domestic_cat.n.01,1,1300,50,True,animals
+cat,n02123159,tiger_cat.n.02,tiger cat,domestic_cat.n.01,1,1300,50,True,animals
+cat,n02123394,persian_cat.n.01,Persian cat,domestic_cat.n.01,1,1300,50,True,animals
+cat,n02123597,siamese_cat.n.01,"Siamese cat, Siamese",domestic_cat.n.01,1,1300,50,True,animals
+cat,n02124075,egyptian_cat.n.01,Egyptian cat,domestic_cat.n.01,1,1300,50,True,animals
+chair,n02791124,barber_chair.n.01,barber chair,chair.n.01,1,1300,50,True,furniture_rooms
+chair,n03376595,folding_chair.n.01,folding chair,chair.n.01,1,1300,50,True,furniture_rooms
+chair,n04099969,rocking_chair.n.01,"rocking chair, rocker",chair.n.01,1,1300,50,True,furniture_rooms
+chair,n04429376,throne.n.01,throne,chair.n.01,2,976,50,True,furniture_rooms
+chicken,n01514668,cock.n.05,cock,cock.n.05,0,1300,50,True,food_drink
+chicken,n01514859,hen.n.02,hen,hen.n.02,0,1300,50,True,food_drink
+clock,n02708093,analog_clock.n.01,analog clock,clock.n.01,1,1292,50,True,household
+clock,n03196217,digital_clock.n.01,digital clock,clock.n.01,1,1300,50,True,household
+clock,n04548280,wall_clock.n.01,wall clock,clock.n.01,1,1299,50,True,household
+closet,n04550184,wardrobe.n.01,"wardrobe, closet, press",wardrobe.n.01,0,1300,50,True,furniture_rooms
+coat,n03404251,fur_coat.n.01,fur coat,coat.n.01,1,1300,50,True,clothing
+coat,n03630383,lab_coat.n.01,"lab coat, laboratory coat",coat.n.01,1,1300,50,True,clothing
+coat,n04479046,trench_coat.n.01,trench coat,coat.n.01,2,1053,50,True,clothing
+coffee,n07920052,espresso.n.01,espresso,coffee.n.01,1,1300,50,True,food_drink
+corn,n12144580,corn.n.02,corn,corn.n.02,0,1300,50,True,food_drink
+couch,n04344873,studio_couch.n.01,"studio couch, day bed",sofa.n.01,2,1300,50,True,furniture_rooms
+cow,n02403003,ox.n.01,ox,cattle.n.01,1,1300,50,True,animals
+cracker,n07695742,pretzel.n.01,pretzel,cracker.n.01,1,1300,50,False,food_drink
+crib,n03131574,crib.n.01,"crib, cot",crib.n.01,0,1300,50,True,furniture_rooms
+cup,n07930864,cup.n.06,cup,cup.n.06,0,1300,50,True,household
+cup,n03063599,coffee_mug.n.01,coffee mug,mug.n.04,1,1300,50,True,household
+diaper,n03188531,diaper.n.01,"diaper, nappy, napkin",diaper.n.01,0,1300,50,True,clothing
+dish,n03775546,mixing_bowl.n.01,mixing bowl,dish.n.01,2,1300,50,False,household
+dish,n04263257,soup_bowl.n.01,soup bowl,dish.n.01,2,1300,50,False,household
+dog,n02110341,dalmatian.n.02,"dalmatian, coach dog, carriage dog",dog.n.01,1,1300,50,True,animals
+dog,n02110806,basenji.n.01,basenji,dog.n.01,1,1300,50,True,animals
+dog,n02110958,pug.n.01,"pug, pug-dog",dog.n.01,1,1300,50,True,animals
+dog,n02111129,leonberg.n.01,Leonberg,dog.n.01,1,1300,50,True,animals
+dog,n02111277,newfoundland.n.01,"Newfoundland, Newfoundland dog",dog.n.01,1,1300,50,True,animals
+dog,n02111500,great_pyrenees.n.01,Great Pyrenees,dog.n.01,1,1300,50,True,animals
+dog,n02113978,mexican_hairless.n.01,Mexican hairless,dog.n.01,1,755,50,True,animals
+dog,n02085620,chihuahua.n.03,Chihuahua,dog.n.01,2,1300,50,True,animals
+dog,n02085782,japanese_spaniel.n.01,Japanese spaniel,dog.n.01,2,772,50,True,animals
+dog,n02085936,maltese_dog.n.01,"Maltese dog, Maltese terrier, Maltese",dog.n.01,2,1300,50,True,animals
+dog,n02086079,pekinese.n.01,"Pekinese, Pekingese, Peke",dog.n.01,2,1300,50,True,animals
+dog,n02086240,shih-tzu.n.01,Shih-Tzu,dog.n.01,2,1300,50,True,animals
+dog,n02087046,toy_terrier.n.01,toy terrier,dog.n.01,2,860,50,True,animals
+dog,n02087394,rhodesian_ridgeback.n.01,Rhodesian ridgeback,dog.n.01,2,1300,50,True,animals
+dog,n02108089,boxer.n.04,boxer,dog.n.01,2,1300,50,True,animals
+dog,n02108422,bull_mastiff.n.01,bull mastiff,dog.n.01,2,1300,50,True,animals
+dog,n02109047,great_dane.n.01,Great Dane,dog.n.01,2,1300,50,True,animals
+dog,n02109525,saint_bernard.n.01,"Saint Bernard, St Bernard",dog.n.01,2,1300,50,True,animals
+dog,n02109961,eskimo_dog.n.01,"Eskimo dog, husky",dog.n.01,2,1300,50,True,animals
+dog,n02111889,samoyed.n.03,"Samoyed, Samoyede",dog.n.01,2,1300,50,True,animals
+dog,n02112018,pomeranian.n.01,Pomeranian,dog.n.01,2,1300,50,True,animals
+dog,n02112137,chow.n.03,"chow, chow chow",dog.n.01,2,1300,50,True,animals
+dog,n02112350,keeshond.n.01,keeshond,dog.n.01,2,1300,50,True,animals
+dog,n02112706,brabancon_griffon.n.01,Brabancon griffon,dog.n.01,2,1070,50,True,animals
+dog,n02113023,pembroke.n.01,"Pembroke, Pembroke Welsh corgi",dog.n.01,2,1300,50,True,animals
+dog,n02113186,cardigan.n.02,"Cardigan, Cardigan Welsh corgi",dog.n.01,2,1300,50,True,animals
+dog,n02113624,toy_poodle.n.01,toy poodle,dog.n.01,2,1300,50,True,animals
+dog,n02113712,miniature_poodle.n.01,miniature poodle,dog.n.01,2,1300,50,True,animals
+dog,n02113799,standard_poodle.n.01,standard poodle,dog.n.01,2,1300,50,True,animals
+dog,n02086910,papillon.n.01,papillon,dog.n.01,3,1300,50,True,animals
+dog,n02088094,afghan_hound.n.01,"Afghan hound, Afghan",dog.n.01,3,1300,50,True,animals
+dog,n02088238,basset.n.01,"basset, basset hound",dog.n.01,3,1300,50,True,animals
+dog,n02088364,beagle.n.01,beagle,dog.n.01,3,1300,50,True,animals
+dog,n02088466,bloodhound.n.01,"bloodhound, sleuthhound",dog.n.01,3,1300,50,True,animals
+dog,n02088632,bluetick.n.01,bluetick,dog.n.01,3,1136,50,True,animals
+dog,n02090379,redbone.n.01,redbone,dog.n.01,3,1290,50,True,animals
+dog,n02091244,ibizan_hound.n.01,"Ibizan hound, Ibizan Podenco",dog.n.01,3,1300,50,True,animals
+dog,n02091467,norwegian_elkhound.n.01,"Norwegian elkhound, elkhound",dog.n.01,3,1300,50,True,animals
+dog,n02091635,otterhound.n.01,"otterhound, otter hound",dog.n.01,3,738,50,True,animals
+dog,n02091831,saluki.n.01,"Saluki, gazelle hound",dog.n.01,3,1300,50,True,animals
+dog,n02092002,scottish_deerhound.n.01,"Scottish deerhound, deerhound",dog.n.01,3,1300,50,True,animals
+dog,n02092339,weimaraner.n.01,Weimaraner,dog.n.01,3,1300,50,True,animals
+dog,n02093647,bedlington_terrier.n.01,Bedlington terrier,dog.n.01,3,1258,50,True,animals
+dog,n02093754,border_terrier.n.01,Border terrier,dog.n.01,3,1300,50,True,animals
+dog,n02093859,kerry_blue_terrier.n.01,Kerry blue terrier,dog.n.01,3,1273,50,True,animals
+dog,n02093991,irish_terrier.n.01,Irish terrier,dog.n.01,3,1300,50,True,animals
+dog,n02094114,norfolk_terrier.n.01,Norfolk terrier,dog.n.01,3,1300,50,True,animals
+dog,n02094258,norwich_terrier.n.01,Norwich terrier,dog.n.01,3,1300,50,True,animals
+dog,n02094433,yorkshire_terrier.n.01,Yorkshire terrier,dog.n.01,3,1300,50,True,animals
+dog,n02096051,airedale.n.01,"Airedale, Airedale terrier",dog.n.01,3,1300,50,True,animals
+dog,n02096177,cairn.n.02,"cairn, cairn terrier",dog.n.01,3,1300,50,True,animals
+dog,n02096294,australian_terrier.n.01,Australian terrier,dog.n.01,3,1300,50,True,animals
+dog,n02096437,dandie_dinmont.n.01,"Dandie Dinmont, Dandie Dinmont terrier",dog.n.01,3,1156,50,True,animals
+dog,n02096585,boston_bull.n.01,"Boston bull, Boston terrier",dog.n.01,3,1300,50,True,animals
+dog,n02097298,scotch_terrier.n.01,"Scotch terrier, Scottish terrier, Scottie",dog.n.01,3,1300,50,True,animals
+dog,n02097474,tibetan_terrier.n.01,"Tibetan terrier, chrysanthemum dog",dog.n.01,3,1300,50,True,animals
+dog,n02097658,silky_terrier.n.01,"silky terrier, Sydney silky",dog.n.01,3,1300,50,True,animals
+dog,n02098105,soft-coated_wheaten_terrier.n.01,soft-coated wheaten terrier,dog.n.01,3,1300,50,True,animals
+dog,n02098286,west_highland_white_terrier.n.01,West Highland white terrier,dog.n.01,3,1300,50,True,animals
+dog,n02098413,lhasa.n.02,"Lhasa, Lhasa apso",dog.n.01,3,1300,50,True,animals
+dog,n02104029,kuvasz.n.01,kuvasz,dog.n.01,3,1300,50,True,animals
+dog,n02104365,schipperke.n.01,schipperke,dog.n.01,3,1300,50,True,animals
+dog,n02105251,briard.n.01,briard,dog.n.01,3,1300,50,True,animals
+dog,n02105412,kelpie.n.02,kelpie,dog.n.01,3,1300,50,True,animals
+dog,n02105505,komondor.n.01,komondor,dog.n.01,3,1300,50,True,animals
+dog,n02105641,old_english_sheepdog.n.01,"Old English sheepdog, bobtail",dog.n.01,3,1300,50,True,animals
+dog,n02105855,shetland_sheepdog.n.01,"Shetland sheepdog, Shetland sheep dog, Shetland",dog.n.01,3,1300,50,True,animals
+dog,n02106030,collie.n.01,collie,dog.n.01,3,1300,50,True,animals
+dog,n02106166,border_collie.n.01,Border collie,dog.n.01,3,1300,50,True,animals
+dog,n02106382,bouvier_des_flandres.n.01,"Bouvier des Flandres, Bouviers des Flandres",dog.n.01,3,1300,50,True,animals
+dog,n02106550,rottweiler.n.01,Rottweiler,dog.n.01,3,1300,50,True,animals
+dog,n02106662,german_shepherd.n.01,"German shepherd, German shepherd dog, German police dog, alsatian",dog.n.01,3,1300,50,True,animals
+dog,n02107574,greater_swiss_mountain_dog.n.01,Greater Swiss Mountain dog,dog.n.01,3,1300,50,True,animals
+dog,n02107683,bernese_mountain_dog.n.01,Bernese mountain dog,dog.n.01,3,1300,50,True,animals
+dog,n02107908,appenzeller.n.01,Appenzeller,dog.n.01,3,1300,50,True,animals
+dog,n02108000,entlebucher.n.01,EntleBucher,dog.n.01,3,1300,50,True,animals
+dog,n02108551,tibetan_mastiff.n.01,Tibetan mastiff,dog.n.01,3,1300,50,True,animals
+dog,n02108915,french_bulldog.n.01,French bulldog,dog.n.01,3,1300,50,True,animals
+dog,n02110063,malamute.n.01,"malamute, malemute, Alaskan malamute",dog.n.01,3,1300,50,True,animals
+dog,n02110185,siberian_husky.n.01,Siberian husky,dog.n.01,3,1300,50,True,animals
+dog,n02086646,blenheim_spaniel.n.01,Blenheim spaniel,dog.n.01,4,1300,50,True,animals
+dog,n02089078,black-and-tan_coonhound.n.01,black-and-tan coonhound,dog.n.01,4,732,50,True,animals
+dog,n02089867,walker_hound.n.01,"Walker hound, Walker foxhound",dog.n.01,4,1025,50,True,animals
+dog,n02089973,english_foxhound.n.01,English foxhound,dog.n.01,4,754,50,True,animals
+dog,n02090622,borzoi.n.01,"borzoi, Russian wolfhound",dog.n.01,4,1300,50,True,animals
+dog,n02090721,irish_wolfhound.n.01,Irish wolfhound,dog.n.01,4,1300,50,True,animals
+dog,n02091032,italian_greyhound.n.01,Italian greyhound,dog.n.01,4,1300,50,False,animals
+dog,n02091134,whippet.n.01,whippet,dog.n.01,4,1300,50,False,animals
+dog,n02093256,staffordshire_bullterrier.n.01,"Staffordshire bullterrier, Staffordshire bull terrier",dog.n.01,4,1300,50,True,animals
+dog,n02093428,american_staffordshire_terrier.n.01,"American Staffordshire terrier, Staffordshire terrier, American pit bull terrier, pit bull terrier",dog.n.01,4,1300,50,True,animals
+dog,n02095314,wire-haired_fox_terrier.n.01,wire-haired fox terrier,dog.n.01,4,977,50,True,animals
+dog,n02095570,lakeland_terrier.n.01,Lakeland terrier,dog.n.01,4,1300,50,True,animals
+dog,n02097047,miniature_schnauzer.n.01,miniature schnauzer,dog.n.01,4,1300,50,True,animals
+dog,n02097130,giant_schnauzer.n.01,giant schnauzer,dog.n.01,4,1300,50,True,animals
+dog,n02097209,standard_schnauzer.n.01,standard schnauzer,dog.n.01,4,1300,50,True,animals
+dog,n02099267,flat-coated_retriever.n.01,flat-coated retriever,dog.n.01,4,1300,50,True,animals
+dog,n02099429,curly-coated_retriever.n.01,curly-coated retriever,dog.n.01,4,1218,50,True,animals
+dog,n02099601,golden_retriever.n.01,golden retriever,dog.n.01,4,1300,50,True,animals
+dog,n02099712,labrador_retriever.n.01,Labrador retriever,dog.n.01,4,1300,50,True,animals
+dog,n02099849,chesapeake_bay_retriever.n.01,Chesapeake Bay retriever,dog.n.01,4,1300,50,True,animals
+dog,n02100236,german_short-haired_pointer.n.01,German short-haired pointer,dog.n.01,4,1300,50,True,animals
+dog,n02100583,vizsla.n.01,"vizsla, Hungarian pointer",dog.n.01,4,1300,50,True,animals
+dog,n02100735,english_setter.n.01,English setter,dog.n.01,4,1300,50,True,animals
+dog,n02100877,irish_setter.n.01,"Irish setter, red setter",dog.n.01,4,1300,50,True,animals
+dog,n02101006,gordon_setter.n.01,Gordon setter,dog.n.01,4,1300,50,True,animals
+dog,n02101388,brittany_spaniel.n.01,Brittany spaniel,dog.n.01,4,1300,50,True,animals
+dog,n02101556,clumber.n.01,"clumber, clumber spaniel",dog.n.01,4,1300,50,True,animals
+dog,n02102318,cocker_spaniel.n.01,"cocker spaniel, English cocker spaniel, cocker",dog.n.01,4,1300,50,True,animals
+dog,n02102480,sussex_spaniel.n.01,Sussex spaniel,dog.n.01,4,1300,50,True,animals
+dog,n02105056,groenendael.n.01,groenendael,dog.n.01,4,1300,50,True,animals
+dog,n02105162,malinois.n.01,malinois,dog.n.01,4,1300,50,True,animals
+dog,n02107142,doberman.n.01,"Doberman, Doberman pinscher",dog.n.01,4,1300,50,True,animals
+dog,n02107312,miniature_pinscher.n.01,miniature pinscher,dog.n.01,4,1300,50,True,animals
+dog,n02110627,affenpinscher.n.01,"affenpinscher, monkey pinscher, monkey dog",dog.n.01,4,954,50,True,animals
+dog,n02095889,sealyham_terrier.n.01,"Sealyham terrier, Sealyham",dog.n.01,5,936,50,True,animals
+dog,n02102040,english_springer.n.01,"English springer, English springer spaniel",dog.n.01,5,1300,50,True,animals
+dog,n02102177,welsh_springer_spaniel.n.01,Welsh springer spaniel,dog.n.01,5,1300,50,True,animals
+dog,n02102973,irish_water_spaniel.n.01,Irish water spaniel,dog.n.01,5,969,50,True,animals
+door,n04239074,sliding_door.n.01,sliding door,door.n.01,1,1300,50,True,furniture_rooms
+dress,n03450230,gown.n.01,gown,dress.n.01,1,1300,50,True,clothing
+drink,n07920052,espresso.n.01,espresso,beverage.n.01,2,1300,50,False,food_drink
+drink,n07892512,red_wine.n.01,red wine,beverage.n.01,3,1300,50,True,food_drink
+drink,n07932039,eggnog.n.01,eggnog,beverage.n.01,4,1193,50,True,food_drink
+duck,n01847000,drake.n.02,drake,duck.n.01,1,1300,50,True,animals
+duck,n01855032,red-breasted_merganser.n.01,"red-breasted merganser, Mergus serrator",duck.n.01,3,1141,50,True,animals
+elephant,n02504013,indian_elephant.n.01,"Indian elephant, Elephas maximus",elephant.n.01,1,1300,50,True,animals
+elephant,n02504458,african_elephant.n.01,"African elephant, Loxodonta africana",elephant.n.01,1,1300,50,True,animals
+firetruck,n03345487,fire_engine.n.01,"fire engine, fire truck",fire_engine.n.01,0,1300,50,True,vehicles
+fish,n02514041,barracouta.n.01,"barracouta, snoek",fish.n.01,2,1300,50,True,food_drink
+fish,n02536864,coho.n.02,"coho, cohoe, coho salmon, blue jack, silver salmon, Oncorhynchus kisutch",fish.n.01,3,1300,50,True,food_drink
+fish,n01494475,hammerhead.n.03,"hammerhead, hammerhead shark",fish.n.01,4,1300,50,True,food_drink
+fish,n01496331,electric_ray.n.01,"electric ray, crampfish, numbfish, torpedo",fish.n.01,4,1300,50,True,food_drink
+fish,n01498041,stingray.n.01,stingray,fish.n.01,4,1300,50,True,food_drink
+fish,n02526121,eel.n.02,eel,fish.n.01,4,1165,50,True,food_drink
+fish,n02640242,sturgeon.n.01,sturgeon,fish.n.01,4,1300,50,True,food_drink
+fish,n02641379,gar.n.01,"gar, garfish, garpike, billfish, Lepisosteus osseus",fish.n.01,4,1300,50,True,food_drink
+fish,n01484850,great_white_shark.n.01,"great white shark, white shark, man-eater, man-eating shark, Carcharodon carcharias",fish.n.01,5,1300,50,True,food_drink
+fish,n01491361,tiger_shark.n.01,"tiger shark, Galeocerdo cuvieri",fish.n.01,5,1300,50,True,food_drink
+fish,n02655020,puffer.n.02,"puffer, pufferfish, blowfish, globefish",fish.n.01,5,1300,50,True,food_drink
+fish,n01440764,tench.n.01,"tench, Tinca tinca",fish.n.01,6,1300,50,True,food_drink
+fish,n01443537,goldfish.n.01,"goldfish, Carassius auratus",fish.n.01,6,1300,50,True,food_drink
+fish,n02606052,rock_beauty.n.01,"rock beauty, Holocanthus tricolor",fish.n.01,6,969,50,True,food_drink
+fish,n02607072,anemone_fish.n.01,anemone fish,fish.n.01,6,1300,50,True,food_drink
+fish,n02643566,lionfish.n.01,lionfish,fish.n.01,6,1300,50,True,food_drink
+flower,n11939491,daisy.n.01,daisy,flower.n.01,1,1300,50,True,outside
+flower,n12057211,yellow_lady's_slipper.n.01,"yellow lady's slipper, yellow lady-slipper, Cypripedium calceolus, Cypripedium parviflorum",flower.n.01,3,1300,50,True,outside
+food,n07718472,cucumber.n.02,"cucumber, cuke",food.n.02,3,1300,50,True,food_drink
+food,n07718747,artichoke.n.02,"artichoke, globe artichoke",food.n.02,3,1300,50,True,food_drink
+food,n07730033,cardoon.n.02,cardoon,food.n.02,3,1125,50,True,food_drink
+food,n07734744,mushroom.n.05,mushroom,food.n.02,3,1300,50,True,food_drink
+food,n07753113,fig.n.04,fig,food.n.02,3,1300,50,True,food_drink
+food,n07753275,pineapple.n.02,"pineapple, ananas",food.n.02,3,1300,50,True,food_drink
+food,n07753592,banana.n.02,banana,food.n.02,3,1300,50,False,food_drink
+food,n07754684,jackfruit.n.02,"jackfruit, jak, jack",food.n.02,3,1300,50,True,food_drink
+food,n07760859,custard_apple.n.02,custard apple,food.n.02,3,1300,50,True,food_drink
+food,n07768694,pomegranate.n.02,pomegranate,food.n.02,3,1300,50,True,food_drink
+food,n07860988,dough.n.01,dough,food.n.01,3,1300,50,True,food_drink
+food,n07871810,meat_loaf.n.01,"meat loaf, meatloaf",food.n.01,3,1300,50,True,food_drink
+food,n07873807,pizza.n.01,"pizza, pizza pie",food.n.01,3,1300,50,False,food_drink
+food,n07875152,potpie.n.01,potpie,food.n.01,3,1300,50,True,food_drink
+food,n07880968,burrito.n.01,burrito,food.n.01,3,1300,50,True,food_drink
+food,n07920052,espresso.n.01,espresso,food.n.01,3,1300,50,False,food_drink
+food,n07579787,plate.n.08,plate,food.n.01,4,1300,50,False,food_drink
+food,n07584110,consomme.n.01,consomme,food.n.01,4,1207,50,False,food_drink
+food,n07590611,hot_pot.n.01,"hot pot, hotpot",food.n.01,4,1149,50,True,food_drink
+food,n07684084,french_loaf.n.01,French loaf,food.n.02,4,1300,50,False,food_drink
+food,n07693725,bagel.n.01,"bagel, beigel",food.n.02,4,1300,50,False,food_drink
+food,n07695742,pretzel.n.01,pretzel,food.n.02,4,1300,50,False,food_drink
+food,n07711569,mashed_potato.n.01,mashed potato,food.n.01,4,1300,50,False,food_drink
+food,n07714990,broccoli.n.02,broccoli,food.n.02,4,1300,50,True,food_drink
+food,n07715103,cauliflower.n.02,cauliflower,food.n.02,4,1300,50,True,food_drink
+food,n07745940,strawberry.n.01,strawberry,food.n.02,4,1300,50,False,food_drink
+food,n07747607,orange.n.01,orange,food.n.02,4,1300,50,False,food_drink
+food,n07749582,lemon.n.01,lemon,food.n.02,4,1300,50,True,food_drink
+food,n07892512,red_wine.n.01,red wine,food.n.01,4,1300,50,False,food_drink
+food,n07613480,trifle.n.01,trifle,food.n.01,5,1300,50,True,food_drink
+food,n07614500,ice_cream.n.01,"ice cream, icecream",food.n.01,5,1300,50,True,food_drink
+food,n07615774,ice_lolly.n.01,"ice lolly, lolly, lollipop, popsicle",food.n.01,5,1300,50,False,food_drink
+food,n07697537,hotdog.n.02,"hotdog, hot dog, red hot",food.n.01,5,1300,50,False,food_drink
+food,n07714571,head_cabbage.n.02,head cabbage,food.n.02,5,1300,50,True,food_drink
+food,n07716358,zucchini.n.02,"zucchini, courgette",food.n.02,5,1300,50,True,food_drink
+food,n07716906,spaghetti_squash.n.02,spaghetti squash,food.n.02,5,1239,50,True,food_drink
+food,n07717410,acorn_squash.n.02,acorn squash,food.n.02,5,1300,50,True,food_drink
+food,n07717556,butternut_squash.n.02,butternut squash,food.n.02,5,1300,50,True,food_drink
+food,n07742313,granny_smith.n.01,Granny Smith,food.n.02,5,1300,50,False,food_drink
+food,n07932039,eggnog.n.01,eggnog,food.n.01,5,1193,50,False,food_drink
+food,n07583066,guacamole.n.01,guacamole,food.n.01,6,1300,50,True,food_drink
+food,n07697313,cheeseburger.n.01,cheeseburger,food.n.01,6,1300,50,False,food_drink
+food,n07720875,bell_pepper.n.02,bell pepper,food.n.02,6,1300,50,True,food_drink
+food,n07836838,chocolate_sauce.n.01,"chocolate sauce, chocolate syrup",food.n.01,6,1300,50,False,food_drink
+food,n07831146,carbonara.n.01,carbonara,food.n.01,7,1300,50,False,food_drink
+frog,n01644373,tree_frog.n.02,"tree frog, tree-frog",frog.n.01,1,1300,50,True,animals
+frog,n01644900,tailed_frog.n.01,"tailed frog, bell toad, ribbed toad, tailed toad, Ascaphus trui",frog.n.01,1,1300,50,True,animals
+frog,n01641577,bullfrog.n.01,"bullfrog, Rana catesbeiana",frog.n.01,2,1300,50,True,animals
+glass,n02823750,beer_glass.n.01,beer glass,glass.n.02,1,1300,50,True,household
+glass,n03443371,goblet.n.01,goblet,glass.n.02,1,1300,50,True,household
+glasses,n04356056,sunglasses.n.01,"sunglasses, dark glasses, shades",spectacles.n.01,1,1300,50,True,household
+glove,n03775071,mitten.n.01,mitten,glove.n.02,1,1300,50,False,clothing
+goose,n01855672,goose.n.01,goose,goose.n.01,0,1300,50,True,animals
+hamburger,n07697313,cheeseburger.n.01,cheeseburger,hamburger.n.01,1,1300,50,True,food_drink
+hammer,n03481172,hammer.n.02,hammer,hammer.n.02,0,1300,50,True,household
+hat,n02817516,bearskin.n.02,"bearskin, busby, shako",hat.n.01,1,1209,50,True,clothing
+hat,n02869837,bonnet.n.01,"bonnet, poke bonnet",hat.n.01,1,1300,50,True,clothing
+hat,n03124170,cowboy_hat.n.01,"cowboy hat, ten-gallon hat",hat.n.01,1,1300,50,True,clothing
+hat,n04259630,sombrero.n.02,sombrero,hat.n.01,1,1300,50,True,clothing
+hen,n01514859,hen.n.02,hen,hen.n.02,0,1300,50,True,animals
+horse,n02389026,sorrel.n.05,sorrel,horse.n.01,1,1300,50,True,animals
+jeans,n03594734,jean.n.01,"jean, blue jean, denim",jean.n.01,0,1300,50,True,clothing
+knife,n03041632,cleaver.n.01,"cleaver, meat cleaver, chopper",knife.n.01,1,1067,50,True,household
+knife,n03658185,letter_opener.n.01,"letter opener, paper knife, paperknife",knife.n.01,1,986,50,True,household
+lamp,n04380533,table_lamp.n.01,table lamp,lamp.n.02,1,1300,50,True,household
+light,n02948072,candle.n.01,"candle, taper, wax light",lamp.n.01,1,1300,50,True,household
+light,n04286575,spotlight.n.02,"spotlight, spot",lamp.n.01,1,1300,50,True,household
+light,n04380533,table_lamp.n.01,table lamp,lamp.n.02,1,1300,50,True,household
+light,n04456115,torch.n.01,torch,light.n.02,1,1300,50,True,household
+light,n03590841,jack-o'-lantern.n.02,jack-o'-lantern,lamp.n.01,2,1300,50,True,household
+lion,n02129165,lion.n.01,"lion, king of beasts, Panthera leo",lion.n.01,0,1300,50,True,animals
+mitten,n03775071,mitten.n.01,mitten,mitten.n.01,0,1300,50,True,clothing
+monkey,n02484975,guenon.n.01,"guenon, guenon monkey",monkey.n.01,2,1300,50,True,animals
+monkey,n02486261,patas.n.01,"patas, hussar monkey, Erythrocebus patas",monkey.n.01,2,1300,50,True,animals
+monkey,n02486410,baboon.n.01,baboon,monkey.n.01,2,1300,50,True,animals
+monkey,n02487347,macaque.n.01,macaque,monkey.n.01,2,1300,50,True,animals
+monkey,n02488291,langur.n.01,langur,monkey.n.01,2,1300,50,True,animals
+monkey,n02488702,colobus.n.01,"colobus, colobus monkey",monkey.n.01,2,1300,50,True,animals
+monkey,n02489166,proboscis_monkey.n.01,"proboscis monkey, Nasalis larvatus",monkey.n.01,2,1300,50,True,animals
+monkey,n02490219,marmoset.n.01,marmoset,monkey.n.01,2,1300,50,True,animals
+monkey,n02492035,capuchin.n.02,"capuchin, ringtail, Cebus capucinus",monkey.n.01,2,1300,50,True,animals
+monkey,n02492660,howler_monkey.n.01,"howler monkey, howler",monkey.n.01,2,1300,50,True,animals
+monkey,n02493509,titi.n.03,"titi, titi monkey",monkey.n.01,2,1300,50,True,animals
+monkey,n02493793,spider_monkey.n.01,"spider monkey, Ateles geoffroyi",monkey.n.01,2,1300,50,True,animals
+monkey,n02494079,squirrel_monkey.n.01,"squirrel monkey, Saimiri sciureus",monkey.n.01,2,1300,50,True,animals
+mop,n04367480,swab.n.02,"swab, swob, mop",swab.n.02,0,1300,50,True,household
+motorcycle,n03785016,moped.n.01,moped,motorcycle.n.01,2,1300,50,True,vehicles
+nail,n03804744,nail.n.02,nail,nail.n.02,0,1300,50,True,household
+necklace,n03814906,necklace.n.01,necklace,necklace.n.01,0,1300,50,True,clothing
+orange,n07747607,orange.n.01,orange,orange.n.01,0,1300,50,True,food_drink
+oven,n03761084,microwave.n.02,"microwave, microwave oven",microwave.n.02,0,1300,50,True,furniture_rooms
+oven,n04111531,rotisserie.n.01,rotisserie,oven.n.01,1,1300,50,True,furniture_rooms
+owl,n01622779,great_grey_owl.n.01,"great grey owl, great gray owl, Strix nebulosa",owl.n.01,1,1300,50,True,animals
+pajamas,n03877472,pajama.n.02,"pajama, pyjama, pj's, jammies",pajama.n.02,0,1300,50,True,clothing
+pants,n03594734,jean.n.01,"jean, blue jean, denim",trouser.n.01,1,1300,50,False,clothing
+paper,n15075141,toilet_tissue.n.01,"toilet tissue, toilet paper, bathroom tissue",paper.n.01,2,1300,50,False,household
+pen,n02783161,ballpoint.n.01,"ballpoint, ballpoint pen, ballpen, Biro",pen.n.01,1,1236,50,True,toys
+pen,n03388183,fountain_pen.n.01,fountain pen,pen.n.01,1,1300,50,True,toys
+pen,n04033901,quill.n.01,"quill, quill pen",pen.n.01,1,1300,50,True,toys
+penguin,n02056570,king_penguin.n.01,"king penguin, Aptenodytes patagonica",penguin.n.01,1,1300,50,True,animals
+person,n09835506,ballplayer.n.01,"ballplayer, baseball player",person.n.01,3,1300,50,True,people
+person,n10565667,scuba_diver.n.01,scuba diver,person.n.01,3,1300,50,True,people
+person,n10148035,groom.n.01,"groom, bridegroom",person.n.01,4,1300,50,True,people
+pig,n02395406,hog.n.03,"hog, pig, grunter, squealer, Sus scrofa",hog.n.03,0,1300,50,True,animals
+pillow,n03938244,pillow.n.01,pillow,pillow.n.01,0,1300,50,True,household
+pizza,n07873807,pizza.n.01,"pizza, pizza pie",pizza.n.01,0,1300,50,True,food_drink
+plant,n11939491,daisy.n.01,daisy,plant.n.02,5,1300,50,False,household
+plant,n12057211,yellow_lady's_slipper.n.01,"yellow lady's slipper, yellow lady-slipper, Cypripedium calceolus, Cypripedium parviflorum",plant.n.02,7,1300,50,False,household
+plate,n07579787,plate.n.08,plate,plate.n.08,0,1300,50,True,household
+popsicle,n07615774,ice_lolly.n.01,"ice lolly, lolly, lollipop, popsicle",ice_lolly.n.01,0,1300,50,True,food_drink
+potato,n07711569,mashed_potato.n.01,mashed potato,potato.n.01,1,1300,50,True,food_drink
+pretzel,n07695742,pretzel.n.01,pretzel,pretzel.n.01,0,1300,50,True,food_drink
+purse,n04026417,purse.n.03,purse,purse.n.03,0,1300,50,True,household
+puzzle,n03598930,jigsaw_puzzle.n.01,jigsaw puzzle,puzzle.n.02,1,1300,50,True,toys
+puzzle,n06785654,crossword_puzzle.n.01,"crossword puzzle, crossword",puzzle.n.02,1,1300,50,True,toys
+radio,n04041544,radio.n.03,"radio, wireless",radio.n.03,0,1300,50,True,household
+refrigerator,n04070727,refrigerator.n.01,"refrigerator, icebox",refrigerator.n.01,0,1300,50,True,furniture_rooms
+roof,n03220513,dome.n.04,dome,roof.n.01,1,1300,50,True,outside
+roof,n04417672,thatch.n.04,"thatch, thatched roof",roof.n.01,1,1300,50,True,outside
+roof,n04435653,tile_roof.n.01,tile roof,roof.n.01,1,1300,50,True,outside
+roof,n04523525,vault.n.03,vault,roof.n.01,1,1300,50,True,outside
+rooster,n01514668,cock.n.05,cock,cock.n.05,0,1300,50,True,animals
+sandwich,n07697537,hotdog.n.02,"hotdog, hot dog, red hot",sandwich.n.01,1,1300,50,True,food_drink
+sandwich,n07697313,cheeseburger.n.01,cheeseburger,sandwich.n.01,2,1300,50,False,food_drink
+sauce,n07836838,chocolate_sauce.n.01,"chocolate sauce, chocolate syrup",sauce.n.01,1,1300,50,True,food_drink
+sauce,n07831146,carbonara.n.01,carbonara,sauce.n.01,2,1300,50,True,food_drink
+scarf,n03325584,feather_boa.n.01,"feather boa, boa",scarf.n.01,1,1300,50,True,clothing
+scarf,n04325704,stole.n.01,stole,scarf.n.01,1,1300,50,True,clothing
+sheep,n02412080,ram.n.05,"ram, tup",sheep.n.01,1,1300,50,True,animals
+shirt,n03595614,jersey.n.03,"jersey, T-shirt, tee shirt",shirt.n.01,1,1285,50,True,clothing
+shoe,n03680355,loafer.n.02,Loafer,shoe.n.01,1,1137,50,True,clothing
+shoe,n04120489,running_shoe.n.01,running shoe,shoe.n.01,1,1300,50,False,clothing
+shoe,n04133789,sandal.n.01,sandal,shoe.n.01,1,1300,50,True,clothing
+shovel,n04208210,shovel.n.01,shovel,shovel.n.01,0,1300,50,True,outside
+sink,n04553703,washbasin.n.02,"washbasin, handbasin, washbowl, lavabo, wash-hand basin",washbasin.n.02,0,1300,50,True,furniture_rooms
+sled,n02860847,bobsled.n.02,"bobsled, bobsleigh, bob",sled.n.01,1,1300,50,True,vehicles
+sled,n03218198,dogsled.n.01,"dogsled, dog sled, dog sleigh",sled.n.01,1,1300,50,True,vehicles
+sneaker,n04120489,running_shoe.n.01,running shoe,running_shoe.n.01,0,1300,50,True,clothing
+sock,n04254777,sock.n.01,sock,sock.n.01,0,1300,50,True,clothing
+soup,n07584110,consomme.n.01,consomme,soup.n.01,1,1207,50,True,food_drink
+spoon,n04597913,wooden_spoon.n.02,wooden spoon,spoon.n.01,1,1300,50,True,household
+squirrel,n02356798,fox_squirrel.n.01,"fox squirrel, eastern fox squirrel, Sciurus niger",squirrel.n.01,2,1206,50,True,animals
+stove,n04330267,stove.n.02,stove,stove.n.02,0,1300,50,True,furniture_rooms
+strawberry,n07745940,strawberry.n.01,strawberry,strawberry.n.01,0,1300,50,True,food_drink
+sweater,n02963159,cardigan.n.01,cardigan,sweater.n.01,1,1300,50,True,clothing
+sweater,n04370456,sweatshirt.n.01,sweatshirt,sweater.n.01,2,931,50,True,clothing
+swing,n04371774,swing.n.02,swing,swing.n.02,0,1300,50,True,outside
+table,n03179701,desk.n.01,desk,table.n.02,1,1300,50,True,furniture_rooms
+table,n03201208,dining_table.n.01,"dining table, board",table.n.03,1,1300,50,True,furniture_rooms
+table,n03982430,pool_table.n.01,"pool table, billiard table, snooker table",table.n.02,1,1300,50,True,furniture_rooms
+teddybear,n04399382,teddy.n.01,"teddy, teddy bear",teddy.n.01,0,1300,50,True,animals
+telephone,n03187595,dial_telephone.n.01,"dial telephone, dial phone",telephone.n.01,1,1300,50,True,household
+telephone,n03902125,pay-phone.n.01,"pay-phone, pay-station",telephone.n.01,1,1300,50,True,household
+telephone,n02992529,cellular_telephone.n.01,"cellular telephone, cellular phone, cellphone, cell, mobile phone",telephone.n.01,2,1300,50,True,household
+tiger,n02129604,tiger.n.02,"tiger, Panthera tigris",tiger.n.02,0,1300,50,True,animals
+tissue,n15075141,toilet_tissue.n.01,"toilet tissue, toilet paper, bathroom tissue",tissue.n.02,1,1300,50,True,household
+towel,n02808304,bath_towel.n.01,bath towel,towel.n.01,1,1300,50,True,household
+towel,n03887697,paper_towel.n.01,paper towel,towel.n.01,1,1300,50,True,household
+toy,n04371774,swing.n.02,swing,plaything.n.01,1,1300,50,False,toys
+toy,n04399382,teddy.n.01,"teddy, teddy bear",plaything.n.01,1,1300,50,False,toys
+tractor,n04465501,tractor.n.01,tractor,tractor.n.01,0,1300,50,True,vehicles
+train,n03272562,electric_locomotive.n.01,electric locomotive,locomotive.n.01,1,1300,50,True,vehicles
+train,n03393912,freight_car.n.01,freight car,car.n.02,1,1300,50,True,vehicles
+train,n03895866,passenger_car.n.01,"passenger car, coach, carriage",car.n.02,1,1300,50,True,vehicles
+train,n04310018,steam_locomotive.n.01,steam locomotive,locomotive.n.01,1,1300,50,True,vehicles
+train,n02917067,bullet_train.n.01,"bullet train, bullet",train.n.01,2,1300,50,True,vehicles
+tray,n04476259,tray.n.01,tray,tray.n.01,0,1300,50,True,household
+tricycle,n04482393,tricycle.n.01,"tricycle, trike, velocipede",tricycle.n.01,0,1300,50,True,vehicles
+truck,n03345487,fire_engine.n.01,"fire engine, fire truck",truck.n.01,1,1300,50,False,vehicles
+truck,n03417042,garbage_truck.n.01,"garbage truck, dustcart",truck.n.01,1,1300,50,True,vehicles
+truck,n03930630,pickup.n.01,"pickup, pickup truck",truck.n.01,1,1300,50,True,vehicles
+truck,n04461696,tow_truck.n.01,"tow truck, tow car, wrecker",truck.n.01,1,1300,50,True,vehicles
+truck,n04467665,trailer_truck.n.01,"trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi",truck.n.01,1,1300,50,True,vehicles
+truck,n03796401,moving_van.n.01,moving van,truck.n.01,2,1159,50,True,vehicles
+truck,n03977966,police_van.n.01,"police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria",truck.n.01,2,1300,50,True,vehicles
+turtle,n01667114,mud_turtle.n.01,mud turtle,turtle.n.02,1,1300,50,True,animals
+turtle,n01667778,terrapin.n.01,terrapin,turtle.n.02,1,1300,50,True,animals
+turtle,n01669191,box_turtle.n.01,"box turtle, box tortoise",turtle.n.02,1,1300,50,True,animals
+turtle,n01664065,loggerhead.n.02,"loggerhead, loggerhead turtle, Caretta caretta",turtle.n.02,2,1300,50,True,animals
+turtle,n01665541,leatherback_turtle.n.01,"leatherback turtle, leatherback, leathery turtle, Dermochelys coriacea",turtle.n.02,2,1300,50,True,animals
+tv,n04404412,television.n.02,"television, television system",television.n.02,0,1300,50,True,furniture_rooms
+vacuum,n04517823,vacuum.n.04,"vacuum, vacuum cleaner",vacuum.n.04,0,1300,50,True,household
+watch,n03197337,digital_watch.n.01,digital watch,watch.n.01,1,889,50,True,household
+wolf,n02114367,timber_wolf.n.01,"timber wolf, grey wolf, gray wolf, Canis lupus",wolf.n.01,1,1300,50,True,animals
+wolf,n02114548,white_wolf.n.01,"white wolf, Arctic wolf, Canis lupus tundrarum",wolf.n.01,1,1300,50,True,animals
+wolf,n02114712,red_wolf.n.01,"red wolf, maned wolf, Canis rufus, Canis niger",wolf.n.01,1,1300,50,True,animals
+wolf,n02114855,coyote.n.01,"coyote, prairie wolf, brush wolf, Canis latrans",wolf.n.01,1,1300,50,True,animals
+zebra,n02391049,zebra.n.01,zebra,zebra.n.01,0,1300,50,True,animals

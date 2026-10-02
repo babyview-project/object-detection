@@ -1,0 +1,1001 @@
+wnid,imagenet_synset,imagenet_label,cdi_most_specific,cdi_all
+n01440764,tench.n.01,"tench, Tinca tinca",fish,animal|fish
+n01443537,goldfish.n.01,"goldfish, Carassius auratus",fish,animal|fish
+n01484850,great_white_shark.n.01,"great white shark, white shark, man-eater, man-eating shark, Carcharodon carcharias",fish,animal|fish
+n01491361,tiger_shark.n.01,"tiger shark, Galeocerdo cuvieri",fish,animal|fish
+n01494475,hammerhead.n.03,"hammerhead, hammerhead shark",fish,animal|fish
+n01496331,electric_ray.n.01,"electric ray, crampfish, numbfish, torpedo",fish,animal|fish
+n01498041,stingray.n.01,stingray,fish,animal|fish
+n01514668,cock.n.05,cock,chicken|rooster,animal|bird|chicken|rooster
+n01514859,hen.n.02,hen,chicken|hen,animal|bird|chicken|hen
+n01518878,ostrich.n.02,"ostrich, Struthio camelus",bird,animal|bird
+n01530575,brambling.n.01,"brambling, Fringilla montifringilla",bird,animal|bird
+n01531178,goldfinch.n.02,"goldfinch, Carduelis carduelis",bird,animal|bird
+n01532829,house_finch.n.01,"house finch, linnet, Carpodacus mexicanus",bird,animal|bird
+n01534433,junco.n.01,"junco, snowbird",bird,animal|bird
+n01537544,indigo_bunting.n.01,"indigo bunting, indigo finch, indigo bird, Passerina cyanea",bird,animal|bird
+n01558993,robin.n.02,"robin, American robin, Turdus migratorius",bird,animal|bird
+n01560419,bulbul.n.01,bulbul,bird,animal|bird
+n01580077,jay.n.02,jay,bird,animal|bird
+n01582220,magpie.n.01,magpie,bird,animal|bird
+n01592084,chickadee.n.01,chickadee,bird,animal|bird
+n01601694,water_ouzel.n.01,"water ouzel, dipper",bird,animal|bird
+n01608432,kite.n.04,kite,bird,animal|bird
+n01614925,bald_eagle.n.01,"bald eagle, American eagle, Haliaeetus leucocephalus",bird,animal|bird
+n01616318,vulture.n.01,vulture,bird,animal|bird
+n01622779,great_grey_owl.n.01,"great grey owl, great gray owl, Strix nebulosa",owl,animal|bird|owl
+n01629819,european_fire_salamander.n.01,"European fire salamander, Salamandra salamandra",animal,animal
+n01630670,common_newt.n.01,"common newt, Triturus vulgaris",animal,animal
+n01631663,eft.n.01,eft,animal,animal
+n01632458,spotted_salamander.n.01,"spotted salamander, Ambystoma maculatum",animal,animal
+n01632777,axolotl.n.01,"axolotl, mud puppy, Ambystoma mexicanum",animal,animal
+n01641577,bullfrog.n.01,"bullfrog, Rana catesbeiana",frog,animal|frog
+n01644373,tree_frog.n.02,"tree frog, tree-frog",frog,animal|frog
+n01644900,tailed_frog.n.01,"tailed frog, bell toad, ribbed toad, tailed toad, Ascaphus trui",frog,animal|frog
+n01664065,loggerhead.n.02,"loggerhead, loggerhead turtle, Caretta caretta",turtle,animal|turtle
+n01665541,leatherback_turtle.n.01,"leatherback turtle, leatherback, leathery turtle, Dermochelys coriacea",turtle,animal|turtle
+n01667114,mud_turtle.n.01,mud turtle,turtle,animal|turtle
+n01667778,terrapin.n.01,terrapin,turtle,animal|turtle
+n01669191,box_turtle.n.01,"box turtle, box tortoise",turtle,animal|turtle
+n01675722,banded_gecko.n.01,banded gecko,animal,animal
+n01677366,common_iguana.n.01,"common iguana, iguana, Iguana iguana",animal,animal
+n01682714,american_chameleon.n.01,"American chameleon, anole, Anolis carolinensis",animal,animal
+n01685808,whiptail.n.01,"whiptail, whiptail lizard",animal,animal
+n01687978,agama.n.01,agama,animal,animal
+n01688243,frilled_lizard.n.01,"frilled lizard, Chlamydosaurus kingi",animal,animal
+n01689811,alligator_lizard.n.01,alligator lizard,animal,animal
+n01692333,gila_monster.n.01,"Gila monster, Heloderma suspectum",animal,animal
+n01693334,green_lizard.n.01,"green lizard, Lacerta viridis",animal,animal
+n01694178,african_chameleon.n.01,"African chameleon, Chamaeleo chamaeleon",animal,animal
+n01695060,komodo_dragon.n.01,"Komodo dragon, Komodo lizard, dragon lizard, giant lizard, Varanus komodoensis",animal,animal
+n01697457,african_crocodile.n.01,"African crocodile, Nile crocodile, Crocodylus niloticus",animal,animal
+n01698640,american_alligator.n.01,"American alligator, Alligator mississipiensis",alligator,alligator|animal
+n01704323,triceratops.n.01,triceratops,animal,animal
+n01728572,thunder_snake.n.01,"thunder snake, worm snake, Carphophis amoenus",animal,animal
+n01728920,ringneck_snake.n.01,"ringneck snake, ring-necked snake, ring snake",animal,animal
+n01729322,hognose_snake.n.01,"hognose snake, puff adder, sand viper",animal,animal
+n01729977,green_snake.n.02,"green snake, grass snake",animal,animal
+n01734418,king_snake.n.01,"king snake, kingsnake",animal,animal
+n01735189,garter_snake.n.01,"garter snake, grass snake",animal,animal
+n01737021,water_snake.n.01,water snake,animal,animal
+n01739381,vine_snake.n.01,vine snake,animal,animal
+n01740131,night_snake.n.01,"night snake, Hypsiglena torquata",animal,animal
+n01742172,boa_constrictor.n.01,"boa constrictor, Constrictor constrictor",animal,animal
+n01744401,rock_python.n.01,"rock python, rock snake, Python sebae",animal,animal
+n01748264,indian_cobra.n.01,"Indian cobra, Naja naja",animal,animal
+n01749939,green_mamba.n.01,green mamba,animal,animal
+n01751748,sea_snake.n.01,sea snake,animal,animal
+n01753488,horned_viper.n.01,"horned viper, cerastes, sand viper, horned asp, Cerastes cornutus",animal,animal
+n01755581,diamondback.n.01,"diamondback, diamondback rattlesnake, Crotalus adamanteus",animal,animal
+n01756291,sidewinder.n.01,"sidewinder, horned rattlesnake, Crotalus cerastes",animal,animal
+n01768244,trilobite.n.01,trilobite,animal,animal
+n01770081,harvestman.n.01,"harvestman, daddy longlegs, Phalangium opilio",animal,animal
+n01770393,scorpion.n.03,scorpion,animal,animal
+n01773157,black_and_gold_garden_spider.n.01,"black and gold garden spider, Argiope aurantia",animal,animal
+n01773549,barn_spider.n.01,"barn spider, Araneus cavaticus",animal,animal
+n01773797,garden_spider.n.01,"garden spider, Aranea diademata",animal,animal
+n01774384,black_widow.n.01,"black widow, Latrodectus mactans",animal,animal
+n01774750,tarantula.n.02,tarantula,animal,animal
+n01775062,wolf_spider.n.01,"wolf spider, hunting spider",animal,animal
+n01776313,tick.n.02,tick,animal,animal
+n01784675,centipede.n.01,centipede,animal,animal
+n01795545,black_grouse.n.01,black grouse,animal|bird,animal|bird
+n01796340,ptarmigan.n.01,ptarmigan,animal|bird,animal|bird
+n01797886,ruffed_grouse.n.01,"ruffed grouse, partridge, Bonasa umbellus",animal|bird,animal|bird
+n01798484,prairie_chicken.n.01,"prairie chicken, prairie grouse, prairie fowl",animal|bird,animal|bird
+n01806143,peacock.n.02,peacock,animal|bird,animal|bird
+n01806567,quail.n.02,quail,animal|bird,animal|bird
+n01807496,partridge.n.03,partridge,animal|bird,animal|bird
+n01817953,african_grey.n.01,"African grey, African gray, Psittacus erithacus",bird,animal|bird
+n01818515,macaw.n.01,macaw,bird,animal|bird
+n01819313,sulphur-crested_cockatoo.n.01,"sulphur-crested cockatoo, Kakatoe galerita, Cacatua galerita",bird,animal|bird
+n01820546,lorikeet.n.01,lorikeet,bird,animal|bird
+n01824575,coucal.n.01,coucal,bird,animal|bird
+n01828970,bee_eater.n.01,bee eater,bird,animal|bird
+n01829413,hornbill.n.01,hornbill,bird,animal|bird
+n01833805,hummingbird.n.01,hummingbird,bird,animal|bird
+n01843065,jacamar.n.01,jacamar,bird,animal|bird
+n01843383,toucan.n.01,toucan,bird,animal|bird
+n01847000,drake.n.02,drake,duck,animal|bird|duck
+n01855032,red-breasted_merganser.n.01,"red-breasted merganser, Mergus serrator",duck,animal|bird|duck
+n01855672,goose.n.01,goose,goose,animal|bird|goose
+n01860187,black_swan.n.01,"black swan, Cygnus atratus",bird,animal|bird
+n01871265,tusker.n.01,tusker,animal,animal
+n01872401,echidna.n.02,"echidna, spiny anteater, anteater",animal,animal
+n01873310,platypus.n.01,"platypus, duckbill, duckbilled platypus, duck-billed platypus, Ornithorhynchus anatinus",animal,animal
+n01877812,wallaby.n.01,"wallaby, brush kangaroo",animal,animal
+n01882714,koala.n.01,"koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus",animal,animal
+n01883070,wombat.n.01,wombat,animal,animal
+n01910747,jellyfish.n.02,jellyfish,animal,animal
+n01914609,sea_anemone.n.01,"sea anemone, anemone",animal,animal
+n01917289,brain_coral.n.01,brain coral,animal,animal
+n01924916,flatworm.n.01,"flatworm, platyhelminth",animal,animal
+n01930112,nematode.n.01,"nematode, nematode worm, roundworm",animal,animal
+n01943899,conch.n.01,conch,animal,animal
+n01944390,snail.n.01,snail,animal,animal
+n01945685,slug.n.07,slug,animal,animal
+n01950731,sea_slug.n.01,"sea slug, nudibranch",animal,animal
+n01955084,chiton.n.02,"chiton, coat-of-mail shell, sea cradle, polyplacophore",animal,animal
+n01968897,chambered_nautilus.n.01,"chambered nautilus, pearly nautilus, nautilus",animal,animal
+n01978287,dungeness_crab.n.02,"Dungeness crab, Cancer magister",animal,animal
+n01978455,rock_crab.n.01,"rock crab, Cancer irroratus",animal,animal
+n01980166,fiddler_crab.n.01,fiddler crab,animal,animal
+n01981276,king_crab.n.03,"king crab, Alaska crab, Alaskan king crab, Alaska king crab, Paralithodes camtschatica",animal,animal
+n01983481,american_lobster.n.02,"American lobster, Northern lobster, Maine lobster, Homarus americanus",animal,animal
+n01984695,spiny_lobster.n.02,"spiny lobster, langouste, rock lobster, crawfish, crayfish, sea crawfish",animal,animal
+n01985128,crayfish.n.03,"crayfish, crawfish, crawdad, crawdaddy",animal,animal
+n01986214,hermit_crab.n.01,hermit crab,animal,animal
+n01990800,isopod.n.01,isopod,animal,animal
+n02002556,white_stork.n.01,"white stork, Ciconia ciconia",bird,animal|bird
+n02002724,black_stork.n.01,"black stork, Ciconia nigra",bird,animal|bird
+n02006656,spoonbill.n.01,spoonbill,bird,animal|bird
+n02007558,flamingo.n.01,flamingo,bird,animal|bird
+n02009229,little_blue_heron.n.01,"little blue heron, Egretta caerulea",bird,animal|bird
+n02009912,american_egret.n.01,"American egret, great white heron, Egretta albus",bird,animal|bird
+n02011460,bittern.n.01,bittern,bird,animal|bird
+n02012849,crane.n.05,crane,bird,animal|bird
+n02013706,limpkin.n.01,"limpkin, Aramus pictus",bird,animal|bird
+n02017213,european_gallinule.n.01,"European gallinule, Porphyrio porphyrio",bird,animal|bird
+n02018207,american_coot.n.01,"American coot, marsh hen, mud hen, water hen, Fulica americana",bird,animal|bird
+n02018795,bustard.n.01,bustard,bird,animal|bird
+n02025239,ruddy_turnstone.n.01,"ruddy turnstone, Arenaria interpres",bird,animal|bird
+n02027492,red-backed_sandpiper.n.01,"red-backed sandpiper, dunlin, Erolia alpina",bird,animal|bird
+n02028035,redshank.n.01,"redshank, Tringa totanus",bird,animal|bird
+n02033041,dowitcher.n.01,dowitcher,bird,animal|bird
+n02037110,oystercatcher.n.01,"oystercatcher, oyster catcher",bird,animal|bird
+n02051845,pelican.n.01,pelican,bird,animal|bird
+n02056570,king_penguin.n.01,"king penguin, Aptenodytes patagonica",penguin,animal|bird|penguin
+n02058221,albatross.n.02,"albatross, mollymawk",bird,animal|bird
+n02066245,grey_whale.n.01,"grey whale, gray whale, devilfish, Eschrichtius gibbosus, Eschrichtius robustus",animal,animal
+n02071294,killer_whale.n.01,"killer whale, killer, orca, grampus, sea wolf, Orcinus orca",animal,animal
+n02074367,dugong.n.01,"dugong, Dugong dugon",animal,animal
+n02077923,sea_lion.n.01,sea lion,animal,animal
+n02085620,chihuahua.n.03,Chihuahua,dog,animal|dog
+n02085782,japanese_spaniel.n.01,Japanese spaniel,dog,animal|dog
+n02085936,maltese_dog.n.01,"Maltese dog, Maltese terrier, Maltese",dog,animal|dog
+n02086079,pekinese.n.01,"Pekinese, Pekingese, Peke",dog,animal|dog
+n02086240,shih-tzu.n.01,Shih-Tzu,dog,animal|dog
+n02086646,blenheim_spaniel.n.01,Blenheim spaniel,dog,animal|dog
+n02086910,papillon.n.01,papillon,dog,animal|dog
+n02087046,toy_terrier.n.01,toy terrier,dog,animal|dog
+n02087394,rhodesian_ridgeback.n.01,Rhodesian ridgeback,dog,animal|dog
+n02088094,afghan_hound.n.01,"Afghan hound, Afghan",dog,animal|dog
+n02088238,basset.n.01,"basset, basset hound",dog,animal|dog
+n02088364,beagle.n.01,beagle,dog,animal|dog
+n02088466,bloodhound.n.01,"bloodhound, sleuthhound",dog,animal|dog
+n02088632,bluetick.n.01,bluetick,dog,animal|dog
+n02089078,black-and-tan_coonhound.n.01,black-and-tan coonhound,dog,animal|dog
+n02089867,walker_hound.n.01,"Walker hound, Walker foxhound",dog,animal|dog
+n02089973,english_foxhound.n.01,English foxhound,dog,animal|dog
+n02090379,redbone.n.01,redbone,dog,animal|dog
+n02090622,borzoi.n.01,"borzoi, Russian wolfhound",dog,animal|dog
+n02090721,irish_wolfhound.n.01,Irish wolfhound,dog,animal|dog
+n02091032,italian_greyhound.n.01,Italian greyhound,animal,animal|dog
+n02091134,whippet.n.01,whippet,animal,animal|dog
+n02091244,ibizan_hound.n.01,"Ibizan hound, Ibizan Podenco",dog,animal|dog
+n02091467,norwegian_elkhound.n.01,"Norwegian elkhound, elkhound",dog,animal|dog
+n02091635,otterhound.n.01,"otterhound, otter hound",dog,animal|dog
+n02091831,saluki.n.01,"Saluki, gazelle hound",dog,animal|dog
+n02092002,scottish_deerhound.n.01,"Scottish deerhound, deerhound",dog,animal|dog
+n02092339,weimaraner.n.01,Weimaraner,dog,animal|dog
+n02093256,staffordshire_bullterrier.n.01,"Staffordshire bullterrier, Staffordshire bull terrier",dog,animal|dog
+n02093428,american_staffordshire_terrier.n.01,"American Staffordshire terrier, Staffordshire terrier, American pit bull terrier, pit bull terrier",dog,animal|dog
+n02093647,bedlington_terrier.n.01,Bedlington terrier,dog,animal|dog
+n02093754,border_terrier.n.01,Border terrier,dog,animal|dog
+n02093859,kerry_blue_terrier.n.01,Kerry blue terrier,dog,animal|dog
+n02093991,irish_terrier.n.01,Irish terrier,dog,animal|dog
+n02094114,norfolk_terrier.n.01,Norfolk terrier,dog,animal|dog
+n02094258,norwich_terrier.n.01,Norwich terrier,dog,animal|dog
+n02094433,yorkshire_terrier.n.01,Yorkshire terrier,dog,animal|dog
+n02095314,wire-haired_fox_terrier.n.01,wire-haired fox terrier,dog,animal|dog
+n02095570,lakeland_terrier.n.01,Lakeland terrier,dog,animal|dog
+n02095889,sealyham_terrier.n.01,"Sealyham terrier, Sealyham",dog,animal|dog
+n02096051,airedale.n.01,"Airedale, Airedale terrier",dog,animal|dog
+n02096177,cairn.n.02,"cairn, cairn terrier",dog,animal|dog
+n02096294,australian_terrier.n.01,Australian terrier,dog,animal|dog
+n02096437,dandie_dinmont.n.01,"Dandie Dinmont, Dandie Dinmont terrier",dog,animal|dog
+n02096585,boston_bull.n.01,"Boston bull, Boston terrier",dog,animal|dog
+n02097047,miniature_schnauzer.n.01,miniature schnauzer,dog,animal|dog
+n02097130,giant_schnauzer.n.01,giant schnauzer,dog,animal|dog
+n02097209,standard_schnauzer.n.01,standard schnauzer,dog,animal|dog
+n02097298,scotch_terrier.n.01,"Scotch terrier, Scottish terrier, Scottie",dog,animal|dog
+n02097474,tibetan_terrier.n.01,"Tibetan terrier, chrysanthemum dog",dog,animal|dog
+n02097658,silky_terrier.n.01,"silky terrier, Sydney silky",dog,animal|dog
+n02098105,soft-coated_wheaten_terrier.n.01,soft-coated wheaten terrier,dog,animal|dog
+n02098286,west_highland_white_terrier.n.01,West Highland white terrier,dog,animal|dog
+n02098413,lhasa.n.02,"Lhasa, Lhasa apso",dog,animal|dog
+n02099267,flat-coated_retriever.n.01,flat-coated retriever,dog,animal|dog
+n02099429,curly-coated_retriever.n.01,curly-coated retriever,dog,animal|dog
+n02099601,golden_retriever.n.01,golden retriever,dog,animal|dog
+n02099712,labrador_retriever.n.01,Labrador retriever,dog,animal|dog
+n02099849,chesapeake_bay_retriever.n.01,Chesapeake Bay retriever,dog,animal|dog
+n02100236,german_short-haired_pointer.n.01,German short-haired pointer,dog,animal|dog
+n02100583,vizsla.n.01,"vizsla, Hungarian pointer",dog,animal|dog
+n02100735,english_setter.n.01,English setter,dog,animal|dog
+n02100877,irish_setter.n.01,"Irish setter, red setter",dog,animal|dog
+n02101006,gordon_setter.n.01,Gordon setter,dog,animal|dog
+n02101388,brittany_spaniel.n.01,Brittany spaniel,dog,animal|dog
+n02101556,clumber.n.01,"clumber, clumber spaniel",dog,animal|dog
+n02102040,english_springer.n.01,"English springer, English springer spaniel",dog,animal|dog
+n02102177,welsh_springer_spaniel.n.01,Welsh springer spaniel,dog,animal|dog
+n02102318,cocker_spaniel.n.01,"cocker spaniel, English cocker spaniel, cocker",dog,animal|dog
+n02102480,sussex_spaniel.n.01,Sussex spaniel,dog,animal|dog
+n02102973,irish_water_spaniel.n.01,Irish water spaniel,dog,animal|dog
+n02104029,kuvasz.n.01,kuvasz,dog,animal|dog
+n02104365,schipperke.n.01,schipperke,dog,animal|dog
+n02105056,groenendael.n.01,groenendael,dog,animal|dog
+n02105162,malinois.n.01,malinois,dog,animal|dog
+n02105251,briard.n.01,briard,dog,animal|dog
+n02105412,kelpie.n.02,kelpie,dog,animal|dog
+n02105505,komondor.n.01,komondor,dog,animal|dog
+n02105641,old_english_sheepdog.n.01,"Old English sheepdog, bobtail",dog,animal|dog
+n02105855,shetland_sheepdog.n.01,"Shetland sheepdog, Shetland sheep dog, Shetland",dog,animal|dog
+n02106030,collie.n.01,collie,dog,animal|dog
+n02106166,border_collie.n.01,Border collie,dog,animal|dog
+n02106382,bouvier_des_flandres.n.01,"Bouvier des Flandres, Bouviers des Flandres",dog,animal|dog
+n02106550,rottweiler.n.01,Rottweiler,dog,animal|dog
+n02106662,german_shepherd.n.01,"German shepherd, German shepherd dog, German police dog, alsatian",dog,animal|dog
+n02107142,doberman.n.01,"Doberman, Doberman pinscher",dog,animal|dog
+n02107312,miniature_pinscher.n.01,miniature pinscher,dog,animal|dog
+n02107574,greater_swiss_mountain_dog.n.01,Greater Swiss Mountain dog,dog,animal|dog
+n02107683,bernese_mountain_dog.n.01,Bernese mountain dog,dog,animal|dog
+n02107908,appenzeller.n.01,Appenzeller,dog,animal|dog
+n02108000,entlebucher.n.01,EntleBucher,dog,animal|dog
+n02108089,boxer.n.04,boxer,dog,animal|dog
+n02108422,bull_mastiff.n.01,bull mastiff,dog,animal|dog
+n02108551,tibetan_mastiff.n.01,Tibetan mastiff,dog,animal|dog
+n02108915,french_bulldog.n.01,French bulldog,dog,animal|dog
+n02109047,great_dane.n.01,Great Dane,dog,animal|dog
+n02109525,saint_bernard.n.01,"Saint Bernard, St Bernard",dog,animal|dog
+n02109961,eskimo_dog.n.01,"Eskimo dog, husky",dog,animal|dog
+n02110063,malamute.n.01,"malamute, malemute, Alaskan malamute",dog,animal|dog
+n02110185,siberian_husky.n.01,Siberian husky,dog,animal|dog
+n02110341,dalmatian.n.02,"dalmatian, coach dog, carriage dog",dog,animal|dog
+n02110627,affenpinscher.n.01,"affenpinscher, monkey pinscher, monkey dog",dog,animal|dog
+n02110806,basenji.n.01,basenji,dog,animal|dog
+n02110958,pug.n.01,"pug, pug-dog",dog,animal|dog
+n02111129,leonberg.n.01,Leonberg,dog,animal|dog
+n02111277,newfoundland.n.01,"Newfoundland, Newfoundland dog",dog,animal|dog
+n02111500,great_pyrenees.n.01,Great Pyrenees,dog,animal|dog
+n02111889,samoyed.n.03,"Samoyed, Samoyede",dog,animal|dog
+n02112018,pomeranian.n.01,Pomeranian,dog,animal|dog
+n02112137,chow.n.03,"chow, chow chow",dog,animal|dog
+n02112350,keeshond.n.01,keeshond,dog,animal|dog
+n02112706,brabancon_griffon.n.01,Brabancon griffon,dog,animal|dog
+n02113023,pembroke.n.01,"Pembroke, Pembroke Welsh corgi",dog,animal|dog
+n02113186,cardigan.n.02,"Cardigan, Cardigan Welsh corgi",dog,animal|dog
+n02113624,toy_poodle.n.01,toy poodle,dog,animal|dog
+n02113712,miniature_poodle.n.01,miniature poodle,dog,animal|dog
+n02113799,standard_poodle.n.01,standard poodle,dog,animal|dog
+n02113978,mexican_hairless.n.01,Mexican hairless,dog,animal|dog
+n02114367,timber_wolf.n.01,"timber wolf, grey wolf, gray wolf, Canis lupus",wolf,animal|wolf
+n02114548,white_wolf.n.01,"white wolf, Arctic wolf, Canis lupus tundrarum",wolf,animal|wolf
+n02114712,red_wolf.n.01,"red wolf, maned wolf, Canis rufus, Canis niger",wolf,animal|wolf
+n02114855,coyote.n.01,"coyote, prairie wolf, brush wolf, Canis latrans",wolf,animal|wolf
+n02115641,dingo.n.01,"dingo, warrigal, warragal, Canis dingo",animal,animal
+n02115913,dhole.n.01,"dhole, Cuon alpinus",animal,animal
+n02116738,african_hunting_dog.n.01,"African hunting dog, hyena dog, Cape hunting dog, Lycaon pictus",animal,animal
+n02117135,hyena.n.01,"hyena, hyaena",animal,animal
+n02119022,red_fox.n.03,"red fox, Vulpes vulpes",animal,animal
+n02119789,kit_fox.n.01,"kit fox, Vulpes macrotis",animal,animal
+n02120079,arctic_fox.n.01,"Arctic fox, white fox, Alopex lagopus",animal,animal
+n02120505,grey_fox.n.01,"grey fox, gray fox, Urocyon cinereoargenteus",animal,animal
+n02123045,tabby.n.01,"tabby, tabby cat",cat,animal|cat
+n02123159,tiger_cat.n.02,tiger cat,cat,animal|cat
+n02123394,persian_cat.n.01,Persian cat,cat,animal|cat
+n02123597,siamese_cat.n.01,"Siamese cat, Siamese",cat,animal|cat
+n02124075,egyptian_cat.n.01,Egyptian cat,cat,animal|cat
+n02125311,cougar.n.01,"cougar, puma, catamount, mountain lion, painter, panther, Felis concolor",animal,animal
+n02127052,lynx.n.02,"lynx, catamount",animal,animal
+n02128385,leopard.n.02,"leopard, Panthera pardus",animal,animal
+n02128757,snow_leopard.n.01,"snow leopard, ounce, Panthera uncia",animal,animal
+n02128925,jaguar.n.01,"jaguar, panther, Panthera onca, Felis onca",animal,animal
+n02129165,lion.n.01,"lion, king of beasts, Panthera leo",lion,animal|lion
+n02129604,tiger.n.02,"tiger, Panthera tigris",tiger,animal|tiger
+n02130308,cheetah.n.01,"cheetah, chetah, Acinonyx jubatus",animal,animal
+n02132136,brown_bear.n.01,"brown bear, bruin, Ursus arctos",bear,animal|bear
+n02133161,american_black_bear.n.01,"American black bear, black bear, Ursus americanus, Euarctos americanus",bear,animal|bear
+n02134084,ice_bear.n.01,"ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus",bear,animal|bear
+n02134418,sloth_bear.n.01,"sloth bear, Melursus ursinus, Ursus ursinus",bear,animal|bear
+n02137549,mongoose.n.01,mongoose,animal,animal
+n02138441,meerkat.n.01,"meerkat, mierkat",animal,animal
+n02165105,tiger_beetle.n.01,tiger beetle,bug,animal|bug
+n02165456,ladybug.n.01,"ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle",bug,animal|bug
+n02167151,ground_beetle.n.01,"ground beetle, carabid beetle",bug,animal|bug
+n02168699,long-horned_beetle.n.01,"long-horned beetle, longicorn, longicorn beetle",bug,animal|bug
+n02169497,leaf_beetle.n.01,"leaf beetle, chrysomelid",bug,animal|bug
+n02172182,dung_beetle.n.01,dung beetle,bug,animal|bug
+n02174001,rhinoceros_beetle.n.01,rhinoceros beetle,bug,animal|bug
+n02177972,weevil.n.01,weevil,bug,animal|bug
+n02190166,fly.n.01,fly,bug,animal|bug
+n02206856,bee.n.01,bee,bee,animal|bee|bug
+n02219486,ant.n.01,"ant, emmet, pismire",ant,animal|ant|bug
+n02226429,grasshopper.n.01,"grasshopper, hopper",bug,animal|bug
+n02229544,cricket.n.01,cricket,bug,animal|bug
+n02231487,walking_stick.n.02,"walking stick, walkingstick, stick insect",bug,animal|bug
+n02233338,cockroach.n.01,"cockroach, roach",bug,animal|bug
+n02236044,mantis.n.01,"mantis, mantid",bug,animal|bug
+n02256656,cicada.n.01,"cicada, cicala",bug,animal|bug
+n02259212,leafhopper.n.01,leafhopper,bug,animal|bug
+n02264363,lacewing.n.01,"lacewing, lacewing fly",bug,animal|bug
+n02268443,dragonfly.n.01,"dragonfly, darning needle, devil's darning needle, sewing needle, snake feeder, snake doctor, mosquito hawk, skeeter hawk",bug,animal|bug
+n02268853,damselfly.n.01,damselfly,bug,animal|bug
+n02276258,admiral.n.02,admiral,butterfly,animal|bug|butterfly
+n02277742,ringlet.n.04,"ringlet, ringlet butterfly",butterfly,animal|bug|butterfly
+n02279972,monarch.n.02,"monarch, monarch butterfly, milkweed butterfly, Danaus plexippus",butterfly,animal|bug|butterfly
+n02280649,cabbage_butterfly.n.01,cabbage butterfly,butterfly,animal|bug|butterfly
+n02281406,sulphur_butterfly.n.01,"sulphur butterfly, sulfur butterfly",butterfly,animal|bug|butterfly
+n02281787,lycaenid.n.01,"lycaenid, lycaenid butterfly",butterfly,animal|bug|butterfly
+n02317335,starfish.n.01,"starfish, sea star",animal,animal
+n02319095,sea_urchin.n.01,sea urchin,animal,animal
+n02321529,sea_cucumber.n.01,"sea cucumber, holothurian",animal,animal
+n02325366,wood_rabbit.n.01,"wood rabbit, cottontail, cottontail rabbit",bunny,animal|bunny
+n02326432,hare.n.01,hare,animal,animal
+n02328150,angora.n.03,"Angora, Angora rabbit",bunny,animal|bunny
+n02342885,hamster.n.01,hamster,animal,animal
+n02346627,porcupine.n.01,"porcupine, hedgehog",animal,animal
+n02356798,fox_squirrel.n.01,"fox squirrel, eastern fox squirrel, Sciurus niger",squirrel,animal|squirrel
+n02361337,marmot.n.01,marmot,animal,animal
+n02363005,beaver.n.07,beaver,animal,animal
+n02364673,guinea_pig.n.02,"guinea pig, Cavia cobaya",animal,animal
+n02389026,sorrel.n.05,sorrel,horse,animal|horse
+n02391049,zebra.n.01,zebra,zebra,animal|zebra
+n02395406,hog.n.03,"hog, pig, grunter, squealer, Sus scrofa",pig,animal|pig
+n02396427,wild_boar.n.01,"wild boar, boar, Sus scrofa",animal,animal
+n02397096,warthog.n.01,warthog,animal,animal
+n02398521,hippopotamus.n.01,"hippopotamus, hippo, river horse, Hippopotamus amphibius",animal,animal
+n02403003,ox.n.01,ox,cow,animal|cow
+n02408429,water_buffalo.n.01,"water buffalo, water ox, Asiatic buffalo, Bubalus bubalis",animal,animal
+n02410509,bison.n.01,bison,animal,animal
+n02412080,ram.n.05,"ram, tup",sheep,animal|sheep
+n02415577,bighorn.n.02,"bighorn, bighorn sheep, cimarron, Rocky Mountain bighorn, Rocky Mountain sheep, Ovis canadensis",animal,animal
+n02417914,ibex.n.01,"ibex, Capra ibex",animal,animal
+n02422106,hartebeest.n.01,hartebeest,animal,animal
+n02422699,impala.n.01,"impala, Aepyceros melampus",animal,animal
+n02423022,gazelle.n.01,gazelle,animal,animal
+n02437312,arabian_camel.n.01,"Arabian camel, dromedary, Camelus dromedarius",animal,animal
+n02437616,llama.n.01,llama,animal,animal
+n02441942,weasel.n.02,weasel,animal,animal
+n02442845,mink.n.03,mink,animal,animal
+n02443114,polecat.n.02,"polecat, fitch, foulmart, foumart, Mustela putorius",animal,animal
+n02443484,black-footed_ferret.n.01,"black-footed ferret, ferret, Mustela nigripes",animal,animal
+n02444819,otter.n.02,otter,animal,animal
+n02445715,skunk.n.04,"skunk, polecat, wood pussy",animal,animal
+n02447366,badger.n.02,badger,animal,animal
+n02454379,armadillo.n.01,armadillo,animal,animal
+n02457408,three-toed_sloth.n.01,"three-toed sloth, ai, Bradypus tridactylus",animal,animal
+n02480495,orangutan.n.01,"orangutan, orang, orangutang, Pongo pygmaeus",animal,animal
+n02480855,gorilla.n.01,"gorilla, Gorilla gorilla",animal,animal
+n02481823,chimpanzee.n.01,"chimpanzee, chimp, Pan troglodytes",animal,animal
+n02483362,gibbon.n.02,"gibbon, Hylobates lar",animal,animal
+n02483708,siamang.n.01,"siamang, Hylobates syndactylus, Symphalangus syndactylus",animal,animal
+n02484975,guenon.n.01,"guenon, guenon monkey",monkey,animal|monkey
+n02486261,patas.n.01,"patas, hussar monkey, Erythrocebus patas",monkey,animal|monkey
+n02486410,baboon.n.01,baboon,monkey,animal|monkey
+n02487347,macaque.n.01,macaque,monkey,animal|monkey
+n02488291,langur.n.01,langur,monkey,animal|monkey
+n02488702,colobus.n.01,"colobus, colobus monkey",monkey,animal|monkey
+n02489166,proboscis_monkey.n.01,"proboscis monkey, Nasalis larvatus",monkey,animal|monkey
+n02490219,marmoset.n.01,marmoset,monkey,animal|monkey
+n02492035,capuchin.n.02,"capuchin, ringtail, Cebus capucinus",monkey,animal|monkey
+n02492660,howler_monkey.n.01,"howler monkey, howler",monkey,animal|monkey
+n02493509,titi.n.03,"titi, titi monkey",monkey,animal|monkey
+n02493793,spider_monkey.n.01,"spider monkey, Ateles geoffroyi",monkey,animal|monkey
+n02494079,squirrel_monkey.n.01,"squirrel monkey, Saimiri sciureus",monkey,animal|monkey
+n02497673,madagascar_cat.n.01,"Madagascar cat, ring-tailed lemur, Lemur catta",animal,animal
+n02500267,indri.n.01,"indri, indris, Indri indri, Indri brevicaudatus",animal,animal
+n02504013,indian_elephant.n.01,"Indian elephant, Elephas maximus",elephant,animal|elephant
+n02504458,african_elephant.n.01,"African elephant, Loxodonta africana",elephant,animal|elephant
+n02509815,lesser_panda.n.01,"lesser panda, red panda, panda, bear cat, cat bear, Ailurus fulgens",animal,animal
+n02510455,giant_panda.n.01,"giant panda, panda, panda bear, coon bear, Ailuropoda melanoleuca",animal,animal
+n02514041,barracouta.n.01,"barracouta, snoek",fish,animal|fish
+n02526121,eel.n.02,eel,fish,animal|fish
+n02536864,coho.n.02,"coho, cohoe, coho salmon, blue jack, silver salmon, Oncorhynchus kisutch",fish,animal|fish
+n02606052,rock_beauty.n.01,"rock beauty, Holocanthus tricolor",fish,animal|fish
+n02607072,anemone_fish.n.01,anemone fish,fish,animal|fish
+n02640242,sturgeon.n.01,sturgeon,fish,animal|fish
+n02641379,gar.n.01,"gar, garfish, garpike, billfish, Lepisosteus osseus",fish,animal|fish
+n02643566,lionfish.n.01,lionfish,fish,animal|fish
+n02655020,puffer.n.02,"puffer, pufferfish, blowfish, globefish",fish,animal|fish
+n02666196,abacus.n.02,abacus,,
+n02667093,abaya.n.01,abaya,,
+n02669723,academic_gown.n.01,"academic gown, academic robe, judge's robe",,
+n02672831,accordion.n.01,"accordion, piano accordion, squeeze box",,
+n02676566,acoustic_guitar.n.01,acoustic guitar,,
+n02687172,aircraft_carrier.n.01,"aircraft carrier, carrier, flattop, attack aircraft carrier",,
+n02690373,airliner.n.01,airliner,airplane,airplane
+n02692877,airship.n.01,"airship, dirigible",,
+n02699494,altar.n.02,altar,,
+n02701002,ambulance.n.01,ambulance,car,car
+n02704792,amphibian.n.01,"amphibian, amphibious vehicle",,
+n02708093,analog_clock.n.01,analog clock,clock,clock
+n02727426,apiary.n.01,"apiary, bee house",,
+n02730930,apron.n.01,apron,,
+n02747177,ashcan.n.01,"ashcan, trash can, garbage can, wastebin, ash bin, ash-bin, ashbin, dustbin, trash barrel, trash bin",,
+n02749479,assault_rifle.n.01,"assault rifle, assault gun",,
+n02769748,backpack.n.01,"backpack, back pack, knapsack, packsack, rucksack, haversack",,
+n02776631,bakery.n.01,"bakery, bakeshop, bakehouse",,
+n02777292,balance_beam.n.01,"balance beam, beam",,
+n02782093,balloon.n.01,balloon,balloon,balloon
+n02783161,ballpoint.n.01,"ballpoint, ballpoint pen, ballpen, Biro",pen,pen
+n02786058,band_aid.n.01,Band Aid,,
+n02787622,banjo.n.01,banjo,,
+n02788148,bannister.n.02,"bannister, banister, balustrade, balusters, handrail",,
+n02790996,barbell.n.01,barbell,,
+n02791124,barber_chair.n.01,barber chair,chair,chair
+n02791270,barbershop.n.01,barbershop,,
+n02793495,barn.n.01,barn,,
+n02794156,barometer.n.01,barometer,,
+n02795169,barrel.n.02,"barrel, cask",,
+n02797295,barrow.n.03,"barrow, garden cart, lawn cart, wheelbarrow",,
+n02799071,baseball.n.02,baseball,ball,ball
+n02802426,basketball.n.02,basketball,ball,ball
+n02804414,bassinet.n.01,bassinet,,
+n02804610,bassoon.n.01,bassoon,,
+n02807133,bathing_cap.n.01,"bathing cap, swimming cap",,
+n02808304,bath_towel.n.01,bath towel,towel,towel
+n02808440,bathtub.n.01,"bathtub, bathing tub, bath, tub",bathtub,bathtub
+n02814533,beach_wagon.n.01,"beach wagon, station wagon, wagon, estate car, beach waggon, station waggon, waggon",car,car
+n02814860,beacon.n.03,"beacon, lighthouse, beacon light, pharos",,
+n02815834,beaker.n.01,beaker,,
+n02817516,bearskin.n.02,"bearskin, busby, shako",hat,hat
+n02823428,beer_bottle.n.01,beer bottle,bottle,bottle
+n02823750,beer_glass.n.01,beer glass,glass,glass
+n02825657,bell_cote.n.01,"bell cote, bell cot",,
+n02834397,bib.n.01,bib,bib,bib
+n02835271,bicycle-built-for-two.n.01,"bicycle-built-for-two, tandem bicycle, tandem",bicycle,bicycle
+n02837789,bikini.n.02,"bikini, two-piece",,
+n02840245,binder.n.03,"binder, ring-binder",,
+n02841315,binoculars.n.01,"binoculars, field glasses, opera glasses",,
+n02843684,birdhouse.n.01,birdhouse,,
+n02859443,boathouse.n.01,boathouse,,
+n02860847,bobsled.n.02,"bobsled, bobsleigh, bob",sled,sled
+n02865351,bolo_tie.n.01,"bolo tie, bolo, bola tie, bola",,
+n02869837,bonnet.n.01,"bonnet, poke bonnet",hat,hat
+n02870880,bookcase.n.01,bookcase,,
+n02871525,bookshop.n.01,"bookshop, bookstore, bookstall",,
+n02877765,bottlecap.n.01,bottlecap,,
+n02879718,bow.n.04,bow,,
+n02883205,bow_tie.n.01,"bow tie, bow-tie, bowtie",,
+n02892201,brass.n.07,"brass, memorial tablet, plaque",,
+n02892767,brassiere.n.01,"brassiere, bra, bandeau",,
+n02894605,breakwater.n.01,"breakwater, groin, groyne, mole, bulwark, seawall, jetty",,
+n02895154,breastplate.n.01,"breastplate, aegis, egis",,
+n02906734,broom.n.01,broom,broom,broom
+n02909870,bucket.n.01,"bucket, pail",bucket,bucket
+n02910353,buckle.n.01,buckle,,
+n02916936,bulletproof_vest.n.01,bulletproof vest,,
+n02917067,bullet_train.n.01,"bullet train, bullet",train,train
+n02927161,butcher_shop.n.01,"butcher shop, meat market",,
+n02930766,cab.n.03,"cab, hack, taxi, taxicab",car,car
+n02939185,caldron.n.01,"caldron, cauldron",,
+n02948072,candle.n.01,"candle, taper, wax light",light,light
+n02950826,cannon.n.02,cannon,,
+n02951358,canoe.n.01,canoe,boat,boat
+n02951585,can_opener.n.01,"can opener, tin opener",,
+n02963159,cardigan.n.01,cardigan,sweater,sweater
+n02965783,car_mirror.n.01,car mirror,,
+n02966193,carousel.n.02,"carousel, carrousel, merry-go-round, roundabout, whirligig",,
+n02966687,carpenter's_kit.n.01,"carpenter's kit, tool kit",,
+n02971356,carton.n.02,carton,box,box
+n02974003,car_wheel.n.01,car wheel,,
+n02977058,cash_machine.n.01,"cash machine, cash dispenser, automated teller machine, automatic teller machine, automated teller, automatic teller, ATM",,
+n02978881,cassette.n.01,cassette,,
+n02979186,cassette_player.n.01,cassette player,,
+n02980441,castle.n.02,castle,,
+n02981792,catamaran.n.01,catamaran,,
+n02988304,cd_player.n.01,CD player,,
+n02992211,cello.n.01,"cello, violoncello",,
+n02992529,cellular_telephone.n.01,"cellular telephone, cellular phone, cellphone, cell, mobile phone",telephone,telephone
+n02999410,chain.n.03,chain,,
+n03000134,chainlink_fence.n.01,chainlink fence,,
+n03000247,chain_mail.n.01,"chain mail, ring mail, mail, chain armor, chain armour, ring armor, ring armour",,
+n03000684,chain_saw.n.01,"chain saw, chainsaw",,
+n03014705,chest.n.02,chest,box,box
+n03016953,chiffonier.n.01,"chiffonier, commode",,
+n03017168,chime.n.01,"chime, bell, gong",,
+n03018349,china_cabinet.n.01,"china cabinet, china closet",,
+n03026506,christmas_stocking.n.01,Christmas stocking,,
+n03028079,church.n.02,"church, church building",,
+n03032252,cinema.n.02,"cinema, movie theater, movie theatre, movie house, picture palace",,
+n03041632,cleaver.n.01,"cleaver, meat cleaver, chopper",knife,knife
+n03042490,cliff_dwelling.n.01,cliff dwelling,,
+n03045698,cloak.n.01,cloak,,
+n03047690,clog.n.01,"clog, geta, patten, sabot",,
+n03062245,cocktail_shaker.n.01,cocktail shaker,,
+n03063599,coffee_mug.n.01,coffee mug,cup,cup
+n03063689,coffeepot.n.01,coffeepot,,
+n03065424,coil.n.01,"coil, spiral, volute, whorl, helix",,
+n03075370,combination_lock.n.01,combination lock,,
+n03085013,computer_keyboard.n.01,"computer keyboard, keypad",,
+n03089624,confectionery.n.02,"confectionery, confectionary, candy store",,
+n03095699,container_ship.n.01,"container ship, containership, container vessel",,
+n03100240,convertible.n.01,convertible,car,car
+n03109150,corkscrew.n.01,"corkscrew, bottle screw",,
+n03110669,cornet.n.01,"cornet, horn, trumpet, trump",,
+n03124043,cowboy_boot.n.01,cowboy boot,boots,boots
+n03124170,cowboy_hat.n.01,"cowboy hat, ten-gallon hat",hat,hat
+n03125729,cradle.n.01,cradle,,
+n03126707,crane.n.04,crane,,
+n03127747,crash_helmet.n.01,crash helmet,,
+n03127925,crate.n.01,crate,box,box
+n03131574,crib.n.01,"crib, cot",crib,crib
+n03133878,crock_pot.n.01,Crock Pot,,
+n03134739,croquet_ball.n.01,croquet ball,ball,ball
+n03141823,crutch.n.01,crutch,,
+n03146219,cuirass.n.01,cuirass,,
+n03160309,dam.n.01,"dam, dike, dyke",,
+n03179701,desk.n.01,desk,table,table
+n03180011,desktop_computer.n.01,desktop computer,,
+n03187595,dial_telephone.n.01,"dial telephone, dial phone",telephone,telephone
+n03188531,diaper.n.01,"diaper, nappy, napkin",diaper,diaper
+n03196217,digital_clock.n.01,digital clock,clock,clock
+n03197337,digital_watch.n.01,digital watch,watch,watch
+n03201208,dining_table.n.01,"dining table, board",table,table
+n03207743,dishrag.n.01,"dishrag, dishcloth",,
+n03207941,dishwasher.n.01,"dishwasher, dish washer, dishwashing machine",,
+n03208938,disk_brake.n.01,"disk brake, disc brake",,
+n03216828,dock.n.05,"dock, dockage, docking facility",,
+n03218198,dogsled.n.01,"dogsled, dog sled, dog sleigh",sled,sled
+n03220513,dome.n.04,dome,roof,roof
+n03223299,doormat.n.02,"doormat, welcome mat",,
+n03240683,drilling_platform.n.01,"drilling platform, offshore rig",,
+n03249569,drum.n.01,"drum, membranophone, tympan",,
+n03250847,drumstick.n.02,drumstick,,
+n03255030,dumbbell.n.01,dumbbell,,
+n03259280,dutch_oven.n.01,Dutch oven,,
+n03271574,electric_fan.n.01,"electric fan, blower",,
+n03272010,electric_guitar.n.01,electric guitar,,
+n03272562,electric_locomotive.n.01,electric locomotive,train,train
+n03290653,entertainment_center.n.01,entertainment center,,
+n03291819,envelope.n.01,envelope,,
+n03297495,espresso_maker.n.01,espresso maker,,
+n03314780,face_powder.n.01,face powder,,
+n03325584,feather_boa.n.01,"feather boa, boa",scarf,scarf
+n03337140,file.n.03,"file, file cabinet, filing cabinet",,
+n03344393,fireboat.n.01,fireboat,boat,boat
+n03345487,fire_engine.n.01,"fire engine, fire truck",firetruck,firetruck|truck
+n03347037,fire_screen.n.01,"fire screen, fireguard",,
+n03355925,flagpole.n.02,"flagpole, flagstaff",,
+n03372029,flute.n.01,"flute, transverse flute",,
+n03376595,folding_chair.n.01,folding chair,chair,chair
+n03379051,football_helmet.n.01,football helmet,,
+n03384352,forklift.n.01,forklift,,
+n03388043,fountain.n.01,fountain,,
+n03388183,fountain_pen.n.01,fountain pen,pen,pen
+n03388549,four-poster.n.01,four-poster,bed,bed
+n03393912,freight_car.n.01,freight car,train,train
+n03394916,french_horn.n.01,"French horn, horn",,
+n03400231,frying_pan.n.01,"frying pan, frypan, skillet",,
+n03404251,fur_coat.n.01,fur coat,coat,coat
+n03417042,garbage_truck.n.01,"garbage truck, dustcart",truck,truck
+n03424325,gasmask.n.01,"gasmask, respirator, gas helmet",,
+n03425413,gas_pump.n.01,"gas pump, gasoline pump, petrol pump, island dispenser",,
+n03443371,goblet.n.01,goblet,glass,glass
+n03444034,go-kart.n.01,go-kart,,
+n03445777,golf_ball.n.01,golf ball,ball,ball
+n03445924,golfcart.n.01,"golfcart, golf cart",,
+n03447447,gondola.n.02,gondola,boat,boat
+n03447721,gong.n.01,"gong, tam-tam",,
+n03450230,gown.n.01,gown,dress,dress
+n03452741,grand_piano.n.01,"grand piano, grand",,
+n03457902,greenhouse.n.01,"greenhouse, nursery, glasshouse",,
+n03459775,grille.n.02,"grille, radiator grille",,
+n03461385,grocery_store.n.01,"grocery store, grocery, food market, market",,
+n03467068,guillotine.n.02,guillotine,,
+n03476684,hair_slide.n.01,hair slide,,
+n03476991,hair_spray.n.01,hair spray,,
+n03478589,half_track.n.01,half track,,
+n03481172,hammer.n.02,hammer,hammer,hammer
+n03482405,hamper.n.02,hamper,basket,basket
+n03483316,hand_blower.n.01,"hand blower, blow dryer, blow drier, hair dryer, hair drier",,
+n03485407,hand-held_computer.n.01,"hand-held computer, hand-held microcomputer",,
+n03485794,handkerchief.n.01,"handkerchief, hankie, hanky, hankey",,
+n03492542,hard_disc.n.01,"hard disc, hard disk, fixed disk",,
+n03494278,harmonica.n.01,"harmonica, mouth organ, harp, mouth harp",,
+n03495258,harp.n.01,harp,,
+n03496892,harvester.n.02,"harvester, reaper",,
+n03498962,hatchet.n.02,hatchet,,
+n03527444,holster.n.01,holster,,
+n03529860,home_theater.n.01,"home theater, home theatre",,
+n03530642,honeycomb.n.02,honeycomb,,
+n03532672,hook.n.04,"hook, claw",,
+n03534580,hoopskirt.n.01,"hoopskirt, crinoline",,
+n03535780,horizontal_bar.n.01,"horizontal bar, high bar",,
+n03538406,horse_cart.n.01,"horse cart, horse-cart",,
+n03544143,hourglass.n.01,hourglass,,
+n03584254,ipod.n.01,iPod,,
+n03584829,iron.n.04,"iron, smoothing iron",,
+n03590841,jack-o'-lantern.n.02,jack-o'-lantern,light,light
+n03594734,jean.n.01,"jean, blue jean, denim",jeans,jeans|pants
+n03594945,jeep.n.01,"jeep, landrover",car,car
+n03595614,jersey.n.03,"jersey, T-shirt, tee shirt",shirt,shirt
+n03598930,jigsaw_puzzle.n.01,jigsaw puzzle,puzzle,puzzle
+n03599486,jinrikisha.n.01,"jinrikisha, ricksha, rickshaw",,
+n03602883,joystick.n.02,joystick,,
+n03617480,kimono.n.01,kimono,,
+n03623198,knee_pad.n.01,knee pad,,
+n03627232,knot.n.02,knot,,
+n03630383,lab_coat.n.01,"lab coat, laboratory coat",coat,coat
+n03633091,ladle.n.01,ladle,,
+n03637318,lampshade.n.01,"lampshade, lamp shade",,
+n03642806,laptop.n.01,"laptop, laptop computer",,
+n03649909,lawn_mower.n.01,"lawn mower, mower",,
+n03657121,lens_cap.n.01,"lens cap, lens cover",,
+n03658185,letter_opener.n.01,"letter opener, paper knife, paperknife",knife,knife
+n03661043,library.n.05,library,,
+n03662601,lifeboat.n.01,lifeboat,boat,boat
+n03666591,lighter.n.02,"lighter, light, igniter, ignitor",,
+n03670208,limousine.n.01,"limousine, limo",car,car
+n03673027,liner.n.04,"liner, ocean liner",,
+n03676483,lipstick.n.01,"lipstick, lip rouge",,
+n03680355,loafer.n.02,Loafer,shoe,shoe
+n03690938,lotion.n.01,lotion,,
+n03691459,loudspeaker.n.01,"loudspeaker, speaker, speaker unit, loudspeaker system, speaker system",,
+n03692522,loupe.n.01,"loupe, jeweler's loupe",,
+n03697007,lumbermill.n.01,"lumbermill, sawmill",,
+n03706229,magnetic_compass.n.01,magnetic compass,,
+n03709823,mailbag.n.02,"mailbag, postbag",,
+n03710193,mailbox.n.01,"mailbox, letter box",box,box
+n03710637,maillot.n.02,maillot,,
+n03710721,maillot.n.01,"maillot, tank suit",,
+n03717622,manhole_cover.n.01,manhole cover,,
+n03720891,maraca.n.01,maraca,,
+n03721384,marimba.n.01,"marimba, xylophone",,
+n03724870,mask.n.01,mask,,
+n03729826,matchstick.n.01,matchstick,,
+n03733131,maypole.n.01,maypole,,
+n03733281,maze.n.01,"maze, labyrinth",,
+n03733805,measuring_cup.n.01,measuring cup,,
+n03742115,medicine_chest.n.01,"medicine chest, medicine cabinet",,
+n03743016,megalith.n.01,"megalith, megalithic structure",,
+n03759954,microphone.n.01,"microphone, mike",,
+n03761084,microwave.n.02,"microwave, microwave oven",oven,oven
+n03763968,military_uniform.n.01,military uniform,,
+n03764736,milk_can.n.01,milk can,can,can
+n03769881,minibus.n.01,minibus,bus,bus
+n03770439,miniskirt.n.01,"miniskirt, mini",,
+n03770679,minivan.n.01,minivan,car,car
+n03773504,missile.n.01,missile,,
+n03775071,mitten.n.01,mitten,mitten,glove|mitten
+n03775546,mixing_bowl.n.01,mixing bowl,bowl,bowl|dish
+n03776460,mobile_home.n.01,"mobile home, manufactured home",,
+n03777568,model_t.n.01,Model T,car,car
+n03777754,modem.n.01,modem,,
+n03781244,monastery.n.01,monastery,,
+n03782006,monitor.n.05,monitor,,
+n03785016,moped.n.01,moped,motorcycle,motorcycle
+n03786901,mortar.n.03,mortar,,
+n03787032,mortarboard.n.02,mortarboard,,
+n03788195,mosque.n.01,mosque,,
+n03788365,mosquito_net.n.01,mosquito net,,
+n03791053,motor_scooter.n.01,"motor scooter, scooter",,
+n03792782,mountain_bike.n.01,"mountain bike, all-terrain bike, off-roader",bicycle,bicycle
+n03792972,mountain_tent.n.01,mountain tent,,
+n03793489,mouse.n.04,"mouse, computer mouse",,
+n03794056,mousetrap.n.01,mousetrap,,
+n03796401,moving_van.n.01,moving van,truck,truck
+n03803284,muzzle.n.03,muzzle,,
+n03804744,nail.n.02,nail,nail,nail
+n03814639,neck_brace.n.01,neck brace,,
+n03814906,necklace.n.01,necklace,necklace,necklace
+n03825788,nipple.n.02,nipple,,
+n03832673,notebook.n.02,"notebook, notebook computer",,
+n03837869,obelisk.n.01,obelisk,,
+n03838899,oboe.n.01,"oboe, hautboy, hautbois",,
+n03840681,ocarina.n.01,"ocarina, sweet potato",,
+n03841143,odometer.n.01,"odometer, hodometer, mileometer, milometer",,
+n03843555,oil_filter.n.01,oil filter,,
+n03854065,organ.n.05,"organ, pipe organ",,
+n03857828,oscilloscope.n.01,"oscilloscope, scope, cathode-ray oscilloscope, CRO",,
+n03866082,overskirt.n.01,overskirt,,
+n03868242,oxcart.n.01,oxcart,,
+n03868863,oxygen_mask.n.01,oxygen mask,,
+n03871628,packet.n.03,packet,,
+n03873416,paddle.n.04,"paddle, boat paddle",,
+n03874293,paddlewheel.n.01,"paddlewheel, paddle wheel",,
+n03874599,padlock.n.01,padlock,,
+n03876231,paintbrush.n.01,paintbrush,brush,brush
+n03877472,pajama.n.02,"pajama, pyjama, pj's, jammies",pajamas,pajamas
+n03877845,palace.n.04,palace,,
+n03884397,panpipe.n.01,"panpipe, pandean pipe, syrinx",,
+n03887697,paper_towel.n.01,paper towel,towel,towel
+n03888257,parachute.n.01,"parachute, chute",,
+n03888605,parallel_bars.n.01,"parallel bars, bars",,
+n03891251,park_bench.n.01,park bench,bench,bench
+n03891332,parking_meter.n.01,parking meter,,
+n03895866,passenger_car.n.01,"passenger car, coach, carriage",train,train
+n03899768,patio.n.01,"patio, terrace",,
+n03902125,pay-phone.n.01,"pay-phone, pay-station",telephone,telephone
+n03903868,pedestal.n.03,"pedestal, plinth, footstall",,
+n03908618,pencil_box.n.01,"pencil box, pencil case",box,box
+n03908714,pencil_sharpener.n.01,pencil sharpener,,
+n03916031,perfume.n.02,"perfume, essence",,
+n03920288,petri_dish.n.01,Petri dish,,
+n03924679,photocopier.n.01,photocopier,,
+n03929660,pick.n.05,"pick, plectrum, plectron",,
+n03929855,pickelhaube.n.01,pickelhaube,,
+n03930313,picket_fence.n.01,"picket fence, paling",,
+n03930630,pickup.n.01,"pickup, pickup truck",truck,truck
+n03933933,pier.n.03,pier,,
+n03935335,piggy_bank.n.01,"piggy bank, penny bank",,
+n03937543,pill_bottle.n.01,pill bottle,bottle,bottle
+n03938244,pillow.n.01,pillow,pillow,pillow
+n03942813,ping-pong_ball.n.01,ping-pong ball,ball,ball
+n03944341,pinwheel.n.02,pinwheel,,
+n03947888,pirate.n.03,"pirate, pirate ship",,
+n03950228,pitcher.n.02,"pitcher, ewer",,
+n03954731,plane.n.05,"plane, carpenter's plane, woodworking plane",,
+n03956157,planetarium.n.01,planetarium,,
+n03958227,plastic_bag.n.01,plastic bag,,
+n03961711,plate_rack.n.01,plate rack,,
+n03967562,plow.n.01,"plow, plough",,
+n03970156,plunger.n.03,"plunger, plumber's helper",,
+n03976467,polaroid_camera.n.01,"Polaroid camera, Polaroid Land camera",camera,camera
+n03976657,pole.n.01,pole,,
+n03977966,police_van.n.01,"police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria",truck,truck
+n03980874,poncho.n.01,poncho,,
+n03982430,pool_table.n.01,"pool table, billiard table, snooker table",table,table
+n03983396,pop_bottle.n.01,"pop bottle, soda bottle",bottle,bottle
+n03991062,pot.n.04,"pot, flowerpot",,
+n03992509,potter's_wheel.n.01,potter's wheel,,
+n03995372,power_drill.n.01,power drill,,
+n03998194,prayer_rug.n.01,"prayer rug, prayer mat",,
+n04004767,printer.n.02,printer,,
+n04005630,prison.n.01,"prison, prison house",,
+n04008634,projectile.n.01,"projectile, missile",,
+n04009552,projector.n.02,projector,,
+n04019541,puck.n.02,"puck, hockey puck",,
+n04023962,punching_bag.n.02,"punching bag, punch bag, punching ball, punchball",,
+n04026417,purse.n.03,purse,purse,purse
+n04033901,quill.n.01,"quill, quill pen",pen,pen
+n04033995,quilt.n.01,"quilt, comforter, comfort, puff",blanket,blanket
+n04037443,racer.n.02,"racer, race car, racing car",car,car
+n04039381,racket.n.04,"racket, racquet",,
+n04040759,radiator.n.03,radiator,,
+n04041544,radio.n.03,"radio, wireless",radio,radio
+n04044716,radio_telescope.n.01,"radio telescope, radio reflector",,
+n04049303,rain_barrel.n.01,rain barrel,,
+n04065272,recreational_vehicle.n.01,"recreational vehicle, RV, R.V.",,
+n04067472,reel.n.03,reel,,
+n04069434,reflex_camera.n.01,reflex camera,camera,camera
+n04070727,refrigerator.n.01,"refrigerator, icebox",refrigerator,refrigerator
+n04074963,remote_control.n.01,"remote control, remote",,
+n04081281,restaurant.n.01,"restaurant, eating house, eating place, eatery",,
+n04086273,revolver.n.01,"revolver, six-gun, six-shooter",,
+n04090263,rifle.n.01,rifle,,
+n04099969,rocking_chair.n.01,"rocking chair, rocker",chair,chair
+n04111531,rotisserie.n.01,rotisserie,oven,oven
+n04116512,rubber_eraser.n.01,"rubber eraser, rubber, pencil eraser",,
+n04118538,rugby_ball.n.01,rugby ball,ball,ball
+n04118776,rule.n.12,"rule, ruler",,
+n04120489,running_shoe.n.01,running shoe,sneaker,shoe|sneaker
+n04125021,safe.n.01,safe,box,box
+n04127249,safety_pin.n.01,safety pin,,
+n04131690,saltshaker.n.01,"saltshaker, salt shaker",,
+n04133789,sandal.n.01,sandal,shoe,shoe
+n04136333,sarong.n.01,sarong,,
+n04141076,sax.n.02,"sax, saxophone",,
+n04141327,scabbard.n.01,scabbard,,
+n04141975,scale.n.07,"scale, weighing machine",,
+n04146614,school_bus.n.01,school bus,bus,bus
+n04147183,schooner.n.02,schooner,,
+n04149813,scoreboard.n.01,scoreboard,,
+n04152593,screen.n.03,"screen, CRT screen",,
+n04153751,screw.n.04,screw,,
+n04154565,screwdriver.n.01,screwdriver,,
+n04162706,seat_belt.n.01,"seat belt, seatbelt",,
+n04179913,sewing_machine.n.01,sewing machine,,
+n04192698,shield.n.02,"shield, buckler",,
+n04200800,shoe_shop.n.01,"shoe shop, shoe-shop, shoe store",,
+n04201297,shoji.n.01,shoji,,
+n04204238,shopping_basket.n.01,shopping basket,basket,basket
+n04204347,shopping_cart.n.01,shopping cart,,
+n04208210,shovel.n.01,shovel,shovel,shovel
+n04209133,shower_cap.n.01,shower cap,,
+n04209239,shower_curtain.n.01,shower curtain,,
+n04228054,ski.n.01,ski,,
+n04229816,ski_mask.n.01,ski mask,,
+n04235860,sleeping_bag.n.01,sleeping bag,,
+n04238763,slide_rule.n.01,"slide rule, slipstick",,
+n04239074,sliding_door.n.01,sliding door,door,door
+n04243546,slot.n.07,"slot, one-armed bandit",,
+n04251144,snorkel.n.01,snorkel,,
+n04252077,snowmobile.n.01,snowmobile,,
+n04252225,snowplow.n.01,"snowplow, snowplough",,
+n04254120,soap_dispenser.n.01,soap dispenser,,
+n04254680,soccer_ball.n.01,soccer ball,ball,ball
+n04254777,sock.n.01,sock,sock,sock
+n04258138,solar_dish.n.01,"solar dish, solar collector, solar furnace",,
+n04259630,sombrero.n.02,sombrero,hat,hat
+n04263257,soup_bowl.n.01,soup bowl,bowl,bowl|dish
+n04264628,space_bar.n.01,space bar,,
+n04265275,space_heater.n.01,space heater,,
+n04266014,space_shuttle.n.01,space shuttle,,
+n04270147,spatula.n.01,spatula,,
+n04273569,speedboat.n.01,speedboat,boat,boat
+n04275548,spider_web.n.01,"spider web, spider's web",,
+n04277352,spindle.n.04,spindle,,
+n04285008,sports_car.n.01,"sports car, sport car",car,car
+n04286575,spotlight.n.02,"spotlight, spot",light,light
+n04296562,stage.n.03,stage,,
+n04310018,steam_locomotive.n.01,steam locomotive,train,train
+n04311004,steel_arch_bridge.n.01,steel arch bridge,,
+n04311174,steel_drum.n.01,steel drum,,
+n04317175,stethoscope.n.01,stethoscope,,
+n04325704,stole.n.01,stole,scarf,scarf
+n04326547,stone_wall.n.01,stone wall,,
+n04328186,stopwatch.n.01,"stopwatch, stop watch",,
+n04330267,stove.n.02,stove,stove,stove
+n04332243,strainer.n.01,strainer,,
+n04335435,streetcar.n.01,"streetcar, tram, tramcar, trolley, trolley car",,
+n04336792,stretcher.n.03,stretcher,,
+n04344873,studio_couch.n.01,"studio couch, day bed",couch,couch
+n04346328,stupa.n.01,"stupa, tope",,
+n04347754,submarine.n.01,"submarine, pigboat, sub, U-boat",,
+n04350905,suit.n.01,"suit, suit of clothes",,
+n04355338,sundial.n.01,sundial,,
+n04355933,sunglass.n.01,sunglass,,
+n04356056,sunglasses.n.01,"sunglasses, dark glasses, shades",glasses,glasses
+n04357314,sunscreen.n.01,"sunscreen, sunblock, sun blocker",,
+n04366367,suspension_bridge.n.01,suspension bridge,,
+n04367480,swab.n.02,"swab, swob, mop",mop,mop
+n04370456,sweatshirt.n.01,sweatshirt,sweater,sweater
+n04371430,swimming_trunks.n.01,"swimming trunks, bathing trunks",,
+n04371774,swing.n.02,swing,swing,swing|toy
+n04372370,switch.n.01,"switch, electric switch, electrical switch",,
+n04376876,syringe.n.01,syringe,,
+n04380533,table_lamp.n.01,table lamp,lamp|light,lamp|light
+n04389033,tank.n.01,"tank, army tank, armored combat vehicle, armoured combat vehicle",,
+n04392985,tape_player.n.01,tape player,,
+n04398044,teapot.n.01,teapot,,
+n04399382,teddy.n.01,"teddy, teddy bear",teddybear,teddybear|toy
+n04404412,television.n.02,"television, television system",tv,tv
+n04409515,tennis_ball.n.01,tennis ball,ball,ball
+n04417672,thatch.n.04,"thatch, thatched roof",roof,roof
+n04418357,theater_curtain.n.01,"theater curtain, theatre curtain",,
+n04423845,thimble.n.02,thimble,,
+n04428191,thresher.n.01,"thresher, thrasher, threshing machine",,
+n04429376,throne.n.01,throne,chair,chair
+n04435653,tile_roof.n.01,tile roof,roof,roof
+n04442312,toaster.n.02,toaster,,
+n04443257,tobacco_shop.n.01,"tobacco shop, tobacconist shop, tobacconist",,
+n04447861,toilet_seat.n.01,toilet seat,,
+n04456115,torch.n.01,torch,light,light
+n04458633,totem_pole.n.01,totem pole,,
+n04461696,tow_truck.n.01,"tow truck, tow car, wrecker",truck,truck
+n04462240,toyshop.n.01,toyshop,,
+n04465501,tractor.n.01,tractor,tractor,tractor
+n04467665,trailer_truck.n.01,"trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi",truck,truck
+n04476259,tray.n.01,tray,tray,tray
+n04479046,trench_coat.n.01,trench coat,coat,coat
+n04482393,tricycle.n.01,"tricycle, trike, velocipede",tricycle,tricycle
+n04483307,trimaran.n.01,trimaran,,
+n04485082,tripod.n.01,tripod,,
+n04486054,triumphal_arch.n.01,triumphal arch,,
+n04487081,trolleybus.n.01,"trolleybus, trolley coach, trackless trolley",bus,bus
+n04487394,trombone.n.01,trombone,,
+n04493381,tub.n.02,"tub, vat",,
+n04501370,turnstile.n.01,turnstile,,
+n04505470,typewriter_keyboard.n.01,typewriter keyboard,,
+n04507155,umbrella.n.01,umbrella,,
+n04509417,unicycle.n.01,"unicycle, monocycle",,
+n04515003,upright.n.02,"upright, upright piano",,
+n04517823,vacuum.n.04,"vacuum, vacuum cleaner",vacuum,vacuum
+n04522168,vase.n.01,vase,,
+n04523525,vault.n.03,vault,roof,roof
+n04525038,velvet.n.01,velvet,,
+n04525305,vending_machine.n.01,vending machine,,
+n04532106,vestment.n.01,vestment,,
+n04532670,viaduct.n.01,viaduct,,
+n04536866,violin.n.01,"violin, fiddle",,
+n04540053,volleyball.n.02,volleyball,ball,ball
+n04542943,waffle_iron.n.01,waffle iron,,
+n04548280,wall_clock.n.01,wall clock,clock,clock
+n04548362,wallet.n.01,"wallet, billfold, notecase, pocketbook",,
+n04550184,wardrobe.n.01,"wardrobe, closet, press",closet,closet
+n04552348,warplane.n.01,"warplane, military plane",airplane,airplane
+n04553703,washbasin.n.02,"washbasin, handbasin, washbowl, lavabo, wash-hand basin",sink,sink
+n04554684,washer.n.03,"washer, automatic washer, washing machine",,
+n04557648,water_bottle.n.01,water bottle,bottle,bottle
+n04560804,water_jug.n.01,water jug,bottle,bottle
+n04562935,water_tower.n.01,water tower,,
+n04579145,whiskey_jug.n.01,whiskey jug,bottle,bottle
+n04579432,whistle.n.04,whistle,,
+n04584207,wig.n.01,wig,,
+n04589890,window_screen.n.01,window screen,,
+n04590129,window_shade.n.01,window shade,,
+n04591157,windsor_tie.n.01,Windsor tie,,
+n04591713,wine_bottle.n.01,wine bottle,bottle,bottle
+n04592741,wing.n.02,wing,,
+n04596742,wok.n.01,wok,,
+n04597913,wooden_spoon.n.02,wooden spoon,spoon,spoon
+n04599235,wool.n.01,"wool, woolen, woollen",,
+n04604644,worm_fence.n.01,"worm fence, snake fence, snake-rail fence, Virginia fence",,
+n04606251,wreck.n.04,wreck,,
+n04612504,yawl.n.01,yawl,boat,boat
+n04613696,yurt.n.01,yurt,,
+n06359193,web_site.n.01,"web site, website, internet site, site",,
+n06596364,comic_book.n.01,comic book,,
+n06785654,crossword_puzzle.n.01,"crossword puzzle, crossword",puzzle,puzzle
+n06794110,street_sign.n.01,street sign,,
+n06874185,traffic_light.n.01,"traffic light, traffic signal, stoplight",,
+n07248320,book_jacket.n.01,"book jacket, dust cover, dust jacket, dust wrapper",,
+n07565083,menu.n.02,menu,,
+n07579787,plate.n.08,plate,plate,food|plate
+n07583066,guacamole.n.01,guacamole,food,food
+n07584110,consomme.n.01,consomme,soup,food|soup
+n07590611,hot_pot.n.01,"hot pot, hotpot",food,food
+n07613480,trifle.n.01,trifle,food,food
+n07614500,ice_cream.n.01,"ice cream, icecream",food,food
+n07615774,ice_lolly.n.01,"ice lolly, lolly, lollipop, popsicle",popsicle,food|popsicle
+n07684084,french_loaf.n.01,French loaf,bread,bread|food
+n07693725,bagel.n.01,"bagel, beigel",bread,bread|food
+n07695742,pretzel.n.01,pretzel,pretzel,bread|cracker|food|pretzel
+n07697313,cheeseburger.n.01,cheeseburger,hamburger,food|hamburger|sandwich
+n07697537,hotdog.n.02,"hotdog, hot dog, red hot",sandwich,food|sandwich
+n07711569,mashed_potato.n.01,mashed potato,potato,food|potato
+n07714571,head_cabbage.n.02,head cabbage,food,food
+n07714990,broccoli.n.02,broccoli,food,food
+n07715103,cauliflower.n.02,cauliflower,food,food
+n07716358,zucchini.n.02,"zucchini, courgette",food,food
+n07716906,spaghetti_squash.n.02,spaghetti squash,food,food
+n07717410,acorn_squash.n.02,acorn squash,food,food
+n07717556,butternut_squash.n.02,butternut squash,food,food
+n07718472,cucumber.n.02,"cucumber, cuke",food,food
+n07718747,artichoke.n.02,"artichoke, globe artichoke",food,food
+n07720875,bell_pepper.n.02,bell pepper,food,food
+n07730033,cardoon.n.02,cardoon,food,food
+n07734744,mushroom.n.05,mushroom,food,food
+n07742313,granny_smith.n.01,Granny Smith,apple,apple|food
+n07745940,strawberry.n.01,strawberry,strawberry,food|strawberry
+n07747607,orange.n.01,orange,orange,food|orange
+n07749582,lemon.n.01,lemon,food,food
+n07753113,fig.n.04,fig,food,food
+n07753275,pineapple.n.02,"pineapple, ananas",food,food
+n07753592,banana.n.02,banana,banana,banana|food
+n07754684,jackfruit.n.02,"jackfruit, jak, jack",food,food
+n07760859,custard_apple.n.02,custard apple,food,food
+n07768694,pomegranate.n.02,pomegranate,food,food
+n07802026,hay.n.01,hay,,
+n07831146,carbonara.n.01,carbonara,sauce,food|sauce
+n07836838,chocolate_sauce.n.01,"chocolate sauce, chocolate syrup",sauce,food|sauce
+n07860988,dough.n.01,dough,food,food
+n07871810,meat_loaf.n.01,"meat loaf, meatloaf",food,food
+n07873807,pizza.n.01,"pizza, pizza pie",pizza,food|pizza
+n07875152,potpie.n.01,potpie,food,food
+n07880968,burrito.n.01,burrito,food,food
+n07892512,red_wine.n.01,red wine,drink,drink|food
+n07920052,espresso.n.01,espresso,coffee,coffee|drink|food
+n07930864,cup.n.06,cup,cup,cup
+n07932039,eggnog.n.01,eggnog,drink,drink|food
+n09193705,alp.n.01,alp,,
+n09229709,bubble.n.01,bubble,bubbles,bubbles
+n09246464,cliff.n.01,"cliff, drop, drop-off",,
+n09256479,coral_reef.n.01,coral reef,,
+n09288635,geyser.n.01,geyser,,
+n09332890,lakeside.n.01,"lakeside, lakeshore",,
+n09399592,promontory.n.01,"promontory, headland, head, foreland",,
+n09421951,sandbar.n.01,"sandbar, sand bar",,
+n09428293,seashore.n.01,"seashore, coast, seacoast, sea-coast",,
+n09468604,valley.n.01,"valley, vale",,
+n09472597,volcano.n.02,volcano,,
+n09835506,ballplayer.n.01,"ballplayer, baseball player",person,person
+n10148035,groom.n.01,"groom, bridegroom",person,person
+n10565667,scuba_diver.n.01,scuba diver,person,person
+n11879895,rapeseed.n.01,rapeseed,,
+n11939491,daisy.n.01,daisy,flower,flower|plant
+n12057211,yellow_lady's_slipper.n.01,"yellow lady's slipper, yellow lady-slipper, Cypripedium calceolus, Cypripedium parviflorum",flower,flower|plant
+n12144580,corn.n.02,corn,corn,corn
+n12267677,acorn.n.01,acorn,,
+n12620546,hip.n.05,"hip, rose hip, rosehip",,
+n12768682,buckeye.n.01,"buckeye, horse chestnut, conker",,
+n12985857,coral_fungus.n.01,coral fungus,,
+n12998815,agaric.n.02,agaric,,
+n13037406,gyromitra.n.01,gyromitra,,
+n13040303,stinkhorn.n.01,"stinkhorn, carrion fungus",,
+n13044778,earthstar.n.01,earthstar,,
+n13052670,hen-of-the-woods.n.01,"hen-of-the-woods, hen of the woods, Polyporus frondosus, Grifola frondosa",,
+n13054560,bolete.n.01,bolete,,
+n13133613,ear.n.05,"ear, spike, capitulum",,
+n15075141,toilet_tissue.n.01,"toilet tissue, toilet paper, bathroom tissue",tissue,paper|tissue

@@ -1,0 +1,3 @@
+n_categories,n_pairs,pearson_r,pearson_p,spearman_r,spearman_p,kendall_tau,kendall_p,category_set,model,order
+123,7503,0.5840355938071176,0.0,0.4668722155178835,0.0,0.32504737374578296,0.0,valid129,clip,vedb_cdi_semantic
+123,7503,0.5001112615019399,0.0,0.3364503830605655,5.745338267989664e-198,0.23024921374203364,1.491556946715344e-196,valid129,dinov3,vedb_cdi_semantic

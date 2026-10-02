@@ -1,0 +1,240 @@
+<title>CDI Exemplar Mapping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+<style>
+/* Layout: a filter bar over a ledger of CDI words; each word shows its ImageNet and LVIS pools side by side. */
+:root {
+  --bg: #f6f7f6; --surface: #ffffff; --ink: #1b2422; --muted: #5d6965; --line: #dfe4e2;
+  --accent: #1d6a72; --accent-soft: #e2f0f1;
+  --ok: #2f7a3b; --ok-soft: #e4f2e5; --moved: #8a5a00; --moved-soft: #f8edd6;
+  --excl: #a3322a; --excl-soft: #f8e2df; --cur: #5a3fa6; --cur-soft: #ece6f8;
+  --f-display: "Newsreader", Georgia, serif; --f-body: "IBM Plex Sans", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121716; --surface: #19201f; --ink: #e6ecea; --muted: #9aa8a4; --line: #2c3634;
+  --accent: #6fc1c9; --accent-soft: #1d3436;
+  --ok: #7fcb88; --ok-soft: #1e3322; --moved: #e3b65a; --moved-soft: #3a2e14;
+  --excl: #f08a80; --excl-soft: #3d1f1c; --cur: #b9a4f2; --cur-soft: #2c2443; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #121716; --surface: #19201f; --ink: #e6ecea; --muted: #9aa8a4; --line: #2c3634;
+  --accent: #6fc1c9; --accent-soft: #1d3436;
+  --ok: #7fcb88; --ok-soft: #1e3322; --moved: #e3b65a; --moved-soft: #3a2e14;
+  --excl: #f08a80; --excl-soft: #3d1f1c; --cur: #b9a4f2; --cur-soft: #2c2443; color-scheme: dark; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 14px; line-height: 1.45; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; display: grid; gap: 22px; }
+h1 { font-family: var(--f-display); font-weight: 600; font-size: 2rem; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--f-display); font-weight: 600; font-size: 1.3rem; margin: 0 0 8px; }
+.lede { color: var(--muted); max-width: 70ch; margin: 6px 0 0; }
+.mono { font-family: var(--f-mono); font-size: 12px; }
+.num { font-variant-numeric: tabular-nums; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; }
+.stat b { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.stat .big { font-size: 15px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 13px; }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+.chip { display: inline-block; font-size: 11px; font-weight: 500; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+.c-analyzed { background: var(--ok-soft); color: var(--ok); }
+.c-moved, .c-hyponym_only { background: var(--moved-soft); color: var(--moved); }
+.c-excluded { background: var(--excl-soft); color: var(--excl); }
+.c-first_sense { background: var(--accent-soft); color: var(--accent); }
+.c-other_sense, .c-added, .c-curated { background: var(--cur-soft); color: var(--cur); }
+.c-dom { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; background: var(--bg); padding-block: 10px;
+  display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; border-bottom: 1px solid var(--line); }
+.bar input[type=search], .bar select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 9px; }
+.bar input[type=search] { min-width: 0; flex: 1 1 180px; max-width: 260px; }
+.bar label { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); }
+.tabs { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.tabs button { font: inherit; border: 0; background: var(--surface); color: var(--muted); padding: 6px 12px; cursor: pointer; }
+.tabs button[aria-selected=true] { background: var(--accent); color: var(--surface); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.count { color: var(--muted); margin-left: auto; }
+.word { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: grid; gap: 10px; }
+.whead { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.whead h3 { font-family: var(--f-display); font-size: 1.35rem; font-weight: 600; margin: 0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+.col { min-width: 0; display: grid; gap: 6px; align-content: start; }
+.col h4 { margin: 0; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.anchors { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.anchor { display: inline-flex; gap: 5px; align-items: center; }
+.note { font-size: 12px; color: var(--cur); }
+.empty { color: var(--muted); font-style: italic; }
+table { width: 100%; border-collapse: collapse; }
+td { padding: 3px 6px 3px 0; border-top: 1px solid var(--line); vertical-align: top; }
+td.n { text-align: right; width: 1%; white-space: nowrap; color: var(--muted); }
+td.s { width: 1%; white-space: nowrap; }
+tr.dim td.name { color: var(--muted); }
+tr.x td.name { text-decoration: line-through; color: var(--muted); }
+.why { display: block; font-size: 11.5px; color: var(--muted); }
+.more { font: inherit; font-size: 12px; color: var(--accent); background: none; border: 0; padding: 2px 0; cursor: pointer; justify-self: start; }
+.log { display: grid; gap: 22px; }
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.tablewrap table td, .tablewrap table th { padding: 6px 10px; text-align: left; }
+.tablewrap th { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.tablewrap tr:first-child td { border-top: 1px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>CDI Exemplar Mapping</h1>
+    <p class="lede">How each CDI word gets its ImageNet images and LVIS box crops. A word pools every source class
+      that WordNet files under its anchor sense(s). Purple marks a choice made by hand: a sense other than WordNet's
+      first, an added anchor, or an excluded class. Everything else follows from WordNet.</p>
+  </header>
+  <section class="stats" id="stats"></section>
+  <div class="legend">
+    <span><i class="chip c-analyzed">analyzed</i> in the exclusive set the results use</span>
+    <span><i class="chip c-moved">moved</i> pooled, but counted under a closer CDI word</span>
+    <span><i class="chip c-hyponym_only">not analyzed</i> word outside valid129</span>
+    <span><i class="chip c-excluded">excluded</i> removed by hand</span>
+    <span><i class="chip c-first_sense">first sense</i> WordNet's first noun sense</span>
+    <span><i class="chip c-other_sense">chosen sense</i> / <i class="chip c-added">added</i> picked by hand</span>
+  </div>
+  <div class="bar">
+    <div class="tabs" role="tablist">
+      <button id="tab-words" role="tab" aria-selected="true">By CDI word</button>
+      <button id="tab-log" role="tab" aria-selected="false">Curation log</button>
+    </div>
+    <input id="q" type="search" placeholder="Search words or classes" aria-label="Search">
+    <select id="scope" aria-label="Words to show">
+      <option value="v129">valid129 words</option>
+      <option value="v85">valid85 words</option>
+      <option value="all">all 295 CDI words</option>
+    </select>
+    <select id="dom" aria-label="CDI domain"><option value="">all domains</option></select>
+    <label><input id="cur" type="checkbox"> hand-curated only</label>
+    <label><input id="hide" type="checkbox"> analyzed classes only</label>
+    <span class="count num" id="count"></span>
+  </div>
+  <main id="words"></main>
+  <main id="log" class="log" hidden></main>
+</div>
+
+<script>
+const DATA = /*__DATA__*/;
+const DS = [["imagenet", "ImageNet", "images"], ["lvis", "LVIS", "crops"]];
+const fmt = n => n == null ? "" : n.toLocaleString("en-US");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const ORIGIN = {first_sense: "first sense", other_sense: "chosen sense", added: "added"};
+
+function isCurated(w) {
+  return DS.some(([k]) => w.ds[k].anchors.some(a => a[1] !== "first_sense") || w.ds[k].rows.some(r => r[3] === "excluded"));
+}
+function statusChip(r, w) {
+  const [, , , st, note] = r;
+  if (st === "analyzed") return '<i class="chip c-analyzed">analyzed</i>';
+  if (st === "excluded") return '<i class="chip c-excluded">excluded</i>';
+  if (note.startsWith("assigned")) return '<i class="chip c-moved">moved</i>';
+  return '<i class="chip c-hyponym_only">not analyzed</i>';
+}
+
+(function stats() {
+  const el = document.getElementById("stats");
+  el.innerHTML = DS.map(([k, label, unit]) => {
+    const s = DATA.stats[k], o = s.origin;
+    return `<div class="stat"><b>${label}</b>
+      <span class="big num">${s.words} CDI words · ${s.classes} source classes · ${fmt(s.exemplars)} ${unit}</span>
+      <span class="num">valid129 anchors: ${o.first_sense || 0} first sense, ${o.other_sense || 0} chosen sense, ${o.added || 0} added</span>
+      <span class="num">${s.excluded} classes excluded by hand</span></div>`;
+  }).join("");
+  const doms = [...new Set(DATA.words.map(w => w.dom))].sort();
+  document.getElementById("dom").insertAdjacentHTML("beforeend", doms.map(d => `<option value="${d}">${d.replace("_", " ")}</option>`).join(""));
+})();
+
+const LIMIT = 40;
+function colHTML(w, k, label, hide) {
+  const d = w.ds[k];
+  let rows = hide ? d.rows.filter(r => r[3] === "analyzed") : d.rows;
+  const anchors = d.anchors.length
+    ? `<div class="anchors">${d.anchors.map(a => `<span class="anchor" title="${esc(a[2])}"><span class="mono">${esc(a[0])}</span><i class="chip c-${a[1]}">${ORIGIN[a[1]]}</i></span>`).join("")}</div>`
+    : '<div class="empty">No anchor: no matching class in this dataset</div>';
+  const note = d.note ? `<div class="note">${esc(d.note)}</div>` : "";
+  if (!rows.length) return `<div class="col"><h4>${label}</h4>${anchors}${note}<div class="empty">${d.rows.length ? "No analyzed classes" : "No classes pooled"}</div></div>`;
+  const id = `${w.w}-${k}`;
+  const shown = rows.slice(0, LIMIT);
+  const tr = r => `<tr class="${r[3] === "excluded" ? "x" : r[3] === "analyzed" ? "" : "dim"}">
+      <td class="name" title="${esc(r[1])}: ${esc(r[6])}">${esc(r[0].replace(/_/g, " "))}${r[4] ? `<span class="why">${esc(r[4])}</span>` : ""}</td>
+      <td class="n num">${fmt(r[2])}</td><td class="s">${statusChip(r, w)}</td></tr>`;
+  return `<div class="col"><h4>${label}</h4>${anchors}${note}
+    <table><tbody id="t-${id}">${shown.map(tr).join("")}</tbody></table>
+    ${rows.length > LIMIT ? `<button class="more" data-id="${id}" data-k="${k}" data-w="${esc(w.w)}">Show all ${rows.length} classes</button>` : ""}</div>`;
+}
+
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const scope = document.getElementById("scope").value, dom = document.getElementById("dom").value;
+  const cur = document.getElementById("cur").checked, hide = document.getElementById("hide").checked;
+  const list = DATA.words.filter(w => {
+    if (scope === "v129" && !w.v129) return false;
+    if (scope === "v85" && !w.v85) return false;
+    if (dom && w.dom !== dom) return false;
+    if (cur && !isCurated(w)) return false;
+    if (scope === "all" && !DS.some(([k]) => w.ds[k].rows.length || w.ds[k].anchors.length) && !q) return false;
+    if (q && !(w.w.includes(q) || DS.some(([k]) => w.ds[k].rows.some(r => r[0].toLowerCase().includes(q))))) return false;
+    return true;
+  });
+  document.getElementById("count").textContent = `${list.length} words`;
+  document.getElementById("words").innerHTML = list.map(w => `<article class="word">
+      <div class="whead"><h3>${esc(w.w)}</h3><i class="chip c-dom">${w.dom.replace("_", " ")}</i>
+        ${w.v85 ? '<i class="chip c-dom">valid85</i>' : w.v129 ? '<i class="chip c-dom">valid129</i>' : ""}
+        ${isCurated(w) ? '<i class="chip c-curated">hand-curated</i>' : ""}
+        <span class="mono" style="color:var(--muted)">WordNet first sense: ${esc(w.first || "none")}</span></div>
+      <div class="cols">${DS.map(([k, label]) => colHTML(w, k, label, hide)).join("")}</div></article>`).join("")
+    || '<p class="empty">No words match these filters.</p>';
+  document.getElementById("words").style.display = "grid";
+  document.getElementById("words").style.gap = "12px";
+}
+
+document.getElementById("words").addEventListener("click", e => {
+  const b = e.target.closest(".more"); if (!b) return;
+  const w = DATA.words.find(x => x.w === b.dataset.w), hide = document.getElementById("hide").checked;
+  const tmp = document.createElement("div"); tmp.innerHTML = colHTML(w, b.dataset.k, "", hide).replace(/<button[\s\S]*$/, "");
+  const full = w.ds[b.dataset.k].rows.filter(r => !hide || r[3] === "analyzed");
+  const tbody = document.getElementById("t-" + b.dataset.id);
+  const tr = r => `<tr class="${r[3] === "excluded" ? "x" : r[3] === "analyzed" ? "" : "dim"}"><td class="name" title="${esc(r[1])}">${esc(r[0].replace(/_/g, " "))}${r[4] ? `<span class="why">${esc(r[4])}</span>` : ""}</td><td class="n num">${fmt(r[2])}</td><td class="s">${statusChip(r, w)}</td></tr>`;
+  tbody.innerHTML = full.map(tr).join(""); b.remove();
+});
+
+function renderLog() {
+  const v = DATA.words.filter(w => w.v129);
+  const senseRows = [], exclRows = [];
+  for (const w of v) for (const [k, label] of DS) {
+    for (const a of w.ds[k].anchors) if (a[1] !== "first_sense")
+      senseRows.push(`<tr><td>${esc(w.w)}</td><td>${label}</td><td class="mono">${esc(w.first || "none")}</td><td><span class="mono">${esc(a[0])}</span> <i class="chip c-${a[1]}">${ORIGIN[a[1]]}</i><span class="why">${esc(a[2])}</span></td><td class="num">${w.ds[k].rows.filter(r => r[3] === "analyzed").length}</td></tr>`);
+    for (const r of w.ds[k].rows) if (r[3] === "excluded")
+      exclRows.push(`<tr><td>${esc(w.w)}</td><td>${label}</td><td>${esc(r[0].replace(/_/g, " "))}</td><td class="num">${fmt(r[2])}</td><td>${esc(r[4])}</td></tr>`);
+  }
+  const notes = [];
+  for (const w of v) for (const [k, label] of DS) if (w.ds[k].note) notes.push(`<tr><td>${esc(w.w)}</td><td>${label}</td><td>${esc(w.ds[k].note)}</td></tr>`);
+  document.getElementById("log").innerHTML = `
+    <section><h2>Senses and anchors chosen by hand (valid129)</h2>
+      <p class="lede">Anchors other than the word's first WordNet noun sense. Every other valid129 anchor is the first sense.</p>
+      <div class="tablewrap"><table><thead><tr><th>CDI word</th><th>Dataset</th><th>WordNet first sense</th><th>Anchor used</th><th>Analyzed classes</th></tr></thead><tbody>${senseRows.join("")}</tbody></table></div></section>
+    <section><h2>Classes excluded by hand (all CDI words)</h2>
+      <p class="lede">WordNet places these under the word's anchor; they were removed because they are not the CDI referent. Counts are images (ImageNet) or annotated boxes (LVIS).</p>
+      <div class="tablewrap"><table><thead><tr><th>CDI word</th><th>Dataset</th><th>Class</th><th>Count</th><th>Reason</th></tr></thead><tbody>${
+        DATA.words.flatMap(w => DS.flatMap(([k, label]) => w.ds[k].rows.filter(r => r[3] === "excluded").map(r =>
+          `<tr><td>${esc(w.w)}</td><td>${label}</td><td>${esc(r[0].replace(/_/g, " "))}</td><td class="num">${fmt(r[2])}</td><td>${esc(r[4])}</td></tr>`))).join("")}</tbody></table></div></section>
+    <section><h2>Mapping notes (valid129)</h2>
+      <div class="tablewrap"><table><thead><tr><th>CDI word</th><th>Dataset</th><th>Note</th></tr></thead><tbody>${notes.join("")}</tbody></table></div></section>`;
+}
+
+function setTab(t) {
+  document.getElementById("tab-words").setAttribute("aria-selected", t === "words");
+  document.getElementById("tab-log").setAttribute("aria-selected", t === "log");
+  document.getElementById("words").hidden = t !== "words";
+  document.getElementById("log").hidden = t !== "log";
+  for (const id of ["q", "scope", "dom", "cur", "hide"]) document.getElementById(id).disabled = t !== "words";
+}
+document.getElementById("tab-words").onclick = () => setTab("words");
+document.getElementById("tab-log").onclick = () => setTab("log");
+for (const id of ["q", "scope", "dom", "cur", "hide"]) document.getElementById(id).addEventListener("input", render);
+render(); renderLog();
+if (location.hash === "#log") setTab("log");
+</script>
