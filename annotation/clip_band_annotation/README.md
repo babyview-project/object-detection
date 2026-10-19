@@ -72,10 +72,14 @@ two steps per item, plus "can't tell" and a "what is it?" label from the CDI lis
 Uses `assignments_<rater>.csv` from the sampler (2 raters, 10% double-coded). Not yet
 tested end to end.
 
+**In-house web task (chosen, 2026-10-18).** Lab RAs only, no Prolific. `web/` is a static
+page for GitHub Pages; RAs open private bundles from `make_inhouse_bundles.py` locally, so
+no images are hosted. `merge_inhouse_responses.py` turns their exports into
+`out/private/human_labels.csv`. See `web/README.md`. (The gallerize patch and the tkinter
+tool remain as alternatives.)
+
 ## Open decisions
 
-- Who sees full frames. Crops went to Prolific for the 868 h study; frames show faces
-  and home interiors, so the frame phase may need lab raters only, or IRB sign-off.
 - The 868 h study excluded body parts; this sample keeps them (valid129).
 
 ## CLIP vs Gemini (before human labels)

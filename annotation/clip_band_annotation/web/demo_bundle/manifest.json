@@ -1,0 +1,32 @@
+{
+ "study": "clip-band-context",
+ "version": 1,
+ "rater": "DEMO",
+ "bundle_id": "80dd30b872",
+ "n_items": 13,
+ "pages": [
+  {
+   "category": "ball",
+   "items": [
+    "b98ded00b15b",
+    "2913c693cc5e",
+    "ad2e09ba8cda",
+    "2f13cec703a2",
+    "4a98284c55cd",
+    "94ada22bc947",
+    "650ee700c728"
+   ]
+  },
+  {
+   "category": "cup",
+   "items": [
+    "eab9185d4f03",
+    "c1870d804c50",
+    "556975d57768",
+    "60ecf895c335",
+    "26e59d79936d",
+    "50047f4c43d2"
+   ]
+  }
+ ]
+}

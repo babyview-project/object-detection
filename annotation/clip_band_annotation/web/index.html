@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Nothing leaves the browser: no network requests are allowed; images load from the RA's own folder. -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<title>Object Check</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="bar" hidden>
+  <div id="where"></div>
+  <div id="progress"><div id="progress-fill"></div></div>
+  <div id="saved" aria-live="polite"></div>
+  <button id="export-top" class="ghost" type="button">Export backup</button>
+</header>
+
+<main>
+  <section id="start" class="panel">
+    <h1>Object check: crops and scenes</h1>
+    <p class="lead">You will see objects that a detector found in videos from a camera worn by a young
+      child. For each page, the detector says every object on it is one kind of thing, for example
+      <b>cup</b>. Your job is to find the ones that are <b>not</b>.</p>
+
+    <h2>How each page works</h2>
+    <ol>
+      <li><b>Crops only.</b> Click every crop that is <b>not</b> the named object. Clicked crops turn red;
+        click again to undo. Leave correct ones alone.</li>
+      <li><b>In the scene.</b> The same crops come back in a new order, each next to its whole video frame
+        with the object outlined in pink. Judge them again from scratch: click every one that is
+        <b>not</b> the named object. Use <b>Enlarge</b> to see a frame bigger.</li>
+    </ol>
+    <p>Your first answers are locked once you move to the scene step, so judge the crops on their own.</p>
+
+    <h2 id="rules">Counts as the named object</h2>
+    <ul>
+      <li>Any real example, even partly visible, blurry, or seen from an odd angle, as long as you can tell
+        what it is.</li>
+      <li>Toys, pictures, drawings and screens showing it.</li>
+    </ul>
+    <h2>Mark as not the object</h2>
+    <ul>
+      <li>A different kind of thing (a bowl on a <b>cup</b> page), or the box is mostly on something else.</li>
+      <li>You cannot tell what it is.</li>
+    </ul>
+
+    <h2>Start</h2>
+    <p>Choose your bundle folder (the unzipped <code>bundle_…</code> folder you were given). Images are
+      read from your computer only; nothing is uploaded. Progress is saved in this browser after every
+      click; use <b>Export backup</b> regularly and upload the file to the lab drive.</p>
+    <label class="picker">
+      <input id="folder" type="file" webkitdirectory directory multiple>
+      <span>Choose bundle folder…</span>
+    </label>
+    <p id="start-msg" class="msg" role="status"></p>
+    <details>
+      <summary>Moving to another computer?</summary>
+      <p>Export a backup here, then on the other computer choose the same bundle folder and import the
+        backup file.</p>
+      <label class="picker small">
+        <input id="import" type="file" accept=".csv,text/csv">
+        <span>Import backup…</span>
+      </label>
+    </details>
+  </section>
+
+  <section id="confirm" class="panel" hidden>
+    <h1>Welcome, <span id="who"></span></h1>
+    <p id="confirm-text"></p>
+    <button id="go" type="button">Start</button>
+  </section>
+
+  <section id="task" hidden>
+    <div id="prompt"></div>
+    <div id="grid"></div>
+    <div class="actions">
+      <span id="count"></span>
+      <button id="next" type="button"></button>
+    </div>
+  </section>
+
+  <section id="done" class="panel" hidden>
+    <h1>All pages done — thank you!</h1>
+    <p>Please export your answers and upload the file to the lab drive.</p>
+    <button id="export-end" type="button">Export answers</button>
+  </section>
+</main>
+
+<div id="zoom" hidden>
+  <img id="zoom-img" alt="">
+  <p>Click anywhere or press Esc to close</p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
