@@ -55,7 +55,9 @@ holds no subject or video ids.
 
 ## Instructions shown to RAs
 
-Edit the "Counts as the named object" / "Mark as not the object" lists in `index.html`.
-Current rules: any recognisable real example counts, even partial or blurry; toys,
-pictures, drawings and screens count; mark it if it is a different thing, the box is
-mostly on something else, or you cannot tell.
+Edit the "Mark as not the object" / "Counts as the named object" lists in `index.html`.
+The invalid types follow the objects-gallerize (868 h) study: other categories, empty
+detections (only background), and blurry or unrecognisable detections. Added here, as the
+gallerize instructions do not say: toys, pictures, drawings and screens count as the
+object. Gallerize's practice trial needs example images that cannot be hosted publicly,
+so RAs are trained in person instead.
