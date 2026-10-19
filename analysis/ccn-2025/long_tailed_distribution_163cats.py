@@ -46,28 +46,136 @@ DEFAULT_CDI_WORDS = PROJECT_ROOT / "data" / "cdi_words.csv"
 DEFAULT_OUT_DIR = SCRIPT_DIR / "long_tailed_163cats"
 
 
-# Konkle colors for long_tailed_163cats plots
-KONKLE_COLORS = {
-    "big_obj": "#3A53A4",
-    "small_obj": "#FAA41A",
-    "animated": "#8250A0",
-    "others": "#C0BDBD",
-}
+# ---------------------------------------------------------------------------
+# Color schemes: set COLOR_SCHEME to switch palettes.
+# Options: "default" | "tol_bright" | "nature" | "catppuccin" | "tokyo" | "coral_teal"
+# ---------------------------------------------------------------------------
+COLOR_SCHEME = "coral_teal"
 
-# CDI semantic categories: pastel color scheme (category -> hex)
-CDI_SEMANTIC_COLORS = {
-    "animals": "#B5EAD7",
-    "body_parts": "#FFB7B2",
-    "clothing": "#C7CEEA",
-    "food_drink": "#FFDAC1",
-    "furniture_rooms": "#E2F0CB",
-    "household": "#F9D5E5",
-    "outside": "#95E1D3",
-    "people": "#FFEAA7",
-    "toys": "#DDA0DD",
-    "vehicles": "#81ECEC",
-    "other": "#DCDDE1",
+# Konkle colors (4): big_obj, small_obj, animated, others
+KONKLE_PALETTES = {
+    "default": {
+        "big_obj": "#2540C4",
+        "small_obj": "#E89400",
+        "animated": "#7B3FA8",
+        "others": "#8B8B8B",
+    },
+    "tol_bright": {  # Paul Tol Bright – colorblind-friendly
+        "big_obj": "#4477AA",
+        "small_obj": "#EE6677",
+        "animated": "#AA3377",
+        "others": "#BBBBBB",
+    },
+    "nature": {
+        "big_obj": "#2E86AB",
+        "small_obj": "#E07A5F",
+        "animated": "#7B2CBF",
+        "others": "#6C757D",
+    },
+    "catppuccin": {  # Catppuccin Mocha – warm, cohesive, pretty
+        "big_obj": "#89B4FA",
+        "small_obj": "#FAB387",
+        "animated": "#CBA6F7",
+        "others": "#585B70",
+    },
+    "tokyo": {  # Tokyo Night – moody blue/purple/cyan
+        "big_obj": "#7AA2F7",
+        "small_obj": "#FF9E64",
+        "animated": "#BB9AF7",
+        "others": "#565F89",
+    },
+    "coral_teal": {  # Coral + teal + gold – trendy, balanced
+        "big_obj": "#5B9BD5",
+        "small_obj": "#E87A5F",
+        "animated": "#9B7EC8",
+        "others": "#8B9A9E",
+    },
 }
+KONKLE_COLORS = KONKLE_PALETTES[COLOR_SCHEME]
+
+# CDI semantic categories (11): saturated, distinct
+CDI_SEMANTIC_PALETTES = {
+    "default": {
+        "animals": "#00B894",
+        "body_parts": "#E74C3C",
+        "clothing": "#6C5CE7",
+        "food_drink": "#E67E22",
+        "furniture_rooms": "#27AE60",
+        "household": "#E056BD",
+        "outside": "#00CEC9",
+        "people": "#F1C40F",
+        "toys": "#9B59B6",
+        "vehicles": "#3498DB",
+        "other": "#95A5A6",
+    },
+    "tol_bright": {
+        "animals": "#228833",
+        "body_parts": "#EE6677",
+        "clothing": "#AA3377",
+        "food_drink": "#CCBB44",
+        "furniture_rooms": "#66CCEE",
+        "household": "#BBBBBB",
+        "outside": "#4477AA",
+        "people": "#EE7733",
+        "toys": "#CC3311",
+        "vehicles": "#0099BB",
+        "other": "#777777",
+    },
+    "nature": {
+        "animals": "#2D6A4F",
+        "body_parts": "#BC4749",
+        "clothing": "#6A4C93",
+        "food_drink": "#E76F51",
+        "furniture_rooms": "#40916C",
+        "household": "#9D4EDD",
+        "outside": "#2E86AB",
+        "people": "#F4A261",
+        "toys": "#7209B7",
+        "vehicles": "#3A86FF",
+        "other": "#6C757D",
+    },
+    "catppuccin": {  # Catppuccin Mocha – warm, pretty
+        "animals": "#A6E3A1",
+        "body_parts": "#F38BA8",
+        "clothing": "#B4BEFE",
+        "food_drink": "#FAB387",
+        "furniture_rooms": "#94E2D5",
+        "household": "#F5C2E7",
+        "outside": "#89DCEB",
+        "people": "#F9E2AF",
+        "toys": "#CBA6F7",
+        "vehicles": "#74C7EC",
+        "other": "#6C7086",
+    },
+    "tokyo": {  # Tokyo Night
+        "animals": "#9ECE6A",
+        "body_parts": "#F7768E",
+        "clothing": "#BB9AF7",
+        "food_drink": "#FF9E64",
+        "furniture_rooms": "#73DACA",
+        "household": "#C0A8F0",
+        "outside": "#7DCFFF",
+        "people": "#E0AF68",
+        "toys": "#A9B1D6",
+        "vehicles": "#7AA2F7",
+        "other": "#565F89",
+    },
+    "coral_teal": {  # Coral + teal + gold – soft but vivid
+        "animals": "#4DB8A8",
+        "body_parts": "#E87A5F",
+        "clothing": "#9B7EC8",
+        "food_drink": "#E8A54C",
+        "furniture_rooms": "#6BAB7A",
+        "household": "#D97B9E",
+        "outside": "#5B9BD5",
+        "people": "#E8C44C",
+        "toys": "#B07CC8",
+        "vehicles": "#6BA3D5",
+        "other": "#8B9A9E",
+    },
+}
+CDI_SEMANTIC_COLORS = CDI_SEMANTIC_PALETTES[COLOR_SCHEME]
+
 # Order for legend (consistent across plots)
 CDI_SEMANTIC_ORDER = [
     "animals", "body_parts", "clothing", "food_drink", "furniture_rooms",
@@ -246,7 +354,7 @@ def plot_bar_with_cdi_semantic(
     y_max: float | None = None,
 ) -> None:
     """
-    Bar plot of proportion per category, colored by CDI semantic category (pastel).
+    Bar plot of proportion per category, colored by CDI semantic category (saturated).
     out_base: path without extension (saved as .png and .pdf).
     """
     plot_df = df.head(top_n).copy() if top_n is not None else df.copy()
@@ -331,7 +439,7 @@ def plot_semantic_group_distribution(
     skewness_val: float | None = None,
     y_max: float | None = None,
 ) -> None:
-    """Bar plot of proportion for one CDI semantic category (top N); pastel color, same style as Konkle group plots."""
+    """Bar plot of proportion for one CDI semantic category (top N); saturated color, same style as Konkle group plots."""
     fig, ax = plt.subplots(figsize=(max(10, len(group_df) * 0.2), 6))
     x = np.arange(len(group_df))
     color = CDI_SEMANTIC_COLORS.get(semantic_category, CDI_SEMANTIC_COLORS["other"])
@@ -422,7 +530,7 @@ def plot_top50_plus_top10_per_semantic(
     Wide combined figure: Panel A = top 50 (full width); Panels B–I = top 10 per semantic
     category in a 4×2 grid. Excludes 'outside'. Panel A uses y_max; subplots B–I each
     scale to their own data (no shared y-axis) so low-frequency categories are readable.
-    Semantic pastel colors.
+    Semantic saturated colors.
     """
     # Semantic categories for the 4×2 grid: all present in data except 'outside'
     # Order by total proportion (frequency) descending so first row = most frequent
@@ -513,7 +621,19 @@ def main() -> None:
         default=DEFAULT_OUT_DIR,
         help="Directory for outputs",
     )
+    parser.add_argument(
+        "--color_scheme",
+        type=str,
+        choices=["default", "tol_bright", "nature", "catppuccin", "tokyo", "coral_teal"],
+        default=COLOR_SCHEME,
+        help="Palette: default, tol_bright, nature, catppuccin (warm/pretty), tokyo (moody), coral_teal (trendy)",
+    )
     args = parser.parse_args()
+
+    # Apply chosen color scheme
+    global KONKLE_COLORS, CDI_SEMANTIC_COLORS
+    KONKLE_COLORS = KONKLE_PALETTES[args.color_scheme]
+    CDI_SEMANTIC_COLORS = CDI_SEMANTIC_PALETTES[args.color_scheme]
 
     out_dir = args.output_dir
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -637,7 +757,7 @@ def main() -> None:
     )
     print(f"Saved: {out_dir / 'long_tailed_top50_plus_konkle_2x2.png'}, .pdf")
 
-    # --- CDI semantic category plots (pastel colors, Lato if available) ---
+    # --- CDI semantic category plots (saturated colors, Lato if available) ---
     # All 163 and top 50 colored by CDI semantic
     plot_bar_with_cdi_semantic(
         count_df,

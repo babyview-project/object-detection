@@ -1,0 +1,470 @@
+diff --git a/server/.env.example b/server/.env.example
+index 1951782..c0cc6e1 100644
+--- a/server/.env.example
++++ b/server/.env.example
+@@ -16,3 +16,11 @@ IMG_DIR=./img
+ # URL prefix prepended to image paths (e.g. /gallerize when behind a reverse proxy subpath)
+ IMG_URL_PREFIX=
+ 
++
++# --- Context study (local_csv only) ---
++# Directory of full frames with the box drawn, same <class>/<file> layout as IMG_DIR.
++# When set, items get a frame_url and the frontend (REACT_APP_CONTEXT_PHASE=1) adds the
++# "same items in the scene" step after each category.
++FRAME_DIR=
++# Number of shuffled_index buckets in the CSV
++NUM_BUCKETS=4
+diff --git a/server/models/response.model.js b/server/models/response.model.js
+index 814e391..ef4245c 100644
+--- a/server/models/response.model.js
++++ b/server/models/response.model.js
+@@ -37,6 +37,19 @@ const responseSchema = new Schema({
+     total_study_time: {
+         type: Number,
+         required: false
++    },
++    // Context study: 'crop' or 'frame' step; page_complete rows list the items shown.
++    phase: {
++        type: String,
++        required: false
++    },
++    n_items: {
++        type: Number,
++        required: false
++    },
++    items: {
++        type: String,
++        required: false
+     }
+ });
+ 
+diff --git a/server/store.js b/server/store.js
+index 621101f..84a0866 100644
+--- a/server/store.js
++++ b/server/store.js
+@@ -103,7 +103,12 @@ function csvGetSingleClass(data, cls, num, shuffledIndex) {
+       return ga - gb || (parseInt(a.shuffled_index) || 0) - (parseInt(b.shuffled_index) || 0);
+     })
+     .slice(0, num)
+-    .map(r => ({ ...r, _id: r.filename, games: [], url: (process.env.IMG_URL_PREFIX || '') + '/db/images/' + r.filename }));
++    .map(r => ({
++      ...r, _id: r.filename, games: [],
++      url: (process.env.IMG_URL_PREFIX || '') + '/db/images/' + r.filename,
++      // Context step: the same item's full frame with its box drawn (FRAME_DIR).
++      ...(process.env.FRAME_DIR ? { frame_url: (process.env.IMG_URL_PREFIX || '') + '/db/frames/' + r.filename } : {}),
++    }));
+   rows.forEach(r => { gamesCount[r.filename] = (gamesCount[r.filename] || 0) + 1; });
+   return rows;
+ }
+@@ -131,7 +136,7 @@ function serve() {
+   });
+ 
+   // Total number of shuffled_index buckets (must match distinct shuffled_index values in the CSV)
+-  const NUM_BUCKETS = 4;
++  const NUM_BUCKETS = parseInt(process.env.NUM_BUCKETS || '4', 10);
+ 
+   // POST /db/assign-worker-index — assigns a shuffled_index to a worker (max 3 real workers per index)
+   app.post("/db/assign-worker-index", async (req, res) => {
+@@ -215,9 +220,21 @@ function serve() {
+       next();
+     });
+     app.get('/db/images/*', (req, res) => {
+-      res.sendFile(path.join(imgDir, req.params[0]));
++      res.sendFile(req.params[0], { root: imgDir });  // root: refuses ../ outside imgDir
+     });
+     log(`serving images from ${imgDir} via /db/images/`);
++    if (process.env.FRAME_DIR) {
++      app.use('/db/frames', (req, res, next) => {
++        if (req.headers['x-api-key'] !== process.env.API_KEY) {
++          return res.status(401).send('Unauthorized');
++        }
++        next();
++      });
++      app.get('/db/frames/*', (req, res) => {
++        res.sendFile(req.params[0], { root: process.env.FRAME_DIR });
++      });
++      log(`serving context frames from ${process.env.FRAME_DIR} via /db/frames/`);
++    }
+ 
+     const csvPath = process.env.DATA_CSV_PATH || path.join(__dirname, 'data', 'annotations.csv');
+     const csvData = parseCSV(csvPath);
+diff --git a/src/components/SingleCard.js b/src/components/SingleCard.js
+index cca64db..67affe1 100644
+--- a/src/components/SingleCard.js
++++ b/src/components/SingleCard.js
+@@ -110,6 +110,95 @@ class DrawCard extends React.Component {
+   }
+ }
+ 
++// Load an image the same way DrawCard does: data/static URLs directly, server
++// paths through the authenticated client. Calls cb with a displayable URL.
++function loadImage(url, cb) {
++  if (!url) return;
++  if (url.startsWith('data:') || url.startsWith('blob:') || url.includes('/static/')) {
++    cb(url);
++    return;
++  }
++  const path = url.replace(/^\/gallerize/, '');
++  apiClient.get(path, { responseType: 'blob' })
++    .then(res => cb(URL.createObjectURL(res.data)))
++    .catch(err => console.error('Failed to load image:', err));
++}
++
++/*
++ContextCard: the crop next to its full frame (box drawn), for the context step.
++Same Invalid / Cancel behaviour as InvalidCard; clicking the frame enlarges it.
++*/
++class ContextCard extends React.Component {
++  constructor(props) {
++    super(props);
++    this.state = { cropUrl: null, frameUrl: null, invalid: false, zoom: false };
++  }
++
++  componentDidMount() {
++    loadImage(this.props.input.url, u => this.setState({ cropUrl: u }));
++    loadImage(this.props.input.frame_url, u => this.setState({ frameUrl: u }));
++  }
++
++  componentWillUnmount() {
++    [this.state.cropUrl, this.state.frameUrl].forEach(u => {
++      if (u && u.startsWith('blob:')) URL.revokeObjectURL(u);
++    });
++  }
++
++  getInstanceInfo() {
++    return {
++      filename: this.props.input.filename,
++      class: this.props.input.class,
++      shuffled_index: this.props.input.shuffled_index,
++      worker_id: new URLSearchParams(window.location.search).get('PROLIFIC_PID') || 'preview'
++    };
++  }
++
++  toggle() {
++    const invalid = !this.state.invalid;
++    this.setState({ invalid });
++    if (invalid) this.props.handleInvalid(this.getInstanceInfo());
++    else this.props.cancelInvalid(this.getInstanceInfo());
++  }
++
++  render() {
++    const { cropUrl, frameUrl, invalid, zoom } = this.state;
++    const crop = { maxWidth: '150px', maxHeight: '150px', margin: 'auto' };
++    const frame = { maxWidth: '200px', maxHeight: '360px', cursor: 'zoom-in', margin: 0 };
++    return (
++      <Card
++        className="single"
++        sx={{ display: 'inline-block', margin: '5px', verticalAlign: 'top',
++              outline: invalid ? '3px solid red' : 'none' }}
++      >
++        <CardContent sx={{ padding: '5px !important', width: '380px' }}>
++          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minHeight: '200px' }}>
++            <div style={{ width: '160px' }}>
++              {cropUrl ? <img src={cropUrl} style={crop} alt="crop" /> : null}
++            </div>
++            <div>
++              {frameUrl
++                ? <img src={frameUrl} style={frame} alt="frame" onClick={() => this.setState({ zoom: true })} />
++                : <div style={{ width: '200px', height: '356px', backgroundColor: '#f0f0f0' }} />}
++            </div>
++          </div>
++          <div style={{ padding: '8px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
++            <span>{this.props.input.class}</span>
++            {invalid
++              ? <Button size="small" variant="outlined" onClick={() => this.toggle()}>Cancel</Button>
++              : <Button size="small" variant="contained" color="error" onClick={() => this.toggle()}>Invalid</Button>}
++          </div>
++          <Dialog open={zoom} onClose={() => this.setState({ zoom: false })} maxWidth="lg">
++            <DialogContent>
++              <img src={frameUrl} style={{ maxWidth: 'none', maxHeight: '85vh' }} alt="frame enlarged" />
++            </DialogContent>
++          </Dialog>
++        </CardContent>
++      </Card>
++    );
++  }
++}
++
+ class InvalidCard extends React.Component {
+   constructor(props) {
+     super(props);
+@@ -252,4 +341,4 @@ class PicLink extends React.Component {
+   }
+ }
+ 
+-export { SingleCard, InvalidCard };
++export { SingleCard, InvalidCard, ContextCard };
+diff --git a/src/components/study/Trial.js b/src/components/study/Trial.js
+index 0ac429e..2145309 100644
+--- a/src/components/study/Trial.js
++++ b/src/components/study/Trial.js
+@@ -1,5 +1,5 @@
+ import React from "react";
+-import { InvalidCard } from "../SingleCard";
++import { InvalidCard, ContextCard } from "../SingleCard";
+ import { Button, Box, Snackbar, Alert, IconButton, Tooltip } from "@mui/material";
+ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+@@ -19,7 +19,11 @@ for (let i = 1; i <= 163; i++) {
+ }
+ 
+ /*
+-A Trial contains props.num images from a single category and a check image
++A Trial contains props.num images from a single category and a check image.
++With props.contextPhase, each category has a second step: the same items are shown
++again next to their full frame (box drawn) and judged again from scratch. Every
++posted response carries `phase` ('crop' or 'frame'), and each finished step posts a
++'page_complete' row listing the items shown, so "nothing marked" is recorded too.
+ */
+ export class Trial extends React.Component {
+     constructor(props) {
+@@ -31,10 +35,12 @@ export class Trial extends React.Component {
+         this.previewJump = this.previewJump.bind(this);
+         this.previewPrev = this.previewPrev.bind(this);
+         this.previewNext = this.previewNext.bind(this);
++        this.showFramePhase = this.showFramePhase.bind(this);
+         this.state = {
+             showPage: props.showPage,
+-            buttonText: 'Next Category',
+             classIdx: -1,
++            phase: 'crop',
++            items: [],
+             toRet: [],
+             nextDisable: false,
+             invalidDrawings: [],
+@@ -96,6 +102,7 @@ export class Trial extends React.Component {
+             previewShuffledIndex: shuffledIndex,
+             nextDisable: false,
+             invalidDrawings: [],
++            phase: 'crop',
+         });
+         this._fetchPreview(cls, shuffledIndex);
+     }
+@@ -105,7 +112,7 @@ export class Trial extends React.Component {
+         const nextIdx = this.state.classIdx - 1;
+         if (nextIdx < 0) return;
+         const cls = this.props.allClasses[nextIdx];
+-        this.setState({ classIdx: nextIdx, nextDisable: false, invalidDrawings: [] });
++        this.setState({ classIdx: nextIdx, nextDisable: false, invalidDrawings: [], phase: 'crop' });
+         this._fetchPreview(cls, this.state.previewShuffledIndex);
+     }
+ 
+@@ -114,7 +121,7 @@ export class Trial extends React.Component {
+         const nextIdx = this.state.classIdx + 1;
+         if (nextIdx >= this.props.allClasses.length) return;
+         const cls = this.props.allClasses[nextIdx];
+-        this.setState({ classIdx: nextIdx, nextDisable: false, invalidDrawings: [] });
++        this.setState({ classIdx: nextIdx, nextDisable: false, invalidDrawings: [], phase: 'crop' });
+         this._fetchPreview(cls, this.state.previewShuffledIndex);
+     }
+ 
+@@ -134,10 +141,62 @@ export class Trial extends React.Component {
+ 
+     // -----------------------------------------------------------------------
+ 
++    workerId() {
++        return new URLSearchParams(window.location.search).get('PROLIFIC_PID') || 'preview';
++    }
++
++    // Post this step's invalid clicks plus one 'page_complete' row for the step.
++    async postPage(phase) {
++        if (this.props.isPreview) {
++            this.setState({ invalidDrawings: [] });
++            return;
++        }
++        const base = {
++            class: this.state.curClass,
++            shuffled_index: this.props.shuffledIndex,
++            worker_id: this.workerId(),
++            order_index: this.state.classIdx + 1,
++            reaction_time: Date.now() - this.state.trialStart,
++            phase: phase,
++        };
++        const rows = this.state.invalidDrawings.map(d => ({ ...d, ...base, trial_type: 'invalid_drawing' }));
++        rows.push({
++            ...base,
++            filename: `page:${this.state.curClass}:${phase}`,
++            trial_type: 'page_complete',
++            n_items: this.state.items.length,
++            items: this.state.items.map(x => x.stem || x.filename).join(';'),
++        });
++        try {
++            await axios.post(`${API_URL}/db/post-response`, rows);
++        } catch (error) {
++            console.log(error);
++        }
++        this.setState({ invalidDrawings: [] });
++    }
++
++    hasFramePhase() {
++        return this.props.contextPhase && this.state.items.some(x => x.frame_url);
++    }
++
++    showFramePhase() {
++        const shuffled = [...this.state.items].sort(() => Math.random() - 0.5);
++        const toRet = shuffled.map(d => (
++            <ContextCard
++                input={d}
++                key={'frame-' + d._id}
++                handleInvalid={this.addInvalid}
++                cancelInvalid={this.removeInvalid}
++            />
++        ));
++        this.setState({ phase: 'frame', toRet, invalidDrawings: [], trialStart: Date.now() });
++        window.scrollTo(0, 0);
++    }
++
+     async nextPage() {
+-        if (this.state.nextDisable) {
++        const { phase, classIdx } = this.state;
++        if (phase === 'crop' && this.state.nextDisable) {
+             this.setState({ snackbarOpen: true });
+-            console.log(checkImages[this.state.checkFn]);
+             // Skip POST in preview mode
+             if (!this.props.isPreview) {
+                 let filename = checkImages[this.state.checkFn].split('/').slice(-1)[0];
+@@ -147,51 +206,40 @@ export class Trial extends React.Component {
+                     trial_type: 'attention_check',
+                     shuffled_index: this.props.shuffledIndex,
+                     reaction_time: Date.now() - this.state.trialStart,
+-                    worker_id: new URLSearchParams(window.location.search).get('PROLIFIC_PID') || 'preview',
+-                    order_index: this.state.classIdx + 1,
++                    worker_id: this.workerId(),
++                    order_index: classIdx + 1,
++                    phase: 'crop',
+                 }]);
+             }
+             return;
+         }
+ 
+-        if (this.state.classIdx === this.props.allClasses.length - 1) {
++        if (classIdx >= 0) {
++            await this.postPage(phase);
++            if (phase === 'crop' && this.hasFramePhase()) {
++                this.showFramePhase();
++                return;
++            }
++        }
++
++        if (classIdx === this.props.allClasses.length - 1) {
+             if (!this.props.isPreview) {
+                 window.location.href = PROLIFIC_COMPLETION_URL;
+             }
+             return;
+         }
+ 
+-        if (this.state.classIdx === this.props.allClasses.length - 2) {
+-            this.setState({ buttonText: 'Submit' });
+-        }
+-
+-        // Skip POST in preview mode
+-        if (!this.props.isPreview && this.state.invalidDrawings.length > 0) {
+-            const rt = Date.now() - this.state.trialStart;
+-            const drawings = this.state.invalidDrawings.map(d => ({ ...d, reaction_time: rt, trial_type: 'invalid_drawing', order_index: this.state.classIdx + 1 }));
+-            await axios.post(`${API_URL}/db/post-response`, drawings)
+-                .then(() => {
+-                    this.setState({ invalidDrawings: [] });
+-                })
+-                .catch(error => {
+-                    console.log(error);
+-                });
+-        } else {
+-            this.setState({ invalidDrawings: [] });
+-        }
+-
+-        let nextIdx = this.state.classIdx + 1;
+-        let curClass = this.props.allClasses[nextIdx];
+-        let prolificPID = new URLSearchParams(window.location.search).get('PROLIFIC_PID') || 'preview';
++        let nextIdx = classIdx + 1;
+         let filter = {
+-            class: curClass,
++            class: this.props.allClasses[nextIdx],
+             num: this.props.num,
+-            worker_id: prolificPID,
++            worker_id: this.workerId(),
+         };
+         this.fetch(filter);
+         this.setState({
+             classIdx: nextIdx,
+             nextDisable: true,
++            phase: 'crop',
+         });
+     }
+ 
+@@ -234,7 +282,7 @@ export class Trial extends React.Component {
+                     toRet.push(checkCard);
+                     toRet.sort(() => Math.random() - 0.5);
+ 
+-                    this.setState({ toRet, curClass: filter.class, trialStart: Date.now(), checkFn: fn });
++                    this.setState({ toRet, items: response.data, curClass: filter.class, trialStart: Date.now(), checkFn: fn });
+                 }
+             })
+             .catch((error) => {
+@@ -251,7 +299,19 @@ export class Trial extends React.Component {
+         }
+ 
+         const { isPreview, allClasses } = this.props;
+-        const { classIdx, previewShuffledIndex } = this.state;
++        const { classIdx, previewShuffledIndex, phase } = this.state;
++        const curName = allClasses[classIdx];
++        const isLast = classIdx === allClasses.length - 1;
++        let buttonText;
++        if (phase === 'crop' && this.hasFramePhase()) {
++            buttonText = 'Next: see them in the scene';
++        } else {
++            buttonText = isLast ? 'Submit' : 'Next Category';
++        }
++        const prompt = phase === 'frame'
++            ? <p>Now each detection is shown with the <b>whole camera frame</b> (pink box). Judge them again:
++                mark every boxed object that is <b>not</b> a <b>{curName}</b>. Click a frame to enlarge it.</p>
++            : <p>Please identify all invalid detections of <b>{curName}</b></p>;
+ 
+         // Preview arrow nav bar
+         const previewNav = isPreview ? (
+@@ -308,12 +368,12 @@ export class Trial extends React.Component {
+                 <div>
+                     {previewNav}
+                     <Box display="flex" justifyContent="center" alignItems="center" style={{ padding: '10px' }}>
+-                        <Button variant="contained" onClick={() => this.nextPage()}>{this.state.buttonText}</Button>
++                        <Button variant="contained" onClick={() => this.nextPage()}>{buttonText}</Button>
+                         <div style={{ paddingLeft: '20px' }}> {this.state.classIdx + 1}/{this.props.allClasses.length} </div>
+                     </Box>
+ 
+                     <Box display="flex" justifyContent="center" alignItems="center" style={{ padding: '10px', textAlign: "center" }}>
+-                        <Box flex={1}><h3 style={{ textAlign: "center", top: "30px" }}><p>Please identify all invalid detections of <b>{this.props.allClasses[this.state.classIdx]}</b></p></h3></Box>
++                        <Box flex={1}><h3 style={{ textAlign: "center", top: "30px" }}>{prompt}</h3></Box>
+                         <Box><img src={refImg} style={{ width: '60px' }} alt="" /></Box>
+                     </Box>
+                     {this.state.toRet}
+diff --git a/src/components/study/study.js b/src/components/study/study.js
+index 2e2b2f7..48f7b9e 100644
+--- a/src/components/study/study.js
++++ b/src/components/study/study.js
+@@ -7,6 +7,8 @@ import { Instruction, Timeline } from "./instruction";
+ import { Trial } from "./Trial";
+ 
+ const API_URL = process.env.REACT_APP_API_URL;
++// Set REACT_APP_CONTEXT_PHASE=1 to add the "same items in the scene" step per category.
++const CONTEXT_PHASE = process.env.REACT_APP_CONTEXT_PHASE === '1';
+ 
+ class Study extends React.Component {
+     constructor(props) {
+@@ -105,6 +107,10 @@ class Study extends React.Component {
+                     </div>
+                 </Box>
+             </Box>
++            {CONTEXT_PHASE && <p>After each category, you will see the <b>same detections again, each next to the
++                whole camera frame</b> with the object outlined in a pink box. Judge every one again from scratch:
++                mark the boxed objects that are not the named category. The frame may help you recognise objects
++                that were unclear on their own, or show that something is not what it first seemed.</p>}
+             <p>When you finish, please click the submit button to complete the study.</p>
+             <p>Let's try a practice trial!</p>
+         </div></Instruction>;
+@@ -175,6 +181,7 @@ class Study extends React.Component {
+                     finalText="Finish"
+                     shuffledIndex={this.state.shuffledIndex}
+                     num={25}
++                    contextPhase={CONTEXT_PHASE}
+                     previewClass={this.props.previewClass}
+                     previewIndex={this.props.previewIndex}
+                     isPreview={this.props.isPreview}

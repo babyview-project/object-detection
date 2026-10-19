@@ -4,6 +4,7 @@
   python scripts/check_exemplar_stage.py
   python scripts/check_exemplar_stage.py --category-set valid85
   python scripts/check_exemplar_stage.py --models clip dinov3
+  BV_EXEMPLAR_EMBED_ROOT=.../exemplar_set_embeddings/2025.2 python scripts/check_exemplar_stage.py --models clip dinov3
 """
 from __future__ import annotations
 

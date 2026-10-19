@@ -22,7 +22,7 @@ Stage 0 (this doc)          Stage 1+ (manuscript analyses)
 
 | Step | What | Notebook / script | Typical runtime |
 |------|------|-------------------|-----------------|
-| **0a** | BabyView category means (z-scored) | [`06_exemplar_set_zscore_embeddings.ipynb`](06_exemplar_set_zscore_embeddings.ipynb) or [`scripts/exemplar_set_zscore_embeddings.py`](scripts/exemplar_set_zscore_embeddings.py) | **Long** for valid129 (CLIP filter list scan) |
+| **0a** | BabyView category means (z-scored) | [`06_exemplar_set_zscore_embeddings.ipynb`](06_exemplar_set_zscore_embeddings.ipynb) or [`scripts/exemplar_set_zscore_embeddings.py`](scripts/exemplar_set_zscore_embeddings.py) | **Long** for valid129 (CLIP filter list scan). **2025.2 packed shards:** `BV_EMBEDDINGS_BASE=.../babyview_full BV_EXEMPLAR_EMBED_ROOT=.../exemplar_set_embeddings/2025.2 python scripts/exemplar_set_zscore_embeddings.py --source packed` (CLIP+DINOv3; see [`packed_crop_embeddings.py`](scripts/packed_crop_embeddings.py)) |
 | **0b** | THINGS CLIP + DINOv3 category means | [`07_things_exemplar_set_zscore_embeddings.ipynb`](07_things_exemplar_set_zscore_embeddings.ipynb) | Moderate |
 | **0c** | THINGS BabyDINOv3 per-image `.npy` (GPU) | [`scripts/create_babydinov3_things_embeddings.py`](scripts/create_babydinov3_things_embeddings.py) | GPU; run once per checkpoint |
 | **0d** | THINGS BabyDINOv3 category means | [`scripts/things_exemplar_set_zscore_babydinov3.py`](scripts/things_exemplar_set_zscore_babydinov3.py) | Fast |

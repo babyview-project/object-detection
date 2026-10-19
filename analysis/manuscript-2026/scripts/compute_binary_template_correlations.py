@@ -18,33 +18,33 @@ from scipy.spatial.distance import pdist, squareform
 from scipy.stats import pearsonr, spearmanr
 
 from _bootstrap import MANUSCRIPT_DIR, PREPRINT_DIR, PROJECT_ROOT, SCRIPTS_DIR
+from manuscript_config import analysis_models, exemplar_embed_dir, output_run_root
+
 CATEGORY_SET = os.environ.get("CATEGORY_SET", "valid129").strip()
 THRESHOLD_TOKEN = os.environ.get("BV_THINGS_EMBED_THRESHOLD", "0.27").strip()
 
-if CATEGORY_SET == "valid85":
-    RESULTS_DIR = PREPRINT_DIR / "supplemental_results_valid85cats_04302026" / "results"
-else:
-    RESULTS_DIR = PREPRINT_DIR / "main_results_valid129s_04302026" / "results"
-
-EXEMPLAR_EMBED_DIR = PREPRINT_DIR / "exemplar_set_embeddings" / CATEGORY_SET
+RESULTS_DIR = output_run_root(CATEGORY_SET) / "results"
+EXEMPLAR_EMBED_DIR = exemplar_embed_dir(CATEGORY_SET)
 INCLUDED_CATEGORIES_TXT = PROJECT_ROOT / "data" / f"included_categories_{CATEGORY_SET}.txt"
 CDI_SEMANTIC_CSV = PROJECT_ROOT / "data" / f"long_tailed_dist_prop_included_categories_{CATEGORY_SET}.csv"
 
-MODELS = ("clip", "dinov3", "babydinov3")
+MODELS = tuple(
+    m
+    for m in analysis_models()
+    if (EXEMPLAR_EMBED_DIR / f"bv_{m}_exemplar_avg_zscore_within_{CATEGORY_SET}.csv").is_file()
+    and (EXEMPLAR_EMBED_DIR / f"things_{m}_exemplar_avg_zscore_within_{CATEGORY_SET}.csv").is_file()
+)
 
 
 def load_included_categories(path: Path) -> list[str]:
     return [ln.strip().lower() for ln in path.read_text().splitlines() if ln.strip()]
 
 
-def load_cdi_semantic_map(path: Path) -> dict[str, str]:
-    df = pd.read_csv(path)
-    col = "category" if "category" in df.columns else df.columns[0]
-    sem_col = "cdi_semantic" if "cdi_semantic" in df.columns else "semantic"
-    return {
-        str(r[col]).strip().lower(): str(r[sem_col]).strip().lower()
-        for _, r in df.iterrows()
-    }
+def load_cdi_semantic_map(path: Path | None = None) -> dict[str, str]:
+    """CDI domain from cdi_words.csv. ``path`` is ignored (kept for callers)."""
+    from manuscript_config import load_cdi_semantic_map as load_from_cdi_words
+
+    return load_from_cdi_words()
 
 
 def load_embedding_csv(path: Path) -> tuple[list[str], np.ndarray]:

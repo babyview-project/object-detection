@@ -33,6 +33,8 @@ from scipy.stats import pearsonr, spearmanr
 from tqdm.auto import tqdm
 
 from _bootstrap import MANUSCRIPT_DIR, PREPRINT_DIR, PROJECT_ROOT, SCRIPTS_DIR
+from manuscript_config import exemplar_embed_dir, output_run_root
+from packed_crop_embeddings import is_packed_store, packed_root_from_path, try_packed_subject_means
 from bv_things_cdi_shuffle_inference import (  # noqa: E402
     draw_horizontal_paired_cluster_delta_bars,
     run_bv_things_shuffle_inference,
@@ -54,9 +56,7 @@ TOP8_RANK_MODE = os.environ.get(
 
 
 def output_run_root_for_category_set(category_set: str) -> Path:
-    if category_set == 'valid129':
-        return PREPRINT_DIR / 'main_results_valid129s_04302026'
-    return PREPRINT_DIR / 'supplemental_results_valid85cats_04302026'
+    return output_run_root(category_set)
 
 
 OUTPUT_RUN_ROOT = output_run_root_for_category_set(TOP8_CATEGORY_SET)
@@ -65,7 +65,7 @@ FIGURES_DIR = OUTPUT_RUN_ROOT / 'figures'
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
-EXEMPLAR_EMBED_DIR = PREPRINT_DIR / 'exemplar_set_embeddings' / TOP8_CATEGORY_SET
+EXEMPLAR_EMBED_DIR = exemplar_embed_dir(TOP8_CATEGORY_SET)
 THINGS_EMBED_CSV = EXEMPLAR_EMBED_DIR / f'things_{EMBED_MODEL}_exemplar_avg_zscore_within_{TOP8_CATEGORY_SET}.csv'
 ORDER_CSV = RESULTS_DIR / f'bv_things_rdm_order_bv_semantic_{EMBED_MODEL}_filtered-{THRESHOLD_TOKEN}_{TOP8_CATEGORY_SET}.csv'
 CDI_SEMANTIC_CSV = DATA_DIR / f'long_tailed_dist_prop_included_categories_{TOP8_CATEGORY_SET}.csv'
@@ -77,10 +77,18 @@ SAMPLED_EXEMPLAR_CSV = (
 )
 TRAJECTORY_CSV = ANALYSIS_DIR / 'individual_analyses' / 'developmental_trajectory_rdms_clip' / 'trajectory_correlations.csv'
 
-YOLOE_ROOT = Path('/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings')
-EMBEDDINGS_DIR = YOLOE_ROOT / (
-    'clip_embeddings_new' if EMBED_MODEL == 'clip' else 'facebook_dinov3-vitb16-pretrain-lvd1689m'
-)
+YOLOE_ROOT = Path(
+    os.environ.get(
+        'BV_EMBEDDINGS_BASE',
+        '/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings',
+    )
+).expanduser()
+if is_packed_store(YOLOE_ROOT):
+    EMBEDDINGS_DIR = YOLOE_ROOT
+else:
+    EMBEDDINGS_DIR = YOLOE_ROOT / (
+        'clip_embeddings_new' if EMBED_MODEL == 'clip' else 'facebook_dinov3-vitb16-pretrain-lvd1689m'
+    )
 
 N_TOP_DENSEST = 8
 USE_MANIFEST_FILTER = os.environ.get('TOP8_USE_MANIFEST_FILTER', '1').strip().lower() not in {'0', 'false', 'no'}
@@ -141,15 +149,11 @@ def load_included_categories(txt_path: Path) -> list[str]:
     return sorted(set(out))
 
 
-def load_cdi_semantic_map(csv_path: Path) -> dict[str, str]:
-    df = pd.read_csv(csv_path)
-    mapping = {}
-    for _, row in df[['category', 'cdi_semantic']].dropna().iterrows():
-        cat = str(row['category']).strip().lower()
-        sem = str(row['cdi_semantic']).strip().lower()
-        if cat:
-            mapping[cat] = sem if sem else 'other'
-    return mapping
+def load_cdi_semantic_map(csv_path: Path | None = None) -> dict[str, str]:
+    """CDI domain from cdi_words.csv. ``csv_path`` is ignored (kept for callers)."""
+    from manuscript_config import load_cdi_semantic_map as load_from_cdi_words
+
+    return load_from_cdi_words()
 
 
 def load_embedding_csv(csv_path: Path) -> tuple[list[str], np.ndarray]:
@@ -583,6 +587,24 @@ def load_top8_subject_centroids(
         print(f'Cache hit: {len(out)}/{len(top_subjects)}; loading embeddings for: {missing}')
     else:
         missing = list(top_subjects)
+
+    packed = packed_root_from_path(embeddings_dir)
+    if packed is not None:
+        print(f'Packed store {packed}: subject×category means (no 868-hour manifest stems)')
+        loaded = try_packed_subject_means(
+            packed,
+            allowed_categories,
+            missing,
+            model=EMBED_MODEL,
+            min_sim=float(THRESHOLD_TOKEN),
+            l2_normalize=True,
+            zscore_across_categories=ZSCORE_EMBEDDINGS_ACROSS_CATEGORIES,
+        ) or {}
+        for sid in missing:
+            cat_dict = loaded.get(sid, {})
+            out[sid] = cat_dict
+            _save_subject_cache(_centroid_cache_path(cache_dir, sid), cat_dict)
+        return out
 
     if USE_MANIFEST_FILTER and stems_by_cat:
         scan_categories = set(stems_by_cat.keys()) & allowed_categories

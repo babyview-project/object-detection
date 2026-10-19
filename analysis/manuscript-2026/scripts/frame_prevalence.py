@@ -5,12 +5,16 @@ frames in the pool.
 
 Pools:
   - valid129 (and valid85 when using the full-dataset builder): all frames in
-    ``merged_frame_detections_with_metadata_filtered-0.27.csv``.
-  - valid85 supplemental: annotation / VQA frame pool (rater-validated exemplar
-    frames from the 7,018-crop cohort).
+    ``merged_frame_detections_with_metadata_filtered-0.27.csv``, or CLIP-passers
+    in a 2025.2 packed ``crops_index.csv.gz``.
+  - valid85 supplemental (868-hour only): annotation / VQA frame pool
+    (rater-validated exemplar frames from the 7,018-crop cohort). On 2025.2
+    packed stores, valid85 is the same full CLIP-passer pool restricted to the
+    85-class inclusion list (868-hour annotation stems do not match).
 """
 from __future__ import annotations
 
+import os
 import shutil
 from pathlib import Path
 
@@ -51,6 +55,72 @@ def load_detections(frame_data_csv: Path) -> pd.DataFrame:
     df["class_name"] = df["class_name"].astype(str).str.strip().str.lower()
     df["frame_key"] = df["original_frame_path"].map(path_to_frame_key)
     return df
+
+
+def load_detections_from_packed_index(
+    emb_root: Path | str,
+    *,
+    min_sim: float = 0.27,
+    exclude_subjects: tuple[str, ...] = ("00270001",),
+    exclude_classes: frozenset[str] | None = None,
+    chunksize: int = 1_000_000,
+) -> pd.DataFrame:
+    """CLIP-passers from 2025.2 ``crops_index.csv.gz`` as ``class_name`` + ``frame_key``.
+
+    ``frame_key`` is ``{video_id}/{frame_number:05d}``. Matches Stage 0: cosine
+    >= ``min_sim``, drop ``person`` / ``picture``, drop excluded subjects.
+    """
+    from packed_crop_embeddings import subject_id_from_video_id
+
+    index_path = Path(emb_root) / "crops_index.csv.gz"
+    if not index_path.is_file():
+        raise FileNotFoundError(index_path)
+    if exclude_classes is None:
+        exclude_classes = frozenset({"person", "picture"})
+    excl_subj = {str(s).zfill(8) for s in exclude_subjects if s}
+    usecols = ["video_id", "frame_number", "class_name", "clip_sim", "passed"]
+    write_time_threshold = abs(float(min_sim) - 0.27) < 1e-9
+    parts: list[pd.DataFrame] = []
+    for chunk in pd.read_csv(index_path, usecols=usecols, chunksize=chunksize):
+        chunk["class_name"] = chunk["class_name"].astype(str).str.strip().str.lower()
+        if write_time_threshold and "passed" in chunk.columns:
+            chunk = chunk[chunk["passed"].astype(bool)]
+        else:
+            chunk = chunk[pd.to_numeric(chunk["clip_sim"], errors="coerce") >= float(min_sim)]
+        if exclude_classes:
+            chunk = chunk[~chunk["class_name"].isin(exclude_classes)]
+        if excl_subj:
+            sid = chunk["video_id"].map(subject_id_from_video_id)
+            chunk = chunk[~sid.isin(excl_subj)]
+        if chunk.empty:
+            continue
+        frame_no = chunk["frame_number"].astype(int).astype(str).str.zfill(5)
+        chunk = chunk.assign(frame_key=chunk["video_id"].astype(str) + "/" + frame_no)
+        parts.append(chunk[["class_name", "frame_key"]])
+    if not parts:
+        return pd.DataFrame(columns=["class_name", "frame_key"])
+    out = pd.concat(parts, ignore_index=True)
+    print(
+        f"Packed detections: {len(out):,} CLIP-pass boxes from {index_path} "
+        f"(min_sim={min_sim:.2f}, frames={out['frame_key'].nunique():,})"
+    )
+    return out
+
+
+def resolve_detections() -> tuple[pd.DataFrame, bool]:
+    """Return (detections, is_packed). Packed if ``BV_EMBEDDINGS_BASE`` is a shard store."""
+    from packed_crop_embeddings import is_packed_store, packed_root_from_path
+
+    emb = os.environ.get("BV_EMBEDDINGS_BASE", "").strip()
+    if emb:
+        root = packed_root_from_path(Path(emb).expanduser()) or Path(emb).expanduser()
+        if is_packed_store(root):
+            min_sim = float(os.environ.get("BV_CLIP_FILTER_LIST_THRESHOLD", "0.27"))
+            return load_detections_from_packed_index(root, min_sim=min_sim), True
+    from _bootstrap import PROJECT_ROOT
+
+    csv = PROJECT_ROOT / "frame_data" / "merged_frame_detections_with_metadata_filtered-0.27.csv"
+    return load_detections(csv), False
 
 
 def build_full_dataset_table(
@@ -140,10 +210,17 @@ def build_frame_prevalence_table(
     category_set: str,
     included: list[str],
     semantic_map: dict[str, str],
+    *,
+    full_pool_for_valid85: bool = False,
 ) -> tuple[pd.DataFrame, str]:
     """Return (table, pool_label) for valid129 or valid85."""
     if category_set == "valid129":
         return build_full_dataset_table(det, included, semantic_map), "full infant-view dataset"
+    if category_set == "valid85" and full_pool_for_valid85:
+        return (
+            build_full_dataset_table(det, included, semantic_map),
+            "full 2025.2 infant-view dataset (valid85 inclusion list)",
+        )
     if category_set == "valid85":
         exemplar_counts = (
             build_valid85_sampled_exemplar_table(

@@ -1,0 +1,19 @@
+{
+ "model": "gemini-2.5-flash-lite",
+ "task": "name",
+ "pass": 1,
+ "endpoint": "vertexai/us-central1",
+ "temperature": 0.0,
+ "thinking": "budget0",
+ "max_px": 512,
+ "date": "2026-10-18",
+ "units": 200,
+ "scored": 199,
+ "failures": 1,
+ "input_tokens": 249981,
+ "output_tokens": 4680,
+ "thinking_tokens": 12,
+ "model_versions": [
+  "gemini-2.5-flash-lite"
+ ]
+}

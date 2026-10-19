@@ -14,7 +14,7 @@ Shared paths: [`manuscript_config.py`](manuscript_config.py) at the manuscript r
 |--------|-------|----------|-------------------|
 | [`manuscript_config.py`](manuscript_config.py) | — | import only | Shared paths (`MANUSCRIPT_DIR`, `exemplar_embed_dir`, …) |
 | [`scripts/check_exemplar_stage.py`](scripts/check_exemplar_stage.py) | 0 | After 06–07 | Gate before **02–05** |
-| [`scripts/exemplar_set_zscore_embeddings.py`](scripts/exemplar_set_zscore_embeddings.py) | 0a | Build BV tables | **06** → `exemplar_set_embeddings/` |
+| [`scripts/exemplar_set_zscore_embeddings.py`](scripts/exemplar_set_zscore_embeddings.py) | 0a | Packed 2025.2 shards or 868-hour `.npy` | **06** → `exemplar_set_embeddings/` |
 | [`scripts/things_exemplar_set_zscore_babydinov3.py`](scripts/things_exemplar_set_zscore_babydinov3.py) | 0d | After THINGS BabyDINOv3 `.npy` | **07** (BabyDINOv3 block) |
 | [`scripts/create_babydinov3_things_embeddings.py`](scripts/create_babydinov3_things_embeddings.py) | 0c | GPU; once per checkpoint | Per-image THINGS `.npy` |
 | [`scripts/create_babydinov3_crop_embeddings.py`](scripts/create_babydinov3_crop_embeddings.py) | 0* | GPU; upstream of **06** | Per-crop BV BabyDINOv3 `.npy` on disk |
@@ -25,6 +25,7 @@ Shared paths: [`manuscript_config.py`](manuscript_config.py) at the manuscript r
 | [`scripts/clip_threshold_sensitivity.py`](scripts/clip_threshold_sensitivity.py) | 1 | Optional supplement | CLIP threshold sensitivity SI |
 | [`scripts/top8_within_between_vs_things.py`](scripts/top8_within_between_vs_things.py) | 1 | After Stage 0; often from **05** | Top-8 CDI vs THINGS (valid85/129) |
 | [`scripts/build_shared_public_data.py`](scripts/build_shared_public_data.py) | publish | After local results exist | [`data/shared_data_manuscript_2026/`](../../data/shared_data_manuscript_2026/) |
+| [`scripts/export_codeocean_capsule.sh`](scripts/export_codeocean_capsule.sh) | publish | Slim CodeOcean / public repo | See [`CODEOCEAN_EXPORT.md`](CODEOCEAN_EXPORT.md) |
 
 \* `create_babydinov3_crop_embeddings.py` is **Tier C** infrastructure (millions of `.npy`).
 Only needed if BabyDINOv3 crop embeddings are not already on your cluster path.
@@ -61,7 +62,7 @@ Notebook **05** adds `scripts/` to `sys.path` when importing this module.
 
 | Script | Purpose |
 |--------|---------|
-| `scripts/exemplar_set_zscore_embeddings.py` | Headless **06**: scan CLIP filter list → average BV `.npy` → z-score CSVs. `./run_06_zscore_tmux.sh` |
+| `scripts/exemplar_set_zscore_embeddings.py` | Headless **06**: 868-hour `.npy` (BabyDINOv3) or 2025.2 packed shards (CLIP+DINOv3 via `packed_crop_embeddings.py`). `./run_06_zscore_tmux.sh` |
 | `scripts/things_exemplar_set_zscore_babydinov3.py` | Z-score THINGS BabyDINOv3 category trees → `things_babydinov3_exemplar_avg_*`. `BV_CATEGORY_SET=valid129` |
 | `scripts/create_babydinov3_things_embeddings.py` | Embed ~1.8k THINGS images (GPU). `./run_babydinov3_things_embed_tmux.sh` |
 | `scripts/create_babydinov3_crop_embeddings.py` | Embed BV crops with BabyDINOv3 checkpoint (GPU, long). Feeds **06** when `BV_BABYDINOV3_EMBEDDINGS_DIR` is populated |

@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-"""Headless runner for 06_exemplar_set_zscore_embeddings.ipynb (tmux / nohup friendly).
+"""Headless Stage 0: BabyView category means → z-scored CSVs.
 
-BabyDINOv3 only: exemplar .npy → per-category mean → z-score within category set.
-(CLIP / facebook DINOv3 paths are skipped; see notebook 06 for commented blocks.)
+Two on-disk layouts (auto-detected, or ``--source`` / ``BV_EMBED_SOURCE``):
 
-Examples:
-  cd analysis/manuscript-2026
-  python scripts/exemplar_set_zscore_embeddings.py --all-category-sets
+- **packed** (2025.2): ``{emb_root}/shards/{video}.npz`` + CLIP-pass DINOv3.
+  Writes ``bv_clip_*`` and ``bv_dinov3_*`` (no BabyDINOv3).
+- **npy** (868-hour): per-crop ``.npy`` tree. Default here is BabyDINOv3 only
+  (CLIP/DINOv3 tables for that release already exist).
 
-  BV_INCLUDE_BABYDINOV3=1 BV_CATEGORY_SET=valid129 python scripts/exemplar_set_zscore_embeddings.py
+Examples::
+
+  BV_EMBEDDINGS_BASE=/ccn2a/dataset/babyview/2025.2/outputs/image_embeddings/babyview_full \\
+    BV_EXEMPLAR_EMBED_ROOT=analysis/manuscript-2026/exemplar_set_embeddings/2025.2 \\
+    python scripts/exemplar_set_zscore_embeddings.py --source packed --category-set valid129
+
+  BV_CATEGORY_SET=valid129 python scripts/exemplar_set_zscore_embeddings.py --source npy
 """
 from __future__ import annotations
 
@@ -24,9 +30,16 @@ import pandas as pd
 from tqdm.auto import tqdm
 
 from _bootstrap import MANUSCRIPT_DIR, PREPRINT_DIR, PROJECT_ROOT, SCRIPTS_DIR
+from packed_crop_embeddings import (
+    DEFAULT_PACKED_ROOT,
+    category_means,
+    is_packed_store,
+)
+from manuscript_config import EXEMPLAR_EMBED_ROOT
+
 DATA_DIR = PROJECT_ROOT / "data"
 ANNOTATION_DIR = PROJECT_ROOT / "annotation"
-OUT_ROOT = PREPRINT_DIR / "exemplar_set_embeddings"
+OUT_ROOT = EXEMPLAR_EMBED_ROOT
 
 CATEGORY_FILES = {
     "valid85": DATA_DIR / "included_categories_valid85.txt",
@@ -52,6 +65,26 @@ def parse_args() -> argparse.Namespace:
         "--all-category-sets",
         action="store_true",
         help="Run valid129 then valid85 (overrides --category-set)",
+    )
+    p.add_argument(
+        "--source",
+        choices=("auto", "packed", "npy"),
+        default=os.environ.get("BV_EMBED_SOURCE", "auto"),
+        help="packed = 2025.2 per-video .npz store (CLIP+DINOv3); "
+             "npy = 868-hour per-crop .npy tree (BabyDINOv3). auto = detect shards.",
+    )
+    p.add_argument(
+        "--emb-root",
+        default=None,
+        help="Packed store root or 868-hour embeddings parent. "
+             "Default: BV_EMBEDDINGS_BASE / BV_PACKED_EMB_ROOT.",
+    )
+    p.add_argument(
+        "--models",
+        nargs="+",
+        choices=("clip", "dinov3", "babydinov3"),
+        default=None,
+        help="Backbones to average. Packed default: clip dinov3. npy default: babydinov3.",
     )
     return p.parse_args()
 
@@ -588,17 +621,118 @@ def run_category_set(category_set: str, cfg: dict) -> None:
     print("Wrote:", out_dir / "exemplar_embedding_run.json")
 
 
+def resolve_source(args) -> tuple[str, Path]:
+    packed_default = Path(os.environ.get("BV_PACKED_EMB_ROOT", str(DEFAULT_PACKED_ROOT))).expanduser()
+    npy_default = Path(
+        os.environ.get(
+            "BV_EMBEDDINGS_BASE",
+            "/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_embeddings",
+        )
+    ).expanduser()
+    explicit = Path(args.emb_root).expanduser() if args.emb_root else None
+    env_base = Path(os.environ["BV_EMBEDDINGS_BASE"]).expanduser() if os.environ.get("BV_EMBEDDINGS_BASE") else None
+
+    if args.source == "packed":
+        for cand in (explicit, env_base, packed_default):
+            if cand is not None:
+                return "packed", cand
+    if args.source == "npy":
+        return "npy", explicit or env_base or npy_default
+
+    for cand in (explicit, env_base, packed_default, npy_default):
+        if cand is None:
+            continue
+        if is_packed_store(cand):
+            return "packed", cand
+    return "npy", explicit or env_base or npy_default
+
+
+def run_category_set_packed(category_set: str, emb_root: Path, models: list[str], min_sim: float) -> None:
+    inc_path = CATEGORY_FILES[category_set]
+    allowed = set(load_included_categories(inc_path))
+    out_dir = OUT_ROOT / category_set
+    out_dir.mkdir(parents=True, exist_ok=True)
+    print(f"\n=== {category_set} (packed store {emb_root}) ===")
+    meta_models: dict = {}
+    cats_out: list[str] = []
+    for model in models:
+        if model == "babydinov3":
+            print("  skip babydinov3 — not in the 2025.2 packed store")
+            continue
+        cats, X, n_by_cat, stats = category_means(
+            emb_root,
+            allowed,
+            model=model,
+            min_sim=min_sim,
+            passed_only=False,
+            l2_normalize=True,
+        )
+        if X.size == 0:
+            raise RuntimeError(f"No {model} vectors for {category_set} in {emb_root}")
+        dim_cols = [f"dim_{i}" for i in range(X.shape[1])]
+        zpath = out_dir / f"bv_{model}_exemplar_avg_zscore_within_{category_set}.csv"
+        rpath = out_dir / f"bv_{model}_exemplar_avg_raw_within_{category_set}.csv"
+        save_cat_emb(zpath, cats, zscore_rows(X), dim_cols)
+        save_cat_emb(rpath, cats, X, dim_cols)
+        meta_models[model] = {
+            "n_categories": len(cats),
+            "n_crops": n_by_cat,
+            "n_crops_total": int(sum(n_by_cat.values())),
+            "stats": {k: v for k, v in stats.items() if k != "n_crops"},
+        }
+        cats_out = cats
+        print(f"Wrote {zpath}  cats={len(cats)}  crops={sum(n_by_cat.values()):,}")
+        print(f"Wrote {rpath}")
+    meta = {
+        "category_set": category_set,
+        "run_mode": "packed_clip_dinov3",
+        "exemplar_source": "packed_shards_clip_sim_ge_min_sim",
+        "included_categories_txt": str(inc_path),
+        "n_inclusion_categories": len(allowed),
+        "emb_root": str(emb_root),
+        "min_sim": min_sim,
+        "models": meta_models,
+        "categories_alphabetical": cats_out,
+        "note": (
+            "valid85 on the packed store is the inclusion list (CLIP-passers in those "
+            "classes), not the 868-hour sampled annotation manifest."
+        ),
+    }
+    (out_dir / "exemplar_embedding_run.json").write_text(json.dumps(meta, indent=2))
+    print("Wrote:", out_dir / "exemplar_embedding_run.json")
+
+
 def main() -> int:
     args = parse_args()
     cfg = load_config()
     category_sets = ["valid129", "valid85"] if args.all_category_sets else [args.category_set]
+    source, emb_root = resolve_source(args)
+    min_sim = float(os.environ.get("BV_CLIP_FILTER_LIST_THRESHOLD", cfg.get("clip_filter_list_threshold", "0.27")))
 
     print("[exemplar_set_zscore_embeddings] PROJECT_ROOT", PROJECT_ROOT)
     print("category_sets", category_sets)
-    print("run_mode: babydinov3_only")
+    print("source", source, "emb_root", emb_root, "exists", emb_root.exists() if hasattr(emb_root, "exists") else None)
+    print("OUT_ROOT", OUT_ROOT)
+
+    if source == "packed":
+        models = list(args.models) if args.models else ["clip", "dinov3"]
+        print("models", models, "min_sim", min_sim)
+        if not is_packed_store(emb_root):
+            raise FileNotFoundError(f"Not a packed store (missing shards/*.npz): {emb_root}")
+        for category_set in category_sets:
+            run_category_set_packed(category_set, emb_root, models, min_sim)
+        print("\nDone.")
+        return 0
+
+    models = list(args.models) if args.models else ["babydinov3"]
+    print("run_mode: npy", models)
     print("CLIP_FILTER_LIST_PATH", cfg["clip_filter_list_path"], "exists:", cfg["clip_filter_list_path"].is_file())
     print("BABYDINOV3_EMBEDDINGS_DIR", cfg["babydinov3_embeddings_dir"], "exists:", cfg["babydinov3_embeddings_dir"].is_dir())
-
+    if models != ["babydinov3"]:
+        print(
+            "npy source currently implements BabyDINOv3 only; use --source packed for CLIP/DINOv3 on 2025.2.",
+            file=sys.stderr,
+        )
     for category_set in category_sets:
         run_category_set(category_set, cfg)
 

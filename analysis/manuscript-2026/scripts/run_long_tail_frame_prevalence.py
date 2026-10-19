@@ -19,13 +19,15 @@ from scipy import stats
 SCRIPT_DIR = Path(__file__).resolve().parent
 PREPRINT_DIR = SCRIPT_DIR.parent
 REPO_ROOT = PREPRINT_DIR.parents[1]
+sys.path.insert(0, str(PREPRINT_DIR))
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from frame_prevalence import (  # noqa: E402
     build_frame_prevalence_table,
-    load_detections,
+    resolve_detections,
     sync_public_frequency_tables,
 )
+from manuscript_config import output_run_root  # noqa: E402
 
 DATA_DIR = REPO_ROOT / "data"
 FRAME_DATA_CSV = REPO_ROOT / "frame_data" / "merged_frame_detections_with_metadata_filtered-0.27.csv"
@@ -37,8 +39,8 @@ CATEGORY_FILES = {
     "valid129": DATA_DIR / "included_categories_valid129.txt",
 }
 RUN_ROOTS = {
-    "valid129": PREPRINT_DIR / "main_results_valid129s_04302026",
-    "valid85": PREPRINT_DIR / "supplemental_results_valid85cats_04302026",
+    "valid129": output_run_root("valid129", PREPRINT_DIR),
+    "valid85": output_run_root("valid85", PREPRINT_DIR),
 }
 
 FRAME_PREVALENCE_YLABEL = "Frame prevalence"
@@ -289,7 +291,13 @@ def semantic_map_from_cdi() -> dict[str, str]:
     )
 
 
-def run_category_set(category_set: str, semantic_map: dict[str, str], det: pd.DataFrame) -> None:
+def run_category_set(
+    category_set: str,
+    semantic_map: dict[str, str],
+    det: pd.DataFrame,
+    *,
+    packed: bool = False,
+) -> None:
     included = [
         line.strip().lower()
         for line in CATEGORY_FILES[category_set].read_text().splitlines()
@@ -302,12 +310,17 @@ def run_category_set(category_set: str, semantic_map: dict[str, str], det: pd.Da
     figures_dir.mkdir(parents=True, exist_ok=True)
     file_suffix = f"filtered-{THRESHOLD_TOKEN}_{category_set}"
 
-    df_cat, pool_label = build_frame_prevalence_table(det, category_set, included, semantic_map)
+    df_cat, pool_label = build_frame_prevalence_table(
+        det, category_set, included, semantic_map, full_pool_for_valid85=packed
+    )
     df_cat = df_cat.sort_values("proportion", ascending=False).reset_index(drop=True)
 
     out_intermediate = results_dir / f"long_tailed_dist_prop_included_categories_{file_suffix}.csv"
     df_cat.to_csv(out_intermediate, index=False)
-    sync_public_frequency_tables(df_cat, category_set, DATA_DIR, threshold_token=THRESHOLD_TOKEN)
+    if packed:
+        print("Skipping public frequency-table sync (packed 2025.2 run; would overwrite 868-hour tables).")
+    else:
+        sync_public_frequency_tables(df_cat, category_set, DATA_DIR, threshold_token=THRESHOLD_TOKEN)
 
     overall_vals = df_cat["proportion"].astype(float).sort_values(ascending=False).to_numpy()
     rows = [
@@ -367,13 +380,17 @@ def _corr_for_category_set(
     det: pd.DataFrame,
     semantic_map: dict[str, str],
     df_precision: pd.DataFrame,
+    *,
+    packed: bool = False,
 ) -> tuple[pd.DataFrame, dict]:
     included = [
         line.strip().lower()
         for line in included_txt.read_text().splitlines()
         if line.strip()
     ]
-    df_prop, pool_label = build_frame_prevalence_table(det, set_name, included, semantic_map)
+    df_prop, pool_label = build_frame_prevalence_table(
+        det, set_name, included, semantic_map, full_pool_for_valid85=packed
+    )
     merged = df_prop.merge(df_precision, on="category", how="inner")
     merged = merged.dropna(subset=["precision", "proportion"]).copy()
 
@@ -602,9 +619,9 @@ def _save_precision_sensitivity(corr_by_set: dict[str, pd.DataFrame]) -> None:
 
 def main() -> int:
     semantic_map = semantic_map_from_cdi()
-    det = load_detections(FRAME_DATA_CSV)
+    det, packed = resolve_detections()
     for category_set in ("valid129", "valid85"):
-        run_category_set(category_set, semantic_map, det)
+        run_category_set(category_set, semantic_map, det, packed=packed)
 
     precision_csv = REPO_ROOT / "annotation" / "per_class_validation_data.csv"
     df_precision = pd.read_csv(precision_csv, usecols=["class", "precision"])
@@ -616,7 +633,7 @@ def main() -> int:
     corr_summary_rows = []
     for set_name, included_txt in CATEGORY_FILES.items():
         merged_set, summary_set = _corr_for_category_set(
-            set_name, included_txt, det, semantic_map, df_precision
+            set_name, included_txt, det, semantic_map, df_precision, packed=packed
         )
         corr_by_set[set_name] = merged_set
         corr_summary_rows.append(summary_set)

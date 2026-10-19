@@ -430,6 +430,18 @@ def write_paper_stats(
             .tolist(),
             5,
         ),
+        "montage_categories_low_to_high_global_n8": select_evenly_spaced(
+            filter_for_montage(clip)
+            .sort_values("global_dispersion")["category"]
+            .tolist(),
+            8,
+        ),
+        "montage_categories_low_to_high_global_n10": select_evenly_spaced(
+            filter_for_montage(clip)
+            .sort_values("global_dispersion")["category"]
+            .tolist(),
+            10,
+        ),
     }
     stats["tsne_categories"] = list(stats["montage_categories_low_to_high_global"])
     stats["tsne_categories_semantic_diverse"] = select_tsne_categories_semantic_diverse(
@@ -581,6 +593,212 @@ def annotate_cross_model_disagreement(
         )
 
 
+def _bboxes_overlap(a: tuple[float, float, float, float], b: tuple[float, float, float, float], pad: float = 3.0) -> bool:
+    return not (a[2] + pad < b[0] or b[2] + pad < a[0] or a[3] + pad < b[1] or b[3] + pad < a[1])
+
+
+def annotate_categories_no_overlap(
+    ax,
+    df: pd.DataFrame,
+    xcol: str,
+    ycol: str,
+    categories: list[str],
+    *,
+    primary: set[str] | None = None,
+    fontsize_primary: float = 9,
+    fontsize_secondary: float = 8,
+) -> list[str]:
+    """Place category labels with greedy + iterative non-overlapping offsets."""
+    primary = {c.lower() for c in (primary or set())}
+    ordered = sorted(
+        {str(c).strip().lower() for c in categories},
+        key=lambda c: (0 if c in primary else 1, c),
+    )
+    cat_lower = df["category"].astype(str).str.strip().str.lower()
+
+    radii = (18, 26, 34, 44, 56, 70, 86)
+    angles = np.linspace(15, 345, 24, endpoint=False)
+    candidates: list[tuple[float, float]] = []
+    for r in radii:
+        for ang in angles:
+            rad = np.deg2rad(ang)
+            candidates.append((float(r * np.cos(rad)), float(r * np.sin(rad))))
+
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+    x0, y0 = ax.transData.transform((xlim[0], ylim[0]))
+    x1, y1 = ax.transData.transform((xlim[1], ylim[1]))
+    ax_box = (min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1))
+
+    placements: list[dict] = []
+    for cat in ordered:
+        row = df.loc[cat_lower == cat]
+        if row.empty:
+            continue
+        r0 = row.iloc[0]
+        x = float(r0[xcol])
+        y = float(r0[ycol])
+        is_primary = cat in primary
+        fs = fontsize_primary if is_primary else fontsize_secondary
+        best = None
+        best_score = None
+        occupied = [p["box"] for p in placements]
+        for ox, oy in candidates:
+            box = _label_bbox_approx(ax, x, y, cat, ox, oy, fs)
+            inside_pen = 0.0
+            if box[0] < ax_box[0] or box[1] < ax_box[1] or box[2] > ax_box[2] or box[3] > ax_box[3]:
+                inside_pen = 120.0
+            overlap_n = sum(1 for p in occupied if _bboxes_overlap(box, p, pad=4.0))
+            score = overlap_n * 2000.0 + inside_pen + 0.12 * (ox * ox + oy * oy) ** 0.5
+            if best_score is None or score < best_score:
+                best_score = score
+                best = (ox, oy, box)
+            if overlap_n == 0 and inside_pen == 0.0:
+                break
+        assert best is not None
+        ox, oy, box = best
+        placements.append(
+            {
+                "cat": cat,
+                "x": x,
+                "y": y,
+                "ox": ox,
+                "oy": oy,
+                "box": box,
+                "fs": fs,
+                "primary": is_primary,
+            }
+        )
+
+    # Iterative repulsion in display space to clear remaining collisions.
+    for _ in range(40):
+        moved = False
+        for i, a in enumerate(placements):
+            for j, b in enumerate(placements):
+                if j <= i:
+                    continue
+                if not _bboxes_overlap(a["box"], b["box"], pad=5.0):
+                    continue
+                acx = 0.5 * (a["box"][0] + a["box"][2])
+                acy = 0.5 * (a["box"][1] + a["box"][3])
+                bcx = 0.5 * (b["box"][0] + b["box"][2])
+                bcy = 0.5 * (b["box"][1] + b["box"][3])
+                dx = acx - bcx
+                dy = acy - bcy
+                dist = max(1.0, (dx * dx + dy * dy) ** 0.5)
+                push = 6.0
+                ux, uy = dx / dist, dy / dist
+                a["ox"] += ux * push
+                a["oy"] += uy * push
+                b["ox"] -= ux * push
+                b["oy"] -= uy * push
+                a["box"] = _label_bbox_approx(ax, a["x"], a["y"], a["cat"], a["ox"], a["oy"], a["fs"])
+                b["box"] = _label_bbox_approx(ax, b["x"], b["y"], b["cat"], b["ox"], b["oy"], b["fs"])
+                moved = True
+        if not moved:
+            break
+
+    labeled: list[str] = []
+    for p in placements:
+        edge = "#555555" if p["primary"] else "#999999"
+        ax.annotate(
+            p["cat"],
+            (p["x"], p["y"]),
+            xytext=(p["ox"], p["oy"]),
+            textcoords="offset points",
+            fontsize=p["fs"],
+            fontweight="bold",
+            color="#141414" if p["primary"] else "#222222",
+            bbox=dict(
+                boxstyle="round,pad=0.25" if p["primary"] else "round,pad=0.2",
+                facecolor="white",
+                edgecolor=edge,
+                alpha=0.93 if p["primary"] else 0.9,
+            ),
+            arrowprops=dict(
+                arrowstyle="-",
+                color="#666666" if p["primary"] else "#888888",
+                lw=0.8,
+                alpha=0.9,
+            ),
+            clip_on=False,
+            zorder=12 if p["primary"] else 11,
+            ha="center",
+            va="center",
+        )
+        labeled.append(p["cat"])
+    return labeled
+
+
+def select_global_local_label_categories(
+    df: pd.DataFrame,
+    xcol: str,
+    ycol: str,
+    selected_categories: list[str],
+    *,
+    n_resid: int = 3,
+    min_resid_ratio: float = 2.5,
+) -> tuple[list[str], list[str]]:
+    """Return (all labels, residual-extreme labels) for a global-vs-local panel.
+
+    Montage labels keep only the low/high endpoints (middle picks sit in the
+    dense cloud and cause collisions). Residual extremes must exceed
+    ``min_resid_ratio × median |OLS residual|`` among non-body-part categories
+    so weakly off-diagonal points are not oversold when ρ is already high.
+    """
+    selected_all = [str(c).strip().lower() for c in selected_categories]
+    # Endpoints only when there are ≥2 montage categories.
+    if len(selected_all) >= 2:
+        selected = [selected_all[0], selected_all[-1]]
+    else:
+        selected = list(selected_all)
+
+    work = df.copy()
+    work["_cat"] = work["category"].astype(str).str.strip().str.lower()
+    pool = work.loc[~work["category"].isin(BODY_PART_CATEGORIES)].copy()
+    resid_cats: list[str] = []
+    if len(pool) >= 3 and n_resid > 0:
+        xv = pool[xcol].to_numpy(dtype=float)
+        yv = pool[ycol].to_numpy(dtype=float)
+        coef = np.polyfit(xv, yv, 1)
+        abs_resid = np.abs(yv - (coef[0] * xv + coef[1]))
+        pool = pool.assign(_abs_resid=abs_resid)
+        med = float(np.median(abs_resid))
+        thresh = max(med * min_resid_ratio, 1e-9)
+        strong = pool.loc[pool["_abs_resid"] >= thresh]
+        if strong.empty:
+            # Fall back to the single largest residual if nothing clears threshold.
+            strong = pool.nlargest(1, "_abs_resid")
+        resid_cats = (
+            strong.nlargest(n_resid, "_abs_resid")["_cat"]
+            .astype(str)
+            .str.strip()
+            .str.lower()
+            .tolist()
+        )
+    labels = list(dict.fromkeys([*selected, *resid_cats]))
+    return labels, resid_cats
+
+
+def _label_bbox_approx(
+    ax,
+    x: float,
+    y: float,
+    text: str,
+    ox: float,
+    oy: float,
+    fontsize: float,
+) -> tuple[float, float, float, float]:
+    """Approximate display-space bbox for a label (x0, y0, x1, y1)."""
+    disp = ax.transData.transform((x, y))
+    # Slightly conservative width so collision checks stay ahead of drawn boxes.
+    w = max(36.0, 0.72 * fontsize * max(1, len(text)) + 14.0)
+    h = fontsize + 14.0
+    cx = disp[0] + ox
+    cy = disp[1] + oy
+    return (cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2)
+
+
 def figure_1c_cross_model(df: pd.DataFrame, stats: dict, out_dir: Path) -> None:
     label_categories = stats.get("montage_categories_low_to_high_global", [])
 
@@ -613,6 +831,130 @@ def figure_1c_cross_model(df: pd.DataFrame, stats: dict, out_dir: Path) -> None:
         fig.savefig(path, dpi=200, bbox_inches="tight")
         print(f"Wrote {path}")
     plt.close(fig)
+
+
+def figure_1c_global_vs_local(df: pd.DataFrame, stats: dict, out_dir: Path) -> dict:
+    """Within-model global vs local dispersion (writeup Figure 1C).
+
+    Labels montage endpoints (low/high global) plus a few OLS residual
+    extremes (non-body-part). Residual points get a thin open ring — enough
+    to find them, not enough to imply a strong global/local dissociation on
+    this tightly coupled cohort.
+    """
+    selected = [str(c).strip().lower() for c in stats.get("montage_categories_low_to_high_global", [])]
+
+    fig, axes = plt.subplots(1, 2, figsize=(12.5, 5.8))
+    fig.subplots_adjust(left=0.07, right=0.80, top=0.88, bottom=0.20, wspace=0.22)
+
+    panels = [
+        (
+            axes[0],
+            "clip_global_dispersion",
+            "clip_mean_knn_dist",
+            "CLIP: global vs local",
+            "Global dispersion (CLIP)",
+            "Local dispersion (CLIP)",
+        ),
+        (
+            axes[1],
+            "dinov3_global_dispersion",
+            "dinov3_mean_knn_dist",
+            "DINOv3: global vs local",
+            "Global dispersion (DINOv3)",
+            "Local dispersion (DINOv3)",
+        ),
+    ]
+    out_info: dict = {"panels": []}
+
+    for ax, xcol, ycol, title, xlabel, ylabel in panels:
+        xv = df[xcol].to_numpy(dtype=float)
+        yv = df[ycol].to_numpy(dtype=float)
+        coef = np.polyfit(xv, yv, 1)
+        x_line = np.linspace(float(np.nanmin(xv)), float(np.nanmax(xv)), 100)
+        ax.plot(
+            x_line,
+            coef[0] * x_line + coef[1],
+            color="#888888",
+            lw=1.0,
+            ls="--",
+            alpha=0.75,
+            zorder=1,
+        )
+
+        ax.scatter(
+            df[xcol],
+            df[ycol],
+            c=df["dot_color"],
+            s=df["dot_size"],
+            alpha=0.82,
+            edgecolor="white",
+            linewidth=0.5,
+            zorder=2,
+        )
+
+        labels, resid_cats = select_global_local_label_categories(
+            df, xcol, ycol, selected, n_resid=2, min_resid_ratio=3.0
+        )
+        # Subtle open rings on residual extremes only (not montage picks).
+        if resid_cats:
+            mask = df["category"].astype(str).str.strip().str.lower().isin(resid_cats)
+            sub = df.loc[mask]
+            ax.scatter(
+                sub[xcol],
+                sub[ycol],
+                s=sub["dot_size"] * 1.55,
+                facecolors="none",
+                edgecolors="#333333",
+                linewidths=1.15,
+                alpha=0.85,
+                zorder=3,
+            )
+
+        rho, p = spearmanr(xv, yv)
+        _add_spearman_box(ax, float(rho), float(p))
+        _style_corr_axes(ax, title, xlabel, ylabel)
+        # Finalize limits before collision-aware placement.
+        ax.relim()
+        ax.autoscale_view()
+        # Primary = montage endpoints (low/high global), even if also residuals.
+        if len(selected) >= 2:
+            primary = {selected[0], selected[-1]}
+        else:
+            primary = set(selected)
+        annotate_categories_no_overlap(
+            ax,
+            df,
+            xcol,
+            ycol,
+            labels,
+            primary=primary,
+        )
+        out_info["panels"].append(
+            {
+                "xcol": xcol,
+                "ycol": ycol,
+                "spearman_rho": float(rho),
+                "p_value": float(p),
+                "labeled": labels,
+                "residual_labeled": resid_cats,
+                "ols_slope": float(coef[0]),
+                "ols_intercept": float(coef[1]),
+            }
+        )
+
+    add_cdi_legends(fig, df, "clip_n_exemplars")
+    fig.suptitle(
+        "Within-model coupling of global and local dispersion (valid7018)",
+        fontsize=12,
+        fontweight="bold",
+        y=0.98,
+    )
+    for ext in ("png", "pdf"):
+        path = out_dir / f"fig1C_valid7018_global_vs_local_k5.{ext}"
+        fig.savefig(path, dpi=200, bbox_inches="tight")
+        print(f"Wrote {path}")
+    plt.close(fig)
+    return out_info
 
 
 def figure_1b_cdi_semantic_groups(df: pd.DataFrame, cdi_summary: pd.DataFrame, out_dir: Path) -> None:
@@ -1310,8 +1652,12 @@ def annotate_frequency_dispersion_decoupling(
 
 ABSTRACT_FIGURE_FILES = (
     "fig1A_valid7018_montages_low_to_high_global",
+    "fig1A_valid7018_montages_low_to_high_global_n8",
+    "fig1A_valid7018_montages_low_to_high_global_n10",
     "fig1B_valid7018_tsne_dinov3",
     "fig1B_valid7018_tsne_dinov3_semantic_diverse",
+    "fig1C_valid7018_global_vs_local_k5",
+    "fig1C_valid7018_cross_model_k5",
     "fig1C_valid7018_frequency_vs_global_dispersion",
     "fig_explore_frequency_vs_global_robustness_2x2",
 )
@@ -1357,7 +1703,15 @@ def figure_1a_montages(
     n_exemplars: int = 25,
     n_cols: int = 5,
     cell_size: tuple[int, int] = (128, 128),
-) -> None:
+    n_panel_rows: int = 1,
+    output_stem: str = "fig1A_valid7018_montages_low_to_high_global",
+    title: str | None = None,
+) -> list[str]:
+    """Write per-category montages and a combined low→high panel grid.
+
+    ``n_panel_rows`` lays category panels in a grid (row-major, low→high left to
+    right, top then bottom). Returns the categories that were successfully written.
+    """
     dispersion_by_cat = dispersion.set_index("category")
     montage_images: list[tuple[str, Image.Image, str, float]] = []
 
@@ -1380,31 +1734,83 @@ def figure_1a_montages(
 
     if not montage_images:
         print("No montages written (crop paths missing?)")
-        return
+        return []
 
     n = len(montage_images)
-    fig, axes = plt.subplots(1, n, figsize=(2.2 * n, 2.8), constrained_layout=True)
-    if n == 1:
-        axes = [axes]
-    for ax, (cat, montage, sem, g) in zip(axes, montage_images):
+    n_panel_rows = max(1, int(n_panel_rows))
+    n_panel_cols = int(np.ceil(n / n_panel_rows))
+    fig_w = 2.15 * n_panel_cols
+    fig_h = 2.55 * n_panel_rows + 0.35
+    fig, axes = plt.subplots(
+        n_panel_rows,
+        n_panel_cols,
+        figsize=(fig_w, fig_h),
+        constrained_layout=True,
+    )
+    axes_flat = np.atleast_1d(axes).ravel().tolist()
+    for ax in axes_flat[n:]:
+        ax.axis("off")
+    for ax, (cat, montage, sem, g) in zip(axes_flat, montage_images):
         ax.imshow(montage)
         ax.axis("off")
         color = CDI_SEMANTIC_COLORS.get(sem, CDI_SEMANTIC_COLORS["other"])
         ax.set_title(
             rf"$\mathit{{{cat}}}$ | $V_c$ = {g:.2f}",
-            fontsize=9,
+            fontsize=8.5 if n_panel_cols >= 5 else 9,
             color=color,
             fontweight="bold",
         )
-    fig.suptitle(
-        "Selected categories (low→high CLIP global dispersion; DINOv3 $V_c$ shown)",
-        fontsize=11,
-    )
+    if title is None:
+        title = (
+            f"Selected categories (low→high CLIP global dispersion; "
+            f"{dispersion_model} $V_c$ shown; n={n})"
+        )
+    fig.suptitle(title, fontsize=11)
     for ext in ("png", "pdf"):
-        path = out_dir / f"fig1A_valid7018_montages_low_to_high_global.{ext}"
+        path = out_dir / f"{output_stem}.{ext}"
         fig.savefig(path, dpi=200, bbox_inches="tight")
         print(f"Wrote {path}")
     plt.close(fig)
+    return [cat for cat, *_ in montage_images]
+
+
+def load_montage_crops_for_categories(
+    categories: list[str],
+    *,
+    n_exemplars: int = 25,
+    crops_zip: Path | None = None,
+) -> dict[str, list[Image.Image]]:
+    """Load top-confidence crops for selected categories from the full crops zip."""
+    import zipfile
+    from collections import defaultdict
+    from io import BytesIO
+
+    zp = Path(crops_zip or (SHARED_ROOT / "crops" / "valid7018_crops.zip"))
+    if not zp.is_file():
+        raise FileNotFoundError(f"Crop zip not found: {zp}")
+
+    want = {str(c).strip().lower() for c in categories}
+    by_cat: dict[str, list[tuple[float, str, bytes]]] = defaultdict(list)
+    with zipfile.ZipFile(zp, "r") as zf:
+        with zf.open("manifest.csv") as mf:
+            rows = list(csv.DictReader(mf.read().decode("utf-8").splitlines()))
+        for row in rows:
+            cat = row["category"].strip().lower()
+            if cat not in want:
+                continue
+            conf = parse_confidence(row["stem"])
+            if not np.isfinite(conf):
+                conf = -1.0
+            with zf.open(row["jpeg_path"]) as f:
+                raw = f.read()
+            by_cat[cat].append((float(conf), row["stem"], raw))
+
+    out: dict[str, list[Image.Image]] = {}
+    for cat in categories:
+        key = str(cat).strip().lower()
+        items = sorted(by_cat.get(key, []), key=lambda t: -t[0])[:n_exemplars]
+        out[key] = [Image.open(BytesIO(raw)).convert("RGB") for _, _, raw in items]
+    return out
 
 
 def figure_1b_tsne(
@@ -1652,6 +2058,28 @@ def main() -> int:
         montage_zip_crops=montage_zip_crops,
         dispersion_model="DINOv3",
     )
+    # Expanded Fig 1A grids (2 rows): load top-confidence crops from full zip.
+    for n_cats, n_rows, stem_key in (
+        (8, 2, "montage_categories_low_to_high_global_n8"),
+        (10, 2, "montage_categories_low_to_high_global_n10"),
+    ):
+        cats_n = stats.get(stem_key) or select_evenly_spaced(
+            filter_for_montage(clip).sort_values("global_dispersion")["category"].tolist(),
+            n_cats,
+        )
+        print(f"Montage n={n_cats} (2 rows): {cats_n}")
+        crops_n = load_montage_crops_for_categories(cats_n, n_exemplars=25)
+        figure_1a_montages(
+            dino,
+            None,
+            semantic_map,
+            cats_n,
+            scratch_dir,
+            montage_zip_crops=crops_n,
+            dispersion_model="DINOv3",
+            n_panel_rows=n_rows,
+            output_stem=f"fig1A_valid7018_montages_low_to_high_global_n{n_cats}",
+        )
     figure_1b_tsne(
         DEFAULT_EMBEDDING_ZIP,
         montage_cats,
@@ -1669,6 +2097,13 @@ def main() -> int:
         title="DINOv3 t-SNE (valid7018; one category per CDI semantic group)",
     )
     figure_1c_cross_model(plot_df, stats, scratch_dir)
+    gvl = figure_1c_global_vs_local(plot_df, stats, scratch_dir)
+    for panel in gvl["panels"]:
+        print(
+            f"Global vs local ({panel['xcol']}): "
+            f"rho={panel['spearman_rho']:.3f}, labeled={panel['labeled']}, "
+            f"residuals={panel['residual_labeled']}"
+        )
     fig1c_res = figure_1c_frequency_vs_global_dispersion(
         semantic_map,
         stats,

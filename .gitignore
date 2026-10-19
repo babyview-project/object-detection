@@ -8,6 +8,8 @@
 .Ruserdata
 frame_data/allframes_1fps.csv
 yoloe/pretrain
+yoloe/mobileclip_blt.pt
+yoloe/mobileclip_blt.ts
 **/recordings_processed.csv
 
 *.html
@@ -44,3 +46,10 @@ analysis/manuscript-2026/**/umap_cdi_results*/*.png
 analysis/manuscript-2026/**/umap_cdi_results*/*.pdf
 analysis/manuscript-2026/results_*
 analysis/manuscript-2026/paths.local.env
+analysis/vedb-1612/paths.local.env
+analysis/vedb-1612/logs/
+
+# Databrary credentials / cached JWTs
+databrary/.env
+databrary/.tokens.json
+**/.databrary_tokens.json

@@ -6,6 +6,61 @@ region-MIL. This doc is the map.
 
 ---
 
+## 0. CDI crop pipeline (2025.2 detections) — start here for CLIP/DINOv3 on boxes
+
+Replicating the manuscript's **crop** pipeline (CLIP embed → CLIP-text filter 0.27 →
+annotated frames of passers → DINOv3 on passers) on the full 2025.2 detection set.
+
+The 868-hour layout was one crop JPG + one `.npy` per detection. 2025.2 has ~20M boxes —
+that many small files would exhaust NFS inodes. This pipeline instead:
+
+| instead of | writes |
+|---|---|
+| crop JPGs | nothing (crop in memory from `extracted_frames_1fps`) |
+| one `.npy` per crop | **one `.npz` per video** under `{emb_root}/shards/` |
+| one annotated JPEG per frame | **one `.tar` per video** under `extracted_frames_1fps_annotated/` |
+| four separate I/O passes | **one GPU pass** (load frame once → CLIP → filter → draw → DINOv3) |
+
+Checkpoints (same as the manuscript, no BabyDINOv3):
+
+- CLIP: `openai/clip-vit-base-patch32` (512-d `get_image_features`)
+- DINOv3: `facebook/dinov3-vitb16-pretrain-lvd1689m` (768-d CLS `pooler_output`)
+- Filter: cosine(L2(image), L2(text)) ≥ **0.27** with template `a photo of a {label}`
+- Dropped: `person`, `picture`; subject `00270001` (override with `--exclude-subjects`)
+
+```bash
+cd image-embedding
+# 1) CPU inventory (~few min)
+python run_cdi_crop_pipeline.py --stage scan
+
+# 2) GPU embed — only on free GPUs (<8 GB used). All 8 are often taken.
+bash dispatch_cdi_crop_pipeline.sh          # auto-pick free GPUs
+# bash dispatch_cdi_crop_pipeline.sh 6,7    # explicit
+
+# 3) after every shard prints "finished"
+python run_cdi_crop_pipeline.py --stage index
+```
+
+Load vectors without exploding shards back into `.npy` files.
+
+Ad-hoc (one class)::
+
+    from crop_embedding_store import CropStore
+    store = CropStore("/ccn2a/dataset/babyview/2025.2/outputs/image_embeddings/babyview_full")
+    ids, X = store.load_category("cup", model="dinov3", passed_only=True)
+
+Manuscript Stage 0 / per-child analyses should use
+[`analysis/manuscript-2026/scripts/packed_crop_embeddings.py`](../analysis/manuscript-2026/scripts/packed_crop_embeddings.py)
+(one pass over shards → category or subject means). Do not call `CropStore.load_clip` per crop.
+
+`--annotated-format jpeg` writes a tree parallel to `extracted_frames_1fps` instead of tars.
+`--annotated-format none` skips drawing. Resume is per-video (`_status/{video_id}.done`).
+
+A previous per-crop `.npy` attempt (cropped from already-drawn `*_annotated.jpg`) was moved
+to `{emb_root}/.stale_*` — do not use those files.
+
+---
+
 ## 1. The three frame sets
 
 | set | frames | manifest | output root |

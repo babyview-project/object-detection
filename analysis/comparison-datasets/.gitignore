@@ -2,6 +2,12 @@
 # Kept in git: results/ tables, figures/, and the small mapping/audit tables.
 outputs/exemplar_sets/
 outputs/montages/
+outputs/context_split/cache/
+outputs/context_controls/cache/
+outputs/context_fixed/cache/
+outputs/background_amount/cache/
+outputs/crop_geometry/cache/
+outputs/matched_controls/cache/
 outputs/mapping/*.npz
 outputs/mapping/lvis_crop_manifest.csv
 outputs/mapping/lvis_crop_metadata.csv.gz

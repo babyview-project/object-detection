@@ -560,6 +560,7 @@ def main() -> int:
     args = parser.parse_args()
 
     from _bootstrap import MANUSCRIPT_DIR, PROJECT_ROOT
+    from manuscript_config import EXEMPLAR_EMBED_ROOT, output_run_root, output_tag
 
     root = PROJECT_ROOT
     preprint = MANUSCRIPT_DIR
@@ -620,12 +621,31 @@ def main() -> int:
             )
         )
 
-    out_fig = preprint / "figures" / "si"
+    out85 = output_run_root("valid85") / "results"
+    out129 = output_run_root("valid129") / "results"
+    if output_tag() == "04302026":
+        out_fig = preprint / "figures" / "si"
+    else:
+        out_fig = output_run_root("valid129") / "figures" / "si"
     out_fig.mkdir(parents=True, exist_ok=True)
-    out85 = preprint / "supplemental_results_valid85cats_04302026" / "results"
-    out129 = preprint / "main_results_valid129s_04302026" / "results"
     out85.mkdir(parents=True, exist_ok=True)
     out129.mkdir(parents=True, exist_ok=True)
+
+    from packed_crop_embeddings import is_packed_store
+
+    if is_packed_store(emb_base):
+        return main_packed(
+            args,
+            emb_base=emb_base,
+            included85=included85,
+            included129=included129,
+            run85=run85,
+            run129=run129,
+            preprint=preprint,
+            out85=out85,
+            out129=out129,
+            out_fig=out_fig,
+        )
 
     thresholds = [float(x) for x in args.thresholds]
     read_chunk_bytes = max(64 * 1024, int(args.read_chunk_mb * 1024 * 1024))
@@ -782,10 +802,10 @@ def main() -> int:
             )
         return pd.DataFrame(rows)
 
-    things85_clip = preprint / "exemplar_set_embeddings" / "valid85" / "things_clip_exemplar_avg_zscore_within_valid85.csv"
-    things85_dino = preprint / "exemplar_set_embeddings" / "valid85" / "things_dinov3_exemplar_avg_zscore_within_valid85.csv"
-    things129_clip = preprint / "exemplar_set_embeddings" / "valid129" / "things_clip_exemplar_avg_zscore_within_valid129.csv"
-    things129_dino = preprint / "exemplar_set_embeddings" / "valid129" / "things_dinov3_exemplar_avg_zscore_within_valid129.csv"
+    things85_clip = EXEMPLAR_EMBED_ROOT / "valid85" / "things_clip_exemplar_avg_zscore_within_valid85.csv"
+    things85_dino = EXEMPLAR_EMBED_ROOT / "valid85" / "things_dinov3_exemplar_avg_zscore_within_valid85.csv"
+    things129_clip = EXEMPLAR_EMBED_ROOT / "valid129" / "things_clip_exemplar_avg_zscore_within_valid129.csv"
+    things129_dino = EXEMPLAR_EMBED_ROOT / "valid129" / "things_dinov3_exemplar_avg_zscore_within_valid129.csv"
 
     cat_order85 = sorted(included85)
     cat_order129 = sorted(included129)
@@ -843,6 +863,122 @@ def main() -> int:
             )
             print(f"Wrote {out_fig / 'clip_threshold_sensitivity_valid129.png'}")
 
+    return 0
+
+
+def main_packed(
+    args,
+    *,
+    emb_base: Path,
+    included85: frozenset[str],
+    included129: frozenset[str],
+    run85: bool,
+    run129: bool,
+    preprint: Path,
+    out85: Path,
+    out129: Path,
+    out_fig: Path,
+) -> int:
+    """2025.2 packed shards: re-threshold CLIP sim in one pass (no .npy / filter lists).
+
+    DINOv3 rows exist only for the write-time 0.27 passers, so t<0.27 adds CLIP
+    boxes without extra DINO vectors.
+    """
+    from manuscript_config import EXEMPLAR_EMBED_ROOT
+    from packed_crop_embeddings import category_means_by_threshold, zscore_rows as packed_zscore_rows
+
+    thresholds = [float(x) for x in args.thresholds]
+    ref_idx = ref_threshold_index(thresholds, 0.27)
+    things85_clip = EXEMPLAR_EMBED_ROOT / "valid85" / "things_clip_exemplar_avg_zscore_within_valid85.csv"
+    things85_dino = EXEMPLAR_EMBED_ROOT / "valid85" / "things_dinov3_exemplar_avg_zscore_within_valid85.csv"
+    things129_clip = EXEMPLAR_EMBED_ROOT / "valid129" / "things_clip_exemplar_avg_zscore_within_valid129.csv"
+    things129_dino = EXEMPLAR_EMBED_ROOT / "valid129" / "things_dinov3_exemplar_avg_zscore_within_valid129.csv"
+
+    def _one(label: str, cats: frozenset[str], things_clip: Path, things_dino: Path, out_csv: Path) -> None:
+        print(f"Packed store {emb_base}: category means for {label} at {thresholds} …", flush=True)
+        by_t = category_means_by_threshold(emb_base, set(cats), thresholds, l2_normalize=True)
+        th_cats_c, th_Xc = load_embedding_csv(things_clip)
+        th_cats_d, th_Xd = load_embedding_csv(things_dino)
+        ref_order = sorted(th_cats_c)
+        th_Xc_full, ord_full = align_rows(ref_order, th_cats_c, th_Xc)
+        th_Xd_full, _ = align_rows(ref_order, th_cats_d, th_Xd)
+        cat_order = sorted(cats)
+        counts_per_t = []
+        for t in thresholds:
+            counts_per_t.append({c: int(by_t[t]["clip_n"].get(c, 0)) for c in cat_order})
+        sp_mix, pr_mix = spearman_pearson_log_vs_ref(counts_per_t, cat_order, ref_idx)
+        rows = []
+        for i, t in enumerate(thresholds):
+            blob = by_t[t]
+            Xc_z = packed_zscore_rows(blob["clip_X"]) if len(blob["clip_categories"]) else blob["clip_X"]
+            Xd_z = packed_zscore_rows(blob["dino_X"]) if len(blob["dino_categories"]) else blob["dino_X"]
+            cats_c = list(blob["clip_categories"])
+            dino_cats = list(blob["dino_categories"])
+            present = [c for c in ref_order if c in set(cats_c) and c in set(dino_cats)]
+            Xc_a, _ = align_rows(present, cats_c, Xc_z)
+            Xd_on_clip, _ = align_rows(present, dino_cats, Xd_z)
+            th_Xc_sub, _ = align_rows(present, ord_full, th_Xc_full)
+            th_Xd_sub, _ = align_rows(present, ord_full, th_Xd_full)
+            bv_vc = vectorize_upper_triangle(compute_rdm(Xc_a))
+            bv_vd = vectorize_upper_triangle(compute_rdm(Xd_on_clip))
+            th_vec_clip = vectorize_upper_triangle(compute_rdm(th_Xc_sub))
+            th_vec_dino = vectorize_upper_triangle(compute_rdm(th_Xd_sub))
+            pr_cd, pp_cd = pearsonr(bv_vc, bv_vd)
+            sp_cd, sp_p_cd = spearmanr(bv_vc, bv_vd)
+            pr_cx, _ = pearsonr(bv_vc, th_vec_clip)
+            sp_cx, _ = spearmanr(bv_vc, th_vec_clip)
+            pr_dx, _ = pearsonr(bv_vd, th_vec_dino)
+            sp_dx, _ = spearmanr(bv_vd, th_vec_dino)
+            th_cd_p, _ = pearsonr(th_vec_clip, th_vec_dino)
+            th_cd_s, _ = spearmanr(th_vec_clip, th_vec_dino)
+            clip_pass_total = int(sum(counts_per_t[i].values()))
+            rows.append(
+                {
+                    "category_set": label,
+                    "clip_threshold": float(t),
+                    "filter_list": f"packed:{emb_base}:clip_sim>={t:.2f}",
+                    "n_manifest_exemplar_paths_after_clip_gate": clip_pass_total,
+                    "n_categories_bv": len(present),
+                    "n_pairs_upper_triangle": len(bv_vc),
+                    "clip_filtered_detections_in_included_categories": clip_pass_total,
+                    "spearman_category_prop_vs_ref": float(sp_mix[i]),
+                    "pearson_log_category_prop_vs_ref": float(pr_mix[i]),
+                    "bv_pearson_clip_vs_dinov3_rdm": float(pr_cd),
+                    "bv_pearson_clip_vs_dinov3_p": float(pp_cd),
+                    "bv_spearman_clip_vs_dinov3_rdm": float(sp_cd),
+                    "bv_spearman_clip_vs_dinov3_p": float(sp_p_cd),
+                    "bv_things_pearson_rdm_clip": float(pr_cx),
+                    "bv_things_spearman_rdm_clip": float(sp_cx),
+                    "bv_things_pearson_rdm_dinov3": float(pr_dx),
+                    "bv_things_spearman_rdm_dinov3": float(sp_dx),
+                    "things_pearson_clip_vs_dinov3_rdm_same_cat_subset": float(th_cd_p),
+                    "things_spearman_clip_vs_dinov3_rdm_same_cat_subset": float(th_cd_s),
+                    "embedding_source": "packed_shards",
+                }
+            )
+        df = pd.DataFrame(rows)
+        df.to_csv(out_csv, index=False)
+        print(f"Wrote {out_csv}")
+        if not args.skip_figure:
+            plot_sensitivity_figure(
+                df,
+                f"CLIP threshold sensitivity ({label}, packed 2025.2)",
+                out_fig / f"clip_threshold_sensitivity_{label}.png",
+                out_fig / f"clip_threshold_sensitivity_{label}.pdf",
+            )
+
+    if run85:
+        if not things85_clip.is_file():
+            raise FileNotFoundError(things85_clip)
+        _one("valid85", included85, things85_clip, things85_dino, out85 / "clip_threshold_sensitivity_valid85.csv")
+    if run129:
+        if not things129_clip.is_file():
+            raise FileNotFoundError(things129_clip)
+        _one("valid129", included129, things129_clip, things129_dino, out129 / "clip_threshold_sensitivity_valid129.csv")
+    print(
+        "Note: packed DINO vectors exist only for write-time CLIP≥0.27 passers.",
+        flush=True,
+    )
     return 0
 
 

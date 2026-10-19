@@ -1,0 +1,361 @@
+# Loading packages
+```{r}
+library(tidyverse)
+library(here)
+```
+
+## import data
+```{r}
+object_names_completed <- read_lines(here("annotation/Dora_20251001_completed/obj.names"))
+
+object_data_completed <- read_lines(here("annotation/Dora_20251001_completed/obj.data"))
+
+object_names_initial <- read_lines(here("annotation/3000_inverse_proportional_sampled_frames_split/Dora_yoloe_annotations/obj.names"))
+
+object_data_initial <- read_lines(here("annotation/3000_inverse_proportional_sampled_frames_split/Dora_yoloe_annotations/obj.data"))
+
+# Get all txt files from both directories
+completed_files <- list.files(here("annotation/Dora_20251001_completed/obj_train_data"), 
+                               pattern = "\\.txt$", 
+                               full.names = TRUE)
+
+initial_files <- list.files(here("annotation/3000_inverse_proportional_sampled_frames_split/Dora_yoloe_annotations"), 
+                            pattern = "\\.txt$", 
+                            full.names = TRUE)
+
+completed_files <- completed_files[!grepl("train\\.txt$", completed_files)]
+
+# Remove files ending with 'train.txt' from initial_files
+initial_files <- initial_files[!grepl("train\\.txt$", initial_files)]
+
+
+# Function to parse a single file
+parse_bbox_file <- function(file_path, source_dir) {
+  # Read all lines from file
+  lines <- read_lines(file_path)
+  
+  # Skip empty files
+  if (length(lines) == 0) return(NULL)
+  
+  # Parse each line
+  parsed <- map_dfr(lines, function(line) {
+    values <- str_split(line, "\\s+")[[1]]
+    tibble(
+      object_id = as.integer(values[1]),
+      x_center = as.numeric(values[2]),
+      y_center = as.numeric(values[3]),
+      width = as.numeric(values[4]),
+      height = as.numeric(values[5])
+    )
+  })
+  
+  # Add filename and source directory
+  parsed %>%
+    mutate(
+      filename = basename(file_path),
+      source = source_dir,
+      .before = 1
+    )
+}
+
+# Parse all files from both directories
+completed_data <- map_dfr(completed_files, 
+                          ~parse_bbox_file(.x, "completed"))
+initial_data <- map_dfr(initial_files, 
+                        ~parse_bbox_file(.x, "initial"))
+
+# Combine both datasets
+combined_data <- bind_rows(completed_data, initial_data)
+
+# Add object names (object_id is 0-indexed or 1-indexed, adjust accordingly)
+# We need to use the appropriate object names for each source
+combined_data <- combined_data %>%
+  mutate(object_name = case_when(
+    source == "completed" ~ object_names_completed[object_id + 1],
+    source == "initial" ~ object_names_initial[object_id + 1],
+    TRUE ~ NA_character_
+  ))
+
+# View the result
+head(combined_data)
+```
+
+```{r}
+# Add object names
+completed_data <- completed_data %>%
+  mutate(object_name = object_names_completed[object_id+1])
+initial_data <- initial_data %>%
+  mutate(object_name = object_names_initial[object_id+1])
+
+# Function to calculate IoU (Intersection over Union)
+calculate_iou <- function(box1, box2) {
+  # Convert from center format to corner format
+  box1_x1 <- box1$x_center - box1$width / 2
+  box1_y1 <- box1$y_center - box1$height / 2
+  box1_x2 <- box1$x_center + box1$width / 2
+  box1_y2 <- box1$y_center + box1$height / 2
+  
+  box2_x1 <- box2$x_center - box2$width / 2
+  box2_y1 <- box2$y_center - box2$height / 2
+  box2_x2 <- box2$x_center + box2$width / 2
+  box2_y2 <- box2$y_center + box2$height / 2
+  
+  # Calculate intersection
+  inter_x1 <- max(box1_x1, box2_x1)
+  inter_y1 <- max(box1_y1, box2_y1)
+  inter_x2 <- min(box1_x2, box2_x2)
+  inter_y2 <- min(box1_y2, box2_y2)
+  
+  inter_width <- max(0, inter_x2 - inter_x1)
+  inter_height <- max(0, inter_y2 - inter_y1)
+  inter_area <- inter_width * inter_height
+  
+  # Calculate union
+  box1_area <- box1$width * box1$height
+  box2_area <- box2$width * box2$height
+  union_area <- box1_area + box2_area - inter_area
+  
+  # IoU
+  if (union_area == 0) return(0)
+  return(inter_area / union_area)
+}
+
+# Match boxes between initial and completed
+match_boxes <- function(filename_base) {
+  init <- initial_data %>% filter(filename == filename_base)
+  comp <- completed_data %>% filter(filename == filename_base)
+  
+  if (nrow(init) == 0 | nrow(comp) == 0) return(NULL)
+  
+  # For each completed box, find best matching initial box
+  matches <- map_dfr(1:nrow(comp), function(i) {
+    comp_box <- comp[i, ]
+    
+    if (nrow(init) == 0) {
+      return(tibble(
+        filename = filename_base,
+        completed_id = i,
+        initial_id = NA,
+        #comp_object_id = comp_box$object_id,
+        object_name = comp_box$object_name,
+        iou = 0,
+        matched = FALSE
+      ))
+    }
+    
+    # Calculate IoU with all initial boxes of same class
+    ious <- map_dbl(1:nrow(init), function(j) {
+      if (init$object_name[j] == comp_box$object_name) {
+        calculate_iou(comp_box, init[j, ])
+      } else {
+        0
+      }
+    })
+    
+    best_match <- which.max(ious)
+    best_iou <- ious[best_match]
+    
+    tibble(
+      filename = filename_base,
+      completed_id = i,
+      initial_id = if(best_iou > 0) best_match else NA,
+      object_name = comp_box$object_name,
+      iou = best_iou,
+      matched = best_iou >= 0.9  # 90% overlap threshold
+    )
+  })
+  
+  # Find initial boxes that weren't matched (false negatives)
+  matched_initial <- matches %>% filter(!is.na(initial_id)) %>% pull(initial_id)
+  unmatched_initial <- setdiff(1:nrow(init), matched_initial)
+  
+  fn_rows <- map_dfr(unmatched_initial, function(i) {
+    tibble(
+      filename = filename_base,
+      completed_id = NA,
+      initial_id = i,
+      object_id = init$object_id[i],
+      object_name = init$object_name[i],
+      iou = 0,
+      matched = FALSE
+    )
+  })
+  
+  bind_rows(matches, fn_rows)
+}
+
+# Get all unique filenames
+all_filenames <- unique(c(completed_data$filename, initial_data$filename))
+
+# Match all files
+all_matches <- map_dfr(all_filenames, match_boxes)
+
+# Calculate metrics per file
+file_metrics <- all_matches %>%
+  group_by(filename) %>%
+  summarise(
+    true_positives = sum(!is.na(completed_id) & !is.na(initial_id) & matched),
+    false_positives = sum(is.na(completed_id) & !is.na(initial_id)),
+    false_negatives = sum(!is.na(completed_id) & is.na(initial_id)),
+    total_completed = sum(!is.na(completed_id)),
+    total_initial = sum(!is.na(initial_id)),
+    mean_iou = mean(iou[iou > 0], na.rm = TRUE)
+  ) %>%
+  mutate(
+    precision = true_positives / (true_positives + false_positives),
+    recall = true_positives / (true_positives + false_negatives),
+    f_score = 2 * (precision * recall) / (precision + recall),
+    precision = ifelse(is.nan(precision), 0, precision),
+    recall = ifelse(is.nan(recall), 0, recall),
+    f_score = ifelse(is.nan(f_score), 0, f_score)
+  )
+
+# Overall summary metrics
+overall_metrics <- all_matches %>%
+  summarise(
+    true_positives = sum(!is.na(completed_id) & !is.na(initial_id) & matched),
+    false_positives = sum(is.na(completed_id) & !is.na(initial_id)),
+    false_negatives = sum(!is.na(completed_id) & is.na(initial_id))
+  ) %>%
+  mutate(
+    precision = true_positives / (true_positives + false_positives),
+    recall = true_positives / (true_positives + false_negatives),
+    f_score = 2 * (precision * recall) / (precision + recall),
+    accuracy = true_positives / (true_positives + false_positives + false_negatives)
+  )
+
+class_metrics <- all_matches %>%
+  group_by(object_name) %>%
+  summarise(
+    true_positives = sum(!is.na(completed_id) & !is.na(initial_id) & matched),
+    false_positives = sum(is.na(completed_id) & !is.na(initial_id)),
+    false_negatives = sum(!is.na(completed_id) & is.na(initial_id)),
+    count = n()
+  ) %>%
+  filter(count >= 3) %>%  # Only classes with at least 3 instances
+  mutate(
+    precision = true_positives / (true_positives + false_positives),
+    recall = true_positives / (true_positives + false_negatives),
+    f_score = 2 * (precision * recall) / (precision + recall),
+    f_score = ifelse(is.nan(f_score), 0, f_score)
+  ) %>%
+  arrange(desc(f_score))
+
+# Save results
+write_csv(file_metrics, here("annotation/output/file_metrics.csv"))
+write_csv(class_metrics, here("annotation/output/class_metrics.csv"))
+write_csv(all_matches, here("annotation/output/detailed_matches.csv"))
+
+# Extract false negatives and false positives with bounding boxes
+# For false negatives: get unmatched initial boxes and pull coordinates from initial data
+false_negatives <- all_matches %>%
+  filter(is.na(completed_id)) %>%
+  select(filename, initial_id, object_name, iou) %>%
+  left_join(
+    initial_data %>% 
+      group_by(filename) %>%
+      mutate(row_id = row_number()) %>%
+      ungroup() %>%
+      select(filename, row_id, x_center, y_center, width, height),
+    by = c("filename" = "filename", "initial_id" = "row_id")
+  ) %>%
+  select(filename, object_name, x_center, y_center, width, height, iou) %>%
+  mutate(error_type = "false_negative")
+
+# For false positives: get unmatched completed boxes and pull coordinates from completed data
+false_positives <- all_matches %>%
+  filter(!is.na(completed_id) & !matched) %>%
+  select(filename, completed_id, object_name, iou) %>%
+  left_join(
+    completed_data %>% 
+      group_by(filename) %>%
+      mutate(row_id = row_number()) %>%
+      ungroup() %>%
+      select(filename, row_id, x_center, y_center, width, height),
+    by = c("filename" = "filename", "completed_id" = "row_id")
+  ) %>%
+  select(filename, object_name, x_center, y_center, width, height, iou) %>%
+  mutate(error_type = "false_positive")
+
+# Save false negatives and false positives to separate CSV files
+write_csv(false_negatives, here("annotation/output/false_negatives.csv"))
+write_csv(false_positives, here("annotation/output/false_positives.csv"))
+
+# Also create a combined file for convenience
+combined_errors <- bind_rows(false_negatives, false_positives)
+write_csv(combined_errors, here("annotation/output/all_errors.csv"))
+
+# Print summary
+cat("\n=== ERROR SUMMARY ===\n")
+cat(sprintf("False Negatives: %d\n", nrow(false_negatives)))
+cat(sprintf("False Positives: %d\n", nrow(false_positives)))
+cat(sprintf("Total Errors: %d\n", nrow(combined_errors)))
+```
+
+```{r}
+summarized_class_metrics <- class_metrics |>
+  summarize(precision = mean(precision, na.rm = TRUE),
+            recall =mean(precision, na.rm = TRUE),
+            f_score = mean(f_score, na.rm=TRUE))
+
+cat("\n=== OVERALL METRICS ===\n")
+cat(sprintf("Precision: %.3f\n", summarized_class_metrics$precision))
+cat(sprintf("Recall: %.3f\n", summarized_class_metrics$recall))
+cat(sprintf("F-Score: %.3f\n", summarized_class_metrics$f_score))
+
+## for file in
+```
+
+
+## make fun plots
+# plots
+```{r}
+# Plot: Distribution of IoU scores
+p1 <- all_matches %>%
+  filter(!is.na(completed_id), iou > 0) %>%
+  ggplot(aes(x = iou)) +
+  geom_histogram(bins = 50, fill = "steelblue", alpha = 0.7) +
+  geom_vline(xintercept = 0.9, color = "red", linetype = "dashed", size = 1) +
+  labs(title = "Distribution of IoU Scores",
+       subtitle = "Red line shows 90% threshold",
+       x = "IoU Score",
+       y = "Count") +
+  theme_minimal()
+
+# Plot: F-Score distribution per file
+p2 <- file_metrics %>%
+  ggplot(aes(x = f_score)) +
+  geom_histogram(bins = 30, fill = "forestgreen", alpha = 0.7) +
+  labs(title = "F-Score Distribution Across Files",
+       x = "F-Score",
+       y = "Count") +
+  theme_minimal()
+
+# Plot: Precision vs Recall
+p3 <- file_metrics %>%
+  ggplot(aes(x = recall, y = precision)) +
+  geom_point(alpha = 0.5, color = "purple") +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray") +
+  labs(title = "Precision vs Recall per File",
+       x = "Recall",
+       y = "Precision") +
+  theme_minimal() +
+  coord_fixed()
+
+p4 <- class_metrics %>%
+  head(20) %>%  # Top 20 classes
+  ggplot(aes(x = reorder(object_name, f_score), y = f_score)) +
+  geom_col(fill = "coral") +
+  coord_flip() +
+  labs(title = "F-Score by Object Class (Top 20)",
+       x = "Object Class",
+       y = "F-Score") +
+  theme_minimal()
+
+# Display plots
+print(p1)
+print(p2)
+print(p3)
+print(p4)
+```
+

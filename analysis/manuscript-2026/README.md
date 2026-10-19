@@ -15,6 +15,7 @@ Analysis code for the BabyView Objects manuscript (June 2026 submission).
 | [**00_build_exemplar_embeddings.md**](00_build_exemplar_embeddings.md) | **Stage 0** — run before 02–05 (notebooks 06–07) |
 | [**SCRIPTS.md**](SCRIPTS.md) | Catalog of [`scripts/`](scripts/) helpers — when to run, vs notebooks |
 | [REPRODUCTION.md](REPRODUCTION.md) | Step-by-step pipeline, dependencies, manuscript ↔ outputs |
+| [CODEOCEAN_EXPORT.md](CODEOCEAN_EXPORT.md) | Slim CodeOcean / public-repo export (include list + script) |
 | [scripts/check_exemplar_stage.py](scripts/check_exemplar_stage.py) | Verify `exemplar_set_embeddings/` before downstream notebooks |
 | [run_exemplar_embedding_stage.sh](run_exemplar_embedding_stage.sh) | Headless Stage 0 driver (BV script + checks) |
 | [DATA_AVAILABILITY.md](DATA_AVAILABILITY.md) | Paste-ready code/data availability text |

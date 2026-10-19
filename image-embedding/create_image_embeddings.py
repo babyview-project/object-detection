@@ -104,13 +104,16 @@ HF_POOLED_MODELS = [
 # Models with no pooler: mean-pool patch tokens at several depths instead.
 VJEPA2_MODELS = ['awwkl/vjepa2-vitl-fpc16-256-babyview-bs3072-e140']
 ZWM_MODELS = ['awwkl/zwm-babyview-170m', 'awwkl/zwm-babyview-1b']
+# CLIP: embedding is the projected image_embeds vector (512-d for ViT-B/32), the same
+# checkpoint/readout used for the manuscript's `clip_embeddings_new` crop trees.
+CLIP_MODELS = ['openai/clip-vit-base-patch32']
 
 # ------------------------- Args ----------------------------------------------
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_name', type=str,
                         default='facebook/dinov2-base',
-                        choices=HF_POOLED_MODELS + VJEPA2_MODELS + ZWM_MODELS,
+                        choices=HF_POOLED_MODELS + VJEPA2_MODELS + ZWM_MODELS + CLIP_MODELS,
                         help='Hugging Face model id')
     parser.add_argument('--input_image_dir', type=str, default=None,
                         help='Directory of input images (jpg/png), searched recursively. '
@@ -279,6 +282,30 @@ class HFPooledBackend:
         return out
 
 
+class CLIPBackend:
+    """OpenAI CLIP: embedding is the projected `image_embeds` vector (512-d for ViT-B/32) --
+    the same readout as the manuscript's `clip_embeddings_new` crop trees. No patch tokens are
+    exposed by `CLIPModel.get_image_features`, so there is no `_meanpatch` / `_grid4x4` variant."""
+
+    def __init__(self, model_name):
+        from transformers import CLIPModel, CLIPProcessor
+        self.processor = CLIPProcessor.from_pretrained(model_name)
+        self.model = CLIPModel.from_pretrained(
+            model_name, dtype=torch.bfloat16, attn_implementation="sdpa"
+        ).to('cuda').eval()
+        self.tag = model_name.replace('/', '_')
+        self.variants = ['']
+
+    def encode(self, img):
+        inputs = self.processor(images=img, return_tensors="pt").to(self.model.device)
+        # transformers>=4.56 wraps get_image_features' return in BaseModelOutputWithPooling,
+        # with the projected (512-d) vector as .pooler_output; older versions return the plain
+        # tensor directly. Handle both so this doesn't silently break on a transformers upgrade.
+        out = self.model.get_image_features(**inputs)
+        image_embeds = out.pooler_output if hasattr(out, 'pooler_output') else out
+        return {'': image_embeds.squeeze(0)}
+
+
 class VJEPA2Backend:
     """V-JEPA2 is a video encoder with no pooler.
 
@@ -417,6 +444,8 @@ class ZWMBackend:
 def build_backend(model_name, layers=None, grid4x4=False, grid4x4_layers=None):
     if model_name in HF_POOLED_MODELS:
         return HFPooledBackend(model_name, grid4x4=grid4x4)
+    if model_name in CLIP_MODELS:
+        return CLIPBackend(model_name)
     if model_name in VJEPA2_MODELS:
         return VJEPA2Backend(model_name, layers, grid4x4=grid4x4, grid4x4_layers=grid4x4_layers)
     if model_name in ZWM_MODELS:
@@ -431,7 +460,8 @@ def image_id_of(image_path):
     return f"{parent}_{stem}"
 
 @torch.inference_mode()
-def create_image_embedding(image_path, out_dir, backend, save_dtype='float16', image_id=None):
+def create_image_embedding(image_path, out_dir, backend, save_dtype='float16', image_id=None,
+                           bbox=None):
     if image_id is None:
         image_id = image_id_of(image_path)
 
@@ -475,6 +505,20 @@ def create_image_embedding(image_path, out_dir, backend, save_dtype='float16', i
 
         if img.mode != 'RGB':
             img = img.convert('RGB')
+
+        if bbox is not None:
+            # bbox coords come from detection-time pixel space, which matches this image's
+            # pixel space (annotated frames are saved at their original detection resolution).
+            # Clamp to image bounds -- some boxes touch/slightly exceed the edge (e.g. ymax
+            # reported as exactly the image height, or float rounding).
+            w, h = img.size
+            x0, y0, x1, y1 = bbox
+            x0, x1 = sorted((max(0, min(w, x0)), max(0, min(w, x1))))
+            y0, y1 = sorted((max(0, min(h, y0)), max(0, min(h, y1))))
+            if x1 - x0 < 1 or y1 - y0 < 1:
+                print(f'[WARN] degenerate crop box {bbox} for {image_path}; skipping')
+                return
+            img = img.crop((x0, y0, x1, y1))
     except Exception as e:
         print(f'[WARN] Could not open {image_path}: {e}')
         return
@@ -509,11 +553,13 @@ def create_image_embedding(image_path, out_dir, backend, save_dtype='float16', i
 @ray.remote(max_retries=-1)
 def process_list_of_images(model_name, items, out_dir, save_dtype, layers,
                            grid4x4=False, grid4x4_layers=None):
-    # items: list of (path, image_id). image_id is None to derive it from the path.
+    # items: list of (path, image_id, bbox). image_id=None derives it from the path;
+    # bbox=None means embed the whole image, otherwise crop to (xmin, ymin, xmax, ymax) first.
     backend = build_backend(model_name, layers, grid4x4=grid4x4, grid4x4_layers=grid4x4_layers)
-    for p, iid in items:
+    for p, iid, bbox in items:
         try:
-            create_image_embedding(p, out_dir, backend, save_dtype=save_dtype, image_id=iid)
+            create_image_embedding(p, out_dir, backend, save_dtype=save_dtype, image_id=iid,
+                                   bbox=bbox)
         except Exception as e:
             print(f'[ERROR] {p}: {e}')
 
@@ -542,28 +588,36 @@ def collect_videos(root):
     return files
 
 def load_manifest_items(csv_path, set_filter=None):
-    """Read image_id,path[,set] rows -> list of (path, image_id). Ids come straight from
-    the CSV, so files needn't follow the <parent>_<stem> naming rule. If set_filter is given,
-    keep only rows whose 'set' column matches (ids collide across sets, so each set is a run)."""
+    """Read image_id,path[,set][,xmin,ymin,xmax,ymax] rows -> list of (path, image_id, bbox).
+    Ids come straight from the CSV, so files needn't follow the <parent>_<stem> naming rule. If
+    set_filter is given, keep only rows whose 'set' column matches (ids collide across sets, so
+    each set is a run). If the bbox columns are present, each row's image is cropped to that box
+    before embedding (e.g. detection crops out of a larger annotated frame); otherwise the whole
+    image at `path` is embedded, same as before bbox support existed."""
     import csv
     items = []
     with open(csv_path) as fh:
         reader = csv.DictReader(fh)
+        has_bbox = {'xmin', 'ymin', 'xmax', 'ymax'}.issubset(reader.fieldnames or [])
         for row in reader:
             if set_filter is not None and row.get('set') != set_filter:
                 continue
-            items.append((row['path'], row['image_id']))
+            bbox = None
+            if has_bbox:
+                bbox = (float(row['xmin']), float(row['ymin']),
+                       float(row['xmax']), float(row['ymax']))
+            items.append((row['path'], row['image_id'], bbox))
     if not items:
         raise SystemExit(f'[FATAL] no rows in {csv_path}' +
                          (f' with set={set_filter}' if set_filter else ''))
     # ids must be unique or files overwrite each other
-    ids = [i for _, i in items]
+    ids = [iid for _, iid, _ in items]
     if len(set(ids)) != len(ids):
         import collections
         dup = [k for k, c in collections.Counter(ids).items() if c > 1]
         raise SystemExit(f'[FATAL] {len(dup)} duplicate image_ids (e.g. {dup[:3]}); '
                          f'pass --manifest_set to split by set')
-    missing = [p for p, _ in items if not os.path.exists(p)]
+    missing = [p for p, _, _ in items if not os.path.exists(p)]
     if missing:
         raise SystemExit(f'[FATAL] {len(missing)} of {len(items)} manifest paths do not exist '
                          f'(first: {missing[0]})')
@@ -601,8 +655,8 @@ if __name__ == "__main__":
                 # Fail loudly: a short set would break paired cross-model comparisons.
                 raise SystemExit(f'[FATAL] {missing} of {len(want)} ids have no matching source image')
 
-        # id=None -> derived from path inside create_image_embedding
-        items = [(p, None) for p in image_files]
+        # id=None -> derived from path inside create_image_embedding; bbox=None -> whole image
+        items = [(p, None, None) for p in image_files]
 
     # Shuffle for load balance across Ray chunks (adjacent frames of one video are similar).
     np.random.shuffle(items)
@@ -619,8 +673,9 @@ if __name__ == "__main__":
         backend = build_backend(args.model_name, args.layers,
                                 grid4x4=args.grid4x4, grid4x4_layers=args.grid4x4_layers)
         print(f'Backend {type(backend).__name__} tag={backend.tag} variants={backend.variants}')
-        for p, iid in items[:5]:
-            create_image_embedding(p, args.out_dir, backend, save_dtype=args.save_dtype, image_id=iid)
+        for p, iid, bbox in items[:5]:
+            create_image_embedding(p, args.out_dir, backend, save_dtype=args.save_dtype,
+                                   image_id=iid, bbox=bbox)
         print('Debug run complete.')
         sys.exit(0)
 

@@ -1,0 +1,5 @@
+model,task,n,agreement
+gemini-2.5-flash-lite,name,574,1.0
+gemini-2.5-flash-lite,verify,576,1.0
+gemini-2.5-flash,name,576,0.9704861111111112
+gemini-2.5-flash,verify,576,0.9895833333333334
