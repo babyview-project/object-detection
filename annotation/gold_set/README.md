@@ -88,23 +88,31 @@ for precision and format; use v2 frames alone for recall and method comparisons.
 - **Person**: YOLOE person boxes as output (production drops person before CLIP) and
   Gemini boxes labelled person.
 - **Merge** (`build_cvat_tasks.py`): a Gemini box matches a YOLOE box when its CDI word
-  (or person) is the YOLOE class and IoU ≥ 0.5 → one box with Gemini's name. Sources are
-  hidden from RAs (key in `out/private/prefill/merged.csv`). The format attribute is
-  pre-filled with Gemini's format (photo and drawing → picture), so RAs correct formats
-  rather than label them from scratch; YOLOE-only boxes and new boxes start as `unset`.
-  RA formats are therefore corrections of Gemini's, not independent labels: agreement with
-  Gemini is an upper bound (anchoring), so report it as such in the format validation.
+  (or person) is the YOLOE class and IoU ≥ 0.5 → one row with Gemini's name and both
+  sets of coordinates (YOLOE in `xmin..`, Gemini in `g_xmin..`). All rows, with their
+  source, are the key in `out/private/prefill/merged.csv`, for comparing RA boxes with
+  YOLOE+CLIP (or any other model) post hoc.
+- **What RAs see**: Gemini's boxes only, in Gemini's coordinates; YOLOE-only boxes are
+  hidden (kept in `merged.csv`). The format attribute is pre-filled with Gemini's format
+  (photo and drawing → picture), so RAs correct formats rather than label them from
+  scratch; boxes RAs draw start as `unset`.
+- **Anchoring**: RA boxes, names and formats are corrections of Gemini's, not independent
+  labels. Agreement with Gemini is an upper bound, and the method comparison favours
+  Gemini (an object both found is scored against a box drawn from Gemini's). Objects only
+  YOLOE found count only if RAs add them. The double-coded shared frames give
+  inter-rater agreement but do not remove this bias; report it in the comparison.
 - **CVAT label setup**: one label, `object`, with a text attribute `name` and a select
   attribute `format`. RAs follow naming rules (lowercase, singular, CDI word when it fits);
   names are mapped to CDI / valid129 categories after annotation.
 
-Pre-fill result (2026-10-21, Gemini cap 30): 14,300 boxes, median 13 per frame (max 39),
-30 frames with none, 739 distinct names; 9,738 boxes are a valid129 class or person. By
-source: Gemini only 11,568, YOLOE+CLIP only 937, both 773; person: YOLOE only 530, both 492.
+Pre-fill result (2026-10-21, Gemini cap 30): merged key 14,300 boxes. By source: Gemini only
+11,568, YOLOE+CLIP only 937, both 773; person: YOLOE only 530, both 492. Shown to RAs:
+12,833 Gemini boxes, median 11 per frame (max 30), 39 frames with none, 730 distinct names;
+8,271 are a valid129 class or person. Matched boxes: median IoU of YOLOE vs Gemini box 0.88.
 Gemini returned 16,081 objects (median 14 per frame); 247 frames still hit the cap of 30,
 and 1,138 objects were dropped as not discrete or parts. Gemini run: 2.71 M input / 0.83 M
 output tokens (about $3). Pre-filled formats: real 10,887, toy 1,099, picture 744, screen
-103, unset 1,467 (the YOLOE-only boxes). The earlier cap-25 run and the 80-frame no-cap test stay in
+103. The earlier cap-25 run and the 80-frame no-cap test stay in
 `gemini_pilot/out/private/` but are not used.
 
 ## CVAT

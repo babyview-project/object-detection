@@ -14,11 +14,13 @@ Pre-fill per frame
               (handles, knobs, ...). Match class = "person" if label or cdi_word is person,
               else cdi_word if it is a valid129 class, else none. Gemini's duplicate boxes
               (same name or class, IoU > DUP_IOU) are collapsed.
-  Merge       same match class and IoU >= MERGE_IOU -> one box (YOLOE coordinates, Gemini's
-              name), source "both". Everything else is kept with its own source.
-RAs never see the source. The format attribute is pre-filled with Gemini's format (photo and
-drawing -> picture) so RAs correct it rather than label it from scratch; boxes without a
-Gemini match (YOLOE only) and boxes RAs draw start as "unset".
+  Merge       same match class and IoU >= MERGE_IOU -> one row (YOLOE coordinates in xmin..,
+              Gemini's in g_xmin.., Gemini's name), source "both". Everything else is kept
+              with its own source. Saved as merged.csv, the key for post-hoc comparisons.
+RAs see Gemini's boxes only (sources in GEMINI_SOURCES, Gemini coordinates); YOLOE-only
+boxes are hidden from them and kept in merged.csv. The format attribute is pre-filled with
+Gemini's format (photo and drawing -> picture) so RAs correct it rather than label it from
+scratch; boxes RAs draw start as "unset".
 
 Per rater and batch: one CVAT task folder
   out/private/cvat/<rater>_batch<k>/
@@ -63,6 +65,7 @@ YOLOE_RAW = PRIV / "prefill" / "yoloe_raw.csv"
 FORMATS = ["unset", "real", "toy", "picture", "screen"]
 GEMINI_FORMAT = {"real": "real", "toy": "toy", "photo": "picture", "drawing": "picture", "screen": "screen"}
 MERGE_IOU, DUP_IOU = 0.5, 0.8
+GEMINI_SOURCES = {"gemini", "both", "both_person"}   # pre-filled for RAs; the rest stay in merged.csv
 
 
 def iou(a, b) -> float:
@@ -142,18 +145,28 @@ def merge(y: pd.DataFrame, g: pd.DataFrame, uids) -> pd.DataFrame:
                 src = "both" if src == "yoloe_clip" else "both_person"
                 row.update(name=gg.at[bj, "name"], gemini_name=gg.at[bj, "name"],
                            gemini_cdi_word=gg.at[bj, "gemini_cdi_word"],
-                           gemini_format=gg.at[bj, "gemini_format"], gemini_iou=best)
+                           gemini_format=gg.at[bj, "gemini_format"], gemini_iou=best,
+                           **{f"g_{c}": gg.at[bj, c] for c in ("xmin", "ymin", "xmax", "ymax")})
             out.append({**row, "source": src})
         for j, s in gg.iterrows():
             if j not in used:
                 out.append(dict(frame_uid=uid, class_name=s.class_name, name=s["name"], xmin=s.xmin,
                                 ymin=s.ymin, xmax=s.xmax, ymax=s.ymax, clip_sim=np.nan, yolo_conf=np.nan,
                                 gemini_name=s["name"], gemini_cdi_word=s.gemini_cdi_word,
-                                gemini_format=s.gemini_format, gemini_iou=np.nan, source="gemini"))
+                                gemini_format=s.gemini_format, gemini_iou=np.nan, g_xmin=s.xmin, g_ymin=s.ymin,
+                                g_xmax=s.xmax, g_ymax=s.ymax, source="gemini"))
     m = pd.DataFrame(out)
     m["gemini_format"] = m.gemini_format.fillna("")
     m.insert(0, "box_id", [f"{u}_{i:03d}" for u, i in zip(m.frame_uid, m.groupby("frame_uid").cumcount())])
     return m
+
+
+def gemini_prefill(m: pd.DataFrame) -> pd.DataFrame:
+    """What RAs see: Gemini's boxes only, in Gemini's coordinates (YOLOE-only boxes left out)."""
+    p = m[m.source.isin(GEMINI_SOURCES)].copy()
+    for c in ("xmin", "ymin", "xmax", "ymax"):
+        p[c] = p[f"g_{c}"]
+    return p
 
 
 def labels_json() -> list[dict]:
@@ -195,13 +208,14 @@ def main():
     m = merge(y, g, frames.frame_uid)
     (PRIV / "prefill").mkdir(parents=True, exist_ok=True)
     m.to_csv(PRIV / "prefill" / "merged.csv", index=False)
+    p = gemini_prefill(m)
 
     raters = sorted(r for r in frames.rater.unique() if r != "shared")
-    per_frame = m.groupby("frame_uid").size().reindex(frames.frame_uid, fill_value=0)
-    summary = {"gemini_run": GEMINI.name, "boxes": len(m), "by_source": m.source.value_counts().to_dict(),
-               "boxes_in_valid129_or_person": int((m.class_name != "").sum()),
-               "distinct_names": int(m.name.nunique()),
-               "prefilled_format": m.gemini_format.replace("", "unset").value_counts().to_dict(),
+    per_frame = p.groupby("frame_uid").size().reindex(frames.frame_uid, fill_value=0)
+    summary = {"gemini_run": GEMINI.name, "merged_boxes": len(m), "by_source": m.source.value_counts().to_dict(),
+               "prefilled_boxes": len(p), "boxes_in_valid129_or_person": int((p.class_name != "").sum()),
+               "distinct_names": int(p.name.nunique()),
+               "prefilled_format": p.gemini_format.replace("", "unset").value_counts().to_dict(),
                "boxes_per_frame_median_max": [float(per_frame.median()), int(per_frame.max())],
                "frames_without_boxes": int((per_frame == 0).sum()), "tasks": {}}
     root = PRIV / "cvat"
@@ -216,12 +230,12 @@ def main():
             for fr in f.itertuples():
                 shutil.copy2(fr.frame_path, d / "images" / f"{fr.frame_uid}.jpg")
             with zipfile.ZipFile(d / "annotations.zip", "w", zipfile.ZIP_DEFLATED) as z:
-                z.writestr("annotations.xml", cvat_xml(f, m[m.frame_uid.isin(f.frame_uid)]))
+                z.writestr("annotations.xml", cvat_xml(f, p[p.frame_uid.isin(f.frame_uid)]))
             (d / "labels.json").write_text(json.dumps(labels_json(), indent=1) + "\n")
             if args.zip:
                 shutil.make_archive(str(d), "zip", root_dir=d)
             summary["tasks"][d.name] = {"frames": len(f), "shared": int((f.rater == "shared").sum()),
-                                        "boxes": int(m.frame_uid.isin(f.frame_uid).sum())}
+                                        "boxes": int(p.frame_uid.isin(f.frame_uid).sum())}
     (root / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     print(json.dumps(summary, indent=2))
 

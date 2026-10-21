@@ -2,9 +2,9 @@
 
 Thank you for helping with this! You will check and correct object boxes on single frames
 from BabyView, the head-camera videos that children wore at home. Each frame already has
-some boxes drawn by computer models. Your job is to make every frame correct and complete:
+some boxes drawn by a computer model. Your job is to make every frame correct and complete:
 box **every object in view** and give each box a **name** in your own words (there is no
-fixed list), fix or delete wrong boxes, add the objects the models missed, and say for every
+fixed list), fix or delete wrong boxes, add the objects the model missed, and say for every
 box whether it is the real object, a toy, a picture or an image on a screen.
 
 Your corrected frames become our new "gold set": the reference we use to measure how well
@@ -194,7 +194,7 @@ Do **not** box:
 
 ### 5.2 Check every pre-drawn box
 
-The boxes come from two different computer models, and they make mistakes. For each box:
+The boxes come from a computer model, and it makes mistakes. For each box:
 
 | If the box… | Do this |
 |---|---|
@@ -227,9 +227,9 @@ recognise it. There is **no limit** on the number of boxes per frame.
 
 ### 5.5 Format (every box)
 
-Most pre-drawn boxes already have a format. It is a computer's guess and is often wrong,
+Pre-drawn boxes already have a format. It is the model's guess and is often wrong,
 especially for toys and pictures: check it on every box and change it when it is wrong.
-A few pre-drawn boxes and every box you draw start as **unset**; give those a format.
+Boxes you draw start as **unset**; give those a format.
 
 | Format | Use for | Examples |
 |---|---|---|
