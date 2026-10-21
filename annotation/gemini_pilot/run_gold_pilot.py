@@ -10,7 +10,8 @@ Every crop in the gold set was judged correct by raters, so it supports two task
   verify  three shuffled words (gold label, a same-domain foil, an other-domain
           foil): is each one the object shown? Gives hits and false alarms.
   detect  the whole source frame (no YOLOE input): every visible object from the
-          vocabulary, with a box. Scored on finding the rater-validated object.
+          vocabulary, with a box.
+  detect_open  the same, open vocabulary: the most precise everyday name per object. Scored on finding the rater-validated object.
           Frames come from out/private/gold_frames.csv (build_gold_frames.py); its
           outputs go to out/private/ because they are keyed by video names.
 
@@ -86,6 +87,58 @@ DETECT_PROMPT = (
     "Word list: {words}"
 )
 
+# Open vocabulary: no word list. People are labelled "person" only (no descriptions).
+DETECT_OPEN_PROMPT = (
+    "Return JSON with \"objects\": every clearly visible object in the frame (at most {max_obj}). "
+    "For each: \"label\", the most precise name for it that people use in everyday life, as a short "
+    "lowercase common noun (e.g. \"sippy cup\" rather than \"cup\" or \"container\"); \"box_2d\", "
+    "[ymin, xmin, ymax, xmax] normalized to 0-1000. Include body parts, clothing, furniture and parts "
+    "of the room. Toys, pictures and screens count: name what they show (e.g. \"toy giraffe\", "
+    "\"picture of a dog\"). Label any person just \"person\", without describing them.\n"
+)
+
+# Same, but says nothing about toys, pictures or screens and gives no example label, so any
+# format word in a label ("stuffed", "poster", "cartoon") is unprompted.
+DETECT_OPEN_NEUTRAL_PROMPT = (
+    "Return JSON with \"objects\": every clearly visible object in the frame (at most {max_obj}). "
+    "For each: \"label\", the most precise name for it that people use in everyday life, as a short "
+    "lowercase name; \"box_2d\", [ymin, xmin, ymax, xmax] normalized to 0-1000. Include body parts, "
+    "clothing, furniture and parts of the room. Label any person just \"person\", without describing them.\n"
+)
+
+# Combined: open label + closest CDI word + visual format, one call. detect_combo_nocap is the
+# same prompt without "(at most N)" and without the schema's maxItems. Tried for the gold set
+# v2 pre-fill (207/1,000 frames hit the 25-object cap) and dropped: without a cap some frames
+# came back with far fewer objects and some looped until the token limit. The pre-fill uses
+# detect_combo --max-obj 30 instead. Format is a small
+# enum (Vertex accepts short enums); the word list is a reference, not a constraint.
+FORMATS = ["real", "toy", "photo", "drawing", "screen"]
+DETECT_COMBO_PROMPT = (
+    "Return JSON with \"objects\": every clearly visible object in the frame (at most {max_obj}). For each:\n"
+    "- \"label\": the most precise name for it that people use in everyday life, as a short lowercase name;\n"
+    "- \"cdi_word\": the closest word from the word list below, copied exactly, or \"none\" if no word fits;\n"
+    "- \"format\": \"real\" for a real object, \"toy\" for a toy version of something, \"photo\" for a "
+    "photograph, \"drawing\" for a drawing, cartoon, painting or illustration, \"screen\" for an image shown on a screen;\n"
+    "- \"box_2d\": [ymin, xmin, ymax, xmax] normalized to 0-1000.\n"
+    "If an object is a toy, picture or screen image of something, label and cdi_word name what it shows, and "
+    "format says what kind of depiction it is. Include body parts, clothing, furniture and parts of the room. "
+    "Label any person just \"person\", without describing them.\n"
+    "Word list: {{words}}"
+)
+
+# detect_combo without the CDI word and word list: open label + format only. Run on the gold
+# set v2 frames with 2.5 Flash and Flash-Lite to compare with the detect_combo pre-fill.
+DETECT_OPEN_FORMAT_PROMPT = (
+    "Return JSON with \"objects\": every clearly visible object in the frame (at most {max_obj}). For each:\n"
+    "- \"label\": the most precise name for it that people use in everyday life, as a short lowercase name;\n"
+    "- \"format\": \"real\" for a real object, \"toy\" for a toy version of something, \"photo\" for a "
+    "photograph, \"drawing\" for a drawing, cartoon, painting or illustration, \"screen\" for an image shown on a screen;\n"
+    "- \"box_2d\": [ymin, xmin, ymax, xmax] normalized to 0-1000.\n"
+    "If an object is a toy, picture or screen image of something, label names what it shows, and "
+    "format says what kind of depiction it is. Include body parts, clothing, furniture and parts of the room. "
+    "Label any person just \"person\", without describing them.\n"
+)
+
 VERIFY_PROMPT = (
     "Return JSON with \"answers\": one entry per word below, with \"word\" and \"is_object\" "
     "(true if the main object in the crop is that kind of thing, else false). Judge each "
@@ -143,8 +196,14 @@ def subsample(gold, k):
                 .sort_values(["category", "crop_id"]).reset_index(drop=True))
 
 
-def load_frames():
-    """One unit per gold frame; the gold crops on it are scored against its boxes."""
+def load_frames(path=None):
+    """One unit per gold frame; the gold crops on it are scored against its boxes.
+    path: another frame list (unit_id, video, frame_id, frame_path, category), e.g.
+    out/private/depiction_frames.csv."""
+    if path is not None:
+        f = pd.read_csv(path, dtype={"frame_id": str})[["unit_id", "video", "frame_id", "frame_path", "category"]]
+        f["crop_id"] = f.unit_id
+        return f.sort_values("unit_id").reset_index(drop=True)
     g = pd.read_csv(OUT_DIR / "private" / "gold_frames.csv", dtype={"frame_id": str})
     f = g.groupby("frame_path", as_index=False).agg(video=("video", "first"), frame_id=("frame_id", "first"),
                                                      category=("category", "first"))
@@ -170,7 +229,7 @@ def make_client():
 
 
 def build_config(task, labels, model, args):
-    from typing import List
+    from typing import List, Literal
     from google.genai import types
     from pydantic import BaseModel, Field, create_model
 
@@ -179,7 +238,15 @@ def build_config(task, labels, model, args):
     # score_gold_pilot.py counts answers that are not on the list.
     if task == "name":
         schema = create_model("Naming", cdi_word=(str, ...), open_label=(str, ...))
-    elif task == "detect":
+    elif task in ("detect_combo", "detect_combo_nocap"):
+        Obj = create_model("Obj", label=(str, ...), cdi_word=(str, ...), format=(Literal[tuple(FORMATS)], ...),
+                           box_2d=(List[int], ...))
+        cap = {} if task == "detect_combo_nocap" else {"max_length": MAX_OBJ}
+        schema = create_model("Detect", objects=(List[Obj], Field(..., **cap)))
+    elif task == "detect_open_format":
+        Obj = create_model("Obj", label=(str, ...), format=(Literal[tuple(FORMATS)], ...), box_2d=(List[int], ...))
+        schema = create_model("Detect", objects=(List[Obj], Field(..., max_length=MAX_OBJ)))
+    elif task in ("detect","detect_open", "detect_open_neutral"):
         Obj = create_model("Obj", label=(str, ...), box_2d=(List[int], ...))
         # maxItems stops runaway lists (Flash-Lite once repeated "toy" boxes until MAX_TOKENS)
         schema = create_model("Detect", objects=(List[Obj], Field(..., max_length=MAX_OBJ)))
@@ -194,13 +261,23 @@ def build_config(task, labels, model, args):
 
     thinking = types.ThinkingConfig(thinking_budget=0)
     return types.GenerateContentConfig(
-        system_instruction=DETECT_SYSTEM if task == "detect" else SYSTEM, response_mime_type="application/json", response_schema=schema,
+        system_instruction=DETECT_SYSTEM if task.startswith("detect") else SYSTEM, response_mime_type="application/json", response_schema=schema,
         temperature=0.0, thinking_config=thinking, max_output_tokens=args.max_output_tokens)
 
 
 def prompt_for(task, row, labels):
     if task == "name":
         return NAME_PROMPT.format(words=", ".join(labels))
+    if task == "detect_open":
+        return DETECT_OPEN_PROMPT.format(max_obj=MAX_OBJ)
+    if task == "detect_combo":
+        return DETECT_COMBO_PROMPT.format(max_obj=MAX_OBJ).format(words=", ".join(labels))
+    if task == "detect_open_format":
+        return DETECT_OPEN_FORMAT_PROMPT.format(max_obj=MAX_OBJ)
+    if task == "detect_combo_nocap":
+        return DETECT_COMBO_PROMPT.replace(" (at most {max_obj})", "").format(words=", ".join(labels))
+    if task == "detect_open_neutral":
+        return DETECT_OPEN_NEUTRAL_PROMPT.format(max_obj=MAX_OBJ)
     if task == "detect":
         return DETECT_PROMPT.format(words=", ".join(labels), max_obj=MAX_OBJ)
     words = [row.category, row.foil_same, row.foil_other]
@@ -254,24 +331,31 @@ def consolidate(out, args, meta):
 
 
 def main():
+    global MAX_OBJ
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="gemini-2.5-flash-lite", choices=ALLOWED_MODELS)
-    ap.add_argument("--task", choices=["name", "verify", "detect"], default="name")
+    ap.add_argument("--task", choices=["name", "verify", "detect", "detect_open", "detect_open_neutral", "detect_combo",
+                                       "detect_combo_nocap", "detect_open_format"], default="name")
     ap.add_argument("--pass", dest="pass_", type=int, default=1, help="2 = retest pass")
     ap.add_argument("--limit-per-cat", type=int, default=0, help="crops per category (0 = all)")
     ap.add_argument("--sample", type=int, default=0, help="random N crops (sanity pass)")
+    ap.add_argument("--frames", type=Path, help="detect tasks: frame list CSV instead of the gold frames")
+    ap.add_argument("--units", type=Path, help="text file of unit ids to run (one per line); tags the output")
     ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--max-px", type=int, default=512, help="downsize longest image edge")
     ap.add_argument("--max-output-tokens", type=int, default=0, help="0 = 512, or 3072 for detect")
+    ap.add_argument("--max-obj", type=int, default=MAX_OBJ, help="detect tasks: object cap in prompt and schema")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--list-models", action="store_true")
     args = ap.parse_args()
-    args.max_output_tokens = args.max_output_tokens or (3072 if args.task == "detect" else 512)
+    MAX_OBJ = args.max_obj
+    args.max_output_tokens = args.max_output_tokens or (16384 if args.task == "detect_combo_nocap" else
+                                                         max(4096, 200 * MAX_OBJ) if args.task == "detect_combo" else 3072 if args.task.startswith("detect") else 512)
 
     labels, domains = load_vocab()
     OUT_DIR.mkdir(exist_ok=True)
-    if args.task == "detect":
-        gold = subsample(load_frames(), args.limit_per_cat)
+    if args.task.startswith("detect"):
+        gold = subsample(load_frames(args.frames), args.limit_per_cat)
     else:
         gold = subsample(add_foils(load_gold(domains), labels, domains), args.limit_per_cat)
         if not (args.sample or args.limit_per_cat):
@@ -279,6 +363,10 @@ def main():
         gold["unit_id"] = gold.crop_id
     if args.sample:
         gold = gold.sample(min(args.sample, len(gold)), random_state=SEED).reset_index(drop=True)
+    if args.units:
+        keep = {l.strip() for l in open(args.units) if l.strip()}
+        gold = gold[gold.unit_id.isin(keep)].reset_index(drop=True)
+        assert len(gold) == len(keep), f"{len(keep) - len(gold)} unit ids not found"
 
     if args.dry_run:
         r = gold.iloc[0]
@@ -287,12 +375,12 @@ def main():
         if "domain" in gold:
             print(gold.domain.value_counts().to_dict())
         print("\n--- system ---\n" + SYSTEM)
-        if args.task != "detect":
+        if not args.task.startswith("detect"):
             print("\n--- name prompt ---\n" + prompt_for("name", r, labels)[:600] + " ...")
             print("\n--- verify prompt ---\n" + prompt_for("verify", r, labels))
         else:
             print("\n--- detect system ---\n" + DETECT_SYSTEM)
-            print("\n--- detect prompt ---\n" + prompt_for("detect", r, labels)[:700] + " ...")
+            print(f"\n--- {args.task} prompt ---\n" + prompt_for(args.task, r, labels)[:700] + " ...")
             im = Image.open(io.BytesIO(to_jpeg(open(r.frame_path, "rb").read(), args.max_px)))
             print(f"frame sent as {im.size}")
         return
@@ -305,8 +393,11 @@ def main():
         return
 
     config = build_config(args.task, labels, args.model, args)
-    tag = f"_s{args.sample}" if args.sample else ""
-    out_dir = OUT_DIR / "private" if args.task == "detect" else OUT_DIR
+    tag = f"_s{args.sample}" if args.sample else (f"_{args.units.stem}" if args.units else
+                                                  f"_{args.frames.stem}" if args.frames else "")
+    if args.task.startswith("detect") and MAX_OBJ != 25:
+        tag += f"_cap{MAX_OBJ}"
+    out_dir = OUT_DIR / "private" if args.task.startswith("detect") else OUT_DIR
     out = out_dir / f"{args.model}__{args.task}__p{args.pass_}{tag}.jsonl"
     done = set()
     if out.exists():
@@ -321,11 +412,11 @@ def main():
     zlock, wlock = threading.Lock(), threading.Lock()
     meta = {"model": args.model, "task": args.task, "pass": args.pass_,
             "endpoint": f"vertexai/{client._api_client.location}", "temperature": 0.0,
-            "thinking": "budget0",
+            "thinking": "budget0", "max_obj": MAX_OBJ,
             "max_px": args.max_px}
 
     def work(row):
-        if args.task == "detect":
+        if args.task.startswith("detect"):
             raw = open(row.frame_path, "rb").read()
         else:
             with zlock:

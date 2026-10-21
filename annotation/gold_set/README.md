@@ -115,6 +115,26 @@ output tokens (about $3). Pre-filled formats: real 10,887, toy 1,099, picture 74
 103. The earlier cap-25 run and the 80-frame no-cap test stay in
 `gemini_pilot/out/private/` but are not used.
 
+## Pre-fill comparison (2026-10-21)
+
+Two more Gemini versions on the same 1,000 frames, open label + format with no CDI word
+(`detect_open_format`, cap 30, full frame), to choose what RAs correct and which model to use
+for the full run. `compare_prefill.py` writes `out/private/compare_prefill/` (summary.csv,
+side-by-side images of 60 frames, index.html).
+
+| | A: 2.5 Flash, open + CDI + format (current) | B: 2.5 Flash, open + format | C: 2.5 Flash-Lite, open + format |
+|---|---|---|---|
+| boxes (median per frame) | 12,833 (11) | 11,643 (10) | 12,278 (9) |
+| frames at the cap of 30 / empty | 56 / 39 | 40 / 26 | 129 / 11 |
+| distinct names | 730 | 1,134 | 909 |
+| real / toy / picture / screen | 85 / 9 / 6 / 1% | 82 / 11 / 5 / 1% | 63 / 27 / 9 / 2% |
+| cost, 1,000 frames online | $2.89 | $2.39 | $0.55 |
+| full run, BV-main 1 per 5 s, batch | $1,487 | $1,227 | $282 |
+
+Flash-Lite names 3,505 objects just "toy" (before duplicates are removed), against 625 for B
+and 1,210 for A; the CDI list (which contains "toy") seems to pull A toward the generic word.
+One Flash-Lite frame returned broken JSON twice and counts as empty.
+
 ## CVAT
 
 For each folder in `out/private/cvat/`: create a task, paste `labels.json` into the label

@@ -76,10 +76,10 @@ def iou(a, b) -> float:
     return i / u if u > 0 else 0.0
 
 
-def load_gemini(frames: pd.DataFrame, classes: set[str]) -> pd.DataFrame:
+def load_gemini(frames: pd.DataFrame, classes: set[str], path: Path = GEMINI) -> pd.DataFrame:
     size = {r.frame_uid: Image.open(r.frame_path).size for r in frames.itertuples()}
     rows, n_err, n_drop = [], 0, 0
-    recs = [json.loads(l) for l in open(GEMINI)]
+    recs = [json.loads(l) for l in open(path)]
     recs = {r["unit_id"]: r for r in recs}            # last record per frame wins (retries)
     missing = set(frames.frame_uid) - set(recs)
     assert not missing, f"Gemini has no output for {len(missing)} frames; rerun the pre-fill"
