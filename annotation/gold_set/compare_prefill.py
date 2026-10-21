@@ -50,11 +50,12 @@ def panel(path, boxes, title, fnt, tfnt):
         c = FMT_COLORS.get(b.gemini_format, (255, 255, 255))
         x0, y0, x1, y1 = (v * 2 for v in (b.xmin, b.ymin, b.xmax, b.ymax))
         d.rectangle((x0, y0, x1, y1), outline=c, width=3)
-        tw, th = d.textbbox((0, 0), b.name, font=fnt)[2:]
+        t = f"{b.name} | {b.gemini_format or '-'}"
+        tw, th = d.textbbox((0, 0), t, font=fnt)[2:]
         ty = y0 - th - 4 if y0 - th - 4 >= 0 else y0
         tx = max(0, min(x0, im.width - tw - 6))
         d.rectangle((tx, ty, tx + tw + 6, ty + th + 4), fill=c)
-        d.text((tx + 3, ty + 1), b.name, fill=(255, 255, 255), font=fnt)
+        d.text((tx + 3, ty + 1), t, fill=(255, 255, 255), font=fnt)
     head = Image.new("RGB", (im.width, 44), (30, 30, 30))
     ImageDraw.Draw(head).text((10, 8), f"{title} · {len(boxes)} boxes", fill=(255, 255, 255), font=tfnt)
     out = Image.new("RGB", (im.width, im.height + 44))
@@ -100,7 +101,7 @@ def main():
     legend = " ".join(f'<span style="border:3px solid rgb{c};padding:1px 6px">{f}</span>' for f, c in FMT_COLORS.items())
     parts = ["<!doctype html><meta charset=utf-8><title>Pre-fill comparison</title>"
              "<body style='font-family:sans-serif;margin:16px'><h1>Gemini pre-fill comparison, gold set v2</h1>",
-             summary.set_index("version").T.to_html(), f"<p>Box color = format: {legend}</p>"]
+             summary.set_index("version").T.to_html(), f"<p>Box text: name | format (photo and drawing shown as picture). Box color = format: {legend}</p>"]
     for r in pick.itertuples():
         ims = [panel(r.frame_path, boxes[k][boxes[k].frame_uid == r.frame_uid], f"{k}: {VERSIONS[k][0]}", fnt, tfnt)
                for k in VERSIONS]
