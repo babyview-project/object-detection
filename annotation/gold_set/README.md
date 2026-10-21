@@ -23,9 +23,9 @@ IRB-approved storage; CVAT runs locally.
 ```bash
 python freeze_v1.py                         # v1 frozen copy + its BV-main subset
 python sample_frames.py --raters Mira Emma   # 1,000 frames -> out/private/frames.csv
-# Gemini pre-fill (Vertex, gemini-2.5-flash, ~$3-4 for 1,000 frames)
+# Gemini pre-fill (Vertex, gemini-2.5-flash, open label + format, ~$2.40 for 1,000 frames)
 cd ../gemini_pilot && set -a && source ~/.secrets/hs-hs-langcog-gemini.env && set +a
-~/.venvs/gemini/bin/python run_gold_pilot.py --model gemini-2.5-flash --task detect_combo \
+~/.venvs/gemini/bin/python run_gold_pilot.py --model gemini-2.5-flash --task detect_open_format \
     --max-obj 30 --frames ../gold_set/out/private/gold_v2_frames.csv --max-px 910 --workers 8
 cd ../gold_set
 # YOLOE+CLIP pre-fill (production settings; YOLOE needs a YOLOE build of ultralytics)
@@ -77,9 +77,11 @@ for precision and format; use v2 frames alone for recall and method comparisons.
   CLIP with the production settings on all 1,000. Check against production on the 314
   covered frames with boxes: 97.8% of production boxes matched (same class, IoU ≥ 0.9),
   CLIP score difference median 0.00006 (max 0.01), 1 pass/fail flip at 0.27.
-- **Gemini**: 2.5 Flash `detect_combo` (box, open label, closest CDI word, format), full
+- **Gemini**: 2.5 Flash `detect_open_format` (box, open label, format; no CDI word), full
   frame at 512×910, temperature 0, thinking off, at most 30 objects per frame
-  (`--max-obj 30`). The first run used 25; 207 of 1,000 frames hit it. A run with no cap
+  (`--max-obj 30`). Chosen over `detect_combo` (the same prompt plus the closest CDI word)
+  after the side-by-side check below: more specific names, fewer generic "toy" labels.
+  Earlier `detect_combo` runs used a cap of 25 (207 of 1,000 frames hit it). A run with no cap
   (`detect_combo_nocap`, tested on 80 frames) was dropped: "at most N" seems to work as a
   target, so without it some busy frames came back with far fewer objects (25 → 5), and some
   looped until the token limit (138 "light" boxes; 2 of 20 broken JSON). All boxes are kept
@@ -87,8 +89,10 @@ for precision and format; use v2 frames alone for recall and method comparisons.
   `build_cvat_tasks.py`); the box name is Gemini's open label.
 - **Person**: YOLOE person boxes as output (production drops person before CLIP) and
   Gemini boxes labelled person.
-- **Merge** (`build_cvat_tasks.py`): a Gemini box matches a YOLOE box when its CDI word
-  (or person) is the YOLOE class and IoU ≥ 0.5 → one row with Gemini's name and both
+- **Merge** (`build_cvat_tasks.py`): a Gemini box matches a YOLOE box when its label, or the
+  label's last word ("toy car" → car), or person is the YOLOE class and IoU ≥ 0.5 (Gemini
+  gives no CDI word in this setup, so the key under-matches synonyms such as "sofa" vs
+  couch; the method comparison scores both detectors against RA boxes anyway) → one row with Gemini's name and both
   sets of coordinates (YOLOE in `xmin..`, Gemini in `g_xmin..`). All rows, with their
   source, are the key in `out/private/prefill/merged.csv`, for comparing RA boxes with
   YOLOE+CLIP (or any other model) post hoc.
@@ -105,24 +109,26 @@ for precision and format; use v2 frames alone for recall and method comparisons.
   attribute `format`. RAs follow naming rules (lowercase, singular, CDI word when it fits);
   names are mapped to CDI / valid129 categories after annotation.
 
-Pre-fill result (2026-10-21, Gemini cap 30): merged key 14,300 boxes. By source: Gemini only
-11,568, YOLOE+CLIP only 937, both 773; person: YOLOE only 530, both 492. Shown to RAs:
-12,833 Gemini boxes, median 11 per frame (max 30), 39 frames with none, 730 distinct names;
-8,271 are a valid129 class or person. Matched boxes: median IoU of YOLOE vs Gemini box 0.88.
-Gemini returned 16,081 objects (median 14 per frame); 247 frames still hit the cap of 30,
-and 1,138 objects were dropped as not discrete or parts. Gemini run: 2.71 M input / 0.83 M
-output tokens (about $3). Pre-filled formats: real 10,887, toy 1,099, picture 744, screen
-103. The earlier cap-25 run and the 80-frame no-cap test stay in
-`gemini_pilot/out/private/` but are not used.
+Pre-fill result (2026-10-21, `detect_open_format`, cap 30): merged key 13,282 boxes. By
+source: Gemini only 10,550, YOLOE+CLIP only 1,078, both 632; person: YOLOE only 567, both 455.
+Shown to RAs: 11,637 Gemini boxes, median 10 per frame (max 30), 26 frames with none, 1,131
+distinct names; 6,062 are a valid129 class or person by label. Matched boxes: median IoU of
+YOLOE vs Gemini box 0.87. Gemini returned 14,415 objects (median 12 per frame); 162 frames hit
+the cap of 30, and 1,678 objects were dropped as not discrete or parts (mostly walls, floors,
+ceilings). Gemini run: 2.06 M input / 0.71 M output tokens ($2.39; 5 broken-JSON responses
+succeeded on retry). Pre-filled formats: real 9,572, toy 1,322, picture 631, screen 112.
+Per RA: Emma 548 frames / 6,172 boxes, Mira 552 / 6,584, shared frames 1,119
+(`out/private/ra_assignments.csv`). The `detect_combo` runs (cap 25, cap 30) and the 80-frame
+no-cap test stay in `gemini_pilot/out/private/` but are not used.
 
 ## Pre-fill comparison (2026-10-21)
 
-Two more Gemini versions on the same 1,000 frames, open label + format with no CDI word
-(`detect_open_format`, cap 30, full frame), to choose what RAs correct and which model to use
-for the full run. `compare_prefill.py` writes `out/private/compare_prefill/` (summary.csv,
+Three Gemini versions on the same 1,000 frames, to choose what RAs correct and which model to
+use for the full run. **Chosen: B** (2.5 Flash, open label + format), for the RA pre-fill and
+the likely full run. `compare_prefill.py` writes `out/private/compare_prefill/` (summary.csv,
 side-by-side images of 60 frames, index.html).
 
-| | A: 2.5 Flash, open + CDI + format (current) | B: 2.5 Flash, open + format | C: 2.5 Flash-Lite, open + format |
+| | A: 2.5 Flash, open + CDI + format | **B: 2.5 Flash, open + format (chosen)** | C: 2.5 Flash-Lite, open + format |
 |---|---|---|---|
 | boxes (median per frame) | 12,833 (11) | 11,643 (10) | 12,278 (9) |
 | frames at the cap of 30 / empty | 56 / 39 | 40 / 26 | 129 / 11 |

@@ -2,8 +2,8 @@
 """Compare Gemini pre-fill versions on the gold set v2 frames, for choosing what RAs correct.
 
 Versions (gemini_pilot/out/private, all cap 30, full frame at 512x910, thinking off):
-  A  2.5 Flash       detect_combo        open label + CDI word + format (current pre-fill)
-  B  2.5 Flash       detect_open_format  open label + format
+  A  2.5 Flash       detect_combo        open label + CDI word + format
+  B  2.5 Flash       detect_open_format  open label + format (chosen: the pre-fill RAs get)
   C  2.5 Flash-Lite  detect_open_format  open label + format
 Boxes are filtered as in build_cvat_tasks.py (not discrete, parts, duplicates); photo and
 drawing are shown as picture, as RAs see them.

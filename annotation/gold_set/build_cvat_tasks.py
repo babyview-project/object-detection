@@ -9,10 +9,13 @@ Pre-fill per frame
   YOLOE+CLIP  boxes that pass CLIP >= 0.27 (prefill_yoloe_clip.py): the production output,
               valid129 classes only. Name = the class.
   YOLOE       person boxes as YOLOE output them (no CLIP step), source "yoloe_person".
-  Gemini      every gemini-2.5-flash detect_combo box (--max-obj 30), name = Gemini's open
-              label, except labels in NOT_DISCRETE (walls, floors, rooms, ...) and PARTS
-              (handles, knobs, ...). Match class = "person" if label or cdi_word is person,
-              else cdi_word if it is a valid129 class, else none. Gemini's duplicate boxes
+  Gemini      every gemini-2.5-flash detect_open_format box (open label + format, --max-obj 30;
+              chosen over detect_combo after compare_prefill.py), name = Gemini's open label,
+              except labels in NOT_DISCRETE (walls, floors, rooms, ...) and PARTS (handles,
+              knobs, ...). Match class = "person" if the label is person, else the label or its
+              last word if that is a valid129 class (cdi_word, when a run has one), else none.
+              The match class only pairs Gemini with YOLOE boxes in merged.csv; categories for
+              analysis come from mapping RA names after annotation. Gemini's duplicate boxes
               (same name or class, IoU > DUP_IOU) are collapsed.
   Merge       same match class and IoU >= MERGE_IOU -> one row (YOLOE coordinates in xmin..,
               Gemini's in g_xmin.., Gemini's name), source "both". Everything else is kept
@@ -52,7 +55,7 @@ REPO = HERE.parents[1]
 PRIV = HERE / "out" / "private"
 FRAMES = PRIV / "frames.csv"
 YOLOE_CLIP = PRIV / "prefill" / "yoloe_clip.csv"
-GEMINI = HERE.parent / "gemini_pilot" / "out" / "private" / "gemini-2.5-flash__detect_combo__p1_gold_v2_frames_cap30.jsonl"
+GEMINI = HERE.parent / "gemini_pilot" / "out" / "private" / "gemini-2.5-flash__detect_open_format__p1_gold_v2_frames_cap30.jsonl"
 VALID129 = REPO / "data" / "included_categories_valid129.txt"
 EXCLUDE = {"person", "picture"}   # not analysis classes
 # Not discrete objects, or parts of one: not pre-filled, and RAs do not box them
@@ -98,7 +101,10 @@ def load_gemini(frames: pd.DataFrame, classes: set[str], path: Path = GEMINI) ->
             if name in NOT_DISCRETE or name in PARTS or len(b) != 4:
                 n_drop += 1
                 continue
-            cls = "person" if "person" in (name, word) else word if word in classes else ""
+            # detect_open_format has no cdi_word: use the label, or its last word ("toy car" -> car)
+            head = name.split()[-1] if name else ""
+            cls = ("person" if "person" in (name, word) else word if word in classes
+                   else name if name in classes else head if head in classes else "")
             y0, x0, y1, x1 = (float(v) for v in b)
             box = (min(x0, x1) * w / 1000, min(y0, y1) * h / 1000, max(x0, x1) * w / 1000, max(y0, y1) * h / 1000)
             if box[2] - box[0] < 2 or box[3] - box[1] < 2:
@@ -165,7 +171,7 @@ def gemini_prefill(m: pd.DataFrame) -> pd.DataFrame:
     """What RAs see: Gemini's boxes only, in Gemini's coordinates (YOLOE-only boxes left out)."""
     p = m[m.source.isin(GEMINI_SOURCES)].copy()
     for c in ("xmin", "ymin", "xmax", "ymax"):
-        p[c] = p[f"g_{c}"]
+        p[c] = p[f"g_{c}"].astype(float)
     return p
 
 

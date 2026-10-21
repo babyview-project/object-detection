@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the pre-filled boxes on the frames, for checking the pre-fill before RAs get it.
+"""Draw the pre-filled boxes RAs get (Gemini's) on the frames, for checking before RAs start.
 
 Reads out/private/prefill/merged.csv (build_cvat_tasks.py) and writes, per CVAT task,
   out/private/overlays/<rater>_batch<k>/<frame_uid>.jpg   frame at 2x, boxes colored by source,
@@ -18,6 +18,8 @@ from pathlib import Path
 
 import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
+
+from build_cvat_tasks import gemini_prefill
 
 HERE = Path(__file__).resolve().parent
 PRIV = HERE / "out" / "private"
@@ -61,14 +63,16 @@ def main():
     args = ap.parse_args()
     frames = pd.read_csv(PRIV / "frames.csv")
     m = pd.read_csv(PRIV / "prefill" / "merged.csv", keep_default_na=False)
+    m = gemini_prefill(m)                                # what RAs see: Gemini boxes, Gemini coordinates
     tasks = sorted(d.name for d in (PRIV / "cvat").iterdir() if d.is_dir())
     tasks = [t for t in tasks if not args.tasks or t in args.tasks]
     fnt = font(18)
     legend = " ".join(f'<span style="border:3px solid rgb{c};padding:1px 6px">{LEGEND[s]}</span>'
                       for s, c in COLORS.items())
     parts = [f"<!doctype html><meta charset=utf-8><title>Pre-fill check</title><body style='font-family:sans-serif'>"
-             f"<h1>Pre-fill check</h1><p>{legend}</p><p>Box text: name | Gemini's format "
-             f"(real, toy, picture, screen; - = YOLOE-only box, no format). RAs see every format as unset.</p>"]
+             f"<h1>Pre-fill check</h1><p>{legend}</p><p>The boxes RAs get: Gemini's only, in Gemini's "
+             f"coordinates (YOLOE-only boxes are hidden). Box text: name | Gemini's format (real, toy, "
+             f"picture, screen), pre-filled for RAs to correct.</p>"]
     for t in tasks:
         uids = sorted(p.stem for p in (PRIV / "cvat" / t / "images").glob("*.jpg"))
         (OUT / t).mkdir(parents=True, exist_ok=True)
