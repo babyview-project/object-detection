@@ -53,3 +53,12 @@ analysis/vedb-1612/logs/
 databrary/.env
 databrary/.tokens.json
 **/.databrary_tokens.json
+
+# Local tooling and caches
+.claude/
+**/.ipynb_checkpoints/
+.Rhistory
+.Rproj.user/
+
+# Perceptual-sorting experiment assets: crop lists name subjects and recording dates
+variability_exp/bv_validated_crops/
