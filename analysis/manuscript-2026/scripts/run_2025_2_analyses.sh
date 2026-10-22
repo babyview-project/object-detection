@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # Run CLIP+DINOv3 manuscript analyses on 2025.2 packed shards.
-# Writes to main_results_valid129s_2025.2/ and supplemental_results_valid85cats_2025.2/
-# (does not overwrite the 868-hour 04302026 trees). Copies public-safe outputs to the capsule.
+# Writes to main_results_valid129s_<tag>/ and supplemental_results_valid85cats_<tag>/
+# (does not overwrite the 868-hour 04302026 trees). Copies public-safe outputs to the
+# capsule only for the default tag (2025.2).
+#
+# Frame subsampling (1 fps frames): BV_FRAME_STRIDE=5 keeps frame_number % 5 == BV_FRAME_OFFSET.
+# Run Stage 0 with the same settings first (exemplar_set_zscore_embeddings.py), e.g.
+#   BV_FRAME_STRIDE=5 BV_OUTPUT_TAG=2025.2_5s bash scripts/run_2025_2_analyses.sh
 set -u
 fail=0
 
@@ -9,14 +14,16 @@ PY="${PY:-/data/j7yang/anaconda3/envs/vislearnlabpy/bin/python}"
 MS="$(cd "$(dirname "$0")/.." && pwd)"
 OD_ROOT="$(cd "$MS/../.." && pwd)"
 CAP="${CAP:-$HOME/babyview-projects/vss2026/babyview-objects-manuscript-capsule}"
-LOG="$MS/logs/analyses_2025.2.log"
+export BV_OUTPUT_TAG="${BV_OUTPUT_TAG:-2025.2}"
+export BV_FRAME_STRIDE="${BV_FRAME_STRIDE:-1}"
+export BV_FRAME_OFFSET="${BV_FRAME_OFFSET:-0}"
+LOG="$MS/logs/analyses_${BV_OUTPUT_TAG}.log"
 
 export PYTHONDONTWRITEBYTECODE=1
 export MPLBACKEND=Agg
 export MPLCONFIGDIR=/tmp/mpl-j7yang
 export BV_EMBEDDINGS_BASE=/ccn2a/dataset/babyview/2025.2/outputs/image_embeddings/babyview_full
-export BV_EXEMPLAR_EMBED_ROOT="$MS/exemplar_set_embeddings/2025.2"
-export BV_OUTPUT_TAG=2025.2
+export BV_EXEMPLAR_EMBED_ROOT="${BV_EXEMPLAR_EMBED_ROOT:-$MS/exemplar_set_embeddings/$BV_OUTPUT_TAG}"
 export BV_ANALYSIS_MODELS=clip,dinov3
 export BV_EMBED_SOURCE=packed
 
@@ -46,7 +53,11 @@ run_py() {
 
 echo "Starting 2025.2 analyses $(date -Is)"
 echo "BV_EXEMPLAR_EMBED_ROOT=$BV_EXEMPLAR_EMBED_ROOT"
-echo "BV_OUTPUT_TAG=$BV_OUTPUT_TAG"
+echo "BV_OUTPUT_TAG=$BV_OUTPUT_TAG BV_FRAME_STRIDE=$BV_FRAME_STRIDE BV_FRAME_OFFSET=$BV_FRAME_OFFSET"
+if [[ ! -d "$BV_EXEMPLAR_EMBED_ROOT/valid129" ]]; then
+  echo "Missing Stage 0 tables in $BV_EXEMPLAR_EMBED_ROOT; run exemplar_set_zscore_embeddings.py first"
+  exit 1
+fi
 
 run_nb 01_long_tailed_distribution.ipynb valid129
 run_nb 01_long_tailed_distribution.ipynb valid85
@@ -76,7 +87,7 @@ run_py scripts/top8_within_between_vs_things.py
 
 run_nb 09_top8_local_global_variability_valid85.ipynb valid85
 
-if [[ -d "$CAP" ]]; then
+if [[ -d "$CAP" && "$BV_OUTPUT_TAG" == "2025.2" ]]; then
   echo "==== copy public-safe 2025.2 outputs to capsule ===="
   mkdir -p "$CAP/analysis/manuscript-2026"
   rsync -a "$MS/exemplar_set_embeddings/2025.2/" \
@@ -104,7 +115,7 @@ if [[ -d "$CAP" ]]; then
   done
 fi
 
-echo "Finished 2025.2 analyses $(date -Is) fail=$fail"
-echo "Results: $MS/main_results_valid129s_2025.2"
-echo "         $MS/supplemental_results_valid85cats_2025.2"
+echo "Finished $BV_OUTPUT_TAG analyses $(date -Is) fail=$fail"
+echo "Results: $MS/main_results_valid129s_$BV_OUTPUT_TAG"
+echo "         $MS/supplemental_results_valid85cats_$BV_OUTPUT_TAG"
 exit "$fail"

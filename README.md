@@ -55,7 +55,7 @@ Shell helpers: `run_exemplar_embedding_stage.sh`, `run_06_zscore_tmux.sh`, `run_
 | `analysis/manuscript-2026/main_results_valid129s_04302026/` | Main-text `results/` and `figures/` |
 | `analysis/manuscript-2026/supplemental_results_valid85cats_04302026/` | Supplement & top-8 valid85 |
 | `…/main_results_valid129s_2025.2/`, `…/supplemental_results_valid85cats_2025.2/` | Same analyses on the 2025.2 release (1 fps): `scripts/run_2025_2_analyses.sh` |
-| `…/main_results_valid129s_2025.2_5s/`, `…/supplemental_results_valid85cats_2025.2_5s/` | 2025.2 at one frame per 5 s (`BV_FRAME_STRIDE=5`, `logs/run_5s.sh`); `results/comparison_vs_1s/` compares it with 1 fps |
+| `…/main_results_valid129s_2025.2_5s/`, `…/supplemental_results_valid85cats_2025.2_5s/` | 2025.2 at one frame per 5 s (`BV_FRAME_STRIDE=5`, `scripts/run_5s_analyses.sh`); `results/comparison_vs_1s/` compares it with 1 fps |
 
 ### Shareable data (no raw video or participant IDs)
 

@@ -28,6 +28,27 @@ DEFAULT_PACKED_ROOT = Path(
 DEFAULT_EXCLUDE_SUBJECTS = ("00270001",)
 
 
+def frame_sampling() -> tuple[int, int]:
+    """(stride, offset) from BV_FRAME_STRIDE / BV_FRAME_OFFSET; default (1, 0) = every frame.
+
+    Frames are 1 fps, so stride 5 keeps one frame every 5 s: frame_number % stride == offset.
+    """
+    stride = int(os.environ.get("BV_FRAME_STRIDE", "1") or 1)
+    offset = int(os.environ.get("BV_FRAME_OFFSET", "0") or 0)
+    if stride < 1 or not 0 <= offset < stride:
+        raise ValueError(f"bad frame sampling: stride={stride} offset={offset}")
+    return stride, offset
+
+
+def frame_keep(frame_numbers) -> np.ndarray:
+    """Boolean mask of rows whose frame is kept under frame_sampling()."""
+    stride, offset = frame_sampling()
+    f = np.asarray(frame_numbers)
+    if stride == 1:
+        return np.ones(f.shape[0], dtype=bool)
+    return (f.astype(np.int64) % stride) == offset
+
+
 def is_packed_store(root: Path | str | None) -> bool:
     if root is None:
         return False
@@ -112,7 +133,7 @@ def _row_mask(
     model: str,
 ) -> np.ndarray:
     n = len(shard["class_name"])
-    mask = np.ones(n, dtype=bool)
+    mask = frame_keep(shard["frame_number"]) if "frame_number" in shard else np.ones(n, dtype=bool)
     if categories is not None:
         names = np.array([str(x).strip().lower() for x in shard["class_name"]])
         mask &= np.isin(names, list(categories))
@@ -194,6 +215,8 @@ def category_means(
         "n_dropped_subject": n_dropped_subj,
         "n_crops": dict(counts),
         "min_sim": min_sim,
+        "frame_stride": frame_sampling()[0],
+        "frame_offset": frame_sampling()[1],
         "passed_only": passed_only,
         "l2_normalize": l2_normalize,
     }
@@ -233,7 +256,8 @@ def category_means_by_threshold(
             clip = np.asarray(z["clip_emb"], dtype=np.float64)
             dino_idx = np.asarray(z["dino_idx"], dtype=np.int32)
             dino = np.asarray(z["dino_emb"], dtype=np.float64)
-        keep_cat = np.isin(names, list(cats))
+            frames = np.asarray(z["frame_number"])
+        keep_cat = np.isin(names, list(cats)) & frame_keep(frames)
         clip_norm = l2_normalize_rows(clip) if l2_normalize else clip
         dino_norm = None
         if dino.size:

@@ -23,5 +23,5 @@ either feed it or are earlier / side projects.
 | 2025.2 | 1 fps, `/ccn2a/dataset/babyview/2025.2/extracted_frames_1fps/` | packed shards + `crops_index.csv.gz` under `/ccn2a/.../outputs/image_embeddings/babyview_full/` | `*_2025.2` |
 | 2025.2, one frame per 5 s | the same store, filtered at load time (`BV_FRAME_STRIDE=5`, `frame_number % 5 == 0`) | same | `*_2025.2_5s` |
 
-The 5-s run is launched with `manuscript-2026/logs/run_5s.sh`; `manuscript-2026/scripts/compare_output_tags.py`
+The 5-s run is launched with `manuscript-2026/scripts/run_5s_analyses.sh`; `manuscript-2026/scripts/compare_output_tags.py`
 compares any two tags (results in `main_results_valid129s_2025.2_5s/results/comparison_vs_1s/`).

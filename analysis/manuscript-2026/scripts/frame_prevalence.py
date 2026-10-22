@@ -81,7 +81,10 @@ def load_detections_from_packed_index(
     usecols = ["video_id", "frame_number", "class_name", "clip_sim", "passed"]
     write_time_threshold = abs(float(min_sim) - 0.27) < 1e-9
     parts: list[pd.DataFrame] = []
+    from packed_crop_embeddings import frame_keep, frame_sampling
+
     for chunk in pd.read_csv(index_path, usecols=usecols, chunksize=chunksize):
+        chunk = chunk[frame_keep(chunk["frame_number"].to_numpy())]  # BV_FRAME_STRIDE (default: all)
         chunk["class_name"] = chunk["class_name"].astype(str).str.strip().str.lower()
         if write_time_threshold and "passed" in chunk.columns:
             chunk = chunk[chunk["passed"].astype(bool)]
@@ -102,7 +105,8 @@ def load_detections_from_packed_index(
     out = pd.concat(parts, ignore_index=True)
     print(
         f"Packed detections: {len(out):,} CLIP-pass boxes from {index_path} "
-        f"(min_sim={min_sim:.2f}, frames={out['frame_key'].nunique():,})"
+        f"(min_sim={min_sim:.2f}, frames={out['frame_key'].nunique():,}, "
+        f"frame stride/offset={frame_sampling()})"
     )
     return out
 
