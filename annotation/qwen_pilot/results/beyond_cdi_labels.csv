@@ -1,0 +1,440 @@
+model,label,frames
+Gemini 2.5 Flash,wall,19
+Gemini 2.5 Flash,shelf,18
+Gemini 2.5 Flash,cabinet,17
+Gemini 2.5 Flash,floor,14
+Gemini 2.5 Flash,rug,13
+Gemini 2.5 Flash,picture frame,11
+Gemini 2.5 Flash,curtain,10
+Gemini 2.5 Flash,fireplace,6
+Gemini 2.5 Flash,air conditioner,5
+Gemini 2.5 Flash,ceiling,5
+Gemini 2.5 Flash,light fixture,5
+Gemini 2.5 Flash,mirror,5
+Gemini 2.5 Flash,play mat,4
+Gemini 2.5 Flash,carpet,4
+Gemini 2.5 Flash,cushion,4
+Gemini 2.5 Flash,bookshelf,4
+Gemini 2.5 Flash,playpen,4
+Gemini 2.5 Flash,mat,4
+Gemini 2.5 Flash,tablet,4
+Gemini 2.5 Flash,microwave,4
+Gemini 2.5 Flash,sweatshirt,3
+Gemini 2.5 Flash,remote control,3
+Gemini 2.5 Flash,baby gate,3
+Gemini 2.5 Flash,chandelier,3
+Gemini 2.5 Flash,sleeve,3
+Gemini 2.5 Flash,door frame,3
+Gemini 2.5 Flash,vase,3
+Gemini 2.5 Flash,container,3
+Gemini 2.5 Flash,bag,3
+Gemini 2.5 Flash,faucet,3
+Gemini 2.5 Flash,hoodie,3
+Gemini 2.5 Flash,countertop,3
+Gemini 2.5 Flash,wooden floor,2
+Gemini 2.5 Flash,dresser,2
+Gemini 2.5 Flash,lid,2
+Gemini 2.5 Flash,tablecloth,2
+Gemini 2.5 Flash,vacuum cleaner,2
+Gemini 2.5 Flash,speaker,2
+Gemini 2.5 Flash,cloth,2
+Gemini 2.5 Flash,blinds,2
+Gemini 2.5 Flash,kitchen cabinet,2
+Gemini 2.5 Flash,card,2
+Gemini 2.5 Flash,painting,2
+Gemini 2.5 Flash,ottoman,2
+Gemini 2.5 Flash,kitchen counter,2
+Gemini 2.5 Flash,piano,2
+Gemini 2.5 Flash,bush,2
+Gemini 2.5 Flash,building,2
+Gemini 2.5 Flash,backpack,2
+Gemini 2.5 Flash,sand,2
+Gemini 2.5 Flash,desk,2
+Gemini 2.5 Flash,drum,2
+Gemini 2.5 Flash,picture of a dolphin,2
+Gemini 2.5 Flash,picture of a camel,2
+Gemini 2.5 Flash,bookcase,2
+Gemini 2.5 Flash,dishwasher,2
+Gemini 2.5 Flash,laptop,1
+Gemini 2.5 Flash,tapestry,1
+Gemini 2.5 Flash,baby bouncer,1
+Gemini 2.5 Flash,fireplace mantel,1
+Gemini 2.5 Flash,toy guitar,1
+Gemini 2.5 Flash,vent,1
+Gemini 2.5 Flash,picture of a sunflower,1
+Gemini 2.5 Flash,cactus,1
+Gemini 2.5 Flash,radiator,1
+Gemini 2.5 Flash,wooden slats,1
+Gemini 2.5 Flash,kitchen hood,1
+Gemini 2.5 Flash,cat scratching post,1
+Gemini 2.5 Flash,toaster,1
+Gemini 2.5 Flash,clothing,1
+Gemini 2.5 Flash,rectangle,1
+Gemini 2.5 Flash,triangle,1
+Gemini 2.5 Flash,circle,1
+Gemini 2.5 Flash,ghost,1
+Gemini 2.5 Flash,lantern,1
+Gemini 2.5 Flash,figurine,1
+Gemini 2.5 Flash,bath mat,1
+Gemini 2.5 Flash,shower drain,1
+Gemini 2.5 Flash,shower door handle,1
+Gemini 2.5 Flash,nightstand,1
+Gemini 2.5 Flash,clothes,1
+Gemini 2.5 Flash,gnome,1
+Gemini 2.5 Flash,toys,1
+Gemini 2.5 Flash,decoration,1
+Gemini 2.5 Flash,coaster,1
+Gemini 2.5 Flash,wipes,1
+Gemini 2.5 Flash,reusable bag,1
+Gemini 2.5 Flash,paper towel holder,1
+Gemini 2.5 Flash,calendar,1
+Gemini 2.5 Flash,hair clip,1
+Gemini 2.5 Flash,tripod,1
+Gemini 2.5 Flash,flowers in vase,1
+Gemini 2.5 Flash,picture of a lemon,1
+Gemini 2.5 Flash,leaf,1
+Gemini 2.5 Flash,shadow,1
+Gemini 2.5 Flash,driveway,1
+Gemini 2.5 Flash,ground,1
+Gemini 2.5 Flash,sandal,1
+Gemini 2.5 Flash,tarp,1
+Gemini 2.5 Flash,controller,1
+Gemini 2.5 Flash,playground,1
+Gemini 2.5 Flash,dish rack,1
+Gemini 2.5 Flash,dish drying rack,1
+Gemini 2.5 Flash,picture of a chick,1
+Gemini 2.5 Flash,duvet,1
+Gemini 2.5 Flash,tree stump,1
+Gemini 2.5 Flash,rope,1
+Gemini 2.5 Flash,toy block,1
+Gemini 2.5 Flash,toy house,1
+Gemini 2.5 Flash,fruit,1
+Gemini 2.5 Flash,fruit salad,1
+Gemini 2.5 Flash,orange slices,1
+Gemini 2.5 Flash,apple slices,1
+Gemini 2.5 Flash,earmuffs,1
+Gemini 2.5 Flash,banana slices,1
+Gemini 2.5 Flash,milk carton,1
+Gemini 2.5 Flash,orange slice,1
+Gemini 2.5 Flash,trellis,1
+Gemini 2.5 Flash,wooden shelf,1
+Gemini 2.5 Flash,wooden deck,1
+Gemini 2.5 Flash,umbrella,1
+Gemini 2.5 Flash,tomato,1
+Gemini 2.5 Flash,net,1
+Gemini 2.5 Flash,block,1
+Gemini 2.5 Flash,ceiling fan,1
+Gemini 2.5 Flash,step stool,1
+Gemini 2.5 Flash,parrot,1
+Gemini 2.5 Flash,wall hanging,1
+Gemini 2.5 Flash,wall decoration,1
+Gemini 2.5 Flash,computer monitor,1
+Gemini 2.5 Flash,suitcase,1
+Gemini 2.5 Flash,humdifier,1
+Gemini 2.5 Flash,label,1
+Gemini 2.5 Flash,picture of a brown creature,1
+Gemini 2.5 Flash,picture of a mushroom,1
+Gemini 2.5 Flash,picture of a starfish,1
+Gemini 2.5 Flash,picture of a blue creature,1
+Gemini 2.5 Flash,picture of a pineapple,1
+Gemini 2.5 Flash,picture of a jellyfish,1
+Gemini 2.5 Flash,picture of a caterpillar,1
+Gemini 2.5 Flash,picture of a kangaroo,1
+Gemini 2.5 Flash,picture of a crab,1
+Gemini 2.5 Flash,picture of a ladybug,1
+Gemini 2.5 Flash,picture of a chimpanzee,1
+Gemini 2.5 Flash,rabbit,1
+Gemini 2.5 Flash,blackberries,1
+Gemini 2.5 Flash,baseball,1
+Gemini 2.5 Flash,staircase,1
+Gemini 2.5 Flash,toy bin,1
+Gemini 2.5 Flash,milk jug,1
+Gemini 2.5 Flash,storage bin,1
+Gemini 2.5 Flash,ladybug,1
+Gemini 2.5 Flash,duckling,1
+Gemini 2.5 Flash,clownfish,1
+Gemini 2.5 Flash,railing,1
+Gemini 2.5 Flash,mantel,1
+Gemini 2.5 Flash,toy shopping cart,1
+Gemini 2.5 Flash,easel,1
+Gemini 2.5 Flash,window blind,1
+Gemini 2.5 Flash,ring,1
+Gemini 2.5 Flash,doorway,1
+Gemini 2.5 Flash,glass block wall,1
+Gemini 2.5 Flash,sound bar,1
+Gemini 2.5 Flash,bed frame,1
+Gemini 2.5 Flash,mattress,1
+Gemini 2.5 Flash,picture of a whale,1
+Gemini 2.5 Flash,picture of an orca,1
+Gemini 2.5 Flash,picture of a shark,1
+Gemini 2.5 Flash,picture of a manta ray,1
+Gemini 2.5 Flash,picture of a wedding,1
+Gemini 2.5 Flash,headband,1
+Gemini 2.5 Flash,toy cart,1
+Gemini 2.5 Flash,wall decor,1
+Gemini 2.5 Flash,cd,1
+Gemini 2.5 Flash,smoke detector,1
+Gemini 2.5 Flash,curb,1
+Gemini 2.5 Flash,road,1
+Gemini 2.5 Flash,stroller handle,1
+Gemini 2.5 Flash,christmas stocking,1
+Gemini 2.5 Flash,scoop,1
+Gemini 2.5 Flash,bin,1
+Gemini 2.5 Flash,grain,1
+Gemini 2.5 Flash,pouf,1
+Gemini 2.5 Flash,snack,1
+Gemini 2.5 Flash,video,1
+Gemini 2.5 Flash,kitchen utensils,1
+Gemini 2.5 Flash,smart display,1
+Gemini 2.5 Flash,frozen characters,1
+Gemini 2.5 Flash,cart,1
+Gemini 2.5 Flash,armrest,1
+Gemini 2.5 Flash,tennis racket,1
+Gemini 2.5 Flash,tulips,1
+Gemini 2.5 Flash,fan,1
+Gemini 2.5 Flash,baby play mat,1
+Gemini 2.5 Flash,bird sticker,1
+Gemini 2.5 Flash,picture of a rhinoceros,1
+Gemini 2.5 Flash,picture of a goat,1
+Gemini 2.5 Flash,picture of a vulture,1
+Gemini 2.5 Flash,puzzle board,1
+Gemini 2.5 Flash,picture of a marmot,1
+Gemini 2.5 Flash,picture of a rabbit,1
+Gemini 2.5 Flash,world map,1
+Gemini 2.5 Flash,wooden cutting board,1
+Gemini 2.5 Flash,red bin,1
+Gemini 2.5 Flash,wooden board,1
+Qwen3.8-27B,wall,67
+Qwen3.8-27B,floor,39
+Qwen3.8-27B,ceiling,32
+Qwen3.8-27B,cabinet,27
+Qwen3.8-27B,rug,25
+Qwen3.8-27B,shelf,19
+Qwen3.8-27B,curtain,15
+Qwen3.8-27B,picture frame,15
+Qwen3.8-27B,clothing,15
+Qwen3.8-27B,fireplace,12
+Qwen3.8-27B,bag,9
+Qwen3.8-27B,bookshelf,9
+Qwen3.8-27B,carpet,7
+Qwen3.8-27B,building,7
+Qwen3.8-27B,cartoon character,7
+Qwen3.8-27B,vase,6
+Qwen3.8-27B,microwave,6
+Qwen3.8-27B,tablet,6
+Qwen3.8-27B,sweatshirt,5
+Qwen3.8-27B,faucet,5
+Qwen3.8-27B,air conditioner,4
+Qwen3.8-27B,playpen,4
+Qwen3.8-27B,storage bin,4
+Qwen3.8-27B,sleeve,4
+Qwen3.8-27B,mirror,4
+Qwen3.8-27B,armchair,4
+Qwen3.8-27B,knife block,4
+Qwen3.8-27B,dishwasher,4
+Qwen3.8-27B,doorway,4
+Qwen3.8-27B,lid,3
+Qwen3.8-27B,dresser,3
+Qwen3.8-27B,remote control,3
+Qwen3.8-27B,laptop,3
+Qwen3.8-27B,play mat,3
+Qwen3.8-27B,hoodie,3
+Qwen3.8-27B,radiator,3
+Qwen3.8-27B,shadow,3
+Qwen3.8-27B,ring,3
+Qwen3.8-27B,staircase,3
+Qwen3.8-27B,fence,3
+Qwen3.8-27B,wooden floor,3
+Qwen3.8-27B,backpack,3
+Qwen3.8-27B,vent,3
+Qwen3.8-27B,rabbit,3
+Qwen3.8-27B,mat,3
+Qwen3.8-27B,cushion,3
+Qwen3.8-27B,tablecloth,2
+Qwen3.8-27B,container,2
+Qwen3.8-27B,screen,2
+Qwen3.8-27B,vacuum cleaner,2
+Qwen3.8-27B,chandelier,2
+Qwen3.8-27B,plastic bag,2
+Qwen3.8-27B,sweatpants,2
+Qwen3.8-27B,pant,2
+Qwen3.8-27B,path,2
+Qwen3.8-27B,figurine,2
+Qwen3.8-27B,clothes,2
+Qwen3.8-27B,pajama,2
+Qwen3.8-27B,light fixture,2
+Qwen3.8-27B,smartwatch,2
+Qwen3.8-27B,calendar,2
+Qwen3.8-27B,cloth,2
+Qwen3.8-27B,man,2
+Qwen3.8-27B,ceiling fan,2
+Qwen3.8-27B,piano,2
+Qwen3.8-27B,suitcase,2
+Qwen3.8-27B,bush,2
+Qwen3.8-27B,ground,2
+Qwen3.8-27B,pipe,2
+Qwen3.8-27B,wooden block,2
+Qwen3.8-27B,goat,2
+Qwen3.8-27B,house,2
+Qwen3.8-27B,bulletin board,2
+Qwen3.8-27B,stool,2
+Qwen3.8-27B,countertop,2
+Qwen3.8-27B,wall decoration,2
+Qwen3.8-27B,ladybug,2
+Qwen3.8-27B,camel,2
+Qwen3.8-27B,dolphin,2
+Qwen3.8-27B,speaker,2
+Qwen3.8-27B,text,2
+Qwen3.8-27B,baby gate,2
+Qwen3.8-27B,mantelpiece,2
+Qwen3.8-27B,toy block,2
+Qwen3.8-27B,mattress,2
+Qwen3.8-27B,bin,2
+Qwen3.8-27B,kitchen counter,2
+Qwen3.8-27B,ottoman,2
+Qwen3.8-27B,soccer player,2
+Qwen3.8-27B,soccer field,2
+Qwen3.8-27B,cactus,1
+Qwen3.8-27B,doorknob,1
+Qwen3.8-27B,bottle cap,1
+Qwen3.8-27B,smart speaker,1
+Qwen3.8-27B,electrical outlet,1
+Qwen3.8-27B,brick wall,1
+Qwen3.8-27B,tapestry,1
+Qwen3.8-27B,outlet,1
+Qwen3.8-27B,blind,1
+Qwen3.8-27B,wardrobe,1
+Qwen3.8-27B,foam mat,1
+Qwen3.8-27B,baby jumper,1
+Qwen3.8-27B,comforter,1
+Qwen3.8-27B,controller,1
+Qwen3.8-27B,skirt,1
+Qwen3.8-27B,range hood,1
+Qwen3.8-27B,cap,1
+Qwen3.8-27B,magnet,1
+Qwen3.8-27B,cat scratching post,1
+Qwen3.8-27B,handrail,1
+Qwen3.8-27B,air vent,1
+Qwen3.8-27B,lantern,1
+Qwen3.8-27B,toy clothes hanger,1
+Qwen3.8-27B,toy microwave,1
+Qwen3.8-27B,handle,1
+Qwen3.8-27B,shampoo,1
+Qwen3.8-27B,letter,1
+Qwen3.8-27B,peach,1
+Qwen3.8-27B,nightstand,1
+Qwen3.8-27B,bed sheet,1
+Qwen3.8-27B,door frame,1
+Qwen3.8-27B,hair clip,1
+Qwen3.8-27B,paper towel roll,1
+Qwen3.8-27B,wet wipes,1
+Qwen3.8-27B,food container,1
+Qwen3.8-27B,tripod,1
+Qwen3.8-27B,duvet,1
+Qwen3.8-27B,tarp,1
+Qwen3.8-27B,playground,1
+Qwen3.8-27B,mesh,1
+Qwen3.8-27B,chick,1
+Qwen3.8-27B,branch,1
+Qwen3.8-27B,wooden plank,1
+Qwen3.8-27B,pavement,1
+Qwen3.8-27B,stump,1
+Qwen3.8-27B,pitcher,1
+Qwen3.8-27B,apple slice,1
+Qwen3.8-27B,juice carton,1
+Qwen3.8-27B,headphones,1
+Qwen3.8-27B,banana slice,1
+Qwen3.8-27B,orange slice,1
+Qwen3.8-27B,trousers,1
+Qwen3.8-27B,leaf,1
+Qwen3.8-27B,wood chip,1
+Qwen3.8-27B,rope,1
+Qwen3.8-27B,ramp,1
+Qwen3.8-27B,fruit,1
+Qwen3.8-27B,baguette,1
+Qwen3.8-27B,pear,1
+Qwen3.8-27B,sunglasses,1
+Qwen3.8-27B,teapot,1
+Qwen3.8-27B,croissant,1
+Qwen3.8-27B,lemon,1
+Qwen3.8-27B,bell pepper,1
+Qwen3.8-27B,fire alarm,1
+Qwen3.8-27B,net,1
+Qwen3.8-27B,seashell,1
+Qwen3.8-27B,building block,1
+Qwen3.8-27B,wooden cylinder,1
+Qwen3.8-27B,trellis,1
+Qwen3.8-27B,deck,1
+Qwen3.8-27B,umbrella,1
+Qwen3.8-27B,child,1
+Qwen3.8-27B,tent,1
+Qwen3.8-27B,sand,1
+Qwen3.8-27B,step stool,1
+Qwen3.8-27B,counter,1
+Qwen3.8-27B,dish rack,1
+Qwen3.8-27B,tub,1
+Qwen3.8-27B,safety gate,1
+Qwen3.8-27B,parrot,1
+Qwen3.8-27B,wall hanging,1
+Qwen3.8-27B,crab,1
+Qwen3.8-27B,bow tie,1
+Qwen3.8-27B,caterpillar,1
+Qwen3.8-27B,starfish,1
+Qwen3.8-27B,desk,1
+Qwen3.8-27B,computer monitor,1
+Qwen3.8-27B,broccoli,1
+Qwen3.8-27B,tomato,1
+Qwen3.8-27B,grape,1
+Qwen3.8-27B,celery,1
+Qwen3.8-27B,chimpanzee,1
+Qwen3.8-27B,insect,1
+Qwen3.8-27B,cable,1
+Qwen3.8-27B,taco,1
+Qwen3.8-27B,frying pan,1
+Qwen3.8-27B,pepper,1
+Qwen3.8-27B,pot,1
+Qwen3.8-27B,blackberry,1
+Qwen3.8-27B,railing,1
+Qwen3.8-27B,toy shopping cart,1
+Qwen3.8-27B,straw,1
+Qwen3.8-27B,floor cushion,1
+Qwen3.8-27B,painting,1
+Qwen3.8-27B,whale,1
+Qwen3.8-27B,seal,1
+Qwen3.8-27B,footprint,1
+Qwen3.8-27B,handprint,1
+Qwen3.8-27B,flowerpot,1
+Qwen3.8-27B,soundbar,1
+Qwen3.8-27B,tattoo,1
+Qwen3.8-27B,toy drum,1
+Qwen3.8-27B,toy drumstick,1
+Qwen3.8-27B,cowboy,1
+Qwen3.8-27B,astronaut,1
+Qwen3.8-27B,rocket,1
+Qwen3.8-27B,headband,1
+Qwen3.8-27B,scoop,1
+Qwen3.8-27B,bubble,1
+Qwen3.8-27B,tortoise,1
+Qwen3.8-27B,mulch,1
+Qwen3.8-27B,play structure,1
+Qwen3.8-27B,kitchen cabinet,1
+Qwen3.8-27B,drawing,1
+Qwen3.8-27B,reindeer,1
+Qwen3.8-27B,utility pole,1
+Qwen3.8-27B,road,1
+Qwen3.8-27B,stocking,1
+Qwen3.8-27B,baseball field,1
+Qwen3.8-27B,snack bag,1
+Qwen3.8-27B,cartoon,1
+Qwen3.8-27B,sandal,1
+Qwen3.8-27B,banner,1
+Qwen3.8-27B,dessert,1
+Qwen3.8-27B,racket,1
+Qwen3.8-27B,tulip,1
+Qwen3.8-27B,rhinoceros,1
+Qwen3.8-27B,vulture,1
+Qwen3.8-27B,magazine,1
+Qwen3.8-27B,fan,1
+Qwen3.8-27B,referee,1
+Qwen3.8-27B,crowd,1
+Qwen3.8-27B,thermostat,1

@@ -1,0 +1,254 @@
+model,category,label,maps_to,n
+Gemini 2.5 Flash,animal,picture of a rhinoceros,(none),1
+Qwen3.8-27B,animal,dog,dog,1
+Qwen3.8-27B,animal,rhinoceros,(none),1
+Gemini 2.5 Flash,ankle,foot,foot,1
+Qwen3.8-27B,apple,apple,apple,2
+Gemini 2.5 Flash,ball,ball,ball,1
+Gemini 2.5 Flash,ball,baseball,(none),1
+Gemini 2.5 Flash,ball,toy,toy,1
+Qwen3.8-27B,ball,ball,ball,2
+Gemini 2.5 Flash,balloon,ball,ball,1
+Gemini 2.5 Flash,basket,basket,basket,1
+Gemini 2.5 Flash,basket,laundry basket,basket,1
+Qwen3.8-27B,basket,basket,basket,3
+Qwen3.8-27B,basket,dish rack,(none),1
+Gemini 2.5 Flash,bed,blanket,blanket,1
+Qwen3.8-27B,bed,comforter,(none),1
+Gemini 2.5 Flash,bench,wooden bench,bench,1
+Qwen3.8-27B,bench,stool,(none),1
+Gemini 2.5 Flash,bird,parrot,(none),1
+Qwen3.8-27B,bird,bird,bird,1
+Qwen3.8-27B,bird,duck,duck,1
+Qwen3.8-27B,bird,parrot,(none),1
+Gemini 2.5 Flash,blanket,blanket,blanket,1
+Gemini 2.5 Flash,blanket,table,table,1
+Qwen3.8-27B,blanket,blanket,blanket,2
+Gemini 2.5 Flash,book,book,book,5
+Qwen3.8-27B,book,book,book,4
+Gemini 2.5 Flash,bottle,drink bottle,bottle,1
+Qwen3.8-27B,bottle,water bottle,bottle,1
+Gemini 2.5 Flash,box,red bin,(none),1
+Gemini 2.5 Flash,box,storage bin,(none),1
+Qwen3.8-27B,box,bin,(none),1
+Qwen3.8-27B,box,box,box,1
+Qwen3.8-27B,box,storage bin,(none),1
+Qwen3.8-27B,bucket,cup,cup,1
+Gemini 2.5 Flash,bunny,rabbit,(none),1
+Qwen3.8-27B,bunny,rabbit,(none),1
+Qwen3.8-27B,bus,car,car,1
+Qwen3.8-27B,can,trash can,can,1
+Qwen3.8-27B,car,car,car,1
+Gemini 2.5 Flash,cat,cat,cat,2
+Qwen3.8-27B,cat,cat,cat,2
+Qwen3.8-27B,cat,stuffed animal,animal,1
+Gemini 2.5 Flash,chair,chair,chair,1
+Qwen3.8-27B,chair,chair,chair,1
+Gemini 2.5 Flash,clock,clock,clock,1
+Qwen3.8-27B,clock,clock,clock,1
+Gemini 2.5 Flash,closet,cabinet,(none),1
+Qwen3.8-27B,closet,cabinet,(none),2
+Qwen3.8-27B,closet,closet,closet,1
+Gemini 2.5 Flash,couch,chair,chair,1
+Gemini 2.5 Flash,couch,sofa,couch,1
+Qwen3.8-27B,couch,chair,chair,1
+Qwen3.8-27B,couch,sofa,couch,2
+Gemini 2.5 Flash,cracker,cracker,cracker,1
+Qwen3.8-27B,cracker,cracker,cracker,1
+Gemini 2.5 Flash,crib,crib,crib,1
+Qwen3.8-27B,crib,crib,crib,1
+Qwen3.8-27B,crib,playpen,(none),1
+Gemini 2.5 Flash,cup,cup,cup,1
+Qwen3.8-27B,cup,pitcher,(none),1
+Qwen3.8-27B,dish,bowl,bowl,1
+Gemini 2.5 Flash,dog,person,person,1
+Qwen3.8-27B,dog,dog,dog,1
+Gemini 2.5 Flash,doll,doll,doll,1
+Qwen3.8-27B,doll,doll,doll,1
+Gemini 2.5 Flash,door,door,door,1
+Gemini 2.5 Flash,door,glass block wall,(none),1
+Qwen3.8-27B,door,door,door,1
+Gemini 2.5 Flash,drawer,box,box,1
+Gemini 2.5 Flash,drawer,cabinet,(none),1
+Qwen3.8-27B,drawer,storage bin,(none),1
+Gemini 2.5 Flash,dress,dress,dress,1
+Qwen3.8-27B,dress,dress,dress,1
+Gemini 2.5 Flash,duck,duck,duck,2
+Gemini 2.5 Flash,duck,faucet,(none),1
+Qwen3.8-27B,duck,bird,bird,1
+Qwen3.8-27B,duck,duck,duck,2
+Qwen3.8-27B,firetruck,toy,toy,1
+Gemini 2.5 Flash,flower,flowers,flower,1
+Qwen3.8-27B,flower,flower,flower,1
+Qwen3.8-27B,flower,tulip,(none),1
+Qwen3.8-27B,food,bowl,bowl,1
+Qwen3.8-27B,food,dessert,(none),1
+Gemini 2.5 Flash,foot,foot,foot,1
+Gemini 2.5 Flash,fork,fork,fork,1
+Qwen3.8-27B,fork,fork,fork,1
+Gemini 2.5 Flash,game,book,book,1
+Gemini 2.5 Flash,game,phone,telephone,1
+Gemini 2.5 Flash,game,tablet,(none),2
+Gemini 2.5 Flash,game,television,tv,3
+Qwen3.8-27B,game,board game box,box,1
+Qwen3.8-27B,game,grass,grass,1
+Qwen3.8-27B,game,smartphone,telephone,1
+Qwen3.8-27B,game,tablet,(none),3
+Qwen3.8-27B,game,television,tv,3
+Gemini 2.5 Flash,giraffe,giraffe,giraffe,1
+Gemini 2.5 Flash,giraffe,picture of a giraffe,giraffe,1
+Qwen3.8-27B,giraffe,giraffe,giraffe,3
+Gemini 2.5 Flash,glass,glass,glass,1
+Qwen3.8-27B,glass,glass,glass,1
+Qwen3.8-27B,grass,grass,grass,1
+Gemini 2.5 Flash,hand,hand,hand,1
+Gemini 2.5 Flash,hand,person's hand,hand,1
+Qwen3.8-27B,hand,hand,hand,1
+Qwen3.8-27B,helicopter,helicopter,helicopter,1
+Qwen3.8-27B,horse,donkey,donkey,1
+Gemini 2.5 Flash,jacket,person,person,1
+Qwen3.8-27B,jacket,person,person,1
+Gemini 2.5 Flash,jar,sippy cup,cup,1
+Qwen3.8-27B,jar,container,(none),1
+Gemini 2.5 Flash,jeans,jeans,jeans,1
+Qwen3.8-27B,jeans,jeans,jeans,1
+Qwen3.8-27B,kitchen,ceiling,(none),1
+Gemini 2.5 Flash,ladder,step stool,(none),1
+Qwen3.8-27B,ladder,step stool,(none),1
+Gemini 2.5 Flash,lamp,chandelier,(none),1
+Qwen3.8-27B,lamp,ceiling fan,(none),1
+Gemini 2.5 Flash,light,person,person,1
+Qwen3.8-27B,light,ceiling light,light,1
+Qwen3.8-27B,milk,milk,milk,1
+Qwen3.8-27B,moose,reindeer,(none),1
+Gemini 2.5 Flash,napkin,napkin,napkin,1
+Qwen3.8-27B,napkin,tissue,tissue,1
+Qwen3.8-27B,necklace,beads,beads,1
+Gemini 2.5 Flash,orange,toy food,food,1
+Qwen3.8-27B,orange,toy,toy,1
+Gemini 2.5 Flash,oven,countertop,(none),1
+Gemini 2.5 Flash,oven,toaster oven,oven,1
+Qwen3.8-27B,oven,microwave,(none),1
+Qwen3.8-27B,oven,stool,(none),1
+Qwen3.8-27B,oven,toy oven,oven,1
+Qwen3.8-27B,owl,toy,toy,1
+Gemini 2.5 Flash,pajamas,dress,dress,1
+Gemini 2.5 Flash,pajamas,person,person,1
+Qwen3.8-27B,pajamas,dress,dress,1
+Qwen3.8-27B,pajamas,person,person,1
+Gemini 2.5 Flash,pants,jeans,jeans,1
+Qwen3.8-27B,pants,jeans,jeans,1
+Gemini 2.5 Flash,paper,book,book,1
+Gemini 2.5 Flash,penguin,picture of a penguin,penguin,1
+Gemini 2.5 Flash,person,person,person,4
+Qwen3.8-27B,person,person,person,4
+Gemini 2.5 Flash,picture,digital clock,clock,1
+Gemini 2.5 Flash,picture,drum,(none),1
+Gemini 2.5 Flash,picture,painting,(none),1
+Gemini 2.5 Flash,picture,picture of a giraffe,giraffe,1
+Gemini 2.5 Flash,picture,picture of a rhinoceros,(none),1
+Gemini 2.5 Flash,picture,socks,sock,1
+Gemini 2.5 Flash,picture,television,tv,2
+Qwen3.8-27B,picture,bird,bird,1
+Qwen3.8-27B,picture,car,car,1
+Qwen3.8-27B,picture,cartoon character,(none),1
+Qwen3.8-27B,picture,dessert,(none),1
+Qwen3.8-27B,picture,dog,dog,1
+Qwen3.8-27B,picture,donkey,donkey,1
+Qwen3.8-27B,picture,drawing,(none),1
+Qwen3.8-27B,picture,frying pan,(none),1
+Qwen3.8-27B,picture,giraffe,giraffe,1
+Qwen3.8-27B,picture,rhinoceros,(none),1
+Qwen3.8-27B,picture,snow,snow,1
+Qwen3.8-27B,picture,socks,sock,1
+Qwen3.8-27B,picture,tablet,(none),2
+Qwen3.8-27B,picture,tiger,tiger,1
+Qwen3.8-27B,picture,train,train,1
+Gemini 2.5 Flash,pig,stuffed animal,animal,1
+Qwen3.8-27B,pig,pig,pig,1
+Qwen3.8-27B,pig,toy,toy,1
+Gemini 2.5 Flash,plant,plant,plant,1
+Qwen3.8-27B,plant,potted plant,plant,1
+Gemini 2.5 Flash,plate,container,(none),1
+Qwen3.8-27B,plate,bowl,bowl,1
+Qwen3.8-27B,plate,high chair tray,tray,1
+Gemini 2.5 Flash,pony,picture of a horse,horse,1
+Gemini 2.5 Flash,pony,toy,toy,1
+Qwen3.8-27B,pony,rocking horse,horse,1
+Gemini 2.5 Flash,purse,bag,(none),1
+Qwen3.8-27B,purse,bag,(none),1
+Qwen3.8-27B,purse,clothing,(none),1
+Gemini 2.5 Flash,puzzle,picture of a rhinoceros,(none),1
+Qwen3.8-27B,puzzle,rhinoceros,(none),1
+Gemini 2.5 Flash,refrigerator,refrigerator,refrigerator,1
+Qwen3.8-27B,refrigerator,refrigerator,refrigerator,1
+Qwen3.8-27B,rooster,chicken,chicken,1
+Gemini 2.5 Flash,sandbox,grain,(none),1
+Gemini 2.5 Flash,scarf,scarf,scarf,1
+Qwen3.8-27B,scarf,scarf,scarf,1
+Gemini 2.5 Flash,sheep,sheep,sheep,1
+Qwen3.8-27B,sheep,sheep,sheep,1
+Gemini 2.5 Flash,shirt,sweatshirt,(none),1
+Qwen3.8-27B,shirt,shirt,shirt,1
+Qwen3.8-27B,shoe,shoe,shoe,1
+Qwen3.8-27B,shoe,sneaker,sneaker,1
+Qwen3.8-27B,shorts,shorts,shorts,1
+Gemini 2.5 Flash,shower,shower door,door,1
+Qwen3.8-27B,shower,shower,shower,1
+Gemini 2.5 Flash,sled,toy shopping cart,(none),1
+Qwen3.8-27B,sled,toy shopping cart,(none),1
+Gemini 2.5 Flash,slide,slide,slide,1
+Qwen3.8-27B,slide,slide,slide,1
+Gemini 2.5 Flash,snow,television,tv,1
+Qwen3.8-27B,snow,snow,snow,1
+Gemini 2.5 Flash,sock,socks,sock,1
+Qwen3.8-27B,sock,sock,sock,1
+Qwen3.8-27B,sock,socks,sock,1
+Qwen3.8-27B,soup,frying pan,(none),1
+Gemini 2.5 Flash,stick,toy,toy,1
+Qwen3.8-27B,stick,stick,stick,1
+Qwen3.8-27B,stick,toy,toy,2
+Gemini 2.5 Flash,stroller,stroller,stroller,2
+Qwen3.8-27B,stroller,stroller,stroller,2
+Gemini 2.5 Flash,sweater,person,person,1
+Qwen3.8-27B,sweater,shirt,shirt,1
+Gemini 2.5 Flash,swing,rope,(none),1
+Qwen3.8-27B,swing,wood chip,(none),1
+Gemini 2.5 Flash,table,high chair,chair,1
+Gemini 2.5 Flash,table,table,table,1
+Qwen3.8-27B,table,table,table,1
+Qwen3.8-27B,table,tray,tray,1
+Qwen3.8-27B,table,tub,(none),1
+Gemini 2.5 Flash,teddybear,toy,toy,1
+Qwen3.8-27B,teddybear,toy,toy,1
+Qwen3.8-27B,tiger,tiger,tiger,1
+Gemini 2.5 Flash,towel,towel,towel,1
+Qwen3.8-27B,towel,cloth,(none),1
+Gemini 2.5 Flash,toy,faucet,(none),1
+Gemini 2.5 Flash,toy,stuffed animal,animal,1
+Gemini 2.5 Flash,toy,toy,toy,2
+Gemini 2.5 Flash,toy,toy food,food,1
+Qwen3.8-27B,toy,bird,bird,1
+Qwen3.8-27B,toy,pig,pig,1
+Qwen3.8-27B,toy,rocking horse,horse,1
+Qwen3.8-27B,toy,toy,toy,7
+Qwen3.8-27B,toy,tulip,(none),1
+Gemini 2.5 Flash,tractor,picture of a person,person,1
+Qwen3.8-27B,tractor,car,car,1
+Qwen3.8-27B,train,train,train,1
+Gemini 2.5 Flash,tray,wooden tray,tray,1
+Qwen3.8-27B,tray,tray,tray,1
+Gemini 2.5 Flash,tree,tree,tree,1
+Qwen3.8-27B,tree,tree,tree,1
+Gemini 2.5 Flash,turtle,toy,toy,1
+Qwen3.8-27B,turtle,tortoise,(none),1
+Qwen3.8-27B,tv,cartoon character,(none),1
+Qwen3.8-27B,tv,television,tv,1
+Gemini 2.5 Flash,vacuum,vacuum cleaner,(none),1
+Qwen3.8-27B,vacuum,vacuum cleaner,(none),1
+Gemini 2.5 Flash,watch,watch,watch,1
+Qwen3.8-27B,watch,watch,watch,1
+Gemini 2.5 Flash,window,curtain,(none),1
+Gemini 2.5 Flash,window,glass block wall,(none),1
+Qwen3.8-27B,window,curtain,(none),2
+Qwen3.8-27B,window,tree,tree,1

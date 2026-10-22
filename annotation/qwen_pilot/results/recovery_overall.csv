@@ -1,0 +1,5 @@
+set,model,objects,box_on_object,recovered,named_anywhere
+depiction,Gemini 2.5 Flash,164,0.47,0.189,0.335
+depiction,Qwen3.8-27B,164,0.689,0.287,0.451
+montage72,Gemini 2.5 Flash,72,0.639,0.431,0.653
+montage72,Qwen3.8-27B,72,0.875,0.653,0.736
