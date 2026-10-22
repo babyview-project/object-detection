@@ -5,14 +5,17 @@ frames extracted from video at **1 fps**. Open-vocabulary detection uses class n
 from the child vocabulary MCDI survey (word lists in [`yoloe/tools/`](yoloe/tools/)).
 
 For YOLOE setup, frame extraction, and batch prediction, see **[`yoloe/README.md`](yoloe/README.md)**.
+Folder-level indexes: **[`analysis/README.md`](analysis/README.md)** (which analysis folder is
+active, legacy or archived, and which data release / output tag each uses) and
+**[`annotation/README.md`](annotation/README.md)** (human annotation and Gemini labelling).
 
 ---
 
 ## BabyView Objects manuscript (2026)
 
 Primary analyses, figures, and **anonymized shareable tables** for the *BabyView Objects*
-manuscript (June 2026 submission) live under **[`analysis/manuscript-2026/`](analysis/manuscript-2026/)**.
-The former `preprint-2026` tree was merged here; **[`analysis/preprint-2026/README.md`](analysis/preprint-2026/README.md)** redirects.
+manuscript (June 2026 submission) live under **[`analysis/manuscript-2026/`](analysis/manuscript-2026/)**
+(the former `preprint-2026` tree was merged into it).
 
 ### Start here
 
@@ -51,6 +54,8 @@ Shell helpers: `run_exemplar_embedding_stage.sh`, `run_06_zscore_tmux.sh`, `run_
 | `analysis/manuscript-2026/exemplar_set_embeddings/` | Category-level z-scored tables (`valid129`, `valid85`) |
 | `analysis/manuscript-2026/main_results_valid129s_04302026/` | Main-text `results/` and `figures/` |
 | `analysis/manuscript-2026/supplemental_results_valid85cats_04302026/` | Supplement & top-8 valid85 |
+| `…/main_results_valid129s_2025.2/`, `…/supplemental_results_valid85cats_2025.2/` | Same analyses on the 2025.2 release (1 fps): `scripts/run_2025_2_analyses.sh` |
+| `…/main_results_valid129s_2025.2_5s/`, `…/supplemental_results_valid85cats_2025.2_5s/` | 2025.2 at one frame per 5 s (`BV_FRAME_STRIDE=5`, `logs/run_5s.sh`); `results/comparison_vs_1s/` compares it with 1 fps |
 
 ### Shareable data (no raw video or participant IDs)
 
@@ -84,7 +89,8 @@ Category lists used in the paper: [`data/included_categories_valid129.txt`](data
 | **[`analysis/individual_analyses/`](analysis/individual_analyses/)** | Per-child RDMs & developmental trajectories | [`README_notebooks_05_06_07.md`](analysis/individual_analyses/README_notebooks_05_06_07.md), [`README_pca_subspace_stability.md`](analysis/individual_analyses/README_pca_subspace_stability.md), [`clip_dino_rdm_correlations/README.md`](analysis/individual_analyses/clip_dino_rdm_correlations/README.md) |
 | **[`analysis/vedb-1612/`](analysis/vedb-1612/)** | VEDB 80-session world subset — same frame / YOLOE / CLIP / DINOv3 pipeline | [`README.md`](analysis/vedb-1612/README.md) |
 | **[`analysis/comparison-datasets/`](analysis/comparison-datasets/)** | ImageNet-1k and LVIS v1 as comparison datasets (WordNet mapping onto CDI words, BV vs ImageNet / LVIS / THINGS / VEDB) | [`README.md`](analysis/comparison-datasets/README.md) |
-| **[`analysis/developmental_trend_analysis_R/`](analysis/developmental_trend_analysis_R/)** | R / Quarto developmental stats | [`data/README_data_csvs.md`](analysis/developmental_trend_analysis_R/data/README_data_csvs.md) |
+| **[`analysis/developmental_trend_analysis_R/`](analysis/developmental_trend_analysis_R/)** | R / Quarto developmental stats | [`README.md`](analysis/developmental_trend_analysis_R/README.md) |
+| **[`analysis/archive/`](analysis/archive/)** | Finished work (CCN 2025) | [`README.md`](analysis/archive/README.md) |
 
 CCN variability code also appears under [`analysis/manuscript-2026/not_in_manuscript/exemplar_variability_analyses/`](analysis/manuscript-2026/not_in_manuscript/exemplar_variability_analyses/).
 
@@ -99,12 +105,13 @@ End-to-end flow: **frames → YOLOE detections → crops → embeddings → manu
 | **[`yoloe/`](yoloe/)** | YOLOE install, `extract_frames.py`, `predict_frames.py`, examples | [`yoloe/README.md`](yoloe/README.md) |
 | **`yoloe/tools/`** | MCDI / open-vocab class lists (`ram_tag_list*.txt`, `MCDI_items_with_AoA.csv`) | |
 | **[`preprocessing/`](preprocessing/)** | Crop from bboxes, blur/size filters, sampling (`sample_object_crops_variability.py`), RSA helpers, BV validated sorting assets | |
-| **[`image-embedding/`](image-embedding/)** | `create_image_embeddings.py`, `analyze_embeddings.ipynb` | |
-| **[`frame_data/`](frame_data/)** | Merged frame-level detection CSVs (CLIP thresholds 0.26–0.28), sampled frames | |
-| **[`depth/`](depth/)** | Depth extraction and object-depth CSV builders | |
-| **[`imu/`](imu/)** | IMU alignment for short clips | |
-| **[`video-qa/`](video-qa/)** | Video QA utilities (e.g. unconstrained objects) | |
-| **[`variability_exp/`](variability_exp/)** | Variability experiment assets | |
+| **[`image-embedding/`](image-embedding/)** | 2025.2 crop + CLIP / DINOv3 pipeline (`run_cdi_crop_pipeline.py`, packed shards), older `create_image_embeddings.py` | [`README_embeddings.md`](image-embedding/README_embeddings.md) |
+| **[`frame_data/`](frame_data/)** | 868-hour frame tables; the merged CLIP-filtered tables were `/data2` links, now gone | [`README.md`](frame_data/README.md) |
+| **[`depth/`](depth/)** | Depth extraction and object-depth CSV builders | [`README.md`](depth/README.md) |
+| **[`imu/`](imu/)** | IMU alignment for short clips | [`README.md`](imu/README.md) |
+| **[`video-qa/`](video-qa/)** | Video QA utilities (e.g. unconstrained objects) | [`README.md`](video-qa/README.md) |
+| **[`variability_exp/`](variability_exp/)** | Perceptual free-sort experiment assets (untracked; crop links removed) | [`README.md`](variability_exp/README.md) |
+| **[`databrary/`](databrary/)** | Databrary API client for downloading BabyView data | [`README.md`](databrary/README.md) |
 
 ---
 
@@ -112,10 +119,11 @@ End-to-end flow: **frames → YOLOE detections → crops → embeddings → manu
 
 | Path | Role |
 |------|------|
-| **[`annotation/README.md`](annotation/README.md)** | Crop annotation GUI (`annotate_crops.py`) |
-| `annotation/precision_868h/per_class_validation_data.csv` | Per-category precision (manuscript & CCN filters) |
-| `annotation/precision_868h/per_file_precision_data.csv` | Per-crop rater validation |
-| `annotation/sampled_object_crops_*` | Exemplar sampling manifests (100 ex / 8 subjects) |
+| **[`annotation/README.md`](annotation/README.md)** | Index of annotation studies, shared label files, crop GUI |
+| [`annotation/precision_868h/`](annotation/precision_868h/) | Prolific crop validation: `per_class_validation_data.csv` (per-category precision, manuscript & CCN filters), `per_file_precision_data.csv`, exemplar sampling manifests |
+| [`annotation/cvat_3000_frames/`](annotation/cvat_3000_frames/) | Mira / Dora CVAT boxes and format tags on 3,000 sampled frames; animal-depiction labels |
+| [`annotation/gemini_pilot/`](annotation/gemini_pilot/), [`annotation/gemini_full_run/`](annotation/gemini_full_run/) | Gemini (Vertex) model pilot and the full 2025.2 run |
+| [`annotation/clip_band_annotation/`](annotation/clip_band_annotation/), [`annotation/gold_set/`](annotation/gold_set/) | CLIP-threshold RA sample (object-check web task) and gold set v2 |
 
 Notebook **10** and shared inputs use animal-depiction aggregates; many analyses depend on precision ≥ 0.6 from `per_class_validation_data.csv`.
 
@@ -140,20 +148,25 @@ object-detection/
 ├── yoloe/                             ← detection (see yoloe/README.md)
 ├── preprocessing/                     ← crops, sampling, filters
 ├── image-embedding/                   ← CLIP/DINO-style crop embeddings
-├── frame_data/                        ← frame-level detection tables
-├── annotation/                        ← rater GUI + validation CSVs
+├── frame_data/                        ← 868-hour frame-level detection tables
+├── annotation/                        ← human annotation + Gemini labelling (see its README)
+│   ├── precision_868h/                ← Prolific crop validation (precision CSVs)
+│   ├── cvat_3000_frames/              ← CVAT boxes + format tags
+│   ├── gemini_pilot/  gemini_full_run/
+│   └── clip_band_annotation/  gold_set/
 ├── data/
 │   ├── included_categories_valid*.txt
 │   └── shared_data_manuscript_2026/   ← anonymized paper tables
-└── analysis/
+├── depth/  imu/  video-qa/  databrary/  variability_exp/
+└── analysis/                          ← see analysis/README.md
     ├── manuscript-2026/               ← BabyView Objects (main)
-    ├── preprint-2026/                 ← redirect → manuscript-2026
     ├── ccn-2026/                      ← CCN poster variability
-    ├── vss-2026/                      ← group RDM pipeline
-    ├── individual_analyses/           ← per-child / developmental
-    ├── vedb-1612/                     ← VEDB world subset (80 sessions)
     ├── comparison-datasets/           ← ImageNet-1k + LVIS v1 vs BabyView
-    └── developmental_trend_analysis_R/
+    ├── vedb-1612/                     ← VEDB world subset (80 sessions)
+    ├── individual_analyses/           ← per-child / developmental (legacy, still read)
+    ├── vss-2026/                      ← group RDM pipeline (legacy, still read)
+    ├── developmental_trend_analysis_R/
+    └── archive/                       ← ccn-2025
 ```
 
 ---
@@ -168,3 +181,9 @@ object-detection/
 | **D** | Raw YOLOE outputs / BabyView video | Notebook 01 from scratch, individual RDMs (04) |
 
 Do not commit `paths.local.env`, raw video paths, or identifiable participant IDs. One subject is excluded from embedding analyses (see [`REPRODUCTION.md`](analysis/manuscript-2026/REPRODUCTION.md)).
+
+Frames and crops show children's homes and family members: they never go into git, Slack or
+shared notebooks. Annotation folders keep images, subject / video ids and per-frame outputs
+in git-ignored `out/private/` folders. BabyView images go to Gemini only through Vertex AI on
+the lab grant project (never AI Studio or API keys). The old `/data2` disk is gone; links and
+paths into it have been removed or are documented where they still appear in legacy code.
