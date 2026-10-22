@@ -565,7 +565,7 @@ def main() -> int:
     root = PROJECT_ROOT
     preprint = MANUSCRIPT_DIR
     data_dir = root / "data"
-    ann_dir = root / "annotation"
+    ann_dir = root / "annotation" / "precision_868h"
 
     included85_txt = data_dir / "included_categories_valid85.txt"
     included129_txt = data_dir / "included_categories_valid129.txt"

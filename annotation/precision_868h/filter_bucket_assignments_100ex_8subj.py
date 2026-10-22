@@ -244,7 +244,7 @@ def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument(
         "--input-csv",
-        default="annotation/sampled_object_crops_100_bucket_assignments_diverse_rebalanced.csv",
+        default="annotation/precision_868h/sampled_object_crops_100_bucket_assignments_diverse_rebalanced.csv",
     )
     p.add_argument(
         "--output-csv",

@@ -64,7 +64,7 @@ CDI_SEMANTIC_ORDER = [
 def _project_root():
     if (SCRIPT_DIR / "annotation_data").exists():
         return SCRIPT_DIR.parent
-    if (SCRIPT_DIR.parent / "annotation" / "annotation_data").exists():
+    if (SCRIPT_DIR.parent / "annotation" / "cvat_3000_frames" / "annotation_data").exists():
         return SCRIPT_DIR.parent
     return SCRIPT_DIR.parent.parent
 

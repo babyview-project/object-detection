@@ -101,7 +101,7 @@ via the original stems in the non-public valid7018 embeddings manifest. All
 
 - `detect` measures recall of rater-validated objects only. Only one object per
   frame was validated, so Gemini's other boxes cannot be scored as right or wrong
-  here; the full frames Mira and Dora boxed (`annotation/annotation_data/`) are the
+  here; the full frames Mira and Dora boxed (`annotation/cvat_3000_frames/annotation_data/`) are the
   test for that.
 - Frames are sent at 288×512 (the guide's 512 px rule), which shrinks small
   objects: a 32 px object becomes about 18 px. If small-object recall decides the

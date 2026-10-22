@@ -623,7 +623,7 @@ def main() -> int:
     for category_set in ("valid129", "valid85"):
         run_category_set(category_set, semantic_map, det, packed=packed)
 
-    precision_csv = REPO_ROOT / "annotation" / "per_class_validation_data.csv"
+    precision_csv = REPO_ROOT / "annotation" / "precision_868h" / "per_class_validation_data.csv"
     df_precision = pd.read_csv(precision_csv, usecols=["class", "precision"])
     df_precision["category"] = df_precision["class"].astype(str).str.strip().str.lower()
     df_precision["precision"] = pd.to_numeric(df_precision["precision"], errors="coerce")

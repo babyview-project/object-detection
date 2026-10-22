@@ -17,7 +17,7 @@ from sample_object_crops_variability import (  # noqa: E402
 )
 
 DEFAULT_TRIAL_BUCKET_CSV = (
-    PROJECT_ROOT / "annotation" / "sampled_object_crops_100_bucket_assignments_100ex_8subj.csv"
+    PROJECT_ROOT / "annotation" / "precision_868h" / "sampled_object_crops_100_bucket_assignments_100ex_8subj.csv"
 )
 
 
@@ -61,8 +61,8 @@ def main() -> None:
     args = ap.parse_args()
 
     cat = args.category.strip().lower()
-    out_csv = PROJECT_ROOT / "annotation" / f"example_page_correct_detections_{cat}.csv"
-    out_dir = PROJECT_ROOT / "annotation" / f"example_page_correct_detections_{cat}_images"
+    out_csv = PROJECT_ROOT / "annotation" / "precision_868h" / f"example_page_correct_detections_{cat}.csv"
+    out_dir = PROJECT_ROOT / "annotation" / "precision_868h" / f"example_page_correct_detections_{cat}_images"
 
     trial_df = pd.read_csv(args.trial_bucket_csv)
     excluded = set(trial_df.loc[trial_df["trial_type"] == "regular", "stem"].astype(str))

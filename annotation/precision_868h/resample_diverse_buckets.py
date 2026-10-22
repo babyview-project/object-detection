@@ -633,15 +633,15 @@ def main() -> None:
     )
     parser.add_argument(
         "--output-csv",
-        default="annotation/sampled_object_crops_100_bucket_assignments_diverse_rebalanced.csv",
+        default="annotation/precision_868h/sampled_object_crops_100_bucket_assignments_diverse_rebalanced.csv",
     )
     parser.add_argument(
         "--concentration-report",
-        default="annotation/sampled_object_crops_100_diverse_rebalanced_concentration.csv",
+        default="annotation/precision_868h/sampled_object_crops_100_diverse_rebalanced_concentration.csv",
     )
     parser.add_argument(
         "--global-report",
-        default="annotation/sampled_object_crops_100_diverse_rebalanced_global_summary.csv",
+        default="annotation/precision_868h/sampled_object_crops_100_diverse_rebalanced_global_summary.csv",
     )
     parser.add_argument("--seed", type=int, default=20260327)
     parser.add_argument(

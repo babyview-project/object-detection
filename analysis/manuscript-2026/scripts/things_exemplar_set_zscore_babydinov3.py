@@ -18,7 +18,7 @@ import pandas as pd
 
 from _bootstrap import MANUSCRIPT_DIR, PREPRINT_DIR, PROJECT_ROOT, SCRIPTS_DIR
 DATA_DIR = PROJECT_ROOT / "data"
-ANNOTATION_DIR = PROJECT_ROOT / "annotation"
+ANNOTATION_DIR = PROJECT_ROOT / "annotation" / "precision_868h"
 OUT_ROOT = PREPRINT_DIR / "exemplar_set_embeddings"
 
 CATEGORY_FILES = {

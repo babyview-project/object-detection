@@ -73,6 +73,7 @@ INCLUDED_TXT = DATA_DIR / f'included_categories_{TOP8_CATEGORY_SET}.txt'
 SAMPLED_EXEMPLAR_CSV = (
     PROJECT_ROOT
     / 'annotation'
+    / 'precision_868h'
     / 'sampled_object_crops_100_bucket_assignments_100ex_8subj_per_video_cap_babyview_only.csv'
 )
 TRAJECTORY_CSV = ANALYSIS_DIR / 'individual_analyses' / 'developmental_trajectory_rdms_clip' / 'trajectory_correlations.csv'

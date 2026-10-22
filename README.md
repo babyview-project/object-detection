@@ -113,8 +113,8 @@ End-to-end flow: **frames → YOLOE detections → crops → embeddings → manu
 | Path | Role |
 |------|------|
 | **[`annotation/README.md`](annotation/README.md)** | Crop annotation GUI (`annotate_crops.py`) |
-| `annotation/per_class_validation_data.csv` | Per-category precision (manuscript & CCN filters) |
-| `annotation/per_file_precision_data.csv` | Per-crop rater validation |
+| `annotation/precision_868h/per_class_validation_data.csv` | Per-category precision (manuscript & CCN filters) |
+| `annotation/precision_868h/per_file_precision_data.csv` | Per-crop rater validation |
 | `annotation/sampled_object_crops_*` | Exemplar sampling manifests (100 ex / 8 subjects) |
 
 Notebook **10** and shared inputs use animal-depiction aggregates; many analyses depend on precision ≥ 0.6 from `per_class_validation_data.csv`.

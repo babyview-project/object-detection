@@ -4,7 +4,7 @@
 Cohort definition (matches manuscript ``exemplar_embedding_run.json`` for valid85):
   - ``data/included_categories_valid85.txt`` ∩ per-class precision > threshold
   - ``annotation/sampled_object_crops_*_babyview_only.csv`` (trial_type == regular)
-  - ``annotation/per_file_precision_data.csv`` (per-crop rater validation)
+  - ``annotation/precision_868h/per_file_precision_data.csv`` (per-crop rater validation)
   - Intersection with CLIP detection filter list (default threshold 0.27)
   - Per-image CLIP and DINOv3 ``.npy`` (cluster paths or git zip)
 

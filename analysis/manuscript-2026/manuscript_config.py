@@ -8,7 +8,7 @@ from pathlib import Path
 MANUSCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = MANUSCRIPT_DIR.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-ANNOTATION_DIR = PROJECT_ROOT / "annotation"
+ANNOTATION_DIR = PROJECT_ROOT / "annotation" / "precision_868h"
 EXEMPLAR_EMBED_ROOT = Path(
     os.environ.get("BV_EXEMPLAR_EMBED_ROOT", str(MANUSCRIPT_DIR / "exemplar_set_embeddings"))
 ).expanduser()

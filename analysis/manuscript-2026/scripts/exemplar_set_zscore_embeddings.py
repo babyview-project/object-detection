@@ -38,7 +38,7 @@ from packed_crop_embeddings import (
 from manuscript_config import EXEMPLAR_EMBED_ROOT
 
 DATA_DIR = PROJECT_ROOT / "data"
-ANNOTATION_DIR = PROJECT_ROOT / "annotation"
+ANNOTATION_DIR = PROJECT_ROOT / "annotation" / "precision_868h"
 OUT_ROOT = EXEMPLAR_EMBED_ROOT
 
 CATEGORY_FILES = {

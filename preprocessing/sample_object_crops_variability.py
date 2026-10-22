@@ -41,12 +41,12 @@ DEFAULT_FILTER_LIST = Path(
     "clip_image_embeddings_filtered-by-clip-0.27_exclude-people_exclude-subject-00270001.txt"
 )
 
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "annotation" / "sampled_object_crops_100_diverse_families"
-DEFAULT_OUTPUT_CSV = PROJECT_ROOT / "annotation" / "sampled_object_crops_100_diverse_families.csv"
-DEFAULT_PARTICIPANT_CSV = PROJECT_ROOT / "annotation" / "sampled_object_crops_100_bucket_assignments.csv"
-DEFAULT_SEED_FILE = PROJECT_ROOT / "annotation" / "sampled_object_crops_100_diverse_families_seed.txt"
-DEFAULT_EXAMPLE_OUTPUT_CSV = PROJECT_ROOT / "annotation" / "example_page_correct_detections_table.csv"
-DEFAULT_EXAMPLE_OUTPUT_DIR = PROJECT_ROOT / "annotation" / "example_page_correct_detections_table_images"
+DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "annotation" / "precision_868h" / "sampled_object_crops_100_diverse_families"
+DEFAULT_OUTPUT_CSV = PROJECT_ROOT / "annotation" / "precision_868h" / "sampled_object_crops_100_diverse_families.csv"
+DEFAULT_PARTICIPANT_CSV = PROJECT_ROOT / "annotation" / "precision_868h" / "sampled_object_crops_100_bucket_assignments.csv"
+DEFAULT_SEED_FILE = PROJECT_ROOT / "annotation" / "precision_868h" / "sampled_object_crops_100_diverse_families_seed.txt"
+DEFAULT_EXAMPLE_OUTPUT_CSV = PROJECT_ROOT / "annotation" / "precision_868h" / "example_page_correct_detections_table.csv"
+DEFAULT_EXAMPLE_OUTPUT_DIR = PROJECT_ROOT / "annotation" / "precision_868h" / "example_page_correct_detections_table_images"
 
 # Reproducibility
 DEFAULT_RANDOM_SEED = 42

@@ -23,6 +23,7 @@ INCLUDED_CATEGORIES_TXT = PROJECT_ROOT / "data" / "included_categories_valid85.t
 SAMPLED_EXEMPLAR_CSV = (
     PROJECT_ROOT
     / "annotation"
+    / "precision_868h"
     / "sampled_object_crops_100_bucket_assignments_100ex_8subj_per_video_cap_babyview_only.csv"
 )
 TRAJECTORY_CSV = (

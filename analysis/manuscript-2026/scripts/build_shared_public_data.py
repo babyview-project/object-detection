@@ -272,6 +272,7 @@ def export_animal_depiction() -> list[str]:
     src = (
         PROJECT_ROOT
         / "annotation"
+        / "cvat_3000_frames"
         / "annotation_data"
         / "7k_animal_depiction_annotation_04302026.csv"
     )

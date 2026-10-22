@@ -144,7 +144,7 @@ def build() -> None:
     cat_rel = "inputs"
     included_129 = PROJECT_ROOT / "data" / "included_categories_valid129.txt"
     included_85 = PROJECT_ROOT / "data" / "included_categories_valid85.txt"
-    per_class_validation = PROJECT_ROOT / "annotation" / "per_class_validation_data.csv"
+    per_class_validation = PROJECT_ROOT / "annotation" / "precision_868h" / "per_class_validation_data.csv"
 
     if not included_129.exists():
         raise FileNotFoundError(f"Missing included categories: {included_129}")

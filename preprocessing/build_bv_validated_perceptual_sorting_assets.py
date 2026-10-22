@@ -40,8 +40,8 @@ import pandas as pd
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUT_ROOT = PROJECT_ROOT / "variability_exp" / "bv_validated_crops"
 DEFAULT_INCLUDED_CATEGORIES = PROJECT_ROOT / "data" / "included_categories.txt"
-DEFAULT_PER_CLASS_CSV = PROJECT_ROOT / "annotation" / "per_class_validation_data.csv"
-DEFAULT_PER_FILE_CSV = PROJECT_ROOT / "annotation" / "per_file_precision_data.csv"
+DEFAULT_PER_CLASS_CSV = PROJECT_ROOT / "annotation" / "precision_868h" / "per_class_validation_data.csv"
+DEFAULT_PER_FILE_CSV = PROJECT_ROOT / "annotation" / "precision_868h" / "per_file_precision_data.csv"
 DEFAULT_CROPPED_DIR = Path("/data2/dataset/babyview/868_hours/outputs/yoloe_cdi_all_cropped_by_class")
 
 IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png")
