@@ -12,6 +12,7 @@ instruction and formats are imported from `../gemini_pilot/run_gold_pilot.py`. T
 | requests | 21 shards of 50,000 (about 84 MB each), one Vertex batch job per shard |
 | cost | about $1,230 at batch prices (measured on the pilot: 2,059 input / 707 output tokens per frame) |
 | bucket | `gs://hs-hs-langcog-gemini-bv-objects` (us-central1, grant project), requested from Mike |
+| results | `/ccn2a/dataset/babyview/2025.2/outputs/object_detections/gemini_2.5_flash_open_format/`, next to the YOLOE output in `cdi/` (folder made writable by Alvin 2026-10-21): `results.jsonl.gz` (about 0.2 GB), `manifest.csv.gz`, `usage.json`, `failed_units.txt`, `README.txt`, written by `collect` |
 
 ## Run
 
@@ -36,7 +37,9 @@ To run the pilot job on its own, move the full `shard_0*.jsonl` files out of `ou
 before `upload`, and put them back afterwards. `upload` sends only the frames that the local shards
 ask for, and skips frames already in the bucket.
 
-All state is in `out/private/` (git-ignored: frame ids carry subject and video ids). `results.jsonl`
+Working files (request shards, raw batch downloads, job state; a few GB) stay in `out/private/`
+(git-ignored: frame ids carry subject and video ids); the raw downloads can be deleted once
+`collect` has published, since the bucket keeps `outputs/` until it is deleted. `results.jsonl`
 has one record per frame in the pilot's format (`unit_id` = `<video_id>/<frame:05d>`, `raw` =
 Gemini's JSON), so `gold_set/build_cvat_tasks.load_gemini` reads it; apply the same filters
 (`NOT_DISCRETE`, `PARTS`, duplicates) when building the analysis tables.

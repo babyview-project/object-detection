@@ -16,7 +16,9 @@ Stages (run in order; each is resumable and keeps its state in out/private/):
   submit    one batch job per uploaded shard, at most --max-active running at once -> out/private/jobs.json
   status    job states and completion counts
   collect   download finished jobs' predictions -> out/private/results.jsonl (same record format as the
-            pilot's jsonl) + usage.json; failed units -> out/private/failed_units.txt
+            pilot's jsonl) + usage.json; failed units -> out/private/failed_units.txt; then copies the
+            final files (gzipped results and manifest, usage, failed list, README) to --results-dir,
+            default /ccn2a/dataset/babyview/2025.2/outputs/object_detections/gemini_2.5_flash_open_format
   cleanup   delete gs://BUCKET/frames/ and requests/ (asks for --yes)
 After collect, `prepare --retry` writes a shard of the failed units; upload, submit and collect it.
 
@@ -53,7 +55,8 @@ sys.path.insert(0, str(HERE.parent / "gemini_pilot"))
 from run_gold_pilot import DETECT_OPEN_FORMAT_PROMPT, DETECT_SYSTEM, FORMATS, make_client  # noqa: E402
 
 FRAMES = Path("/ccn2a/dataset/babyview/2025.2/extracted_frames_1fps")
-PRIV = HERE / "out" / "private"
+PRIV = HERE / "out" / "private"                  # working files: requests, raw batch outputs, job state
+RESULTS = Path("/ccn2a/dataset/babyview/2025.2/outputs/object_detections/gemini_2.5_flash_open_format")
 MODEL = "gemini-2.5-flash"
 MAX_OBJ, MAX_PX, STEP = 30, 910, 5
 MAX_OUTPUT_TOKENS = max(4096, 200 * MAX_OBJ)   # pilot used 3,072; its 5 broken-JSON replies look truncated
@@ -343,6 +346,30 @@ def stage_collect(args):
     (PRIV / "usage.json").write_text(json.dumps(usage, indent=1) + "\n")
     print(json.dumps(usage, indent=1))
     print(f"{len(failed):,} units not scored -> failed_units.txt (prepare --retry to resubmit)")
+    publish(Path(args.results_dir), usage)
+
+
+def publish(dest: Path, usage: dict):
+    """Final files next to the YOLOE detections; working files stay in out/private."""
+    import gzip
+    import shutil
+    dest.mkdir(parents=True, exist_ok=True)
+    for name in ("results.jsonl", "manifest.csv"):
+        with open(PRIV / name, "rb") as src, gzip.open(dest / f"{name}.gz", "wb") as dst:
+            shutil.copyfileobj(src, dst)
+    for name in ("usage.json", "failed_units.txt"):
+        shutil.copy2(PRIV / name, dest / name)
+    (dest / "README.txt").write_text(
+        "Gemini object annotation of 2025.2 BV-main (subjects S00xx, S00270001 excluded), every 5th 1 fps frame\n"
+        f"of extracted_frames_1fps. Model {MODEL} on Vertex batch, task detect_open_format: per object an open\n"
+        f"label, a format (real, toy, photo, drawing, screen) and box_2d [ymin, xmin, ymax, xmax] on 0-1000;\n"
+        f"at most {MAX_OBJ} objects, full 512x910 frame, temperature 0, thinking off.\n"
+        "results.jsonl.gz: one record per frame; unit_id = <video_id>/<frame:05d>, raw = Gemini's JSON, error = null\n"
+        "  if parsed. Raw output: walls, floors and object parts are not filtered yet.\n"
+        "manifest.csv.gz: the frames sent. failed_units.txt: frames without a parsed result. usage.json: tokens, cost.\n"
+        "Code: babyview-project/object-detection, annotation/gemini_full_run/run_full_batch.py\n"
+        f"Written {time.strftime('%Y-%m-%d')}: {usage['scored']:,} of {usage['units']:,} frames scored.\n")
+    print(f"published -> {dest}")
 
 
 def stage_cleanup(args):
@@ -367,6 +394,7 @@ def main():
     ap.add_argument("--workers", type=int, default=32, help="upload / cleanup threads")
     ap.add_argument("--max-active", type=int, default=4, help="submit: batch jobs running at once")
     ap.add_argument("--yes", action="store_true", help="cleanup: confirm deletion")
+    ap.add_argument("--results-dir", default=str(RESULTS), help="collect: where the final files go")
     args = ap.parse_args()
     if args.stage in ("upload", "submit", "collect", "cleanup") and not args.bucket:
         sys.exit(f"{args.stage} needs --bucket")
