@@ -9,7 +9,7 @@ Frame-level detection tables for the **868-hour** release.
 
 The merged tables (one row per CLIP-passing YOLOE box, at CLIP cut-offs 0.26 / 0.27 /
 0.28) are still named by 868-hour code paths, e.g. `analysis/manuscript-2026/scripts/frame_prevalence.py`
-(868-hour branch), `analysis/ccn-2025/`, `analysis/individual_analyses/12_*` and several
+(868-hour branch), `analysis/archive/ccn-2025/`, `analysis/individual_analyses/12_*` and several
 `analysis/manuscript-2026/not_in_manuscript/` notebooks. Those paths fail until the tables
 are restored from a backup.
 

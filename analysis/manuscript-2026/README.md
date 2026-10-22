@@ -5,7 +5,7 @@ Analysis code for the BabyView Objects manuscript (June 2026 submission).
 **New to the pipeline?** Start with **[Stage 0: build embeddings](00_build_exemplar_embeddings.md)**
 (notebooks **06–07**), then **[REPRODUCTION.md](REPRODUCTION.md)** for the full workflow.
 
-> **Note:** `analysis/preprint-2026/` redirects here. Exploratory work that was
+> **Note:** the former `analysis/preprint-2026/` tree was merged here. Exploratory work that was
 > **not** in the submission lives in **[`not_in_manuscript/`](not_in_manuscript/)**.
 
 ## Quick links
