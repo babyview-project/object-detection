@@ -1,0 +1,11 @@
+model,human_format,boxes,format_correct,real_vs_depiction_correct,label_just_toy
+gemini-2.5-flash,drawing,24,0.833,0.833,0.0
+gemini-2.5-flash,photo,24,0.208,0.917,0.0
+gemini-2.5-flash,real,49,0.98,0.98,0.041
+gemini-2.5-flash,screen,13,0.385,0.385,0.0
+gemini-2.5-flash,toy,19,0.421,0.421,0.158
+gemini-2.5-flash-lite,drawing,14,1.0,1.0,0.0
+gemini-2.5-flash-lite,photo,15,0.2,1.0,0.0
+gemini-2.5-flash-lite,real,27,0.926,0.926,0.037
+gemini-2.5-flash-lite,screen,11,0.909,1.0,0.0
+gemini-2.5-flash-lite,toy,15,0.667,0.667,0.267

@@ -1,0 +1,5 @@
+model,run,labels,distinct,label_is_vocab_word,label_equals_cdi_word,cdi_none
+gemini-2.5-flash,combo,1063,232,0.751,0.745,0.178
+gemini-2.5-flash,neutral open,845,235,0.593,,
+gemini-2.5-flash-lite,combo,952,205,0.772,0.827,0.022
+gemini-2.5-flash-lite,neutral open,978,175,0.656,,

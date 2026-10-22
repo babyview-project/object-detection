@@ -35,7 +35,7 @@ def read_runs():
     runs = {}
     for f in sorted(OUT_DIR.glob("*__*__p*.jsonl")) + sorted((OUT_DIR / "private").glob("*__*__p*.jsonl")):
         model, task, p = f.stem.split("__")
-        if "_s" in p:  # sanity-pass samples are not scored
+        if "_" in p or task not in TASK_COLS:  # sanity / subset runs and detect_open are not scored here
             continue
         rows = [json.loads(l) for l in open(f)]
         df = pd.DataFrame(rows)

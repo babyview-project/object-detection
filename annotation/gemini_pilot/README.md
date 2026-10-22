@@ -31,10 +31,13 @@ or a near-synonym of the gold label. Same-domain foils can still be truly visibl
 in a crop (a chair next to a table), so `fa_same` has a nonzero floor.
 
 Settings, as in `gemini_align.py`: system instruction + terse prompt, JSON
-response schema (the CDI word is an enum), one call per crop, temperature 0,
-thinking off (`thinking_budget=0`; Gemini 3 cannot fully disable it, so
-`thinking_level=minimal`), longest image edge downsized to 512 px, default media
-resolution, 32 workers. Reliability: a second pass on 8 crops per category (576).
+response schema, one call per crop, temperature 0, thinking off
+(`thinking_budget=0`), longest image edge downsized to 512 px, default media
+resolution, 32 workers, output cap 512 tokens (3,072 for `detect`). Words are plain
+strings, not an enum: Vertex rejects an enum of 150+ values (the vocabulary has 295),
+so the scorer counts off-list answers (`off_list`). `detect` lists are capped at 25
+objects in the schema (`maxItems`), after Flash-Lite once repeated boxes until the
+token limit. Reliability: a second pass on 8 crops per category (576).
 
 ## Decision rule (set before running)
 
