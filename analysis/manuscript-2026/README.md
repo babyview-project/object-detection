@@ -2,6 +2,11 @@
 
 Analysis code for the BabyView Objects manuscript (June 2026 submission).
 
+> **Revision (Nov 2026):** the main text now uses the Qwen open-vocabulary pipeline
+> ([`../qwen-open-vocab/`](../qwen-open-vocab/)); this folder is the original YOLOE + CLIP pipeline, kept for SI 1 on
+> the 2025.2 release (`*_2025.2` at 1 fps, `*_2025.2_5s` at one frame per 5 s). Manuscript and response-letter
+> figures live in the git-ignored `revision_private/`.
+
 **New to the pipeline?** Start with **[Stage 0: build embeddings](00_build_exemplar_embeddings.md)**
 (notebooks **06–07**), then **[REPRODUCTION.md](REPRODUCTION.md)** for the full workflow.
 
@@ -65,6 +70,7 @@ See **[00_build_exemplar_embeddings.md](00_build_exemplar_embeddings.md)**. Quic
 |---------------|------|
 | `main_results_valid129s_2025.2/` | Main-text YOLOE `results/` and `figures/` on 2025.2 (revision SI; the submitted 868-hour `_04302026` trees are in git history) |
 | `supplemental_results_valid85cats_2025.2/` | Supplement & top-8 valid85 on 2025.2 |
+| `*_2025.2_5s/` | The same at one frame per 5 s (`scripts/run_5s_analyses.sh`); SI 1 sampling-rate check |
 | `exemplar_set_embeddings/` | Category-level z-scored tables |
 
 Helper `.py` files under **[`scripts/`](scripts/)** (Stage 0 runners, shuffle library, supplement CLIs, public data export) are cataloged in **[SCRIPTS.md](SCRIPTS.md)**.

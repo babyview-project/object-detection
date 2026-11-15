@@ -6,7 +6,7 @@ Run from repo root (`object-detection/`) with **`ccn-valid7018`** (`../environme
 
 ```bash
 conda activate ccn-valid7018
-bash analysis/ccn-2026/run_valid7018_from_zip.sh
+bash analysis/archive/ccn-2026/run_valid7018_from_zip.sh
 ```
 
 | Script | Output |
@@ -20,9 +20,9 @@ bash analysis/ccn-2026/run_valid7018_from_zip.sh
 ## Maintainer (cluster crop/embedding paths)
 
 ```bash
-python analysis/ccn-2026/scripts/build_valid7018_embeddings_zip.py
-python analysis/ccn-2026/scripts/build_valid7018_montage_crops_zip.py
-python analysis/ccn-2026/scripts/build_shared_public_data_ccn.py
+python analysis/archive/ccn-2026/scripts/build_valid7018_embeddings_zip.py
+python analysis/archive/ccn-2026/scripts/build_valid7018_montage_crops_zip.py
+python analysis/archive/ccn-2026/scripts/build_shared_public_data_ccn.py
 ```
 
 See [`../SCRIPTS.md`](../SCRIPTS.md) and [`../REPRODUCTION.md`](../REPRODUCTION.md).

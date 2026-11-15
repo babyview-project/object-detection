@@ -1,21 +1,34 @@
 # BabyView object detection
 
-Code to detect, recognize, and label objects across BabyView videos. Models run on
-frames extracted from video at **1 fps**. Open-vocabulary detection uses class names
-from the child vocabulary MCDI survey (word lists in [`yoloe/tools/`](yoloe/tools/)).
+Code to detect, recognize, and label objects across BabyView videos, and the analyses of the *BabyView Objects*
+manuscript. Frames are extracted at 1 fps.
 
-For YOLOE setup, frame extraction, and batch prediction, see **[`yoloe/README.md`](yoloe/README.md)**.
-Folder-level indexes: **[`analysis/README.md`](analysis/README.md)** (which analysis folder is
-active, legacy or archived, and which data release / output tag each uses) and
-**[`annotation/README.md`](annotation/README.md)** (human annotation and Gemini labelling).
+Folder-level indexes: **[`analysis/README.md`](analysis/README.md)** (which analysis folder is active or
+archived, and which data release / output tag each uses) and **[`annotation/README.md`](annotation/README.md)**
+(human annotation, Qwen and Gemini labelling).
 
 ---
 
-## BabyView Objects manuscript (2026)
+## Revision (November 2026): Qwen open-vocabulary pipeline
 
-Primary analyses, figures, and **anonymized shareable tables** for the *BabyView Objects*
-manuscript (June 2026 submission) live under **[`analysis/manuscript-2026/`](analysis/manuscript-2026/)**
-(the former `preprint-2026` tree was merged into it).
+The revised manuscript's main text uses Qwen3.8-27B open-vocabulary detections (one frame every 5 s, renamed labels,
+828 Tier 1 and 182 core categories), compared with VEDB, THINGS, LVIS and ImageNet.
+
+| Folder | What |
+|--------|------|
+| **[`annotation/qwen_pilot/`](annotation/qwen_pilot/)** | Qwen runs (BabyView, VEDB), crop embeddings, SAM 3 masks; raw outputs via `out/runs` |
+| **[`analysis/qwen-open-vocab/`](analysis/qwen-open-vocab/README.md)** | Every main-text analysis and figure, the response-letter figures, controls, THINGS-27 domain variant |
+| [`analysis/comparison-datasets/`](analysis/comparison-datasets/README.md), [`analysis/vedb-1612/`](analysis/vedb-1612/README.md) | LVIS / ImageNet category tables; VEDB frames, stores and adult-session list |
+| `analysis/manuscript-2026/revision_private/` | Manuscript and response-letter figures (git-ignored; holds BabyView frames) |
+
+---
+
+## Original pipeline (June 2026 submission; SI 1 of the revision)
+
+The YOLOE + CLIP pipeline on 129 CDI categories, analyses, and **anonymized shareable tables** live under
+**[`analysis/manuscript-2026/`](analysis/manuscript-2026/)**. The revision keeps its results on the 2025.2 release
+(1 fps and one frame per 5 s). For YOLOE setup, frame extraction and batch prediction, see
+**[`yoloe/README.md`](yoloe/README.md)**.
 
 ### Start here
 
@@ -52,7 +65,8 @@ Shell helpers: `run_exemplar_embedding_stage.sh`, `run_06_zscore_tmux.sh`, `run_
 | Path | Contents |
 |------|----------|
 | `analysis/manuscript-2026/exemplar_set_embeddings/` | Category-level z-scored tables (`valid129`, `valid85`) |
-| `…/main_results_valid129s_2025.2/`, `…/supplemental_results_valid85cats_2025.2/` | YOLOE analyses on the 2025.2 release (1 fps; revision SI): `scripts/run_2025_2_analyses.sh`. The 868-hour `*_04302026` trees of the submitted version were removed (git history) |
+| `…/main_results_valid129s_2025.2/`, `…/supplemental_results_valid85cats_2025.2/` | YOLOE analyses on the 2025.2 release (1 fps; SI 1): `scripts/run_2025_2_analyses.sh`. The 868-hour `*_04302026` trees of the submitted version were removed (git history) |
+| `…/main_results_valid129s_2025.2_5s/`, `…/supplemental_results_valid85cats_2025.2_5s/` | The same at one frame per 5 s (SI 1 sampling-rate check): `scripts/run_5s_analyses.sh` |
 
 ### Shareable data (no raw video or participant IDs)
 
@@ -73,14 +87,14 @@ Category lists used in the paper: [`data/included_categories_valid129.txt`](data
 
 ---
 
-## Related conference analyses
+## Other analysis folders
 
 | Folder | Paper / venue | Entry point |
 |--------|---------------|-------------|
-| **[`analysis/qwen-open-vocab/`](analysis/qwen-open-vocab/)** | Revision main analyses: Qwen open-vocabulary detections, BabyView vs VEDB / THINGS / LVIS / ImageNet, controls | scripts and notebooks in the folder |
-| **[`analysis/vedb-1612/`](analysis/vedb-1612/)** | VEDB 80-session world subset — same frame / YOLOE / CLIP / DINOv3 pipeline | [`README.md`](analysis/vedb-1612/README.md) |
-| **[`analysis/comparison-datasets/`](analysis/comparison-datasets/)** | ImageNet-1k and LVIS v1 as comparison datasets (WordNet mapping onto CDI words, BV vs ImageNet / LVIS / THINGS / VEDB) | [`README.md`](analysis/comparison-datasets/README.md) |
-| **[`analysis/archive/`](analysis/archive/)** | Finished work: CCN 2025 paper, CCN 2026 poster (`ccn-2026/`) | [`README.md`](analysis/archive/README.md) |
+| **[`analysis/vedb-1612/`](analysis/vedb-1612/)** | VEDB volume 1612 (709 adult sessions): download, frames, YOLOE / CLIP / DINOv3 stores, adult-session list | [`README.md`](analysis/vedb-1612/README.md) |
+| **[`analysis/comparison-datasets/`](analysis/comparison-datasets/)** | ImageNet-1k and LVIS v1: data prep, category tables, LVIS crop-size / CLIP-filter controls (notebook 16) | [`README.md`](analysis/comparison-datasets/README.md) |
+| **[`analysis/talk-figures/unr-2026/`](analysis/talk-figures/unr-2026/)** | Figure helpers and fonts the manuscript figure scripts import | [`README.md`](analysis/talk-figures/unr-2026/README.md) |
+| **[`analysis/archive/`](analysis/archive/)** | Finished or superseded: CCN 2025 paper, CCN 2026 poster, 129-category YOLOE comparisons with ImageNet / LVIS / VEDB | [`README.md`](analysis/archive/README.md) |
 
 ---
 

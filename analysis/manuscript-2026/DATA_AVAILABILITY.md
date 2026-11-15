@@ -21,7 +21,5 @@ local embedding paths are documented in `analysis/manuscript-2026/paths.example.
 
 **Reproducing main-text statistics.** Compare tables in `data/shared_data_manuscript_2026/results_valid129/`
 to the manuscript, or rerun notebooks **01–05** and **08–09** per `REPRODUCTION.md`.
-Optional LaTeX autofill:
-`analysis/manuscript-2026/not_in_manuscript/10_fill_results_preprint_numbers.ipynb`.
 
 ---

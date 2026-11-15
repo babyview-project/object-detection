@@ -5,9 +5,10 @@
 > extraction, the VEDB YOLOE / embedding scripts and `exemplar_set_embeddings/` (read by comparison-datasets
 > notebook 16), the adult-session list and adults-only store builder used by `qwen-open-vocab/`.
 
-Preprocess and analyze the **80-session** VEDB world-camera subset the same way
-the manuscript processes BabyView: 1 fps frames, YOLOE with the CDI noun list,
-CLIP filter at 0.27, then DINOv3 on the boxes that pass.
+Preprocess the VEDB world-camera videos (volume 1612; first 80 sessions, then all 717, of which the 709 adult
+sessions are analyzed) the same way the manuscript processes BabyView: 1 fps frames, YOLOE with the CDI noun list,
+CLIP filter at 0.27, then DINOv3 on the boxes that pass. The revision's Qwen detections of VEDB are run from
+`annotation/qwen_pilot/` (`run_vedb.sh`) and analyzed in `analysis/qwen-open-vocab/`.
 
 This folder is the analysis home (tables and figures). The mp4s and the heavy
 outputs stay on `/ccn2a`.
@@ -130,10 +131,11 @@ python run_cdi_crop_pipeline.py --stage index \
   --exclude-subjects
 ```
 
-### 4. Analyses
+### 4. Analyses (archived 2026-11-15: `../archive/vedb-1612/`)
 
-Write notebooks and tables under this folder (`results/`, `figures/`). The
-manuscript notebooks that transfer are the pooled ones:
+The YOLOE + CLIP BabyView–VEDB analyses below now live in `../archive/vedb-1612/`; the revision's BabyView–VEDB
+comparisons are in `../qwen-open-vocab/` (`bv_vedb_analysis.ipynb`). The manuscript notebooks that transferred were
+the pooled ones:
 
 | Manuscript | VEDB analogue |
 |------------|----------------|
@@ -145,7 +147,7 @@ manuscript notebooks that transfer are the pooled ones:
 Per-child notebooks (04, 08–09) do not apply: these are adult headcam sessions,
 not BabyView children.
 
-### 5. BV vs VEDB additions (October 2026)
+### 5. BV vs VEDB additions (October 2026; archived)
 
 - `plot_bv_vedb_rdms.py` also writes RDMs clustered within each CDI domain on the BV or the VEDB RDM:
   `analyses/{valid129,valid85}/figures/bv_vedb_rdm_comparison_<model>_clustered_{bv,vedb}_*.png`,

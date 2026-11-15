@@ -60,7 +60,7 @@ Also considered (not in layout): `fig_explore_frequency_vs_global_robustness_2x2
 **Local:**
 
 ```bash
-cd analysis/ccn-2026/poster
+cd analysis/archive/ccn-2026/poster
 pdflatex ccn2026_poster.tex
 ```
 

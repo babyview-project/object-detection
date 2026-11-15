@@ -2,8 +2,8 @@
 
 Numbered notebooks (**01–10**, plus Stage 0 **06–07**) are the main manuscript analyses. **Unnumbered `.py` files**
 live under [`scripts/`](scripts/) — Stage 0 headless runners, statistics imported by notebooks,
-supplement figures, and publication packaging. Exploratory scripts live under
-[`not_in_manuscript/`](not_in_manuscript/) (see [`not_in_manuscript/README.md`](not_in_manuscript/README.md)).
+supplement figures, and publication packaging. (The exploratory `not_in_manuscript/` folder was removed on
+2026-11-15; git history.)
 
 Run scripts from `analysis/manuscript-2026/` (e.g. `python scripts/check_exemplar_stage.py`).
 Shared paths: [`manuscript_config.py`](manuscript_config.py) at the manuscript root.
@@ -20,8 +20,13 @@ Shared paths: [`manuscript_config.py`](manuscript_config.py) at the manuscript r
 | [`scripts/create_babydinov3_crop_embeddings.py`](scripts/create_babydinov3_crop_embeddings.py) | 0* | GPU; upstream of **06** | Per-crop BV BabyDINOv3 `.npy` on disk |
 | [`scripts/bv_things_cdi_shuffle_inference.py`](scripts/bv_things_cdi_shuffle_inference.py) | — | import only | **05**, `top8_within_between_vs_things.py` |
 | [`scripts/compute_binary_template_correlations.py`](scripts/compute_binary_template_correlations.py) | 1 | After **03** (orders/embeddings) | Binary CDI template RDM control |
-| [`scripts/compare_dinov3_vs_babydinov3.py`](scripts/compare_dinov3_vs_babydinov3.py) | 1 | After Stage 0 | DINOv3 vs BabyDINOv3 supplement stats |
-| [`scripts/plot_things_dinov3_vs_babydinov3_umap.py`](scripts/plot_things_dinov3_vs_babydinov3_umap.py) | 1 | After compare script | UMAP figure (THINGS backbones) |
+| [`scripts/run_2025_2_analyses.sh`](scripts/run_2025_2_analyses.sh) | 1 | After Stage 0 (2025.2) | Every Stage 1 notebook and script → `*_2025.2/` (SI 1) |
+| [`scripts/run_5s_analyses.sh`](scripts/run_5s_analyses.sh) | 0 + 1 | Packed store | Stage 0 and Stage 1 at one frame per 5 s → `*_2025.2_5s/` (SI 1, sampling rate) |
+| [`scripts/compare_output_tags.py`](scripts/compare_output_tags.py) | — | After two runs | Table-by-table comparison of two output tags (e.g. 2025.2 vs 2025.2_5s) |
+| [`scripts/execute_notebook.py`](scripts/execute_notebook.py) | — | used by the runners | Executes a notebook's code cells in-process (no outputs saved) |
+| [`scripts/packed_crop_embeddings.py`](scripts/packed_crop_embeddings.py) | — | import only | Reads the 2025.2 packed crop shards (notebooks 04, 08, 09; Stage 0; top-8 script) |
+| [`scripts/frame_prevalence.py`](scripts/frame_prevalence.py), [`scripts/run_long_tail_frame_prevalence.py`](scripts/run_long_tail_frame_prevalence.py) | 1 | Optional | Frame-prevalence long-tail tables and figures (notebook 01) |
+| [`scripts/make_dataset_overview_figure.py`](scripts/make_dataset_overview_figure.py) | figure | Revision | Dataset overview figure (example images per dataset) → `revision_private/figures/dataset_overview/` |
 | [`scripts/clip_threshold_sensitivity.py`](scripts/clip_threshold_sensitivity.py) | 1 | Optional supplement | CLIP threshold sensitivity SI |
 | [`scripts/top8_within_between_vs_things.py`](scripts/top8_within_between_vs_things.py) | 1 | After Stage 0; often from **05** | Top-8 CDI vs THINGS (valid85/129) |
 | [`scripts/build_shared_public_data.py`](scripts/build_shared_public_data.py) | publish | After local results exist | [`data/shared_data_manuscript_2026/`](../../data/shared_data_manuscript_2026/) |
@@ -77,8 +82,6 @@ Notebook **07** (THINGS CLIP + DINOv3) has **no** separate headless script yet; 
 | Script | Typical command | Outputs |
 |--------|-----------------|--------|
 | `scripts/compute_binary_template_correlations.py` | `python scripts/compute_binary_template_correlations.py` | `main_results_*/results/binary_template_*` |
-| `scripts/compare_dinov3_vs_babydinov3.py` | `CATEGORY_SET=valid129 python scripts/compare_dinov3_vs_babydinov3.py` | `dinov3_vs_babydinov3_*`, scatter PNG |
-| `scripts/plot_things_dinov3_vs_babydinov3_umap.py` | `python scripts/plot_things_dinov3_vs_babydinov3_umap.py` | UMAP coords + figure under `main_results_*/figures/` |
 | `scripts/clip_threshold_sensitivity.py` | `python scripts/clip_threshold_sensitivity.py` | SI figures, `clip_threshold_sensitivity_valid*.csv` |
 | `scripts/top8_within_between_vs_things.py` | `python scripts/top8_within_between_vs_things.py` | `supplemental_results_*/results/top8_vs_things_*` |
 
@@ -94,21 +97,13 @@ Notebook **05** can invoke `scripts/top8_within_between_vs_things.py` in a cell;
 
 ---
 
-## Not in the manuscript (`not_in_manuscript/`)
-
-Includes `pooled_bv_vs_things_cdi_domain_valid85.py`, drift pilots, early `visualize_tsne_umap_*.py`,
-CCN `exemplar_variability_analyses/`, VEST export, etc. **Do not run for submission reproduction**
-unless you are extending the project.
-
----
-
 ## Why keep scripts separate from notebooks?
 
 | Reason | Example |
 |--------|---------|
 | **Long / tmux jobs** | `exemplar_set_zscore_embeddings.py`, `create_babydinov3_*` |
 | **Reusable library** | `bv_things_cdi_shuffle_inference.py` |
-| **Thin CLIs** | `compare_dinov3_vs_babydinov3.py`, `check_exemplar_stage.py` |
+| **Thin CLIs** | `compare_output_tags.py`, `check_exemplar_stage.py` |
 | **Called from notebooks** | **05** → `scripts/top8_within_between_vs_things.py` |
 
 Merging everything into numbered notebooks would duplicate logic and make headless/cluster runs harder. Use this file + notebook numbers together: **notebooks for exploration**, **scripts for repeatability**.

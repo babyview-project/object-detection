@@ -9,7 +9,7 @@ Between detection and analysis: cropping, filtering, sampling, and small builder
 | `filter_blurry.py`, `filter_cropped_images_by_size.py` | blur (Laplacian variance) and size filters |
 | `sample_object_crops_variability.py` | samples exemplars per category for crowdsourcing (writes to `annotation/precision_868h/`) |
 | `sample_non_object_attention_tiles.py` | non-object attention-check tiles |
-| `build_bv_validated_perceptual_sorting_assets.py` | assets for the perceptual free-sort experiment (`variability_exp/`) |
+| `build_bv_validated_perceptual_sorting_assets.py` | assets for the perceptual free-sort experiment (its `variability_exp/` folder was removed on 2026-11-15) |
 | `group_embeddings_by_agemo.py` | per category x child x age-in-months embedding averages |
 | `make_category_rsa.py`, `make_category_rsa_from_doc.py` | early category RSA |
 | `make_montage.py`, `visualize_mask.py` | QC images |

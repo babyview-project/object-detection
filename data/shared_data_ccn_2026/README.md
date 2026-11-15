@@ -3,7 +3,7 @@
 Primary cohort (Methods-aligned):
 - `valid7018/` — global + local metrics on the same 7,018 rater-validated crops
   (`valid7018_paper_stats.json` for headline ρ). **Must match**
-  `analysis/ccn-2026/valid7018/` (cohort-internal feature-wise z-score).
+  `analysis/archive/ccn-2026/valid7018/` (cohort-internal feature-wise z-score).
 - `embeddings/valid7018_bv_embeddings.zip` — paired CLIP+DINO `.npy` (~20 MB;
   feature-wise globally normalized; run `build_valid7018_embeddings_zip.py`)
 - `embeddings/valid7018_embedding_norm_stats.json` — cohort z-score μ/σ (fit on 7,018 crops)
@@ -31,12 +31,12 @@ Also included:
 
 ## Regenerating this bundle
 
-After recomputing metrics under `analysis/ccn-2026/valid7018/`, re-export so the
+After recomputing metrics under `analysis/archive/ccn-2026/valid7018/`, re-export so the
 shared CSVs stay consistent with the embeddings:
 
 ```bash
-python analysis/ccn-2026/scripts/build_shared_public_data_ccn.py
+python analysis/archive/ccn-2026/scripts/build_shared_public_data_ccn.py
 ```
 
-(Or copy the metric CSVs/JSON from `analysis/ccn-2026/valid7018/` into
+(Or copy the metric CSVs/JSON from `analysis/archive/ccn-2026/valid7018/` into
 `data/shared_data_ccn_2026/valid7018/`.)

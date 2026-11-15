@@ -4,7 +4,7 @@
 
 ```bash
 conda activate ccn-valid7018   # see environment.yml
-bash analysis/ccn-2026/run_valid7018_from_zip.sh
+bash analysis/archive/ccn-2026/run_valid7018_from_zip.sh
 ```
 
 | Script / entry | Role |

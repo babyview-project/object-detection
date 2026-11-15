@@ -30,11 +30,11 @@ See `--help` for flags.
 
 | Path | Why |
 |------|-----|
-| `not_in_manuscript/`, logs, `__pycache__` | Exploratory / junk |
+| logs, `__pycache__` | Junk |
 | Notebooks **06–07**, `00_build_…`, `run_*tmux*.sh`, `run_exemplar_…` | Stage 0 / cluster |
 | `create_babydinov3_*.py`, `exemplar_set_zscore_*.py`, `check_exemplar_stage.py` | Tier C builders |
 | `build_shared_public_data.py`, `export_codeocean_capsule.sh`, autofill | Packaging / drafting |
-| `paths.example.env`, `online_annotation/` | Private paths / methods aside |
+| `paths.example.env` | Private paths |
 | Local `main_results/**/subject_*`, `*all_subjects*`, `*.npz` | Privacy / regenerable |
 | `vqa_detections/.../unconstrained_objects.csv` | Video-level VQA dump (~19 M); SI uses summaries/figures instead |
 | Real BabyView subject IDs / absolute `/home`, `/data2`, `/ccn2` paths | Scrubbed in the exported capsule (replaced with tokens) |

@@ -32,6 +32,6 @@ Subset copied by `publish_abstract_figures()`:
 ## Public bundle — `data/shared_data_ccn_2026/`
 
 Mirror of `valid7018/` metrics plus `embeddings/`, `montages/`, and `inputs/`.
-After regenerating `analysis/ccn-2026/valid7018/`, re-export with
+After regenerating `analysis/archive/ccn-2026/valid7018/`, re-export with
 `scripts/build_shared_public_data_ccn.py` so the shared CSVs stay consistent
 with the embedding zip (cohort z-score normalization).

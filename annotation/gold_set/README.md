@@ -24,7 +24,7 @@ IRB-approved storage; CVAT runs locally.
 python freeze_v1.py                         # v1 frozen copy + its BV-main subset
 python sample_frames.py --raters Mira Emma   # 1,000 frames -> out/private/frames.csv
 # Gemini pre-fill (Vertex, gemini-2.5-flash, open label + format, ~$2.40 for 1,000 frames)
-cd ../gemini_pilot && set -a && source ~/.secrets/hs-hs-langcog-gemini.env && set +a
+cd ../archive/gemini_pilot && set -a && source ~/.secrets/hs-hs-langcog-gemini.env && set +a
 ~/.venvs/gemini/bin/python run_gold_pilot.py --model gemini-2.5-flash --task detect_open_format \
     --max-obj 30 --frames ../gold_set/out/private/gold_v2_frames.csv --max-px 910 --workers 8
 cd ../gold_set

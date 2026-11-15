@@ -25,4 +25,4 @@ Stems are opaque ids (no subject/file identifiers). Manifests align crops ↔ em
 
 Rebuild::
 
-  python analysis/ccn-2026/scripts/build_valid7018_public_release.py
+  python analysis/archive/ccn-2026/scripts/build_valid7018_public_release.py

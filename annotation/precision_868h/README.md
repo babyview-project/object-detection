@@ -31,6 +31,6 @@ The aggregate per-category precision is also published in
 | `make_sampled_bucket_assignment_montages.py` | QC montages per category / bucket |
 | `make_example_page_practice_category.py` | builds an example / practice page for one category |
 
-Rater responses were analysed in `analysis/manuscript-2026/online_annotation/online_annotation.qmd`.
+Rater responses were analysed in `analysis/manuscript-2026/online_annotation/online_annotation.qmd` (removed 2026-11-15; git history).
 The montage folder `sampled_object_crops_100ex_8subj_montages_babyview_only` was a link into
 `/data2` and is gone.

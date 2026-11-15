@@ -7,6 +7,11 @@ former `preprint-2026` and `manuscript-2026` folders). Public anonymized tables
 live in [`data/shared_data_manuscript_2026/`](../../data/shared_data_manuscript_2026/) for verifying most aggregate
 statistics without access to raw BabyView recordings.
 
+> **Revision (Nov 2026):** the main text now uses the Qwen open-vocabulary pipeline (`analysis/qwen-open-vocab/`).
+> This folder is the original YOLOE + CLIP pipeline, kept for SI 1 on the 2025.2 release at 1 fps
+> (`*_2025.2`, `scripts/run_2025_2_analyses.sh`) and one frame per 5 s (`*_2025.2_5s`, `scripts/run_5s_analyses.sh`).
+> The submitted 868-hour `*_04302026` results are in git history only; their embeddings are gone.
+
 ## Repository layout
 
 ```text
@@ -26,20 +31,16 @@ analysis/manuscript-2026/
 ├── 08_top8_kid_category_cosine_similarity.ipynb
 ├── 09_top8_local_global_variability_valid85.ipynb
 ├── 10_animal_depiction_label_proportions.ipynb
-├── exemplar_set_embeddings/{valid129,valid85}/
-├── main_results_valid129s_04302026/            # Main-text figures & tables
-├── supplemental_results_valid85cats_04302026/  # Supplement / top-8 valid85
-├── not_in_manuscript/                          # Exploratory / CCN / drift (not in submission)
+├── exemplar_set_embeddings/{2025.2,2025.2_5s}/{valid129,valid85}/   # Stage 0 tables per output tag
+├── main_results_valid129s_2025.2[_5s]/         # SI 1 figures & tables (129 categories)
+├── supplemental_results_valid85cats_2025.2[_5s]/  # 85-category supplement / top-8
+├── scripts/run_2025_2_analyses.sh, scripts/run_5s_analyses.sh   # full Stage 1 runs
 ├── scripts/build_shared_public_data.py
 ├── paths.example.env
 └── requirements-manuscript.txt
 ```
 
-**Not in the submitted manuscript** — see [`not_in_manuscript/README.md`](not_in_manuscript/README.md):
-
-- `not_in_manuscript/10_fill_results_preprint_numbers.ipynb` — LaTeX number autofill (optional)
-- Notebooks `12`–`13`, longitudinal drift, clutter proxy, CCN exemplar variability
-- Early t-SNE/UMAP, VEST export, pooled CDI-domain exploratory scripts
+Exploratory work that was not in the submission (`not_in_manuscript/`) was removed on 2026-11-15 (git history).
 
 ## Environment
 
@@ -88,11 +89,6 @@ Notebook **01** does not use these tables and can run in parallel with Stage 0.
 Aggregate result tables are in `data/shared_data_manuscript_2026/results_valid129/` (see `MANIFEST.json`).
 Compare them to the manuscript or recompute from Tier B notebooks **01–05**, **08–09**.
 
-Optional LaTeX autofill: run
-[`not_in_manuscript/10_fill_results_preprint_numbers.ipynb`](not_in_manuscript/10_fill_results_preprint_numbers.ipynb)
-(cwd = `not_in_manuscript/`). It auto-discovers `main_results_valid129*/results/` under
-the manuscript folder (or symlink/copy from `data/shared_data_manuscript_2026/results_valid129/`) and writes
-`results_preprint_numbers_autofill.txt` in `analysis/manuscript-2026/`.
 
 ### Regenerate main figures (Tier B)
 
@@ -104,7 +100,6 @@ the manuscript folder (or symlink/copy from `data/shared_data_manuscript_2026/re
 | 3 | `03` | RDM comparisons, category orders |
 | 4 | `05` | CDI within/between, cluster shuffle, delta figures |
 | 5 | `scripts/compute_binary_template_correlations.py` | Binary CDI template vs real RDM |
-| 6 | `scripts/compare_dinov3_vs_babydinov3.py` | DINOv3 vs BabyDINOv3 supplement |
 | 7 | `04` | Individual & top-8 RDM panels (needs Tier C) |
 | 8 | `08`, `09`, `scripts/top8_within_between_vs_things.py` | Top-8 supplement |
 | 9 | `10` | Animal depiction proportions (supplement) |
@@ -133,11 +128,10 @@ Headless helpers: `./run_exemplar_embedding_stage.sh`, `./run_06_zscore_tmux.sh`
 | CDI cluster within/between | `cluster_within_between_*`, `bv_vs_things_cluster_strength_*` | `05` |
 | Binary semantic template control | `binary_template_vs_real_rdm_correlations_valid129.csv` | `compute_binary_template_correlations.py` |
 | Top-8 RDM agreement (Spearman ρ headline) | `individual_rdm_pairwise_*_top8_densest_*` (anonymized in `data/shared_data_manuscript_2026/`) | `04` |
-| DINOv3 vs BabyDINOv3 | `dinov3_vs_babydinov3_*`, UMAP coords | `compare_dinov3_vs_babydinov3.py`, `plot_things_dinov3_vs_babydinov3_umap.py` |
 | Animal depiction supplement | `animal_depiction_label_proportions_by_category.csv` | `10` (aggregate also in `data/shared_data_manuscript_2026/inputs/`) |
 
 Supplement (valid85): repeat `02`–`03` with `CATEGORY_SET=valid85`; top-8 analyses in
-`supplemental_results_valid85cats_04302026/` and `data/shared_data_manuscript_2026/top8_valid85/`.
+`supplemental_results_valid85cats_2025.2/` and `data/shared_data_manuscript_2026/top8_valid85/`.
 
 ## Category sets
 

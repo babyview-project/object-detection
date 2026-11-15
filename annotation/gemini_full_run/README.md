@@ -3,7 +3,7 @@
 Runs the gold set v2 pre-fill setup (setup B) over BabyView 2025.2 BV-main:
 `gemini-2.5-flash`, `detect_open_format` (open label + format + box per object, at most 30),
 full frame (512×910), temperature 0, thinking off, one frame every 5 s. Prompt, system
-instruction and formats are imported from `../gemini_pilot/run_gold_pilot.py`. The output cap is
+instruction and formats are imported from `../archive/gemini_pilot/run_gold_pilot.py`. The output cap is
 6,000 tokens (the pilot used 3,072; its 5 broken-JSON replies in 1,000 looked truncated).
 
 | | |

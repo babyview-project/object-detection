@@ -65,17 +65,17 @@ decisions, and ends with a review checklist. Run in this order; 01 and 05 once p
 | 03 | `03_class_embeddings` | `imagenet` / `lvis` | per-class means of L2-normalized embeddings (`RECOMPUTE`; default loads saved); LVIS crop sizes | ~50 min to recompute |
 | 05 | `05_stage0_category_tables` | `imagenet` / `lvis` | hyponym + exclusive category sets; BV/THINGS re-z-scored on them; reproduces the manuscript's 0.554 / 0.402 | s |
 | 02 | `02_mapping_audit` | both | every hand-chosen sense and exclusion, review page | ~30 s |
-| 04 | `04_montages` | `imagenet` / `lvis` | 5×5 exemplar montages | ~30 s |
-| 06 | `06_bv_vs_comparison_dataset` | `imagenet` / `lvis` | category cosine, RDM correlations (permutation + bootstrap), RDM figures | ~1.5 min |
-| 07 | `07_rdms_clustered` | any 2+ of bv vedb things imagenet lvis | pairwise RDM correlations, RDMs clustered within domain | ~1 min |
-| 08 | `08_rdm_correlation_matrix` | any 2+ | dataset × dataset and dataset × backbone matrices | ~20 s |
-| 09 | `09_cluster_strength` | any 2+ | raw and SD-scaled Δ, shuffle bands, bootstrap pair tests | ~1 min |
-| 10 | `10_category_prevalence` | any of bv vedb imagenet lvis | pooled and native prevalence | ~30 s |
-| 11 | `11_context_split_cluster_strength` | — (bv, vedb, things) | does BV domain clustering survive when compared categories come from different children (split by subject ID; no household information was available)? Within- vs cross-half Δ, Δ/SD and AUC; BV vs VEDB vs THINGS | ~10 min (+25 min to rebuild the per-video cache) |
-| 12 | `12_cooccurrence_and_lvis_controls` | — (bv, vedb, things, lvis) | same-domain coefficient with and without frame co-occurrence / shared-context controls; LVIS in-scene crops vs BV/VEDB/THINGS; writes Supplementary Tables Y and Z | ~25 min |
-| 13 | `13_room_activity_fixed_cluster_strength` | — (bv 2025.2, things) | domain clustering with the room / activity of each 10-s clip held fixed (`merged_contexts.csv`): same-room, cross-room, vs pooled and THINGS | ~30 min, single low-priority thread |
-| 14 | `14_background_amount` | — (lvis, imagenet, bv, vedb, things) | LVIS crops vs whole images (all / unshared photos); ImageNet whole photos vs THINGS, BV, VEDB with co-occurrence control | ~20 min, single low-priority thread (one pass over LVIS whole-image files) |
-| 15 | `15_crop_geometry_bv_vedb` | — (bv, vedb) | crop geometry (size, position, truncation, clutter) by domain; AUC within geometry levels; geometry-matched AUC and BV–VEDB ρ; noise ceilings; BV − VEDB equivalence (±0.04) | ~10 min (+30 min to rebuild the cache) |
+| 04 | `04_montages` (archived: `analysis/archive/comparison-datasets/notebooks/`) | `imagenet` / `lvis` | 5×5 exemplar montages | ~30 s |
+| 06 | `06_bv_vs_comparison_dataset` (archived: `analysis/archive/comparison-datasets/notebooks/`) | `imagenet` / `lvis` | category cosine, RDM correlations (permutation + bootstrap), RDM figures | ~1.5 min |
+| 07 | `07_rdms_clustered` (archived: `analysis/archive/comparison-datasets/notebooks/`) | any 2+ of bv vedb things imagenet lvis | pairwise RDM correlations, RDMs clustered within domain | ~1 min |
+| 08 | `08_rdm_correlation_matrix` (archived: `analysis/archive/comparison-datasets/notebooks/`) | any 2+ | dataset × dataset and dataset × backbone matrices | ~20 s |
+| 09 | `09_cluster_strength` (archived: `analysis/archive/comparison-datasets/notebooks/`) | any 2+ | raw and SD-scaled Δ, shuffle bands, bootstrap pair tests | ~1 min |
+| 10 | `10_category_prevalence` (archived: `analysis/archive/comparison-datasets/notebooks/`) | any of bv vedb imagenet lvis | pooled and native prevalence | ~30 s |
+| 11 | `11_context_split_cluster_strength` (archived: `analysis/archive/comparison-datasets/notebooks/`) | — (bv, vedb, things) | does BV domain clustering survive when compared categories come from different children (split by subject ID; no household information was available)? Within- vs cross-half Δ, Δ/SD and AUC; BV vs VEDB vs THINGS | ~10 min (+25 min to rebuild the per-video cache) |
+| 12 | `12_cooccurrence_and_lvis_controls` (archived: `analysis/archive/comparison-datasets/notebooks/`) | — (bv, vedb, things, lvis) | same-domain coefficient with and without frame co-occurrence / shared-context controls; LVIS in-scene crops vs BV/VEDB/THINGS; writes Supplementary Tables Y and Z | ~25 min |
+| 13 | `13_room_activity_fixed_cluster_strength` (archived: `analysis/archive/comparison-datasets/notebooks/`) | — (bv 2025.2, things) | domain clustering with the room / activity of each 10-s clip held fixed (`merged_contexts.csv`): same-room, cross-room, vs pooled and THINGS | ~30 min, single low-priority thread |
+| 14 | `14_background_amount` (archived: `analysis/archive/comparison-datasets/notebooks/`) | — (lvis, imagenet, bv, vedb, things) | LVIS crops vs whole images (all / unshared photos); ImageNet whole photos vs THINGS, BV, VEDB with co-occurrence control | ~20 min, single low-priority thread (one pass over LVIS whole-image files) |
+| 15 | `15_crop_geometry_bv_vedb` (archived: `analysis/archive/comparison-datasets/notebooks/`) | — (bv, vedb) | crop geometry (size, position, truncation, clutter) by domain; AUC within geometry levels; geometry-matched AUC and BV–VEDB ρ; noise ceilings; BV − VEDB equivalence (±0.04) | ~10 min (+30 min to rebuild the cache) |
 | 16 | `16_crop_quality_and_exemplar_count` | — (bv, vedb, things, lvis, imagenet) | short-side floors (≥ 32 / 64 px) on every crop dataset × BV's CLIP filter on LVIS; 12 exemplars per category in every dataset | ~2 min (+30 min to rebuild the cache, mostly reading 604k LVIS crop files) |
 
 Headless execution (e.g. after editing): `jupyter nbconvert --to notebook --execute --inplace
@@ -152,9 +152,9 @@ editable text (TrueType) instead of Type 3 glyph outlines.
 | `outputs/montages/` | `imagenet_val/` (round-robin over pooled classes), `lvis_uniform/` (crops sampled uniformly from the pool: the mix each mean averages), `lvis_round_robin/`; each has `montage_manifest.csv` |
 
 **Elsewhere** (extensions of existing VEDB scripts, so they stay with them):
-- `vedb-1612/plot_bv_vedb_rdms.py` → `vedb-1612/analyses/{valid129,valid85}/figures/bv_vedb_rdm_comparison_<model>_clustered_{bv,vedb}_*.png`
+- `archive/vedb-1612/plot_bv_vedb_rdms.py` → `archive/vedb-1612/analyses/{valid129,valid85}/figures/bv_vedb_rdm_comparison_<model>_clustered_{bv,vedb}_*.png`
   (BV vs VEDB on all shared categories, clustered within domain; orders in `results/`).
-- `vedb-1612/plot_bv_vedb_category_montage.py` → `…/figures/bv_vedb_category_wise_cosine_montage_animals_*` (all CDI animals).
+- `archive/vedb-1612/plot_bv_vedb_category_montage.py` → `…/figures/bv_vedb_category_wise_cosine_montage_animals_*` (all CDI animals).
 
 ## Main results (exclusive sets; CLIP / DINOv3)
 
@@ -200,7 +200,7 @@ The scaled Δ is one reasonable normalization, not the only one; raw and scaled 
 disagree exactly where the datasets' RDM spreads differ.
 
 Open, outside this folder: notebook 05 (`manuscript-2026/05_within_between_cdi_cluster_correlation.ipynb`,
-`scripts/bv_things_cdi_shuffle_inference.py`) and `vedb-1612/plot_bv_vedb_cluster_delta_bars.py` use the same
+`scripts/bv_things_cdi_shuffle_inference.py`) and `archive/vedb-1612/plot_bv_vedb_cluster_delta_bars.py` use the same
 raw-scale Δ and shuffle-based difference test for BV vs THINGS and VEDB vs BV. The THINGS RDM is also
 compressed: on the manuscript's 129 categories the SD of its distances is 0.129 vs BV 0.205 (CLIP) and
 0.070 vs 0.160 (DINOv3). Notebook 09 with `DATASETS = ["bv", "things"]` reruns that comparison on the manuscript's 129

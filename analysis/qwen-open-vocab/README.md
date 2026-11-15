@@ -1,40 +1,69 @@
-# qwen-open-vocab/: analyses of the Qwen3.8-27B open-vocabulary detections (2025.2)
+# qwen-open-vocab/: the revision's main analyses (Qwen3.8-27B open-vocabulary detections)
 
-The full 2025.2 Qwen3.8-27B run (every 5th 1 fps frame; `annotation/qwen_pilot/`) grouped by Qwen's basic-level
-category instead of the 129 YOLOE classes, with the manuscript's methods (category means of L2-normalized CLIP / DINOv3
-crop vectors, z-scored across the categories compared, cosine RDMs, power-law long tail, domain clustering with a
-category bootstrap).
+Every main-text analysis and figure of the revised *BabyView Objects* manuscript, and the response-letter figures.
+Input: the full 2025.2 Qwen3.8-27B run on BabyView and VEDB (one frame every 5 s; `annotation/qwen_pilot/`), grouped
+by Qwen's basic-level category. Methods follow the original manuscript: category means of L2-normalized crop vectors
+(DINOv3 reported; CLIP computed), z-scored across the categories compared, cosine RDMs, power-law long tail, domain
+clustering with a within-domain category bootstrap.
 
-| File | Does |
+## Variants (environment variables, `variant.py`)
+
+| Variable | Values | Effect |
+|---|---|---|
+| `QOV_LABELS` | `renamed` (use this), `original` | `renamed`: generic labels replaced by the renaming pass (`boxes_index_renamed.csv.gz`); folders get `_renamed`. The `original`-label outputs were removed on 2026-11-15 (only `out/private/open/categories.csv` is kept, for the WordNet mapping) |
+| `QOV_CATS` | `core`, `tier1` (default) | `core`: the 182 core categories (`data/included_categories_qwen_core.txt`); folders get `_core` |
+| `QOV_DOMAINS` | `cdi` (default), `things27` | `things27`: THINGS high-level categories (`data/category_domains_things27.csv`, `build_things27_domains.py`); folders get `_things27`, manuscript figures go to `figures_things27/` |
+
+VEDB is restricted to adults (709 of 717 sessions, `analysis/vedb-1612/vedb_adult_sessions.txt`). The full rerun,
+both domain schemes, is `analysis/vedb-1612/rerun_adults_only.sh`.
+
+## Scripts
+
+| Step | Scripts | Does |
+|---|---|---|
+| Category means | `build_open_means.py` (`--dataset vedb`) | open category set and per-child / per-session embedding sums → `out/private/open[_vedb]_renamed/` (private) |
+| Cross-dataset mapping | `sense_pick.py`, `build_crossdataset_mapping.py` | WordNet sense per category (Qwen picks), then each THINGS / LVIS / ImageNet item mapped to a category → `mapping/map_*.csv` |
+| Cross-dataset tables | `build_crossdataset_tables.py`, `embed_lvis_extra.py`, `build_format_tables.py`, `format_classifier.py` | category tables for BabyView, VEDB, THINGS, LVIS, ImageNet (`out/crossdataset_renamed/`); format shares |
+| Domains | `build_things27_domains.py`, `make_things27_inputs.py` | THINGS-27 domains (hand labels in `mapping/domain_handmap_things27.csv`, column `final`), and the `*_things27` input copies |
+| BabyView vs VEDB | `build_bv_vedb_data.py`, `build_bv_vedb_nb.py` → `bv_vedb_analysis.ipynb`, `scene_within_child_density.py`, `filter_bv_vedb_sample_adults.py` | scene statistics, category presence, embedding sample, age trends |
+| Cross-dataset analyses | `build_crossdataset_nb.py` → `crossdataset_analysis.ipynb`, `ego_vs_curated.py`, `things_readout_check.py` | RDMs, RDM agreement, domain clustering, egocentric vs curated, THINGS readout check |
+| Open categories | `build_open_nb.py` → `open_category_analysis.ipynb` | long tail, BabyView RDMs, per-child RDMs, BabyView vs THINGS |
+| Co-occurrence | `build_cooccurrence_data.py`, `build_cooccurrence_nb.py` → `cooccurrence_analysis.ipynb` | co-occurrence structure, BabyView vs VEDB |
+| Controls | `build_controls_data.py`, `controls_analysis.py`, `controls_figures.py`, `build_blur_control.py`, `analyze_background_control.py` | subject split, co-occurrence, room / activity, geometry, size floors, exemplar count, prevalence, blur, SAM 3 background removal |
+| Development | `build_child_month_means.py`, `development_within_child.py`, `development_size_by_domain.py` | within-child random-slope checks of the age trends (Supplementary Figure S14), object size by domain (CDI only) |
+| One child / early children | `build_subject_nb.py`, `build_children_cache.py`, `build_children_nb.py`, `make_subject_figures.py`, `make_depiction_figures.py`, `make_depiction_montages.py` | pilot analyses on S00320001 and the first children |
+| Figures | `make_manuscript_figures.py`, `make_dinov3_manuscript_figures.py`, `background_response_figures.py`, `make_background_examples.py`, `make_crossdataset_montages.py`, `make_overview_examples_figure.py`, `fig_style.py` | manuscript figures (`figures/manuscript[_things27]/`, copied to `manuscript-2026/revision_private/manuscript_revision/figures[_things27]/`) and response-letter figures (`revision_private/figures[_things27]/`); some panels reuse `analysis/talk-figures/unr-2026/` |
+
+## Folders
+
+| Folder | Contents |
 |---|---|
-| `build_open_means.py` | open category set (844 basic-level categories with >= 300 boxes from >= 10 children; no generic labels, person, surfaces) and per-child embedding sums from the Qwen box store -> `out/private/open/` (private) |
-| `build_open_nb.py` | writes `open_category_analysis.ipynb`; execute it into `out/private/` |
-| `build_subject_nb.py` -> `qwen_subject_analysis.ipynb` | one child (S00320001): coverage, objects by age, long tail, formats, Qwen vs YOLOE, co-occurrence and embedding RDMs |
-| `build_children_cache.py`, `build_children_nb.py` -> `children_analysis.ipynb` | the children complete at the time (15): long tail per child and at equal sample size, shared vs child-specific categories, depictions by child / age / domain, co-occurrence agreement |
-| `build_cooccurrence_data.py`, `build_cooccurrence_nb.py` -> `cooccurrence_analysis.ipynb` | BabyView vs VEDB object co-occurrence (NPMI over frames, Tier 1 categories in >= 0.1% of frames in both): top pairs and associates, domain structure and scene clusters, split-half BabyView-VEDB agreement by age (all frames, home scenes, real objects only), pairs that differ (bootstrap over children / sessions), per child: closer to other children or to adults, co-occurrence vs CLIP / DINOv3 similarity, frame vs 30 s / 2 min windows -> `results/cooccurrence/`, `figures/cooccurrence/` |
-| `make_subject_figures.py` | manuscript-style long-tail bars (all, real, depicted), individual RDMs (alphabetical and clustered within domain) -> `figures/<subject>/` |
-| `make_depiction_figures.py` | depictions by category (all categories, top 100, per domain), pooled over children and per child -> `figures/<subject>/`, `figures/children/` |
-| `make_depiction_montages.py` | crop montages by format for chosen categories (private: `out/private/depiction_montages/`) |
-| `build_controls_data.py`, `controls_analysis.py`, `controls_figures.py` | the comparison-datasets controls (notebooks 10-16) rerun on the open categories, BabyView and VEDB: subject split, co-occurrence control, room / activity held fixed, crop geometry with noise ceilings and BabyView-VEDB equivalence, size floors, exemplar count, rows-only vs Mantel RDM null, category frequency agreement -> `results/controls[_renamed]/`, `figures/controls[_renamed]/`. One shard pass (~10 min) sums box vectors by unit x category x geometry cell / room / activity |
-| `scene_within_child_density.py` | within-child age slopes of the scene statistics (`bv_vedb_analysis.ipynb` 1b) weighted by frames per child-month (also unweighted and precision-weighted) -> `results/bv_vedb[_renamed]/scene_statistics_within_child_density.csv` |
-| `results/` | aggregate tables: 129-category replication (Qwen vs YOLOE + CLIP), long tail, BV domain clustering, individual RDM agreement, BV vs THINGS (515 shared concepts), category-wise BV-THINGS similarity |
-| `figures/` | open set: long tail, BV RDMs (CLIP, DINOv3), BV vs THINGS RDMs; `S00320001/`, `children/` (incl. `depictions_pooled/` and one folder per child) |
+| `mapping/` | WordNet sense choices, dataset → category maps, THINGS-27 hand-mapping sheet (in git) |
+| `results/` | aggregate tables per variant (`*_renamed[_things27][_core]`) |
+| `figures/` | figures per variant; `manuscript[_things27]/`, `manuscript_dinov3[_things27]/` |
+| `out/` | link to `/data2/.../qwen-open-vocab/out` (git-ignored): `out/private/` holds per-child tables, samples and executed notebooks; `out/crossdataset*/` the category tables |
 
-Inputs: the Qwen box store and its embeddings (`/data2/dataset/babyview/2025.2/outputs/object_detections/qwen3.8-27b_setupB_t1/`,
+Inputs: the Qwen box stores and embeddings (`/data2/dataset/babyview/2025.2/outputs/object_detections/qwen3.8-27b_setupB_t1/`,
 `annotation/qwen_pilot/embed_full_run.py`), the hierarchy table (`annotation/qwen_pilot/results/category_hierarchy_*.csv`),
-and THINGS embeddings (`/data2/dataset/babyview/related_data/things/embeddings/`, `annotation/qwen_pilot/embed_things.py`).
-(`results/replication_129_qwen_vs_yoloe.csv` is a record of the earlier 129-category Qwen vs YOLOE replication; its inputs
-were removed on 2026-11-15.)
+THINGS embeddings (`/data2/dataset/babyview/related_data/things/embeddings/`, `annotation/qwen_pilot/embed_things.py`),
+LVIS / ImageNet category tables (`analysis/comparison-datasets/outputs/mapping/`), SAM 3 masks
+(`annotation/qwen_pilot/sam3_crop_sample.py`). `results/replication_129_qwen_vs_yoloe.csv` is a record of the earlier
+129-category Qwen vs YOLOE replication; its inputs were removed on 2026-11-15.
+
+## Running
+
+Notebooks are written by their `build_*_nb.py` and executed into `out/private/` (they read private data):
 
 ```bash
 cd analysis/qwen-open-vocab
-python build_open_means.py --workers 4                    # analysis env (vislearnlabpy), ~10 min
-python build_open_nb.py
-jupyter nbconvert --to notebook --execute open_category_analysis.ipynb --ExecutePreprocessor.kernel_name=vislearnlabpy \
-    --ExecutePreprocessor.timeout=7200 --output-dir out/private --output open_category_analysis_executed.ipynb
+export QOV_LABELS=renamed
+python build_open_means.py --workers 4 && python build_open_means.py --dataset vedb --workers 4
+python build_crossdataset_tables.py
+QOV_CATS=core jupyter nbconvert --to notebook --execute crossdataset_analysis.ipynb --ExecutePreprocessor.kernel_name=vislearnlabpy \
+    --ExecutePreprocessor.timeout=28800 --output-dir out/private --output crossdataset_analysis_executed_renamed_core.ipynb
 ```
 
-Controls (after `build_open_means.py`, also with `--dataset vedb`, `build_crossdataset_tables.py` and `build_bv_vedb_data.py`):
+Controls (after the means, `build_crossdataset_tables.py` and `build_bv_vedb_data.py`):
 
 ```bash
 QOV_LABELS=renamed nice -n 19 python build_controls_data.py --workers 16
@@ -44,3 +73,6 @@ for m in clip dinov3; do for k in room act; do                # room is slow: fo
 QOV_LABELS=renamed python controls_analysis.py --sections room_merge
 QOV_LABELS=renamed python controls_figures.py
 ```
+
+`build_child_month_means.py`, `development_within_child.py` and `background_response_figures.py` need an environment
+with pyarrow (`/data/j7yang/anaconda3/bin/python`); the `vislearnlabpy` env has none.
