@@ -27,7 +27,7 @@ from pathlib import Path
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-PRIV = HERE.parent / "gemini_pilot" / "out" / "private"
+PRIV = HERE.parent / "qwen_pilot" / "out" / "runs"
 FULLRUN = HERE.parent / "gemini_full_run" / "out" / "private" / "pilot_results" / "results_pilot.jsonl"
 RES = HERE / "results"
 W, H = 512, 910

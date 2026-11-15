@@ -5,7 +5,7 @@
 #   bash run_qwen_pilot.sh            # pick a free GPU, smoke test, then every set
 #   GPUS=3 bash run_qwen_pilot.sh     # use GPU 3
 #   STAGE=smoke bash run_qwen_pilot.sh
-# Progress: tail -f logs/run.log ; outputs in ../gemini_pilot/out/private/qwen3.8-27b-fp8__*.jsonl
+# Progress: tail -f logs/run.log ; outputs in out/runs/qwen3.8-27b-fp8__*.jsonl
 set -u
 cd "$(dirname "$0")"
 mkdir -p logs
@@ -32,7 +32,7 @@ echo "$(date -Is) model=$QWEN_MODEL GPUs=$CUDA_VISIBLE_DEVICES stage=$STAGE" | t
 run() { echo "==== $* $(date +%T)" | tee -a logs/run.log; nice -n 10 $PY -u run_qwen_pilot.py "$@" 2>&1 | tee -a logs/run.log | grep -E "frames/s|DONE|Error|error" ; }
 
 run --task detect_open_format --frames depiction --limit 8          # smoke: loads, parses, timing
-SMOKE=../gemini_pilot/out/private/qwen3.8-27b-fp8__detect_open_format__p1_depiction_frames_lim8.jsonl
+SMOKE=out/runs/qwen3.8-27b-fp8__detect_open_format__p1_depiction_frames_lim8.jsonl
 if ! grep -q '"error": null' "$SMOKE" 2>/dev/null; then
   echo "$(date -Is) SMOKE FAILED: no parsed reply in $SMOKE; see logs/run.log" | tee -a logs/run.log
   exit 1

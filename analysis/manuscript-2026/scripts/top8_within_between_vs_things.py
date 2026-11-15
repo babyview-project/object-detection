@@ -76,7 +76,7 @@ SAMPLED_EXEMPLAR_CSV = (
     / 'precision_868h'
     / 'sampled_object_crops_100_bucket_assignments_100ex_8subj_per_video_cap_babyview_only.csv'
 )
-TRAJECTORY_CSV = ANALYSIS_DIR / 'individual_analyses' / 'developmental_trajectory_rdms_clip' / 'trajectory_correlations.csv'
+TRAJECTORY_CSV = PROJECT_ROOT / 'data' / 'top8_trajectory_correlations_clip.csv'  # from the removed analysis/individual_analyses
 
 YOLOE_ROOT = Path(
     os.environ.get(

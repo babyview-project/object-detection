@@ -23,9 +23,9 @@ from _bootstrap import MANUSCRIPT_DIR, PREPRINT_DIR, PROJECT_ROOT, SCRIPTS_DIR
 DATA_DIR = PROJECT_ROOT / "data"
 SHARED_DIR = DATA_DIR / "shared_data_manuscript_2026"
 
-MAIN_RESULTS = MANUSCRIPT_DIR / "main_results_valid129s_04302026" / "results"
+MAIN_RESULTS = MANUSCRIPT_DIR / "main_results_valid129s_2025.2" / "results"
 SUPP_RESULTS = (
-    MANUSCRIPT_DIR / "supplemental_results_valid85cats_04302026" / "results"
+    MANUSCRIPT_DIR / "supplemental_results_valid85cats_2025.2" / "results"
 )
 EXEMPLAR_DIR = MANUSCRIPT_DIR / "exemplar_set_embeddings"
 
@@ -272,6 +272,7 @@ def export_animal_depiction() -> list[str]:
     src = (
         PROJECT_ROOT
         / "annotation"
+        / "archive"
         / "cvat_3000_frames"
         / "annotation_data"
         / "7k_animal_depiction_annotation_04302026.csv"

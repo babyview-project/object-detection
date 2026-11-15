@@ -35,7 +35,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out" / "private"
 V1_PUBLIC = Path("/home/j7yang/babyview-projects/ccn-2026-object-variability/data/"
                  "shared_data_ccn_2026/valid5921_public")
-V1_FRAMES = HERE.parent / "gemini_pilot" / "out" / "private" / "gold_frames.csv"
+V1_FRAMES = HERE.parent / "qwen_pilot" / "out" / "runs" / "gold_frames.csv"
 STORES = [Path("/ccn2/dataset/babyview/unzip"), Path("/ccn2/dataset/babyview/unzip_2025")]
 EXCLUDED_SUBJECTS = {"00270001"}
 UNNAMED_VIDEO_SUBJECT = "00270001"   # 2023_<n>_<hash> videos, from their GoPro sidecar files

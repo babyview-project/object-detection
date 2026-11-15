@@ -30,7 +30,7 @@ from PIL import Image, ImageDraw
 from build_cvat_tasks import PRIV, VALID129, EXCLUDE, dedup, load_gemini
 from make_overlays import font
 
-GP = Path(__file__).resolve().parent.parent / "gemini_pilot" / "out" / "private"
+GP = Path(__file__).resolve().parent.parent / "qwen_pilot" / "out" / "runs"
 VERSIONS = {
     "A": ("2.5 Flash · open + CDI + format", "gemini-2.5-flash__detect_combo__p1_gold_v2_frames_cap30"),
     "B": ("2.5 Flash · open + format", "gemini-2.5-flash__detect_open_format__p1_gold_v2_frames_cap30"),

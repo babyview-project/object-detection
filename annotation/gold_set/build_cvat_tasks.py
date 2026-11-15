@@ -55,7 +55,7 @@ REPO = HERE.parents[1]
 PRIV = HERE / "out" / "private"
 FRAMES = PRIV / "frames.csv"
 YOLOE_CLIP = PRIV / "prefill" / "yoloe_clip.csv"
-GEMINI = HERE.parent / "gemini_pilot" / "out" / "private" / "gemini-2.5-flash__detect_open_format__p1_gold_v2_frames_cap30.jsonl"
+GEMINI = HERE.parent / "qwen_pilot" / "out" / "runs" / "gemini-2.5-flash__detect_open_format__p1_gold_v2_frames_cap30.jsonl"
 VALID129 = REPO / "data" / "included_categories_valid129.txt"
 EXCLUDE = {"person", "picture"}   # not analysis classes
 # Not discrete objects, or parts of one: not pre-filled, and RAs do not box them

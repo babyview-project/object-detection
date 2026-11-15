@@ -51,7 +51,7 @@ import pandas as pd
 from PIL import Image
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent / "gemini_pilot"))
+sys.path.insert(0, str(HERE.parent / "archive" / "gemini_pilot"))
 from run_gold_pilot import DETECT_OPEN_FORMAT_PROMPT, DETECT_SYSTEM, FORMATS, make_client  # noqa: E402
 
 FRAMES = Path("/ccn2a/dataset/babyview/2025.2/extracted_frames_1fps")

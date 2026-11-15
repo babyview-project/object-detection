@@ -26,7 +26,7 @@ REQUIRED_EMBEDDING_MODELS: tuple[str, ...] = ("clip", "dinov3", "babydinov3")
 
 # Result-folder suffix. Default keeps the 868-hour manuscript trees.
 # Example: BV_OUTPUT_TAG=2025.2 → main_results_valid129s_2025.2/
-DEFAULT_OUTPUT_TAG = "04302026"
+DEFAULT_OUTPUT_TAG = "2025.2"
 
 
 def resolve_manuscript_dir(cwd: Path | None = None) -> Path:

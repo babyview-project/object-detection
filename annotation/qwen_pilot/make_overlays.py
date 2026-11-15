@@ -22,12 +22,12 @@ import pandas as pd
 from PIL import Image
 
 HERE = Path(__file__).resolve().parent
-PILOT = HERE.parent / "gemini_pilot"
+PILOT = HERE.parent / "archive" / "gemini_pilot"
 sys.path.insert(0, str(PILOT))
 import compare_boxes_montage as cb  # noqa: E402  (draw_panel, colours)
 from compare_qwen_gemini import FULLRUN, load, looping, objects  # noqa: E402
 
-PRIV = PILOT / "out" / "private"
+PRIV = HERE / "out" / "runs"
 SETS = {  # frame list, Qwen file, Gemini file
     "gold_v2": (HERE.parent / "gold_set" / "out" / "private" / "gold_v2_frames.csv",
                 PRIV / "qwen3.8-27b-fp8__detect_open_format__p1_gold_v2_frames_cap30.jsonl",

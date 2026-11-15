@@ -43,7 +43,7 @@ import pandas as pd
 from PIL import Image
 
 HERE = Path(__file__).resolve().parent
-PILOT = HERE.parent / "gemini_pilot"
+PILOT = HERE.parent / "archive" / "gemini_pilot"
 sys.path.insert(0, str(PILOT))
 import run_gold_pilot as gp  # noqa: E402  (prompts, vocabulary, frame lists)
 

@@ -27,13 +27,13 @@ from pathlib import Path
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-PILOT = HERE.parent / "gemini_pilot"
+PILOT = HERE.parent / "archive" / "gemini_pilot"
 sys.path.insert(0, str(PILOT))
 import run_gold_pilot as gp  # noqa: E402
 from vocab_groups import related  # noqa: E402
 from compare_qwen_gemini import iou, load, objects  # noqa: E402
 
-PRIV = PILOT / "out" / "private"
+PRIV = HERE / "out" / "runs"
 RES = HERE / "results"
 W, H = 512, 910
 VOCAB = set(gp.load_vocab()[0])

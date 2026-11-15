@@ -21,7 +21,7 @@ import pandas as pd
 from compare_qwen_gemini import iou, load, looping, objects
 
 HERE = Path(__file__).resolve().parent
-P = HERE.parent / "gemini_pilot" / "out" / "private"
+P = HERE.parent / "qwen_pilot" / "out" / "runs"
 F = "qwen3.8-27b-fp8__detect_open_format__p1_fullrun500{}.jsonl"
 SETTINGS = {"t0 (pilot)": "", "t0.5": "_t0.5_pp0", "t1.0": "_t1_pp0", "t0 + penalty 1.5": "_t0_pp1.5",
             "t0.5 + penalty 1.5": "_t0.5_pp1.5", "t0.7 + penalty 1.5 (Qwen rec.)": "_qwen"}

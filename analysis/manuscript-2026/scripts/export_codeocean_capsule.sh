@@ -133,8 +133,6 @@ ANALYSIS_SCRIPTS=(
   _bootstrap.py
   bv_things_cdi_shuffle_inference.py
   compute_binary_template_correlations.py
-  compare_dinov3_vs_babydinov3.py
-  plot_things_dinov3_vs_babydinov3_umap.py
   top8_within_between_vs_things.py
   clip_threshold_sensitivity.py
   packed_crop_embeddings.py
@@ -167,8 +165,7 @@ printf "  %-55s %s\n" "shared .../vqa_detections" "$(estimate_tree "$REPO_ROOT/d
 printf "  %-55s %s\n" "  unconstrained_objects.csv (raw; opt-in)" "$(estimate_tree "$REPO_ROOT/data/shared_data_manuscript_2026/vqa_detections/unconstrained_objects/unconstrained_objects.csv")"
 printf "  %-55s %s\n" "shared .../embeddings" "$(estimate_tree "$REPO_ROOT/data/shared_data_manuscript_2026/embeddings")"
 printf "  %-55s %s\n" "exemplar_set_embeddings (local)" "$(estimate_tree "$MS_DIR/exemplar_set_embeddings")"
-printf "  %-55s %s\n" "main_results/.../results" "$(estimate_tree "$MS_DIR/main_results_valid129s_04302026/results")"
-printf "  %-55s %s\n" "not_in_manuscript (EXCLUDED)" "$(estimate_tree "$MS_DIR/not_in_manuscript")"
+printf "  %-55s %s\n" "main_results/.../results" "$(estimate_tree "$MS_DIR/main_results_valid129s_2025.2/results")"
 
 if [[ "$DRY_RUN" -eq 1 ]]; then
   echo
@@ -237,14 +234,14 @@ for f in "${DATA_STUBS[@]}"; do
   fi
 done
 
-# YOLOE↔VQA convergence stats (manuscript SI; currently live under analysis/ccn-2026/)
+# YOLOE↔VQA convergence stats (manuscript SI; currently live under analysis/archive/ccn-2026/)
 if [[ "$INCLUDE_VQA_SUMMARY" -eq 1 ]]; then
   echo "==> YOLOE↔VQA correlation tables"
   VQA_OUT="$OUT/data/shared_data_manuscript_2026/vqa_detections"
   mkdir -p "$VQA_OUT"
   for f in \
-    "$REPO_ROOT/analysis/ccn-2026/valid7018/yoloe_vqa_correlation.json" \
-    "$REPO_ROOT/analysis/ccn-2026/valid7018/yoloe_vqa_correlation_by_category.csv"
+    "$REPO_ROOT/analysis/archive/ccn-2026/valid7018/yoloe_vqa_correlation.json" \
+    "$REPO_ROOT/analysis/archive/ccn-2026/valid7018/yoloe_vqa_correlation_by_category.csv"
   do
     [[ -f "$f" ]] && rsync_copy "$f" "$VQA_OUT/$(basename "$f")"
   done
@@ -358,8 +355,8 @@ fi
 if [[ "$INCLUDE_LOCAL_RESULTS" -eq 1 ]]; then
   echo "==> local results/ (privacy-filtered)"
   for pair in \
-    "main_results_valid129s_04302026/results" \
-    "supplemental_results_valid85cats_04302026/results"
+    "main_results_valid129s_2025.2/results" \
+    "supplemental_results_valid85cats_2025.2/results"
   do
     if [[ -d "$MS_DIR/$pair" ]]; then
       rsync_copy "$MS_DIR/$pair/" "$MS_OUT/$pair/" \
@@ -376,8 +373,8 @@ fi
 if [[ "$INCLUDE_FIGURES" -eq 1 ]]; then
   echo "==> figures/"
   for pair in \
-    "main_results_valid129s_04302026/figures" \
-    "supplemental_results_valid85cats_04302026/figures"
+    "main_results_valid129s_2025.2/figures" \
+    "supplemental_results_valid85cats_2025.2/figures"
   do
     if [[ -d "$MS_DIR/$pair" ]]; then
       rsync_copy "$MS_DIR/$pair/" "$MS_OUT/$pair/"

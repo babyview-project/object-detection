@@ -52,10 +52,7 @@ Shell helpers: `run_exemplar_embedding_stage.sh`, `run_06_zscore_tmux.sh`, `run_
 | Path | Contents |
 |------|----------|
 | `analysis/manuscript-2026/exemplar_set_embeddings/` | Category-level z-scored tables (`valid129`, `valid85`) |
-| `analysis/manuscript-2026/main_results_valid129s_04302026/` | Main-text `results/` and `figures/` |
-| `analysis/manuscript-2026/supplemental_results_valid85cats_04302026/` | Supplement & top-8 valid85 |
-| `…/main_results_valid129s_2025.2/`, `…/supplemental_results_valid85cats_2025.2/` | Same analyses on the 2025.2 release (1 fps): `scripts/run_2025_2_analyses.sh` |
-| `…/main_results_valid129s_2025.2_5s/`, `…/supplemental_results_valid85cats_2025.2_5s/` | 2025.2 at one frame per 5 s (`BV_FRAME_STRIDE=5`, `scripts/run_5s_analyses.sh`); `results/comparison_vs_1s/` compares it with 1 fps |
+| `…/main_results_valid129s_2025.2/`, `…/supplemental_results_valid85cats_2025.2/` | YOLOE analyses on the 2025.2 release (1 fps; revision SI): `scripts/run_2025_2_analyses.sh`. The 868-hour `*_04302026` trees of the submitted version were removed (git history) |
 
 ### Shareable data (no raw video or participant IDs)
 
@@ -74,25 +71,16 @@ python analysis/manuscript-2026/scripts/build_shared_public_data.py
 
 Category lists used in the paper: [`data/included_categories_valid129.txt`](data/included_categories_valid129.txt), [`data/included_categories_valid85.txt`](data/included_categories_valid85.txt).
 
-### Exploratory work (not in the submission)
-
-**[`analysis/manuscript-2026/not_in_manuscript/`](analysis/manuscript-2026/not_in_manuscript/)** — drift pilots, clutter proxy, early t-SNE/UMAP, LaTeX autofill notebook, and related scripts. See [`not_in_manuscript/README.md`](analysis/manuscript-2026/not_in_manuscript/README.md).
-
 ---
 
 ## Related conference analyses
 
 | Folder | Paper / venue | Entry point |
 |--------|---------------|-------------|
-| **[`analysis/ccn-2026/`](analysis/ccn-2026/)** | CCN 2026 poster — exemplar variability (Plots A–C, kNN, THINGS) | [`README.md`](analysis/ccn-2026/README.md), [`SCRIPTS.md`](analysis/ccn-2026/SCRIPTS.md), [`OUTPUTS.md`](analysis/ccn-2026/OUTPUTS.md) |
-| **[`analysis/vss-2026/`](analysis/vss-2026/)** | VSS 2026 — group RDM / embedding pipeline (CLIP, DINOv3) | [`README.md`](analysis/vss-2026/README.md) |
-| **[`analysis/individual_analyses/`](analysis/individual_analyses/)** | Per-child RDMs & developmental trajectories | [`README_notebooks_05_06_07.md`](analysis/individual_analyses/README_notebooks_05_06_07.md), [`README_pca_subspace_stability.md`](analysis/individual_analyses/README_pca_subspace_stability.md), [`clip_dino_rdm_correlations/README.md`](analysis/individual_analyses/clip_dino_rdm_correlations/README.md) |
+| **[`analysis/qwen-open-vocab/`](analysis/qwen-open-vocab/)** | Revision main analyses: Qwen open-vocabulary detections, BabyView vs VEDB / THINGS / LVIS / ImageNet, controls | scripts and notebooks in the folder |
 | **[`analysis/vedb-1612/`](analysis/vedb-1612/)** | VEDB 80-session world subset — same frame / YOLOE / CLIP / DINOv3 pipeline | [`README.md`](analysis/vedb-1612/README.md) |
 | **[`analysis/comparison-datasets/`](analysis/comparison-datasets/)** | ImageNet-1k and LVIS v1 as comparison datasets (WordNet mapping onto CDI words, BV vs ImageNet / LVIS / THINGS / VEDB) | [`README.md`](analysis/comparison-datasets/README.md) |
-| **[`analysis/developmental_trend_analysis_R/`](analysis/developmental_trend_analysis_R/)** | R / Quarto developmental stats | [`README.md`](analysis/developmental_trend_analysis_R/README.md) |
-| **[`analysis/archive/`](analysis/archive/)** | Finished work (CCN 2025) | [`README.md`](analysis/archive/README.md) |
-
-CCN variability code also appears under [`analysis/manuscript-2026/not_in_manuscript/exemplar_variability_analyses/`](analysis/manuscript-2026/not_in_manuscript/exemplar_variability_analyses/).
+| **[`analysis/archive/`](analysis/archive/)** | Finished work: CCN 2025 paper, CCN 2026 poster (`ccn-2026/`) | [`README.md`](analysis/archive/README.md) |
 
 ---
 
@@ -109,8 +97,6 @@ End-to-end flow: **frames → YOLOE detections → crops → embeddings → manu
 | **[`frame_data/`](frame_data/)** | 868-hour frame tables; the merged CLIP-filtered tables were `/data2` links, now gone | [`README.md`](frame_data/README.md) |
 | **[`depth/`](depth/)** | Depth extraction and object-depth CSV builders | [`README.md`](depth/README.md) |
 | **[`imu/`](imu/)** | IMU alignment for short clips | [`README.md`](imu/README.md) |
-| **[`video-qa/`](video-qa/)** | Video QA utilities (e.g. unconstrained objects) | [`README.md`](video-qa/README.md) |
-| **[`variability_exp/`](variability_exp/)** | Perceptual free-sort experiment assets (untracked; crop links removed) | [`README.md`](variability_exp/README.md) |
 | **[`databrary/`](databrary/)** | Databrary API client for downloading BabyView data | [`README.md`](databrary/README.md) |
 
 ---
@@ -121,9 +107,9 @@ End-to-end flow: **frames → YOLOE detections → crops → embeddings → manu
 |------|------|
 | **[`annotation/README.md`](annotation/README.md)** | Index of annotation studies, shared label files, crop GUI |
 | [`annotation/precision_868h/`](annotation/precision_868h/) | Prolific crop validation: `per_class_validation_data.csv` (per-category precision, manuscript & CCN filters), `per_file_precision_data.csv`, exemplar sampling manifests |
-| [`annotation/cvat_3000_frames/`](annotation/cvat_3000_frames/) | Mira / Dora CVAT boxes and format tags on 3,000 sampled frames; animal-depiction labels |
-| [`annotation/gemini_pilot/`](annotation/gemini_pilot/), [`annotation/gemini_full_run/`](annotation/gemini_full_run/) | Gemini (Vertex) model pilot and the full 2025.2 run |
-| [`annotation/clip_band_annotation/`](annotation/clip_band_annotation/), [`annotation/gold_set/`](annotation/gold_set/) | CLIP-threshold RA sample (object-check web task) and gold set v2 |
+| [`annotation/qwen_pilot/`](annotation/qwen_pilot/) | Qwen open-vocabulary detection runs (raw outputs via `out/runs`), crop embeddings, SAM 3 checks |
+| [`annotation/gemini_full_run/`](annotation/gemini_full_run/), [`annotation/gold_set/`](annotation/gold_set/) | Full 2025.2 Gemini run; gold set v2 |
+| [`annotation/archive/`](annotation/archive/) | Finished: CVAT boxes and format tags on 3,000 frames (`cvat_3000_frames/`, animal-depiction labels), Gemini model pilot (`gemini_pilot/`) |
 
 Notebook **10** and shared inputs use animal-depiction aggregates; many analyses depend on precision ≥ 0.6 from `per_class_validation_data.csv`.
 
@@ -151,22 +137,19 @@ object-detection/
 ├── frame_data/                        ← 868-hour frame-level detection tables
 ├── annotation/                        ← human annotation + Gemini labelling (see its README)
 │   ├── precision_868h/                ← Prolific crop validation (precision CSVs)
-│   ├── cvat_3000_frames/              ← CVAT boxes + format tags
-│   ├── gemini_pilot/  gemini_full_run/
-│   └── clip_band_annotation/  gold_set/
+│   ├── qwen_pilot/  gemini_full_run/  gold_set/
+│   └── archive/                       ← cvat_3000_frames, gemini_pilot
 ├── data/
 │   ├── included_categories_valid*.txt
 │   └── shared_data_manuscript_2026/   ← anonymized paper tables
-├── depth/  imu/  video-qa/  databrary/  variability_exp/
+├── depth/  imu/  databrary/
 └── analysis/                          ← see analysis/README.md
     ├── manuscript-2026/               ← BabyView Objects (main)
-    ├── ccn-2026/                      ← CCN poster variability
+    ├── qwen-open-vocab/               ← revision main analyses (Qwen open vocabulary)
     ├── comparison-datasets/           ← ImageNet-1k + LVIS v1 vs BabyView
-    ├── vedb-1612/                     ← VEDB world subset (80 sessions)
-    ├── individual_analyses/           ← per-child / developmental (legacy, still read)
-    ├── vss-2026/                      ← group RDM pipeline (legacy, still read)
-    ├── developmental_trend_analysis_R/
-    └── archive/                       ← ccn-2025
+    ├── vedb-1612/                     ← VEDB world subset
+    ├── talk-figures/unr-2026/         ← figure helpers the manuscript scripts import
+    └── archive/                       ← ccn-2025, ccn-2026
 ```
 
 ---
