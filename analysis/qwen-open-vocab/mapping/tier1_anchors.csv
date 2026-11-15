@@ -1,0 +1,829 @@
+category,domain,boxes,anchors,origin,rule_anchor,definition,exclude,review_flags
+abacus,toys,370,abacus.n.02,Qwen-chosen sense,abacus.n.01,a calculator that performs arithmetic functions by manually sliding counters on rods or in grooves,,Qwen and rule disagree (rule: abacus.n.01)
+activity center,toys,1158,,none (Qwen: no sense fits),,,,not in WordNet
+activity cube,toys,335,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: cube.n.05 (head noun; name matches only)
+adult,people,896,adult.n.01,Qwen-chosen sense,adult.n.01,a fully developed person from maturity onward,,
+air conditioner,furniture_rooms,15826,air_conditioner.n.01,Qwen-chosen sense,air_conditioner.n.01,a system that keeps air cool and dry,,
+air fryer,furniture_rooms,318,,none (Qwen: no sense fits),,,,not in WordNet
+air purifier,furniture_rooms,1553,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: purifier.n.01 (head noun; name matches only)
+air vent,furniture_rooms,7721,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: vent.n.01 (head noun; name matches only)
+airplane,vehicles,2683,airplane.n.01;warplane.n.01,comparison-datasets (hand-checked),airplane.n.01;warplane.n.01,an aircraft that has a fixed wing and is powered by propellers or jets,,
+alligator,animals,684,alligator.n.02,comparison-datasets (hand-checked),alligator.n.02,either of two amphibious reptiles related to crocodiles but with shorter broader snouts,,
+ambulance,vehicles,529,ambulance.n.01,Qwen-chosen sense,ambulance.n.01,a vehicle that takes people to and from hospitals,,
+apple,food_drink,10029,apple.n.01,comparison-datasets (hand-checked),apple.n.01,fruit with red or yellow or green skin and sweet to tart crisp whitish flesh,,
+appliance,household,3282,appliance.n.02,Qwen-chosen sense,appliance.n.01,durable goods for home or office use,,Qwen and rule disagree (rule: appliance.n.01)
+apricot,food_drink,314,apricot.n.02,Qwen-chosen sense,apricot.n.01,downy yellow to rosy-colored fruit resembling a small peach,,Qwen and rule disagree (rule: apricot.n.01)
+apron,clothing,1660,apron.n.01,Qwen-chosen sense,apron.n.01,a garment of cloth or leather or plastic that is tied about the waist and worn to protect your clothing,,
+archway,furniture_rooms,302,arch.n.03,Qwen-chosen sense,arch.n.03,a passageway under a curved masonry construction,,
+arm,body_parts,39794,arm.n.01,Qwen-chosen sense,arm.n.01,a human limb; technically the part of the superior limb between the shoulder and the elbow but commonly used to refer to the whole superior limb,,
+armchair,furniture_rooms,16462,armchair.n.01,Qwen-chosen sense,armchair.n.01,chair with a support on each side for arms,,
+artwork,household,1485,,none (Qwen: no sense fits),artwork.n.01,,,Qwen: no sense fits (rule: artwork.n.01)
+avocado,food_drink,1062,avocado.n.01,Qwen-chosen sense,avocado.n.01,a pear-shaped tropical fruit with green or blackish skin and rich yellowish pulp enclosing a single large seed,,
+awning,furniture_rooms,1059,awning.n.01,Qwen-chosen sense,awning.n.01,a canopy made of canvas to shelter people or things from rain or sun,,
+baby,people,4947,baby.n.01,Qwen-chosen sense,baby.n.01,a very young child (birth to 1 year) who has not yet begun to walk or talk,,
+baby activity center,other,748,,none (Qwen: no sense fits),,,,not in WordNet
+baby playpen,other,722,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: playpen.n.01 (head noun; name matches only)
+baby seat,other,718,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: seat.n.03 (head noun; name matches only)
+baby swing,other,401,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: swing.n.02 (head noun; name matches only)
+backpack,clothing,19585,backpack.n.01,Qwen-chosen sense,backpack.n.01,a bag carried by a strap on your back or shoulder,,
+backsplash,furniture_rooms,794,,none (Qwen: no sense fits),,,,not in WordNet
+bag,household,99291,bag.n.01,Qwen-chosen sense,bag.n.01,a flexible container with a single opening,,
+bagel,other,360,bagel.n.01,Qwen-chosen sense,bagel.n.01,(Yiddish) glazed yeast-raised doughnut-shaped roll with hard crust,,
+balcony,furniture_rooms,1638,balcony.n.02,Qwen-chosen sense,balcony.n.01,a platform projecting from the wall of a building and surrounded by a balustrade or railing or parapet,,Qwen and rule disagree (rule: balcony.n.01)
+ball,toys,87101,ball.n.01;ball.n.06,comparison-datasets (hand-checked) + audit fix,ball.n.01,round object that is hit or thrown or kicked in games,punching_bag.n.02;snowball.n.04,
+ball pit,toys,996,,none (Qwen: no sense fits),,,,not in WordNet
+balloon,toys,13839,balloon.n.01;balloon.n.02,comparison-datasets (hand-checked) + audit fix,balloon.n.01,large tough nonrigid bag filled with gas or heated air,hot-air_balloon.n.01,
+banana,food_drink,21121,banana.n.02,comparison-datasets (hand-checked),banana.n.02,elongated crescent-shaped yellow fruit with soft sweet flesh,,
+banana peel,food_drink,1231,banana_peel.n.01,Qwen-chosen sense,banana_peel.n.01,the skin of a banana (especially when it is stripped off and discarded),,
+band,clothing,417,band.n.11,Qwen-chosen sense,band.n.04,"a thin flat strip or loop of flexible material that goes around or over something else, typically to hold it together or as a decoration",,Qwen and rule disagree (rule: band.n.04)
+banner,other,1187,banner.n.01,Qwen-chosen sense,banner.n.01,long strip of cloth or paper used for decoration or advertising,,
+barn,outside,842,barn.n.01,Qwen-chosen sense,barn.n.01,an outlying farm building for storing grain or animal feed and housing farm animals,,
+barrel,household,308,barrel.n.03,Qwen-chosen sense,barrel.n.01,a bulging cylindrical shape; hollow with flat ends,,Qwen and rule disagree (rule: barrel.n.01)
+baseball,toys,673,baseball.n.02,Qwen-chosen sense,baseball.n.02,a ball used in playing baseball,,
+baseball bat,toys,384,baseball_bat.n.01,Qwen-chosen sense,baseball_bat.n.01,an implement used in baseball by the batter,,
+baseboard,furniture_rooms,8850,baseboard.n.01,Qwen-chosen sense,baseboard.n.01,a molding covering the joint formed by a wall and the floor,,
+basin,household,409,basin.n.01,Qwen-chosen sense,basin.n.01,a bowl-shaped vessel; usually used for holding food or liquids,,
+basket,household,85797,basket.n.01,comparison-datasets (hand-checked),basket.n.01,a container that is usually woven and has handles,,
+basketball,toys,2860,basketball.n.02,Qwen-chosen sense,basketball.n.02,an inflated ball used in playing basketball,,
+bassinet,furniture_rooms,366,bassinet.n.01,Qwen-chosen sense,bassinet.n.01,a basket (usually hooded) used as a baby's bed,,
+bat,toys,654,bat.n.05,Qwen-chosen sense,bat.n.05,a club used for hitting a ball in various games,,
+bathrobe,clothing,332,bathrobe.n.01,Qwen-chosen sense,bathrobe.n.01,a loose-fitting robe of towelling; worn after a bath or swim,,
+bathtub,furniture_rooms,4890,bathtub.n.01,comparison-datasets (hand-checked),bathtub.n.01,a relatively large open container that you fill with water and use to wash the body,,
+bead,toys,1319,bead.n.01,Qwen-chosen sense,bead.n.01,a small ball with a hole through the middle,,
+bead maze,toys,455,,none (Qwen: no sense fits),,,,not in WordNet
+beam,furniture_rooms,3398,beam.n.02,Qwen-chosen sense,beam.n.02,"long thick piece of wood or metal or concrete, etc., used in construction",,
+bean,food_drink,451,bean.n.01,Qwen-chosen sense,bean.n.01,any of various edible seeds of plants of the family Leguminosae used for food,,
+bean bag,furniture_rooms,3745,,none (Qwen: no sense fits),beanbag.n.01,,,Qwen: no sense fits (rule: beanbag.n.01)
+beanie,other,338,beanie.n.01,Qwen-chosen sense,beanie.n.01,a small skullcap; formerly worn by schoolboys and college freshmen,,
+bear,animals,7415,bear.n.01,comparison-datasets (hand-checked),bear.n.01,massive plantigrade carnivorous or omnivorous mammals with long shaggy coats and strong claws,,
+beard,other,812,beard.n.01,Qwen-chosen sense,beard.n.01,the hair growing on the lower part of a man's face,,
+bed,furniture_rooms,48728,bed.n.01,comparison-datasets (hand-checked),bed.n.01,a piece of furniture that provides a place to sleep,hammock.n.02,
+bed sheet,household,1316,sheet.n.03,Qwen-chosen sense,sheet.n.03,bed linen consisting of a large rectangular piece of cotton or linen cloth; used in pairs,,
+bedding,household,856,bedclothes.n.01,Qwen-chosen sense,bedclothes.n.01,coverings that are used on a bed,,
+bedspread,household,3915,bedspread.n.01,Qwen-chosen sense,bedspread.n.01,decorative cover for a bed,,
+bee,animals,1558,bee.n.01,comparison-datasets (hand-checked),bee.n.01,any of numerous hairy-bodied insects including social and solitary species,,
+bell,household,342,bell.n.01,Qwen-chosen sense,bell.n.01,a hollow device made of metal that makes a ringing sound when struck,,
+belt,clothing,426,belt.n.02,comparison-datasets (hand-checked),belt.n.02,a band to tie or buckle around the body (usually at the waist),,
+bench,furniture_rooms,9265,bench.n.01,comparison-datasets (hand-checked),bench.n.01,a long seat for more than one person,,
+bib,clothing,326,bib.n.01;bib.n.02,comparison-datasets (hand-checked),bib.n.01;bib.n.02,top part of an apron; covering the chest,,
+bicycle,vehicles,4911,bicycle.n.01,comparison-datasets (hand-checked),bicycle.n.01,a wheeled vehicle that has two wheels and is moved by foot pedals,,
+bin,household,91751,bin.n.01,Qwen-chosen sense,bin.n.01,a container; usually has a lid,,
+binder,household,426,binder.n.03,Qwen-chosen sense,binder.n.01,holds loose papers or magazines,,Qwen and rule disagree (rule: binder.n.01)
+bird,animals,13090,bird.n.01,comparison-datasets (hand-checked),bird.n.01,warm-blooded egg-laying vertebrates characterized by feathers and forelimbs modified as wings,,
+biscuit,food_drink,341,cookie.n.01,Qwen-chosen sense,biscuit.n.01,any of various small flat sweet cakes (`biscuit' is the British term),,Qwen and rule disagree (rule: biscuit.n.01)
+blackboard,household,1179,blackboard.n.01,Qwen-chosen sense,blackboard.n.01,sheet of slate; for writing with chalk,,
+blanket,household,67773,blanket.n.01;quilt.n.01,comparison-datasets (hand-checked),blanket.n.01;quilt.n.01,bedding that keeps a person warm in bed,,
+blender,furniture_rooms,4779,blender.n.01,Qwen-chosen sense,blender.n.01,an electrically powered mixer with whirling blades that mix or chop or liquefy foods,,
+blinds,furniture_rooms,30574,,none (Qwen: no sense fits),,,,not in WordNet
+block,toys,86849,block.n.01,Qwen-chosen sense,block.n.01,a solid piece of something (usually having flat rectangular sides),,
+blouse,clothing,453,blouse.n.01,Qwen-chosen sense,blouse.n.01,a top worn by women,,
+blueberry,food_drink,897,blueberry.n.02,Qwen-chosen sense,blueberry.n.01,sweet edible dark-blue berries of either low-growing or high-growing blueberry plants,,Qwen and rule disagree (rule: blueberry.n.01)
+board,household,2255,board.n.03,Qwen-chosen sense,board.n.02,a flat piece of material designed for a special purpose,,Qwen and rule disagree (rule: board.n.02)
+board game,toys,1895,board_game.n.01,Qwen-chosen sense,board_game.n.01,a game played on a specially designed board,,
+boat,vehicles,3316,boat.n.01,comparison-datasets (hand-checked),boat.n.01,a small vessel for travel on water,,
+book,household,442260,book.n.01,comparison-datasets (hand-checked),book.n.01,a written work or composition that has been published (printed on pages bound together),,
+bookshelf,furniture_rooms,87393,bookshelf.n.01,Qwen-chosen sense,bookshelf.n.01,a shelf on which to keep books,,
+boot,clothing,1712,boot.n.01,Qwen-chosen sense,boot.n.01,footwear that covers the whole foot and lower leg,,
+bottle,household,184496,bottle.n.01,comparison-datasets (hand-checked),bottle.n.01,a glass or plastic vessel used for storing drinks or other liquids; typically cylindrical without handles and with a narrow neck that can be plugged or capped,,
+bouncer,furniture_rooms,717,,none (Qwen: no sense fits),bouncer.n.01,,,Qwen: no sense fits (rule: bouncer.n.01)
+bow,clothing,586,bow.n.08,Qwen-chosen sense,bow.n.01,a decorative interlacing of ribbons,,Qwen and rule disagree (rule: bow.n.01)
+bowl,household,120859,bowl.n.03,comparison-datasets (hand-checked),bowl.n.03,a dish that is round and open at the top for serving foods,,
+box,household,272114,box.n.01,comparison-datasets (hand-checked),box.n.01,a (usually rectangular) container; may have a lid,cash_register.n.01;window_box.n.01,
+boy,people,1551,male_child.n.01,Qwen-chosen sense,boy.n.02,a youthful male person,,Qwen and rule disagree (rule: boy.n.02)
+bracelet,clothing,5863,bracelet.n.02,Qwen-chosen sense,bracelet.n.02,jewelry worn around the wrist for decoration,,
+branch,outside,686,branch.n.02,Qwen-chosen sense,branch.n.02,"a division of a stem, or secondary stem arising from the main stem of a plant",,
+bread,food_drink,7529,bread.n.01,comparison-datasets (hand-checked),bread.n.01,food made from dough of flour or meal and usually raised with yeast or baking powder and then baked,meat_loaf.n.01,
+brick,toys,1564,,none (Qwen: no sense fits),brick.n.01,,,Qwen: no sense fits (rule: brick.n.01)
+bridge,outside,707,bridge.n.01,Qwen-chosen sense,bridge.n.01,a structure that allows people or vehicles to cross an obstacle such as a river or canal or railway etc.,,
+broccoli,food_drink,990,broccoli.n.02,Qwen-chosen sense,broccoli.n.01,branched green undeveloped flower heads,,Qwen and rule disagree (rule: broccoli.n.01)
+broom,household,3547,broom.n.01,comparison-datasets (hand-checked),broom.n.01,a cleaning implement for sweeping; bundle of straws or twigs attached to a long handle,,
+brush,household,2550,brush.n.02,comparison-datasets (hand-checked),brush.n.02,an implement that has hairs or bristles firmly set into a handle,,
+bubble,toys,2483,bubble.n.01,Qwen-chosen sense,bubble.n.04,"a hollow globule of gas (e.g., air or carbon dioxide)",,Qwen and rule disagree (rule: bubble.n.04)
+bucket,household,16196,bucket.n.01,comparison-datasets (hand-checked),bucket.n.01,a roughly cylindrical vessel that is open at the top,,
+building,outside,19778,building.n.01,Qwen-chosen sense,building.n.01,a structure that has a roof and walls and stands more or less permanently in one place,,
+bunny,animals,421,rabbit.n.01,comparison-datasets (hand-checked),rabbit.n.01,any of various burrowing animals of the family Leporidae having long ears and short tails; some domesticated and raised for pets or food,,
+burner,furniture_rooms,402,burner.n.02,Qwen-chosen sense,burner.n.01,the heating elements of a stove or range on which pots and pans are placed for cooking,,Qwen and rule disagree (rule: burner.n.01)
+bus,vehicles,5295,bus.n.01,comparison-datasets (hand-checked),bus.n.01,a vehicle carrying many passengers; used for public transport,,
+bush,outside,13464,shrub.n.01,Qwen-chosen sense,shrub.n.01,a low woody perennial plant usually having several major stems,,
+butter,food_drink,822,butter.n.01,comparison-datasets (hand-checked),butter.n.01,an edible emulsion of fat globules made by churning milk or cream; for cooking and table use,,
+butterfly,animals,2484,butterfly.n.01,comparison-datasets (hand-checked),butterfly.n.01,diurnal insect typically having a slender body with knobbed antennae and broad colorful wings,,
+button,clothing,5163,button.n.01,comparison-datasets (hand-checked),button.n.01,a round fastener sewn to shirts and coats etc to fit through buttonholes,,
+cabinet,furniture_rooms,347950,cabinet.n.01,Qwen-chosen sense,cabinet.n.01,a piece of furniture resembling a cupboard with doors and shelves and drawers; for storage or display,,
+cable,household,7227,cable.n.02,Qwen-chosen sense,cable.n.02,a conductor for transmitting electrical or optical signals or electric power,,
+cactus,outside,655,cactus.n.01,Qwen-chosen sense,cactus.n.01,any succulent plant of the family Cactaceae native chiefly to arid regions of the New World and usually having spines,,
+cage,household,1221,cage.n.01,Qwen-chosen sense,cage.n.01,an enclosure made or wire or metal bars in which birds or animals can be kept,,
+cake,food_drink,692,cake.n.03,comparison-datasets (hand-checked),cake.n.03,"baked goods made from or based on a mixture of flour, sugar, eggs, and fat",,
+calculator,household,379,calculator.n.02,Qwen-chosen sense,calculator.n.02,a small machine that is used for mathematical calculations,,
+calendar,household,2925,calendar.n.03,Qwen-chosen sense,calendar.n.01,a tabular array of the days (usually for one year),,Qwen and rule disagree (rule: calendar.n.01)
+camera,household,3174,camera.n.01,comparison-datasets (hand-checked),camera.n.01,equipment for taking photographs (usually consisting of a lightproof box with a lens at one end and light-sensitive film at the other),,
+can,household,9348,can.n.01,comparison-datasets (hand-checked),can.n.01,airtight sealed metal container for food or drink or paint etc.,,
+candle,household,3686,candle.n.01,Qwen-chosen sense,candle.n.01,stick of wax with a wick in the middle,,
+candle holder,household,386,candlestick.n.01,Qwen-chosen sense,candlestick.n.01,a holder with sockets for candles,,
+candy,food_drink,901,candy.n.01,Qwen-chosen sense,candy.n.01,a rich sweet made of flavored sugar and often combined with fruit or nuts,,
+canister,household,1358,canister.n.02,Qwen-chosen sense,canister.n.02,metal container for storing dry foods such as tea or flour,,
+canopy,other,536,canopy.n.03,Qwen-chosen sense,canopy.n.01,a covering (usually of cloth) that serves as a roof to shelter an area from the weather,,Qwen and rule disagree (rule: canopy.n.01)
+cap,clothing,4152,cap.n.01,Qwen-chosen sense,cap.n.01,a tight-fitting headdress,,
+car,vehicles,105233,car.n.01,comparison-datasets (hand-checked),car.n.01,a motor vehicle with four wheels; usually propelled by an internal combustion engine,,
+car seat,vehicles,3587,car_seat.n.01,Qwen-chosen sense,car_seat.n.01,a seat in a car,,
+car window,other,748,car_window.n.01,Qwen-chosen sense,car_window.n.01,a window in a car,,
+card,household,31083,card.n.04,Qwen-chosen sense,card.n.01,"thin cardboard, usually rectangular",,Qwen and rule disagree (rule: card.n.01)
+cardboard,household,2829,cardboard.n.01,Qwen-chosen sense,cardboard.n.01,a stiff moderately thick paper,,
+cardigan,clothing,3966,cardigan.n.01,Qwen-chosen sense,cardigan.n.01,knitted jacket that is fastened up the front with buttons or a zipper,,
+carrot,food_drink,5100,carrot.n.01,comparison-datasets (hand-checked),carrot.n.01,deep orange edible root of the cultivated carrot plant,,
+cart,household,2468,,none (Qwen: no sense fits),cart.n.01,,,Qwen: no sense fits (rule: cart.n.01)
+carton,household,2574,carton.n.02,Qwen-chosen sense,carton.n.02,a box made of cardboard; opens by flaps on top,,
+cartoon,toys,2079,cartoon.n.02,Qwen-chosen sense,cartoon.n.01,a film made by photographing a series of cartoon drawings to give the illusion of movement when projected in rapid sequence,,Qwen and rule disagree (rule: cartoon.n.01)
+case,household,687,case.n.05,Qwen-chosen sense,case.n.05,a portable container for carrying several objects,,
+castle,toys,370,,none (Qwen: no sense fits),castle.n.02,,,Qwen: no sense fits (rule: castle.n.02)
+cat,animals,28402,cat.n.01,comparison-datasets (hand-checked),cat.n.01,feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats,cougar.n.01,
+cat tree,household,3403,,none (Qwen: no sense fits),,,,not in WordNet
+caterpillar,animals,736,caterpillar.n.01,Qwen-chosen sense,caterpillar.n.01,a wormlike and often brightly colored and hairy or spiny larva of a butterfly or moth,,
+cd,other,383,compact_disk.n.01,Qwen-chosen sense,compact_disk.n.01,a digitally encoded recording on an optical disk that is smaller than a phonograph record; played back by a laser,,
+celery,food_drink,347,celery.n.02,Qwen-chosen sense,celery.n.01,stalks eaten raw or cooked or used as seasoning,,Qwen and rule disagree (rule: celery.n.01)
+cereal,food_drink,7145,cereal.n.03,Qwen-chosen sense,cereal.n.01,a breakfast food prepared from grain,,Qwen and rule disagree (rule: cereal.n.01)
+chair,furniture_rooms,382156,chair.n.01,comparison-datasets (hand-checked),chair.n.01,"a seat for one person, with a support for the back",,
+chalk,toys,691,chalk.n.04,Qwen-chosen sense,chalk.n.04,"a piece of calcite or a similar substance, usually in the shape of a crayon, that is used to write or draw on blackboards or other flat surfaces",,
+chandelier,household,37241,chandelier.n.01,Qwen-chosen sense,chandelier.n.01,branched lighting fixture; often ornate; hangs from the ceiling,,
+charger,household,682,charger.n.02,Qwen-chosen sense,charger.n.02,a device for charging or recharging batteries,,
+chart,other,611,chart.n.01,Qwen-chosen sense,chart.n.02,a visual display of information,,Qwen and rule disagree (rule: chart.n.02)
+cheerio,food_drink,1046,,none (Qwen: no sense fits),adieu.n.01,,,Qwen: no sense fits (rule: adieu.n.01)
+cheese,food_drink,1713,cheese.n.01,Qwen-chosen sense,cheese.n.01,a solid food prepared from the pressed curd of milk,,
+cheese stick,food_drink,367,,none (Qwen: no sense fits),,,,not in WordNet
+cherry,food_drink,646,cherry.n.03,Qwen-chosen sense,cherry.n.01,a red fruit with a single hard stone,,Qwen and rule disagree (rule: cherry.n.01)
+chest,furniture_rooms,556,chest.n.02,Qwen-chosen sense,chest.n.02,box with a lid; used for storage; usually large and sturdy,,
+chick,animals,644,chick.n.01,Qwen-chosen sense,chick.n.01,young bird especially of domestic fowl,,
+chicken,animals,1358,cock.n.05;hen.n.02;chicken.n.02,comparison-datasets (hand-checked),cock.n.05;hen.n.02;chicken.n.02,adult male bird,,
+child,people,14156,child.n.01,Qwen-chosen sense,child.n.01,a young person of either sex,,
+chimney,furniture_rooms,1257,chimney.n.01,Qwen-chosen sense,chimney.n.01,a vertical flue that provides a path through which smoke from a fire is carried away through the wall or roof of a building,,
+chopstick,household,2172,chopstick.n.01,Qwen-chosen sense,chopstick.n.01,one of a pair of slender sticks used as oriental tableware to eat food with,,
+christmas ornament,other,1683,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: decoration.n.01 (head noun; name matches only)
+circle,other,430,circle.n.03,Qwen-chosen sense,circle.n.07,something approximating the shape of a circle,,Qwen and rule disagree (rule: circle.n.07)
+clay,toys,710,clay.n.01,Qwen-chosen sense,clay.n.01,a very fine-grained soil that is plastic when moist but hard when fired,,
+clip,household,342,clip.n.03,Qwen-chosen sense,clip.n.03,any of various small fasteners used to hold loose articles together,,
+clock,household,29108,clock.n.01,comparison-datasets (hand-checked),clock.n.01,a timepiece that shows the time of day,,
+clog,other,742,clog.n.01,Qwen-chosen sense,clog.n.01,footwear usually with wooden soles,,
+closet,furniture_rooms,10592,wardrobe.n.01;cupboard.n.01,comparison-datasets (hand-checked),wardrobe.n.01;cupboard.n.01,a tall piece of furniture that provides storage space for clothes; has a door and rails or hooks for hanging clothes,,
+cloth,household,19224,fabric.n.01,Qwen-chosen sense,fabric.n.01,artifact made by weaving or felting or knitting or crocheting natural or synthetic fibers,,
+clothes,clothing,23597,apparel.n.01,Qwen-chosen sense,apparel.n.01,clothing in general,,
+clothes rack,furniture_rooms,608,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: rack.n.05 (head noun; name matches only)
+clothespin,household,827,clothespin.n.01,Qwen-chosen sense,clothespin.n.01,wood or plastic fastener; for holding clothes on a clothesline,,
+clothing rack,furniture_rooms,620,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: rack.n.05 (head noun; name matches only)
+cloud,outside,7097,cloud.n.02,Qwen-chosen sense,cloud.n.02,a visible mass of water or ice particles suspended at a considerable altitude,,
+coaster,household,1254,coaster.n.03,Qwen-chosen sense,coaster.n.03,"a covering (plate or mat) that protects the surface of a table (i.e., from the condensation on a cold glass or bottle)",,
+coat,clothing,6463,coat.n.01,comparison-datasets (hand-checked),coat.n.01,an outer garment that has sleeves and covers the body from shoulder down; worn outdoors,,
+coat rack,furniture_rooms,848,coatrack.n.01,Qwen-chosen sense,coatrack.n.01,a rack with hooks for temporarily holding coats and hats,,
+coffee machine,furniture_rooms,1194,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: machine.n.01 (head noun; name matches only)
+coffee maker,household,9340,coffee_maker.n.01,Qwen-chosen sense,coffee_maker.n.01,a kitchen appliance for brewing coffee automatically,,
+coffee pot,household,403,coffeepot.n.01,Qwen-chosen sense,coffeepot.n.01,tall pot in which coffee is brewed,,
+coin,other,1240,coin.n.01,Qwen-chosen sense,coin.n.01,a flat metal piece (usually a disc) used as money,,
+colander,household,1566,colander.n.01,Qwen-chosen sense,colander.n.01,bowl-shaped strainer; used to wash or drain foods,,
+collar,clothing,516,collar.n.03,Qwen-chosen sense,collar.n.01,anything worn or placed about the neck,,Qwen and rule disagree (rule: collar.n.01)
+column,furniture_rooms,1577,column.n.07,Qwen-chosen sense,column.n.02,(architecture) a tall vertical cylindrical structure standing upright and used to support a structure,,Qwen and rule disagree (rule: column.n.02)
+comb,household,352,comb.n.01,Qwen-chosen sense,comb.n.01,a flat device with narrow pointed teeth on one edge; disentangles or arranges hair,,
+comforter,household,2219,quilt.n.01,Qwen-chosen sense,comforter.n.04,bedding made of two layers of cloth filled with stuffing and stitched together,,Qwen and rule disagree (rule: comforter.n.04)
+computer,household,343,computer.n.01,Qwen-chosen sense,computer.n.01,a machine for performing calculations automatically,,
+computer monitor,household,5972,computer_monitor.n.01,Qwen-chosen sense,computer_monitor.n.01,a device that displays signals on a computer screen,,
+computer mouse,household,628,mouse.n.04,Qwen-chosen sense,mouse.n.04,a hand-operated electronic device that controls the coordinates of a cursor on your computer screen as you move it around on a pad; on the bottom of the device is a ball that rolls on the surface of the pad,,
+computer screen,household,472,computer_screen.n.01,Qwen-chosen sense,computer_screen.n.01,a screen used to display the output of a computer to the user,,
+concrete,other,708,,none (Qwen: no sense fits),concrete.n.01,,,Qwen: no sense fits (rule: concrete.n.01)
+concrete slab,other,300,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: slab.n.01 (head noun; name matches only)
+cone,toys,738,cone.n.01,Qwen-chosen sense,cone.n.01,any cone-shaped artifact,,
+console,household,369,console_table.n.01,Qwen-chosen sense,console.n.02,a small table fixed to a wall or designed to stand against a wall,,Qwen and rule disagree (rule: console.n.02)
+container,household,57690,container.n.01,Qwen-chosen sense,container.n.01,any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another),,
+controller,toys,375,control.n.09,Qwen-chosen sense,control.n.09,a mechanism that controls the operation of a machine,,
+cookie,food_drink,4358,cookie.n.01,comparison-datasets (hand-checked),cookie.n.01,any of various small flat sweet cakes (`biscuit' is the British term),,
+cookie cutter,household,378,cookie_cutter.n.01,Qwen-chosen sense,cookie_cutter.n.01,a kitchen utensil used to cut a sheet of cookie dough into desired shapes before baking,,
+cooler,household,579,cooler.n.01,Qwen-chosen sense,cooler.n.01,a refrigerator for cooling liquids,,
+cord,household,3372,cord.n.03,Qwen-chosen sense,cord.n.01,a light insulated conductor for household use,,Qwen and rule disagree (rule: cord.n.01)
+corkboard,household,338,,none (Qwen: no sense fits),corkboard.n.01,,,Qwen: no sense fits (rule: corkboard.n.01)
+corn,food_drink,579,corn.n.02;corn.n.03,comparison-datasets (hand-checked),corn.n.02;corn.n.03,the dried grains or kernels or corn used as animal feed or ground for meal,,
+couch,furniture_rooms,187078,sofa.n.01,comparison-datasets (hand-checked),sofa.n.01,an upholstered seat for more than one person,,
+counter,furniture_rooms,43626,counter.n.01,Qwen-chosen sense,counter.n.01,table consisting of a horizontal surface over which business is transacted,,
+countertop,furniture_rooms,36216,countertop.n.01,Qwen-chosen sense,countertop.n.01,the top side of a counter,,
+cover,household,321,screen.n.04,Qwen-chosen sense,cover.n.09,a covering that serves to conceal or shelter something,,Qwen and rule disagree (rule: cover.n.09)
+cow,animals,3853,cattle.n.01,comparison-datasets (hand-checked),cattle.n.01,domesticated bovine animals as a group regardless of sex or age; ; ; - Bible,,
+crab,animals,581,crab.n.01,Qwen-chosen sense,crab.n.01,decapod having eyes on short stalks and a broad flattened carapace with a small abdomen folded under the thorax and pincers,,
+cracker,food_drink,5665,cracker.n.01,comparison-datasets (hand-checked),cracker.n.01,a thin crisp wafer made of flour and water with or without leavening and shortening; unsweetened or semisweet,,
+cradle,furniture_rooms,424,cradle.n.01,Qwen-chosen sense,cradle.n.01,a baby bed with sides and rockers,,
+craft,toys,844,,none (Qwen: no sense fits),craft.n.02,,,Qwen: no sense fits (rule: craft.n.02)
+crane,vehicles,390,crane.n.04,Qwen-chosen sense,crane.n.04,lifts and moves heavy objects; lifting tackle is suspended from a pivoted boom that rotates around a vertical axis,,
+crate,household,1642,crate.n.01,Qwen-chosen sense,crate.n.01,a rugged box (usually made of wood); used for shipping,,
+crayon,toys,13418,crayon.n.01,comparison-datasets (hand-checked),crayon.n.01,writing implement consisting of a colored stick of composition wax used for writing and drawing,,
+crib,furniture_rooms,20865,crib.n.01,comparison-datasets (hand-checked),crib.n.01,baby bed with high sides made of slats,,
+crocodile,animals,1876,,none (Qwen: no sense fits),crocodile.n.01,,,Qwen: no sense fits (rule: crocodile.n.01)
+croissant,food_drink,437,crescent_roll.n.01,Qwen-chosen sense,crescent_roll.n.01,very rich flaky crescent-shaped roll,,
+crumb,food_drink,404,crumb.n.03,Qwen-chosen sense,crumb.n.03,small piece of e.g. bread or cake,,
+cube,toys,1609,cube.n.05,Qwen-chosen sense,cube.n.05,a block in the (approximate) shape of a cube,,
+cucumber,food_drink,1029,cucumber.n.02,Qwen-chosen sense,cucumber.n.01,cylindrical green fruit with thin green rind and white flesh eaten as a vegetable; related to melons,,Qwen and rule disagree (rule: cucumber.n.01)
+cup,household,214041,cup.n.01;cup.n.06;mug.n.04,comparison-datasets (hand-checked),cup.n.01;cup.n.06;mug.n.04,a small open container usually used for drinking; usually has a handle,,
+cup holder,household,665,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: holder.n.01 (head noun; name matches only)
+cupboard,furniture_rooms,1277,cupboard.n.01,Qwen-chosen sense,cupboard.n.01,a small room (or recess) or cabinet used for storage space,,
+cupcake,food_drink,634,cupcake.n.01,Qwen-chosen sense,cupcake.n.01,small cake baked in a muffin tin,,
+curtain,furniture_rooms,157939,curtain.n.01,Qwen-chosen sense,curtain.n.01,hanging cloth used as a blind (especially for a window),,
+cushion,furniture_rooms,42402,cushion.n.03,Qwen-chosen sense,cushion.n.02,a soft bag filled with air or a mass of padding such as feathers or foam rubber etc.,,Qwen and rule disagree (rule: cushion.n.02)
+cutting board,household,8741,chopping_board.n.01,Qwen-chosen sense,chopping_board.n.01,a wooden board where meats or vegetables can be cut,,
+cylinder,other,604,cylinder.n.01,Qwen-chosen sense,cylinder.n.03,a solid bounded by a cylindrical surface and two parallel planes (the bases),,Qwen and rule disagree (rule: cylinder.n.03)
+cymbal,other,397,cymbal.n.01,Qwen-chosen sense,cymbal.n.01,a percussion instrument consisting of a concave brass disk; makes a loud crashing sound when hit with a drumstick or when two are struck together,,
+deck,other,1575,deck.n.04,Qwen-chosen sense,deck.n.01,a porch that resembles the deck on a ship,,Qwen and rule disagree (rule: deck.n.01)
+decoration,household,5624,decoration.n.01,Qwen-chosen sense,decoration.n.01,something used to beautify,,
+deer,animals,695,deer.n.01,comparison-datasets (hand-checked),deer.n.01,distinguished from Bovidae by the male's having solid deciduous antlers,,
+desk,furniture_rooms,12201,desk.n.01,Qwen-chosen sense,desk.n.01,a piece of furniture with a writing surface and usually drawers or other compartments,,
+diaper,clothing,2688,diaper.n.01,comparison-datasets (hand-checked),diaper.n.01,garment consisting of a folded cloth drawn up between the legs and fastened at the waist; worn by infants to catch excrement,,
+dinosaur,animals,6098,,none (Qwen: no sense fits),dinosaur.n.01,,,Qwen: no sense fits (rule: dinosaur.n.01)
+disc,toys,397,disk.n.01,Qwen-chosen sense,phonograph_record.n.01,something with a round shape resembling a flat circular plate,,Qwen and rule disagree (rule: phonograph_record.n.01)
+dish,household,8697,dish.n.01,comparison-datasets (hand-checked),dish.n.01,a piece of dishware normally used as a container for holding or serving food,petri_dish.n.01,
+dish brush,household,369,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: brush.n.02 (head noun; name matches only)
+dish rack,household,13655,dish_rack.n.01,Qwen-chosen sense,dish_rack.n.01,a rack for holding dishes as dishwater drains off of them,,
+dish soap,household,2311,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: soap.n.01 (head noun; name matches only)
+dishwasher,furniture_rooms,13033,dishwasher.n.01,Qwen-chosen sense,dishwasher.n.01,a machine for washing dishes,,
+display case,household,457,case.n.20,Qwen-chosen sense,case.n.20,a glass container used to store and display items in a shop or museum or home,,
+dog,animals,36251,dog.n.01,comparison-datasets (hand-checked),dog.n.01,a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since prehistoric times; occurs in many breeds,,
+doll,toys,17087,doll.n.01,comparison-datasets (hand-checked),doll.n.01,a small replica of a person; used as a toy,,
+dollhouse,toys,542,dollhouse.n.02,Qwen-chosen sense,dollhouse.n.01,a small model of a house used as a toy by children,,Qwen and rule disagree (rule: dollhouse.n.01)
+dolphin,animals,934,,none (Qwen: no sense fits),dolphin.n.02,,,Qwen: no sense fits (rule: dolphin.n.02)
+donkey,animals,314,domestic_ass.n.01,comparison-datasets (hand-checked),domestic_ass.n.01,domestic beast of burden descended from the African wild ass; patient but stubborn,,
+donut,food_drink,960,doughnut.n.02,Qwen-chosen sense,doughnut.n.02,a small ring-shaped friedcake,,
+door,furniture_rooms,279005,door.n.01,comparison-datasets (hand-checked),door.n.01,a swinging or sliding barrier that will close the entrance to a room or building or vehicle,,
+door handle,furniture_rooms,12241,doorknob.n.01,Qwen-chosen sense,doorknob.n.01,a knob used to release the catch when opening a door (often called `doorhandle' in Great Britain),,
+door knob,furniture_rooms,732,doorknob.n.01,Qwen-chosen sense,doorknob.n.01,a knob used to release the catch when opening a door (often called `doorhandle' in Great Britain),,
+doorframe,furniture_rooms,6755,doorframe.n.01,Qwen-chosen sense,doorframe.n.01,the frame that supports a door,,
+doorknob,furniture_rooms,10697,doorknob.n.01,Qwen-chosen sense,doorknob.n.01,a knob used to release the catch when opening a door (often called `doorhandle' in Great Britain),,
+doormat,household,4580,doormat.n.02,Qwen-chosen sense,doormat.n.02,a mat placed outside an exterior door for wiping the shoes before entering,,
+dragon,people,603,dragon.n.01,Qwen-chosen sense,dragon.n.01,a creature of Teutonic mythology; usually represented as breathing fire and having a reptilian body and sometimes wings,,
+drain,furniture_rooms,563,drain.n.03,Qwen-chosen sense,drain.n.02,a pipe through which liquid is carried away,,Qwen and rule disagree (rule: drain.n.02)
+drawer,furniture_rooms,50722,drawer.n.01,comparison-datasets (hand-checked),drawer.n.01,a boxlike container in a piece of furniture; made so as to slide in and out,,
+drawer unit,furniture_rooms,1758,,none (Qwen: no sense fits),,,,not in WordNet
+drawing,household,61238,drawing.n.02,Qwen-chosen sense,drawing.n.02,a representation of forms or objects on a surface by means of lines,,
+dress,clothing,18582,dress.n.01,comparison-datasets (hand-checked),dress.n.01,a one-piece garment for a woman; has skirt and bodice,,
+dresser,furniture_rooms,22094,chest_of_drawers.n.01,Qwen-chosen sense,dresser.n.05,furniture with drawers for keeping clothes,,Qwen and rule disagree (rule: dresser.n.05)
+drill,household,566,drill.n.01,Qwen-chosen sense,drill.n.01,a tool with a sharp point and cutting edges for making holes in hard materials (usually rotating rapidly or by repeated blows),,
+drum,toys,3092,drum.n.01,Qwen-chosen sense,drum.n.01,a musical percussion instrument; usually consists of a hollow cylinder with a membrane stretched across each end,,
+dryer,furniture_rooms,812,dryer.n.01,Qwen-chosen sense,dryer.n.01,an appliance that removes moisture,,
+drying rack,household,572,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: rack.n.01 (head noun; name matches only)
+duck,animals,6574,duck.n.01,comparison-datasets (hand-checked),duck.n.01,small wild or domesticated web-footed broad-billed swimming bird usually having a depressed body and short legs,,
+dumbbell,household,903,dumbbell.n.01,Qwen-chosen sense,dumbbell.n.01,an exercising weight; two spheres connected by a short bar that serves as a handle,,
+dustpan,household,660,dustpan.n.02,Qwen-chosen sense,dustpan.n.02,a short-handled receptacle into which dust can be swept,,
+duvet,household,1091,eiderdown.n.01,Qwen-chosen sense,eiderdown.n.01,a soft quilt usually filled with the down of the eider,,
+ear,body_parts,1132,ear.n.01,Qwen-chosen sense,ear.n.01,the sense organ for hearing and equilibrium,,
+earring,clothing,1018,earring.n.01,Qwen-chosen sense,earring.n.01,jewelry to ornament the ear; usually clipped to the earlobe or fastened through a hole in the lobe,,
+easel,household,2088,easel.n.01,Qwen-chosen sense,easel.n.01,an upright tripod for displaying something (usually an artist's canvas),,
+egg,food_drink,6936,egg.n.02,comparison-datasets (hand-checked),egg.n.02,oval reproductive body of a fowl (especially a hen) used as food,,
+egg carton,household,773,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: carton.n.02 (head noun; name matches only)
+eggplant,food_drink,513,eggplant.n.01,Qwen-chosen sense,eggplant.n.01,egg-shaped vegetable having a shiny skin typically dark purple but occasionally white or yellow,,
+elephant,animals,11149,elephant.n.01,comparison-datasets (hand-checked),elephant.n.01,five-toed pachyderm,,
+elmo,other,316,,none (Qwen: no sense fits),,,,not in WordNet
+entertainment center,other,2280,entertainment_center.n.01,Qwen-chosen sense,entertainment_center.n.01,a wall unit containing sound and television systems,,
+envelope,household,2400,envelope.n.01,Qwen-chosen sense,envelope.n.01,"a flat (usually rectangular) container for a letter, thin package, etc.",,
+eraser,household,370,eraser.n.01,Qwen-chosen sense,eraser.n.01,an implement used to erase something,,
+excavator,vehicles,568,power_shovel.n.01,Qwen-chosen sense,power_shovel.n.01,a machine for excavating,,
+exercise ball,toys,3042,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: ball.n.06 (head noun; name matches only)
+exercise bike,household,693,exercise_bike.n.01,Qwen-chosen sense,exercise_bike.n.01,an exercise device resembling a stationary bike,,
+eye,body_parts,1861,eye.n.01,Qwen-chosen sense,eye.n.01,the organ of sight,,
+face,body_parts,9343,face.n.01,Qwen-chosen sense,face.n.01,the front of the human head from the forehead to the chin and ear to ear,,
+fan,household,35539,fan.n.01,Qwen-chosen sense,fan.n.01,a device for creating a current of air by movement of a surface or surfaces,,
+faucet,household,24774,faucet.n.01,Qwen-chosen sense,faucet.n.01,a regulator for controlling the flow of a liquid from a reservoir,,
+feet,body_parts,446,,none (Qwen: no sense fits),,,,not in WordNet
+fence,outside,22467,fence.n.01,Qwen-chosen sense,fence.n.01,a barrier that serves to enclose an area,,
+field,outside,301,playing_field.n.02,Qwen-chosen sense,plain.n.01,a piece of land prepared for playing a game,,Qwen and rule disagree (rule: plain.n.01)
+figurine,toys,559,figurine.n.01,Qwen-chosen sense,figurine.n.01,a small carved or molded figure,,
+filing cabinet,furniture_rooms,500,file.n.03,Qwen-chosen sense,file.n.03,office furniture consisting of a container for keeping papers in order,,
+finger,body_parts,10146,finger.n.01,Qwen-chosen sense,finger.n.01,any of the terminal members of the hand (sometimes excepting the thumb),,
+fire,outside,1058,fire.n.03,Qwen-chosen sense,fire.n.04,the process of combustion of inflammable materials producing heat and light and (often) smoke,,Qwen and rule disagree (rule: fire.n.04)
+fire extinguisher,household,1014,fire_extinguisher.n.01,Qwen-chosen sense,fire_extinguisher.n.01,a manually operated device for extinguishing small fires,,
+fire hydrant,outside,326,fireplug.n.01,Qwen-chosen sense,fireplug.n.01,an upright hydrant for drawing water to use in fighting a fire,,
+fire truck,vehicles,1845,fire_engine.n.01,Qwen-chosen sense,fire_engine.n.01,any of various large trucks that carry firemen and equipment to the site of a fire,,
+fireplace,furniture_rooms,34542,fireplace.n.01,Qwen-chosen sense,fireplace.n.01,an open recess in a wall at the base of a chimney where a fire can be built,,
+fish,animals,9532,fish.n.01,comparison-datasets (hand-checked),fish.n.01,any of various mostly cold-blooded aquatic vertebrates usually having scales and breathing through gills,,
+fish tank,household,336,aquarium.n.01,Qwen-chosen sense,aquarium.n.01,a tank or pool or bowl filled with water for keeping live fish and underwater animals,,
+flag,outside,1465,flag.n.01,comparison-datasets (hand-checked),flag.n.01,emblem usually consisting of a rectangular piece of cloth of distinctive design,,
+flamingo,animals,498,,none (Qwen: no sense fits),flamingo.n.01,,,Qwen: no sense fits (rule: flamingo.n.01)
+flashcard,toys,460,flash_card.n.01,Qwen-chosen sense,flash_card.n.01,a card with words or numbers or pictures that is flashed to a class by the teacher,,
+flip-flop,clothing,1553,flip-flop.n.02,Qwen-chosen sense,flip-flop.n.02,a backless sandal held to the foot by a thong between the big toe and the second toe,,
+flower,outside,37868,flower.n.01;flower_arrangement.n.01;bouquet.n.01,comparison-datasets (hand-checked),flower.n.01;flower_arrangement.n.01;bouquet.n.01,a plant cultivated for its blooms or blossoms,,
+flower arrangement,household,799,flower_arrangement.n.01,Qwen-chosen sense,flower_arrangement.n.01,a decorative arrangement of flowers,,
+flower pot,household,2044,pot.n.04,Qwen-chosen sense,pot.n.04,a container in which plants are cultivated,,
+flowerpot,household,4877,pot.n.04,Qwen-chosen sense,pot.n.04,a container in which plants are cultivated,,
+foil,household,573,foil.n.01,Qwen-chosen sense,foil.n.01,a piece of thin and flexible sheet metal,,
+foot,body_parts,97300,foot.n.01,Qwen-chosen sense,foot.n.01,the part of the leg of a human being below the ankle joint,,
+football,toys,474,football.n.02,Qwen-chosen sense,football.n.02,the inflated oblong ball used in playing American football,,
+footstool,furniture_rooms,783,footstool.n.01,Qwen-chosen sense,footstool.n.01,a low seat or a stool to rest the feet of a seated person,,
+fork,household,14743,fork.n.01,comparison-datasets (hand-checked),fork.n.01,cutlery used for serving and eating food,,
+fox,animals,1018,fox.n.01,Qwen-chosen sense,fox.n.01,alert carnivorous mammal with pointed muzzle and ears and a bushy tail; most are predators that do not hunt in packs,,
+frame,household,4079,frame.n.10,Qwen-chosen sense,frame.n.01,a framework that supports and protects a picture or a mirror,,Qwen and rule disagree (rule: frame.n.01)
+frog,animals,2339,frog.n.01,comparison-datasets (hand-checked),frog.n.01,any of various tailless stout-bodied amphibians with long hind limbs for leaping; semiaquatic and terrestrial species,,
+fruit,food_drink,3268,fruit.n.01,Qwen-chosen sense,fruit.n.01,the ripened reproductive body of a seed plant,,
+frying pan,household,4895,frying_pan.n.01,Qwen-chosen sense,frying_pan.n.01,a pan used for frying foods,,
+game,toys,326,game.n.03,Qwen-chosen sense,game.n.09,an amusement or pastime,,Qwen and rule disagree (rule: game.n.09)
+game console,toys,640,,none (Qwen: no sense fits),,,,not in WordNet
+game controller,toys,847,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: control.n.09 (head noun; name matches only)
+game piece,toys,362,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: piece.n.02 (head noun; name matches only)
+garage door,other,785,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: door.n.01 (head noun; name matches only)
+garbage bin,household,305,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: bin.n.01 (head noun; name matches only)
+garland,household,1968,wreath.n.01,Qwen-chosen sense,wreath.n.01,flower arrangement consisting of a circular band of foliage or flowers for ornamental purposes,,
+garlic,food_drink,790,garlic.n.02,Qwen-chosen sense,garlic.n.01,aromatic bulb used as seasoning,,Qwen and rule disagree (rule: garlic.n.01)
+garment,clothing,487,garment.n.01,Qwen-chosen sense,garment.n.01,an article of clothing,,
+gate,furniture_rooms,14134,gate.n.01,Qwen-chosen sense,gate.n.01,a movable barrier in a fence or wall,,
+gear,other,1920,gear.n.01,Qwen-chosen sense,gear.n.01,a toothed wheel that engages another toothed mechanism in order to change the speed or direction of transmitted motion,,
+ghost,people,408,ghost.n.03,Qwen-chosen sense,ghost.n.03,the visible disembodied soul of a dead person,,
+gift,other,454,gift.n.01,Qwen-chosen sense,gift.n.01,something acquired without compensation,,
+giraffe,animals,3191,giraffe.n.01,comparison-datasets (hand-checked),giraffe.n.01,tallest living quadruped; having a spotted coat and small horns and very long neck and legs; of savannahs of tropical Africa,,
+girl,people,4309,female_child.n.01,Qwen-chosen sense,girl.n.01,a youthful female person,,Qwen and rule disagree (rule: girl.n.01)
+glass,household,20335,glass.n.02,comparison-datasets (hand-checked),glass.n.02,a container for holding liquids while drinking,,
+glass door,other,897,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: door.n.01 (head noun; name matches only)
+glasses,household,53037,spectacles.n.01,comparison-datasets (hand-checked),spectacles.n.01,optical instrument consisting of a frame that holds a pair of lenses for correcting defective vision,,
+globe,household,1114,globe.n.03,Qwen-chosen sense,globe.n.03,a sphere on which a map (especially of the earth) is represented,,
+glove,clothing,785,glove.n.02;baseball_glove.n.01,comparison-datasets (hand-checked),glove.n.02;baseball_glove.n.01,handwear: covers the hand and wrist,,
+goal,outside,372,goal.n.03,Qwen-chosen sense,goal.n.03,game equipment consisting of the place toward which players of a game try to advance a ball or puck in order to score points,,
+goat,animals,630,goat.n.01,Qwen-chosen sense,goat.n.01,any of numerous agile ruminants related to sheep but having a beard and straight horns,,
+grape,food_drink,1694,grape.n.01,Qwen-chosen sense,grape.n.01,any of various juicy fruit of the genus Vitis with green or purple skins; grow in clusters,,
+grass,outside,12519,grass.n.01,Qwen-chosen sense,grass.n.01,narrow-leaved green herbage: grown as lawns; used as pasture for grazing animals; cut and dried as hay,,
+grater,household,308,grater.n.01,Qwen-chosen sense,grater.n.01,utensil with sharp perforations for shredding foods (as vegetables or cheese),,
+gravel,other,548,gravel.n.01,Qwen-chosen sense,gravel.n.01,rock fragments and pebbles,,
+grill,outside,881,,none (Qwen: no sense fits),grill.n.02,,,Qwen: no sense fits (rule: grill.n.02)
+guitar,household,4297,guitar.n.01,Qwen-chosen sense,guitar.n.01,a stringed instrument usually having six strings; played by strumming or plucking,,
+gun,toys,434,gun.n.01,Qwen-chosen sense,gun.n.01,a weapon that discharges a missile at high velocity (especially from a metal tube or barrel),,
+gym,toys,546,,none (Qwen: no sense fits),gymnasium.n.02,,,Qwen: no sense fits (rule: gymnasium.n.02)
+hair,body_parts,28398,hair.n.01,Qwen-chosen sense,hair.n.01,a covering for the body (or parts of it) consisting of a dense growth of threadlike structures (as on the human head); helps to prevent heat loss,,
+hair bun,body_parts,498,,none (Qwen: no sense fits),,,,not in WordNet
+hair clip,clothing,1037,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: clip.n.03 (head noun; name matches only)
+hair dryer,household,320,hand_blower.n.01,Qwen-chosen sense,hand_blower.n.01,a hand-held electric blower that can blow warm air onto the hair; used for styling hair,,
+hair tie,clothing,759,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: tie.n.09 (head noun; name matches only)
+hairbrush,household,900,hairbrush.n.01,Qwen-chosen sense,hairbrush.n.01,a brush used to groom a person's hair,,
+hammer,household,663,hammer.n.02,comparison-datasets (hand-checked),hammer.n.02,a hand tool with a heavy rigid head and a handle; used to deliver an impulsive force by striking,,
+hamper,household,508,hamper.n.02,Qwen-chosen sense,hamper.n.02,a basket usually with a cover,,
+hand,body_parts,339325,hand.n.01,Qwen-chosen sense,hand.n.01,the (prehensile) extremity of the superior limb,,
+handle,household,9148,handle.n.01,Qwen-chosen sense,handle.n.01,the appendage to an object that is designed to be held in order to use or move it,,
+handprint,other,365,,none (Qwen: no sense fits),,,,not in WordNet
+handrail,furniture_rooms,2441,bannister.n.02,Qwen-chosen sense,bannister.n.02,a railing at the side of a staircase or balcony to prevent people from falling,,
+hanger,household,1436,hanger.n.02,Qwen-chosen sense,hanger.n.02,anything from which something can be hung,,
+hat,clothing,10180,hat.n.01,comparison-datasets (hand-checked),hat.n.01,headdress that protects the head from bad weather; has shaped crown and usually a brim,,
+head,body_parts,2005,head.n.01,Qwen-chosen sense,head.n.01,the upper part of the human body or the front part of the body in animals; contains the face and brains,,
+headband,clothing,2166,headband.n.01,Qwen-chosen sense,headband.n.01,a band worn around or over the head,,
+headboard,furniture_rooms,2220,headboard.n.01,Qwen-chosen sense,headboard.n.01,a vertical board or panel forming the head of a bedstead,,
+headphones,household,1084,,none (Qwen: no sense fits),,,,not in WordNet
+heart,other,1508,heart.n.07,Qwen-chosen sense,heart.n.10,a plane figure with rounded sides curving inward at the top and intersecting at the bottom; conventionally used on playing cards and valentines,,Qwen and rule disagree (rule: heart.n.10)
+heater,furniture_rooms,1425,heater.n.01,Qwen-chosen sense,heater.n.01,device that heats water or supplies warmth to a room,,
+hedge,outside,622,hedge.n.01,Qwen-chosen sense,hedge.n.01,a fence formed by a row of closely planted shrubs or bushes,,
+helicopter,vehicles,562,helicopter.n.01,comparison-datasets (hand-checked),helicopter.n.01,an aircraft without wings that obtains its lift from the rotation of overhead blades,,
+helmet,clothing,2807,helmet.n.02,Qwen-chosen sense,helmet.n.01,a protective headgear made of hard material to resist blows,,Qwen and rule disagree (rule: helmet.n.01)
+hinge,household,2103,hinge.n.01,Qwen-chosen sense,hinge.n.01,a joint that holds two parts together so that one can swing relative to the other,,
+hippo,animals,468,,none (Qwen: no sense fits),hippopotamus.n.01,,,Qwen: no sense fits (rule: hippopotamus.n.01)
+hood,clothing,493,hood.n.08,Qwen-chosen sense,hood.n.04,a headdress that protects the head and face,,Qwen and rule disagree (rule: hood.n.04)
+hoodie,clothing,8187,,none (Qwen: no sense fits),,,,not in WordNet
+hook,household,569,hook.n.05,Qwen-chosen sense,hook.n.01,a curved or bent implement for suspending or pulling something,,Qwen and rule disagree (rule: hook.n.01)
+hoop,toys,1829,basket.n.03,Qwen-chosen sense,hoop.n.01,horizontal circular metal hoop supporting a net through which players try to throw the basketball,,Qwen and rule disagree (rule: hoop.n.01)
+hose,outside,2280,hose.n.03,comparison-datasets (hand-checked),hose.n.03,a flexible pipe for conveying a liquid or gas,,
+hot air balloon,vehicles,752,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: balloon.n.01 (head noun; name matches only)
+house,outside,39408,house.n.01,Qwen-chosen sense,house.n.01,a dwelling that serves as living quarters for one or more families,,
+hula hoop,toys,638,hula-hoop.n.01,Qwen-chosen sense,hula-hoop.n.01,plaything consisting of a tubular plastic hoop for swinging around the hips,,
+humidifier,household,405,,none (Qwen: no sense fits),,,,not in WordNet
+ice cream,food_drink,1292,ice_cream.n.01,Qwen-chosen sense,ice_cream.n.01,frozen dessert containing cream and sugar and flavoring,,
+illustration,household,1280,illustration.n.04,Qwen-chosen sense,illustration.n.04,a visual representation (a picture or diagram) that is used make some subject more pleasing or easier to understand,,
+insect,animals,1165,insect.n.01,Qwen-chosen sense,insect.n.01,small air-breathing arthropod,,
+island,outside,3666,island.n.02,Qwen-chosen sense,island.n.01,a zone or area resembling an island,,Qwen and rule disagree (rule: island.n.01)
+jacket,clothing,12620,jacket.n.01,comparison-datasets (hand-checked),jacket.n.01,a short coat,,
+jar,household,44699,jar.n.01,comparison-datasets (hand-checked),jar.n.01,a vessel (usually cylindrical) with a wide mouth and without handles,vase.n.01;crock.n.03;urn.n.01,
+jeans,clothing,31788,jean.n.01,comparison-datasets (hand-checked),jean.n.01,(usually plural) close-fitting trousers of heavy denim for manual work or casual wear,,
+jug,household,5169,jug.n.01,Qwen-chosen sense,jug.n.01,a large bottle with a narrow mouth,,
+juice,food_drink,322,juice.n.01,Qwen-chosen sense,juice.n.01,the liquid part that can be extracted from plant or animal tissue by squeezing or cooking,,
+kettle,household,10052,kettle.n.01,Qwen-chosen sense,kettle.n.01,a metal pot for stewing or boiling; usually has a lid,,
+key,household,645,key.n.01,comparison-datasets (hand-checked),key.n.01,metal device shaped in such a way that when it is inserted into the appropriate lock the lock's mechanism can be rotated,,
+keyboard,household,3053,keyboard.n.01,Qwen-chosen sense,keyboard.n.01,device consisting of a set of keys on a piano or organ or typewriter or typesetting machine or computer or the like,,
+kitchen,furniture_rooms,4690,kitchen.n.01,Qwen-chosen sense,kitchen.n.01,a room equipped for preparing meals,,
+kitchen set,toys,518,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: set.n.01 (head noun; name matches only)
+kiwi,food_drink,318,kiwi.n.03,Qwen-chosen sense,kiwi.n.03,fuzzy brown egg-shaped fruit with slightly tart green flesh,,
+knee,body_parts,1597,knee.n.01,Qwen-chosen sense,knee.n.01,hinge joint in the human leg connecting the tibia and fibula with the femur and protected in front by the patella,,
+knife,household,17619,knife.n.01,comparison-datasets (hand-checked),knife.n.01,edge tool used as a cutting instrument; has a pointed blade with a sharp edge and a handle,,
+knife block,household,3463,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: block.n.01 (head noun; name matches only)
+knob,household,11067,knob.n.02,Qwen-chosen sense,knob.n.01,a round handle,,Qwen and rule disagree (rule: knob.n.01)
+label,other,831,label.n.04,Qwen-chosen sense,label.n.03,an identifying or descriptive marker that is attached to an object,,Qwen and rule disagree (rule: label.n.03)
+ladder,outside,3079,ladder.n.01,comparison-datasets (hand-checked),ladder.n.01,steps consisting of two parallel members connected by rungs; for climbing up or down,,
+ladle,household,1618,ladle.n.01,Qwen-chosen sense,ladle.n.01,a spoon-shaped vessel with a long handle; frequently used to transfer liquids from one container to another,,
+ladybug,animals,922,ladybug.n.01,Qwen-chosen sense,ladybug.n.01,small round bright-colored and spotted beetle that usually feeds on aphids and other insect pests,,
+lamp,household,113459,lamp.n.02,comparison-datasets (hand-checked),lamp.n.02,a piece of furniture holding one or more electric light bulbs,,
+lampshade,household,441,lampshade.n.01,Qwen-chosen sense,lampshade.n.01,a protective ornamental shade used to screen a light bulb from direct view,,
+landscape,outside,963,landscape.n.01,Qwen-chosen sense,landscape.n.02,an expanse of scenery that can be seen in a single view,,Qwen and rule disagree (rule: landscape.n.02)
+lantern,household,673,lantern.n.01,Qwen-chosen sense,lantern.n.01,light in a transparent protective case,,
+laptop,household,15256,laptop.n.01,Qwen-chosen sense,laptop.n.01,a portable computer small enough to use in your lap,,
+lawn,outside,1611,lawn.n.01,Qwen-chosen sense,lawn.n.01,a field of cultivated and mowed grass,,
+leaf,outside,6426,leaf.n.01,Qwen-chosen sense,leaf.n.01,the main organ of photosynthesis and transpiration in higher plants,,
+leg,body_parts,54831,leg.n.01,Qwen-chosen sense,leg.n.01,a human limb; commonly used to refer to a whole limb but technically only the part of the limb between the knee and ankle,,
+leggings,clothing,10958,,none (Qwen: no sense fits),,,,not in WordNet
+lego,toys,7734,lego.n.01,Qwen-chosen sense,lego.n.01,(trademark) a child's plastic construction set for making mechanical models,,
+lego block,toys,1827,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: block.n.01 (head noun; name matches only)
+lemon,food_drink,2878,lemon.n.01,Qwen-chosen sense,lemon.n.01,yellow oval fruit with juicy acidic flesh,,
+letter,other,7281,letter.n.02,Qwen-chosen sense,letter.n.03,the conventional characters of the alphabet used to represent speech,,Qwen and rule disagree (rule: letter.n.03)
+lettuce,food_drink,825,lettuce.n.03,Qwen-chosen sense,lettuce.n.02,leaves of any of various plants of Lactuca sativa,,Qwen and rule disagree (rule: lettuce.n.02)
+lid,household,8224,lid.n.02,Qwen-chosen sense,lid.n.02,"a movable top or cover (hinged or separate) for closing the opening at the top of a box, chest, jar, pan, etc.",,
+light,household,277254,lamp.n.01;lamp.n.02;light.n.02,comparison-datasets (hand-checked),lamp.n.01;lamp.n.02;light.n.02,an artificial source of visible illumination,,
+light bulb,household,10845,light_bulb.n.01,Qwen-chosen sense,light_bulb.n.01,electric lamp consisting of a transparent or translucent glass housing containing a wire filament (usually tungsten) that emits light when heated by electricity,,
+light fixture,furniture_rooms,47866,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: fixture.n.01 (head noun; name matches only)
+light switch,furniture_rooms,28943,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: switch.n.01 (head noun; name matches only)
+lime,food_drink,474,lime.n.06,Qwen-chosen sense,lime.n.04,the green acidic fruit of any of various lime trees,,Qwen and rule disagree (rule: lime.n.04)
+lion,animals,2894,lion.n.01,comparison-datasets (hand-checked),lion.n.01,large gregarious predatory feline of Africa and India having a tawny coat with a shaggy mane in the male,,
+lizard,animals,423,lizard.n.01,Qwen-chosen sense,lizard.n.01,relatively long-bodied reptile with usually two pairs of legs and a tapering tail,,
+llama,animals,324,llama.n.01,Qwen-chosen sense,llama.n.01,wild or domesticated South American cud-chewing animal related to camels but smaller and lacking a hump,,
+lock,household,336,lock.n.01,Qwen-chosen sense,lock.n.01,a fastener fitted to a door or drawer to keep it firmly closed,,
+log,outside,434,log.n.01,Qwen-chosen sense,log.n.01,a segment of the trunk of a tree when stripped of branches,,
+logo,other,526,logo.n.01,Qwen-chosen sense,logo.n.01,a company emblem or device,,
+lunch box,household,786,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: box.n.01 (head noun; name matches only)
+magazine,household,3798,magazine.n.02,Qwen-chosen sense,magazine.n.02,product consisting of a paperback periodic publication as a physical object,,
+magnet,household,28813,magnet.n.01,Qwen-chosen sense,magnet.n.01,(physics) a device that attracts iron and produces a magnetic field,,
+mallet,toys,782,mallet.n.02,Qwen-chosen sense,mallet.n.01,"a light drumstick with a rounded head that is used to strike such percussion instruments as chimes, kettledrums, marimbas, glockenspiels, etc.",,Qwen and rule disagree (rule: mallet.n.01)
+man,people,10984,man.n.01,Qwen-chosen sense,man.n.01,an adult person who is male (as opposed to a woman),,
+mango,food_drink,369,mango.n.02,Qwen-chosen sense,mango.n.01,"large oval tropical fruit having smooth skin, juicy aromatic pulp, and a large hairy seed",,Qwen and rule disagree (rule: mango.n.01)
+mantel,furniture_rooms,4069,mantel.n.01,Qwen-chosen sense,mantel.n.01,shelf that projects from wall above fireplace,,
+map,household,2775,map.n.01,Qwen-chosen sense,map.n.01,a diagrammatic representation of the earth's surface (or part of it),,
+maraca,toys,351,maraca.n.01,Qwen-chosen sense,maraca.n.01,a percussion instrument consisting of a hollow gourd containing pebbles or beans; often played in pairs,,
+marker,household,9791,marker.n.03,Qwen-chosen sense,marker.n.01,a writing implement for making a mark,,Qwen and rule disagree (rule: marker.n.01)
+mask,clothing,862,mask.n.01,Qwen-chosen sense,mask.n.01,a covering to disguise or conceal the face,,
+mat,household,48662,mat.n.01,Qwen-chosen sense,mat.n.01,a thick flat pad used as a floor covering,,
+mattress,furniture_rooms,8048,mattress.n.01,Qwen-chosen sense,mattress.n.01,"a large thick pad filled with resilient material and often incorporating coiled springs, used as a bed or part of a bed",,
+measuring cup,household,2580,measuring_cup.n.01,Qwen-chosen sense,measuring_cup.n.01,graduated cup used to measure liquid or granular ingredients,,
+meat,food_drink,1447,meat.n.01,Qwen-chosen sense,meat.n.01,the flesh of animals (including fishes and birds and snails) used as food,,
+melon,food_drink,397,melon.n.01,comparison-datasets (hand-checked),melon.n.01,any of numerous fruits of the gourd family having a hard rind and sweet juicy flesh,,
+mermaid,people,302,,none (Qwen: no sense fits),mermaid.n.01,,,Qwen: no sense fits (rule: mermaid.n.01)
+mesh,household,399,net.n.06,Qwen-chosen sense,net.n.06,an open fabric of string or rope or wire woven together at regular intervals,,
+mickey mouse,other,406,,none (Qwen: no sense fits),mickey_mouse.n.01,,,Qwen: no sense fits (rule: mickey_mouse.n.01)
+microphone,household,424,microphone.n.01,Qwen-chosen sense,microphone.n.01,device for converting sound waves into electrical energy,,
+microwave,furniture_rooms,41086,microwave.n.02,Qwen-chosen sense,microwave.n.02,kitchen appliance that cooks food by passing an electromagnetic wave through it; heat results from the absorption of energy by the water molecules in the food,,
+milk,food_drink,2077,milk.n.01,comparison-datasets (hand-checked),milk.n.01,a white nutritious liquid secreted by mammals and used as food by human beings,,
+minnie mouse,other,307,minnie_mouse.n.01,Qwen-chosen sense,minnie_mouse.n.01,the partner of Mickey Mouse,,
+mirror,household,26894,mirror.n.01,Qwen-chosen sense,mirror.n.01,polished surface that forms images by reflecting light,,
+mixer,household,671,mixer.n.04,Qwen-chosen sense,mixer.n.03,a kitchen utensil that is used for mixing foods,,Qwen and rule disagree (rule: mixer.n.03)
+mobile,toys,1028,mobile.n.03,Qwen-chosen sense,mobile.n.03,sculpture suspended in midair whose delicately balanced parts can be set in motion by air currents,,
+mold,household,412,mold.n.02,Qwen-chosen sense,mold.n.02,container into which liquid is poured to create a given shape when it hardens,,
+monitor,household,3889,monitor.n.04,Qwen-chosen sense,monitor.n.04,display produced by a device that takes signals and displays them on a television screen or a computer monitor,,
+monkey,animals,3097,monkey.n.01,comparison-datasets (hand-checked),monkey.n.01,any of various long-tailed primates (excluding the prosimians),,
+monster,people,1368,monster.n.01,Qwen-chosen sense,monster.n.01,an imaginary creature usually having various human and animal parts,,
+moon,outside,1680,moon.n.02,Qwen-chosen sense,moon.n.02,any object resembling a moon,,
+mop,household,1656,swab.n.02,comparison-datasets (hand-checked),swab.n.02,cleaning implement consisting of absorbent material fastened to a handle; for cleaning floors,,
+mountain,outside,1093,mountain.n.01,Qwen-chosen sense,mountain.n.01,a land mass that projects well above its surroundings; higher than a hill,,
+mouse,animals,3462,,none (Qwen: no sense fits),mouse.n.01,,,Qwen: no sense fits (rule: mouse.n.01)
+mouth,body_parts,1178,mouth.n.02,Qwen-chosen sense,mouth.n.01,the externally visible part of the oral cavity on the face and the system of organs surrounding the opening,,Qwen and rule disagree (rule: mouth.n.01)
+muffin,food_drink,534,muffin.n.01,comparison-datasets (hand-checked),muffin.n.01,a sweet quick bread baked in a cup-shaped pan,,
+muffin tin,household,366,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: tin.n.02 (head noun; name matches only)
+mulch,other,926,mulch.n.01,Qwen-chosen sense,mulch.n.01,a protective covering of rotting vegetable matter spread to reduce evaporation and soil erosion,,
+mushroom,outside,918,mushroom.n.01,Qwen-chosen sense,mushroom.n.01,common name for an edible agaric (contrasting with the inedible toadstool),,
+napkin,household,13906,napkin.n.01,comparison-datasets (hand-checked),napkin.n.01,a small piece of table linen that is used to wipe the mouth and to cover the lap in order to protect clothing,,
+necklace,clothing,2113,necklace.n.01,comparison-datasets (hand-checked),necklace.n.01,jewelry consisting of a cord or chain (often bearing gems) worn about the neck as an ornament (especially by women),,
+net,household,634,net.n.02,Qwen-chosen sense,net.n.02,a trap made of netting to catch fish or birds or insects,,
+newspaper,household,1707,newspaper.n.01,Qwen-chosen sense,newspaper.n.03,a daily or weekly publication on folded sheets; contains news and articles and advertisements,,Qwen and rule disagree (rule: newspaper.n.03)
+nightstand,furniture_rooms,5772,,none (Qwen: no sense fits),,,,not in WordNet
+noodle,food_drink,767,noodle.n.01,Qwen-chosen sense,noodle.n.01,a ribbonlike strip of pasta,,
+nose,body_parts,886,nose.n.01,Qwen-chosen sense,nose.n.01,the organ of smell and entrance to the respiratory tract; the prominent part of the face of man or other mammals,,
+note,other,1690,note.n.01,Qwen-chosen sense,note.n.01,a brief written record,,
+notebook,household,2946,notebook.n.01,Qwen-chosen sense,notebook.n.02,a book with blank pages for recording notes or memoranda,,Qwen and rule disagree (rule: notebook.n.02)
+number,other,1770,numeral.n.01,Qwen-chosen sense,number.n.11,a symbol used to represent a number,,Qwen and rule disagree (rule: number.n.11)
+number block,toys,481,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: block.n.01 (head noun; name matches only)
+octopus,animals,1034,,none (Qwen: no sense fits),octopus.n.02,,,Qwen: no sense fits (rule: octopus.n.02)
+onion,food_drink,1598,onion.n.01,Qwen-chosen sense,onion.n.01,the bulb of an onion plant,,
+orange,food_drink,4913,orange.n.01,comparison-datasets (hand-checked),orange.n.01,round yellow to orange fruit of any of several citrus trees,,
+ottoman,furniture_rooms,10091,ottoman.n.03,Qwen-chosen sense,ottoman.n.03,thick cushion used as a seat,,
+outlet,furniture_rooms,16072,wall_socket.n.01,Qwen-chosen sense,mercantile_establishment.n.01,receptacle providing a place in a wiring system where current can be taken to run electrical devices,,Qwen and rule disagree (rule: mercantile_establishment.n.01)
+oven,furniture_rooms,28629,oven.n.01;microwave.n.02,comparison-datasets (hand-checked),oven.n.01;microwave.n.02,kitchen appliance used for baking or roasting,dutch_oven.n.01,
+oven mitt,household,2075,,none (Qwen: no sense fits),,,,not in WordNet
+overalls,clothing,417,,none (Qwen: no sense fits),,,,not in WordNet
+owl,animals,1426,owl.n.01,comparison-datasets (hand-checked),owl.n.01,nocturnal bird of prey with hawk-like beak and claws and large head with front-facing eyes,,
+pacifier,household,1064,comforter.n.04,Qwen-chosen sense,pacifier.n.02,device used for an infant to suck or bite on,,Qwen and rule disagree (rule: pacifier.n.02)
+package,household,5950,package.n.01,Qwen-chosen sense,package.n.02,a collection of things wrapped or boxed together,,Qwen and rule disagree (rule: package.n.02)
+packaging,household,1073,packaging.n.03,Qwen-chosen sense,packaging.n.03,material used to make packages,,
+paint,household,939,paint.n.01,Qwen-chosen sense,paint.n.01,a substance used as a coating to protect or decorate a surface (especially a mixture of pigment suspended in a liquid); dries to form a hard coating,,
+paintbrush,household,361,paintbrush.n.01,Qwen-chosen sense,paintbrush.n.01,a brush used as an applicator (to apply paint),,
+painting,household,40916,painting.n.01,Qwen-chosen sense,painting.n.01,graphic art consisting of an artistic composition made by applying paints to a surface,,
+pajamas,clothing,5676,pajama.n.02,comparison-datasets (hand-checked),pajama.n.02,(usually plural) loose-fitting nightclothes worn for sleeping or lounging; have a jacket top and trousers,,
+pan,household,8595,pan.n.01,Qwen-chosen sense,pan.n.01,cooking utensil consisting of a wide metal vessel,,
+pancake,food_drink,1186,pancake.n.01,comparison-datasets (hand-checked),pancake.n.01,a flat cake of thin batter fried on both sides on a griddle,,
+panda,animals,5607,,none (Qwen: no sense fits),giant_panda.n.01,,,Qwen: no sense fits (rule: giant_panda.n.01)
+pants,clothing,101876,trouser.n.01,comparison-datasets (hand-checked),trouser.n.01,"(usually in the plural) a garment extending from the waist to the knee or ankle, covering each leg separately",,
+paper,household,67217,paper.n.01,comparison-datasets (hand-checked),paper.n.01,a material made of cellulose pulp derived mainly from wood or rags or certain grasses,,
+paper roll,household,311,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: roll.n.11 (head noun; name matches only)
+paper towel,household,8456,paper_towel.n.01,Qwen-chosen sense,paper_towel.n.01,a disposable towel made of absorbent paper,,
+paper towel roll,household,5969,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: roll.n.11 (head noun; name matches only)
+pasta,food_drink,869,pasta.n.02,Qwen-chosen sense,pasta.n.01,shaped and dried dough made from flour and water and sometimes egg,,Qwen and rule disagree (rule: pasta.n.01)
+path,outside,724,path.n.02,Qwen-chosen sense,path.n.02,a way especially designed for a particular use,,
+patio,other,490,patio.n.01,Qwen-chosen sense,patio.n.01,usually paved outdoor area adjoining a residence,,
+pavement,outside,2601,pavement.n.01,Qwen-chosen sense,pavement.n.01,the paved surface of a thoroughfare,,
+pea,food_drink,832,pea.n.01,Qwen-chosen sense,pea.n.01,seed of a pea plant used for food,,
+pea pod,food_drink,340,pea_pod.n.01,Qwen-chosen sense,pea_pod.n.01,husk of a pea; edible in some garden peas,,
+peach,food_drink,1289,peach.n.03,Qwen-chosen sense,peach.n.01,downy juicy fruit with sweet yellowish or whitish flesh,,Qwen and rule disagree (rule: peach.n.01)
+pear,food_drink,546,pear.n.01,Qwen-chosen sense,pear.n.01,sweet juicy gritty-textured fruit available in many varieties,,
+peel,food_drink,560,peel.n.02,Qwen-chosen sense,peel.n.02,the rind of a fruit or vegetable,,
+peg,toys,306,peg.n.01,Qwen-chosen sense,peg.n.01,a wooden pin pushed or driven into a surface,,
+pegboard,household,1024,pegboard.n.01,Qwen-chosen sense,pegboard.n.01,a board perforated with regularly spaced holes into which pegs can be fitted,,
+pen,household,7119,pen.n.01,comparison-datasets (hand-checked),pen.n.01,a writing implement with a point from which ink flows,,
+pen holder,household,491,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: holder.n.01 (head noun; name matches only)
+pencil,household,6882,pencil.n.01,comparison-datasets (hand-checked),pencil.n.01,a thin cylindrical pointed writing implement; a rod of marking substance encased in wood,,
+pencil case,household,572,pencil_box.n.01,Qwen-chosen sense,pencil_box.n.01,a box for holding pencils,,
+pencil holder,household,357,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: holder.n.01 (head noun; name matches only)
+penguin,animals,2171,penguin.n.01,comparison-datasets (hand-checked),penguin.n.01,short-legged flightless birds of cold southern especially Antarctic regions having webbed feet and wings modified as flippers,,
+pepper,food_drink,504,pepper.n.04,Qwen-chosen sense,pepper.n.01,sweet and hot varieties of fruits of plants of the genus Capsicum,,Qwen and rule disagree (rule: pepper.n.01)
+pepper grinder,household,376,pepper_mill.n.01,Qwen-chosen sense,pepper_mill.n.01,a mill for grinding pepper,,
+phone,household,56836,telephone.n.01,Qwen-chosen sense,telephone.n.01,electronic equipment that converts sound into electrical signals that can be transmitted over distances and then converts received signals back into sounds,,
+photo,household,13132,photograph.n.01,Qwen-chosen sense,photograph.n.01,a representation of a person or scene in the form of a print or transparent slide; recorded by a camera on light-sensitive material,,
+piano,household,5234,piano.n.01,Qwen-chosen sense,piano.n.01,a keyboard instrument that is played by depressing keys that cause hammers to strike tuned strings and produce sounds,,
+picture,household,284727,picture.n.01,Qwen-chosen sense,picture.n.01,a visual representation (of an object or scene or person or abstraction) produced on a surface,,
+picture frame,household,137919,picture_frame.n.01,Qwen-chosen sense,picture_frame.n.01,a framework in which a picture is mounted,,
+pig,animals,5960,hog.n.03,comparison-datasets (hand-checked),hog.n.03,domestic swine,,
+pillar,furniture_rooms,567,column.n.07,Qwen-chosen sense,column.n.06,(architecture) a tall vertical cylindrical structure standing upright and used to support a structure,,Qwen and rule disagree (rule: column.n.06)
+pillow,household,143046,pillow.n.01,comparison-datasets (hand-checked),pillow.n.01,a cushion to support the head of a sleeping person,,
+pineapple,food_drink,1105,pineapple.n.02,Qwen-chosen sense,pineapple.n.01,large sweet fleshy tropical fruit with a terminal tuft of stiff leaves; widely cultivated,,Qwen and rule disagree (rule: pineapple.n.01)
+pinecone,other,316,pinecone.n.01,Qwen-chosen sense,pinecone.n.01,the seed-producing cone of a pine tree,,
+pipe,household,1172,pipe.n.02,Qwen-chosen sense,pipe.n.01,a long tube made of metal or plastic that is used to carry water or oil or gas etc.,,Qwen and rule disagree (rule: pipe.n.01)
+pitcher,household,1284,pitcher.n.02,Qwen-chosen sense,pitcher.n.02,an open vessel with a handle and a spout for pouring,,
+pizza,food_drink,1744,pizza.n.01,comparison-datasets (hand-checked),pizza.n.01,Italian open pie made of thin bread dough spread with a spiced mixture of e.g. tomato sauce and cheese,,
+place mat,household,2400,place_mat.n.01,Qwen-chosen sense,place_mat.n.01,a mat serving as table linen for an individual place setting,,
+placemat,household,4177,,none (Qwen: no sense fits),,,,not in WordNet
+planet,other,497,,none (Qwen: no sense fits),planet.n.01,,,Qwen: no sense fits (rule: planet.n.01)
+plank,household,498,board.n.02,Qwen-chosen sense,board.n.02,a stout length of sawn timber; made in a wide variety of sizes and used for many purposes,,
+plant,household,74696,flower.n.01,comparison-datasets (hand-checked),flower.n.01,a plant cultivated for its blooms or blossoms,,
+planter,household,1138,planter.n.03,Qwen-chosen sense,planter.n.03,a decorative pot for house plants,,
+planter box,other,415,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: box.n.01 (head noun; name matches only)
+plate,household,83162,plate.n.08;plate.n.04,comparison-datasets (hand-checked),plate.n.08;plate.n.04,a main course served on a plate,,
+play kitchen,toys,318,,none (Qwen: no sense fits),,,,not in WordNet
+play structure,toys,397,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: structure.n.01 (head noun; name matches only)
+play tent,other,1071,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: tent.n.01 (head noun; name matches only)
+play tunnel,other,461,,none (Qwen: no sense fits),,,,not in WordNet
+playdough,toys,464,,none (Qwen: no sense fits),,,,not in WordNet
+playhouse,toys,424,playhouse.n.01,Qwen-chosen sense,playhouse.n.01,plaything consisting of a small model of a house that children can play inside of,,
+playmat,toys,349,,none (Qwen: no sense fits),,,,not in WordNet
+playpen,household,28042,playpen.n.01,Qwen-chosen sense,playpen.n.01,a portable enclosure in which babies may be left to play,,
+playset,toys,421,,none (Qwen: no sense fits),,,,not in WordNet
+plug,household,717,plug.n.05,Qwen-chosen sense,plug.n.01,an electrical device with two or three pins that is inserted in a socket to make an electrical connection,,Qwen and rule disagree (rule: plug.n.01)
+plum,food_drink,403,plum.n.02,Qwen-chosen sense,plum.n.01,any of numerous varieties of small to medium-sized round or oval fruit having a smooth skin and a single pit,,Qwen and rule disagree (rule: plum.n.01)
+pole,household,1552,pole.n.01,Qwen-chosen sense,pole.n.01,a long (usually round) rod of wood or metal or plastic,,
+polo shirt,other,385,polo_shirt.n.01,Qwen-chosen sense,polo_shirt.n.01,a shirt with short sleeves designed for comfort and casual wear,,
+pom-pom,toys,1046,pompon.n.01,Qwen-chosen sense,pompon.n.01,decoration consisting of a ball of tufted wool or silk; usually worn on a hat,,
+pompom,toys,410,,none (Qwen: no sense fits),,,,not in WordNet
+pony,animals,7052,pony.n.05,comparison-datasets (hand-checked),pony.n.05,any of various breeds of small gentle horses usually less than five feet high at the shoulder,,
+pool,outside,351,pool.n.01,Qwen-chosen sense,pool.n.01,an excavation that is (usually) filled with water,,
+post,furniture_rooms,491,post.n.04,Qwen-chosen sense,post.n.04,an upright consisting of a piece of timber or metal fixed firmly in an upright position,,
+poster,household,6515,poster.n.01,Qwen-chosen sense,post_horse.n.01,a sign posted in a public place as an advertisement,,Qwen and rule disagree (rule: post_horse.n.01)
+pot,household,24871,pot.n.01,Qwen-chosen sense,pot.n.01,metal or earthenware cooking vessel that is usually round and deep; often has a handle and lid,,
+potato,food_drink,1907,potato.n.01,comparison-datasets (hand-checked),potato.n.01,an edible tuber native to South America; a staple food of Ireland,,
+potty,furniture_rooms,384,chamberpot.n.01,Qwen-chosen sense,toilet.n.02,a receptacle for urination or defecation in the bedroom,,Qwen and rule disagree (rule: toilet.n.02)
+potty chair,household,683,potty_seat.n.01,Qwen-chosen sense,potty_seat.n.01,toilet consisting of a small seat used by young children,,
+pouch,household,963,pouch.n.01,Qwen-chosen sense,pouch.n.01,a small or medium size container for holding or carrying things,,
+power cord,household,406,power_cord.n.01,Qwen-chosen sense,power_cord.n.01,a cord to conduct power to an electrical appliance,,
+power line,other,2341,power_line.n.01,Qwen-chosen sense,power_line.n.01,cable used to distribute electricity,,
+power strip,household,1681,,none (Qwen: no sense fits),,,,not in WordNet
+pressure cooker,household,363,pressure_cooker.n.01,Qwen-chosen sense,pressure_cooker.n.01,autoclave for cooking at temperatures above the boiling point of water,,
+printer,household,1177,printer.n.03,Qwen-chosen sense,printer.n.02,a machine that prints,,Qwen and rule disagree (rule: printer.n.02)
+pumpkin,food_drink,4097,pumpkin.n.02,comparison-datasets (hand-checked),pumpkin.n.02,usually large pulpy deep-yellow round fruit of the squash family maturing in late summer or early autumn,,
+purse,household,3066,purse.n.03;bag.n.04,comparison-datasets (hand-checked),purse.n.03;bag.n.04,a small bag for carrying money,,
+puzzle,toys,7874,puzzle.n.02,comparison-datasets (hand-checked),puzzle.n.02,a game that tests your ingenuity,,
+puzzle piece,toys,8256,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: piece.n.01 (head noun; name matches only)
+quilt,household,1707,quilt.n.01,Qwen-chosen sense,quilt.n.01,bedding made of two layers of cloth filled with stuffing and stitched together,,
+rabbit,animals,4813,rabbit.n.01,Qwen-chosen sense,rabbit.n.01,any of various burrowing animals of the family Leporidae having long ears and short tails; some domesticated and raised for pets or food,,
+rack,furniture_rooms,2907,rack.n.01,Qwen-chosen sense,rack.n.01,framework for holding objects,,
+racket,toys,421,racket.n.04,Qwen-chosen sense,racket.n.04,a sports implement (usually consisting of a handle and an oval frame with a tightly interlaced network of strings) used to strike a ball (or shuttlecock) in various games,,
+radiator,furniture_rooms,7219,radiator.n.02,Qwen-chosen sense,radiator.n.02,heater consisting of a series of pipes for circulating steam or hot water to heat rooms or buildings,,
+radio,household,435,radio.n.03;radio_receiver.n.01,comparison-datasets (hand-checked),radio.n.03;radio_receiver.n.01,a communication system based on broadcasting electromagnetic waves,,
+rag,household,333,rag.n.01,Qwen-chosen sense,rag.n.01,a small piece of cloth or paper,,
+railing,furniture_rooms,14810,railing.n.01,Qwen-chosen sense,railing.n.01,a barrier consisting of a horizontal bar and supports,,
+rainbow,outside,1800,rainbow.n.01,Qwen-chosen sense,rainbow.n.01,an arc of colored light in the sky caused by refraction of the sun's rays by rain,,
+ramp,toys,616,ramp.n.01,Qwen-chosen sense,ramp.n.01,an inclined surface connecting two levels,,
+range hood,furniture_rooms,12893,range_hood.n.01,Qwen-chosen sense,range_hood.n.01,exhaust hood over a kitchen range,,
+rattle,toys,3674,rattle.n.02,Qwen-chosen sense,rattle.n.02,a baby's toy that makes percussive noises when shaken,,
+record player,other,386,record_player.n.01,Qwen-chosen sense,record_player.n.01,machine in which rotating records cause a stylus to vibrate and the vibrations are amplified acoustically or electronically,,
+refrigerator,furniture_rooms,88184,refrigerator.n.01,comparison-datasets (hand-checked),refrigerator.n.01,white goods in which food can be stored at low temperatures,cooler.n.01,
+remote control,household,9723,remote_control.n.01,Qwen-chosen sense,remote_control.n.01,a device that can be used to control a machine or apparatus from a distance,,
+rhinoceros,animals,340,,none (Qwen: no sense fits),rhinoceros.n.01,,,Qwen: no sense fits (rule: rhinoceros.n.01)
+rice,food_drink,1189,rice.n.01,Qwen-chosen sense,rice.n.01,grains used as food either unpolished or more often polished,,
+rice cooker,furniture_rooms,1100,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: cooker.n.01 (head noun; name matches only)
+ride-on toy,other,503,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: plaything.n.01 (head noun; name matches only)
+ring,clothing,18271,ring.n.02,Qwen-chosen sense,ring.n.07,a toroidal shape,,Qwen and rule disagree (rule: ring.n.07)
+ring stacker,toys,690,,none (Qwen: no sense fits),,,,not in WordNet
+robe,clothing,1116,robe.n.01,Qwen-chosen sense,robe.n.01,any loose flowing garment,,
+robot,toys,808,,none (Qwen: no sense fits),automaton.n.02,,,Qwen: no sense fits (rule: automaton.n.02)
+robot vacuum,household,974,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: vacuum.n.04 (head noun; name matches only)
+rock,outside,5256,rock.n.01,Qwen-chosen sense,rock.n.01,a lump or mass of hard consolidated mineral matter,,
+rocket,toys,442,rocket.n.01,Qwen-chosen sense,rocket.n.01,any vehicle self-propelled by a rocket engine,,
+rocking horse,toys,788,hobby.n.02,Qwen-chosen sense,hobby.n.02,a child's plaything consisting of an imitation horse mounted on rockers; the child straddles it and pretends to ride,,
+rolling pin,household,370,rolling_pin.n.01,Qwen-chosen sense,rolling_pin.n.01,utensil consisting of a cylinder (usually of wood) with a handle at each end; used to roll out dough,,
+roof,outside,851,roof.n.01,comparison-datasets (hand-checked),roof.n.01,a protective covering that covers or forms the top of a building,,
+rope,household,444,rope.n.01,Qwen-chosen sense,rope.n.01,a strong line,,
+rose,outside,1235,rose.n.01,Qwen-chosen sense,rose.n.01,any of many shrubs of the genus Rosa that bear roses,,
+rug,furniture_rooms,167378,rug.n.01,Qwen-chosen sense,rug.n.01,floor covering consisting of a piece of thick heavy fabric (usually with nap or pile),,
+ruler,household,717,rule.n.12,Qwen-chosen sense,rule.n.12,measuring stick consisting of a strip of wood or metal or plastic with a straight edge that is used for drawing straight lines and measuring lengths,,
+sailboat,vehicles,480,sailboat.n.01,Qwen-chosen sense,sailboat.n.01,a small sailing vessel; usually with a single mast,,
+salad,food_drink,798,salad.n.01,Qwen-chosen sense,salad.n.01,food mixtures either arranged on a plate or tossed and served with a moist dressing; usually consisting of or including greens,,
+salt shaker,household,995,saltshaker.n.01,Qwen-chosen sense,saltshaker.n.01,a shaker with a perforated top for sprinkling salt,,
+sand,outside,1163,sand.n.01,Qwen-chosen sense,sand.n.01,a loose material consisting of grains of rock or coral,,
+sandal,clothing,7516,sandal.n.01,Qwen-chosen sense,sandal.n.01,a shoe consisting of a sole fastened by straps to the foot,,
+sandwich,food_drink,1570,sandwich.n.01,comparison-datasets (hand-checked),sandwich.n.01,two (or more) slices of bread with a filling between them,,
+santa claus,people,653,santa_claus.n.01,Qwen-chosen sense,santa_claus.n.01,the legendary patron saint of children; an imaginary being who is thought to bring presents to children at Christmas,,
+saucepan,household,320,saucepan.n.01,Qwen-chosen sense,saucepan.n.01,a deep pan with a handle; used for stewing or boiling,,
+scale,household,326,scale.n.07,Qwen-chosen sense,scale.n.05,a measuring instrument for weighing; shows amount of mass,,Qwen and rule disagree (rule: scale.n.05)
+scarf,clothing,1012,scarf.n.01,comparison-datasets (hand-checked),scarf.n.01,a garment worn around the head or neck or shoulders for warmth or decoration,,
+scissors,household,8811,scissors.n.01,comparison-datasets (hand-checked),scissors.n.01,an edge tool having two crossed pivoting blades,,
+scoop,household,1889,,none (Qwen: no sense fits),scoop.n.05,,,Qwen: no sense fits (rule: scoop.n.05)
+scooter,toys,1565,scooter.n.02,Qwen-chosen sense,scooter.n.02,child's two-wheeled vehicle operated by foot,,
+scratching post,household,613,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: post.n.04 (head noun; name matches only)
+screen,household,8768,screen.n.03,Qwen-chosen sense,screen.n.01,the display that is electronically created on the surface of the large end of a cathode-ray tube,,Qwen and rule disagree (rule: screen.n.01)
+screw,household,601,screw.n.04,Qwen-chosen sense,screw.n.02,a fastener with a tapered threaded shank and a slotted head,,Qwen and rule disagree (rule: screw.n.02)
+screwdriver,household,347,screwdriver.n.01,Qwen-chosen sense,screwdriver.n.01,a hand tool for driving screws; has a tip that fits into the head of a screw,,
+seahorse,animals,431,,none (Qwen: no sense fits),seahorse.n.02,,,Qwen: no sense fits (rule: seahorse.n.02)
+seal,animals,311,seal.n.09,Qwen-chosen sense,seal.n.09,any of numerous marine mammals that come on shore to breed; chiefly of cold regions,,
+seashell,outside,541,seashell.n.01,Qwen-chosen sense,seashell.n.01,the shell of a marine organism,,
+seat,furniture_rooms,877,seat.n.03,Qwen-chosen sense,seat.n.03,furniture that is designed for sitting on,,
+shadow,other,2357,shadow.n.01,Qwen-chosen sense,shadow.n.09,shade within clear boundaries,,Qwen and rule disagree (rule: shadow.n.09)
+shaker,household,562,shaker.n.03,Qwen-chosen sense,shaker.n.03,a container in which something can be shaken,,
+shape sorter,toys,2501,,none (Qwen: no sense fits),,,,not in WordNet
+shark,animals,734,,none (Qwen: no sense fits),shark.n.01,,,Qwen: no sense fits (rule: shark.n.01)
+shed,outside,1034,shed.n.01,Qwen-chosen sense,shed.n.01,an outbuilding with a single story; used for shelter or storage,,
+sheep,animals,1664,sheep.n.01,comparison-datasets (hand-checked),sheep.n.01,woolly usually horned ruminant mammal related to the goat,,
+sheet,household,618,sheet.n.03,Qwen-chosen sense,sheet.n.01,bed linen consisting of a large rectangular piece of cotton or linen cloth; used in pairs,,Qwen and rule disagree (rule: sheet.n.01)
+shelf,furniture_rooms,149130,shelf.n.01,Qwen-chosen sense,shelf.n.01,a support that consists of a horizontal surface for holding objects,,
+ship,vehicles,430,ship.n.01,Qwen-chosen sense,ship.n.01,a vessel that carries passengers or freight,,
+shirt,clothing,208788,shirt.n.01,comparison-datasets (hand-checked),shirt.n.01,a garment worn on the upper half of the body,,
+shoe,clothing,131059,shoe.n.01,comparison-datasets (hand-checked),shoe.n.01,footwear shaped to fit the foot (below the ankle) with a flexible upper of leather or plastic and a sole and heel of heavier material,,
+shoe rack,furniture_rooms,1454,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: rack.n.05 (head noun; name matches only)
+shopping cart,household,856,shopping_cart.n.01,Qwen-chosen sense,shopping_cart.n.01,a handcart that holds groceries or other goods while shopping,,
+shorts,clothing,48061,short_pants.n.01,comparison-datasets (hand-checked),short_pants.n.01,trousers that end at or above the knee,,
+shovel,outside,3704,shovel.n.01,comparison-datasets (hand-checked),shovel.n.01,a hand tool for lifting loose material; consists of a curved container or scoop and a handle,,
+shower curtain,household,876,shower_curtain.n.01,Qwen-chosen sense,shower_curtain.n.01,a curtain that keeps water from splashing out of the shower area,,
+shower head,household,500,showerhead.n.01,Qwen-chosen sense,showerhead.n.01,a perforated nozzle that showers water on a bather,,
+shutter,furniture_rooms,540,shutter.n.02,Qwen-chosen sense,shutter.n.01,a hinged blind for a window,,Qwen and rule disagree (rule: shutter.n.01)
+sideboard,furniture_rooms,523,buffet.n.01,Qwen-chosen sense,sideboard.n.01,a piece of furniture that stands at the side of a dining room; has shelves and drawers,,Qwen and rule disagree (rule: sideboard.n.01)
+sidewalk,other,2388,sidewalk.n.01,Qwen-chosen sense,sidewalk.n.01,walk consisting of a paved area for pedestrians; usually beside a street or roadway,,
+sign,household,8925,sign.n.02,Qwen-chosen sense,signboard.n.01,a public display of a message,,Qwen and rule disagree (rule: signboard.n.01)
+sink,furniture_rooms,29342,sink.n.01;washbasin.n.02,comparison-datasets (hand-checked),sink.n.01;washbasin.n.02,plumbing fixture consisting of a water basin fixed to a wall or floor and having a drainpipe,,
+skateboard,toys,343,skateboard.n.01,Qwen-chosen sense,skateboard.n.01,a board with wheels that is ridden in a standing or crouching position and propelled by foot,,
+skeleton,toys,331,skeletal_system.n.01,Qwen-chosen sense,skeleton.n.04,the hard structure (bones and cartilages) that provides a frame for the body of an animal,,Qwen and rule disagree (rule: skeleton.n.04)
+skirt,clothing,5523,skirt.n.02,Qwen-chosen sense,skirt.n.01,a garment hanging from the waist; worn mainly by girls and women,,Qwen and rule disagree (rule: skirt.n.01)
+skull,body_parts,303,skull.n.01,Qwen-chosen sense,skull.n.01,the bony skeleton of the head of vertebrates,,
+skylight,furniture_rooms,451,skylight.n.01,Qwen-chosen sense,skylight.n.01,a window in a roof to admit daylight,,
+sleeve,clothing,29111,sleeve.n.01,Qwen-chosen sense,sleeve.n.01,the part of a garment that is attached at the armhole and that provides a cloth covering for the arm,,
+slide,outside,3871,chute.n.02,comparison-datasets (hand-checked),chute.n.02,sloping channel through which things can descend,,
+slipper,clothing,12832,slipper.n.01,comparison-datasets (hand-checked),slipper.n.01,low footwear that can be slipped on and off easily; usually worn indoors,,
+smart speaker,household,306,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: loudspeaker.n.01 (head noun; name matches only)
+smiley face,other,311,,none (Qwen: no sense fits),,,,not in WordNet
+smoke detector,household,8378,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: detector.n.01 (head noun; name matches only)
+snack,food_drink,1787,bite.n.04,Qwen-chosen sense,bite.n.04,a light informal meal,,
+snake,animals,414,snake.n.05,Qwen-chosen sense,snake.n.01,"something long, thin, and flexible that resembles a snake",,Qwen and rule disagree (rule: snake.n.01)
+snow,outside,698,snow.n.02,Qwen-chosen sense,snow.n.02,a layer of snowflakes (white crystals of frozen water) covering the ground,,
+snowman,outside,573,snowman.n.01,comparison-datasets (hand-checked),snowman.n.01,a figure of a person made of packed snow,,
+soap,household,1747,soap.n.01,comparison-datasets (hand-checked),soap.n.01,a cleansing agent made from the salts of vegetable or animal fats,,
+soap dispenser,household,3719,soap_dispenser.n.01,Qwen-chosen sense,soap_dispenser.n.01,dispenser of liquid soap,,
+sock,clothing,42270,sock.n.01,comparison-datasets (hand-checked),sock.n.01,hosiery consisting of a cloth covering for the foot; worn inside the shoe; reaches to between the ankle and the knee,,
+socket,furniture_rooms,5136,socket.n.03,Qwen-chosen sense,socket.n.02,a receptacle into which an electric device can be inserted,,Qwen and rule disagree (rule: socket.n.02)
+soda can,food_drink,347,soda_can.n.01,Qwen-chosen sense,soda_can.n.01,a can for holding soft drinks,,
+soil,outside,1489,soil.n.02,Qwen-chosen sense,soil.n.02,the part of the earth's surface consisting of humus and disintegrated rock,,
+soundbar,household,328,,none (Qwen: no sense fits),,,,not in WordNet
+soup,food_drink,483,soup.n.01,comparison-datasets (hand-checked),soup.n.01,liquid food especially of meat or fish or vegetable stock often containing pieces of solid food,,
+spaghetti,food_drink,337,spaghetti.n.02,Qwen-chosen sense,spaghetti.n.01,pasta in the form of long strings,,Qwen and rule disagree (rule: spaghetti.n.01)
+spatula,household,5905,spatula.n.01,Qwen-chosen sense,spatula.n.01,a turner with a narrow flexible blade,,
+speaker,household,5322,loudspeaker.n.01,Qwen-chosen sense,loudspeaker.n.01,electro-acoustic transducer that converts electrical signals into sounds loud enough to be heard at a distance,,
+spice,food_drink,342,spice.n.02,Qwen-chosen sense,spice.n.02,any of a variety of pungent aromatic vegetable substances used for flavoring food,,
+spice rack,household,777,spice_rack.n.01,Qwen-chosen sense,spice_rack.n.01,a rack for displaying containers filled with spices,,
+spider,animals,1077,spider.n.01,Qwen-chosen sense,spider.n.01,"predatory arachnid with eight legs, two poison fangs, two feelers, and usually two silk-spinning organs at the back end of the body; they spin silk to make cocoons for eggs or traps for prey",,
+spider-man,people,1198,,none (Qwen: no sense fits),,,,not in WordNet
+sponge,household,5251,sponge.n.01,Qwen-chosen sense,sponge.n.01,a porous mass of interlacing fibers that forms the internal skeleton of various marine animals and usable to absorb water or any porous rubber or cellulose product similarly used,,
+spoon,household,48055,spoon.n.01,comparison-datasets (hand-checked),spoon.n.01,a piece of cutlery with a shallow bowl-shaped container and a handle; used to stir or serve or take up food,,
+spray bottle,household,3174,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: bottle.n.01 (head noun; name matches only)
+spray can,household,605,aerosol.n.02,Qwen-chosen sense,aerosol.n.02,a dispenser that holds a substance under pressure and that can release it as a fine spray (usually by means of a propellant gas),,
+square,other,787,square.n.07,Qwen-chosen sense,square.n.07,any artifact having a shape similar to a plane geometric figure with four equal sides and four right angles,,
+squash,food_drink,327,squash.n.02,Qwen-chosen sense,squash.n.01,edible fruit of a squash plant; eaten as a vegetable,,Qwen and rule disagree (rule: squash.n.01)
+squirrel,animals,937,squirrel.n.01,comparison-datasets (hand-checked),squirrel.n.01,a kind of arboreal rodent having a long bushy tail,,
+stacking ring,toys,720,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: ring.n.02 (head noun; name matches only)
+stair,furniture_rooms,1667,step.n.04,Qwen-chosen sense,step.n.04,support consisting of a place to rest the foot while ascending or descending a stairway,,
+stand,furniture_rooms,1179,stand.n.04,Qwen-chosen sense,stand.n.04,a small table for holding articles of various kinds,,
+stapler,household,374,stapler.n.01,Qwen-chosen sense,stapler.n.01,a machine that inserts staples into sheets of paper in order to fasten them together,,
+star,outside,3654,star.n.05,Qwen-chosen sense,star.n.01,a plane figure with 5 or more points; often used as an emblem,,Qwen and rule disagree (rule: star.n.01)
+starfish,animals,781,,none (Qwen: no sense fits),starfish.n.01,,,Qwen: no sense fits (rule: starfish.n.01)
+statue,household,395,statue.n.01,Qwen-chosen sense,statue.n.01,a sculpture representing a human or animal,,
+steering wheel,vehicles,1441,steering_wheel.n.01,Qwen-chosen sense,steering_wheel.n.01,a handwheel that is used for steering,,
+step,furniture_rooms,302,step.n.04,Qwen-chosen sense,step.n.04,support consisting of a place to rest the foot while ascending or descending a stairway,,
+stick,outside,3405,stick.n.01,Qwen-chosen sense,stick.n.01,an implement consisting of a length of wood,,
+sticker,household,12493,gummed_label.n.01,Qwen-chosen sense,dagger.n.01,an adhesive label,,Qwen and rule disagree (rule: dagger.n.01)
+sticker sheet,toys,367,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: sheet.n.06 (head noun; name matches only)
+stocking,clothing,6323,stocking.n.01,Qwen-chosen sense,stocking.n.01,close-fitting hosiery to cover the foot and leg; come in matched pairs (usually used in the plural),,
+stool,furniture_rooms,38853,stool.n.01,Qwen-chosen sense,stool.n.01,a simple seat without a back or arms,,
+storage unit,furniture_rooms,2454,,none (Qwen: no sense fits),,,,not in WordNet
+stove,furniture_rooms,35329,stove.n.02;stove.n.01,comparison-datasets (hand-checked),stove.n.02;stove.n.01,any heating apparatus,,
+stovetop,furniture_rooms,460,,none (Qwen: no sense fits),,,,not in WordNet
+strainer,household,839,strainer.n.01,Qwen-chosen sense,strainer.n.01,a filter to retain larger pieces while smaller pieces and liquids pass through,,
+strap,household,864,strap.n.01,Qwen-chosen sense,strap.n.01,an elongated leather strip (or a strip of similar material) for binding things together or holding something in position,,
+straw,household,21979,straw.n.04,Qwen-chosen sense,straw.n.01,a thin paper or plastic tube used to suck liquids into the mouth,,Qwen and rule disagree (rule: straw.n.01)
+strawberry,food_drink,5032,strawberry.n.01,comparison-datasets (hand-checked),strawberry.n.01,sweet fleshy red fruit,,
+street light,outside,707,streetlight.n.01,Qwen-chosen sense,streetlight.n.01,a lamp supported on a lamppost; for illuminating a street,,
+streetlight,outside,501,streetlight.n.01,Qwen-chosen sense,streetlight.n.01,a lamp supported on a lamppost; for illuminating a street,,
+string,household,426,string.n.01,Qwen-chosen sense,string.n.01,a lightweight cord,,
+string light,household,885,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: light.n.02 (head noun; name matches only)
+stroller,vehicles,21496,baby_buggy.n.01,comparison-datasets (hand-checked),baby_buggy.n.01,a small vehicle with four wheels in which a baby or child is pushed around,,
+suitcase,household,2521,bag.n.06,Qwen-chosen sense,bag.n.06,a portable rectangular container for carrying clothes,,
+sun,outside,2926,sun.n.01,Qwen-chosen sense,sun.n.04,the star that is the source of light and heat for the planets in the solar system,,Qwen and rule disagree (rule: sun.n.04)
+sunflower,outside,626,sunflower.n.01,Qwen-chosen sense,sunflower.n.01,any plant of the genus Helianthus having large flower heads with dark disk florets and showy yellow rays,,
+suv,vehicles,461,sport_utility.n.01,Qwen-chosen sense,sport_utility.n.01,a high-performance four-wheel drive car built on a truck chassis,,
+sweater,clothing,47626,sweater.n.01,comparison-datasets (hand-checked),sweater.n.01,a crocheted or knitted garment covering the upper part of the body,,
+sweatpants,clothing,14105,sweat_pants.n.01,Qwen-chosen sense,sweat_pants.n.01,loose-fitting trousers with elastic cuffs; worn by athletes,,
+sweatshirt,clothing,35722,sweatshirt.n.01,Qwen-chosen sense,sweatshirt.n.01,cotton knit pullover with long sleeves worn during athletic activity,,
+swing,outside,899,swing.n.02,comparison-datasets (hand-checked),swing.n.02,mechanical device used as a plaything to support someone swinging back and forth,,
+switch,household,1031,switch.n.01,Qwen-chosen sense,switch.n.01,control consisting of a mechanical or electrical or electronic device for making or breaking or changing the connections in a circuit,,
+table,furniture_rooms,375282,table.n.02;table.n.03,comparison-datasets (hand-checked),table.n.02;table.n.03,a piece of furniture having a smooth flat top that is usually supported by one or more vertical legs,,
+table runner,household,302,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: runner.n.08 (head noun; name matches only)
+tablecloth,household,25246,tablecloth.n.01,Qwen-chosen sense,tablecloth.n.01,a covering spread over a dining table,,
+tablet,household,22017,,none (Qwen: no sense fits),tablet.n.01,,,Qwen: no sense fits (rule: tablet.n.01)
+tableware,household,337,tableware.n.01,Qwen-chosen sense,tableware.n.01,articles for use at the table (dishes and silverware and glassware),,
+tag,household,615,tag.n.01,Qwen-chosen sense,rag.n.01,"a label written or printed on paper, cardboard, or plastic that is attached to something to indicate its owner, nature, price, etc.",,Qwen and rule disagree (rule: rag.n.01)
+tank top,clothing,11314,tank_top.n.01,Qwen-chosen sense,tank_top.n.01,a tight-fitting sleeveless shirt with wide shoulder straps and low neck and no front opening; often worn over a shirt or blouse,,
+tape,household,2054,tape.n.01,comparison-datasets (hand-checked),tape.n.01,a long thin piece of cloth or paper as used for binding or fastening,,
+tapestry,household,3674,tapestry.n.03,Qwen-chosen sense,tapestry.n.02,a wall hanging of heavy handwoven fabric with pictorial designs,,Qwen and rule disagree (rule: tapestry.n.02)
+tarp,household,1281,tarpaulin.n.01,Qwen-chosen sense,tarpaulin.n.01,waterproofed canvas,,
+tattoo,body_parts,2556,tattoo.n.02,Qwen-chosen sense,tattoo.n.02,a design on the skin made by tattooing,,
+teapot,household,1224,teapot.n.01,Qwen-chosen sense,teapot.n.01,pot for brewing tea; usually has a spout and handle,,
+teddy bear,animals,11995,teddy.n.01,Qwen-chosen sense,teddy.n.01,plaything consisting of a child's toy bear (usually plush and stuffed with soft materials),,
+television,furniture_rooms,105962,television_receiver.n.01,Qwen-chosen sense,television.n.02,an electronic device that receives television signals and displays them on a screen,,Qwen and rule disagree (rule: television.n.02)
+tent,toys,2219,tent.n.01,Qwen-chosen sense,tent.n.01,a portable shelter (usually of canvas stretched over supporting poles and fastened to the ground with ropes and pegs),,
+text,other,4018,text.n.01,Qwen-chosen sense,text.n.01,the words of something written,,
+thermos,household,5541,thermos.n.01,Qwen-chosen sense,thermos.n.01,vacuum flask that preserves temperature of hot or cold drinks,,
+thermostat,household,2332,thermostat.n.01,Qwen-chosen sense,thermostat.n.01,a regulator for automatically regulating temperature by starting or stopping the supply of heat,,
+tiger,animals,3150,tiger.n.02,comparison-datasets (hand-checked),tiger.n.02,large feline of forests in most of Asia having a tawny coat with black stripes; endangered,,
+tile,furniture_rooms,6685,tile.n.01,Qwen-chosen sense,tile.n.01,a flat thin rectangular slab (as of fired clay or rubber or linoleum) used to cover surfaces,,
+timer,household,772,timer.n.01,Qwen-chosen sense,timer.n.01,a timepiece that measures a time interval and signals its end,,
+tissue,household,18073,tissue.n.02,comparison-datasets (hand-checked),tissue.n.02,a soft thin (usually translucent) paper,,
+tissue box,household,10337,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: box.n.01 (head noun; name matches only)
+toast,food_drink,346,toast.n.01,comparison-datasets (hand-checked),toast.n.01,slices of bread that have been toasted,,
+toaster,household,5040,toaster.n.02,Qwen-chosen sense,toaster.n.02,a kitchen appliance (usually electric) for toasting bread,,
+toaster oven,furniture_rooms,2376,toaster_oven.n.01,Qwen-chosen sense,toaster_oven.n.01,kitchen appliance consisting of a small electric oven for toasting or warming food,,
+toe,body_parts,4733,toe.n.01,Qwen-chosen sense,toe.n.01,one of the digits of the foot,,
+toilet,furniture_rooms,5126,toilet.n.02,Qwen-chosen sense,toilet.n.01,a plumbing fixture for defecation and urination,,Qwen and rule disagree (rule: toilet.n.01)
+toilet paper,household,3369,toilet_tissue.n.01,Qwen-chosen sense,toilet_tissue.n.01,a soft thin absorbent paper for use in toilets,,
+toilet paper roll,household,379,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: roll.n.11 (head noun; name matches only)
+tomato,food_drink,2049,tomato.n.01,Qwen-chosen sense,tomato.n.01,mildly acid red or yellow pulpy fruit eaten as a vegetable,,
+tongs,household,703,tongs.n.01,Qwen-chosen sense,tongs.n.01,any of various devices for taking hold of objects; usually have two hinged legs with handles above and pointed hooks below,,
+toothbrush,household,7239,toothbrush.n.01,comparison-datasets (hand-checked),toothbrush.n.01,small brush; has long handle; used to clean teeth,,
+toothpaste,household,1674,toothpaste.n.01,Qwen-chosen sense,toothpaste.n.01,a dentifrice in the form of a paste,,
+top,clothing,2147,top.n.10,Qwen-chosen sense,top.n.07,a garment (especially for women) that extends from the shoulders to the waist or hips,,Qwen and rule disagree (rule: top.n.07)
+tortilla,food_drink,313,tortilla.n.01,Qwen-chosen sense,tortilla.n.01,thin unleavened pancake made from cornmeal or wheat flour,,
+tote bag,household,1613,carryall.n.01,Qwen-chosen sense,carryall.n.01,a capacious bag or basket,,
+towel,household,42315,towel.n.01,comparison-datasets (hand-checked),towel.n.01,a rectangular piece of absorbent cloth (or paper) for drying or wiping,,
+towel rack,household,357,towel_rack.n.01,Qwen-chosen sense,towel_rack.n.01,a rack consisting of one or more bars on which towels can be hung,,
+towel ring,household,345,towel_ring.n.01,Qwen-chosen sense,towel_ring.n.01,a circular hoop for holding a towel,,
+track,toys,926,,none (Qwen: no sense fits),track.n.03,,,Qwen: no sense fits (rule: track.n.03)
+tractor,vehicles,818,tractor.n.01,comparison-datasets (hand-checked),tractor.n.01,a wheeled vehicle with large wheels; used in farming and other applications,,
+train,vehicles,11182,train.n.01;locomotive.n.01;car.n.02,comparison-datasets (hand-checked),train.n.01;locomotive.n.01;car.n.02,public transport provided by a line of railway cars coupled together and drawn by a locomotive,,
+train track,toys,3206,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: track.n.03 (head noun; name matches only)
+trampoline,toys,749,trampoline.n.01,Qwen-chosen sense,trampoline.n.01,gymnastic apparatus consisting of a strong canvas sheet attached with springs to a metal frame; used for tumbling,,
+trash can,household,22013,ashcan.n.01,Qwen-chosen sense,ashcan.n.01,a bin that holds rubbish until it is collected,,
+tray,household,24486,tray.n.01,comparison-datasets (hand-checked),tray.n.01,an open receptacle for holding or displaying or serving articles or food,,
+tree,outside,75480,tree.n.01,Qwen-chosen sense,tree.n.01,a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms,,
+triangle,other,1732,,none (Qwen: no sense fits),triangle.n.04,,,Qwen: no sense fits (rule: triangle.n.04)
+tricycle,vehicles,3183,tricycle.n.01,comparison-datasets (hand-checked),tricycle.n.01,a vehicle with three wheels that is moved by foot pedals,,
+tripod,household,1013,tripod.n.01,Qwen-chosen sense,tripod.n.01,a three-legged rack used for support,,
+truck,vehicles,10353,truck.n.01,comparison-datasets (hand-checked),truck.n.01,an automotive vehicle suitable for hauling,minivan.n.01,
+tube,household,1424,pipe.n.03,Qwen-chosen sense,tube.n.01,a hollow cylindrical shape,,Qwen and rule disagree (rule: tube.n.01)
+tunnel,toys,659,,none (Qwen: no sense fits),tunnel.n.01,,,Qwen: no sense fits (rule: tunnel.n.01)
+tupperware,household,1768,,none (Qwen: no sense fits),,,,not in WordNet
+turtle,animals,1790,turtle.n.02,comparison-datasets (hand-checked),turtle.n.02,any of various aquatic and land reptiles having a bony shell and flipper-like limbs for swimming,,
+tv stand,furniture_rooms,4534,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: stand.n.04 (head noun; name matches only)
+ukulele,toys,692,uke.n.01,Qwen-chosen sense,uke.n.01,a small guitar having four strings,,
+umbrella,household,2993,umbrella.n.01,Qwen-chosen sense,umbrella.n.01,a lightweight handheld collapsible canopy,,
+underwear,clothing,415,underwear.n.01,Qwen-chosen sense,underwear.n.01,undergarment worn next to the skin and under the outer garments,,
+unicorn,animals,808,,none (Qwen: no sense fits),unicorn.n.01,,,Qwen: no sense fits (rule: unicorn.n.01)
+utensil,household,3692,utensil.n.01,Qwen-chosen sense,utensil.n.01,an implement for practical use (especially in a household),,
+utensil holder,household,1912,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: holder.n.01 (head noun; name matches only)
+utility pole,other,2419,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: pole.n.01 (head noun; name matches only)
+vacuum cleaner,furniture_rooms,7871,vacuum.n.04,Qwen-chosen sense,vacuum.n.04,an electrical home appliance that cleans by suction,,
+van,vehicles,732,van.n.05,Qwen-chosen sense,van.n.03,a truck with an enclosed cargo space,,Qwen and rule disagree (rule: van.n.03)
+vase,household,23261,vase.n.01,Qwen-chosen sense,vase.n.01,an open jar of glass or porcelain used as an ornament or to hold flowers,,
+vegetable,food_drink,2982,vegetable.n.01,Qwen-chosen sense,vegetable.n.01,edible seeds or roots or stems or leaves or bulbs or tubers or nonsweet fruits of any of numerous herbaceous plant,,
+vent,furniture_rooms,38433,vent.n.01,Qwen-chosen sense,vent.n.01,a hole for the escape of gas or air,,
+vest,clothing,921,,none (Qwen: no sense fits),vest.n.01,,,Qwen: no sense fits (rule: vest.n.01)
+video game,toys,817,computer_game.n.01,Qwen-chosen sense,computer_game.n.01,a game played against a computer,,
+waffle,other,440,waffle.n.01,Qwen-chosen sense,waffle.n.01,pancake batter baked in a waffle iron,,
+wagon,vehicles,465,wagon.n.04,Qwen-chosen sense,wagon.n.01,a child's four-wheeled toy cart sometimes used for coasting,,Qwen and rule disagree (rule: wagon.n.01)
+walker,household,3484,walker.n.06,Qwen-chosen sense,walker.n.04,an enclosing framework on casters or wheels; helps babies learn to walk,,Qwen and rule disagree (rule: walker.n.04)
+wall decal,other,1715,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: decal.n.01 (head noun; name matches only)
+wall hanging,household,2766,hanging.n.01,Qwen-chosen sense,hanging.n.01,decoration that is hung (as a tapestry) on a wall or over a window,,
+wallet,household,1160,wallet.n.01,Qwen-chosen sense,wallet.n.01,a pocket-size case for holding papers and paper money,,
+wardrobe,furniture_rooms,1632,wardrobe.n.01,Qwen-chosen sense,wardrobe.n.01,a tall piece of furniture that provides storage space for clothes; has a door and rails or hooks for hanging clothes,,
+washing machine,furniture_rooms,2163,washer.n.03,Qwen-chosen sense,washer.n.03,a home appliance for washing clothes and linens automatically,,
+watch,household,25146,watch.n.01,comparison-datasets (hand-checked),watch.n.01,a small portable timepiece,,
+water,food_drink,1729,water.n.01,Qwen-chosen sense,water.n.06,binary compound that occurs at room temperature as a clear colorless odorless tasteless liquid; freezes into ice below 0 degrees centigrade and boils above 100 degrees centigrade; widely used as a solvent,,Qwen and rule disagree (rule: water.n.06)
+water dispenser,household,626,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: dispenser.n.01 (head noun; name matches only)
+water gun,other,456,water_pistol.n.01,Qwen-chosen sense,water_pistol.n.01,plaything consisting of a toy pistol that squirts water,,
+water table,other,811,,none (Qwen: no sense fits),water_table.n.01,,,Qwen: no sense fits (rule: water_table.n.01)
+watering can,household,635,watering_can.n.01,Qwen-chosen sense,watering_can.n.01,a container with a handle and a spout with a perforated nozzle; used to sprinkle water over plants,,
+watermelon,food_drink,1492,watermelon.n.02,Qwen-chosen sense,watermelon.n.01,large oblong or roundish melon with a hard green rind and sweet watery red or occasionally yellowish pulp,,Qwen and rule disagree (rule: watermelon.n.01)
+weed,other,373,weed.n.01,Qwen-chosen sense,weed.n.02,any plant that crowds out cultivated plants,,Qwen and rule disagree (rule: weed.n.02)
+whale,animals,1038,,none (Qwen: no sense fits),whale.n.02,,,Qwen: no sense fits (rule: whale.n.02)
+wheel,household,3110,wheel.n.01,Qwen-chosen sense,wheel.n.01,a simple machine consisting of a circular frame with spokes (or a solid disc) that can rotate on a shaft or axle (as in vehicles or other machines),,
+whisk,household,647,whisk.n.01,Qwen-chosen sense,whisk.n.01,a mixer incorporating a coil of wires; used for whipping eggs or cream,,
+whiteboard,household,996,,none (Qwen: no sense fits),,,,not in WordNet
+window,furniture_rooms,355959,window.n.01,Qwen-chosen sense,window.n.01,a framework of wood or metal that contains a glass windowpane and is built into a wall or roof to admit light or air,,
+window sill,furniture_rooms,988,windowsill.n.01,Qwen-chosen sense,windowsill.n.01,the sill of a window; the horizontal member at the bottom of the window frame,,
+wine glass,other,2320,wineglass.n.01,Qwen-chosen sense,wineglass.n.01,a glass that has a stem and in which wine is served,,
+wipe,household,468,,none (Qwen: no sense fits),rub.n.02,,,Qwen: no sense fits (rule: rub.n.02)
+wire,household,2449,wire.n.02,Qwen-chosen sense,wire.n.01,a metal conductor that carries electricity over a distance,,Qwen and rule disagree (rule: wire.n.01)
+woman,people,10847,woman.n.01,Qwen-chosen sense,woman.n.01,an adult female person (as opposed to a man),,
+wood,other,734,wood.n.01,Qwen-chosen sense,wood.n.08,the hard fibrous lignified substance under the bark of trees,,Qwen and rule disagree (rule: wood.n.08)
+wood chip,outside,319,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: bit.n.02 (head noun; name matches only)
+wrapper,household,491,wrapping.n.01,Qwen-chosen sense,negligee.n.01,the covering (usually paper or cellophane) in which something is wrapped,,Qwen and rule disagree (rule: negligee.n.01)
+wreath,household,1156,wreath.n.01,Qwen-chosen sense,wreath.n.01,flower arrangement consisting of a circular band of foliage or flowers for ornamental purposes,,
+wristband,clothing,520,,none (Qwen: no sense fits),wristband.n.01,,,Qwen: no sense fits (rule: wristband.n.01)
+xylophone,toys,2187,,none (Qwen: no sense fits),marimba.n.01,,,Qwen: no sense fits (rule: marimba.n.01)
+yoga mat,household,443,,none (Qwen: head-noun sense only),,,,not in WordNet; approximate: mat.n.03 (head noun; name matches only)
+yogurt,food_drink,1517,yogurt.n.01,comparison-datasets (hand-checked),yogurt.n.01,a custard-like food made from curdled milk,,
+zebra,animals,1569,zebra.n.01,comparison-datasets (hand-checked),zebra.n.01,any of several fleet black-and-white striped African equines,,

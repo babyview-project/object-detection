@@ -1,0 +1,696 @@
+id,name,synset,n_exemplars,category,anchor,hypernym_distance
+n01440764,tench,tench.n.01,1350,fish,fish.n.01,6
+n01443537,goldfish,goldfish.n.01,1350,fish,fish.n.01,6
+n01484850,great white shark,great_white_shark.n.01,1350,fish,fish.n.01,5
+n01491361,tiger shark,tiger_shark.n.01,1350,fish,fish.n.01,5
+n01494475,hammerhead,hammerhead.n.03,1350,fish,fish.n.01,4
+n01496331,electric ray,electric_ray.n.01,1350,fish,fish.n.01,4
+n01498041,stingray,stingray.n.01,1350,fish,fish.n.01,4
+n01514668,cock,cock.n.05,1350,chicken,cock.n.05,0
+n01514859,hen,hen.n.02,1350,chicken,hen.n.02,0
+n01518878,ostrich,ostrich.n.02,1350,bird,bird.n.01,2
+n01530575,brambling,brambling.n.01,1350,bird,bird.n.01,4
+n01531178,goldfinch,goldfinch.n.02,1350,bird,bird.n.01,4
+n01532829,house finch,house_finch.n.01,1350,bird,bird.n.01,4
+n01534433,junco,junco.n.01,1350,bird,bird.n.01,4
+n01537544,indigo bunting,indigo_bunting.n.01,1350,bird,bird.n.01,5
+n01558993,robin,robin.n.02,1350,bird,bird.n.01,4
+n01560419,bulbul,bulbul.n.01,1350,bird,bird.n.01,5
+n01580077,jay,jay.n.02,1350,bird,bird.n.01,4
+n01582220,magpie,magpie.n.01,1350,bird,bird.n.01,4
+n01592084,chickadee,chickadee.n.01,1350,bird,bird.n.01,4
+n01601694,water ouzel,water_ouzel.n.01,1350,bird,bird.n.01,3
+n01608432,kite,kite.n.04,1350,bird,bird.n.01,3
+n01614925,bald eagle,bald_eagle.n.01,1350,bird,bird.n.01,3
+n01616318,vulture,vulture.n.01,1350,bird,bird.n.01,2
+n01622779,great grey owl,great_grey_owl.n.01,1350,owl,owl.n.01,1
+n01641577,bullfrog,bullfrog.n.01,1350,frog,frog.n.01,2
+n01644373,tree frog,tree_frog.n.02,1350,frog,frog.n.01,1
+n01644900,tailed frog,tailed_frog.n.01,1350,frog,frog.n.01,1
+n01664065,loggerhead,loggerhead.n.02,1350,turtle,turtle.n.02,2
+n01665541,leatherback turtle,leatherback_turtle.n.01,1350,turtle,turtle.n.02,2
+n01667114,mud turtle,mud_turtle.n.01,1350,turtle,turtle.n.02,1
+n01667778,terrapin,terrapin.n.01,1350,turtle,turtle.n.02,1
+n01669191,box turtle,box_turtle.n.01,1350,turtle,turtle.n.02,1
+n01675722,banded gecko,banded_gecko.n.01,1350,lizard,lizard.n.01,2
+n01677366,common iguana,common_iguana.n.01,1350,lizard,lizard.n.01,2
+n01682714,American chameleon,american_chameleon.n.01,1350,lizard,lizard.n.01,2
+n01685808,whiptail,whiptail.n.01,1350,lizard,lizard.n.01,2
+n01687978,agama,agama.n.01,1350,lizard,lizard.n.01,2
+n01688243,frilled lizard,frilled_lizard.n.01,1167,lizard,lizard.n.01,2
+n01689811,alligator lizard,alligator_lizard.n.01,1350,lizard,lizard.n.01,2
+n01692333,Gila monster,gila_monster.n.01,1350,lizard,lizard.n.01,2
+n01693334,green lizard,green_lizard.n.01,1350,lizard,lizard.n.01,2
+n01694178,African chameleon,african_chameleon.n.01,1350,lizard,lizard.n.01,2
+n01695060,Komodo dragon,komodo_dragon.n.01,1350,lizard,lizard.n.01,2
+n01698640,American alligator,american_alligator.n.01,1350,alligator,alligator.n.02,1
+n01773157,black and gold garden spider,black_and_gold_garden_spider.n.01,1350,spider,spider.n.01,1
+n01773549,barn spider,barn_spider.n.01,1350,spider,spider.n.01,1
+n01773797,garden spider,garden_spider.n.01,1350,spider,spider.n.01,1
+n01774384,black widow,black_widow.n.01,1350,spider,spider.n.01,1
+n01774750,tarantula,tarantula.n.02,1350,spider,spider.n.01,1
+n01775062,wolf spider,wolf_spider.n.01,1350,spider,spider.n.01,1
+n01795545,black grouse,black_grouse.n.01,1350,bird,bird.n.01,4
+n01796340,ptarmigan,ptarmigan.n.01,1350,bird,bird.n.01,4
+n01797886,ruffed grouse,ruffed_grouse.n.01,1350,bird,bird.n.01,4
+n01798484,prairie chicken,prairie_chicken.n.01,1350,bird,bird.n.01,4
+n01806143,peacock,peacock.n.02,1350,bird,bird.n.01,6
+n01806567,quail,quail.n.02,1350,bird,bird.n.01,4
+n01807496,partridge,partridge.n.03,1350,bird,bird.n.01,4
+n01817953,African grey,african_grey.n.01,1350,bird,bird.n.01,2
+n01818515,macaw,macaw.n.01,1350,bird,bird.n.01,2
+n01819313,sulphur-crested cockatoo,sulphur-crested_cockatoo.n.01,1350,bird,bird.n.01,3
+n01820546,lorikeet,lorikeet.n.01,1350,bird,bird.n.01,3
+n01824575,coucal,coucal.n.01,1350,bird,bird.n.01,3
+n01828970,bee eater,bee_eater.n.01,1350,bird,bird.n.01,2
+n01829413,hornbill,hornbill.n.01,1350,bird,bird.n.01,2
+n01833805,hummingbird,hummingbird.n.01,1350,bird,bird.n.01,2
+n01843065,jacamar,jacamar.n.01,1350,bird,bird.n.01,2
+n01843383,toucan,toucan.n.01,1350,bird,bird.n.01,2
+n01847000,drake,drake.n.02,1350,duck,duck.n.01,1
+n01855032,red-breasted merganser,red-breasted_merganser.n.01,1191,duck,duck.n.01,3
+n01855672,goose,goose.n.01,1350,bird,bird.n.01,4
+n01860187,black swan,black_swan.n.01,1350,bird,bird.n.01,3
+n01978287,Dungeness crab,dungeness_crab.n.02,1350,crab,crab.n.01,1
+n01978455,rock crab,rock_crab.n.01,1350,crab,crab.n.01,1
+n01980166,fiddler crab,fiddler_crab.n.01,1350,crab,crab.n.01,1
+n01981276,king crab,king_crab.n.03,1350,crab,crab.n.01,1
+n02002556,white stork,white_stork.n.01,1350,bird,bird.n.01,4
+n02002724,black stork,black_stork.n.01,1350,bird,bird.n.01,4
+n02006656,spoonbill,spoonbill.n.01,1350,bird,bird.n.01,3
+n02007558,flamingo,flamingo.n.01,1350,bird,bird.n.01,3
+n02009229,little blue heron,little_blue_heron.n.01,1350,bird,bird.n.01,4
+n02009912,American egret,american_egret.n.01,1350,bird,bird.n.01,5
+n02011460,bittern,bittern.n.01,1350,bird,bird.n.01,4
+n02012849,crane,crane.n.05,1350,bird,bird.n.01,3
+n02013706,limpkin,limpkin.n.01,1350,bird,bird.n.01,3
+n02017213,European gallinule,european_gallinule.n.01,1350,bird,bird.n.01,4
+n02018207,American coot,american_coot.n.01,1350,bird,bird.n.01,5
+n02018795,bustard,bustard.n.01,1350,bird,bird.n.01,3
+n02025239,ruddy turnstone,ruddy_turnstone.n.01,1350,bird,bird.n.01,6
+n02027492,red-backed sandpiper,red-backed_sandpiper.n.01,1350,bird,bird.n.01,5
+n02028035,redshank,redshank.n.01,1350,bird,bird.n.01,5
+n02033041,dowitcher,dowitcher.n.01,1350,bird,bird.n.01,5
+n02037110,oystercatcher,oystercatcher.n.01,1350,bird,bird.n.01,4
+n02051845,pelican,pelican.n.01,1350,bird,bird.n.01,4
+n02056570,king penguin,king_penguin.n.01,1350,penguin,penguin.n.01,1
+n02058221,albatross,albatross.n.02,1350,bird,bird.n.01,4
+n02077923,sea lion,sea_lion.n.01,1350,seal,seal.n.09,2
+n02085620,Chihuahua,chihuahua.n.03,1350,dog,dog.n.01,2
+n02085782,Japanese spaniel,japanese_spaniel.n.01,822,dog,dog.n.01,2
+n02085936,Maltese dog,maltese_dog.n.01,1350,dog,dog.n.01,2
+n02086079,Pekinese,pekinese.n.01,1350,dog,dog.n.01,2
+n02086240,Shih-Tzu,shih-tzu.n.01,1350,dog,dog.n.01,2
+n02086646,Blenheim spaniel,blenheim_spaniel.n.01,1350,dog,dog.n.01,4
+n02086910,papillon,papillon.n.01,1350,dog,dog.n.01,3
+n02087046,toy terrier,toy_terrier.n.01,910,dog,dog.n.01,2
+n02087394,Rhodesian ridgeback,rhodesian_ridgeback.n.01,1350,dog,dog.n.01,2
+n02088094,Afghan hound,afghan_hound.n.01,1350,dog,dog.n.01,3
+n02088238,basset,basset.n.01,1350,dog,dog.n.01,3
+n02088364,beagle,beagle.n.01,1350,dog,dog.n.01,3
+n02088466,bloodhound,bloodhound.n.01,1350,dog,dog.n.01,3
+n02088632,bluetick,bluetick.n.01,1186,dog,dog.n.01,3
+n02089078,black-and-tan coonhound,black-and-tan_coonhound.n.01,782,dog,dog.n.01,4
+n02089867,Walker hound,walker_hound.n.01,1075,dog,dog.n.01,4
+n02089973,English foxhound,english_foxhound.n.01,804,dog,dog.n.01,4
+n02090379,redbone,redbone.n.01,1340,dog,dog.n.01,3
+n02090622,borzoi,borzoi.n.01,1350,dog,dog.n.01,4
+n02090721,Irish wolfhound,irish_wolfhound.n.01,1350,dog,dog.n.01,4
+n02091032,Italian greyhound,italian_greyhound.n.01,1350,dog,dog.n.01,4
+n02091134,whippet,whippet.n.01,1350,dog,dog.n.01,4
+n02091244,Ibizan hound,ibizan_hound.n.01,1350,dog,dog.n.01,3
+n02091467,Norwegian elkhound,norwegian_elkhound.n.01,1350,dog,dog.n.01,3
+n02091635,otterhound,otterhound.n.01,788,dog,dog.n.01,3
+n02091831,Saluki,saluki.n.01,1350,dog,dog.n.01,3
+n02092002,Scottish deerhound,scottish_deerhound.n.01,1350,dog,dog.n.01,3
+n02092339,Weimaraner,weimaraner.n.01,1350,dog,dog.n.01,3
+n02093256,Staffordshire bullterrier,staffordshire_bullterrier.n.01,1350,dog,dog.n.01,4
+n02093428,American Staffordshire terrier,american_staffordshire_terrier.n.01,1350,dog,dog.n.01,4
+n02093647,Bedlington terrier,bedlington_terrier.n.01,1308,dog,dog.n.01,3
+n02093754,Border terrier,border_terrier.n.01,1350,dog,dog.n.01,3
+n02093859,Kerry blue terrier,kerry_blue_terrier.n.01,1323,dog,dog.n.01,3
+n02093991,Irish terrier,irish_terrier.n.01,1350,dog,dog.n.01,3
+n02094114,Norfolk terrier,norfolk_terrier.n.01,1350,dog,dog.n.01,3
+n02094258,Norwich terrier,norwich_terrier.n.01,1350,dog,dog.n.01,3
+n02094433,Yorkshire terrier,yorkshire_terrier.n.01,1350,dog,dog.n.01,3
+n02095314,wire-haired fox terrier,wire-haired_fox_terrier.n.01,1027,dog,dog.n.01,4
+n02095570,Lakeland terrier,lakeland_terrier.n.01,1350,dog,dog.n.01,4
+n02095889,Sealyham terrier,sealyham_terrier.n.01,986,dog,dog.n.01,5
+n02096051,Airedale,airedale.n.01,1350,dog,dog.n.01,3
+n02096177,cairn,cairn.n.02,1350,dog,dog.n.01,3
+n02096294,Australian terrier,australian_terrier.n.01,1350,dog,dog.n.01,3
+n02096437,Dandie Dinmont,dandie_dinmont.n.01,1206,dog,dog.n.01,3
+n02096585,Boston bull,boston_bull.n.01,1350,dog,dog.n.01,3
+n02097047,miniature schnauzer,miniature_schnauzer.n.01,1350,dog,dog.n.01,4
+n02097130,giant schnauzer,giant_schnauzer.n.01,1350,dog,dog.n.01,4
+n02097209,standard schnauzer,standard_schnauzer.n.01,1350,dog,dog.n.01,4
+n02097298,Scotch terrier,scotch_terrier.n.01,1350,dog,dog.n.01,3
+n02097474,Tibetan terrier,tibetan_terrier.n.01,1350,dog,dog.n.01,3
+n02097658,silky terrier,silky_terrier.n.01,1350,dog,dog.n.01,3
+n02098105,soft-coated wheaten terrier,soft-coated_wheaten_terrier.n.01,1350,dog,dog.n.01,3
+n02098286,West Highland white terrier,west_highland_white_terrier.n.01,1350,dog,dog.n.01,3
+n02098413,Lhasa,lhasa.n.02,1350,dog,dog.n.01,3
+n02099267,flat-coated retriever,flat-coated_retriever.n.01,1350,dog,dog.n.01,4
+n02099429,curly-coated retriever,curly-coated_retriever.n.01,1268,dog,dog.n.01,4
+n02099601,golden retriever,golden_retriever.n.01,1350,dog,dog.n.01,4
+n02099712,Labrador retriever,labrador_retriever.n.01,1350,dog,dog.n.01,4
+n02099849,Chesapeake Bay retriever,chesapeake_bay_retriever.n.01,1350,dog,dog.n.01,4
+n02100236,German short-haired pointer,german_short-haired_pointer.n.01,1350,dog,dog.n.01,4
+n02100583,vizsla,vizsla.n.01,1350,dog,dog.n.01,4
+n02100735,English setter,english_setter.n.01,1350,dog,dog.n.01,4
+n02100877,Irish setter,irish_setter.n.01,1350,dog,dog.n.01,4
+n02101006,Gordon setter,gordon_setter.n.01,1350,dog,dog.n.01,4
+n02101388,Brittany spaniel,brittany_spaniel.n.01,1350,dog,dog.n.01,4
+n02101556,clumber,clumber.n.01,1350,dog,dog.n.01,4
+n02102040,English springer,english_springer.n.01,1350,dog,dog.n.01,5
+n02102177,Welsh springer spaniel,welsh_springer_spaniel.n.01,1350,dog,dog.n.01,5
+n02102318,cocker spaniel,cocker_spaniel.n.01,1350,dog,dog.n.01,4
+n02102480,Sussex spaniel,sussex_spaniel.n.01,1350,dog,dog.n.01,4
+n02102973,Irish water spaniel,irish_water_spaniel.n.01,1019,dog,dog.n.01,5
+n02104029,kuvasz,kuvasz.n.01,1350,dog,dog.n.01,3
+n02104365,schipperke,schipperke.n.01,1350,dog,dog.n.01,3
+n02105056,groenendael,groenendael.n.01,1350,dog,dog.n.01,4
+n02105162,malinois,malinois.n.01,1350,dog,dog.n.01,4
+n02105251,briard,briard.n.01,1350,dog,dog.n.01,3
+n02105412,kelpie,kelpie.n.02,1350,dog,dog.n.01,3
+n02105505,komondor,komondor.n.01,1350,dog,dog.n.01,3
+n02105641,Old English sheepdog,old_english_sheepdog.n.01,1350,dog,dog.n.01,3
+n02105855,Shetland sheepdog,shetland_sheepdog.n.01,1350,dog,dog.n.01,3
+n02106030,collie,collie.n.01,1350,dog,dog.n.01,3
+n02106166,Border collie,border_collie.n.01,1350,dog,dog.n.01,3
+n02106382,Bouvier des Flandres,bouvier_des_flandres.n.01,1350,dog,dog.n.01,3
+n02106550,Rottweiler,rottweiler.n.01,1350,dog,dog.n.01,3
+n02106662,German shepherd,german_shepherd.n.01,1350,dog,dog.n.01,3
+n02107142,Doberman,doberman.n.01,1350,dog,dog.n.01,4
+n02107312,miniature pinscher,miniature_pinscher.n.01,1350,dog,dog.n.01,4
+n02107574,Greater Swiss Mountain dog,greater_swiss_mountain_dog.n.01,1350,dog,dog.n.01,3
+n02107683,Bernese mountain dog,bernese_mountain_dog.n.01,1350,dog,dog.n.01,3
+n02107908,Appenzeller,appenzeller.n.01,1350,dog,dog.n.01,3
+n02108000,EntleBucher,entlebucher.n.01,1350,dog,dog.n.01,3
+n02108089,boxer,boxer.n.04,1350,dog,dog.n.01,2
+n02108422,bull mastiff,bull_mastiff.n.01,1350,dog,dog.n.01,2
+n02108551,Tibetan mastiff,tibetan_mastiff.n.01,1350,dog,dog.n.01,3
+n02108915,French bulldog,french_bulldog.n.01,1350,dog,dog.n.01,3
+n02109047,Great Dane,great_dane.n.01,1350,dog,dog.n.01,2
+n02109525,Saint Bernard,saint_bernard.n.01,1350,dog,dog.n.01,2
+n02109961,Eskimo dog,eskimo_dog.n.01,1350,dog,dog.n.01,2
+n02110063,malamute,malamute.n.01,1350,dog,dog.n.01,3
+n02110185,Siberian husky,siberian_husky.n.01,1350,dog,dog.n.01,3
+n02110341,dalmatian,dalmatian.n.02,1350,dog,dog.n.01,1
+n02110627,affenpinscher,affenpinscher.n.01,1004,dog,dog.n.01,4
+n02110806,basenji,basenji.n.01,1350,dog,dog.n.01,1
+n02110958,pug,pug.n.01,1350,dog,dog.n.01,1
+n02111129,Leonberg,leonberg.n.01,1350,dog,dog.n.01,1
+n02111277,Newfoundland,newfoundland.n.01,1350,dog,dog.n.01,1
+n02111500,Great Pyrenees,great_pyrenees.n.01,1350,dog,dog.n.01,1
+n02111889,Samoyed,samoyed.n.03,1350,dog,dog.n.01,2
+n02112018,Pomeranian,pomeranian.n.01,1350,dog,dog.n.01,2
+n02112137,chow,chow.n.03,1350,dog,dog.n.01,2
+n02112350,keeshond,keeshond.n.01,1350,dog,dog.n.01,2
+n02112706,Brabancon griffon,brabancon_griffon.n.01,1120,dog,dog.n.01,2
+n02113023,Pembroke,pembroke.n.01,1350,dog,dog.n.01,2
+n02113186,Cardigan,cardigan.n.02,1350,dog,dog.n.01,2
+n02113624,toy poodle,toy_poodle.n.01,1350,dog,dog.n.01,2
+n02113712,miniature poodle,miniature_poodle.n.01,1350,dog,dog.n.01,2
+n02113799,standard poodle,standard_poodle.n.01,1350,dog,dog.n.01,2
+n02113978,Mexican hairless,mexican_hairless.n.01,805,dog,dog.n.01,1
+n02119022,red fox,red_fox.n.03,1350,fox,fox.n.01,1
+n02119789,kit fox,kit_fox.n.01,1350,fox,fox.n.01,1
+n02120079,Arctic fox,arctic_fox.n.01,1350,fox,fox.n.01,1
+n02120505,grey fox,grey_fox.n.01,1350,fox,fox.n.01,1
+n02123045,tabby,tabby.n.01,1350,cat,cat.n.01,2
+n02123159,tiger cat,tiger_cat.n.02,1350,cat,cat.n.01,2
+n02123394,Persian cat,persian_cat.n.01,1350,cat,cat.n.01,2
+n02123597,Siamese cat,siamese_cat.n.01,1350,cat,cat.n.01,2
+n02124075,Egyptian cat,egyptian_cat.n.01,1350,cat,cat.n.01,2
+n02127052,lynx,lynx.n.02,1350,cat,cat.n.01,2
+n02129165,lion,lion.n.01,1350,lion,lion.n.01,0
+n02129604,tiger,tiger.n.02,1350,tiger,tiger.n.02,0
+n02132136,brown bear,brown_bear.n.01,1350,bear,bear.n.01,1
+n02133161,American black bear,american_black_bear.n.01,1350,bear,bear.n.01,1
+n02134084,ice bear,ice_bear.n.01,1350,bear,bear.n.01,1
+n02134418,sloth bear,sloth_bear.n.01,1350,bear,bear.n.01,1
+n02165105,tiger beetle,tiger_beetle.n.01,1350,insect,insect.n.01,2
+n02165456,ladybug,ladybug.n.01,1350,ladybug,ladybug.n.01,0
+n02167151,ground beetle,ground_beetle.n.01,1350,insect,insect.n.01,2
+n02168699,long-horned beetle,long-horned_beetle.n.01,1350,insect,insect.n.01,2
+n02169497,leaf beetle,leaf_beetle.n.01,1350,insect,insect.n.01,2
+n02172182,dung beetle,dung_beetle.n.01,1350,insect,insect.n.01,4
+n02174001,rhinoceros beetle,rhinoceros_beetle.n.01,1350,insect,insect.n.01,4
+n02177972,weevil,weevil.n.01,1350,insect,insect.n.01,2
+n02190166,fly,fly.n.01,1350,insect,insect.n.01,2
+n02206856,bee,bee.n.01,1350,bee,bee.n.01,0
+n02219486,ant,ant.n.01,1350,insect,insect.n.01,2
+n02226429,grasshopper,grasshopper.n.01,1350,insect,insect.n.01,2
+n02229544,cricket,cricket.n.01,1350,insect,insect.n.01,2
+n02231487,walking stick,walking_stick.n.02,1350,insect,insect.n.01,2
+n02233338,cockroach,cockroach.n.01,1350,insect,insect.n.01,2
+n02236044,mantis,mantis.n.01,1350,insect,insect.n.01,2
+n02256656,cicada,cicada.n.01,1350,insect,insect.n.01,2
+n02259212,leafhopper,leafhopper.n.01,1350,insect,insect.n.01,2
+n02264363,lacewing,lacewing.n.01,1350,insect,insect.n.01,2
+n02268443,dragonfly,dragonfly.n.01,1350,insect,insect.n.01,2
+n02268853,damselfly,damselfly.n.01,1350,insect,insect.n.01,2
+n02276258,admiral,admiral.n.02,1350,butterfly,butterfly.n.01,2
+n02277742,ringlet,ringlet.n.04,1350,butterfly,butterfly.n.01,1
+n02279972,monarch,monarch.n.02,1350,butterfly,butterfly.n.01,2
+n02280649,cabbage butterfly,cabbage_butterfly.n.01,1350,butterfly,butterfly.n.01,2
+n02281406,sulphur butterfly,sulphur_butterfly.n.01,1350,butterfly,butterfly.n.01,1
+n02281787,lycaenid,lycaenid.n.01,1350,butterfly,butterfly.n.01,1
+n02325366,wood rabbit,wood_rabbit.n.01,1350,rabbit,rabbit.n.01,1
+n02328150,Angora,angora.n.03,1350,rabbit,rabbit.n.01,1
+n02356798,fox squirrel,fox_squirrel.n.01,1256,squirrel,squirrel.n.01,2
+n02391049,zebra,zebra.n.01,1350,zebra,zebra.n.01,0
+n02395406,hog,hog.n.03,1350,pig,hog.n.03,0
+n02403003,ox,ox.n.01,1350,cow,cattle.n.01,1
+n02412080,ram,ram.n.05,1350,sheep,sheep.n.01,1
+n02417914,ibex,ibex.n.01,1350,goat,goat.n.01,2
+n02437616,llama,llama.n.01,1350,llama,llama.n.01,0
+n02484975,guenon,guenon.n.01,1350,monkey,monkey.n.01,2
+n02486261,patas,patas.n.01,1350,monkey,monkey.n.01,2
+n02486410,baboon,baboon.n.01,1350,monkey,monkey.n.01,2
+n02487347,macaque,macaque.n.01,1350,monkey,monkey.n.01,2
+n02488291,langur,langur.n.01,1350,monkey,monkey.n.01,2
+n02488702,colobus,colobus.n.01,1350,monkey,monkey.n.01,2
+n02489166,proboscis monkey,proboscis_monkey.n.01,1350,monkey,monkey.n.01,2
+n02490219,marmoset,marmoset.n.01,1350,monkey,monkey.n.01,2
+n02492035,capuchin,capuchin.n.02,1350,monkey,monkey.n.01,2
+n02492660,howler monkey,howler_monkey.n.01,1350,monkey,monkey.n.01,2
+n02493509,titi,titi.n.03,1350,monkey,monkey.n.01,2
+n02493793,spider monkey,spider_monkey.n.01,1350,monkey,monkey.n.01,2
+n02494079,squirrel monkey,squirrel_monkey.n.01,1350,monkey,monkey.n.01,2
+n02504013,Indian elephant,indian_elephant.n.01,1350,elephant,elephant.n.01,1
+n02504458,African elephant,african_elephant.n.01,1350,elephant,elephant.n.01,1
+n02514041,barracouta,barracouta.n.01,1350,fish,fish.n.01,2
+n02526121,eel,eel.n.02,1215,fish,fish.n.01,4
+n02536864,coho,coho.n.02,1350,fish,fish.n.01,3
+n02606052,rock beauty,rock_beauty.n.01,1019,fish,fish.n.01,6
+n02607072,anemone fish,anemone_fish.n.01,1350,fish,fish.n.01,6
+n02640242,sturgeon,sturgeon.n.01,1350,fish,fish.n.01,4
+n02641379,gar,gar.n.01,1350,fish,fish.n.01,4
+n02643566,lionfish,lionfish.n.01,1350,fish,fish.n.01,6
+n02655020,puffer,puffer.n.02,1350,fish,fish.n.01,5
+n02666196,abacus,abacus.n.02,1350,abacus,abacus.n.02,0
+n02667093,abaya,abaya.n.01,1350,robe,robe.n.01,1
+n02676566,acoustic guitar,acoustic_guitar.n.01,1350,guitar,guitar.n.01,1
+n02687172,aircraft carrier,aircraft_carrier.n.01,1350,ship,ship.n.01,2
+n02690373,airliner,airliner.n.01,1350,airplane,airplane.n.01,1
+n02701002,ambulance,ambulance.n.01,1350,ambulance,ambulance.n.01,0
+n02704792,amphibian,amphibian.n.01,1350,container,container.n.01,4
+n02708093,analog clock,analog_clock.n.01,1342,clock,clock.n.01,1
+n02727426,apiary,apiary.n.01,1350,shed,shed.n.01,1
+n02730930,apron,apron.n.01,1350,apron,apron.n.01,0
+n02747177,ashcan,ashcan.n.01,1350,trash can,ashcan.n.01,0
+n02749479,assault rifle,assault_rifle.n.01,1350,gun,gun.n.01,5
+n02769748,backpack,backpack.n.01,1350,backpack,backpack.n.01,0
+n02782093,balloon,balloon.n.01,1350,balloon,balloon.n.01,0
+n02783161,ballpoint,ballpoint.n.01,1286,pen,pen.n.01,1
+n02788148,bannister,bannister.n.02,1350,handrail,bannister.n.02,0
+n02791124,barber chair,barber_chair.n.01,1350,chair,chair.n.01,1
+n02793495,barn,barn.n.01,1350,barn,barn.n.01,0
+n02795169,barrel,barrel.n.02,1350,container,container.n.01,2
+n02797295,barrow,barrow.n.03,1350,container,container.n.01,3
+n02799071,baseball,baseball.n.02,1350,baseball,baseball.n.02,0
+n02802426,basketball,basketball.n.02,1350,basketball,basketball.n.02,0
+n02804414,bassinet,bassinet.n.01,1350,bassinet,bassinet.n.01,0
+n02807133,bathing cap,bathing_cap.n.01,1350,cap,cap.n.01,1
+n02808304,bath towel,bath_towel.n.01,1350,towel,towel.n.01,1
+n02808440,bathtub,bathtub.n.01,1350,bathtub,bathtub.n.01,0
+n02814533,beach wagon,beach_wagon.n.01,1350,car,car.n.01,1
+n02815834,beaker,beaker.n.01,1350,jar,jar.n.01,1
+n02817516,bearskin,bearskin.n.02,1259,hat,hat.n.01,1
+n02823428,beer bottle,beer_bottle.n.01,1350,bottle,bottle.n.01,1
+n02823750,beer glass,beer_glass.n.01,1350,glass,glass.n.02,1
+n02834397,bib,bib.n.01,1350,bib,bib.n.01,0
+n02835271,bicycle-built-for-two,bicycle-built-for-two.n.01,1350,bicycle,bicycle.n.01,1
+n02837789,bikini,bikini.n.02,1350,garment,garment.n.01,2
+n02840245,binder,binder.n.03,1350,binder,binder.n.03,0
+n02859443,boathouse,boathouse.n.01,1350,shed,shed.n.01,1
+n02865351,bolo tie,bolo_tie.n.01,1350,garment,garment.n.01,3
+n02869837,bonnet,bonnet.n.01,1350,hat,hat.n.01,1
+n02883205,bow tie,bow_tie.n.01,1350,garment,garment.n.01,3
+n02892767,brassiere,brassiere.n.01,1350,garment,garment.n.01,2
+n02906734,broom,broom.n.01,1350,broom,broom.n.01,0
+n02909870,bucket,bucket.n.01,1350,bucket,bucket.n.01,0
+n02916936,bulletproof vest,bulletproof_vest.n.01,1226,garment,garment.n.01,2
+n02917067,bullet train,bullet_train.n.01,1350,train,train.n.01,2
+n02930766,cab,cab.n.03,1350,car,car.n.01,1
+n02939185,caldron,caldron.n.01,1350,pot,pot.n.01,1
+n02948072,candle,candle.n.01,1350,candle,candle.n.01,0
+n02950826,cannon,cannon.n.02,1350,gun,gun.n.01,1
+n02951358,canoe,canoe.n.01,1350,boat,boat.n.01,2
+n02963159,cardigan,cardigan.n.01,1350,cardigan,cardigan.n.01,0
+n02965783,car mirror,car_mirror.n.01,1350,mirror,mirror.n.01,1
+n02971356,carton,carton.n.02,1350,carton,carton.n.02,0
+n02974003,car wheel,car_wheel.n.01,1350,wheel,wheel.n.01,1
+n02978881,cassette,cassette.n.01,1236,container,container.n.01,1
+n02981792,catamaran,catamaran.n.01,1350,sailboat,sailboat.n.01,1
+n02992529,cellular telephone,cellular_telephone.n.01,1350,phone,telephone.n.01,2
+n03000134,chainlink fence,chainlink_fence.n.01,1350,fence,fence.n.01,1
+n03014705,chest,chest.n.02,1350,chest,chest.n.02,0
+n03016953,chiffonier,chiffonier.n.01,1350,dresser,chest_of_drawers.n.01,1
+n03018349,china cabinet,china_cabinet.n.01,1350,cabinet,cabinet.n.01,1
+n03026506,Christmas stocking,christmas_stocking.n.01,1350,stocking,stocking.n.01,1
+n03028079,church,church.n.02,1350,building,building.n.01,2
+n03032252,cinema,cinema.n.02,1350,building,building.n.01,2
+n03041632,cleaver,cleaver.n.01,1117,knife,knife.n.01,1
+n03047690,clog,clog.n.01,1350,clog,clog.n.01,0
+n03062245,cocktail shaker,cocktail_shaker.n.01,1204,shaker,shaker.n.03,1
+n03063599,coffee mug,coffee_mug.n.01,1350,cup,mug.n.04,1
+n03063689,coffeepot,coffeepot.n.01,1350,coffee pot,coffeepot.n.01,0
+n03075370,combination lock,combination_lock.n.01,1266,lock,lock.n.01,1
+n03085013,computer keyboard,computer_keyboard.n.01,1350,keyboard,keyboard.n.01,1
+n03095699,container ship,container_ship.n.01,1350,ship,ship.n.01,2
+n03100240,convertible,convertible.n.01,1350,car,car.n.01,1
+n03124043,cowboy boot,cowboy_boot.n.01,1350,boot,boot.n.01,1
+n03124170,cowboy hat,cowboy_hat.n.01,1350,hat,hat.n.01,1
+n03125729,cradle,cradle.n.01,1350,cradle,cradle.n.01,0
+n03126707,crane,crane.n.04,1350,crane,crane.n.04,0
+n03127747,crash helmet,crash_helmet.n.01,1350,helmet,helmet.n.02,1
+n03127925,crate,crate.n.01,1350,crate,crate.n.01,0
+n03131574,crib,crib.n.01,1350,crib,crib.n.01,0
+n03133878,Crock Pot,crock_pot.n.01,1237,utensil,utensil.n.01,4
+n03134739,croquet ball,croquet_ball.n.01,1350,ball,ball.n.01,1
+n03141823,crutch,crutch.n.01,1350,stick,stick.n.01,2
+n03179701,desk,desk.n.01,1350,desk,desk.n.01,0
+n03180011,desktop computer,desktop_computer.n.01,1350,computer,computer.n.01,3
+n03187595,dial telephone,dial_telephone.n.01,1350,phone,telephone.n.01,1
+n03188531,diaper,diaper.n.01,1350,diaper,diaper.n.01,0
+n03196217,digital clock,digital_clock.n.01,1350,clock,clock.n.01,1
+n03197337,digital watch,digital_watch.n.01,939,watch,watch.n.01,1
+n03201208,dining table,dining_table.n.01,1350,table,table.n.03,1
+n03207743,dishrag,dishrag.n.01,1350,cloth,fabric.n.01,2
+n03207941,dishwasher,dishwasher.n.01,1350,dishwasher,dishwasher.n.01,0
+n03220513,dome,dome.n.04,1350,roof,roof.n.01,1
+n03223299,doormat,doormat.n.02,1350,doormat,doormat.n.02,0
+n03249569,drum,drum.n.01,1350,drum,drum.n.01,0
+n03250847,drumstick,drumstick.n.02,1350,stick,stick.n.01,1
+n03255030,dumbbell,dumbbell.n.01,1350,dumbbell,dumbbell.n.01,0
+n03259280,Dutch oven,dutch_oven.n.01,1350,appliance,appliance.n.02,4
+n03271574,electric fan,electric_fan.n.01,1350,fan,fan.n.01,1
+n03272010,electric guitar,electric_guitar.n.01,1350,guitar,guitar.n.01,1
+n03272562,electric locomotive,electric_locomotive.n.01,1350,train,locomotive.n.01,1
+n03290653,entertainment center,entertainment_center.n.01,1350,entertainment center,entertainment_center.n.01,0
+n03291819,envelope,envelope.n.01,1350,envelope,envelope.n.01,0
+n03297495,espresso maker,espresso_maker.n.01,1186,coffee maker,coffee_maker.n.01,1
+n03325584,feather boa,feather_boa.n.01,1350,scarf,scarf.n.01,1
+n03337140,file,file.n.03,1350,filing cabinet,file.n.03,0
+n03344393,fireboat,fireboat.n.01,1350,boat,boat.n.01,1
+n03345487,fire engine,fire_engine.n.01,1350,fire truck,fire_engine.n.01,0
+n03355925,flagpole,flagpole.n.02,1350,stick,stick.n.01,2
+n03376595,folding chair,folding_chair.n.01,1350,chair,chair.n.01,1
+n03379051,football helmet,football_helmet.n.01,1350,helmet,helmet.n.02,1
+n03384352,forklift,forklift.n.01,1350,container,container.n.01,3
+n03388183,fountain pen,fountain_pen.n.01,1350,pen,pen.n.01,1
+n03388549,four-poster,four-poster.n.01,1350,bed,bed.n.01,1
+n03393912,freight car,freight_car.n.01,1350,train,car.n.02,1
+n03400231,frying pan,frying_pan.n.01,1272,frying pan,frying_pan.n.01,0
+n03404251,fur coat,fur_coat.n.01,1350,coat,coat.n.01,1
+n03417042,garbage truck,garbage_truck.n.01,1350,truck,truck.n.01,1
+n03443371,goblet,goblet.n.01,1350,glass,glass.n.02,1
+n03444034,go-kart,go-kart.n.01,1350,container,container.n.01,4
+n03445777,golf ball,golf_ball.n.01,1350,ball,ball.n.01,1
+n03445924,golfcart,golfcart.n.01,1350,container,container.n.01,4
+n03447447,gondola,gondola.n.02,1350,boat,boat.n.01,1
+n03450230,gown,gown.n.01,1350,dress,dress.n.01,1
+n03452741,grand piano,grand_piano.n.01,1350,piano,piano.n.01,1
+n03457902,greenhouse,greenhouse.n.01,1350,building,building.n.01,1
+n03476684,hair slide,hair_slide.n.01,1350,clip,clip.n.03,1
+n03478589,half track,half_track.n.01,1350,container,container.n.01,4
+n03481172,hammer,hammer.n.02,1350,hammer,hammer.n.02,0
+n03482405,hamper,hamper.n.02,1350,hamper,hamper.n.02,0
+n03483316,hand blower,hand_blower.n.01,1350,hair dryer,hand_blower.n.01,0
+n03485407,hand-held computer,hand-held_computer.n.01,1084,computer,computer.n.01,4
+n03485794,handkerchief,handkerchief.n.01,1350,cloth,fabric.n.01,2
+n03529860,home theater,home_theater.n.01,1350,building,building.n.01,2
+n03534580,hoopskirt,hoopskirt.n.01,1350,skirt,skirt.n.02,1
+n03538406,horse cart,horse_cart.n.01,1350,container,container.n.01,4
+n03584829,iron,iron.n.04,1350,appliance,appliance.n.02,2
+n03590841,jack-o'-lantern,jack-o'-lantern.n.02,1350,lantern,lantern.n.01,1
+n03594734,jean,jean.n.01,1350,jeans,jean.n.01,0
+n03594945,jeep,jeep.n.01,1350,car,car.n.01,1
+n03595614,jersey,jersey.n.03,1335,shirt,shirt.n.01,1
+n03598930,jigsaw puzzle,jigsaw_puzzle.n.01,1350,puzzle,puzzle.n.02,1
+n03599486,jinrikisha,jinrikisha.n.01,1350,container,container.n.01,4
+n03602883,joystick,joystick.n.02,1350,controller,control.n.09,1
+n03617480,kimono,kimono.n.01,1350,robe,robe.n.01,1
+n03630383,lab coat,lab_coat.n.01,1350,coat,coat.n.01,1
+n03633091,ladle,ladle.n.01,1350,ladle,ladle.n.01,0
+n03637318,lampshade,lampshade.n.01,1350,lampshade,lampshade.n.01,0
+n03642806,laptop,laptop.n.01,1350,laptop,laptop.n.01,0
+n03658185,letter opener,letter_opener.n.01,1036,knife,knife.n.01,1
+n03661043,library,library.n.05,1350,building,building.n.01,1
+n03662601,lifeboat,lifeboat.n.01,1350,boat,boat.n.01,2
+n03670208,limousine,limousine.n.01,1350,car,car.n.01,1
+n03673027,liner,liner.n.04,1350,ship,ship.n.01,2
+n03680355,Loafer,loafer.n.02,1187,shoe,shoe.n.01,1
+n03691459,loudspeaker,loudspeaker.n.01,1350,speaker,loudspeaker.n.01,0
+n03709823,mailbag,mailbag.n.02,1350,bag,bag.n.01,1
+n03710193,mailbox,mailbox.n.01,1350,box,box.n.01,1
+n03710721,maillot,maillot.n.01,1350,garment,garment.n.01,2
+n03720891,maraca,maraca.n.01,1350,maraca,maraca.n.01,0
+n03724870,mask,mask.n.01,1350,mask,mask.n.01,0
+n03729826,matchstick,matchstick.n.01,1350,stick,stick.n.01,1
+n03733131,maypole,maypole.n.01,1350,post,post.n.04,1
+n03733805,measuring cup,measuring_cup.n.01,1350,measuring cup,measuring_cup.n.01,0
+n03742115,medicine chest,medicine_chest.n.01,1350,cabinet,cabinet.n.01,1
+n03759954,microphone,microphone.n.01,1350,microphone,microphone.n.01,0
+n03761084,microwave,microwave.n.02,1350,microwave,microwave.n.02,0
+n03764736,milk can,milk_can.n.01,1147,can,can.n.01,1
+n03769881,minibus,minibus.n.01,1350,bus,bus.n.01,1
+n03770439,miniskirt,miniskirt.n.01,1350,skirt,skirt.n.02,1
+n03770679,minivan,minivan.n.01,1350,car,car.n.01,1
+n03773504,missile,missile.n.01,1350,rocket,rocket.n.01,1
+n03775071,mitten,mitten.n.01,1350,glove,glove.n.02,1
+n03775546,mixing bowl,mixing_bowl.n.01,1350,bowl,bowl.n.03,1
+n03776460,mobile home,mobile_home.n.01,1350,container,container.n.01,3
+n03777568,Model T,model_t.n.01,1350,car,car.n.01,1
+n03781244,monastery,monastery.n.01,1205,house,house.n.01,3
+n03785016,moped,moped.n.01,1350,container,container.n.01,6
+n03786901,mortar,mortar.n.03,1350,container,container.n.01,2
+n03787032,mortarboard,mortarboard.n.02,1350,cap,cap.n.01,1
+n03788195,mosque,mosque.n.01,1350,building,building.n.01,2
+n03791053,motor scooter,motor_scooter.n.01,1350,container,container.n.01,2
+n03792782,mountain bike,mountain_bike.n.01,1350,bicycle,bicycle.n.01,1
+n03792972,mountain tent,mountain_tent.n.01,1350,tent,tent.n.01,1
+n03793489,mouse,mouse.n.04,1350,computer mouse,mouse.n.04,0
+n03796401,moving van,moving_van.n.01,1209,van,van.n.05,1
+n03814906,necklace,necklace.n.01,1350,necklace,necklace.n.01,0
+n03832673,notebook,notebook.n.02,1350,computer,computer.n.01,4
+n03866082,overskirt,overskirt.n.01,1055,skirt,skirt.n.02,1
+n03868242,oxcart,oxcart.n.01,1350,container,container.n.01,4
+n03871628,packet,packet.n.03,1350,container,container.n.01,2
+n03874293,paddlewheel,paddlewheel.n.01,1350,wheel,wheel.n.01,1
+n03874599,padlock,padlock.n.01,1350,lock,lock.n.01,1
+n03876231,paintbrush,paintbrush.n.01,1350,paintbrush,paintbrush.n.01,0
+n03877472,pajama,pajama.n.02,1350,pajamas,pajama.n.02,0
+n03877845,palace,palace.n.04,1350,house,house.n.01,2
+n03887697,paper towel,paper_towel.n.01,1350,paper towel,paper_towel.n.01,0
+n03891251,park bench,park_bench.n.01,1350,bench,bench.n.01,1
+n03891332,parking meter,parking_meter.n.01,1350,timer,timer.n.01,1
+n03895866,passenger car,passenger_car.n.01,1350,train,car.n.02,1
+n03899768,patio,patio.n.01,1202,patio,patio.n.01,0
+n03902125,pay-phone,pay-phone.n.01,1350,phone,telephone.n.01,1
+n03908618,pencil box,pencil_box.n.01,1350,pencil case,pencil_box.n.01,0
+n03920288,Petri dish,petri_dish.n.01,1012,container,container.n.01,2
+n03930313,picket fence,picket_fence.n.01,1350,fence,fence.n.01,1
+n03930630,pickup,pickup.n.01,1350,truck,truck.n.01,1
+n03935335,piggy bank,piggy_bank.n.01,1350,container,container.n.01,2
+n03937543,pill bottle,pill_bottle.n.01,1350,bottle,bottle.n.01,1
+n03938244,pillow,pillow.n.01,1350,pillow,pillow.n.01,0
+n03942813,ping-pong ball,ping-pong_ball.n.01,1332,ball,ball.n.01,1
+n03944341,pinwheel,pinwheel.n.02,1167,wheel,wheel.n.01,1
+n03947888,pirate,pirate.n.03,1168,ship,ship.n.01,1
+n03950228,pitcher,pitcher.n.02,1350,pitcher,pitcher.n.02,0
+n03956157,planetarium,planetarium.n.01,1320,building,building.n.01,1
+n03958227,plastic bag,plastic_bag.n.01,1119,bag,bag.n.01,1
+n03961711,plate rack,plate_rack.n.01,1103,rack,rack.n.01,1
+n03976467,Polaroid camera,polaroid_camera.n.01,1350,camera,camera.n.01,1
+n03976657,pole,pole.n.01,1350,pole,pole.n.01,0
+n03977966,police van,police_van.n.01,1350,van,van.n.05,1
+n03980874,poncho,poncho.n.01,1350,garment,garment.n.01,3
+n03982430,pool table,pool_table.n.01,1350,table,table.n.02,1
+n03983396,pop bottle,pop_bottle.n.01,1350,bottle,bottle.n.01,1
+n03991062,pot,pot.n.04,1350,flowerpot,pot.n.04,0
+n03992509,potter's wheel,potter's_wheel.n.01,1350,wheel,wheel.n.01,1
+n03995372,power drill,power_drill.n.01,958,drill,drill.n.01,1
+n03998194,prayer rug,prayer_rug.n.01,1350,rug,rug.n.01,1
+n04004767,printer,printer.n.02,1350,printer,printer.n.03,1
+n04026417,purse,purse.n.03,1350,purse,purse.n.03,0
+n04033901,quill,quill.n.01,1350,pen,pen.n.01,1
+n04033995,quilt,quilt.n.01,1350,blanket,quilt.n.01,0
+n04037443,racer,racer.n.02,1350,car,car.n.01,1
+n04039381,racket,racket.n.04,1350,racket,racket.n.04,0
+n04041544,radio,radio.n.03,1350,radio,radio.n.03,0
+n04049303,rain barrel,rain_barrel.n.01,1350,pool,pool.n.01,2
+n04065272,recreational vehicle,recreational_vehicle.n.01,1350,container,container.n.01,3
+n04069434,reflex camera,reflex_camera.n.01,1350,camera,camera.n.01,1
+n04070727,refrigerator,refrigerator.n.01,1350,refrigerator,refrigerator.n.01,0
+n04074963,remote control,remote_control.n.01,1350,remote control,remote_control.n.01,0
+n04081281,restaurant,restaurant.n.01,1350,building,building.n.01,1
+n04086273,revolver,revolver.n.01,1350,gun,gun.n.01,3
+n04090263,rifle,rifle.n.01,1350,gun,gun.n.01,2
+n04099969,rocking chair,rocking_chair.n.01,1350,chair,chair.n.01,1
+n04111531,rotisserie,rotisserie.n.01,1350,oven,oven.n.01,1
+n04116512,rubber eraser,rubber_eraser.n.01,1350,eraser,eraser.n.01,1
+n04118538,rugby ball,rugby_ball.n.01,1350,ball,ball.n.01,1
+n04118776,rule,rule.n.12,1350,ruler,rule.n.12,0
+n04120489,running shoe,running_shoe.n.01,1350,shoe,shoe.n.01,1
+n04125021,safe,safe.n.01,1079,box,box.n.01,2
+n04131690,saltshaker,saltshaker.n.01,1350,salt shaker,saltshaker.n.01,0
+n04133789,sandal,sandal.n.01,1350,sandal,sandal.n.01,0
+n04136333,sarong,sarong.n.01,1350,skirt,skirt.n.02,1
+n04141975,scale,scale.n.07,1350,scale,scale.n.07,0
+n04146614,school bus,school_bus.n.01,1350,bus,bus.n.01,1
+n04149813,scoreboard,scoreboard.n.01,1350,board,board.n.03,1
+n04152593,screen,screen.n.03,1317,screen,screen.n.03,0
+n04153751,screw,screw.n.04,1350,screw,screw.n.04,0
+n04154565,screwdriver,screwdriver.n.01,1350,screwdriver,screwdriver.n.01,0
+n04162706,seat belt,seat_belt.n.01,1350,belt,belt.n.02,2
+n04179913,sewing machine,sewing_machine.n.01,1350,appliance,appliance.n.02,2
+n04201297,shoji,shoji.n.01,1299,cover,screen.n.04,1
+n04204238,shopping basket,shopping_basket.n.01,1350,basket,basket.n.01,1
+n04204347,shopping cart,shopping_cart.n.01,1350,shopping cart,shopping_cart.n.01,0
+n04208210,shovel,shovel.n.01,1350,shovel,shovel.n.01,0
+n04209133,shower cap,shower_cap.n.01,1350,cap,cap.n.01,1
+n04209239,shower curtain,shower_curtain.n.01,1350,shower curtain,shower_curtain.n.01,0
+n04235860,sleeping bag,sleeping_bag.n.01,1350,bag,bag.n.01,1
+n04238763,slide rule,slide_rule.n.01,1212,computer,computer.n.01,2
+n04239074,sliding door,sliding_door.n.01,1350,door,door.n.01,1
+n04252077,snowmobile,snowmobile.n.01,1350,container,container.n.01,4
+n04252225,snowplow,snowplow.n.01,1350,container,container.n.01,4
+n04254120,soap dispenser,soap_dispenser.n.01,1350,soap dispenser,soap_dispenser.n.01,0
+n04254680,soccer ball,soccer_ball.n.01,1350,ball,ball.n.01,1
+n04254777,sock,sock.n.01,1350,sock,sock.n.01,0
+n04259630,sombrero,sombrero.n.02,1350,hat,hat.n.01,1
+n04263257,soup bowl,soup_bowl.n.01,1350,bowl,bowl.n.03,1
+n04265275,space heater,space_heater.n.01,1054,heater,heater.n.01,1
+n04270147,spatula,spatula.n.01,1350,spatula,spatula.n.01,0
+n04273569,speedboat,speedboat.n.01,1350,boat,boat.n.01,2
+n04277352,spindle,spindle.n.04,1350,stick,stick.n.01,1
+n04285008,sports car,sports_car.n.01,1350,car,car.n.01,1
+n04286575,spotlight,spotlight.n.02,1350,light,lamp.n.01,1
+n04310018,steam locomotive,steam_locomotive.n.01,1350,train,locomotive.n.01,1
+n04311004,steel arch bridge,steel_arch_bridge.n.01,1203,bridge,bridge.n.01,1
+n04325704,stole,stole.n.01,1350,scarf,scarf.n.01,1
+n04326547,stone wall,stone_wall.n.01,1350,fence,fence.n.01,1
+n04328186,stopwatch,stopwatch.n.01,1134,timer,timer.n.01,1
+n04330267,stove,stove.n.02,1350,stove,stove.n.02,0
+n04332243,strainer,strainer.n.01,1350,strainer,strainer.n.01,0
+n04335435,streetcar,streetcar.n.01,1350,container,container.n.01,3
+n04344873,studio couch,studio_couch.n.01,1350,couch,sofa.n.01,2
+n04346328,stupa,stupa.n.01,1350,building,building.n.01,3
+n04347754,submarine,submarine.n.01,1350,ship,ship.n.01,3
+n04350905,suit,suit.n.01,1350,garment,garment.n.01,1
+n04356056,sunglasses,sunglasses.n.01,1350,glasses,spectacles.n.01,1
+n04366367,suspension bridge,suspension_bridge.n.01,1350,bridge,bridge.n.01,1
+n04367480,swab,swab.n.02,1350,mop,swab.n.02,0
+n04370456,sweatshirt,sweatshirt.n.01,981,sweatshirt,sweatshirt.n.01,0
+n04371430,swimming trunks,swimming_trunks.n.01,1350,garment,garment.n.01,2
+n04371774,swing,swing.n.02,1350,swing,swing.n.02,0
+n04372370,switch,switch.n.01,1350,switch,switch.n.01,0
+n04380533,table lamp,table_lamp.n.01,1350,light,lamp.n.02,1
+n04389033,tank,tank.n.01,1350,container,container.n.01,4
+n04398044,teapot,teapot.n.01,1350,teapot,teapot.n.01,0
+n04399382,teddy,teddy.n.01,1350,teddy bear,teddy.n.01,0
+n04409515,tennis ball,tennis_ball.n.01,1350,ball,ball.n.01,1
+n04417672,thatch,thatch.n.04,1350,roof,roof.n.01,1
+n04418357,theater curtain,theater_curtain.n.01,1314,curtain,curtain.n.01,1
+n04423845,thimble,thimble.n.02,1350,container,container.n.01,1
+n04429376,throne,throne.n.01,1026,chair,chair.n.01,2
+n04435653,tile roof,tile_roof.n.01,1350,roof,roof.n.01,1
+n04442312,toaster,toaster.n.02,1350,toaster,toaster.n.02,0
+n04447861,toilet seat,toilet_seat.n.01,1350,seat,seat.n.03,1
+n04456115,torch,torch.n.01,1350,light,light.n.02,1
+n04458633,totem pole,totem_pole.n.01,1350,decoration,decoration.n.01,3
+n04461696,tow truck,tow_truck.n.01,1350,truck,truck.n.01,1
+n04465501,tractor,tractor.n.01,1350,tractor,tractor.n.01,0
+n04467665,trailer truck,trailer_truck.n.01,1350,truck,truck.n.01,1
+n04476259,tray,tray.n.01,1350,tray,tray.n.01,0
+n04479046,trench coat,trench_coat.n.01,1103,coat,coat.n.01,2
+n04482393,tricycle,tricycle.n.01,1350,tricycle,tricycle.n.01,0
+n04483307,trimaran,trimaran.n.01,1350,sailboat,sailboat.n.01,1
+n04485082,tripod,tripod.n.01,1210,tripod,tripod.n.01,0
+n04487081,trolleybus,trolleybus.n.01,1350,bus,bus.n.01,1
+n04493381,tub,tub.n.02,1350,container,container.n.01,2
+n04501370,turnstile,turnstile.n.01,1350,gate,gate.n.01,1
+n04505470,typewriter keyboard,typewriter_keyboard.n.01,1350,keyboard,keyboard.n.01,1
+n04507155,umbrella,umbrella.n.01,1350,umbrella,umbrella.n.01,0
+n04509417,unicycle,unicycle.n.01,1350,container,container.n.01,2
+n04515003,upright,upright.n.02,1350,piano,piano.n.01,1
+n04517823,vacuum,vacuum.n.04,1350,vacuum cleaner,vacuum.n.04,0
+n04522168,vase,vase.n.01,1350,vase,vase.n.01,0
+n04523525,vault,vault.n.03,1350,roof,roof.n.01,1
+n04525038,velvet,velvet.n.01,1112,cloth,fabric.n.01,1
+n04532670,viaduct,viaduct.n.01,1350,bridge,bridge.n.01,1
+n04540053,volleyball,volleyball.n.02,1350,ball,ball.n.01,1
+n04542943,waffle iron,waffle_iron.n.01,1187,appliance,appliance.n.02,3
+n04548280,wall clock,wall_clock.n.01,1349,clock,clock.n.01,1
+n04548362,wallet,wallet.n.01,1350,wallet,wallet.n.01,0
+n04550184,wardrobe,wardrobe.n.01,1350,closet,wardrobe.n.01,0
+n04552348,warplane,warplane.n.01,1350,airplane,warplane.n.01,0
+n04553703,washbasin,washbasin.n.02,1350,sink,washbasin.n.02,0
+n04554684,washer,washer.n.03,1350,washing machine,washer.n.03,0
+n04557648,water bottle,water_bottle.n.01,1350,bottle,bottle.n.01,1
+n04560804,water jug,water_jug.n.01,1350,jug,jug.n.01,1
+n04562935,water tower,water_tower.n.01,1350,container,container.n.01,4
+n04579145,whiskey jug,whiskey_jug.n.01,1105,jug,jug.n.01,1
+n04591157,Windsor tie,windsor_tie.n.01,1263,garment,garment.n.01,3
+n04591713,wine bottle,wine_bottle.n.01,1350,bottle,bottle.n.01,1
+n04596742,wok,wok.n.01,1350,pan,pan.n.01,1
+n04597913,wooden spoon,wooden_spoon.n.02,1350,spoon,spoon.n.01,1
+n04599235,wool,wool.n.01,1350,cloth,fabric.n.01,1
+n04604644,worm fence,worm_fence.n.01,1350,fence,fence.n.01,2
+n04606251,wreck,wreck.n.04,1350,ship,ship.n.01,1
+n04612504,yawl,yawl.n.01,1256,boat,boat.n.01,2
+n06359193,web site,web_site.n.01,1350,computer,computer.n.01,1
+n06785654,crossword puzzle,crossword_puzzle.n.01,1350,puzzle,puzzle.n.02,1
+n06794110,street sign,street_sign.n.01,1350,sign,sign.n.02,1
+n07248320,book jacket,book_jacket.n.01,1204,wrapper,wrapping.n.01,2
+n07579787,plate,plate.n.08,1350,plate,plate.n.08,0
+n07584110,consomme,consomme.n.01,1257,soup,soup.n.01,1
+n07614500,ice cream,ice_cream.n.01,1350,ice cream,ice_cream.n.01,0
+n07684084,French loaf,french_loaf.n.01,1350,bread,bread.n.01,2
+n07693725,bagel,bagel.n.01,1350,bagel,bagel.n.01,0
+n07695742,pretzel,pretzel.n.01,1350,cracker,cracker.n.01,1
+n07697313,cheeseburger,cheeseburger.n.01,1350,sandwich,sandwich.n.01,2
+n07697537,hotdog,hotdog.n.02,1350,sandwich,sandwich.n.01,1
+n07711569,mashed potato,mashed_potato.n.01,1350,potato,potato.n.01,1
+n07714571,head cabbage,head_cabbage.n.02,1350,vegetable,vegetable.n.01,3
+n07714990,broccoli,broccoli.n.02,1350,broccoli,broccoli.n.02,0
+n07715103,cauliflower,cauliflower.n.02,1350,vegetable,vegetable.n.01,2
+n07716358,zucchini,zucchini.n.02,1350,squash,squash.n.02,2
+n07716906,spaghetti squash,spaghetti_squash.n.02,1289,squash,squash.n.02,2
+n07717410,acorn squash,acorn_squash.n.02,1350,squash,squash.n.02,2
+n07717556,butternut squash,butternut_squash.n.02,1350,squash,squash.n.02,2
+n07718472,cucumber,cucumber.n.02,1350,cucumber,cucumber.n.02,0
+n07718747,artichoke,artichoke.n.02,1350,vegetable,vegetable.n.01,1
+n07720875,bell pepper,bell_pepper.n.02,1350,pepper,pepper.n.04,2
+n07730033,cardoon,cardoon.n.02,1175,vegetable,vegetable.n.01,1
+n07734744,mushroom,mushroom.n.05,1350,vegetable,vegetable.n.01,1
+n07742313,Granny Smith,granny_smith.n.01,1350,apple,apple.n.01,2
+n07745940,strawberry,strawberry.n.01,1350,strawberry,strawberry.n.01,0
+n07747607,orange,orange.n.01,1350,orange,orange.n.01,0
+n07749582,lemon,lemon.n.01,1350,lemon,lemon.n.01,0
+n07753113,fig,fig.n.04,1350,fruit,fruit.n.01,2
+n07753275,pineapple,pineapple.n.02,1350,pineapple,pineapple.n.02,0
+n07753592,banana,banana.n.02,1350,banana,banana.n.02,0
+n07754684,jackfruit,jackfruit.n.02,1350,fruit,fruit.n.01,2
+n07760859,custard apple,custard_apple.n.02,1350,fruit,fruit.n.01,2
+n07768694,pomegranate,pomegranate.n.02,1350,fruit,fruit.n.01,2
+n07873807,pizza,pizza.n.01,1350,pizza,pizza.n.01,0
+n07930864,cup,cup.n.06,1350,cup,cup.n.06,0
+n09193705,alp,alp.n.01,1350,mountain,mountain.n.01,1
+n09229709,bubble,bubble.n.01,1350,bubble,bubble.n.01,0
+n09472597,volcano,volcano.n.02,1350,mountain,mountain.n.01,1
+n11879895,rapeseed,rapeseed.n.01,1350,fruit,fruit.n.01,3
+n11939491,daisy,daisy.n.01,1350,plant,flower.n.01,1
+n12057211,yellow lady's slipper,yellow_lady's_slipper.n.01,1350,plant,flower.n.01,3
+n12144580,corn,corn.n.02,1350,corn,corn.n.02,0
+n12267677,acorn,acorn.n.01,1350,fruit,fruit.n.01,1
+n12620546,hip,hip.n.05,1350,fruit,fruit.n.01,1
+n12768682,buckeye,buckeye.n.01,1350,fruit,fruit.n.01,2
+n13133613,ear,ear.n.05,1350,fruit,fruit.n.01,1
+n15075141,toilet tissue,toilet_tissue.n.01,1350,toilet paper,toilet_tissue.n.01,0
+n02317335,starfish,starfish.n.01,1350,starfish,name match,0
+n02980441,castle,castle.n.02,1350,castle,name match,0

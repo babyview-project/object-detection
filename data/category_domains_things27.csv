@@ -1,0 +1,829 @@
+category,core,cdi_domain,domain_things27,source,detail,domain_display,domain_analysis
+abacus,False,toys,home decor,exact,abacus,home decor,home decor
+activity center,False,toys,toy,hand (provisional),no WordNet sense,other,other:activity center
+activity cube,False,toys,,none,"cube.n.05 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:activity cube
+adult,False,people,,person,people are not a domain,people,people
+air conditioner,False,furniture_rooms,electronic device,exact,air_conditioner,electronic device,electronic device
+air fryer,False,furniture_rooms,,none,no WordNet sense,other,other:air fryer
+air purifier,False,furniture_rooms,electronic device,wordnet,purifier.n.01 -> apparatus.n.01 (3/4 labeled THINGS concepts),electronic device,electronic device
+air vent,False,furniture_rooms,,hand (provisional),"vent.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:air vent
+airplane,True,vehicles,vehicle,exact,airplane,vehicle,vehicle
+alligator,False,animals,animal,exact,alligator,animal,animal
+ambulance,False,vehicles,vehicle,exact,ambulance,vehicle,vehicle
+apple,True,food_drink,food,exact,apple,food,food
+appliance,True,household,electronic device,hand (provisional),"{'electronic device': 7, 'tool': 1}",electronic device,electronic device
+apricot,False,food_drink,food,wordnet,apricot.n.02 -> edible_fruit.n.01 (31/31 labeled THINGS concepts),food,food
+apron,True,clothing,clothing,exact,apron,clothing,clothing
+archway,False,furniture_rooms,,none,"arch.n.03 -> way.n.06: no majority ([('tool', 2), ('weapon', 1)])",other,other:archway
+arm,False,body_parts,body part,exact,arm,other,other:arm
+armchair,False,furniture_rooms,furniture,hand (provisional),{'furniture': 1},furniture,furniture
+artwork,False,household,,none,no WordNet sense,other,other:artwork
+avocado,False,food_drink,food,exact,avocado,food,food
+awning,False,furniture_rooms,,none,"awning.n.01 -> protective_covering.n.01: no majority ([('home decor', 4), ('part of car', 3)])",other,other:awning
+baby,False,people,,person,people are not a domain,people,people
+baby activity center,False,other,,none,no WordNet sense,other,other:baby activity center
+baby playpen,False,other,container,wordnet,playpen.n.01 -> enclosure.n.01 (5/5 labeled THINGS concepts),container,container
+baby seat,False,other,furniture,wordnet,seat.n.03 -> seat.n.03 (12/13 labeled THINGS concepts),furniture,furniture
+baby swing,False,other,part of car,wordnet,swing.n.02 -> mechanical_device.n.01 (4/8 labeled THINGS concepts),other,other:baby swing
+backpack,True,clothing,container,exact,backpack,container,container
+backsplash,False,furniture_rooms,,none,no WordNet sense,other,other:backsplash
+bag,True,household,container,exact,bag,container,container
+bagel,False,other,food,exact,bagel,food,food
+balcony,False,furniture_rooms,,none,"balcony.n.02 -> structure.n.01: no majority ([('container', 10), ('home decor', 4)])",other,other:balcony
+ball,True,toys,toy,exact,ball,other,other:ball
+ball pit,False,toys,,none,no WordNet sense,other,other:ball pit
+balloon,True,toys,toy,exact,balloon,other,other:balloon
+banana,True,food_drink,food,exact,banana,food,food
+banana peel,False,food_drink,office supply,wordnet,banana_peel.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+band,False,clothing,home decor,wordnet,band.n.11 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+banner,False,other,home decor,wordnet,banner.n.01 -> decoration.n.01 (5/10 labeled THINGS concepts),home decor,home decor
+barn,False,outside,,none,"barn.n.01 -> structure.n.01: no majority ([('container', 10), ('home decor', 4)])",other,other:barn
+barrel,False,household,container,exact,barrel,container,container
+baseball,False,toys,sports equipment,exact,baseball,other,other:baseball
+baseball bat,False,toys,sports equipment,exact,baseball_bat,other,other:baseball bat
+baseboard,False,furniture_rooms,,hand (provisional),baseboard.n.01 -> decoration.n.01 (5/10 labeled THINGS concepts),other,other:baseboard
+basin,False,household,home decor,mapped,"{'home decor': 1, 'container': 1}",home decor,home decor
+basket,True,household,container,exact,basket,container,container
+basketball,True,toys,sports equipment,exact,basketball,other,other:basketball
+bassinet,False,furniture_rooms,furniture,exact,bassinet,furniture,furniture
+bat,False,toys,sports equipment,exact,bat2,other,other:bat
+bathrobe,False,clothing,clothing,exact,bathrobe,clothing,clothing
+bathtub,True,furniture_rooms,container,exact,bathtub,container,container
+bead,False,toys,clothing,wordnet,bead.n.01 -> jewelry.n.01 (4/4 labeled THINGS concepts),clothing,clothing
+bead maze,False,toys,,none,no WordNet sense,other,other:bead maze
+beam,False,furniture_rooms,furniture,wordnet,beam.n.02 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+bean,False,food_drink,food,mapped,{'food': 1},food,food
+bean bag,False,furniture_rooms,,none,no WordNet sense,other,other:bean bag
+beanie,False,other,clothing,exact,beanie,clothing,clothing
+bear,True,animals,animal,exact,bear,animal,animal
+beard,False,other,body part,exact,beard,other,other:beard
+bed,True,furniture_rooms,furniture,exact,bed,furniture,furniture
+bed sheet,False,household,clothing,wordnet,sheet.n.03 -> commodity.n.01 (85/110 labeled THINGS concepts),clothing,clothing
+bedding,False,household,medical equipment,wordnet,bedclothes.n.01 -> cloth_covering.n.01 (4/4 labeled THINGS concepts),other,other:bedding
+bedspread,False,household,medical equipment,wordnet,bedspread.n.01 -> cloth_covering.n.01 (4/4 labeled THINGS concepts),other,other:bedspread
+bee,False,animals,insect,exact,bee,other,other:bee
+bell,False,household,musical instrument,exact,bell,other,other:bell
+belt,True,clothing,clothing,exact,belt,clothing,clothing
+bench,True,furniture_rooms,furniture,exact,bench,furniture,furniture
+bib,False,clothing,clothing,wordnet,bib.n.02 -> commodity.n.01 (85/110 labeled THINGS concepts),clothing,clothing
+bicycle,True,vehicles,vehicle,exact,bike,vehicle,vehicle
+bin,False,household,container,exact,bin,container,container
+binder,True,household,office supply,exact,binder,office supply,office supply
+bird,True,animals,animal,exact,bird,animal,animal
+biscuit,False,food_drink,food,name,biscuit,food,food
+blackboard,False,household,sports equipment,wordnet,blackboard.n.01 -> sheet.n.06 (6/7 labeled THINGS concepts),other,other:blackboard
+blanket,True,household,home decor,hand (provisional),blanket.n.01 -> cloth_covering.n.01 (4/4 labeled THINGS concepts),home decor,home decor
+blender,False,furniture_rooms,electronic device,exact,blender,electronic device,electronic device
+blinds,False,furniture_rooms,home decor,hand (provisional),no WordNet sense,home decor,home decor
+block,False,toys,toy,hand (provisional),{'tool': 1},other,other:block
+blouse,False,clothing,clothing,exact,blouse,clothing,clothing
+blueberry,False,food_drink,food,exact,blueberry,food,food
+board,True,household,,hand (provisional),{'sports equipment': 3},other,other:board
+board game,False,toys,drink,wordnet,board_game.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:board game
+boat,True,vehicles,vehicle,exact,boat,vehicle,vehicle
+book,False,household,office supply,hand (provisional),book.n.02 -> creation.n.02 (5/6 labeled THINGS concepts),office supply,office supply
+bookshelf,False,furniture_rooms,furniture,exact,bookshelf,furniture,furniture
+boot,True,clothing,clothing,exact,boot,clothing,clothing
+bottle,True,household,container,exact,bottle,container,container
+bouncer,False,furniture_rooms,,none,no WordNet sense,other,other:bouncer
+bow,False,clothing,clothing,name,"bow1,bow2",clothing,clothing
+bowl,False,household,container,name,bowl,container,container
+box,True,household,container,exact,box,container,container
+boy,False,people,,person,people are not a domain,people,people
+bracelet,False,clothing,clothing,exact,bracelet2,clothing,clothing
+branch,False,outside,food,wordnet,branch.n.02 -> plant_organ.n.01 (49/50 labeled THINGS concepts),food,food
+bread,True,food_drink,food,exact,bread,food,food
+brick,False,toys,,none,"brick.n.01 -> instrumentality.n.03: no majority ([('tool', 104), ('container', 91)])",other,other:brick
+bridge,False,outside,,none,"bridge.n.01 -> structure.n.01: no majority ([('container', 10), ('home decor', 4)])",other,other:bridge
+broccoli,False,food_drink,food,wordnet,broccoli.n.02 -> cruciferous_vegetable.n.01 (3/3 labeled THINGS concepts),food,food
+broom,True,household,tool,exact,broom,tool,tool
+brush,False,household,tool,exact,brush,tool,tool
+bubble,True,toys,,hand (provisional),bubble.n.01 -> shape.n.02 (2/3 labeled THINGS concepts),other,other:bubble
+bucket,True,household,container,exact,bucket,container,container
+building,True,outside,,hand (provisional),{'container': 2},other,other:building
+bunny,False,animals,,none,no WordNet sense,other,other:bunny
+burner,False,furniture_rooms,electronic device,exact,burner,electronic device,electronic device
+bus,True,vehicles,vehicle,exact,bus,vehicle,vehicle
+bush,False,outside,plant,exact,bush,other,other:bush
+butter,False,food_drink,food,exact,butter,food,food
+butterfly,False,animals,insect,exact,butterfly,other,other:butterfly
+button,False,clothing,clothing,exact,button1,clothing,clothing
+cabinet,True,furniture_rooms,furniture,exact,cabinet,furniture,furniture
+cable,False,household,electronic device,hand (provisional),"cable.n.02 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",electronic device,electronic device
+cactus,False,outside,plant,exact,cactus,other,other:cactus
+cage,False,household,container,exact,cage,container,container
+cake,False,food_drink,food,exact,cake,food,food
+calculator,False,household,electronic device,wordnet,calculator.n.02 -> machine.n.01 (13/21 labeled THINGS concepts),electronic device,electronic device
+calendar,False,household,drink,wordnet,calendar.n.03 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:calendar
+camera,True,household,electronic device,name,camera2,electronic device,electronic device
+can,True,household,container,exact,can,container,container
+candle,True,household,home decor,exact,candle,home decor,home decor
+candle holder,False,household,home decor,exact,candlestick,home decor,home decor
+candy,False,food_drink,food,exact,candy,food,food
+canister,False,household,container,exact,canister,container,container
+canopy,False,other,,none,"canopy.n.03 -> protective_covering.n.01: no majority ([('home decor', 4), ('part of car', 3)])",other,other:canopy
+cap,True,clothing,clothing,hand (provisional),cap.n.01 -> headdress.n.01 (10/12 labeled THINGS concepts),clothing,clothing
+car,True,vehicles,vehicle,exact,car,vehicle,vehicle
+car seat,False,vehicles,part of car,exact,car_seat,other,other:car seat
+car window,False,other,,none,"car_window.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:car window
+card,False,household,office supply,hand (provisional),card.n.04 -> paper.n.01 (2/3 labeled THINGS concepts),office supply,office supply
+cardboard,False,household,office supply,wordnet,cardboard.n.01 -> paper.n.01 (2/3 labeled THINGS concepts),office supply,office supply
+cardigan,True,clothing,clothing,exact,cardigan,clothing,clothing
+carrot,False,food_drink,food,hand (provisional),carrot.n.01 -> plant_organ.n.01 (49/50 labeled THINGS concepts),food,food
+cart,False,household,vehicle,name,cart,vehicle,vehicle
+carton,False,household,container,wordnet,carton.n.02 -> box.n.01 (9/9 labeled THINGS concepts),container,container
+cartoon,False,toys,home decor,wordnet,cartoon.n.02 -> creation.n.02 (5/6 labeled THINGS concepts),home decor,home decor
+case,False,household,container,mapped,"{'container': 5, 'medical equipment': 1}",container,container
+castle,False,toys,,none,no WordNet sense,other,other:castle
+cat,True,animals,animal,exact,cat,animal,animal
+cat tree,False,household,,none,no WordNet sense,other,other:cat tree
+caterpillar,False,animals,insect,exact,caterpillar,other,other:caterpillar
+cd,False,other,,none,"compact_disk.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:cd
+celery,False,food_drink,food,exact,celery,food,food
+cereal,False,food_drink,food,exact,cereal,food,food
+chair,True,furniture_rooms,furniture,exact,chair,furniture,furniture
+chalk,False,toys,tool,wordnet,chalk.n.04 -> writing_implement.n.01 (5/7 labeled THINGS concepts),tool,tool
+chandelier,False,household,home decor,exact,chandelier,home decor,home decor
+charger,False,household,,none,"charger.n.02 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:charger
+chart,False,other,drink,wordnet,chart.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:chart
+cheerio,False,food_drink,,none,no WordNet sense,other,other:cheerio
+cheese,False,food_drink,food,exact,cheese,food,food
+cheese stick,False,food_drink,,none,no WordNet sense,other,other:cheese stick
+cherry,False,food_drink,food,exact,cherry,food,food
+chest,False,furniture_rooms,furniture,exact,chest2,furniture,furniture
+chick,False,animals,animal,exact,chick,animal,animal
+chicken,True,animals,animal,exact,chicken2,animal,animal
+child,False,people,,person,people are not a domain,people,people
+chimney,False,furniture_rooms,,none,"chimney.n.01 -> conduit.n.01: no majority ([('weapon', 1), ('part of car', 1)])",other,other:chimney
+chopstick,False,household,tool,exact,chopsticks,tool,tool
+christmas ornament,False,other,home decor,wordnet,decoration.n.01 -> decoration.n.01 (5/10 labeled THINGS concepts),home decor,home decor
+circle,False,other,home decor,wordnet,circle.n.03 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+clay,False,toys,office supply,wordnet,clay.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+clip,True,household,office supply,hand (provisional),{'office supply': 1},office supply,office supply
+clock,True,household,home decor,hand (provisional),{'home decor': 1},home decor,home decor
+clog,False,other,clothing,wordnet,clog.n.01 -> footwear.n.02 (7/8 labeled THINGS concepts),clothing,clothing
+closet,True,furniture_rooms,furniture,exact,closet,furniture,furniture
+cloth,True,household,,hand (provisional),"{'clothing': 3, 'tool': 1, 'medical equipment': 1}",other,other:cloth
+clothes,False,clothing,clothing,exact,clothes,clothing,clothing
+clothes rack,False,furniture_rooms,furniture,wordnet,rack.n.05 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+clothespin,False,household,,none,"clothespin.n.01 -> fastener.n.02: no majority ([('clothing', 4), ('office supply', 4)])",other,other:clothespin
+clothing rack,False,furniture_rooms,furniture,wordnet,rack.n.05 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+cloud,False,outside,,hand (provisional),"cloud.n.02 -> physical_entity.n.01: no majority ([('food', 287), ('animal', 176)])",other,other:cloud
+coaster,False,household,home decor,exact,coaster,home decor,home decor
+coat,True,clothing,clothing,exact,coat,clothing,clothing
+coat rack,False,furniture_rooms,furniture,exact,coat_rack,furniture,furniture
+coffee machine,False,furniture_rooms,electronic device,wordnet,machine.n.01 -> machine.n.01 (13/21 labeled THINGS concepts),electronic device,electronic device
+coffee maker,True,household,electronic device,exact,coffeemaker,electronic device,electronic device
+coffee pot,False,household,container,exact,coffee_pot,container,container
+coin,False,other,food,wordnet,coin.n.01 -> measure.n.02 (2/3 labeled THINGS concepts),food,food
+colander,False,household,tool,wordnet,colander.n.01 -> filter.n.01 (2/3 labeled THINGS concepts),tool,tool
+collar,False,clothing,clothing,wordnet,collar.n.03 -> clothing.n.01 (85/89 labeled THINGS concepts),clothing,clothing
+column,False,furniture_rooms,furniture,wordnet,column.n.07 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+comb,False,household,,none,"comb.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:comb
+comforter,False,household,medical equipment,wordnet,quilt.n.01 -> cloth_covering.n.01 (4/4 labeled THINGS concepts),other,other:comforter
+computer,False,household,electronic device,exact,computer,electronic device,electronic device
+computer monitor,False,household,electronic device,hand (provisional),computer_monitor.n.01 -> electronic_device.n.01 (4/5 labeled THINGS concepts),electronic device,electronic device
+computer mouse,True,household,electronic device,exact,mouse2,electronic device,electronic device
+computer screen,False,household,electronic device,exact,computer_screen,electronic device,electronic device
+concrete,False,other,,none,no WordNet sense,other,other:concrete
+concrete slab,False,other,,none,"slab.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:concrete slab
+cone,False,toys,,none,"cone.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:cone
+console,False,household,furniture,wordnet,console_table.n.01 -> table.n.02 (6/7 labeled THINGS concepts),furniture,furniture
+container,True,household,container,exact,container,container,container
+controller,True,toys,electronic device,hand (provisional),{'electronic device': 1},electronic device,electronic device
+cookie,False,food_drink,food,exact,cookie,food,food
+cookie cutter,False,household,,none,"cookie_cutter.n.01 -> kitchen_utensil.n.01: no majority ([('container', 7), ('tool', 7)])",other,other:cookie cutter
+cooler,False,household,electronic device,wordnet,cooler.n.01 -> white_goods.n.01 (4/4 labeled THINGS concepts),electronic device,electronic device
+cord,False,household,,none,"cord.n.03 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:cord
+corkboard,False,household,,none,"corkboard.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:corkboard
+corn,False,food_drink,plant,name,corn,other,other:corn
+couch,True,furniture_rooms,furniture,exact,couch,furniture,furniture
+counter,False,furniture_rooms,furniture,exact,counter,furniture,furniture
+countertop,False,furniture_rooms,furniture,hand (provisional),countertop.n.01 -> surface.n.01 (2/4 labeled THINGS concepts),furniture,furniture
+cover,False,household,clothing,wordnet,screen.n.04 -> covering.n.02 (94/114 labeled THINGS concepts),clothing,clothing
+cow,True,animals,animal,name,cow,animal,animal
+crab,False,animals,animal,exact,crab,animal,animal
+cracker,True,food_drink,food,exact,cracker,food,food
+cradle,False,furniture_rooms,furniture,wordnet,cradle.n.01 -> furniture.n.01 (28/31 labeled THINGS concepts),furniture,furniture
+craft,False,toys,,none,no WordNet sense,other,other:craft
+crane,False,vehicles,,none,"crane.n.04 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:crane
+crate,True,household,container,exact,crate,container,container
+crayon,False,toys,toy,exact,crayon,other,other:crayon
+crib,False,furniture_rooms,furniture,exact,crib,furniture,furniture
+crocodile,False,animals,,none,no WordNet sense,other,other:crocodile
+croissant,False,food_drink,food,exact,croissant,food,food
+crumb,False,food_drink,food,exact,crumb,food,food
+cube,False,toys,,none,"cube.n.05 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:cube
+cucumber,True,food_drink,food,exact,cucumber,food,food
+cup,True,household,container,exact,"cup,mug",container,container
+cup holder,False,household,home decor,wordnet,holder.n.01 -> holding_device.n.01 (2/3 labeled THINGS concepts),home decor,home decor
+cupboard,False,furniture_rooms,container,wordnet,cupboard.n.01 -> area.n.05 (7/7 labeled THINGS concepts),container,container
+cupcake,False,food_drink,food,exact,cupcake,food,food
+curtain,True,furniture_rooms,home decor,exact,curtain,home decor,home decor
+cushion,False,furniture_rooms,home decor,hand (provisional),{'part of car': 1},home decor,home decor
+cutting board,False,household,tool,hand (provisional),chopping_board.n.01 -> board.n.03 (4/4 labeled THINGS concepts),tool,tool
+cylinder,False,other,home decor,wordnet,cylinder.n.01 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+cymbal,False,other,musical instrument,exact,cymbal,other,other:cymbal
+deck,False,other,,none,"deck.n.04 -> structure.n.01: no majority ([('container', 10), ('home decor', 4)])",other,other:deck
+decoration,True,household,home decor,hand (provisional),"{'clothing': 2, 'home decor': 3, 'food': 1}",home decor,home decor
+deer,False,animals,animal,exact,deer,animal,animal
+desk,True,furniture_rooms,furniture,exact,desk,furniture,furniture
+diaper,False,clothing,clothing,exact,diaper,clothing,clothing
+dinosaur,False,animals,animal,hand (provisional),no WordNet sense,animal,animal
+disc,False,toys,home decor,wordnet,disk.n.01 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+dish,False,household,container,hand (provisional),{'container': 1},container,container
+dish brush,False,household,tool,wordnet,brush.n.02 -> implement.n.01 (71/97 labeled THINGS concepts),tool,tool
+dish rack,False,household,tool,hand (provisional),dish_rack.n.01 -> rack.n.01 (2/3 labeled THINGS concepts),tool,tool
+dish soap,False,household,office supply,wordnet,soap.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+dishwasher,True,furniture_rooms,electronic device,exact,dishwasher,electronic device,electronic device
+display case,False,household,container,wordnet,case.n.20 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+dog,True,animals,animal,exact,dog,animal,animal
+doll,False,toys,toy,exact,doll,other,other:doll
+dollhouse,False,toys,toy,exact,dollhouse,other,other:dollhouse
+dolphin,False,animals,animal,exact,dolphin,animal,animal
+donkey,False,animals,animal,exact,donkey,animal,animal
+donut,False,food_drink,food,exact,donut,food,food
+door,False,furniture_rooms,,hand (provisional),{'part of car': 1},other,other:door
+door handle,False,furniture_rooms,,hand (provisional),doorknob.n.01 -> part.n.02 (3/5 labeled THINGS concepts),other,other:door handle
+door knob,False,furniture_rooms,clothing,wordnet,doorknob.n.01 -> part.n.02 (3/5 labeled THINGS concepts),clothing,clothing
+doorframe,False,furniture_rooms,,hand (provisional),"doorframe.n.01 -> framework.n.03: no majority ([('furniture', 2), ('home decor', 1)])",other,other:doorframe
+doorknob,False,furniture_rooms,,hand (provisional),doorknob.n.01 -> part.n.02 (3/5 labeled THINGS concepts),other,other:doorknob
+doormat,True,household,home decor,hand (provisional),doormat.n.02 -> covering.n.02 (94/114 labeled THINGS concepts),home decor,home decor
+dragon,False,people,,person,people are not a domain,people,people
+drain,False,furniture_rooms,,none,"drain.n.03 -> tube.n.01: no majority ([('weapon', 1), ('part of car', 1)])",other,other:drain
+drawer,False,furniture_rooms,container,exact,drawer,container,container
+drawer unit,False,furniture_rooms,,none,no WordNet sense,other,other:drawer unit
+drawing,False,household,home decor,hand (provisional),drawing.n.02 -> representation.n.02 (3/3 labeled THINGS concepts),home decor,home decor
+dress,True,clothing,clothing,exact,dress,clothing,clothing
+dresser,False,furniture_rooms,furniture,exact,dresser,furniture,furniture
+drill,False,household,electronic device,exact,drill,electronic device,electronic device
+drum,True,toys,musical instrument,exact,drum,other,other:drum
+dryer,False,furniture_rooms,electronic device,exact,dryer,electronic device,electronic device
+drying rack,False,household,furniture,wordnet,rack.n.01 -> rack.n.01 (2/3 labeled THINGS concepts),furniture,furniture
+duck,True,animals,animal,exact,duck,animal,animal
+dumbbell,True,household,sports equipment,exact,dumbbell,other,other:dumbbell
+dustpan,False,household,tool,exact,dustpan,tool,tool
+duvet,False,household,medical equipment,wordnet,eiderdown.n.01 -> cloth_covering.n.01 (4/4 labeled THINGS concepts),other,other:duvet
+ear,False,body_parts,body part,exact,ear,other,other:ear
+earring,False,clothing,clothing,exact,earring,clothing,clothing
+easel,False,household,furniture,wordnet,easel.n.01 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+egg,False,food_drink,food,exact,egg,food,food
+egg carton,False,household,container,wordnet,carton.n.02 -> box.n.01 (9/9 labeled THINGS concepts),container,container
+eggplant,False,food_drink,food,exact,eggplant,food,food
+elephant,True,animals,animal,exact,elephant,animal,animal
+elmo,False,other,,none,no WordNet sense,other,other:elmo
+entertainment center,False,other,furniture,wordnet,entertainment_center.n.01 -> furniture.n.01 (28/31 labeled THINGS concepts),furniture,furniture
+envelope,True,household,office supply,exact,envelope,office supply,office supply
+eraser,True,household,office supply,exact,eraser,office supply,office supply
+excavator,False,vehicles,electronic device,wordnet,power_shovel.n.01 -> machine.n.01 (13/21 labeled THINGS concepts),electronic device,electronic device
+exercise ball,False,toys,toy,wordnet,ball.n.06 -> plaything.n.01 (20/20 labeled THINGS concepts),other,other:exercise ball
+exercise bike,False,household,,none,"exercise_bike.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:exercise bike
+eye,False,body_parts,body part,exact,eye,other,other:eye
+face,False,body_parts,body part,exact,face,other,other:face
+fan,True,household,electronic device,exact,fan,electronic device,electronic device
+faucet,False,household,,hand (provisional),"faucet.n.01 -> mechanism.n.05: no majority ([('part of car', 5), ('tool', 3)])",other,other:faucet
+feet,False,body_parts,,none,no WordNet sense,other,other:feet
+fence,False,outside,,hand (provisional),fence.n.01 -> barrier.n.01 (2/3 labeled THINGS concepts),other,other:fence
+field,False,outside,,none,"playing_field.n.02 -> object.n.01: no majority ([('animal', 173), ('clothing', 117)])",other,other:field
+figurine,False,toys,home decor,exact,figurine,home decor,home decor
+filing cabinet,True,furniture_rooms,furniture,exact,filing_cabinet,furniture,furniture
+finger,False,body_parts,body part,exact,finger,other,other:finger
+fire,False,outside,,none,"fire.n.03 -> physical_entity.n.01: no majority ([('food', 287), ('animal', 176)])",other,other:fire
+fire extinguisher,False,household,,none,"fire_extinguisher.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:fire extinguisher
+fire hydrant,False,outside,,none,"fireplug.n.01 -> tube.n.01: no majority ([('weapon', 1), ('part of car', 1)])",other,other:fire hydrant
+fire truck,True,vehicles,vehicle,exact,firetruck,vehicle,vehicle
+fireplace,False,furniture_rooms,,hand (provisional),fireplace.n.01 -> enclosure.n.01 (5/5 labeled THINGS concepts),other,other:fireplace
+fish,True,animals,animal,exact,fish,animal,animal
+fish tank,False,household,home decor,exact,aquarium,home decor,home decor
+flag,False,outside,home decor,wordnet,flag.n.01 -> decoration.n.01 (5/10 labeled THINGS concepts),home decor,home decor
+flamingo,False,animals,animal,name,flamingo,animal,animal
+flashcard,False,toys,drink,wordnet,flash_card.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:flashcard
+flip-flop,False,clothing,clothing,exact,flip_flop,clothing,clothing
+flower,False,outside,plant,name,flower,other,other:flower
+flower arrangement,False,household,home decor,wordnet,flower_arrangement.n.01 -> decoration.n.01 (5/10 labeled THINGS concepts),home decor,home decor
+flower pot,False,household,container,wordnet,pot.n.04 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+flowerpot,False,household,container,hand (provisional),pot.n.04 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+foil,False,household,sports equipment,wordnet,foil.n.01 -> sheet.n.06 (6/7 labeled THINGS concepts),other,other:foil
+foot,False,body_parts,body part,exact,foot,other,other:foot
+football,False,toys,sports equipment,exact,football,other,other:football
+footstool,False,furniture_rooms,furniture,wordnet,footstool.n.01 -> seat.n.03 (12/13 labeled THINGS concepts),furniture,furniture
+fork,False,household,tool,exact,fork,tool,tool
+fox,False,animals,animal,exact,fox,animal,animal
+frame,False,household,home decor,exact,frame,home decor,home decor
+frog,True,animals,animal,exact,frog,animal,animal
+fruit,True,food_drink,food,exact,fruit,food,food
+frying pan,False,household,tool,hand (provisional),frying_pan.n.01 -> cooking_utensil.n.01 (7/8 labeled THINGS concepts),tool,tool
+game,False,toys,electronic device,mapped,{'electronic device': 1},electronic device,electronic device
+game console,False,toys,,none,no WordNet sense,other,other:game console
+game controller,False,toys,,none,"control.n.09 -> mechanism.n.05: no majority ([('part of car', 5), ('tool', 3)])",other,other:game controller
+game piece,False,toys,,none,"piece.n.02 -> whole.n.02: no majority ([('animal', 173), ('clothing', 116)])",other,other:game piece
+garage door,False,other,part of car,wordnet,door.n.01 -> barrier.n.01 (2/3 labeled THINGS concepts),other,other:garage door
+garbage bin,False,household,container,wordnet,bin.n.01 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+garland,False,household,home decor,exact,wreath,home decor,home decor
+garlic,False,food_drink,food,exact,garlic,food,food
+garment,True,clothing,clothing,hand (provisional),"{'clothing': 27, 'sports equipment': 1}",clothing,clothing
+gate,False,furniture_rooms,,hand (provisional),gate.n.01 -> barrier.n.01 (2/3 labeled THINGS concepts),other,other:gate
+gear,False,other,part of car,wordnet,gear.n.01 -> mechanical_device.n.01 (4/8 labeled THINGS concepts),other,other:gear
+ghost,False,people,,person,people are not a domain,people,people
+gift,False,other,drink,wordnet,gift.n.01 -> relation.n.01 (16/23 labeled THINGS concepts),other,other:gift
+giraffe,False,animals,animal,exact,giraffe,animal,animal
+girl,False,people,,person,people are not a domain,people,people
+glass,True,household,container,exact,glass,container,container
+glass door,False,other,part of car,wordnet,door.n.01 -> barrier.n.01 (2/3 labeled THINGS concepts),other,other:glass door
+glasses,True,household,clothing,exact,glasses,clothing,clothing
+globe,False,household,home decor,exact,globe,home decor,home decor
+glove,True,clothing,clothing,exact,"baseball_glove,glove",clothing,clothing
+goal,False,outside,sports equipment,wordnet,goal.n.03 -> game_equipment.n.01 (9/10 labeled THINGS concepts),other,other:goal
+goat,True,animals,animal,exact,goat,animal,animal
+grape,False,food_drink,food,exact,grape,food,food
+grass,False,outside,plant,exact,grass,other,other:grass
+grater,False,household,tool,exact,grater,tool,tool
+gravel,False,other,office supply,wordnet,gravel.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+grill,False,outside,,none,"grill.n.02 -> framework.n.03: no majority ([('furniture', 2), ('home decor', 1)])",other,other:grill
+guitar,True,household,musical instrument,exact,guitar,other,other:guitar
+gun,True,toys,weapon,exact,gun,other,other:gun
+gym,False,toys,,none,no WordNet sense,other,other:gym
+hair,False,body_parts,body part,exact,hair,other,other:hair
+hair bun,False,body_parts,,none,no WordNet sense,other,other:hair bun
+hair clip,False,clothing,,none,"clip.n.03 -> fastener.n.02: no majority ([('clothing', 4), ('office supply', 4)])",other,other:hair clip
+hair dryer,True,household,electronic device,exact,hairdryer,electronic device,electronic device
+hair tie,False,clothing,,none,"tie.n.09 -> line.n.18: no majority ([('sports equipment', 1), ('clothing', 1)])",other,other:hair tie
+hairbrush,False,household,tool,wordnet,hairbrush.n.01 -> implement.n.01 (71/97 labeled THINGS concepts),tool,tool
+hammer,True,household,weapon,exact,hammer,other,other:hammer
+hamper,True,household,container,hand (provisional),hamper.n.02 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+hand,False,body_parts,body part,exact,hand,other,other:hand
+handle,False,household,,hand (provisional),handle.n.01 -> part.n.02 (3/5 labeled THINGS concepts),other,other:handle
+handprint,False,other,,none,no WordNet sense,other,other:handprint
+handrail,False,furniture_rooms,part of car,wordnet,bannister.n.02 -> barrier.n.01 (2/3 labeled THINGS concepts),other,other:handrail
+hanger,False,household,furniture,wordnet,hanger.n.02 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+hat,True,clothing,clothing,exact,hat,clothing,clothing
+head,False,body_parts,body part,wordnet,head.n.01 -> external_body_part.n.01 (10/10 labeled THINGS concepts),other,other:head
+headband,False,clothing,clothing,exact,headband,clothing,clothing
+headboard,False,furniture_rooms,sports equipment,wordnet,headboard.n.01 -> sheet.n.06 (6/7 labeled THINGS concepts),other,other:headboard
+headphones,False,household,part of car,wordnet,earphone.n.01 -> electrical_device.n.01 (2/3 labeled THINGS concepts),other,other:headphones
+heart,False,other,home decor,wordnet,heart.n.07 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+heater,True,furniture_rooms,electronic device,hand (provisional),"{'electronic device': 1, 'container': 1}",electronic device,electronic device
+hedge,False,outside,plant,exact,hedge,other,other:hedge
+helicopter,False,vehicles,vehicle,exact,helicopter,vehicle,vehicle
+helmet,True,clothing,sports equipment,exact,helmet,other,other:helmet
+hinge,False,household,,none,"hinge.n.01 -> instrumentality.n.03: no majority ([('tool', 104), ('container', 91)])",other,other:hinge
+hippo,False,animals,,none,no WordNet sense,other,other:hippo
+hood,False,clothing,clothing,wordnet,hood.n.08 -> headdress.n.01 (10/12 labeled THINGS concepts),clothing,clothing
+hoodie,False,clothing,clothing,exact,hoodie,clothing,clothing
+hook,False,household,tool,wordnet,hook.n.05 -> implement.n.01 (71/97 labeled THINGS concepts),tool,tool
+hoop,False,toys,sports equipment,exact,basketball_hoop,other,other:hoop
+hose,False,outside,tool,exact,hose,tool,tool
+hot air balloon,False,vehicles,vehicle,exact,hot-air_balloon,vehicle,vehicle
+house,False,outside,,hand (provisional),"house.n.01 -> structure.n.01: no majority ([('container', 10), ('home decor', 4)])",other,other:house
+hula hoop,False,toys,toy,wordnet,hula-hoop.n.01 -> plaything.n.01 (20/20 labeled THINGS concepts),other,other:hula hoop
+humidifier,False,household,,none,no WordNet sense,other,other:humidifier
+ice cream,True,food_drink,food,exact,ice_cream,food,food
+illustration,False,household,home decor,wordnet,illustration.n.04 -> representation.n.02 (3/3 labeled THINGS concepts),home decor,home decor
+insect,False,animals,insect,mapped,"{'insect': 12, 'animal': 12}",other,other:insect
+island,False,outside,,none,"island.n.02 -> object.n.01: no majority ([('animal', 173), ('clothing', 117)])",other,other:island
+jacket,False,clothing,clothing,exact,jacket,clothing,clothing
+jar,True,household,container,exact,jar,container,container
+jeans,True,clothing,clothing,exact,jeans,clothing,clothing
+jug,True,household,container,exact,jug,container,container
+juice,False,food_drink,drink,exact,juice,other,other:juice
+kettle,False,household,tool,exact,kettle,tool,tool
+key,False,household,,none,"key.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:key
+keyboard,True,household,musical instrument,exact,keyboard,other,other:keyboard
+kitchen,False,furniture_rooms,,hand (provisional),kitchen.n.01 -> area.n.05 (7/7 labeled THINGS concepts),other,other:kitchen
+kitchen set,False,toys,drink,wordnet,set.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:kitchen set
+kiwi,False,food_drink,food,name,kiwi,food,food
+knee,False,body_parts,body part,exact,knee,other,other:knee
+knife,True,household,weapon,exact,knife,other,other:knife
+knife block,False,household,,none,"block.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:knife block
+knob,False,household,,hand (provisional),knob.n.02 -> part.n.02 (3/5 labeled THINGS concepts),other,other:knob
+label,False,other,drink,wordnet,label.n.04 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:label
+ladder,False,outside,tool,exact,ladder,tool,tool
+ladle,True,household,tool,exact,ladle,tool,tool
+ladybug,False,animals,insect,exact,ladybug,other,other:ladybug
+lamp,False,household,electronic device,name,lamp,electronic device,electronic device
+lampshade,False,household,home decor,exact,lampshade,home decor,home decor
+landscape,False,outside,,none,"landscape.n.01 -> object.n.01: no majority ([('animal', 173), ('clothing', 117)])",other,other:landscape
+lantern,False,household,,none,"lantern.n.01 -> lamp.n.01: no majority ([('home decor', 1), ('tool', 1)])",other,other:lantern
+laptop,True,household,electronic device,exact,laptop,electronic device,electronic device
+lawn,False,outside,,none,"lawn.n.01 -> object.n.01: no majority ([('animal', 173), ('clothing', 117)])",other,other:lawn
+leaf,False,outside,,hand (provisional),leaf.n.01 -> plant_organ.n.01 (49/50 labeled THINGS concepts),other,other:leaf
+leg,False,body_parts,body part,exact,leg,other,other:leg
+leggings,False,clothing,clothing,name,leggings,clothing,clothing
+lego,False,toys,toy,exact,lego,other,other:lego
+lego block,False,toys,,none,"block.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:lego block
+lemon,False,food_drink,food,exact,lemon,food,food
+letter,False,other,,hand (provisional),letter.n.02 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:letter
+lettuce,False,food_drink,plant,exact,lettuce,other,other:lettuce
+lid,False,household,,hand (provisional),lid.n.02 -> covering.n.02 (94/114 labeled THINGS concepts),other,other:lid
+light,True,household,electronic device,exact,lamp,electronic device,electronic device
+light bulb,False,household,electronic device,hand (provisional),"light_bulb.n.01 -> lamp.n.01: no majority ([('home decor', 1), ('tool', 1)])",electronic device,electronic device
+light fixture,False,furniture_rooms,home decor,hand (provisional),"fixture.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",home decor,home decor
+light switch,False,furniture_rooms,,hand (provisional),"switch.n.01 -> mechanism.n.05: no majority ([('part of car', 5), ('tool', 3)])",other,other:light switch
+lime,False,food_drink,food,exact,lime,food,food
+lion,True,animals,animal,exact,lion,animal,animal
+lizard,False,animals,animal,exact,lizard,animal,animal
+llama,False,animals,animal,exact,llama,animal,animal
+lock,False,household,,none,"lock.n.01 -> fastener.n.02: no majority ([('clothing', 4), ('office supply', 4)])",other,other:lock
+log,False,outside,office supply,wordnet,log.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+logo,False,other,drink,wordnet,logo.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:logo
+lunch box,False,household,container,wordnet,box.n.01 -> box.n.01 (9/9 labeled THINGS concepts),container,container
+magazine,False,household,home decor,wordnet,magazine.n.02 -> creation.n.02 (5/6 labeled THINGS concepts),home decor,home decor
+magnet,False,household,office supply,hand (provisional),"magnet.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",office supply,office supply
+mallet,False,toys,tool,name,mallet,tool,tool
+man,False,people,,person,people are not a domain,people,people
+mango,False,food_drink,food,exact,mango,food,food
+mantel,False,furniture_rooms,furniture,wordnet,mantel.n.01 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+map,False,household,home decor,wordnet,map.n.01 -> representation.n.02 (3/3 labeled THINGS concepts),home decor,home decor
+maraca,False,toys,musical instrument,wordnet,maraca.n.01 -> percussion_instrument.n.01 (9/9 labeled THINGS concepts),other,other:maraca
+marker,False,household,tool,exact,marker,tool,tool
+mask,False,clothing,clothing,wordnet,mask.n.01 -> attire.n.01 (3/3 labeled THINGS concepts),clothing,clothing
+mat,False,household,home decor,hand (provisional),mat.n.01 -> covering.n.02 (94/114 labeled THINGS concepts),home decor,home decor
+mattress,False,furniture_rooms,furniture,exact,mattress,furniture,furniture
+measuring cup,True,household,tool,exact,measuring_cup,tool,tool
+meat,False,food_drink,food,exact,meat,food,food
+melon,False,food_drink,food,exact,melon,food,food
+mermaid,False,people,,person,people are not a domain,people,people
+mesh,False,household,clothing,wordnet,net.n.06 -> fabric.n.01 (3/5 labeled THINGS concepts),clothing,clothing
+mickey mouse,False,other,,none,no WordNet sense,other,other:mickey mouse
+microphone,True,household,electronic device,exact,microphone,electronic device,electronic device
+microwave,True,furniture_rooms,electronic device,exact,microwave,electronic device,electronic device
+milk,False,food_drink,drink,exact,milk,other,other:milk
+minnie mouse,False,other,animal,wordnet,minnie_mouse.n.01 -> animal.n.01 (173/173 labeled THINGS concepts),animal,animal
+mirror,True,household,home decor,exact,mirror,home decor,home decor
+mixer,False,household,electronic device,exact,mixer,electronic device,electronic device
+mobile,False,toys,home decor,wordnet,mobile.n.03 -> creation.n.02 (5/6 labeled THINGS concepts),home decor,home decor
+mold,False,household,container,exact,mold1,container,container
+monitor,False,household,electronic device,wordnet,monitor.n.04 -> electronic_device.n.01 (4/5 labeled THINGS concepts),electronic device,electronic device
+monkey,True,animals,animal,exact,monkey,animal,animal
+monster,False,people,,person,people are not a domain,people,people
+moon,False,outside,,none,"moon.n.02 -> object.n.01: no majority ([('animal', 173), ('clothing', 117)])",other,other:moon
+mop,True,household,tool,exact,mop,tool,tool
+mountain,False,outside,,none,"mountain.n.01 -> object.n.01: no majority ([('animal', 173), ('clothing', 117)])",other,other:mountain
+mouse,False,animals,animal,exact,mouse1,animal,animal
+mouth,False,body_parts,body part,exact,mouth,other,other:mouth
+muffin,False,food_drink,food,exact,muffin,food,food
+muffin tin,False,household,container,wordnet,tin.n.02 -> vessel.n.03 (31/33 labeled THINGS concepts),container,container
+mulch,False,other,,none,"mulch.n.01 -> protective_covering.n.01: no majority ([('home decor', 4), ('part of car', 3)])",other,other:mulch
+mushroom,False,outside,food,name,mushroom,food,food
+napkin,False,household,home decor,hand (provisional),napkin.n.01 -> commodity.n.01 (85/110 labeled THINGS concepts),home decor,home decor
+necklace,True,clothing,clothing,hand (provisional),necklace.n.01 -> jewelry.n.01 (4/4 labeled THINGS concepts),clothing,clothing
+net,False,household,,none,"net.n.02 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:net
+newspaper,False,household,,none,"newspaper.n.01 -> instrumentality.n.03: no majority ([('tool', 104), ('container', 91)])",other,other:newspaper
+nightstand,False,furniture_rooms,furniture,exact,nightstand,furniture,furniture
+noodle,False,food_drink,food,exact,noodle,food,food
+nose,False,body_parts,body part,exact,nose,other,other:nose
+note,False,other,drink,wordnet,note.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:note
+notebook,False,household,office supply,exact,notebook,office supply,office supply
+number,False,other,drink,wordnet,numeral.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:number
+number block,False,toys,,none,"block.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:number block
+octopus,False,animals,animal,exact,octopus,animal,animal
+onion,False,food_drink,food,exact,onion,food,food
+orange,True,food_drink,food,exact,orange,food,food
+ottoman,False,furniture_rooms,furniture,name,ottoman,furniture,furniture
+outlet,False,furniture_rooms,,hand (provisional),wall_socket.n.01 -> part.n.02 (3/5 labeled THINGS concepts),other,other:outlet
+oven,True,furniture_rooms,electronic device,exact,oven,electronic device,electronic device
+oven mitt,False,household,,none,no WordNet sense,other,other:oven mitt
+overalls,False,clothing,clothing,exact,overalls,clothing,clothing
+owl,True,animals,animal,exact,owl,animal,animal
+pacifier,False,household,,none,"comforter.n.04 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:pacifier
+package,False,household,container,hand (provisional),package.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),container,container
+packaging,False,household,sports equipment,wordnet,packaging.n.03 -> equipment.n.01 (27/49 labeled THINGS concepts),other,other:packaging
+paint,False,household,clothing,wordnet,paint.n.01 -> covering.n.02 (94/114 labeled THINGS concepts),clothing,clothing
+paintbrush,True,household,tool,exact,paintbrush,tool,tool
+painting,False,household,home decor,hand (provisional),painting.n.01 -> creation.n.02 (5/6 labeled THINGS concepts),home decor,home decor
+pajamas,False,clothing,clothing,exact,pajamas,clothing,clothing
+pan,True,household,container,exact,pan,container,container
+pancake,False,food_drink,food,exact,pancake,food,food
+panda,False,animals,animal,exact,panda,animal,animal
+pants,False,clothing,clothing,exact,pants,clothing,clothing
+paper,False,household,office supply,exact,paper,office supply,office supply
+paper roll,False,household,home decor,wordnet,roll.n.11 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+paper towel,True,household,,hand (provisional),paper_towel.n.01 -> piece_of_cloth.n.01 (3/4 labeled THINGS concepts),other,other:paper towel
+paper towel roll,False,household,,hand (provisional),roll.n.11 -> shape.n.02 (2/3 labeled THINGS concepts),other,other:paper towel roll
+pasta,False,food_drink,food,exact,pasta,food,food
+path,False,outside,,none,"path.n.02 -> way.n.06: no majority ([('tool', 2), ('weapon', 1)])",other,other:path
+patio,False,other,container,wordnet,patio.n.01 -> area.n.05 (7/7 labeled THINGS concepts),container,container
+pavement,False,outside,electronic device,wordnet,pavement.n.01 -> surface.n.01 (2/4 labeled THINGS concepts),electronic device,electronic device
+pea,False,food_drink,food,wordnet,pea.n.01 -> vegetable.n.01 (28/28 labeled THINGS concepts),food,food
+pea pod,False,food_drink,body part,wordnet,pea_pod.n.01 -> covering.n.01 (4/5 labeled THINGS concepts),other,other:pea pod
+peach,False,food_drink,food,exact,peach,food,food
+pear,False,food_drink,food,exact,pear,food,food
+peel,False,food_drink,office supply,wordnet,peel.n.02 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+peg,False,toys,sports equipment,mapped,{'sports equipment': 1},other,other:peg
+pegboard,False,household,electronic device,wordnet,pegboard.n.01 -> surface.n.01 (2/4 labeled THINGS concepts),electronic device,electronic device
+pen,True,household,office supply,exact,pen,office supply,office supply
+pen holder,False,household,home decor,wordnet,holder.n.01 -> holding_device.n.01 (2/3 labeled THINGS concepts),home decor,home decor
+pencil,False,household,office supply,exact,pencil,office supply,office supply
+pencil case,False,household,container,wordnet,pencil_box.n.01 -> box.n.01 (9/9 labeled THINGS concepts),container,container
+pencil holder,False,household,home decor,wordnet,holder.n.01 -> holding_device.n.01 (2/3 labeled THINGS concepts),home decor,home decor
+penguin,True,animals,animal,exact,penguin,animal,animal
+pepper,False,food_drink,food,exact,pepper2,food,food
+pepper grinder,False,household,tool,exact,pepper_mill,tool,tool
+phone,True,household,electronic device,hand (provisional),{'electronic device': 1},electronic device,electronic device
+photo,False,household,home decor,hand (provisional),photograph.n.01 -> representation.n.02 (3/3 labeled THINGS concepts),home decor,home decor
+piano,True,household,musical instrument,exact,piano,other,other:piano
+picture,False,household,home decor,hand (provisional),picture.n.01 -> representation.n.02 (3/3 labeled THINGS concepts),home decor,home decor
+picture frame,False,household,home decor,hand (provisional),"picture_frame.n.01 -> framework.n.03: no majority ([('furniture', 2), ('home decor', 1)])",home decor,home decor
+pig,True,animals,animal,exact,pig,animal,animal
+pillar,False,furniture_rooms,furniture,wordnet,column.n.07 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+pillow,True,household,home decor,exact,pillow,home decor,home decor
+pineapple,False,food_drink,food,exact,pineapple,food,food
+pinecone,False,other,home decor,exact,pinecone,home decor,home decor
+pipe,False,household,part of car,mapped,{'part of car': 1},other,other:pipe
+pitcher,True,household,container,exact,pitcher,container,container
+pizza,True,food_drink,food,exact,pizza,food,food
+place mat,False,household,home decor,exact,place_mat,home decor,home decor
+placemat,False,household,home decor,hand (provisional),no WordNet sense,home decor,home decor
+planet,False,other,,none,no WordNet sense,other,other:planet
+plank,False,household,,none,"board.n.02 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:plank
+plant,True,household,plant,exact,"flower,plant",other,other:plant
+planter,False,household,container,wordnet,planter.n.03 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+planter box,False,other,container,wordnet,box.n.01 -> box.n.01 (9/9 labeled THINGS concepts),container,container
+plate,True,household,container,hand (provisional),plate.n.04 -> tableware.n.01 (3/6 labeled THINGS concepts),container,container
+play kitchen,False,toys,,none,no WordNet sense,other,other:play kitchen
+play structure,False,toys,,none,"structure.n.01 -> structure.n.01: no majority ([('container', 10), ('home decor', 4)])",other,other:play structure
+play tent,False,other,,none,"tent.n.01 -> structure.n.01: no majority ([('container', 10), ('home decor', 4)])",other,other:play tent
+play tunnel,False,other,,none,no WordNet sense,other,other:play tunnel
+playdough,False,toys,,none,no WordNet sense,other,other:playdough
+playhouse,False,toys,toy,wordnet,playhouse.n.01 -> plaything.n.01 (20/20 labeled THINGS concepts),other,other:playhouse
+playmat,False,toys,,none,no WordNet sense,other,other:playmat
+playpen,False,household,furniture,hand (provisional),playpen.n.01 -> enclosure.n.01 (5/5 labeled THINGS concepts),furniture,furniture
+playset,False,toys,,none,no WordNet sense,other,other:playset
+plug,False,household,part of car,wordnet,plug.n.05 -> electrical_device.n.01 (2/3 labeled THINGS concepts),other,other:plug
+plum,False,food_drink,food,exact,plum,food,food
+pole,True,household,,hand (provisional),"{'sports equipment': 1, 'toy': 1}",other,other:pole
+polo shirt,False,other,clothing,exact,polo_shirt,clothing,clothing
+pom-pom,False,toys,clothing,wordnet,pompon.n.01 -> adornment.n.01 (4/4 labeled THINGS concepts),clothing,clothing
+pompom,False,toys,,none,no WordNet sense,other,other:pompom
+pony,False,animals,animal,exact,pony,animal,animal
+pool,False,outside,container,mapped,{'container': 1},container,container
+post,True,furniture_rooms,,hand (provisional),post.n.04 -> support.n.10 (3/6 labeled THINGS concepts),other,other:post
+poster,False,household,home decor,hand (provisional),poster.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),home decor,home decor
+pot,True,household,container,exact,pot,container,container
+potato,True,food_drink,food,exact,potato,food,food
+potty,False,furniture_rooms,container,wordnet,chamberpot.n.01 -> receptacle.n.01 (3/3 labeled THINGS concepts),container,container
+potty chair,False,household,,none,"potty_seat.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:potty chair
+pouch,False,household,container,mapped,{'container': 1},container,container
+power cord,False,household,,none,"power_cord.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:power cord
+power line,False,other,,none,"power_line.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:power line
+power strip,False,household,,none,no WordNet sense,other,other:power strip
+pressure cooker,False,household,container,wordnet,pressure_cooker.n.01 -> vessel.n.03 (31/33 labeled THINGS concepts),container,container
+printer,True,household,electronic device,exact,printer,electronic device,electronic device
+pumpkin,False,food_drink,food,exact,pumpkin,food,food
+purse,True,household,clothing,exact,purse,clothing,clothing
+puzzle,False,toys,toy,hand (provisional),puzzle.n.02 -> game_equipment.n.01 (9/10 labeled THINGS concepts),other,other:puzzle
+puzzle piece,False,toys,toy,hand (provisional),piece.n.01 -> piece.n.01 (3/4 labeled THINGS concepts),other,other:puzzle piece
+quilt,False,household,medical equipment,wordnet,quilt.n.01 -> cloth_covering.n.01 (4/4 labeled THINGS concepts),other,other:quilt
+rabbit,True,animals,animal,exact,rabbit,animal,animal
+rack,False,furniture_rooms,furniture,exact,rack1,furniture,furniture
+racket,True,toys,sports equipment,exact,racket,other,other:racket
+radiator,False,furniture_rooms,electronic device,hand (provisional),"radiator.n.02 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",electronic device,electronic device
+radio,True,household,electronic device,exact,radio,electronic device,electronic device
+rag,False,household,clothing,wordnet,rag.n.01 -> piece_of_cloth.n.01 (3/4 labeled THINGS concepts),clothing,clothing
+railing,False,furniture_rooms,,hand (provisional),railing.n.01 -> barrier.n.01 (2/3 labeled THINGS concepts),other,other:railing
+rainbow,False,outside,home decor,wordnet,rainbow.n.01 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+ramp,False,toys,part of car,wordnet,ramp.n.01 -> mechanical_device.n.01 (4/8 labeled THINGS concepts),other,other:ramp
+range hood,False,furniture_rooms,electronic device,hand (provisional),range_hood.n.01 -> covering.n.02 (94/114 labeled THINGS concepts),electronic device,electronic device
+rattle,False,toys,toy,exact,rattle,other,other:rattle
+record player,False,other,electronic device,exact,record_player,electronic device,electronic device
+refrigerator,True,furniture_rooms,electronic device,exact,refrigerator,electronic device,electronic device
+remote control,True,household,electronic device,exact,remote_control,electronic device,electronic device
+rhinoceros,False,animals,animal,exact,rhinoceros,animal,animal
+rice,False,food_drink,food,exact,rice,food,food
+rice cooker,False,furniture_rooms,container,wordnet,cooker.n.01 -> cooking_utensil.n.01 (7/8 labeled THINGS concepts),container,container
+ride-on toy,False,other,toy,wordnet,plaything.n.01 -> plaything.n.01 (20/20 labeled THINGS concepts),other,other:ride-on toy
+ring,False,clothing,clothing,hand (provisional),ring.n.02 -> shape.n.02 (2/3 labeled THINGS concepts),clothing,clothing
+ring stacker,False,toys,,none,no WordNet sense,other,other:ring stacker
+robe,False,clothing,clothing,exact,robe,clothing,clothing
+robot,False,toys,toy,exact,robot,other,other:robot
+robot vacuum,False,household,electronic device,wordnet,vacuum.n.04 -> home_appliance.n.01 (17/17 labeled THINGS concepts),electronic device,electronic device
+rock,False,outside,,hand (provisional),rock.n.01 -> natural_object.n.01 (50/55 labeled THINGS concepts),other,other:rock
+rocket,False,toys,vehicle,name,rocket,vehicle,vehicle
+rocking horse,False,toys,toy,exact,rocking_horse,other,other:rocking horse
+rolling pin,False,household,tool,exact,rolling_pin,tool,tool
+roof,False,outside,part of car,mapped,{'part of car': 1},other,other:roof
+rope,False,household,tool,exact,rope,tool,tool
+rose,False,outside,plant,exact,rose,other,other:rose
+rug,True,furniture_rooms,home decor,exact,rug,home decor,home decor
+ruler,False,household,tool,exact,ruler,tool,tool
+sailboat,False,vehicles,vehicle,exact,sailboat,vehicle,vehicle
+salad,False,food_drink,food,exact,salad,food,food
+salt shaker,True,household,container,exact,saltshaker,container,container
+sand,False,outside,office supply,wordnet,sand.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+sandal,True,clothing,clothing,exact,sandal,clothing,clothing
+sandwich,True,food_drink,food,exact,sandwich,food,food
+santa claus,False,people,,person,people are not a domain,people,people
+saucepan,False,household,container,wordnet,saucepan.n.01 -> cooking_utensil.n.01 (7/8 labeled THINGS concepts),container,container
+scale,True,household,tool,hand (provisional),"scale.n.07 -> measuring_instrument.n.01: no majority ([('tool', 3), ('home decor', 2)])",tool,tool
+scarf,True,clothing,clothing,exact,scarf,clothing,clothing
+scissors,False,household,weapon,exact,scissors,other,other:scissors
+scoop,False,household,tool,name,scoop,tool,tool
+scooter,False,toys,vehicle,exact,scooter,vehicle,vehicle
+scratching post,False,household,furniture,wordnet,post.n.04 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+screen,False,household,electronic device,name,screen1,electronic device,electronic device
+screw,True,household,tool,hand (provisional),"screw.n.04 -> fastener.n.02: no majority ([('clothing', 4), ('office supply', 4)])",tool,tool
+screwdriver,True,household,tool,exact,screwdriver,tool,tool
+seahorse,False,animals,animal,name,seahorse,animal,animal
+seal,False,animals,animal,name,seal,animal,animal
+seashell,False,outside,body part,wordnet,seashell.n.01 -> covering.n.01 (4/5 labeled THINGS concepts),other,other:seashell
+seat,False,furniture_rooms,furniture,wordnet,seat.n.03 -> seat.n.03 (12/13 labeled THINGS concepts),furniture,furniture
+shadow,False,other,home decor,wordnet,shadow.n.01 -> attribute.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+shaker,False,household,container,name,shaker,container,container
+shape sorter,False,toys,toy,hand (provisional),no WordNet sense,other,other:shape sorter
+shark,False,animals,animal,name,shark,animal,animal
+shed,False,outside,,none,"shed.n.01 -> structure.n.01: no majority ([('container', 10), ('home decor', 4)])",other,other:shed
+sheep,True,animals,animal,exact,sheep,animal,animal
+sheet,False,household,clothing,wordnet,sheet.n.03 -> commodity.n.01 (85/110 labeled THINGS concepts),clothing,clothing
+shelf,False,furniture_rooms,furniture,exact,shelf,furniture,furniture
+ship,False,vehicles,vehicle,exact,ship,vehicle,vehicle
+shirt,True,clothing,clothing,exact,shirt,clothing,clothing
+shoe,True,clothing,clothing,exact,shoe,clothing,clothing
+shoe rack,False,furniture_rooms,furniture,wordnet,rack.n.05 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+shopping cart,True,household,container,exact,shopping_cart,container,container
+shorts,False,clothing,clothing,exact,shorts,clothing,clothing
+shovel,True,outside,tool,exact,shovel,tool,tool
+shower curtain,True,household,home decor,hand (provisional),"shower_curtain.n.01 -> protective_covering.n.01: no majority ([('home decor', 4), ('part of car', 3)])",home decor,home decor
+shower head,False,household,,none,"showerhead.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:shower head
+shutter,False,furniture_rooms,,none,"shutter.n.02 -> protective_covering.n.01: no majority ([('home decor', 4), ('part of car', 3)])",other,other:shutter
+sideboard,False,furniture_rooms,furniture,wordnet,buffet.n.01 -> furniture.n.01 (28/31 labeled THINGS concepts),furniture,furniture
+sidewalk,False,other,,none,"sidewalk.n.01 -> way.n.06: no majority ([('tool', 2), ('weapon', 1)])",other,other:sidewalk
+sign,True,household,,hand (provisional),sign.n.02 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:sign
+sink,True,furniture_rooms,furniture,hand (provisional),"sink.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",furniture,furniture
+skateboard,False,toys,vehicle,exact,skateboard,vehicle,vehicle
+skeleton,False,toys,body part,exact,skeleton,other,other:skeleton
+skirt,True,clothing,clothing,exact,skirt,clothing,clothing
+skull,False,body_parts,body part,exact,skull,other,other:skull
+skylight,False,furniture_rooms,,none,"skylight.n.01 -> framework.n.03: no majority ([('furniture', 2), ('home decor', 1)])",other,other:skylight
+sleeve,False,clothing,,hand (provisional),sleeve.n.01 -> cloth_covering.n.01 (4/4 labeled THINGS concepts),other,other:sleeve
+slide,False,outside,toy,hand (provisional),slide.n.04 -> plaything.n.01 (20/20 labeled THINGS concepts),other,other:slide
+slipper,False,clothing,clothing,exact,slipper,clothing,clothing
+smart speaker,False,household,part of car,wordnet,loudspeaker.n.01 -> electrical_device.n.01 (2/3 labeled THINGS concepts),other,other:smart speaker
+smiley face,False,other,,none,no WordNet sense,other,other:smiley face
+smoke detector,False,household,electronic device,hand (provisional),"detector.n.01 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",electronic device,electronic device
+snack,False,food_drink,food,exact,snack,food,food
+snake,False,animals,,none,"snake.n.05 -> object.n.01: no majority ([('animal', 173), ('clothing', 117)])",other,other:snake
+snow,False,outside,,none,"snow.n.02 -> object.n.01: no majority ([('animal', 173), ('clothing', 117)])",other,other:snow
+snowman,False,outside,home decor,wordnet,snowman.n.01 -> representation.n.02 (3/3 labeled THINGS concepts),home decor,home decor
+soap,False,household,office supply,wordnet,soap.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+soap dispenser,False,household,container,wordnet,soap_dispenser.n.01 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+sock,True,clothing,clothing,exact,sock,clothing,clothing
+socket,False,furniture_rooms,,hand (provisional),socket.n.03 -> part.n.02 (3/5 labeled THINGS concepts),other,other:socket
+soda can,False,food_drink,container,wordnet,soda_can.n.01 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+soil,False,outside,office supply,wordnet,soil.n.02 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+soundbar,False,household,,none,no WordNet sense,other,other:soundbar
+soup,True,food_drink,food,exact,soup,food,food
+spaghetti,False,food_drink,food,exact,spaghetti,food,food
+spatula,False,household,tool,exact,spatula,tool,tool
+speaker,True,household,electronic device,hand (provisional),loudspeaker.n.01 -> electrical_device.n.01 (2/3 labeled THINGS concepts),electronic device,electronic device
+spice,False,food_drink,food,mapped,{'food': 1},food,food
+spice rack,False,household,furniture,wordnet,spice_rack.n.01 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+spider,False,animals,animal,exact,spider,animal,animal
+spider-man,False,people,,person,people are not a domain,people,people
+sponge,False,household,tool,hand (provisional),sponge.n.01 -> material.n.01 (3/6 labeled THINGS concepts),tool,tool
+spoon,True,household,tool,exact,spoon,tool,tool
+spray bottle,False,household,container,wordnet,bottle.n.01 -> bottle.n.01 (7/7 labeled THINGS concepts),container,container
+spray can,False,household,container,wordnet,aerosol.n.02 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+square,False,other,,none,"square.n.07 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:square
+squash,False,food_drink,food,exact,squash,food,food
+squirrel,False,animals,animal,exact,squirrel,animal,animal
+stacking ring,False,toys,home decor,wordnet,ring.n.02 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+stair,False,furniture_rooms,furniture,wordnet,step.n.04 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+stand,False,furniture_rooms,furniture,mapped,{'furniture': 1},furniture,furniture
+stapler,False,household,office supply,exact,stapler,office supply,office supply
+star,False,outside,,hand (provisional),star.n.05 -> shape.n.02 (2/3 labeled THINGS concepts),other,other:star
+starfish,True,animals,animal,exact,starfish,animal,animal
+statue,False,household,home decor,exact,statue,home decor,home decor
+steering wheel,False,vehicles,part of car,exact,steering_wheel,other,other:steering wheel
+step,False,furniture_rooms,furniture,wordnet,step.n.04 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+stick,True,outside,,hand (provisional),"{'weapon': 1, 'medical equipment': 2}",other,other:stick
+sticker,False,household,office supply,hand (provisional),gummed_label.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),office supply,office supply
+sticker sheet,False,toys,sports equipment,wordnet,sheet.n.06 -> sheet.n.06 (6/7 labeled THINGS concepts),other,other:sticker sheet
+stocking,False,clothing,clothing,exact,stockings,clothing,clothing
+stool,False,furniture_rooms,furniture,exact,stool,furniture,furniture
+storage unit,False,furniture_rooms,,none,no WordNet sense,other,other:storage unit
+stove,True,furniture_rooms,electronic device,exact,"stove1,stove2",electronic device,electronic device
+stovetop,False,furniture_rooms,,none,no WordNet sense,other,other:stovetop
+strainer,True,household,tool,exact,strainer,tool,tool
+strap,False,household,tool,wordnet,strap.n.01 -> implement.n.01 (71/97 labeled THINGS concepts),tool,tool
+straw,False,household,tool,hand (provisional),"straw.n.04 -> tube.n.01: no majority ([('weapon', 1), ('part of car', 1)])",tool,tool
+strawberry,False,food_drink,food,exact,strawberry,food,food
+street light,False,outside,,none,"streetlight.n.01 -> lamp.n.01: no majority ([('home decor', 1), ('tool', 1)])",other,other:street light
+streetlight,False,outside,,none,"streetlight.n.01 -> lamp.n.01: no majority ([('home decor', 1), ('tool', 1)])",other,other:streetlight
+string,False,household,,none,"string.n.01 -> line.n.18: no majority ([('sports equipment', 1), ('clothing', 1)])",other,other:string
+string light,False,household,part of car,wordnet,light.n.02 -> source_of_illumination.n.01 (2/4 labeled THINGS concepts),other,other:string light
+stroller,False,vehicles,vehicle,exact,stroller,vehicle,vehicle
+suitcase,False,household,container,exact,suitcase,container,container
+sun,False,outside,food,wordnet,sun.n.01 -> natural_object.n.01 (50/55 labeled THINGS concepts),food,food
+sunflower,False,outside,plant,exact,sunflower,other,other:sunflower
+suv,False,vehicles,vehicle,wordnet,sport_utility.n.01 -> car.n.01 (8/8 labeled THINGS concepts),vehicle,vehicle
+sweater,False,clothing,clothing,exact,sweater,clothing,clothing
+sweatpants,False,clothing,clothing,hand (provisional),sweat_pants.n.01 -> trouser.n.01 (3/3 labeled THINGS concepts),clothing,clothing
+sweatshirt,False,clothing,clothing,hand (provisional),sweatshirt.n.01 -> sweater.n.01 (3/3 labeled THINGS concepts),clothing,clothing
+swing,False,outside,part of car,wordnet,swing.n.02 -> mechanical_device.n.01 (4/8 labeled THINGS concepts),other,other:swing
+switch,False,household,,none,"switch.n.01 -> mechanism.n.05: no majority ([('part of car', 5), ('tool', 3)])",other,other:switch
+table,True,furniture_rooms,furniture,exact,table,furniture,furniture
+table runner,False,household,clothing,wordnet,runner.n.08 -> covering.n.02 (94/114 labeled THINGS concepts),clothing,clothing
+tablecloth,False,household,home decor,hand (provisional),tablecloth.n.01 -> commodity.n.01 (85/110 labeled THINGS concepts),home decor,home decor
+tablet,False,household,electronic device,exact,tablet,electronic device,electronic device
+tableware,False,household,tool,wordnet,tableware.n.01 -> tableware.n.01 (3/6 labeled THINGS concepts),tool,tool
+tag,False,household,drink,wordnet,tag.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:tag
+tank top,False,clothing,clothing,hand (provisional),tank_top.n.01 -> shirt.n.01 (4/4 labeled THINGS concepts),clothing,clothing
+tape,False,household,office supply,exact,tape,office supply,office supply
+tapestry,False,household,home decor,exact,tapestry,home decor,home decor
+tarp,False,household,clothing,wordnet,tarpaulin.n.01 -> fabric.n.01 (3/5 labeled THINGS concepts),clothing,clothing
+tattoo,False,body_parts,home decor,wordnet,tattoo.n.02 -> decoration.n.01 (5/10 labeled THINGS concepts),home decor,home decor
+teapot,True,household,container,exact,teapot,container,container
+teddy bear,True,animals,toy,exact,teddy_bear,other,other:teddy bear
+television,False,furniture_rooms,electronic device,hand (provisional),television_receiver.n.01 -> electronic_equipment.n.01 (10/10 labeled THINGS concepts),electronic device,electronic device
+tent,True,toys,container,exact,tent,container,container
+text,False,other,drink,wordnet,text.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:text
+thermos,False,household,container,exact,thermos,container,container
+thermostat,False,household,,none,"thermostat.n.01 -> mechanism.n.05: no majority ([('part of car', 5), ('tool', 3)])",other,other:thermostat
+tiger,True,animals,animal,exact,tiger,animal,animal
+tile,False,furniture_rooms,,hand (provisional),"tile.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:tile
+timer,False,household,tool,exact,timer,tool,tool
+tissue,False,household,,hand (provisional),tissue.n.02 -> paper.n.01 (2/3 labeled THINGS concepts),other,other:tissue
+tissue box,False,household,container,hand (provisional),box.n.01 -> box.n.01 (9/9 labeled THINGS concepts),container,container
+toast,False,food_drink,food,exact,toast,food,food
+toaster,True,household,electronic device,exact,toaster,electronic device,electronic device
+toaster oven,False,furniture_rooms,electronic device,exact,toaster_oven,electronic device,electronic device
+toe,False,body_parts,body part,exact,toe,other,other:toe
+toilet,False,furniture_rooms,furniture,hand (provisional),"toilet.n.02 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",furniture,furniture
+toilet paper,True,household,,hand (provisional),toilet_tissue.n.01 -> paper.n.01 (2/3 labeled THINGS concepts),other,other:toilet paper
+toilet paper roll,False,household,home decor,wordnet,roll.n.11 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+tomato,False,food_drink,food,exact,tomato,food,food
+tongs,False,household,tool,exact,tongs,tool,tool
+toothbrush,False,household,tool,hand (provisional),toothbrush.n.01 -> implement.n.01 (71/97 labeled THINGS concepts),tool,tool
+toothpaste,False,household,office supply,wordnet,toothpaste.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+top,False,clothing,clothing,wordnet,top.n.10 -> woman's_clothing.n.01 (3/3 labeled THINGS concepts),clothing,clothing
+tortilla,False,food_drink,food,exact,tortilla,food,food
+tote bag,False,household,container,wordnet,carryall.n.01 -> bag.n.01 (7/10 labeled THINGS concepts),container,container
+towel,True,household,home decor,hand (provisional),towel.n.01 -> piece_of_cloth.n.01 (3/4 labeled THINGS concepts),home decor,home decor
+towel rack,False,household,furniture,wordnet,towel_rack.n.01 -> rack.n.01 (2/3 labeled THINGS concepts),furniture,furniture
+towel ring,False,household,clothing,wordnet,towel_ring.n.01 -> band.n.07 (4/6 labeled THINGS concepts),clothing,clothing
+track,False,toys,,none,no WordNet sense,other,other:track
+tractor,True,vehicles,vehicle,exact,tractor,vehicle,vehicle
+train,True,vehicles,vehicle,exact,train,vehicle,vehicle
+train track,False,toys,,none,"track.n.03 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:train track
+trampoline,False,toys,sports equipment,exact,trampoline,other,other:trampoline
+trash can,True,household,container,exact,trashcan,container,container
+tray,True,household,container,hand (provisional),tray.n.01 -> receptacle.n.01 (3/3 labeled THINGS concepts),container,container
+tree,False,outside,plant,exact,tree,other,other:tree
+triangle,False,other,musical instrument,exact,triangle,other,other:triangle
+tricycle,True,vehicles,vehicle,exact,tricycle,vehicle,vehicle
+tripod,True,household,tool,hand (provisional),tripod.n.01 -> support.n.10 (3/6 labeled THINGS concepts),tool,tool
+truck,True,vehicles,vehicle,exact,truck,vehicle,vehicle
+tube,False,household,home decor,wordnet,pipe.n.03 -> shape.n.02 (2/3 labeled THINGS concepts),home decor,home decor
+tunnel,False,toys,,none,no WordNet sense,other,other:tunnel
+tupperware,False,household,container,exact,tupperware,container,container
+turtle,True,animals,animal,exact,turtle,animal,animal
+tv stand,False,furniture_rooms,furniture,hand (provisional),stand.n.04 -> table.n.02 (6/7 labeled THINGS concepts),furniture,furniture
+ukulele,False,toys,musical instrument,exact,ukulele,other,other:ukulele
+umbrella,True,household,clothing,hand (provisional),"umbrella.n.01 -> protective_covering.n.01: no majority ([('home decor', 4), ('part of car', 3)])",clothing,clothing
+underwear,False,clothing,clothing,exact,underwear,clothing,clothing
+unicorn,False,animals,,none,no WordNet sense,other,other:unicorn
+utensil,True,household,tool,hand (provisional),"{'electronic device': 1, 'container': 1, 'tool': 2}",tool,tool
+utensil holder,False,household,home decor,wordnet,holder.n.01 -> holding_device.n.01 (2/3 labeled THINGS concepts),home decor,home decor
+utility pole,False,other,sports equipment,wordnet,pole.n.01 -> rod.n.01 (2/3 labeled THINGS concepts),other,other:utility pole
+vacuum cleaner,True,furniture_rooms,electronic device,exact,vacuum,electronic device,electronic device
+van,False,vehicles,vehicle,exact,van,vehicle,vehicle
+vase,True,household,home decor,exact,vase,home decor,home decor
+vegetable,True,food_drink,food,exact,vegetable,food,food
+vent,False,furniture_rooms,,hand (provisional),"vent.n.01 -> artifact.n.01: no majority ([('clothing', 116), ('tool', 114)])",other,other:vent
+vest,False,clothing,clothing,name,vest,clothing,clothing
+video game,False,toys,drink,wordnet,computer_game.n.01 -> abstraction.n.06 (18/33 labeled THINGS concepts),other,other:video game
+waffle,False,other,food,exact,waffle,food,food
+wagon,False,vehicles,vehicle,name,wagon,vehicle,vehicle
+walker,False,household,medical equipment,name,walker1,other,other:walker
+wall decal,False,other,office supply,wordnet,decal.n.01 -> paper.n.01 (2/3 labeled THINGS concepts),office supply,office supply
+wall hanging,False,household,home decor,wordnet,hanging.n.01 -> decoration.n.01 (5/10 labeled THINGS concepts),home decor,home decor
+wallet,True,household,container,exact,wallet,container,container
+wardrobe,False,furniture_rooms,furniture,wordnet,wardrobe.n.01 -> furniture.n.01 (28/31 labeled THINGS concepts),furniture,furniture
+washing machine,True,furniture_rooms,electronic device,exact,washing_machine,electronic device,electronic device
+watch,True,household,clothing,exact,watch,clothing,clothing
+water,False,food_drink,office supply,wordnet,water.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+water dispenser,False,household,container,wordnet,dispenser.n.01 -> container.n.01 (83/127 labeled THINGS concepts),container,container
+water gun,False,other,toy,exact,squirt_gun,other,other:water gun
+water table,False,other,,none,no WordNet sense,other,other:water table
+watering can,False,household,tool,exact,watering_can,tool,tool
+watermelon,False,food_drink,food,exact,watermelon,food,food
+weed,False,other,plant,exact,weed,other,other:weed
+whale,False,animals,animal,exact,whale,animal,animal
+wheel,True,household,part of car,exact,wheel,other,other:wheel
+whisk,False,household,tool,exact,whisk,tool,tool
+whiteboard,False,household,,none,no WordNet sense,other,other:whiteboard
+window,False,furniture_rooms,,hand (provisional),"window.n.01 -> framework.n.03: no majority ([('furniture', 2), ('home decor', 1)])",other,other:window
+window sill,False,furniture_rooms,furniture,wordnet,windowsill.n.01 -> support.n.10 (3/6 labeled THINGS concepts),furniture,furniture
+wine glass,False,other,container,exact,wineglass,container,container
+wipe,False,household,,none,no WordNet sense,other,other:wipe
+wire,False,household,,none,"wire.n.02 -> device.n.01: no majority ([('electronic device', 36), ('musical instrument', 33)])",other,other:wire
+woman,False,people,,person,people are not a domain,people,people
+wood,False,other,office supply,wordnet,wood.n.01 -> material.n.01 (3/6 labeled THINGS concepts),office supply,office supply
+wood chip,False,outside,body part,wordnet,bit.n.02 -> part.n.03 (30/30 labeled THINGS concepts),other,other:wood chip
+wrapper,False,household,clothing,wordnet,wrapping.n.01 -> covering.n.02 (94/114 labeled THINGS concepts),clothing,clothing
+wreath,False,household,home decor,name,wreath,home decor,home decor
+wristband,False,clothing,,none,no WordNet sense,other,other:wristband
+xylophone,False,toys,musical instrument,exact,xylophone,other,other:xylophone
+yoga mat,False,household,sports equipment,wordnet,mat.n.03 -> sports_equipment.n.01 (21/22 labeled THINGS concepts),other,other:yoga mat
+yogurt,False,food_drink,food,exact,yogurt,food,food
+zebra,False,animals,animal,exact,zebra,animal,animal

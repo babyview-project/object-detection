@@ -22,19 +22,15 @@ analysis/manuscript-2026/results_preprint_autofilled_backup.tex
 analysis/manuscript-2026/results_preprint_numbers_autofill.txt
 analysis/manuscript-2026/results_preprint_numbers_table.csv
 analysis/manuscript-2026/results_preprint.tex
-# CCN 2026 — valid7018 pipeline; abstract_figures/ and valid7018/*.csv|json are in git
-analysis/ccn-2026/447_Variability_in_Young_Child*
-analysis/ccn-2026/valid7018/figures/
+# CCN 2026 (archived) — valid7018 pipeline; abstract_figures/ and valid7018/*.csv|json are in git
+analysis/archive/ccn-2026/447_Variability_in_Young_Child*
+analysis/archive/ccn-2026/valid7018/figures/
 
 # Manuscript 2026 — submission PDF, figures, logs, Tier-B embeddings, exploratory images
 analysis/manuscript-2026/logs/
 analysis/manuscript-2026/exemplar_set_embeddings/
 analysis/manuscript-2026/main_results_*/figures/
 analysis/manuscript-2026/supplemental_results_*/figures/
-analysis/manuscript-2026/not_in_manuscript/**/*.png
-analysis/manuscript-2026/not_in_manuscript/**/*.pdf
-analysis/manuscript-2026/not_in_manuscript/**/*.svg
-analysis/manuscript-2026/not_in_manuscript/clutter_proxy_exploration/results/
 # Exploratory t-SNE/UMAP figures (keep tsne_cdi_coordinates.csv etc.)
 analysis/manuscript-2026/tsne_cdi_results*/*.png
 analysis/manuscript-2026/tsne_cdi_results*/*.pdf
@@ -61,4 +57,6 @@ databrary/.tokens.json
 .Rproj.user/
 
 # Perceptual-sorting experiment assets: crop lists name subjects and recording dates
-variability_exp/bv_validated_crops/
+
+# Qwen open-vocabulary analyses: out/ is a link to private per-child data on /data2
+analysis/qwen-open-vocab/out

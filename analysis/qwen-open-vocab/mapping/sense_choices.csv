@@ -1,0 +1,829 @@
+category,choice,synset,definition,approximate,n_options
+abacus,2,abacus.n.02,a calculator that performs arithmetic functions by manually sliding counters on rods or in grooves,False,2
+activity center,0,,,True,12
+activity cube,5,cube.n.05,a block in the (approximate) shape of a cube,True,5
+adult,1,adult.n.01,a fully developed person from maturity onward,False,2
+air conditioner,1,air_conditioner.n.01,a system that keeps air cool and dry,False,1
+air fryer,0,,,True,1
+air purifier,1,purifier.n.01,an apparatus for removing impurities,True,1
+air vent,1,vent.n.01,a hole for the escape of gas or air,True,5
+airplane,1,airplane.n.01,an aircraft that has a fixed wing and is powered by propellers or jets,False,1
+alligator,0,,,False,2
+ambulance,1,ambulance.n.01,a vehicle that takes people to and from hospitals,False,1
+apple,1,apple.n.01,fruit with red or yellow or green skin and sweet to tart crisp whitish flesh,False,2
+appliance,2,appliance.n.02,durable goods for home or office use,False,2
+apricot,2,apricot.n.02,downy yellow to rosy-colored fruit resembling a small peach,False,3
+apron,1,apron.n.01,a garment of cloth or leather or plastic that is tied about the waist and worn to protect your clothing,False,4
+archway,1,arch.n.03,a passageway under a curved masonry construction,False,1
+arm,1,arm.n.01,a human limb; technically the part of the superior limb between the shoulder and the elbow but commonly used to refer to the whole superior limb,False,6
+armchair,1,armchair.n.01,chair with a support on each side for arms,False,1
+artwork,0,,,False,1
+avocado,1,avocado.n.01,a pear-shaped tropical fruit with green or blackish skin and rich yellowish pulp enclosing a single large seed,False,2
+awning,1,awning.n.01,a canopy made of canvas to shelter people or things from rain or sun,False,1
+baby,1,baby.n.01,a very young child (birth to 1 year) who has not yet begun to walk or talk,False,7
+baby activity center,0,,,True,12
+baby playpen,1,playpen.n.01,a portable enclosure in which babies may be left to play,True,1
+baby seat,3,seat.n.03,furniture that is designed for sitting on,True,9
+baby swing,2,swing.n.02,mechanical device used as a plaything to support someone swinging back and forth,True,9
+backpack,1,backpack.n.01,a bag carried by a strap on your back or shoulder,False,1
+bag,1,bag.n.01,a flexible container with a single opening,False,9
+bagel,1,bagel.n.01,(Yiddish) glazed yeast-raised doughnut-shaped roll with hard crust,False,1
+balcony,2,balcony.n.02,a platform projecting from the wall of a building and surrounded by a balustrade or railing or parapet,False,2
+ball,6,ball.n.06,a spherical object used as a plaything,False,12
+ball pit,0,,,True,11
+balloon,2,balloon.n.02,small thin inflatable rubber bag with narrow neck,False,2
+banana,2,banana.n.02,elongated crescent-shaped yellow fruit with soft sweet flesh,False,2
+banana peel,1,banana_peel.n.01,the skin of a banana (especially when it is stripped off and discarded),False,1
+band,11,band.n.11,"a thin flat strip or loop of flexible material that goes around or over something else, typically to hold it together or as a decoration",False,12
+banner,1,banner.n.01,long strip of cloth or paper used for decoration or advertising,False,3
+barn,1,barn.n.01,an outlying farm building for storing grain or animal feed and housing farm animals,False,2
+barrel,3,barrel.n.03,a bulging cylindrical shape; hollow with flat ends,False,5
+baseball,2,baseball.n.02,a ball used in playing baseball,False,2
+baseball bat,1,baseball_bat.n.01,an implement used in baseball by the batter,False,1
+baseboard,1,baseboard.n.01,a molding covering the joint formed by a wall and the floor,False,1
+basin,1,basin.n.01,a bowl-shaped vessel; usually used for holding food or liquids,False,5
+basket,1,basket.n.01,a container that is usually woven and has handles,False,4
+basketball,2,basketball.n.02,an inflated ball used in playing basketball,False,2
+bassinet,1,bassinet.n.01,a basket (usually hooded) used as a baby's bed,False,2
+bat,5,bat.n.05,a club used for hitting a ball in various games,False,5
+bathrobe,1,bathrobe.n.01,a loose-fitting robe of towelling; worn after a bath or swim,False,1
+bathtub,1,bathtub.n.01,a relatively large open container that you fill with water and use to wash the body,False,1
+bead,1,bead.n.01,a small ball with a hole through the middle,False,3
+bead maze,0,,,True,2
+beam,2,beam.n.02,"long thick piece of wood or metal or concrete, etc., used in construction",False,7
+bean,1,bean.n.01,any of various edible seeds of plants of the family Leguminosae used for food,False,4
+bean bag,0,,,False,1
+beanie,1,beanie.n.01,a small skullcap; formerly worn by schoolboys and college freshmen,False,1
+bear,0,,,False,2
+beard,1,beard.n.01,the hair growing on the lower part of a man's face,False,5
+bed,1,bed.n.01,a piece of furniture that provides a place to sleep,False,8
+bed sheet,1,sheet.n.03,bed linen consisting of a large rectangular piece of cotton or linen cloth; used in pairs,False,1
+bedding,1,bedclothes.n.01,coverings that are used on a bed,False,2
+bedspread,1,bedspread.n.01,decorative cover for a bed,False,1
+bee,1,bee.n.01,any of numerous hairy-bodied insects including social and solitary species,False,2
+bell,1,bell.n.01,a hollow device made of metal that makes a ringing sound when struck,False,10
+belt,2,belt.n.02,a band to tie or buckle around the body (usually at the waist),False,7
+bench,1,bench.n.01,a long seat for more than one person,False,7
+bib,2,bib.n.02,a napkin tied under the chin of a child while eating,False,2
+bicycle,1,bicycle.n.01,a wheeled vehicle that has two wheels and is moved by foot pedals,False,1
+bin,1,bin.n.01,a container; usually has a lid,False,3
+binder,3,binder.n.03,holds loose papers or magazines,False,4
+bird,1,bird.n.01,warm-blooded egg-laying vertebrates characterized by feathers and forelimbs modified as wings,False,5
+biscuit,2,cookie.n.01,any of various small flat sweet cakes (`biscuit' is the British term),False,2
+blackboard,1,blackboard.n.01,sheet of slate; for writing with chalk,False,1
+blanket,1,blanket.n.01,bedding that keeps a person warm in bed,False,3
+blender,1,blender.n.01,an electrically powered mixer with whirling blades that mix or chop or liquefy foods,False,1
+block,1,block.n.01,a solid piece of something (usually having flat rectangular sides),False,12
+blouse,1,blouse.n.01,a top worn by women,False,1
+blueberry,2,blueberry.n.02,sweet edible dark-blue berries of either low-growing or high-growing blueberry plants,False,2
+board,3,board.n.03,a flat piece of material designed for a special purpose,False,9
+board game,1,board_game.n.01,a game played on a specially designed board,False,1
+boat,1,boat.n.01,a small vessel for travel on water,False,2
+book,2,book.n.02,physical objects consisting of a number of pages bound together,False,11
+bookshelf,1,bookshelf.n.01,a shelf on which to keep books,False,1
+boot,1,boot.n.01,footwear that covers the whole foot and lower leg,False,7
+bottle,1,bottle.n.01,a glass or plastic vessel used for storing drinks or other liquids; typically cylindrical without handles and with a narrow neck that can be plugged or capped,False,3
+bouncer,0,,,False,1
+bow,8,bow.n.08,a decorative interlacing of ribbons,False,9
+bowl,1,bowl.n.01,a round vessel that is open at the top; used chiefly for holding food or liquids,False,9
+box,1,box.n.01,a (usually rectangular) container; may have a lid,False,10
+boy,1,male_child.n.01,a youthful male person,False,4
+bracelet,2,bracelet.n.02,jewelry worn around the wrist for decoration,False,2
+branch,2,branch.n.02,"a division of a stem, or secondary stem arising from the main stem of a plant",False,6
+bread,1,bread.n.01,food made from dough of flour or meal and usually raised with yeast or baking powder and then baked,False,2
+brick,0,,,False,2
+bridge,1,bridge.n.01,a structure that allows people or vehicles to cross an obstacle such as a river or canal or railway etc.,False,9
+broccoli,2,broccoli.n.02,branched green undeveloped flower heads,False,2
+broom,1,broom.n.01,a cleaning implement for sweeping; bundle of straws or twigs attached to a long handle,False,3
+brush,2,brush.n.02,an implement that has hairs or bristles firmly set into a handle,False,9
+bubble,1,bubble.n.01,"a hollow globule of gas (e.g., air or carbon dioxide)",False,4
+bucket,1,bucket.n.01,a roughly cylindrical vessel that is open at the top,False,2
+building,1,building.n.01,a structure that has a roof and walls and stands more or less permanently in one place,False,4
+bunny,0,,,False,2
+burner,2,burner.n.02,the heating elements of a stove or range on which pots and pans are placed for cooking,False,2
+bus,1,bus.n.01,a vehicle carrying many passengers; used for public transport,False,4
+bush,1,shrub.n.01,a low woody perennial plant usually having several major stems,False,7
+butter,1,butter.n.01,an edible emulsion of fat globules made by churning milk or cream; for cooking and table use,False,2
+butterfly,1,butterfly.n.01,diurnal insect typically having a slender body with knobbed antennae and broad colorful wings,False,2
+button,1,button.n.01,a round fastener sewn to shirts and coats etc to fit through buttonholes,False,7
+cabinet,1,cabinet.n.01,a piece of furniture resembling a cupboard with doors and shelves and drawers; for storage or display,False,4
+cable,2,cable.n.02,a conductor for transmitting electrical or optical signals or electric power,False,6
+cactus,1,cactus.n.01,any succulent plant of the family Cactaceae native chiefly to arid regions of the New World and usually having spines,False,1
+cage,1,cage.n.01,an enclosure made or wire or metal bars in which birds or animals can be kept,False,5
+cake,3,cake.n.03,"baked goods made from or based on a mixture of flour, sugar, eggs, and fat",False,3
+calculator,2,calculator.n.02,a small machine that is used for mathematical calculations,False,2
+calendar,3,calendar.n.03,a tabular array of the days (usually for one year),False,3
+camera,1,camera.n.01,equipment for taking photographs (usually consisting of a lightproof box with a lens at one end and light-sensitive film at the other),False,2
+can,1,can.n.01,airtight sealed metal container for food or drink or paint etc.,False,6
+candle,1,candle.n.01,stick of wax with a wick in the middle,False,2
+candle holder,1,candlestick.n.01,a holder with sockets for candles,False,1
+candy,1,candy.n.01,a rich sweet made of flavored sugar and often combined with fruit or nuts,False,1
+canister,2,canister.n.02,metal container for storing dry foods such as tea or flour,False,2
+canopy,3,canopy.n.03,a covering (usually of cloth) that serves as a roof to shelter an area from the weather,False,3
+cap,1,cap.n.01,a tight-fitting headdress,False,9
+car,1,car.n.01,a motor vehicle with four wheels; usually propelled by an internal combustion engine,False,5
+car seat,1,car_seat.n.01,a seat in a car,False,1
+car window,1,car_window.n.01,a window in a car,False,1
+card,4,card.n.04,"thin cardboard, usually rectangular",False,11
+cardboard,1,cardboard.n.01,a stiff moderately thick paper,False,1
+cardigan,1,cardigan.n.01,knitted jacket that is fastened up the front with buttons or a zipper,False,2
+carrot,1,carrot.n.01,deep orange edible root of the cultivated carrot plant,False,4
+cart,0,,,False,2
+carton,2,carton.n.02,a box made of cardboard; opens by flaps on top,False,2
+cartoon,2,cartoon.n.02,a film made by photographing a series of cartoon drawings to give the illusion of movement when projected in rapid sequence,False,2
+case,5,case.n.05,a portable container for carrying several objects,False,12
+castle,0,,,False,4
+cat,1,cat.n.01,feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats,False,8
+cat tree,0,,,True,2
+caterpillar,1,caterpillar.n.01,a wormlike and often brightly colored and hairy or spiny larva of a butterfly or moth,False,2
+cd,4,compact_disk.n.01,a digitally encoded recording on an optical disk that is smaller than a phonograph record; played back by a laser,False,4
+celery,2,celery.n.02,stalks eaten raw or cooked or used as seasoning,False,2
+cereal,3,cereal.n.03,a breakfast food prepared from grain,False,3
+chair,1,chair.n.01,"a seat for one person, with a support for the back",False,5
+chalk,4,chalk.n.04,"a piece of calcite or a similar substance, usually in the shape of a crayon, that is used to write or draw on blackboards or other flat surfaces",False,4
+chandelier,1,chandelier.n.01,branched lighting fixture; often ornate; hangs from the ceiling,False,1
+charger,2,charger.n.02,a device for charging or recharging batteries,False,2
+chart,1,chart.n.01,a visual display of information,False,2
+cheerio,0,,,False,1
+cheese,1,cheese.n.01,a solid food prepared from the pressed curd of milk,False,2
+cheese stick,0,,,True,9
+cherry,3,cherry.n.03,a red fruit with a single hard stone,False,4
+chest,2,chest.n.02,box with a lid; used for storage; usually large and sturdy,False,4
+chick,1,chick.n.01,young bird especially of domestic fowl,False,2
+chicken,2,chicken.n.02,a domestic fowl bred for flesh or eggs; believed to have been developed from the red jungle fowl,False,4
+child,1,child.n.01,a young person of either sex,False,4
+chimney,1,chimney.n.01,a vertical flue that provides a path through which smoke from a fire is carried away through the wall or roof of a building,False,2
+chopstick,1,chopstick.n.01,one of a pair of slender sticks used as oriental tableware to eat food with,False,1
+christmas ornament,1,decoration.n.01,something used to beautify,True,1
+circle,3,circle.n.03,something approximating the shape of a circle,False,8
+clay,1,clay.n.01,a very fine-grained soil that is plastic when moist but hard when fired,False,5
+clip,3,clip.n.03,any of various small fasteners used to hold loose articles together,False,6
+clock,1,clock.n.01,a timepiece that shows the time of day,False,1
+clog,1,clog.n.01,footwear usually with wooden soles,False,3
+closet,3,wardrobe.n.01,a tall piece of furniture that provides storage space for clothes; has a door and rails or hooks for hanging clothes,False,4
+cloth,1,fabric.n.01,artifact made by weaving or felting or knitting or crocheting natural or synthetic fibers,False,1
+clothes,1,apparel.n.01,clothing in general,False,1
+clothes rack,5,rack.n.05,a support for displaying various articles,True,7
+clothespin,1,clothespin.n.01,wood or plastic fastener; for holding clothes on a clothesline,False,1
+clothing rack,5,rack.n.05,a support for displaying various articles,True,7
+cloud,2,cloud.n.02,a visible mass of water or ice particles suspended at a considerable altitude,False,6
+coaster,3,coaster.n.03,"a covering (plate or mat) that protects the surface of a table (i.e., from the condensation on a cold glass or bottle)",False,3
+coat,1,coat.n.01,an outer garment that has sleeves and covers the body from shoulder down; worn outdoors,False,3
+coat rack,1,coatrack.n.01,a rack with hooks for temporarily holding coats and hats,False,1
+coffee machine,1,machine.n.01,any mechanical or electrical device that transmits or modifies energy to perform or assist in the performance of human tasks,True,6
+coffee maker,1,coffee_maker.n.01,a kitchen appliance for brewing coffee automatically,False,1
+coffee pot,1,coffeepot.n.01,tall pot in which coffee is brewed,False,1
+coin,1,coin.n.01,a flat metal piece (usually a disc) used as money,False,1
+colander,1,colander.n.01,bowl-shaped strainer; used to wash or drain foods,False,1
+collar,3,collar.n.03,anything worn or placed about the neck,False,9
+column,7,column.n.07,(architecture) a tall vertical cylindrical structure standing upright and used to support a structure,False,9
+comb,1,comb.n.01,a flat device with narrow pointed teeth on one edge; disentangles or arranges hair,False,5
+comforter,3,quilt.n.01,bedding made of two layers of cloth filled with stuffing and stitched together,False,4
+computer,1,computer.n.01,a machine for performing calculations automatically,False,2
+computer monitor,1,computer_monitor.n.01,a device that displays signals on a computer screen,False,1
+computer mouse,1,mouse.n.04,a hand-operated electronic device that controls the coordinates of a cursor on your computer screen as you move it around on a pad; on the bottom of the device is a ball that rolls on the surface of the pad,False,1
+computer screen,1,computer_screen.n.01,a screen used to display the output of a computer to the user,False,1
+concrete,0,,,False,1
+concrete slab,1,slab.n.01,block consisting of a thick piece of something,True,1
+cone,1,cone.n.01,any cone-shaped artifact,False,4
+console,1,console_table.n.01,a small table fixed to a wall or designed to stand against a wall,False,4
+container,1,container.n.01,any object that can be used to hold things (especially a large metal boxlike object of standardized dimensions that can be loaded from one form of transport to another),False,1
+controller,3,control.n.09,a mechanism that controls the operation of a machine,False,3
+cookie,1,cookie.n.01,any of various small flat sweet cakes (`biscuit' is the British term),False,3
+cookie cutter,1,cookie_cutter.n.01,a kitchen utensil used to cut a sheet of cookie dough into desired shapes before baking,False,1
+cooler,1,cooler.n.01,a refrigerator for cooling liquids,False,3
+cord,3,cord.n.03,a light insulated conductor for household use,False,4
+corkboard,0,,,False,1
+corn,3,corn.n.03,ears of corn that can be prepared and served for human food,False,7
+couch,1,sofa.n.01,an upholstered seat for more than one person,False,3
+counter,1,counter.n.01,table consisting of a horizontal surface over which business is transacted,False,9
+countertop,1,countertop.n.01,the top side of a counter,False,1
+cover,1,screen.n.04,a covering that serves to conceal or shelter something,False,10
+cow,1,cow.n.01,female of domestic cattle:,False,3
+crab,1,crab.n.01,decapod having eyes on short stalks and a broad flattened carapace with a small abdomen folded under the thorax and pincers,False,7
+cracker,1,cracker.n.01,a thin crisp wafer made of flour and water with or without leavening and shortening; unsweetened or semisweet,False,5
+cradle,1,cradle.n.01,a baby bed with sides and rockers,False,4
+craft,0,,,False,5
+crane,4,crane.n.04,lifts and moves heavy objects; lifting tackle is suspended from a pivoted boom that rotates around a vertical axis,False,5
+crate,1,crate.n.01,a rugged box (usually made of wood); used for shipping,False,2
+crayon,1,crayon.n.01,writing implement consisting of a colored stick of composition wax used for writing and drawing,False,1
+crib,1,crib.n.01,baby bed with high sides made of slats,False,5
+crocodile,0,,,False,1
+croissant,1,crescent_roll.n.01,very rich flaky crescent-shaped roll,False,1
+crumb,3,crumb.n.03,small piece of e.g. bread or cake,False,3
+cube,5,cube.n.05,a block in the (approximate) shape of a cube,False,5
+cucumber,2,cucumber.n.02,cylindrical green fruit with thin green rind and white flesh eaten as a vegetable; related to melons,False,2
+cup,1,cup.n.01,a small open container usually used for drinking; usually has a handle,False,8
+cup holder,1,holder.n.01,a holding device,True,3
+cupboard,1,cupboard.n.01,a small room (or recess) or cabinet used for storage space,False,1
+cupcake,1,cupcake.n.01,small cake baked in a muffin tin,False,1
+curtain,1,curtain.n.01,hanging cloth used as a blind (especially for a window),False,2
+cushion,3,cushion.n.03,a soft bag filled with air or a mass of padding such as feathers or foam rubber etc.,False,3
+cutting board,1,chopping_board.n.01,a wooden board where meats or vegetables can be cut,False,1
+cylinder,1,cylinder.n.01,a solid bounded by a cylindrical surface and two parallel planes (the bases),False,4
+cymbal,1,cymbal.n.01,a percussion instrument consisting of a concave brass disk; makes a loud crashing sound when hit with a drumstick or when two are struck together,False,1
+deck,4,deck.n.04,a porch that resembles the deck on a ship,False,4
+decoration,1,decoration.n.01,something used to beautify,False,3
+deer,0,,,False,1
+desk,1,desk.n.01,a piece of furniture with a writing surface and usually drawers or other compartments,False,1
+diaper,1,diaper.n.01,garment consisting of a folded cloth drawn up between the legs and fastened at the waist; worn by infants to catch excrement,False,2
+dinosaur,0,,,False,1
+disc,2,disk.n.01,something with a round shape resembling a flat circular plate,False,4
+dish,1,dish.n.01,a piece of dishware normally used as a container for holding or serving food,False,6
+dish brush,2,brush.n.02,an implement that has hairs or bristles firmly set into a handle,True,9
+dish rack,1,dish_rack.n.01,a rack for holding dishes as dishwater drains off of them,False,1
+dish soap,1,soap.n.01,a cleansing agent made from the salts of vegetable or animal fats,True,3
+dishwasher,1,dishwasher.n.01,a machine for washing dishes,False,2
+display case,1,case.n.20,a glass container used to store and display items in a shop or museum or home,False,1
+dog,1,dog.n.01,a member of the genus Canis (probably descended from the common wolf) that has been domesticated by man since prehistoric times; occurs in many breeds,False,7
+doll,1,doll.n.01,a small replica of a person; used as a toy,False,2
+dollhouse,2,dollhouse.n.02,a small model of a house used as a toy by children,False,2
+dolphin,0,,,False,2
+donkey,2,domestic_ass.n.01,domestic beast of burden descended from the African wild ass; patient but stubborn,False,2
+donut,1,doughnut.n.02,a small ring-shaped friedcake,False,1
+door,1,door.n.01,a swinging or sliding barrier that will close the entrance to a room or building or vehicle,False,5
+door handle,1,doorknob.n.01,a knob used to release the catch when opening a door (often called `doorhandle' in Great Britain),False,1
+door knob,1,doorknob.n.01,a knob used to release the catch when opening a door (often called `doorhandle' in Great Britain),False,1
+doorframe,1,doorframe.n.01,the frame that supports a door,False,1
+doorknob,1,doorknob.n.01,a knob used to release the catch when opening a door (often called `doorhandle' in Great Britain),False,1
+doormat,2,doormat.n.02,a mat placed outside an exterior door for wiping the shoes before entering,False,2
+dragon,1,dragon.n.01,a creature of Teutonic mythology; usually represented as breathing fire and having a reptilian body and sometimes wings,False,4
+drain,3,drain.n.03,a pipe through which liquid is carried away,False,4
+drawer,1,drawer.n.01,a boxlike container in a piece of furniture; made so as to slide in and out,False,3
+drawer unit,0,,,True,6
+drawing,2,drawing.n.02,a representation of forms or objects on a surface by means of lines,False,6
+dress,1,dress.n.01,a one-piece garment for a woman; has skirt and bodice,False,3
+dresser,1,chest_of_drawers.n.01,furniture with drawers for keeping clothes,False,5
+drill,1,drill.n.01,a tool with a sharp point and cutting edges for making holes in hard materials (usually rotating rapidly or by repeated blows),False,4
+drum,1,drum.n.01,a musical percussion instrument; usually consists of a hollow cylinder with a membrane stretched across each end,False,6
+dryer,1,dryer.n.01,an appliance that removes moisture,False,1
+drying rack,1,rack.n.01,framework for holding objects,True,7
+duck,1,duck.n.01,small wild or domesticated web-footed broad-billed swimming bird usually having a depressed body and short legs,False,4
+dumbbell,1,dumbbell.n.01,an exercising weight; two spheres connected by a short bar that serves as a handle,False,2
+dustpan,2,dustpan.n.02,a short-handled receptacle into which dust can be swept,False,2
+duvet,1,eiderdown.n.01,a soft quilt usually filled with the down of the eider,False,1
+ear,1,ear.n.01,the sense organ for hearing and equilibrium,False,5
+earring,1,earring.n.01,jewelry to ornament the ear; usually clipped to the earlobe or fastened through a hole in the lobe,False,1
+easel,1,easel.n.01,an upright tripod for displaying something (usually an artist's canvas),False,1
+egg,2,egg.n.02,oval reproductive body of a fowl (especially a hen) used as food,False,3
+egg carton,2,carton.n.02,a box made of cardboard; opens by flaps on top,True,2
+eggplant,1,eggplant.n.01,egg-shaped vegetable having a shiny skin typically dark purple but occasionally white or yellow,False,2
+elephant,1,elephant.n.01,five-toed pachyderm,False,2
+entertainment center,1,entertainment_center.n.01,a wall unit containing sound and television systems,False,1
+envelope,1,envelope.n.01,"a flat (usually rectangular) container for a letter, thin package, etc.",False,6
+eraser,1,eraser.n.01,an implement used to erase something,False,1
+excavator,2,power_shovel.n.01,a machine for excavating,False,2
+exercise ball,6,ball.n.06,a spherical object used as a plaything,True,11
+exercise bike,1,exercise_bike.n.01,an exercise device resembling a stationary bike,False,1
+eye,1,eye.n.01,the organ of sight,False,5
+face,1,face.n.01,the front of the human head from the forehead to the chin and ear to ear,False,12
+fan,1,fan.n.01,a device for creating a current of air by movement of a surface or surfaces,False,3
+faucet,1,faucet.n.01,a regulator for controlling the flow of a liquid from a reservoir,False,1
+fence,1,fence.n.01,a barrier that serves to enclose an area,False,2
+field,8,playing_field.n.02,a piece of land prepared for playing a game,False,12
+figurine,1,figurine.n.01,a small carved or molded figure,False,1
+filing cabinet,1,file.n.03,office furniture consisting of a container for keeping papers in order,False,1
+finger,1,finger.n.01,any of the terminal members of the hand (sometimes excepting the thumb),False,3
+fire,3,fire.n.03,the process of combustion of inflammable materials producing heat and light and (often) smoke,False,9
+fire extinguisher,1,fire_extinguisher.n.01,a manually operated device for extinguishing small fires,False,1
+fire hydrant,1,fireplug.n.01,an upright hydrant for drawing water to use in fighting a fire,False,1
+fire truck,1,fire_engine.n.01,any of various large trucks that carry firemen and equipment to the site of a fire,False,1
+fireplace,1,fireplace.n.01,an open recess in a wall at the base of a chimney where a fire can be built,False,1
+fish,1,fish.n.01,any of various mostly cold-blooded aquatic vertebrates usually having scales and breathing through gills,False,4
+fish tank,1,aquarium.n.01,a tank or pool or bowl filled with water for keeping live fish and underwater animals,False,1
+flag,1,flag.n.01,emblem usually consisting of a rectangular piece of cloth of distinctive design,False,7
+flamingo,0,,,False,1
+flashcard,1,flash_card.n.01,a card with words or numbers or pictures that is flashed to a class by the teacher,False,1
+flip-flop,2,flip-flop.n.02,a backless sandal held to the foot by a thong between the big toe and the second toe,False,4
+flower,1,flower.n.01,a plant cultivated for its blooms or blossoms,False,3
+flower arrangement,1,flower_arrangement.n.01,a decorative arrangement of flowers,False,1
+flower pot,1,pot.n.04,a container in which plants are cultivated,False,1
+flowerpot,1,pot.n.04,a container in which plants are cultivated,False,1
+foil,1,foil.n.01,a piece of thin and flexible sheet metal,False,5
+foot,1,foot.n.01,the part of the leg of a human being below the ankle joint,False,11
+football,2,football.n.02,the inflated oblong ball used in playing American football,False,2
+footstool,1,footstool.n.01,a low seat or a stool to rest the feet of a seated person,False,1
+fork,1,fork.n.01,cutlery used for serving and eating food,False,5
+fox,1,fox.n.01,alert carnivorous mammal with pointed muzzle and ears and a bushy tail; most are predators that do not hunt in packs,False,7
+frame,10,frame.n.10,a framework that supports and protects a picture or a mirror,False,11
+frog,1,frog.n.01,any of various tailless stout-bodied amphibians with long hind limbs for leaping; semiaquatic and terrestrial species,False,3
+fruit,1,fruit.n.01,the ripened reproductive body of a seed plant,False,3
+frying pan,1,frying_pan.n.01,a pan used for frying foods,False,1
+game,3,game.n.03,an amusement or pastime,False,11
+game console,0,,,True,4
+game controller,3,control.n.09,a mechanism that controls the operation of a machine,True,3
+game piece,2,piece.n.02,an item that is an instance of some type,True,12
+garage door,1,door.n.01,a swinging or sliding barrier that will close the entrance to a room or building or vehicle,True,5
+garbage bin,1,bin.n.01,a container; usually has a lid,True,2
+garland,4,wreath.n.01,flower arrangement consisting of a circular band of foliage or flowers for ornamental purposes,False,4
+garlic,2,garlic.n.02,aromatic bulb used as seasoning,False,2
+garment,1,garment.n.01,an article of clothing,False,1
+gate,1,gate.n.01,a movable barrier in a fence or wall,False,4
+gear,1,gear.n.01,a toothed wheel that engages another toothed mechanism in order to change the speed or direction of transmitted motion,False,4
+ghost,3,ghost.n.03,the visible disembodied soul of a dead person,False,4
+gift,1,gift.n.01,something acquired without compensation,False,3
+giraffe,0,,,False,1
+girl,2,female_child.n.01,a youthful female person,False,5
+glass,2,glass.n.02,a container for holding liquids while drinking,False,7
+glass door,1,door.n.01,a swinging or sliding barrier that will close the entrance to a room or building or vehicle,True,5
+glasses,1,spectacles.n.01,optical instrument consisting of a frame that holds a pair of lenses for correcting defective vision,False,1
+globe,3,globe.n.03,a sphere on which a map (especially of the earth) is represented,False,3
+glove,2,glove.n.02,handwear: covers the hand and wrist,False,3
+goal,3,goal.n.03,game equipment consisting of the place toward which players of a game try to advance a ball or puck in order to score points,False,4
+goat,1,goat.n.01,any of numerous agile ruminants related to sheep but having a beard and straight horns,False,4
+grape,1,grape.n.01,any of various juicy fruit of the genus Vitis with green or purple skins; grow in clusters,False,3
+grass,1,grass.n.01,narrow-leaved green herbage: grown as lawns; used as pasture for grazing animals; cut and dried as hay,False,5
+grater,1,grater.n.01,utensil with sharp perforations for shredding foods (as vegetables or cheese),False,1
+gravel,1,gravel.n.01,rock fragments and pebbles,False,1
+grill,0,,,False,2
+guitar,1,guitar.n.01,a stringed instrument usually having six strings; played by strumming or plucking,False,1
+gun,1,gun.n.01,a weapon that discharges a missile at high velocity (especially from a metal tube or barrel),False,7
+gym,0,,,False,1
+hair,1,hair.n.01,a covering for the body (or parts of it) consisting of a dense growth of threadlike structures (as on the human head); helps to prevent heat loss,False,6
+hair bun,0,,,True,1
+hair clip,3,clip.n.03,any of various small fasteners used to hold loose articles together,True,6
+hair dryer,1,hand_blower.n.01,a hand-held electric blower that can blow warm air onto the hair; used for styling hair,False,1
+hair tie,9,tie.n.09,a cord (or string or ribbon or wire etc.) with which something is tied,True,9
+hairbrush,1,hairbrush.n.01,a brush used to groom a person's hair,False,1
+hammer,2,hammer.n.02,a hand tool with a heavy rigid head and a handle; used to deliver an impulsive force by striking,False,8
+hamper,2,hamper.n.02,a basket usually with a cover,False,2
+hand,1,hand.n.01,the (prehensile) extremity of the superior limb,False,12
+handle,1,handle.n.01,the appendage to an object that is designed to be held in order to use or move it,False,1
+handrail,1,bannister.n.02,a railing at the side of a staircase or balcony to prevent people from falling,False,1
+hanger,2,hanger.n.02,anything from which something can be hung,False,2
+hat,1,hat.n.01,headdress that protects the head from bad weather; has shaped crown and usually a brim,False,2
+head,1,head.n.01,the upper part of the human body or the front part of the body in animals; contains the face and brains,False,12
+headband,1,headband.n.01,a band worn around or over the head,False,1
+headboard,1,headboard.n.01,a vertical board or panel forming the head of a bedstead,False,1
+heart,7,heart.n.07,a plane figure with rounded sides curving inward at the top and intersecting at the bottom; conventionally used on playing cards and valentines,False,10
+heater,1,heater.n.01,device that heats water or supplies warmth to a room,False,2
+hedge,1,hedge.n.01,a fence formed by a row of closely planted shrubs or bushes,False,3
+helicopter,1,helicopter.n.01,an aircraft without wings that obtains its lift from the rotation of overhead blades,False,1
+helmet,2,helmet.n.02,a protective headgear made of hard material to resist blows,False,2
+hinge,1,hinge.n.01,a joint that holds two parts together so that one can swing relative to the other,False,2
+hippo,0,,,False,2
+hood,8,hood.n.08,a headdress that protects the head and face,False,10
+hook,5,hook.n.05,a curved or bent implement for suspending or pulling something,False,8
+hoop,4,basket.n.03,horizontal circular metal hoop supporting a net through which players try to throw the basketball,False,4
+hose,3,hose.n.03,a flexible pipe for conveying a liquid or gas,False,3
+hot air balloon,1,balloon.n.01,large tough nonrigid bag filled with gas or heated air,True,2
+house,1,house.n.01,a dwelling that serves as living quarters for one or more families,False,12
+hula hoop,1,hula-hoop.n.01,plaything consisting of a tubular plastic hoop for swinging around the hips,False,1
+ice cream,1,ice_cream.n.01,frozen dessert containing cream and sugar and flavoring,False,1
+illustration,4,illustration.n.04,a visual representation (a picture or diagram) that is used make some subject more pleasing or easier to understand,False,4
+insect,1,insect.n.01,small air-breathing arthropod,False,2
+island,2,island.n.02,a zone or area resembling an island,False,2
+jacket,1,jacket.n.01,a short coat,False,5
+jar,1,jar.n.01,a vessel (usually cylindrical) with a wide mouth and without handles,False,3
+jug,1,jug.n.01,a large bottle with a narrow mouth,False,2
+juice,1,juice.n.01,the liquid part that can be extracted from plant or animal tissue by squeezing or cooking,False,4
+kettle,1,kettle.n.01,a metal pot for stewing or boiling; usually has a lid,False,4
+key,1,key.n.01,metal device shaped in such a way that when it is inserted into the appropriate lock the lock's mechanism can be rotated,False,12
+keyboard,1,keyboard.n.01,device consisting of a set of keys on a piano or organ or typewriter or typesetting machine or computer or the like,False,2
+kitchen,1,kitchen.n.01,a room equipped for preparing meals,False,1
+kitchen set,1,set.n.01,a group of things of the same kind that belong together and are so used,True,12
+kiwi,3,kiwi.n.03,fuzzy brown egg-shaped fruit with slightly tart green flesh,False,4
+knee,1,knee.n.01,hinge joint in the human leg connecting the tibia and fibula with the femur and protected in front by the patella,False,3
+knife,1,knife.n.01,edge tool used as a cutting instrument; has a pointed blade with a sharp edge and a handle,False,3
+knife block,1,block.n.01,a solid piece of something (usually having flat rectangular sides),True,12
+knob,2,knob.n.02,a round handle,False,4
+label,4,label.n.04,an identifying or descriptive marker that is attached to an object,False,4
+ladder,1,ladder.n.01,steps consisting of two parallel members connected by rungs; for climbing up or down,False,3
+ladle,1,ladle.n.01,a spoon-shaped vessel with a long handle; frequently used to transfer liquids from one container to another,False,1
+ladybug,1,ladybug.n.01,small round bright-colored and spotted beetle that usually feeds on aphids and other insect pests,False,1
+lamp,2,lamp.n.02,a piece of furniture holding one or more electric light bulbs,False,2
+lampshade,1,lampshade.n.01,a protective ornamental shade used to screen a light bulb from direct view,False,1
+landscape,1,landscape.n.01,an expanse of scenery that can be seen in a single view,False,4
+lantern,1,lantern.n.01,light in a transparent protective case,False,1
+laptop,1,laptop.n.01,a portable computer small enough to use in your lap,False,1
+lawn,1,lawn.n.01,a field of cultivated and mowed grass,False,1
+leaf,1,leaf.n.01,the main organ of photosynthesis and transpiration in higher plants,False,3
+leg,1,leg.n.01,a human limb; commonly used to refer to a whole limb but technically only the part of the limb between the knee and ankle,False,9
+lego,1,lego.n.01,(trademark) a child's plastic construction set for making mechanical models,False,1
+lego block,1,block.n.01,a solid piece of something (usually having flat rectangular sides),True,12
+lemon,1,lemon.n.01,yellow oval fruit with juicy acidic flesh,False,5
+letter,2,letter.n.02,the conventional characters of the alphabet used to represent speech,False,5
+lettuce,3,lettuce.n.03,leaves of any of various plants of Lactuca sativa,False,3
+lid,2,lid.n.02,"a movable top or cover (hinged or separate) for closing the opening at the top of a box, chest, jar, pan, etc.",False,3
+light,2,light.n.02,any device serving as a source of illumination,False,12
+light bulb,1,light_bulb.n.01,electric lamp consisting of a transparent or translucent glass housing containing a wire filament (usually tungsten) that emits light when heated by electricity,False,1
+light fixture,1,fixture.n.01,an object firmly fixed in place (especially in a household),True,4
+light switch,1,switch.n.01,control consisting of a mechanical or electrical or electronic device for making or breaking or changing the connections in a circuit,True,7
+lime,6,lime.n.06,the green acidic fruit of any of various lime trees,False,6
+lion,0,,,False,4
+lizard,1,lizard.n.01,relatively long-bodied reptile with usually two pairs of legs and a tapering tail,False,2
+llama,1,llama.n.01,wild or domesticated South American cud-chewing animal related to camels but smaller and lacking a hump,False,1
+lock,1,lock.n.01,a fastener fitted to a door or drawer to keep it firmly closed,False,6
+log,1,log.n.01,a segment of the trunk of a tree when stripped of branches,False,5
+logo,1,logo.n.01,a company emblem or device,False,1
+lunch box,1,box.n.01,a (usually rectangular) container; may have a lid,True,10
+magazine,2,magazine.n.02,product consisting of a paperback periodic publication as a physical object,False,6
+magnet,1,magnet.n.01,(physics) a device that attracts iron and produces a magnetic field,False,2
+mallet,2,mallet.n.02,"a light drumstick with a rounded head that is used to strike such percussion instruments as chimes, kettledrums, marimbas, glockenspiels, etc.",False,3
+man,1,man.n.01,an adult person who is male (as opposed to a woman),False,11
+mango,2,mango.n.02,"large oval tropical fruit having smooth skin, juicy aromatic pulp, and a large hairy seed",False,2
+mantel,1,mantel.n.01,shelf that projects from wall above fireplace,False,1
+map,1,map.n.01,a diagrammatic representation of the earth's surface (or part of it),False,2
+maraca,1,maraca.n.01,a percussion instrument consisting of a hollow gourd containing pebbles or beans; often played in pairs,False,1
+marker,3,marker.n.03,a writing implement for making a mark,False,3
+mask,1,mask.n.01,a covering to disguise or conceal the face,False,4
+mat,1,mat.n.01,a thick flat pad used as a floor covering,False,7
+mattress,1,mattress.n.01,"a large thick pad filled with resilient material and often incorporating coiled springs, used as a bed or part of a bed",False,1
+measuring cup,1,measuring_cup.n.01,graduated cup used to measure liquid or granular ingredients,False,1
+meat,1,meat.n.01,the flesh of animals (including fishes and birds and snails) used as food,False,3
+melon,1,melon.n.01,any of numerous fruits of the gourd family having a hard rind and sweet juicy flesh,False,2
+mermaid,0,,,False,1
+mesh,4,net.n.06,an open fabric of string or rope or wire woven together at regular intervals,False,5
+mickey mouse,0,,,False,1
+microphone,1,microphone.n.01,device for converting sound waves into electrical energy,False,1
+microwave,2,microwave.n.02,kitchen appliance that cooks food by passing an electromagnetic wave through it; heat results from the absorption of energy by the water molecules in the food,False,2
+milk,1,milk.n.01,a white nutritious liquid secreted by mammals and used as food by human beings,False,4
+minnie mouse,1,minnie_mouse.n.01,the partner of Mickey Mouse,False,1
+mirror,1,mirror.n.01,polished surface that forms images by reflecting light,False,2
+mixer,4,mixer.n.04,a kitchen utensil that is used for mixing foods,False,4
+mobile,3,mobile.n.03,sculpture suspended in midair whose delicately balanced parts can be set in motion by air currents,False,3
+mold,2,mold.n.02,container into which liquid is poured to create a given shape when it hardens,False,8
+monitor,4,monitor.n.04,display produced by a device that takes signals and displays them on a television screen or a computer monitor,False,7
+monkey,0,,,False,2
+monster,1,monster.n.01,an imaginary creature usually having various human and animal parts,False,5
+moon,2,moon.n.02,any object resembling a moon,False,6
+mop,1,swab.n.02,cleaning implement consisting of absorbent material fastened to a handle; for cleaning floors,False,1
+mountain,1,mountain.n.01,a land mass that projects well above its surroundings; higher than a hill,False,2
+mouse,0,,,False,4
+mouth,2,mouth.n.02,the externally visible part of the oral cavity on the face and the system of organs surrounding the opening,False,8
+muffin,1,muffin.n.01,a sweet quick bread baked in a cup-shaped pan,False,1
+muffin tin,2,tin.n.02,"a vessel (box, can, pan, etc.) made of tinplate and used mainly in baking",True,4
+mulch,1,mulch.n.01,a protective covering of rotting vegetable matter spread to reduce evaporation and soil erosion,False,1
+mushroom,1,mushroom.n.01,common name for an edible agaric (contrasting with the inedible toadstool),False,5
+napkin,1,napkin.n.01,a small piece of table linen that is used to wipe the mouth and to cover the lap in order to protect clothing,False,2
+necklace,1,necklace.n.01,jewelry consisting of a cord or chain (often bearing gems) worn about the neck as an ornament (especially by women),False,1
+net,2,net.n.02,a trap made of netting to catch fish or birds or insects,False,6
+newspaper,1,newspaper.n.01,a daily or weekly publication on folded sheets; contains news and articles and advertisements,False,4
+noodle,1,noodle.n.01,a ribbonlike strip of pasta,False,2
+nose,1,nose.n.01,the organ of smell and entrance to the respiratory tract; the prominent part of the face of man or other mammals,False,8
+note,1,note.n.01,a brief written record,False,9
+notebook,1,notebook.n.01,a book with blank pages for recording notes or memoranda,False,2
+number,5,numeral.n.01,a symbol used to represent a number,False,11
+number block,1,block.n.01,a solid piece of something (usually having flat rectangular sides),True,12
+octopus,0,,,False,2
+onion,1,onion.n.01,the bulb of an onion plant,False,3
+orange,1,orange.n.01,round yellow to orange fruit of any of several citrus trees,False,5
+ottoman,3,ottoman.n.03,thick cushion used as a seat,False,4
+outlet,2,wall_socket.n.01,receptacle providing a place in a wiring system where current can be taken to run electrical devices,False,4
+oven,1,oven.n.01,kitchen appliance used for baking or roasting,False,1
+oven mitt,0,,,True,2
+owl,0,,,False,1
+pacifier,3,comforter.n.04,device used for an infant to suck or bite on,False,3
+package,1,package.n.01,a collection of things wrapped or boxed together,False,3
+packaging,3,packaging.n.03,material used to make packages,False,3
+paint,1,paint.n.01,a substance used as a coating to protect or decorate a surface (especially a mixture of pigment suspended in a liquid); dries to form a hard coating,False,3
+paintbrush,1,paintbrush.n.01,a brush used as an applicator (to apply paint),False,1
+painting,1,painting.n.01,graphic art consisting of an artistic composition made by applying paints to a surface,False,4
+pan,1,pan.n.01,cooking utensil consisting of a wide metal vessel,False,4
+pancake,1,pancake.n.01,a flat cake of thin batter fried on both sides on a griddle,False,1
+panda,0,,,False,2
+pants,0,,,False,1
+paper,1,paper.n.01,a material made of cellulose pulp derived mainly from wood or rags or certain grasses,False,7
+paper roll,11,roll.n.11,anything rolled up in cylindrical form,True,12
+paper towel,1,paper_towel.n.01,a disposable towel made of absorbent paper,False,1
+paper towel roll,11,roll.n.11,anything rolled up in cylindrical form,True,12
+pasta,2,pasta.n.02,shaped and dried dough made from flour and water and sometimes egg,False,2
+path,2,path.n.02,a way especially designed for a particular use,False,4
+patio,1,patio.n.01,usually paved outdoor area adjoining a residence,False,1
+pavement,1,pavement.n.01,the paved surface of a thoroughfare,False,3
+pea,1,pea.n.01,seed of a pea plant used for food,False,3
+pea pod,1,pea_pod.n.01,husk of a pea; edible in some garden peas,False,1
+peach,3,peach.n.03,downy juicy fruit with sweet yellowish or whitish flesh,False,4
+pear,1,pear.n.01,sweet juicy gritty-textured fruit available in many varieties,False,2
+peel,2,peel.n.02,the rind of a fruit or vegetable,False,2
+peg,1,peg.n.01,a wooden pin pushed or driven into a surface,False,6
+pegboard,1,pegboard.n.01,a board perforated with regularly spaced holes into which pegs can be fitted,False,1
+pen,1,pen.n.01,a writing implement with a point from which ink flows,False,5
+pen holder,1,holder.n.01,a holding device,True,3
+pencil,1,pencil.n.01,a thin cylindrical pointed writing implement; a rod of marking substance encased in wood,False,4
+pencil case,1,pencil_box.n.01,a box for holding pencils,False,1
+pencil holder,1,holder.n.01,a holding device,True,3
+penguin,0,,,False,1
+pepper,4,pepper.n.04,sweet and hot varieties of fruits of plants of the genus Capsicum,False,4
+pepper grinder,1,pepper_mill.n.01,a mill for grinding pepper,False,1
+phone,1,telephone.n.01,electronic equipment that converts sound into electrical signals that can be transmitted over distances and then converts received signals back into sounds,False,3
+photo,1,photograph.n.01,a representation of a person or scene in the form of a print or transparent slide; recorded by a camera on light-sensitive material,False,1
+piano,1,piano.n.01,a keyboard instrument that is played by depressing keys that cause hammers to strike tuned strings and produce sounds,False,2
+picture,1,picture.n.01,a visual representation (of an object or scene or person or abstraction) produced on a surface,False,10
+picture frame,1,picture_frame.n.01,a framework in which a picture is mounted,False,1
+pig,1,hog.n.03,domestic swine,False,6
+pillar,5,column.n.07,(architecture) a tall vertical cylindrical structure standing upright and used to support a structure,False,5
+pillow,1,pillow.n.01,a cushion to support the head of a sleeping person,False,1
+pineapple,2,pineapple.n.02,large sweet fleshy tropical fruit with a terminal tuft of stiff leaves; widely cultivated,False,2
+pinecone,1,pinecone.n.01,the seed-producing cone of a pine tree,False,1
+pipe,2,pipe.n.02,a long tube made of metal or plastic that is used to carry water or oil or gas etc.,False,5
+pitcher,2,pitcher.n.02,an open vessel with a handle and a spout for pouring,False,5
+pizza,1,pizza.n.01,Italian open pie made of thin bread dough spread with a spiced mixture of e.g. tomato sauce and cheese,False,1
+place mat,1,place_mat.n.01,a mat serving as table linen for an individual place setting,False,1
+planet,0,,,False,3
+plank,1,board.n.02,a stout length of sawn timber; made in a wide variety of sizes and used for many purposes,False,2
+plant,2,plant.n.02,(botany) a living organism lacking the power of locomotion,False,4
+planter,3,planter.n.03,a decorative pot for house plants,False,3
+planter box,1,box.n.01,a (usually rectangular) container; may have a lid,True,10
+plate,4,plate.n.04,dish on which food is served or from which food is eaten,False,12
+play kitchen,0,,,True,1
+play structure,1,structure.n.01,a thing constructed; a complex entity constructed of many parts,True,5
+play tent,1,tent.n.01,a portable shelter (usually of canvas stretched over supporting poles and fastened to the ground with ropes and pegs),True,2
+play tunnel,0,,,True,2
+playhouse,1,playhouse.n.01,plaything consisting of a small model of a house that children can play inside of,False,1
+playpen,1,playpen.n.01,a portable enclosure in which babies may be left to play,False,1
+plug,5,plug.n.05,an electrical device with two or three pins that is inserted in a socket to make an electrical connection,False,7
+plum,2,plum.n.02,any of numerous varieties of small to medium-sized round or oval fruit having a smooth skin and a single pit,False,3
+pole,1,pole.n.01,a long (usually round) rod of wood or metal or plastic,False,10
+polo shirt,1,polo_shirt.n.01,a shirt with short sleeves designed for comfort and casual wear,False,1
+pom-pom,1,pompon.n.01,decoration consisting of a ball of tufted wool or silk; usually worn on a hat,False,2
+pony,5,pony.n.05,any of various breeds of small gentle horses usually less than five feet high at the shoulder,False,5
+pool,1,pool.n.01,an excavation that is (usually) filled with water,False,9
+post,4,post.n.04,an upright consisting of a piece of timber or metal fixed firmly in an upright position,False,11
+poster,1,poster.n.01,a sign posted in a public place as an advertisement,False,3
+pot,1,pot.n.01,metal or earthenware cooking vessel that is usually round and deep; often has a handle and lid,False,9
+potato,1,potato.n.01,an edible tuber native to South America; a staple food of Ireland,False,2
+potty,2,chamberpot.n.01,a receptacle for urination or defecation in the bedroom,False,2
+potty chair,1,potty_seat.n.01,toilet consisting of a small seat used by young children,False,1
+pouch,1,pouch.n.01,a small or medium size container for holding or carrying things,False,3
+power cord,1,power_cord.n.01,a cord to conduct power to an electrical appliance,False,1
+power line,1,power_line.n.01,cable used to distribute electricity,False,1
+power strip,0,,,True,6
+pressure cooker,1,pressure_cooker.n.01,autoclave for cooking at temperatures above the boiling point of water,False,1
+printer,3,printer.n.03,a machine that prints,False,3
+pumpkin,2,pumpkin.n.02,usually large pulpy deep-yellow round fruit of the squash family maturing in late summer or early autumn,False,2
+purse,1,bag.n.04,a container used for carrying money and small personal items or accessories (especially by women),False,4
+puzzle,2,puzzle.n.02,a game that tests your ingenuity,False,2
+puzzle piece,1,piece.n.01,a separate part of a whole,True,12
+quilt,1,quilt.n.01,bedding made of two layers of cloth filled with stuffing and stitched together,False,1
+rabbit,1,rabbit.n.01,any of various burrowing animals of the family Leporidae having long ears and short tails; some domesticated and raised for pets or food,False,3
+rack,1,rack.n.01,framework for holding objects,False,7
+racket,4,racket.n.04,a sports implement (usually consisting of a handle and an oval frame with a tightly interlaced network of strings) used to strike a ball (or shuttlecock) in various games,False,4
+radiator,2,radiator.n.02,heater consisting of a series of pipes for circulating steam or hot water to heat rooms or buildings,False,3
+radio,2,radio_receiver.n.01,an electronic receiver that detects and demodulates and amplifies transmitted signals,False,3
+rag,1,rag.n.01,a small piece of cloth or paper,False,5
+railing,1,railing.n.01,a barrier consisting of a horizontal bar and supports,False,2
+rainbow,1,rainbow.n.01,an arc of colored light in the sky caused by refraction of the sun's rays by rain,False,2
+ramp,1,ramp.n.01,an inclined surface connecting two levels,False,3
+range hood,1,range_hood.n.01,exhaust hood over a kitchen range,False,1
+rattle,2,rattle.n.02,a baby's toy that makes percussive noises when shaken,False,3
+record player,1,record_player.n.01,machine in which rotating records cause a stylus to vibrate and the vibrations are amplified acoustically or electronically,False,1
+refrigerator,1,refrigerator.n.01,white goods in which food can be stored at low temperatures,False,1
+remote control,1,remote_control.n.01,a device that can be used to control a machine or apparatus from a distance,False,1
+rhinoceros,0,,,False,1
+rice,1,rice.n.01,grains used as food either unpolished or more often polished,False,4
+rice cooker,1,cooker.n.01,a utensil for cooking,True,1
+ride-on toy,1,plaything.n.01,an artifact designed to be played with,True,5
+ring,2,ring.n.02,a toroidal shape,False,9
+ring stacker,0,,,True,1
+robe,1,robe.n.01,any loose flowing garment,False,2
+robot,0,,,False,1
+robot vacuum,4,vacuum.n.04,an electrical home appliance that cleans by suction,True,4
+rock,1,rock.n.01,a lump or mass of hard consolidated mineral matter,False,7
+rocket,1,rocket.n.01,any vehicle self-propelled by a rocket engine,False,5
+rocking horse,1,hobby.n.02,a child's plaything consisting of an imitation horse mounted on rockers; the child straddles it and pretends to ride,False,1
+rolling pin,1,rolling_pin.n.01,utensil consisting of a cylinder (usually of wood) with a handle at each end; used to roll out dough,False,1
+roof,1,roof.n.01,a protective covering that covers or forms the top of a building,False,4
+rope,1,rope.n.01,a strong line,False,2
+rose,1,rose.n.01,any of many shrubs of the genus Rosa that bear roses,False,3
+rug,1,rug.n.01,floor covering consisting of a piece of thick heavy fabric (usually with nap or pile),False,1
+ruler,2,rule.n.12,measuring stick consisting of a strip of wood or metal or plastic with a straight edge that is used for drawing straight lines and measuring lengths,False,2
+sailboat,1,sailboat.n.01,a small sailing vessel; usually with a single mast,False,1
+salad,1,salad.n.01,food mixtures either arranged on a plate or tossed and served with a moist dressing; usually consisting of or including greens,False,1
+salt shaker,1,saltshaker.n.01,a shaker with a perforated top for sprinkling salt,False,1
+sand,1,sand.n.01,a loose material consisting of grains of rock or coral,False,3
+sandal,1,sandal.n.01,a shoe consisting of a sole fastened by straps to the foot,False,1
+sandwich,1,sandwich.n.01,two (or more) slices of bread with a filling between them,False,1
+santa claus,1,santa_claus.n.01,the legendary patron saint of children; an imaginary being who is thought to bring presents to children at Christmas,False,1
+saucepan,1,saucepan.n.01,a deep pan with a handle; used for stewing or boiling,False,1
+scale,7,scale.n.07,a measuring instrument for weighing; shows amount of mass,False,10
+scarf,1,scarf.n.01,a garment worn around the head or neck or shoulders for warmth or decoration,False,2
+scissors,1,scissors.n.01,an edge tool having two crossed pivoting blades,False,3
+scoop,0,,,False,6
+scooter,2,scooter.n.02,child's two-wheeled vehicle operated by foot,False,5
+scratching post,4,post.n.04,an upright consisting of a piece of timber or metal fixed firmly in an upright position,True,8
+screen,3,screen.n.03,the display that is electronically created on the surface of the large end of a cathode-ray tube,False,9
+screw,4,screw.n.04,a fastener with a tapered threaded shank and a slotted head,False,5
+screwdriver,1,screwdriver.n.01,a hand tool for driving screws; has a tip that fits into the head of a screw,False,2
+seahorse,0,,,False,2
+seal,9,seal.n.09,any of numerous marine mammals that come on shore to breed; chiefly of cold regions,False,9
+seashell,1,seashell.n.01,the shell of a marine organism,False,1
+seat,3,seat.n.03,furniture that is designed for sitting on,False,9
+shadow,1,shadow.n.01,shade within clear boundaries,False,9
+shaker,3,shaker.n.03,a container in which something can be shaken,False,3
+shape sorter,0,,,True,2
+shark,0,,,False,3
+shed,1,shed.n.01,an outbuilding with a single story; used for shelter or storage,False,1
+sheep,1,sheep.n.01,woolly usually horned ruminant mammal related to the goat,False,3
+sheet,3,sheet.n.03,bed linen consisting of a large rectangular piece of cotton or linen cloth; used in pairs,False,8
+shelf,1,shelf.n.01,a support that consists of a horizontal surface for holding objects,False,2
+ship,1,ship.n.01,a vessel that carries passengers or freight,False,1
+shirt,1,shirt.n.01,a garment worn on the upper half of the body,False,1
+shoe,1,shoe.n.01,footwear shaped to fit the foot (below the ankle) with a flexible upper of leather or plastic and a sole and heel of heavier material,False,4
+shoe rack,5,rack.n.05,a support for displaying various articles,True,7
+shopping cart,1,shopping_cart.n.01,a handcart that holds groceries or other goods while shopping,False,1
+shorts,1,short_pants.n.01,trousers that end at or above the knee,False,2
+shovel,1,shovel.n.01,a hand tool for lifting loose material; consists of a curved container or scoop and a handle,False,4
+shower curtain,1,shower_curtain.n.01,a curtain that keeps water from splashing out of the shower area,False,1
+shower head,1,showerhead.n.01,a perforated nozzle that showers water on a bather,False,1
+shutter,2,shutter.n.02,a hinged blind for a window,False,2
+sideboard,3,buffet.n.01,a piece of furniture that stands at the side of a dining room; has shelves and drawers,False,3
+sidewalk,1,sidewalk.n.01,walk consisting of a paved area for pedestrians; usually beside a street or roadway,False,1
+sign,2,sign.n.02,a public display of a message,False,11
+sink,1,sink.n.01,plumbing fixture consisting of a water basin fixed to a wall or floor and having a drainpipe,False,4
+skateboard,1,skateboard.n.01,a board with wheels that is ridden in a standing or crouching position and propelled by foot,False,1
+skeleton,3,skeletal_system.n.01,the hard structure (bones and cartilages) that provides a frame for the body of an animal,False,4
+skirt,2,skirt.n.02,a garment hanging from the waist; worn mainly by girls and women,False,4
+skull,1,skull.n.01,the bony skeleton of the head of vertebrates,False,1
+skylight,1,skylight.n.01,a window in a roof to admit daylight,False,1
+sleeve,1,sleeve.n.01,the part of a garment that is attached at the armhole and that provides a cloth covering for the arm,False,2
+slide,4,slide.n.04,plaything consisting of a sloping chute down which children can slide,False,7
+slipper,1,slipper.n.01,low footwear that can be slipped on and off easily; usually worn indoors,False,2
+smart speaker,2,loudspeaker.n.01,electro-acoustic transducer that converts electrical signals into sounds loud enough to be heard at a distance,True,2
+smiley face,0,,,True,12
+smoke detector,1,detector.n.01,any device that receives a signal or stimulus (as heat or pressure or light or motion etc.) and responds to it in a distinctive manner,True,3
+snack,1,bite.n.04,a light informal meal,False,1
+snake,5,snake.n.05,"something long, thin, and flexible that resembles a snake",False,5
+snow,2,snow.n.02,a layer of snowflakes (white crystals of frozen water) covering the ground,False,4
+snowman,1,snowman.n.01,a figure of a person made of packed snow,False,1
+soap,1,soap.n.01,a cleansing agent made from the salts of vegetable or animal fats,False,3
+soap dispenser,1,soap_dispenser.n.01,dispenser of liquid soap,False,1
+sock,1,sock.n.01,hosiery consisting of a cloth covering for the foot; worn inside the shoe; reaches to between the ankle and the knee,False,2
+socket,3,socket.n.03,a receptacle into which an electric device can be inserted,False,3
+soda can,1,soda_can.n.01,a can for holding soft drinks,False,1
+soil,2,soil.n.02,the part of the earth's surface consisting of humus and disintegrated rock,False,4
+soup,1,soup.n.01,liquid food especially of meat or fish or vegetable stock often containing pieces of solid food,False,3
+spaghetti,2,spaghetti.n.02,pasta in the form of long strings,False,2
+spatula,1,spatula.n.01,a turner with a narrow flexible blade,False,2
+speaker,2,loudspeaker.n.01,electro-acoustic transducer that converts electrical signals into sounds loud enough to be heard at a distance,False,3
+spice,2,spice.n.02,any of a variety of pungent aromatic vegetable substances used for flavoring food,False,3
+spice rack,1,spice_rack.n.01,a rack for displaying containers filled with spices,False,1
+spider,1,spider.n.01,"predatory arachnid with eight legs, two poison fangs, two feelers, and usually two silk-spinning organs at the back end of the body; they spin silk to make cocoons for eggs or traps for prey",False,3
+sponge,1,sponge.n.01,a porous mass of interlacing fibers that forms the internal skeleton of various marine animals and usable to absorb water or any porous rubber or cellulose product similarly used,False,4
+spoon,1,spoon.n.01,a piece of cutlery with a shallow bowl-shaped container and a handle; used to stir or serve or take up food,False,3
+spray bottle,1,bottle.n.01,a glass or plastic vessel used for storing drinks or other liquids; typically cylindrical without handles and with a narrow neck that can be plugged or capped,True,3
+spray can,1,aerosol.n.02,a dispenser that holds a substance under pressure and that can release it as a fine spray (usually by means of a propellant gas),False,1
+square,7,square.n.07,any artifact having a shape similar to a plane geometric figure with four equal sides and four right angles,False,8
+squash,2,squash.n.02,edible fruit of a squash plant; eaten as a vegetable,False,3
+squirrel,1,squirrel.n.01,a kind of arboreal rodent having a long bushy tail,False,2
+stacking ring,2,ring.n.02,a toroidal shape,True,9
+stair,1,step.n.04,support consisting of a place to rest the foot while ascending or descending a stairway,False,1
+stand,4,stand.n.04,a small table for holding articles of various kinds,False,12
+stapler,1,stapler.n.01,a machine that inserts staples into sheets of paper in order to fasten them together,False,1
+star,5,star.n.05,a plane figure with 5 or more points; often used as an emblem,False,8
+starfish,0,,,False,1
+statue,1,statue.n.01,a sculpture representing a human or animal,False,1
+steering wheel,1,steering_wheel.n.01,a handwheel that is used for steering,False,1
+step,4,step.n.04,support consisting of a place to rest the foot while ascending or descending a stairway,False,11
+stick,1,stick.n.01,an implement consisting of a length of wood,False,9
+sticker,2,gummed_label.n.01,an adhesive label,False,4
+sticker sheet,6,sheet.n.06,a flat artifact that is thin relative to its length and width,True,8
+stocking,1,stocking.n.01,close-fitting hosiery to cover the foot and leg; come in matched pairs (usually used in the plural),False,2
+stool,1,stool.n.01,a simple seat without a back or arms,False,4
+storage unit,0,,,True,6
+stove,1,stove.n.01,a kitchen appliance used for cooking food,False,2
+strainer,1,strainer.n.01,a filter to retain larger pieces while smaller pieces and liquids pass through,False,1
+strap,1,strap.n.01,an elongated leather strip (or a strip of similar material) for binding things together or holding something in position,False,4
+straw,4,straw.n.04,a thin paper or plastic tube used to suck liquids into the mouth,False,4
+strawberry,1,strawberry.n.01,sweet fleshy red fruit,False,3
+street light,1,streetlight.n.01,a lamp supported on a lamppost; for illuminating a street,False,1
+streetlight,1,streetlight.n.01,a lamp supported on a lamppost; for illuminating a street,False,1
+string,1,string.n.01,a lightweight cord,False,10
+string light,2,light.n.02,any device serving as a source of illumination,True,12
+stroller,2,baby_buggy.n.01,a small vehicle with four wheels in which a baby or child is pushed around,False,2
+suitcase,1,bag.n.06,a portable rectangular container for carrying clothes,False,1
+sun,1,sun.n.01,the star that is the source of light and heat for the planets in the solar system,False,5
+sunflower,1,sunflower.n.01,any plant of the genus Helianthus having large flower heads with dark disk florets and showy yellow rays,False,1
+suv,1,sport_utility.n.01,a high-performance four-wheel drive car built on a truck chassis,False,1
+sweater,1,sweater.n.01,a crocheted or knitted garment covering the upper part of the body,False,2
+sweatpants,1,sweat_pants.n.01,loose-fitting trousers with elastic cuffs; worn by athletes,False,1
+sweatshirt,1,sweatshirt.n.01,cotton knit pullover with long sleeves worn during athletic activity,False,1
+swing,2,swing.n.02,mechanical device used as a plaything to support someone swinging back and forth,False,9
+switch,1,switch.n.01,control consisting of a mechanical or electrical or electronic device for making or breaking or changing the connections in a circuit,False,7
+table,2,table.n.02,a piece of furniture having a smooth flat top that is usually supported by one or more vertical legs,False,6
+table runner,8,runner.n.08,a long narrow carpet,True,10
+tablecloth,1,tablecloth.n.01,a covering spread over a dining table,False,1
+tablet,0,,,False,4
+tableware,1,tableware.n.01,articles for use at the table (dishes and silverware and glassware),False,1
+tag,1,tag.n.01,"a label written or printed on paper, cardboard, or plastic that is attached to something to indicate its owner, nature, price, etc.",False,5
+tank top,1,tank_top.n.01,a tight-fitting sleeveless shirt with wide shoulder straps and low neck and no front opening; often worn over a shirt or blouse,False,1
+tape,1,tape.n.01,a long thin piece of cloth or paper as used for binding or fastening,False,5
+tapestry,3,tapestry.n.03,a wall hanging of heavy handwoven fabric with pictorial designs,False,3
+tarp,1,tarpaulin.n.01,waterproofed canvas,False,1
+tattoo,2,tattoo.n.02,a design on the skin made by tattooing,False,3
+teapot,1,teapot.n.01,pot for brewing tea; usually has a spout and handle,False,1
+teddy bear,1,teddy.n.01,plaything consisting of a child's toy bear (usually plush and stuffed with soft materials),False,1
+television,3,television_receiver.n.01,an electronic device that receives television signals and displays them on a screen,False,3
+tent,1,tent.n.01,a portable shelter (usually of canvas stretched over supporting poles and fastened to the ground with ropes and pegs),False,2
+text,1,text.n.01,the words of something written,False,4
+thermos,1,thermos.n.01,vacuum flask that preserves temperature of hot or cold drinks,False,1
+thermostat,1,thermostat.n.01,a regulator for automatically regulating temperature by starting or stopping the supply of heat,False,1
+tiger,0,,,False,2
+tile,1,tile.n.01,a flat thin rectangular slab (as of fired clay or rubber or linoleum) used to cover surfaces,False,3
+timer,1,timer.n.01,a timepiece that measures a time interval and signals its end,False,3
+tissue,2,tissue.n.02,a soft thin (usually translucent) paper,False,2
+tissue box,1,box.n.01,a (usually rectangular) container; may have a lid,True,10
+toast,1,toast.n.01,slices of bread that have been toasted,False,4
+toaster,2,toaster.n.02,a kitchen appliance (usually electric) for toasting bread,False,2
+toaster oven,1,toaster_oven.n.01,kitchen appliance consisting of a small electric oven for toasting or warming food,False,1
+toe,1,toe.n.01,one of the digits of the foot,False,4
+toilet,2,toilet.n.02,a plumbing fixture for defecation and urination,False,4
+toilet paper,1,toilet_tissue.n.01,a soft thin absorbent paper for use in toilets,False,1
+toilet paper roll,11,roll.n.11,anything rolled up in cylindrical form,True,12
+tomato,1,tomato.n.01,mildly acid red or yellow pulpy fruit eaten as a vegetable,False,2
+tongs,1,tongs.n.01,any of various devices for taking hold of objects; usually have two hinged legs with handles above and pointed hooks below,False,1
+toothbrush,1,toothbrush.n.01,small brush; has long handle; used to clean teeth,False,2
+toothpaste,1,toothpaste.n.01,a dentifrice in the form of a paste,False,1
+top,10,top.n.10,a garment (especially for women) that extends from the shoulders to the waist or hips,False,11
+tortilla,1,tortilla.n.01,thin unleavened pancake made from cornmeal or wheat flour,False,1
+tote bag,1,carryall.n.01,a capacious bag or basket,False,1
+towel,1,towel.n.01,a rectangular piece of absorbent cloth (or paper) for drying or wiping,False,1
+towel rack,1,towel_rack.n.01,a rack consisting of one or more bars on which towels can be hung,False,1
+towel ring,1,towel_ring.n.01,a circular hoop for holding a towel,False,1
+track,0,,,False,11
+tractor,1,tractor.n.01,a wheeled vehicle with large wheels; used in farming and other applications,False,2
+train,1,train.n.01,public transport provided by a line of railway cars coupled together and drawn by a locomotive,False,6
+train track,3,track.n.03,a pair of parallel rails providing a runway for wheels,True,11
+trampoline,1,trampoline.n.01,gymnastic apparatus consisting of a strong canvas sheet attached with springs to a metal frame; used for tumbling,False,1
+trash can,1,ashcan.n.01,a bin that holds rubbish until it is collected,False,1
+tray,1,tray.n.01,an open receptacle for holding or displaying or serving articles or food,False,1
+tree,1,tree.n.01,a tall perennial woody plant having a main trunk and branches forming a distinct elevated crown; includes both gymnosperms and angiosperms,False,3
+triangle,0,,,False,5
+tricycle,1,tricycle.n.01,a vehicle with three wheels that is moved by foot pedals,False,1
+tripod,1,tripod.n.01,a three-legged rack used for support,False,1
+truck,1,truck.n.01,an automotive vehicle suitable for hauling,False,2
+tube,3,pipe.n.03,a hollow cylindrical shape,False,5
+tunnel,0,,,False,2
+turtle,2,turtle.n.02,any of various aquatic and land reptiles having a bony shell and flipper-like limbs for swimming,False,2
+tv stand,4,stand.n.04,a small table for holding articles of various kinds,True,12
+ukulele,1,uke.n.01,a small guitar having four strings,False,1
+umbrella,1,umbrella.n.01,a lightweight handheld collapsible canopy,False,3
+underwear,1,underwear.n.01,undergarment worn next to the skin and under the outer garments,False,1
+unicorn,0,,,False,1
+utensil,1,utensil.n.01,an implement for practical use (especially in a household),False,1
+utensil holder,1,holder.n.01,a holding device,True,3
+utility pole,1,pole.n.01,a long (usually round) rod of wood or metal or plastic,True,9
+vacuum cleaner,1,vacuum.n.04,an electrical home appliance that cleans by suction,False,1
+van,5,van.n.05,a truck with an enclosed cargo space,False,5
+vase,1,vase.n.01,an open jar of glass or porcelain used as an ornament or to hold flowers,False,1
+vegetable,1,vegetable.n.01,edible seeds or roots or stems or leaves or bulbs or tubers or nonsweet fruits of any of numerous herbaceous plant,False,2
+vent,1,vent.n.01,a hole for the escape of gas or air,False,5
+vest,0,,,False,2
+video game,1,computer_game.n.01,a game played against a computer,False,1
+waffle,1,waffle.n.01,pancake batter baked in a waffle iron,False,1
+wagon,4,wagon.n.04,a child's four-wheeled toy cart sometimes used for coasting,False,5
+walker,6,walker.n.06,an enclosing framework on casters or wheels; helps babies learn to walk,False,6
+wall decal,1,decal.n.01,either a design that is fixed to some surface or a paper bearing the design which is to be transferred to the surface,True,1
+wall hanging,1,hanging.n.01,decoration that is hung (as a tapestry) on a wall or over a window,False,1
+wallet,1,wallet.n.01,a pocket-size case for holding papers and paper money,False,1
+wardrobe,1,wardrobe.n.01,a tall piece of furniture that provides storage space for clothes; has a door and rails or hooks for hanging clothes,False,3
+washing machine,1,washer.n.03,a home appliance for washing clothes and linens automatically,False,1
+watch,1,watch.n.01,a small portable timepiece,False,6
+water,1,water.n.01,binary compound that occurs at room temperature as a clear colorless odorless tasteless liquid; freezes into ice below 0 degrees centigrade and boils above 100 degrees centigrade; widely used as a solvent,False,6
+water dispenser,1,dispenser.n.01,a container so designed that the contents can be used in prescribed amounts,True,2
+water gun,1,water_pistol.n.01,plaything consisting of a toy pistol that squirts water,False,1
+water table,0,,,False,1
+watering can,1,watering_can.n.01,a container with a handle and a spout with a perforated nozzle; used to sprinkle water over plants,False,1
+watermelon,2,watermelon.n.02,large oblong or roundish melon with a hard green rind and sweet watery red or occasionally yellowish pulp,False,2
+weed,1,weed.n.01,any plant that crowds out cultivated plants,False,3
+whale,0,,,False,2
+wheel,1,wheel.n.01,a simple machine consisting of a circular frame with spokes (or a solid disc) that can rotate on a shaft or axle (as in vehicles or other machines),False,7
+whisk,1,whisk.n.01,a mixer incorporating a coil of wires; used for whipping eggs or cream,False,2
+window,1,window.n.01,a framework of wood or metal that contains a glass windowpane and is built into a wall or roof to admit light or air,False,8
+window sill,1,windowsill.n.01,the sill of a window; the horizontal member at the bottom of the window frame,False,1
+wine glass,1,wineglass.n.01,a glass that has a stem and in which wine is served,False,1
+wipe,0,,,False,1
+wire,2,wire.n.02,a metal conductor that carries electricity over a distance,False,4
+woman,1,woman.n.01,an adult female person (as opposed to a man),False,4
+wood,1,wood.n.01,the hard fibrous lignified substance under the bark of trees,False,8
+wood chip,1,bit.n.02,a small fragment of something broken off from the whole,True,9
+wrapper,2,wrapping.n.01,the covering (usually paper or cellophane) in which something is wrapped,False,3
+wreath,1,wreath.n.01,flower arrangement consisting of a circular band of foliage or flowers for ornamental purposes,False,1
+wristband,0,,,False,2
+xylophone,0,,,False,1
+yoga mat,3,mat.n.03,sports equipment consisting of a piece of thick padding on the floor for gymnastic sports,True,6
+yogurt,1,yogurt.n.01,a custard-like food made from curdled milk,False,1
+zebra,0,,,False,1
+backsplash,0,,,False,0
+blinds,0,,,False,0
+elmo,0,,,False,0
+feet,0,,,False,0
+handprint,0,,,False,0
+headphones,0,,,False,0
+hoodie,0,,,False,0
+humidifier,0,,,False,0
+jeans,0,,,False,0
+leggings,0,,,False,0
+nightstand,0,,,False,0
+overalls,0,,,False,0
+pajamas,0,,,False,0
+placemat,0,,,False,0
+playdough,0,,,False,0
+playmat,0,,,False,0
+playset,0,,,False,0
+pompom,0,,,False,0
+soundbar,0,,,False,0
+spider-man,0,,,False,0
+stovetop,0,,,False,0
+tupperware,0,,,False,0
+whiteboard,0,,,False,0

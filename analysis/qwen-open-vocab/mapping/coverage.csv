@@ -1,0 +1,829 @@
+category,domain,boxes,origin,review_flags,things_items,things_exact,things_exemplars,lvis_items,lvis_exact,lvis_exemplars,imagenet_items,imagenet_exact,imagenet_exemplars,yoloe_valid129
+abacus,toys,370,Qwen-chosen sense,Qwen and rule disagree (rule: abacus.n.01),1,1,14,0,0,0,1,1,1350,False
+activity center,toys,1158,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+activity cube,toys,335,none (Qwen: head-noun sense only),not in WordNet; approximate: cube.n.05 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+adult,people,896,Qwen-chosen sense,,1,0,12,0,0,0,0,0,0,False
+air conditioner,furniture_rooms,15826,Qwen-chosen sense,,1,1,13,1,1,146,0,0,0,False
+air fryer,furniture_rooms,318,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+air purifier,furniture_rooms,1553,none (Qwen: head-noun sense only),not in WordNet; approximate: purifier.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+air vent,furniture_rooms,7721,none (Qwen: head-noun sense only),not in WordNet; approximate: vent.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+airplane,vehicles,2683,comparison-datasets (hand-checked),,3,1,41,4,1,682,2,1,2700,False
+alligator,animals,684,comparison-datasets (hand-checked),,1,1,14,1,1,1,1,0,1350,True
+ambulance,vehicles,529,Qwen-chosen sense,,1,1,13,1,1,6,1,1,1350,False
+apple,food_drink,10029,comparison-datasets (hand-checked),,1,1,12,1,1,3116,1,0,1350,True
+appliance,household,3282,Qwen-chosen sense,Qwen and rule disagree (rule: appliance.n.01),7,0,95,7,0,25,4,0,5237,False
+apricot,food_drink,314,Qwen-chosen sense,Qwen and rule disagree (rule: apricot.n.01),0,0,0,1,1,0,0,0,0,False
+apron,clothing,1660,Qwen-chosen sense,,1,1,13,1,1,161,1,1,1350,False
+archway,furniture_rooms,302,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+arm,body_parts,39794,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,True
+armchair,furniture_rooms,16462,Qwen-chosen sense,,1,0,12,2,1,212,0,0,0,False
+artwork,household,1485,none (Qwen: no sense fits),Qwen: no sense fits (rule: artwork.n.01),0,0,0,0,0,0,0,0,0,False
+avocado,food_drink,1062,Qwen-chosen sense,,1,1,16,1,1,152,0,0,0,False
+awning,furniture_rooms,1059,Qwen-chosen sense,,1,1,13,1,1,888,0,0,0,False
+baby,people,4947,Qwen-chosen sense,,1,1,35,0,0,0,0,0,0,False
+baby activity center,other,748,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+baby playpen,other,722,none (Qwen: head-noun sense only),not in WordNet; approximate: playpen.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+baby seat,other,718,none (Qwen: head-noun sense only),not in WordNet; approximate: seat.n.03 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+baby swing,other,401,none (Qwen: head-noun sense only),not in WordNet; approximate: swing.n.02 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+backpack,clothing,19585,Qwen-chosen sense,,1,1,13,1,1,947,1,1,1350,False
+backsplash,furniture_rooms,794,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+bag,household,99291,Qwen-chosen sense,,9,1,127,9,0,939,3,0,3819,False
+bagel,other,360,Qwen-chosen sense,,1,1,24,1,1,68,1,1,1350,False
+balcony,furniture_rooms,1638,Qwen-chosen sense,Qwen and rule disagree (rule: balcony.n.01),0,0,0,0,0,0,0,0,0,False
+ball,toys,87101,comparison-datasets (hand-checked) + audit fix,,7,1,112,8,1,686,7,0,9432,True
+ball pit,toys,996,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+balloon,toys,13839,comparison-datasets (hand-checked) + audit fix,,1,1,20,1,1,272,1,1,1350,True
+banana,food_drink,21121,comparison-datasets (hand-checked),,1,1,13,1,1,9156,1,1,1350,True
+banana peel,food_drink,1231,Qwen-chosen sense,,1,1,17,0,0,0,0,0,0,False
+band,clothing,417,Qwen-chosen sense,Qwen and rule disagree (rule: band.n.04),0,0,0,0,0,0,0,0,0,False
+banner,other,1187,Qwen-chosen sense,,1,1,13,1,1,1163,0,0,0,False
+barn,outside,842,Qwen-chosen sense,,0,0,0,0,0,0,1,1,1350,False
+barrel,household,308,Qwen-chosen sense,Qwen and rule disagree (rule: barrel.n.01),1,1,19,0,0,0,0,0,0,False
+baseball,toys,673,Qwen-chosen sense,,1,1,18,1,1,201,1,1,1350,False
+baseball bat,toys,384,Qwen-chosen sense,,1,1,12,1,1,522,0,0,0,False
+baseboard,furniture_rooms,8850,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+basin,household,409,Qwen-chosen sense,,1,0,15,1,0,3,0,0,0,False
+basket,household,85797,comparison-datasets (hand-checked),,2,1,24,1,1,731,1,0,1350,True
+basketball,toys,2860,Qwen-chosen sense,,1,1,13,1,1,14,1,1,1350,False
+bassinet,furniture_rooms,366,Qwen-chosen sense,,1,1,16,0,0,0,1,1,1350,False
+bat,toys,654,Qwen-chosen sense,,1,1,15,0,0,0,0,0,0,False
+bathrobe,clothing,332,Qwen-chosen sense,,1,1,21,1,1,10,0,0,0,False
+bathtub,furniture_rooms,4890,comparison-datasets (hand-checked),,3,1,50,1,1,170,1,1,1350,True
+bead,toys,1319,Qwen-chosen sense,,1,1,14,1,1,164,0,0,0,False
+bead maze,toys,455,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+beam,furniture_rooms,3398,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+bean,food_drink,451,Qwen-chosen sense,,1,0,12,0,0,0,0,0,0,False
+bean bag,furniture_rooms,3745,none (Qwen: no sense fits),Qwen: no sense fits (rule: beanbag.n.01),0,0,0,0,0,0,0,0,0,False
+beanie,other,338,Qwen-chosen sense,,1,1,18,1,1,298,0,0,0,False
+bear,animals,7415,comparison-datasets (hand-checked),,2,1,45,3,1,270,4,0,5400,False
+beard,other,812,Qwen-chosen sense,,1,1,16,0,0,0,0,0,0,False
+bed,furniture_rooms,48728,comparison-datasets (hand-checked),,3,1,54,2,1,437,1,0,1350,True
+bed sheet,household,1316,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+bedding,household,856,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+bedspread,household,3915,Qwen-chosen sense,,0,0,0,1,1,19,0,0,0,False
+bee,animals,1558,comparison-datasets (hand-checked),,1,1,27,0,0,0,1,1,1350,False
+bell,household,342,Qwen-chosen sense,,1,1,17,2,1,81,0,0,0,False
+belt,clothing,426,comparison-datasets (hand-checked),,2,1,27,1,1,676,1,0,1350,True
+bench,furniture_rooms,9265,comparison-datasets (hand-checked),,1,1,16,2,1,819,1,0,1350,True
+bib,clothing,326,comparison-datasets (hand-checked),,1,1,15,1,1,12,1,1,1350,True
+bicycle,vehicles,4911,comparison-datasets (hand-checked),,1,1,23,1,1,969,2,0,2700,False
+bin,household,91751,Qwen-chosen sense,,1,1,14,0,0,0,0,0,0,False
+binder,household,426,Qwen-chosen sense,Qwen and rule disagree (rule: binder.n.01),1,1,24,1,1,47,1,1,1350,False
+bird,animals,13090,comparison-datasets (hand-checked),,21,1,372,18,1,2751,53,0,71550,True
+biscuit,food_drink,341,Qwen-chosen sense,Qwen and rule disagree (rule: biscuit.n.01),0,0,0,0,0,0,0,0,0,False
+blackboard,household,1179,Qwen-chosen sense,,1,1,12,1,1,37,0,0,0,False
+blanket,household,67773,comparison-datasets (hand-checked),,2,2,25,2,2,738,1,1,1350,True
+blender,furniture_rooms,4779,Qwen-chosen sense,,1,1,14,1,1,57,0,0,0,False
+blinds,furniture_rooms,30574,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+block,toys,86849,Qwen-chosen sense,,2,1,28,2,0,99,0,0,0,False
+blouse,clothing,453,Qwen-chosen sense,,1,1,16,1,1,99,0,0,0,False
+blueberry,food_drink,897,Qwen-chosen sense,Qwen and rule disagree (rule: blueberry.n.01),1,1,12,1,1,713,0,0,0,False
+board,household,2255,Qwen-chosen sense,Qwen and rule disagree (rule: board.n.02),8,0,106,7,0,1148,1,0,1350,False
+board game,toys,1895,Qwen-chosen sense,,4,1,59,0,0,0,0,0,0,False
+boat,vehicles,3316,comparison-datasets (hand-checked),,7,1,97,10,1,1959,6,0,8006,False
+book,household,442260,comparison-datasets (hand-checked),,1,1,13,3,1,7077,0,0,0,True
+bookshelf,furniture_rooms,87393,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+boot,clothing,1712,Qwen-chosen sense,,2,1,29,2,1,2121,1,0,1350,False
+bottle,household,184496,comparison-datasets (hand-checked),,5,1,68,5,1,3024,5,0,6750,True
+bouncer,furniture_rooms,717,none (Qwen: no sense fits),Qwen: no sense fits (rule: bouncer.n.01),0,0,0,0,0,0,0,0,0,False
+bow,clothing,586,Qwen-chosen sense,Qwen and rule disagree (rule: bow.n.01),1,1,12,1,1,186,0,0,0,False
+bowl,household,120859,comparison-datasets (hand-checked),,0,0,0,2,1,940,2,0,2700,True
+box,household,272114,comparison-datasets (hand-checked),,6,1,85,4,1,1436,2,0,2429,True
+boy,people,1551,Qwen-chosen sense,Qwen and rule disagree (rule: boy.n.02),1,1,13,0,0,0,0,0,0,False
+bracelet,clothing,5863,Qwen-chosen sense,,2,1,29,2,1,590,0,0,0,False
+branch,outside,686,Qwen-chosen sense,,2,1,27,0,0,0,0,0,0,False
+bread,food_drink,7529,comparison-datasets (hand-checked),,9,1,126,6,1,1208,1,0,1350,True
+brick,toys,1564,none (Qwen: no sense fits),Qwen: no sense fits (rule: brick.n.01),1,1,14,0,0,0,0,0,0,False
+bridge,outside,707,Qwen-chosen sense,,0,0,0,0,0,0,3,0,3903,False
+broccoli,food_drink,990,Qwen-chosen sense,Qwen and rule disagree (rule: broccoli.n.01),0,0,0,0,0,0,1,1,1350,False
+broom,household,3547,comparison-datasets (hand-checked),,1,1,12,1,1,20,1,1,1350,True
+brush,household,2550,comparison-datasets (hand-checked),,1,1,13,1,0,28,0,0,0,False
+bubble,toys,2483,Qwen-chosen sense,Qwen and rule disagree (rule: bubble.n.04),2,1,24,1,0,5,1,1,1350,False
+bucket,household,16196,comparison-datasets (hand-checked),,2,1,25,2,1,282,1,1,1350,True
+building,outside,19778,Qwen-chosen sense,,2,0,26,1,0,2,9,0,12120,False
+bunny,animals,421,comparison-datasets (hand-checked),,0,0,0,0,0,0,0,0,0,False
+burner,furniture_rooms,402,Qwen-chosen sense,Qwen and rule disagree (rule: burner.n.01),1,1,12,0,0,0,0,0,0,False
+bus,vehicles,5295,comparison-datasets (hand-checked),,2,1,25,2,1,652,3,0,4050,False
+bush,outside,13464,Qwen-chosen sense,,5,1,71,0,0,0,0,0,0,False
+butter,food_drink,822,comparison-datasets (hand-checked),,1,1,16,1,1,78,0,0,0,False
+butterfly,animals,2484,comparison-datasets (hand-checked),,1,1,16,1,1,116,6,0,8100,True
+button,clothing,5163,comparison-datasets (hand-checked),,1,1,19,1,1,1452,0,0,0,False
+cabinet,furniture_rooms,347950,Qwen-chosen sense,,1,1,14,2,1,1656,2,0,2700,False
+cable,household,7227,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+cactus,outside,655,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+cage,household,1221,Qwen-chosen sense,,2,1,24,1,0,34,0,0,0,False
+cake,food_drink,692,comparison-datasets (hand-checked),,5,1,74,4,1,717,0,0,0,False
+calculator,household,379,Qwen-chosen sense,,1,1,14,1,1,27,0,0,0,False
+calendar,household,2925,Qwen-chosen sense,Qwen and rule disagree (rule: calendar.n.01),0,0,0,0,0,0,0,0,0,False
+camera,household,3174,comparison-datasets (hand-checked),,2,1,25,2,1,506,2,0,2700,False
+can,household,9348,comparison-datasets (hand-checked),,2,1,24,3,1,406,1,0,1147,True
+candle,household,3686,Qwen-chosen sense,,1,1,12,1,1,616,1,1,1350,False
+candle holder,household,386,Qwen-chosen sense,,2,1,31,1,1,67,0,0,0,False
+candy,food_drink,901,Qwen-chosen sense,,13,1,166,7,0,49,0,0,0,False
+canister,household,1358,Qwen-chosen sense,,1,1,15,1,1,25,0,0,0,False
+canopy,other,536,Qwen-chosen sense,Qwen and rule disagree (rule: canopy.n.01),0,0,0,0,0,0,0,0,0,False
+cap,clothing,4152,Qwen-chosen sense,,1,0,12,5,1,1561,3,0,4050,False
+car,vehicles,105233,comparison-datasets (hand-checked),,7,1,121,8,1,2754,9,0,12150,True
+car seat,vehicles,3587,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+car window,other,748,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+card,household,31083,Qwen-chosen sense,Qwen and rule disagree (rule: card.n.01),0,0,0,0,0,0,0,0,0,False
+cardboard,household,2829,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+cardigan,clothing,3966,Qwen-chosen sense,,1,1,14,1,1,1,1,1,1350,False
+carrot,food_drink,5100,comparison-datasets (hand-checked),,0,0,0,1,1,3762,0,0,0,True
+cart,household,2468,none (Qwen: no sense fits),Qwen: no sense fits (rule: cart.n.01),0,0,0,0,0,0,0,0,0,False
+carton,household,2574,Qwen-chosen sense,,0,0,0,1,1,36,1,1,1350,False
+cartoon,toys,2079,Qwen-chosen sense,Qwen and rule disagree (rule: cartoon.n.01),0,0,0,0,0,0,0,0,0,False
+case,household,687,Qwen-chosen sense,,6,0,78,5,0,163,0,0,0,False
+castle,toys,370,none (Qwen: no sense fits),Qwen: no sense fits (rule: castle.n.02),0,0,0,0,0,0,1,1,1350,False
+cat,animals,28402,comparison-datasets (hand-checked),,1,1,12,1,1,482,6,0,8100,True
+cat tree,household,3403,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+caterpillar,animals,736,Qwen-chosen sense,,1,1,21,0,0,0,0,0,0,False
+cd,other,383,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+celery,food_drink,347,Qwen-chosen sense,Qwen and rule disagree (rule: celery.n.01),1,1,12,0,0,0,0,0,0,False
+cereal,food_drink,7145,Qwen-chosen sense,Qwen and rule disagree (rule: cereal.n.01),3,1,41,1,0,0,0,0,0,False
+chair,furniture_rooms,382156,comparison-datasets (hand-checked),,5,1,61,7,1,2721,4,0,5076,True
+chalk,toys,691,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+chandelier,household,37241,Qwen-chosen sense,,1,1,12,1,1,66,0,0,0,False
+charger,household,682,Qwen-chosen sense,,1,1,14,0,0,0,0,0,0,False
+chart,other,611,Qwen-chosen sense,Qwen and rule disagree (rule: chart.n.02),0,0,0,0,0,0,0,0,0,False
+cheerio,food_drink,1046,none (Qwen: no sense fits),Qwen: no sense fits (rule: adieu.n.01),0,0,0,0,0,0,0,0,0,False
+cheese,food_drink,1713,Qwen-chosen sense,,3,1,40,1,0,1,0,0,0,False
+cheese stick,food_drink,367,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+cherry,food_drink,646,Qwen-chosen sense,Qwen and rule disagree (rule: cherry.n.01),1,1,12,1,1,206,0,0,0,False
+chest,furniture_rooms,556,Qwen-chosen sense,,2,1,25,1,0,7,1,1,1350,False
+chick,animals,644,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+chicken,animals,1358,comparison-datasets (hand-checked),,2,1,26,2,1,31,2,2,2700,False
+child,people,14156,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+chimney,furniture_rooms,1257,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+chopstick,household,2172,Qwen-chosen sense,,1,1,12,1,1,90,0,0,0,False
+christmas ornament,other,1683,none (Qwen: head-noun sense only),not in WordNet; approximate: decoration.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+circle,other,430,Qwen-chosen sense,Qwen and rule disagree (rule: circle.n.07),0,0,0,0,0,0,0,0,0,False
+clay,toys,710,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+clip,household,342,Qwen-chosen sense,,1,0,13,1,1,25,1,0,1350,False
+clock,household,29108,comparison-datasets (hand-checked),,2,1,33,3,1,701,3,0,4041,True
+clog,other,742,Qwen-chosen sense,,0,0,0,0,0,0,1,1,1350,False
+closet,furniture_rooms,10592,comparison-datasets (hand-checked),,1,1,13,3,2,330,1,1,1350,True
+cloth,household,19224,Qwen-chosen sense,,8,0,101,8,0,243,4,0,5162,False
+clothes,clothing,23597,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+clothes rack,furniture_rooms,608,none (Qwen: head-noun sense only),not in WordNet; approximate: rack.n.05 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+clothespin,household,827,Qwen-chosen sense,,1,1,12,1,1,35,0,0,0,False
+clothing rack,furniture_rooms,620,none (Qwen: head-noun sense only),not in WordNet; approximate: rack.n.05 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+cloud,outside,7097,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+coaster,household,1254,Qwen-chosen sense,,1,1,18,1,1,87,0,0,0,False
+coat,clothing,6463,comparison-datasets (hand-checked),,4,1,52,4,1,732,3,0,3803,False
+coat rack,furniture_rooms,848,Qwen-chosen sense,,1,1,15,1,1,2,0,0,0,False
+coffee machine,furniture_rooms,1194,none (Qwen: head-noun sense only),not in WordNet; approximate: machine.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+coffee maker,household,9340,Qwen-chosen sense,,1,1,14,1,1,49,1,0,1186,False
+coffee pot,household,403,Qwen-chosen sense,,1,1,14,1,1,9,1,1,1350,False
+coin,other,1240,Qwen-chosen sense,,1,1,15,2,1,99,0,0,0,False
+colander,household,1566,Qwen-chosen sense,,0,0,0,1,1,4,0,0,0,False
+collar,clothing,516,Qwen-chosen sense,Qwen and rule disagree (rule: collar.n.01),0,0,0,0,0,0,0,0,0,False
+column,furniture_rooms,1577,Qwen-chosen sense,Qwen and rule disagree (rule: column.n.02),1,1,14,0,0,0,0,0,0,False
+comb,household,352,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,True
+comforter,household,2219,Qwen-chosen sense,Qwen and rule disagree (rule: comforter.n.04),0,0,0,0,0,0,0,0,0,False
+computer,household,343,Qwen-chosen sense,,1,1,12,0,0,0,5,0,6346,False
+computer monitor,household,5972,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+computer mouse,household,628,Qwen-chosen sense,,1,1,18,1,1,384,1,1,1350,False
+computer screen,household,472,Qwen-chosen sense,,1,1,16,0,0,0,0,0,0,False
+concrete,other,708,none (Qwen: no sense fits),Qwen: no sense fits (rule: concrete.n.01),0,0,0,0,0,0,0,0,0,False
+concrete slab,other,300,none (Qwen: head-noun sense only),not in WordNet; approximate: slab.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+cone,toys,738,Qwen-chosen sense,,0,0,0,1,1,707,0,0,0,False
+console,household,369,Qwen-chosen sense,Qwen and rule disagree (rule: console.n.02),0,0,0,0,0,0,0,0,0,False
+container,household,57690,Qwen-chosen sense,,38,1,505,42,0,2205,27,0,35998,False
+controller,toys,375,Qwen-chosen sense,,2,0,27,2,1,442,1,0,1350,False
+cookie,food_drink,4358,comparison-datasets (hand-checked),,4,1,53,2,1,275,0,0,0,True
+cookie cutter,household,378,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+cooler,household,579,Qwen-chosen sense,,1,1,13,1,1,113,0,0,0,False
+cord,household,3372,Qwen-chosen sense,Qwen and rule disagree (rule: cord.n.01),1,1,15,0,0,0,0,0,0,False
+corkboard,household,338,none (Qwen: no sense fits),Qwen: no sense fits (rule: corkboard.n.01),1,1,15,1,1,1,0,0,0,False
+corn,food_drink,579,comparison-datasets (hand-checked),,1,0,15,1,1,527,1,1,1350,True
+couch,furniture_rooms,187078,comparison-datasets (hand-checked),,3,1,51,3,1,542,1,0,1350,True
+counter,furniture_rooms,43626,Qwen-chosen sense,,1,1,17,0,0,0,0,0,0,False
+countertop,furniture_rooms,36216,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+cover,household,321,Qwen-chosen sense,Qwen and rule disagree (rule: cover.n.09),0,0,0,0,0,0,1,0,1299,False
+cow,animals,3853,comparison-datasets (hand-checked),,2,0,28,1,0,1663,1,0,1350,False
+crab,animals,581,Qwen-chosen sense,,1,1,17,1,1,7,4,0,5400,False
+cracker,food_drink,5665,comparison-datasets (hand-checked),,2,1,28,2,1,125,1,0,1350,True
+cradle,furniture_rooms,424,Qwen-chosen sense,,0,0,0,0,0,0,1,1,1350,False
+craft,toys,844,none (Qwen: no sense fits),Qwen: no sense fits (rule: craft.n.02),0,0,0,0,0,0,0,0,0,False
+crane,vehicles,390,Qwen-chosen sense,,1,1,18,0,0,0,1,1,1350,False
+crate,household,1642,Qwen-chosen sense,,1,1,17,1,1,403,1,1,1350,False
+crayon,toys,13418,comparison-datasets (hand-checked),,1,1,17,1,1,36,0,0,0,False
+crib,furniture_rooms,20865,comparison-datasets (hand-checked),,1,1,17,1,1,6,1,1,1350,True
+crocodile,animals,1876,none (Qwen: no sense fits),Qwen: no sense fits (rule: crocodile.n.01),0,0,0,0,0,0,0,0,0,False
+croissant,food_drink,437,Qwen-chosen sense,,1,1,14,1,1,33,0,0,0,False
+crumb,food_drink,404,Qwen-chosen sense,,1,1,12,1,1,608,0,0,0,False
+cube,toys,1609,Qwen-chosen sense,,2,0,29,2,1,23,0,0,0,False
+cucumber,food_drink,1029,Qwen-chosen sense,Qwen and rule disagree (rule: cucumber.n.01),1,1,16,1,1,453,1,1,1350,False
+cup,household,214041,comparison-datasets (hand-checked),,4,2,58,5,2,1288,2,1,2700,True
+cup holder,household,665,none (Qwen: head-noun sense only),not in WordNet; approximate: holder.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+cupboard,furniture_rooms,1277,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+cupcake,food_drink,634,Qwen-chosen sense,,1,1,17,1,1,609,0,0,0,False
+curtain,furniture_rooms,157939,Qwen-chosen sense,,1,1,12,1,1,976,1,0,1314,False
+cushion,furniture_rooms,42402,Qwen-chosen sense,Qwen and rule disagree (rule: cushion.n.02),3,1,36,1,1,1303,0,0,0,False
+cutting board,household,8741,Qwen-chosen sense,,1,1,12,1,1,150,0,0,0,False
+cylinder,other,604,Qwen-chosen sense,Qwen and rule disagree (rule: cylinder.n.03),1,0,13,0,0,0,0,0,0,False
+cymbal,other,397,Qwen-chosen sense,,1,1,16,1,1,0,0,0,0,False
+deck,other,1575,Qwen-chosen sense,Qwen and rule disagree (rule: deck.n.01),0,0,0,0,0,0,0,0,0,False
+decoration,household,5624,Qwen-chosen sense,,17,0,247,14,0,602,1,0,1350,False
+deer,animals,695,comparison-datasets (hand-checked),,3,1,46,2,1,56,0,0,0,False
+desk,furniture_rooms,12201,Qwen-chosen sense,,1,1,14,1,1,360,1,1,1350,False
+diaper,clothing,2688,comparison-datasets (hand-checked),,1,1,12,1,1,11,1,1,1350,False
+dinosaur,animals,6098,none (Qwen: no sense fits),Qwen: no sense fits (rule: dinosaur.n.01),0,0,0,0,0,0,0,0,0,False
+disc,toys,397,Qwen-chosen sense,Qwen and rule disagree (rule: phonograph_record.n.01),0,0,0,0,0,0,0,0,0,False
+dish,household,8697,comparison-datasets (hand-checked),,2,1,34,3,1,84,0,0,0,True
+dish brush,household,369,none (Qwen: head-noun sense only),not in WordNet; approximate: brush.n.02 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+dish rack,household,13655,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+dish soap,household,2311,none (Qwen: head-noun sense only),not in WordNet; approximate: soap.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+dishwasher,furniture_rooms,13033,Qwen-chosen sense,,1,1,13,1,1,74,1,1,1350,False
+display case,household,457,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+dog,animals,36251,comparison-datasets (hand-checked),,5,1,82,6,1,546,118,0,153773,True
+doll,toys,17087,comparison-datasets (hand-checked),,2,1,29,2,1,67,0,0,0,True
+dollhouse,toys,542,Qwen-chosen sense,Qwen and rule disagree (rule: dollhouse.n.01),1,1,14,0,0,0,0,0,0,False
+dolphin,animals,934,none (Qwen: no sense fits),Qwen: no sense fits (rule: dolphin.n.02),1,1,14,1,1,1,0,0,0,False
+donkey,animals,314,comparison-datasets (hand-checked),,1,1,17,1,1,25,0,0,0,False
+donut,food_drink,960,Qwen-chosen sense,,1,1,16,1,1,2562,0,0,0,False
+door,furniture_rooms,279005,comparison-datasets (hand-checked),,4,1,59,0,0,0,1,0,1350,True
+door handle,furniture_rooms,12241,Qwen-chosen sense,,1,1,20,1,1,770,0,0,0,False
+door knob,furniture_rooms,732,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+doorframe,furniture_rooms,6755,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+doorknob,furniture_rooms,10697,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+doormat,household,4580,Qwen-chosen sense,,1,1,16,1,1,28,1,1,1350,False
+dragon,people,603,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+drain,furniture_rooms,563,Qwen-chosen sense,Qwen and rule disagree (rule: drain.n.02),1,1,17,0,0,0,0,0,0,False
+drawer,furniture_rooms,50722,comparison-datasets (hand-checked),,1,1,13,1,1,1430,0,0,0,True
+drawer unit,furniture_rooms,1758,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+drawing,household,61238,Qwen-chosen sense,,1,0,12,0,0,0,0,0,0,False
+dress,clothing,18582,comparison-datasets (hand-checked),,1,1,13,2,1,642,1,0,1350,True
+dresser,furniture_rooms,22094,Qwen-chosen sense,Qwen and rule disagree (rule: dresser.n.05),1,1,19,0,0,0,1,0,1350,False
+drill,household,566,Qwen-chosen sense,,1,1,14,1,1,2,1,0,958,False
+drum,toys,3092,Qwen-chosen sense,,3,1,47,2,1,14,1,1,1350,False
+dryer,furniture_rooms,812,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+drying rack,household,572,none (Qwen: head-noun sense only),not in WordNet; approximate: rack.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+duck,animals,6574,comparison-datasets (hand-checked),,2,1,38,3,1,134,2,0,2541,False
+dumbbell,household,903,Qwen-chosen sense,,1,1,17,1,1,4,1,1,1350,False
+dustpan,household,660,Qwen-chosen sense,,1,1,13,1,1,3,0,0,0,False
+duvet,household,1091,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+ear,body_parts,1132,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,True
+earring,clothing,1018,Qwen-chosen sense,,1,1,16,1,1,544,0,0,0,False
+easel,household,2088,Qwen-chosen sense,,1,1,16,1,1,10,0,0,0,False
+egg,food_drink,6936,comparison-datasets (hand-checked),,1,1,15,1,1,189,0,0,0,True
+egg carton,household,773,none (Qwen: head-noun sense only),not in WordNet; approximate: carton.n.02 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+eggplant,food_drink,513,Qwen-chosen sense,,1,1,12,1,1,7,0,0,0,False
+elephant,animals,11149,comparison-datasets (hand-checked),,1,1,12,2,1,1013,2,0,2700,False
+elmo,other,316,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+entertainment center,other,2280,Qwen-chosen sense,,0,0,0,0,0,0,1,1,1350,False
+envelope,household,2400,Qwen-chosen sense,,1,1,12,1,1,56,1,1,1350,False
+eraser,household,370,Qwen-chosen sense,,1,1,12,1,1,10,1,0,1350,False
+excavator,vehicles,568,Qwen-chosen sense,,0,0,0,1,1,4,0,0,0,False
+exercise ball,toys,3042,none (Qwen: head-noun sense only),not in WordNet; approximate: ball.n.06 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+exercise bike,household,693,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+eye,body_parts,1861,Qwen-chosen sense,,1,1,21,0,0,0,0,0,0,True
+face,body_parts,9343,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,True
+fan,household,35539,Qwen-chosen sense,,1,1,14,1,1,156,1,0,1350,False
+faucet,household,24774,Qwen-chosen sense,,1,1,12,2,1,614,0,0,0,False
+feet,body_parts,446,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+fence,outside,22467,Qwen-chosen sense,,1,1,24,0,0,0,4,0,5400,False
+field,outside,301,Qwen-chosen sense,Qwen and rule disagree (rule: plain.n.01),0,0,0,0,0,0,0,0,0,False
+figurine,toys,559,Qwen-chosen sense,,1,1,12,1,1,168,0,0,0,False
+filing cabinet,furniture_rooms,500,Qwen-chosen sense,,1,1,12,1,1,14,1,1,1350,False
+finger,body_parts,10146,Qwen-chosen sense,,2,1,24,0,0,0,0,0,0,True
+fire,outside,1058,Qwen-chosen sense,Qwen and rule disagree (rule: fire.n.04),0,0,0,0,0,0,0,0,0,False
+fire extinguisher,household,1014,Qwen-chosen sense,,1,1,16,1,1,46,0,0,0,False
+fire hydrant,outside,326,Qwen-chosen sense,,1,1,14,1,1,279,0,0,0,False
+fire truck,vehicles,1845,Qwen-chosen sense,,1,1,12,1,1,42,1,1,1350,False
+fireplace,furniture_rooms,34542,Qwen-chosen sense,,2,1,31,1,1,103,0,0,0,False
+fish,animals,9532,comparison-datasets (hand-checked),,9,1,122,6,1,107,16,0,21134,True
+fish tank,household,336,Qwen-chosen sense,,2,1,29,2,1,11,0,0,0,False
+flag,outside,1465,comparison-datasets (hand-checked),,1,1,14,2,1,1255,0,0,0,False
+flamingo,animals,498,none (Qwen: no sense fits),Qwen: no sense fits (rule: flamingo.n.01),0,0,0,0,0,0,0,0,0,False
+flashcard,toys,460,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+flip-flop,clothing,1553,Qwen-chosen sense,,1,1,12,1,1,139,0,0,0,False
+flower,outside,37868,comparison-datasets (hand-checked),,1,1,14,2,2,914,0,0,0,True
+flower arrangement,household,799,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+flower pot,household,2044,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+flowerpot,household,4877,Qwen-chosen sense,,0,0,0,1,1,850,1,1,1350,False
+foil,household,573,Qwen-chosen sense,,1,0,15,1,0,82,0,0,0,False
+foot,body_parts,97300,Qwen-chosen sense,,1,1,14,0,0,0,0,0,0,True
+football,toys,474,Qwen-chosen sense,,1,1,12,1,1,7,0,0,0,False
+footstool,furniture_rooms,783,Qwen-chosen sense,,0,0,0,1,1,8,0,0,0,False
+fork,household,14743,comparison-datasets (hand-checked),,1,1,12,1,1,652,0,0,0,True
+fox,animals,1018,Qwen-chosen sense,,1,1,16,0,0,0,4,0,5400,False
+frame,household,4079,Qwen-chosen sense,Qwen and rule disagree (rule: frame.n.01),1,1,12,0,0,0,0,0,0,False
+frog,animals,2339,comparison-datasets (hand-checked),,1,1,15,1,1,56,3,0,4050,True
+fruit,food_drink,3268,Qwen-chosen sense,,30,1,408,13,0,1417,9,0,12150,False
+frying pan,household,4895,Qwen-chosen sense,,0,0,0,1,1,37,1,1,1272,False
+game,toys,326,Qwen-chosen sense,Qwen and rule disagree (rule: game.n.09),1,0,16,0,0,0,0,0,0,False
+game console,toys,640,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+game controller,toys,847,none (Qwen: head-noun sense only),not in WordNet; approximate: control.n.09 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+game piece,toys,362,none (Qwen: head-noun sense only),not in WordNet; approximate: piece.n.02 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+garage door,other,785,none (Qwen: head-noun sense only),not in WordNet; approximate: door.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+garbage bin,household,305,none (Qwen: head-noun sense only),not in WordNet; approximate: bin.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+garland,household,1968,Qwen-chosen sense,,2,1,26,1,1,21,0,0,0,False
+garlic,food_drink,790,Qwen-chosen sense,Qwen and rule disagree (rule: garlic.n.01),1,1,12,1,1,213,0,0,0,False
+garment,clothing,487,Qwen-chosen sense,,27,0,362,20,0,2111,10,0,13289,False
+gate,furniture_rooms,14134,Qwen-chosen sense,,2,1,25,0,0,0,1,0,1350,False
+gear,other,1920,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+ghost,people,408,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+gift,other,454,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+giraffe,animals,3191,comparison-datasets (hand-checked),,1,1,24,1,1,756,0,0,0,False
+girl,people,4309,Qwen-chosen sense,Qwen and rule disagree (rule: girl.n.01),1,1,13,0,0,0,0,0,0,False
+glass,household,20335,comparison-datasets (hand-checked),,2,1,26,2,1,1241,2,0,2700,True
+glass door,other,897,none (Qwen: head-noun sense only),not in WordNet; approximate: door.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+glasses,household,53037,comparison-datasets (hand-checked),,3,1,45,3,1,2625,1,0,1350,True
+globe,household,1114,Qwen-chosen sense,,1,1,12,1,1,16,0,0,0,False
+glove,clothing,785,comparison-datasets (hand-checked),,3,2,47,3,2,1641,1,0,1350,True
+goal,outside,372,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+goat,animals,630,Qwen-chosen sense,,1,1,12,1,1,132,1,0,1350,False
+grape,food_drink,1694,Qwen-chosen sense,,1,1,20,1,1,1745,0,0,0,False
+grass,outside,12519,Qwen-chosen sense,,2,1,32,0,0,0,0,0,0,True
+grater,household,308,Qwen-chosen sense,,1,1,12,1,1,10,0,0,0,False
+gravel,other,548,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+grill,outside,881,none (Qwen: no sense fits),Qwen: no sense fits (rule: grill.n.02),1,1,12,1,1,90,0,0,0,False
+guitar,household,4297,Qwen-chosen sense,,1,1,17,1,1,52,2,0,2700,False
+gun,toys,434,Qwen-chosen sense,,4,1,49,4,1,8,4,0,5400,False
+gym,toys,546,none (Qwen: no sense fits),Qwen: no sense fits (rule: gymnasium.n.02),0,0,0,0,0,0,0,0,0,False
+hair,body_parts,28398,Qwen-chosen sense,,3,1,37,0,0,0,0,0,0,True
+hair bun,body_parts,498,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+hair clip,clothing,1037,none (Qwen: head-noun sense only),not in WordNet; approximate: clip.n.03 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+hair dryer,household,320,Qwen-chosen sense,,1,1,15,1,1,32,1,1,1350,False
+hair tie,clothing,759,none (Qwen: head-noun sense only),not in WordNet; approximate: tie.n.09 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+hairbrush,household,900,Qwen-chosen sense,,1,1,15,1,1,28,0,0,0,False
+hammer,household,663,comparison-datasets (hand-checked),,4,1,53,1,1,13,1,1,1350,False
+hamper,household,508,Qwen-chosen sense,,1,0,12,2,1,9,1,1,1350,False
+hand,body_parts,339325,Qwen-chosen sense,,1,1,14,0,0,0,0,0,0,True
+handle,household,9148,Qwen-chosen sense,,1,1,13,1,1,1765,0,0,0,False
+handprint,other,365,none (Qwen: no sense fits),not in WordNet,1,1,12,0,0,0,0,0,0,False
+handrail,furniture_rooms,2441,Qwen-chosen sense,,0,0,0,0,0,0,1,1,1350,False
+hanger,household,1436,Qwen-chosen sense,,1,1,14,1,0,117,0,0,0,False
+hat,clothing,10180,comparison-datasets (hand-checked),,5,1,72,8,1,1586,4,0,5309,True
+head,body_parts,2005,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+headband,clothing,2166,Qwen-chosen sense,,1,1,15,1,1,232,0,0,0,False
+headboard,furniture_rooms,2220,Qwen-chosen sense,,0,0,0,1,1,155,0,0,0,False
+headphones,household,1084,none (Qwen: no sense fits),not in WordNet,1,1,13,0,0,0,0,0,0,False
+heart,other,1508,Qwen-chosen sense,Qwen and rule disagree (rule: heart.n.10),0,0,0,0,0,0,0,0,0,False
+heater,furniture_rooms,1425,Qwen-chosen sense,,2,1,28,2,1,14,1,0,1054,False
+hedge,outside,622,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+helicopter,vehicles,562,comparison-datasets (hand-checked),,1,1,25,1,1,9,0,0,0,False
+helmet,clothing,2807,Qwen-chosen sense,Qwen and rule disagree (rule: helmet.n.01),2,1,28,2,1,884,2,0,2700,False
+hinge,household,2103,Qwen-chosen sense,,1,1,12,1,1,811,0,0,0,False
+hippo,animals,468,none (Qwen: no sense fits),Qwen: no sense fits (rule: hippopotamus.n.01),0,0,0,0,0,0,0,0,0,False
+hood,clothing,493,Qwen-chosen sense,Qwen and rule disagree (rule: hood.n.04),1,1,12,0,0,0,0,0,0,False
+hoodie,clothing,8187,none (Qwen: no sense fits),not in WordNet,1,1,15,0,0,0,0,0,0,False
+hook,household,569,Qwen-chosen sense,Qwen and rule disagree (rule: hook.n.01),2,1,24,1,1,200,0,0,0,False
+hoop,toys,1829,Qwen-chosen sense,Qwen and rule disagree (rule: hoop.n.01),1,1,12,0,0,0,0,0,0,False
+hose,outside,2280,comparison-datasets (hand-checked),,1,1,12,3,1,125,0,0,0,True
+hot air balloon,vehicles,752,none (Qwen: head-noun sense only),not in WordNet; approximate: balloon.n.01 (head noun; name matches only),1,1,22,1,1,0,0,0,0,False
+house,outside,39408,Qwen-chosen sense,,0,0,0,1,0,0,2,0,2555,False
+hula hoop,toys,638,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+humidifier,household,405,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+ice cream,food_drink,1292,Qwen-chosen sense,,1,1,12,1,1,15,1,1,1350,False
+illustration,household,1280,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+insect,animals,1165,Qwen-chosen sense,,12,0,189,4,0,23,19,0,25650,False
+island,outside,3666,Qwen-chosen sense,Qwen and rule disagree (rule: island.n.01),0,0,0,0,0,0,0,0,0,False
+jacket,clothing,12620,comparison-datasets (hand-checked),,2,1,31,4,1,1968,0,0,0,True
+jar,household,44699,comparison-datasets (hand-checked),,2,1,30,1,1,304,1,0,1350,True
+jeans,clothing,31788,comparison-datasets (hand-checked),,1,1,17,1,1,971,1,1,1350,True
+jug,household,5169,Qwen-chosen sense,,1,1,13,1,0,4,2,0,2455,False
+juice,food_drink,322,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+kettle,household,10052,Qwen-chosen sense,,1,1,15,2,1,35,0,0,0,False
+key,household,645,comparison-datasets (hand-checked),,1,1,19,1,1,104,0,0,0,False
+keyboard,household,3053,Qwen-chosen sense,,1,1,15,1,0,562,2,0,2700,False
+kitchen,furniture_rooms,4690,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+kitchen set,toys,518,none (Qwen: head-noun sense only),not in WordNet; approximate: set.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+kiwi,food_drink,318,Qwen-chosen sense,,0,0,0,1,1,189,0,0,0,False
+knee,body_parts,1597,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+knife,household,17619,comparison-datasets (hand-checked),,5,1,67,3,1,736,2,0,2153,False
+knife block,household,3463,none (Qwen: head-noun sense only),not in WordNet; approximate: block.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+knob,household,11067,Qwen-chosen sense,Qwen and rule disagree (rule: knob.n.01),1,1,18,1,1,1483,0,0,0,False
+label,other,831,Qwen-chosen sense,Qwen and rule disagree (rule: label.n.03),0,0,0,1,0,1186,0,0,0,False
+ladder,outside,3079,comparison-datasets (hand-checked),,1,1,15,2,1,172,0,0,0,True
+ladle,household,1618,Qwen-chosen sense,,2,1,25,1,1,42,1,1,1350,False
+ladybug,animals,922,Qwen-chosen sense,,1,1,13,1,1,4,1,1,1350,False
+lamp,household,113459,comparison-datasets (hand-checked),,0,0,0,0,0,0,0,0,0,True
+lampshade,household,441,Qwen-chosen sense,,1,1,12,1,1,403,1,1,1350,False
+landscape,outside,963,Qwen-chosen sense,Qwen and rule disagree (rule: landscape.n.02),0,0,0,0,0,0,0,0,0,False
+lantern,household,673,Qwen-chosen sense,,1,1,14,1,1,47,1,0,1350,False
+laptop,household,15256,Qwen-chosen sense,,1,1,15,1,1,551,1,1,1350,False
+lawn,outside,1611,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+leaf,outside,6426,Qwen-chosen sense,,3,1,41,0,0,0,0,0,0,False
+leg,body_parts,54831,Qwen-chosen sense,,1,1,16,0,0,0,0,0,0,False
+leggings,clothing,10958,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+lego,toys,7734,Qwen-chosen sense,,1,1,13,1,1,168,0,0,0,False
+lego block,toys,1827,none (Qwen: head-noun sense only),not in WordNet; approximate: block.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+lemon,food_drink,2878,Qwen-chosen sense,,1,1,12,1,1,440,1,1,1350,False
+letter,other,7281,Qwen-chosen sense,Qwen and rule disagree (rule: letter.n.03),0,0,0,0,0,0,0,0,0,False
+lettuce,food_drink,825,Qwen-chosen sense,Qwen and rule disagree (rule: lettuce.n.02),1,1,12,0,0,0,0,0,0,False
+lid,household,8224,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+light,household,277254,comparison-datasets (hand-checked),,7,1,92,9,1,4272,3,0,4050,False
+light bulb,household,10845,Qwen-chosen sense,,1,1,15,1,1,1135,0,0,0,False
+light fixture,furniture_rooms,47866,none (Qwen: head-noun sense only),not in WordNet; approximate: fixture.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+light switch,furniture_rooms,28943,none (Qwen: head-noun sense only),not in WordNet; approximate: switch.n.01 (head noun; name matches only),1,1,17,0,0,0,0,0,0,False
+lime,food_drink,474,Qwen-chosen sense,Qwen and rule disagree (rule: lime.n.04),1,1,14,1,1,201,0,0,0,False
+lion,animals,2894,comparison-datasets (hand-checked),,1,1,25,1,1,24,1,1,1350,False
+lizard,animals,423,Qwen-chosen sense,,2,1,38,1,1,4,11,0,14667,False
+llama,animals,324,Qwen-chosen sense,,2,1,28,0,0,0,1,1,1350,False
+lock,household,336,Qwen-chosen sense,,3,1,38,2,0,27,2,0,2616,False
+log,outside,434,Qwen-chosen sense,,1,1,12,1,1,1105,0,0,0,False
+logo,other,526,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+lunch box,household,786,none (Qwen: head-noun sense only),not in WordNet; approximate: box.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+magazine,household,3798,Qwen-chosen sense,,0,0,0,1,1,329,0,0,0,False
+magnet,household,28813,Qwen-chosen sense,,1,1,12,1,1,1494,0,0,0,False
+mallet,toys,782,Qwen-chosen sense,Qwen and rule disagree (rule: mallet.n.01),0,0,0,0,0,0,0,0,0,False
+man,people,10984,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+mango,food_drink,369,Qwen-chosen sense,Qwen and rule disagree (rule: mango.n.01),1,1,19,0,0,0,0,0,0,False
+mantel,furniture_rooms,4069,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+map,household,2775,Qwen-chosen sense,,1,1,14,2,1,37,0,0,0,False
+maraca,toys,351,Qwen-chosen sense,,0,0,0,0,0,0,1,1,1350,False
+marker,household,9791,Qwen-chosen sense,Qwen and rule disagree (rule: marker.n.01),2,1,25,1,1,71,0,0,0,False
+mask,clothing,862,Qwen-chosen sense,,2,1,33,0,0,0,1,1,1350,False
+mat,household,48662,Qwen-chosen sense,,1,1,14,0,0,0,0,0,0,False
+mattress,furniture_rooms,8048,Qwen-chosen sense,,2,1,27,2,1,79,0,0,0,False
+measuring cup,household,2580,Qwen-chosen sense,,1,1,12,1,1,15,1,1,1350,False
+meat,food_drink,1447,Qwen-chosen sense,,10,1,143,9,0,1261,0,0,0,False
+melon,food_drink,397,comparison-datasets (hand-checked),,2,1,28,2,1,44,0,0,0,True
+mermaid,people,302,none (Qwen: no sense fits),Qwen: no sense fits (rule: mermaid.n.01),0,0,0,0,0,0,0,0,0,False
+mesh,household,399,Qwen-chosen sense,,3,1,41,1,0,6,0,0,0,False
+mickey mouse,other,406,none (Qwen: no sense fits),Qwen: no sense fits (rule: mickey_mouse.n.01),0,0,0,0,0,0,0,0,0,False
+microphone,household,424,Qwen-chosen sense,,1,1,15,1,1,90,1,1,1350,False
+microwave,furniture_rooms,41086,Qwen-chosen sense,,1,1,12,1,1,191,1,1,1350,False
+milk,food_drink,2077,comparison-datasets (hand-checked),,1,1,21,2,1,19,0,0,0,True
+minnie mouse,other,307,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+mirror,household,26894,Qwen-chosen sense,,2,1,24,3,1,1146,1,0,1350,False
+mixer,household,671,Qwen-chosen sense,Qwen and rule disagree (rule: mixer.n.03),2,1,29,2,1,38,0,0,0,False
+mobile,toys,1028,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+mold,household,412,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+monitor,household,3889,Qwen-chosen sense,,0,0,0,1,1,598,0,0,0,False
+monkey,animals,3097,comparison-datasets (hand-checked),,1,1,19,2,1,12,13,0,17550,False
+monster,people,1368,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+moon,outside,1680,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+mop,household,1656,comparison-datasets (hand-checked),,1,1,13,1,1,11,1,1,1350,False
+mountain,outside,1093,Qwen-chosen sense,,0,0,0,0,0,0,2,0,2700,False
+mouse,animals,3462,none (Qwen: no sense fits),Qwen: no sense fits (rule: mouse.n.01),1,1,17,0,0,0,0,0,0,False
+mouth,body_parts,1178,Qwen-chosen sense,Qwen and rule disagree (rule: mouth.n.01),1,1,12,0,0,0,0,0,0,True
+muffin,food_drink,534,comparison-datasets (hand-checked),,1,1,13,1,1,154,0,0,0,True
+muffin tin,household,366,none (Qwen: head-noun sense only),not in WordNet; approximate: tin.n.02 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+mulch,other,926,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+mushroom,outside,918,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+napkin,household,13906,comparison-datasets (hand-checked),,1,1,13,1,1,918,0,0,0,True
+necklace,clothing,2113,comparison-datasets (hand-checked),,1,1,15,2,1,765,1,1,1350,True
+net,household,634,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+newspaper,household,1707,Qwen-chosen sense,Qwen and rule disagree (rule: newspaper.n.03),0,0,0,1,1,202,0,0,0,False
+nightstand,furniture_rooms,5772,none (Qwen: no sense fits),not in WordNet,1,1,14,0,0,0,0,0,0,False
+noodle,food_drink,767,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+nose,body_parts,886,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,True
+note,other,1690,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+notebook,household,2946,Qwen-chosen sense,Qwen and rule disagree (rule: notebook.n.02),1,1,13,1,1,96,0,0,0,False
+number,other,1770,Qwen-chosen sense,Qwen and rule disagree (rule: number.n.11),0,0,0,0,0,0,0,0,0,False
+number block,toys,481,none (Qwen: head-noun sense only),not in WordNet; approximate: block.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+octopus,animals,1034,none (Qwen: no sense fits),Qwen: no sense fits (rule: octopus.n.02),1,1,12,2,2,0,0,0,0,False
+onion,food_drink,1598,Qwen-chosen sense,,1,1,15,1,1,1767,0,0,0,False
+orange,food_drink,4913,comparison-datasets (hand-checked),,1,1,13,1,1,2364,1,1,1350,True
+ottoman,furniture_rooms,10091,Qwen-chosen sense,,0,0,0,1,1,48,0,0,0,False
+outlet,furniture_rooms,16072,Qwen-chosen sense,Qwen and rule disagree (rule: mercantile_establishment.n.01),1,1,12,1,1,620,0,0,0,False
+oven,furniture_rooms,28629,comparison-datasets (hand-checked),,1,1,15,1,1,111,1,0,1350,True
+oven mitt,household,2075,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+overalls,clothing,417,none (Qwen: no sense fits),not in WordNet,1,1,12,1,1,14,0,0,0,False
+owl,animals,1426,comparison-datasets (hand-checked),,1,1,27,1,1,14,1,0,1350,False
+pacifier,household,1064,Qwen-chosen sense,Qwen and rule disagree (rule: pacifier.n.02),1,1,14,1,1,15,0,0,0,False
+package,household,5950,Qwen-chosen sense,Qwen and rule disagree (rule: package.n.02),0,0,0,0,0,0,0,0,0,False
+packaging,household,1073,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+paint,household,939,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+paintbrush,household,361,Qwen-chosen sense,,1,1,13,1,1,15,1,1,1350,False
+painting,household,40916,Qwen-chosen sense,,2,1,28,1,1,574,0,0,0,False
+pajamas,clothing,5676,comparison-datasets (hand-checked),,1,1,13,1,1,54,1,1,1350,True
+pan,household,8595,Qwen-chosen sense,,2,1,29,2,1,250,1,0,1350,False
+pancake,food_drink,1186,comparison-datasets (hand-checked),,2,1,31,2,1,49,0,0,0,False
+panda,animals,5607,none (Qwen: no sense fits),Qwen: no sense fits (rule: giant_panda.n.01),1,1,18,1,1,12,0,0,0,False
+pants,clothing,101876,comparison-datasets (hand-checked),,1,1,13,1,1,1416,0,0,0,True
+paper,household,67217,comparison-datasets (hand-checked),,10,1,131,3,0,96,0,0,0,True
+paper roll,household,311,none (Qwen: head-noun sense only),not in WordNet; approximate: roll.n.11 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+paper towel,household,8456,Qwen-chosen sense,,1,1,14,1,1,116,1,1,1350,False
+paper towel roll,household,5969,none (Qwen: head-noun sense only),not in WordNet; approximate: roll.n.11 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+pasta,food_drink,869,Qwen-chosen sense,Qwen and rule disagree (rule: pasta.n.01),5,1,73,0,0,0,0,0,0,False
+path,outside,724,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+patio,other,490,Qwen-chosen sense,,0,0,0,0,0,0,1,1,1202,False
+pavement,outside,2601,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+pea,food_drink,832,Qwen-chosen sense,,0,0,0,1,1,467,0,0,0,False
+pea pod,food_drink,340,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+peach,food_drink,1289,Qwen-chosen sense,Qwen and rule disagree (rule: peach.n.01),1,1,14,1,1,257,0,0,0,False
+pear,food_drink,546,Qwen-chosen sense,,1,1,13,1,1,268,0,0,0,False
+peel,food_drink,560,Qwen-chosen sense,,1,0,16,0,0,0,0,0,0,False
+peg,toys,306,Qwen-chosen sense,,2,1,26,0,0,0,0,0,0,False
+pegboard,household,1024,Qwen-chosen sense,,0,0,0,1,1,0,0,0,0,False
+pen,household,7119,comparison-datasets (hand-checked),,3,1,42,2,1,239,3,0,3986,False
+pen holder,household,491,none (Qwen: head-noun sense only),not in WordNet; approximate: holder.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+pencil,household,6882,comparison-datasets (hand-checked),,1,1,12,1,1,83,0,0,0,False
+pencil case,household,572,Qwen-chosen sense,,0,0,0,1,1,1,1,1,1350,False
+pencil holder,household,357,none (Qwen: head-noun sense only),not in WordNet; approximate: holder.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+penguin,animals,2171,comparison-datasets (hand-checked),,1,1,24,1,1,28,1,0,1350,False
+pepper,food_drink,504,Qwen-chosen sense,Qwen and rule disagree (rule: pepper.n.01),3,1,51,2,0,807,1,0,1350,False
+pepper grinder,household,376,Qwen-chosen sense,,1,1,14,1,1,19,0,0,0,False
+phone,household,56836,Qwen-chosen sense,,2,1,29,2,1,778,3,0,4050,False
+photo,household,13132,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+piano,household,5234,Qwen-chosen sense,,1,1,13,1,1,24,2,0,2700,False
+picture,household,284727,Qwen-chosen sense,,1,0,13,0,0,0,0,0,0,False
+picture frame,household,137919,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+pig,animals,5960,comparison-datasets (hand-checked),,1,1,12,1,1,31,1,1,1350,False
+pillar,furniture_rooms,567,Qwen-chosen sense,Qwen and rule disagree (rule: column.n.06),0,0,0,0,0,0,0,0,0,False
+pillow,household,143046,comparison-datasets (hand-checked),,1,1,13,1,1,1290,1,1,1350,True
+pineapple,food_drink,1105,Qwen-chosen sense,Qwen and rule disagree (rule: pineapple.n.01),1,1,12,1,1,215,1,1,1350,False
+pinecone,other,316,Qwen-chosen sense,,1,1,12,1,1,12,0,0,0,False
+pipe,household,1172,Qwen-chosen sense,Qwen and rule disagree (rule: pipe.n.01),3,1,42,1,1,786,0,0,0,False
+pitcher,household,1284,Qwen-chosen sense,,1,1,15,2,1,125,1,1,1350,False
+pizza,food_drink,1744,comparison-datasets (hand-checked),,1,1,15,1,1,782,1,1,1350,True
+place mat,household,2400,Qwen-chosen sense,,1,1,12,1,1,330,0,0,0,False
+placemat,household,4177,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+planet,other,497,none (Qwen: no sense fits),Qwen: no sense fits (rule: planet.n.01),0,0,0,0,0,0,0,0,0,False
+plank,household,498,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+plant,household,74696,comparison-datasets (hand-checked),,5,2,75,1,0,0,2,0,2700,True
+planter,household,1138,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+planter box,other,415,none (Qwen: head-noun sense only),not in WordNet; approximate: box.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+plate,household,83162,comparison-datasets (hand-checked),,2,1,25,3,1,1212,1,1,1350,True
+play kitchen,toys,318,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+play structure,toys,397,none (Qwen: head-noun sense only),not in WordNet; approximate: structure.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+play tent,other,1071,none (Qwen: head-noun sense only),not in WordNet; approximate: tent.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+play tunnel,other,461,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+playdough,toys,464,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+playhouse,toys,424,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+playmat,toys,349,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+playpen,household,28042,Qwen-chosen sense,,1,1,14,1,1,1,0,0,0,False
+playset,toys,421,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+plug,household,717,Qwen-chosen sense,Qwen and rule disagree (rule: plug.n.01),1,1,13,0,0,0,0,0,0,False
+plum,food_drink,403,Qwen-chosen sense,Qwen and rule disagree (rule: plum.n.01),1,1,13,0,0,0,0,0,0,False
+pole,household,1552,Qwen-chosen sense,,4,1,53,4,1,4819,1,1,1350,False
+polo shirt,other,385,Qwen-chosen sense,,1,1,15,1,1,371,0,0,0,False
+pom-pom,toys,1046,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+pompom,toys,410,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+pony,animals,7052,comparison-datasets (hand-checked),,1,1,13,1,1,24,0,0,0,True
+pool,outside,351,Qwen-chosen sense,,1,0,20,0,0,0,1,0,1350,False
+post,furniture_rooms,491,Qwen-chosen sense,,4,0,55,2,0,1126,1,0,1350,False
+poster,household,6515,Qwen-chosen sense,Qwen and rule disagree (rule: post_horse.n.01),0,0,0,1,1,589,0,0,0,False
+pot,household,24871,Qwen-chosen sense,,1,1,16,1,1,282,1,0,1350,False
+potato,food_drink,1907,comparison-datasets (hand-checked),,3,1,42,2,1,717,1,0,1350,False
+potty,furniture_rooms,384,Qwen-chosen sense,Qwen and rule disagree (rule: toilet.n.02),0,0,0,0,0,0,0,0,0,False
+potty chair,household,683,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+pouch,household,963,Qwen-chosen sense,,1,0,16,1,1,18,0,0,0,False
+power cord,household,406,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+power line,other,2341,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+power strip,household,1681,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+pressure cooker,household,363,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+printer,household,1177,Qwen-chosen sense,Qwen and rule disagree (rule: printer.n.02),2,1,28,2,1,61,1,0,1350,False
+pumpkin,food_drink,4097,comparison-datasets (hand-checked),,1,1,21,1,1,422,0,0,0,True
+purse,household,3066,comparison-datasets (hand-checked),,1,1,12,3,1,774,1,1,1350,True
+puzzle,toys,7874,comparison-datasets (hand-checked),,1,0,14,0,0,0,2,0,2700,False
+puzzle piece,toys,8256,none (Qwen: head-noun sense only),not in WordNet; approximate: piece.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+quilt,household,1707,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+rabbit,animals,4813,Qwen-chosen sense,,1,1,14,1,1,14,2,0,2700,False
+rack,furniture_rooms,2907,Qwen-chosen sense,,2,1,25,0,0,0,1,0,1103,False
+racket,toys,421,Qwen-chosen sense,,1,1,14,2,1,596,1,1,1350,False
+radiator,furniture_rooms,7219,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+radio,household,435,comparison-datasets (hand-checked),,1,1,15,1,1,23,1,1,1350,True
+rag,household,333,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+railing,furniture_rooms,14810,Qwen-chosen sense,,2,1,31,0,0,0,0,0,0,False
+rainbow,outside,1800,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+ramp,toys,616,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+range hood,furniture_rooms,12893,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+rattle,toys,3674,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+record player,other,386,Qwen-chosen sense,,3,1,58,1,1,4,0,0,0,False
+refrigerator,furniture_rooms,88184,comparison-datasets (hand-checked),,2,1,24,1,0,406,1,1,1350,True
+remote control,household,9723,Qwen-chosen sense,,1,1,13,1,1,483,1,1,1350,False
+rhinoceros,animals,340,none (Qwen: no sense fits),Qwen: no sense fits (rule: rhinoceros.n.01),1,1,12,1,1,7,0,0,0,False
+rice,food_drink,1189,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+rice cooker,furniture_rooms,1100,none (Qwen: head-noun sense only),not in WordNet; approximate: cooker.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+ride-on toy,other,503,none (Qwen: head-noun sense only),not in WordNet; approximate: plaything.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+ring,clothing,18271,Qwen-chosen sense,Qwen and rule disagree (rule: ring.n.07),0,0,0,0,0,0,0,0,0,False
+ring stacker,toys,690,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+robe,clothing,1116,Qwen-chosen sense,,2,1,29,2,1,17,2,0,2700,False
+robot,toys,808,none (Qwen: no sense fits),Qwen: no sense fits (rule: automaton.n.02),1,1,15,0,0,0,0,0,0,False
+robot vacuum,household,974,none (Qwen: head-noun sense only),not in WordNet; approximate: vacuum.n.04 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+rock,outside,5256,Qwen-chosen sense,,3,1,55,0,0,0,0,0,0,True
+rocket,toys,442,Qwen-chosen sense,,1,0,17,0,0,0,1,0,1350,False
+rocking horse,toys,788,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+rolling pin,household,370,Qwen-chosen sense,,1,1,12,1,1,13,0,0,0,False
+roof,outside,851,comparison-datasets (hand-checked),,1,0,12,0,0,0,4,0,5400,False
+rope,household,444,Qwen-chosen sense,,3,1,42,0,0,0,0,0,0,False
+rose,outside,1235,Qwen-chosen sense,,1,1,17,0,0,0,0,0,0,False
+rug,furniture_rooms,167378,Qwen-chosen sense,,2,1,28,1,0,4,1,0,1350,False
+ruler,household,717,Qwen-chosen sense,,1,1,13,0,0,0,1,1,1350,False
+sailboat,vehicles,480,Qwen-chosen sense,,1,1,15,0,0,0,2,0,2700,False
+salad,food_drink,798,Qwen-chosen sense,,2,1,32,2,1,63,0,0,0,False
+salt shaker,household,995,Qwen-chosen sense,,1,1,16,1,1,121,1,1,1350,False
+sand,outside,1163,Qwen-chosen sense,,1,1,21,0,0,0,0,0,0,False
+sandal,clothing,7516,Qwen-chosen sense,,1,1,15,1,1,507,1,1,1350,False
+sandwich,food_drink,1570,comparison-datasets (hand-checked),,6,1,81,2,1,408,2,0,2700,True
+santa claus,people,653,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+saucepan,household,320,Qwen-chosen sense,,0,0,0,1,1,12,0,0,0,False
+scale,household,326,Qwen-chosen sense,Qwen and rule disagree (rule: scale.n.05),1,1,12,1,1,46,1,1,1350,False
+scarf,clothing,1012,comparison-datasets (hand-checked),,3,1,43,3,1,306,2,0,2700,True
+scissors,household,8811,comparison-datasets (hand-checked),,4,1,54,3,1,273,0,0,0,True
+scoop,household,1889,none (Qwen: no sense fits),Qwen: no sense fits (rule: scoop.n.05),0,0,0,0,0,0,0,0,0,False
+scooter,toys,1565,Qwen-chosen sense,,1,1,16,0,0,0,0,0,0,False
+scratching post,household,613,none (Qwen: head-noun sense only),not in WordNet; approximate: post.n.04 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+screen,household,8768,Qwen-chosen sense,Qwen and rule disagree (rule: screen.n.01),0,0,0,0,0,0,1,1,1317,False
+screw,household,601,Qwen-chosen sense,Qwen and rule disagree (rule: screw.n.02),2,1,29,1,0,1953,1,1,1350,False
+screwdriver,household,347,Qwen-chosen sense,,1,1,15,1,1,64,1,1,1350,False
+seahorse,animals,431,none (Qwen: no sense fits),Qwen: no sense fits (rule: seahorse.n.02),0,0,0,0,0,0,0,0,0,False
+seal,animals,311,Qwen-chosen sense,,0,0,0,0,0,0,1,0,1350,False
+seashell,outside,541,Qwen-chosen sense,,0,0,0,1,1,55,0,0,0,False
+seat,furniture_rooms,877,Qwen-chosen sense,,0,0,0,0,0,0,1,0,1350,False
+shadow,other,2357,Qwen-chosen sense,Qwen and rule disagree (rule: shadow.n.09),0,0,0,0,0,0,0,0,0,False
+shaker,household,562,Qwen-chosen sense,,0,0,0,1,1,8,1,0,1204,False
+shape sorter,toys,2501,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+shark,animals,734,none (Qwen: no sense fits),Qwen: no sense fits (rule: shark.n.01),0,0,0,0,0,0,0,0,0,False
+shed,outside,1034,Qwen-chosen sense,,0,0,0,0,0,0,2,0,2700,False
+sheep,animals,1664,comparison-datasets (hand-checked),,1,1,12,3,1,2670,1,0,1350,False
+sheet,household,618,Qwen-chosen sense,Qwen and rule disagree (rule: sheet.n.01),0,0,0,0,0,0,0,0,0,False
+shelf,furniture_rooms,149130,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+ship,vehicles,430,Qwen-chosen sense,,5,1,75,3,0,9,6,0,7918,False
+shirt,clothing,208788,comparison-datasets (hand-checked),,2,1,27,2,1,2815,1,0,1335,True
+shoe,clothing,131059,comparison-datasets (hand-checked),,4,1,58,2,1,1972,2,0,2537,True
+shoe rack,furniture_rooms,1454,none (Qwen: head-noun sense only),not in WordNet; approximate: rack.n.05 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+shopping cart,household,856,Qwen-chosen sense,,1,1,16,1,1,17,1,1,1350,False
+shorts,clothing,48061,comparison-datasets (hand-checked),,1,1,14,1,1,1072,0,0,0,True
+shovel,outside,3704,comparison-datasets (hand-checked),,1,1,12,1,1,17,1,1,1350,True
+shower curtain,household,876,Qwen-chosen sense,,1,1,19,1,1,99,1,1,1350,False
+shower head,household,500,Qwen-chosen sense,,1,1,16,0,0,0,0,0,0,False
+shutter,furniture_rooms,540,Qwen-chosen sense,Qwen and rule disagree (rule: shutter.n.01),1,1,15,0,0,0,0,0,0,False
+sideboard,furniture_rooms,523,Qwen-chosen sense,Qwen and rule disagree (rule: sideboard.n.01),0,0,0,0,0,0,0,0,0,False
+sidewalk,other,2388,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+sign,household,8925,Qwen-chosen sense,Qwen and rule disagree (rule: signboard.n.01),1,0,16,1,0,1628,1,0,1350,False
+sink,furniture_rooms,29342,comparison-datasets (hand-checked),,1,1,15,3,1,570,1,1,1350,True
+skateboard,toys,343,Qwen-chosen sense,,1,1,14,1,1,645,0,0,0,False
+skeleton,toys,331,Qwen-chosen sense,Qwen and rule disagree (rule: skeleton.n.04),1,1,16,0,0,0,0,0,0,False
+skirt,clothing,5523,Qwen-chosen sense,Qwen and rule disagree (rule: skirt.n.01),2,1,33,3,1,366,4,0,5105,False
+skull,body_parts,303,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+skylight,furniture_rooms,451,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+sleeve,clothing,29111,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+slide,outside,3871,comparison-datasets (hand-checked),,1,1,13,1,1,30,0,0,0,True
+slipper,clothing,12832,comparison-datasets (hand-checked),,1,1,12,1,1,30,0,0,0,True
+smart speaker,household,306,none (Qwen: head-noun sense only),not in WordNet; approximate: loudspeaker.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+smiley face,other,311,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+smoke detector,household,8378,none (Qwen: head-noun sense only),not in WordNet; approximate: detector.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+snack,food_drink,1787,Qwen-chosen sense,,1,1,14,0,0,0,0,0,0,False
+snake,animals,414,Qwen-chosen sense,Qwen and rule disagree (rule: snake.n.01),0,0,0,0,0,0,0,0,0,False
+snow,outside,698,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+snowman,outside,573,comparison-datasets (hand-checked),,1,1,12,1,1,7,0,0,0,False
+soap,household,1747,comparison-datasets (hand-checked),,1,1,12,1,1,263,0,0,0,True
+soap dispenser,household,3719,Qwen-chosen sense,,0,0,0,0,0,0,1,1,1350,False
+sock,clothing,42270,comparison-datasets (hand-checked),,1,1,13,1,1,1408,1,1,1350,True
+socket,furniture_rooms,5136,Qwen-chosen sense,Qwen and rule disagree (rule: socket.n.02),0,0,0,0,0,0,0,0,0,False
+soda can,food_drink,347,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+soil,outside,1489,Qwen-chosen sense,,1,0,13,0,0,0,0,0,0,False
+soundbar,household,328,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+soup,food_drink,483,comparison-datasets (hand-checked),,1,1,12,1,1,55,1,0,1257,True
+spaghetti,food_drink,337,Qwen-chosen sense,Qwen and rule disagree (rule: spaghetti.n.01),1,1,14,0,0,0,0,0,0,False
+spatula,household,5905,Qwen-chosen sense,,1,1,13,0,0,0,1,1,1350,False
+speaker,household,5322,Qwen-chosen sense,,1,1,19,3,1,398,1,1,1350,False
+spice,food_drink,342,Qwen-chosen sense,,1,0,12,0,0,0,0,0,0,False
+spice rack,household,777,Qwen-chosen sense,,0,0,0,1,1,14,0,0,0,False
+spider,animals,1077,Qwen-chosen sense,,2,1,28,1,1,1,6,0,8100,False
+spider-man,people,1198,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+sponge,household,5251,Qwen-chosen sense,,1,1,14,1,1,18,0,0,0,False
+spoon,household,48055,comparison-datasets (hand-checked),,1,1,13,3,1,458,1,0,1350,True
+spray bottle,household,3174,none (Qwen: head-noun sense only),not in WordNet; approximate: bottle.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+spray can,household,605,Qwen-chosen sense,,0,0,0,1,1,11,0,0,0,False
+square,other,787,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+squash,food_drink,327,Qwen-chosen sense,Qwen and rule disagree (rule: squash.n.01),2,1,26,1,0,178,4,0,5339,False
+squirrel,animals,937,comparison-datasets (hand-checked),,3,1,46,1,1,2,1,0,1256,False
+stacking ring,toys,720,none (Qwen: head-noun sense only),not in WordNet; approximate: ring.n.02 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+stair,furniture_rooms,1667,Qwen-chosen sense,,1,1,17,0,0,0,0,0,0,False
+stand,furniture_rooms,1179,Qwen-chosen sense,,1,0,12,0,0,0,0,0,0,False
+stapler,household,374,Qwen-chosen sense,,1,1,12,1,1,8,0,0,0,False
+star,outside,3654,Qwen-chosen sense,Qwen and rule disagree (rule: star.n.01),0,0,0,0,0,0,0,0,0,False
+starfish,animals,781,none (Qwen: no sense fits),Qwen: no sense fits (rule: starfish.n.01),1,1,15,1,1,2,1,1,1350,False
+statue,household,395,Qwen-chosen sense,,1,1,17,1,1,428,0,0,0,False
+steering wheel,vehicles,1441,Qwen-chosen sense,,1,1,15,1,1,155,0,0,0,False
+step,furniture_rooms,302,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+stick,outside,3405,Qwen-chosen sense,,7,1,91,5,0,219,5,0,6750,True
+sticker,household,12493,Qwen-chosen sense,Qwen and rule disagree (rule: dagger.n.01),1,1,13,0,0,0,0,0,0,False
+sticker sheet,toys,367,none (Qwen: head-noun sense only),not in WordNet; approximate: sheet.n.06 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+stocking,clothing,6323,Qwen-chosen sense,,1,1,12,0,0,0,1,0,1350,False
+stool,furniture_rooms,38853,Qwen-chosen sense,,2,1,24,3,1,134,0,0,0,False
+storage unit,furniture_rooms,2454,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+stove,furniture_rooms,35329,comparison-datasets (hand-checked),,2,2,26,1,1,230,1,1,1350,False
+stovetop,furniture_rooms,460,none (Qwen: no sense fits),not in WordNet,0,0,0,0,0,0,0,0,0,False
+strainer,household,839,Qwen-chosen sense,,2,1,27,1,1,20,1,1,1350,False
+strap,household,864,Qwen-chosen sense,,1,1,17,2,1,1047,0,0,0,False
+straw,household,21979,Qwen-chosen sense,Qwen and rule disagree (rule: straw.n.01),1,1,17,1,1,226,0,0,0,False
+strawberry,food_drink,5032,comparison-datasets (hand-checked),,1,1,15,1,1,864,1,1,1350,True
+street light,outside,707,Qwen-chosen sense,,1,1,16,1,1,1606,0,0,0,False
+streetlight,outside,501,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+string,household,426,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+string light,household,885,none (Qwen: head-noun sense only),not in WordNet; approximate: light.n.02 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+stroller,vehicles,21496,comparison-datasets (hand-checked),,1,1,16,1,1,78,0,0,0,True
+suitcase,household,2521,Qwen-chosen sense,,1,1,14,1,1,1791,0,0,0,False
+sun,outside,2926,Qwen-chosen sense,Qwen and rule disagree (rule: sun.n.04),0,0,0,0,0,0,0,0,0,False
+sunflower,outside,626,Qwen-chosen sense,,1,1,18,1,1,86,0,0,0,False
+suv,vehicles,461,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+sweater,clothing,47626,comparison-datasets (hand-checked),,2,1,34,2,1,366,0,0,0,True
+sweatpants,clothing,14105,Qwen-chosen sense,,0,0,0,1,1,7,0,0,0,False
+sweatshirt,clothing,35722,Qwen-chosen sense,,0,0,0,1,1,258,1,1,981,False
+swing,outside,899,comparison-datasets (hand-checked),,1,1,13,0,0,0,1,1,1350,True
+switch,household,1031,Qwen-chosen sense,,4,1,52,0,0,0,1,1,1350,False
+table,furniture_rooms,375282,comparison-datasets (hand-checked),,5,1,66,6,1,898,2,0,2700,True
+table runner,household,302,none (Qwen: head-noun sense only),not in WordNet; approximate: runner.n.08 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+tablecloth,household,25246,Qwen-chosen sense,,1,1,12,1,1,501,0,0,0,False
+tablet,household,22017,none (Qwen: no sense fits),Qwen: no sense fits (rule: tablet.n.01),1,1,13,0,0,0,0,0,0,False
+tableware,household,337,Qwen-chosen sense,,3,0,40,3,0,149,0,0,0,False
+tag,household,615,Qwen-chosen sense,Qwen and rule disagree (rule: rag.n.01),1,1,13,0,0,0,0,0,0,False
+tank top,clothing,11314,Qwen-chosen sense,,0,0,0,1,1,337,0,0,0,False
+tape,household,2054,comparison-datasets (hand-checked),,2,1,25,2,1,48,0,0,0,True
+tapestry,household,3674,Qwen-chosen sense,Qwen and rule disagree (rule: tapestry.n.02),1,1,15,0,0,0,0,0,0,False
+tarp,household,1281,Qwen-chosen sense,,1,1,13,1,1,204,0,0,0,False
+tattoo,body_parts,2556,Qwen-chosen sense,,1,1,19,0,0,0,0,0,0,False
+teapot,household,1224,Qwen-chosen sense,,1,1,13,1,1,38,1,1,1350,False
+teddy bear,animals,11995,Qwen-chosen sense,,1,1,12,1,1,1029,1,1,1350,False
+television,furniture_rooms,105962,Qwen-chosen sense,Qwen and rule disagree (rule: television.n.02),0,0,0,1,1,397,0,0,0,False
+tent,toys,2219,Qwen-chosen sense,,2,1,28,1,0,0,1,0,1350,False
+text,other,4018,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+thermos,household,5541,Qwen-chosen sense,,1,1,17,1,1,7,0,0,0,False
+thermostat,household,2332,Qwen-chosen sense,,1,1,16,1,1,25,0,0,0,False
+tiger,animals,3150,comparison-datasets (hand-checked),,1,1,13,1,1,10,1,1,1350,False
+tile,furniture_rooms,6685,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+timer,household,772,Qwen-chosen sense,,3,1,47,2,1,197,2,0,2484,False
+tissue,household,18073,comparison-datasets (hand-checked),,0,0,0,1,1,84,0,0,0,False
+tissue box,household,10337,none (Qwen: head-noun sense only),not in WordNet; approximate: box.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+toast,food_drink,346,comparison-datasets (hand-checked),,1,1,13,1,1,36,0,0,0,False
+toaster,household,5040,Qwen-chosen sense,,1,1,14,1,1,69,1,1,1350,False
+toaster oven,furniture_rooms,2376,Qwen-chosen sense,,1,1,14,1,1,13,0,0,0,False
+toe,body_parts,4733,Qwen-chosen sense,,1,1,14,0,0,0,0,0,0,True
+toilet,furniture_rooms,5126,Qwen-chosen sense,Qwen and rule disagree (rule: toilet.n.01),1,1,14,1,1,629,0,0,0,False
+toilet paper,household,3369,Qwen-chosen sense,,1,1,20,1,1,349,1,1,1350,False
+toilet paper roll,household,379,none (Qwen: head-noun sense only),not in WordNet; approximate: roll.n.11 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+tomato,food_drink,2049,Qwen-chosen sense,,1,1,14,1,1,2107,0,0,0,False
+tongs,household,703,Qwen-chosen sense,,1,1,12,1,1,44,0,0,0,False
+toothbrush,household,7239,comparison-datasets (hand-checked),,1,1,12,1,1,276,0,0,0,True
+toothpaste,household,1674,Qwen-chosen sense,,1,1,14,1,1,50,0,0,0,False
+top,clothing,2147,Qwen-chosen sense,Qwen and rule disagree (rule: top.n.07),0,0,0,1,0,0,0,0,0,False
+tortilla,food_drink,313,Qwen-chosen sense,,1,1,13,1,1,11,0,0,0,False
+tote bag,household,1613,Qwen-chosen sense,,0,0,0,1,1,66,0,0,0,False
+towel,household,42315,comparison-datasets (hand-checked),,1,1,16,4,1,820,1,0,1350,True
+towel rack,household,357,Qwen-chosen sense,,1,1,13,1,1,191,0,0,0,False
+towel ring,household,345,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+track,toys,926,none (Qwen: no sense fits),Qwen: no sense fits (rule: track.n.03),0,0,0,0,0,0,0,0,0,False
+tractor,vehicles,818,comparison-datasets (hand-checked),,2,1,34,2,1,16,1,1,1350,False
+train,vehicles,11182,comparison-datasets (hand-checked),,1,1,12,6,2,856,5,0,6750,False
+train track,toys,3206,none (Qwen: head-noun sense only),not in WordNet; approximate: track.n.03 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+trampoline,toys,749,Qwen-chosen sense,,1,1,14,1,1,4,0,0,0,False
+trash can,household,22013,Qwen-chosen sense,,1,1,14,1,1,548,1,1,1350,False
+tray,household,24486,comparison-datasets (hand-checked),,1,1,12,1,1,472,1,1,1350,True
+tree,outside,75480,Qwen-chosen sense,,5,1,63,1,0,1,0,0,0,True
+triangle,other,1732,none (Qwen: no sense fits),Qwen: no sense fits (rule: triangle.n.04),1,1,12,1,1,0,0,0,0,False
+tricycle,vehicles,3183,comparison-datasets (hand-checked),,1,1,14,1,1,7,1,1,1350,False
+tripod,household,1013,Qwen-chosen sense,,1,1,12,1,1,24,1,1,1210,False
+truck,vehicles,10353,comparison-datasets (hand-checked),,2,1,27,5,1,596,4,0,5400,False
+tube,household,1424,Qwen-chosen sense,Qwen and rule disagree (rule: tube.n.01),0,0,0,0,0,0,0,0,0,False
+tunnel,toys,659,none (Qwen: no sense fits),Qwen: no sense fits (rule: tunnel.n.01),0,0,0,0,0,0,0,0,0,False
+tupperware,household,1768,none (Qwen: no sense fits),not in WordNet,1,1,15,0,0,0,0,0,0,False
+turtle,animals,1790,comparison-datasets (hand-checked),,1,1,18,1,1,5,5,0,6750,False
+tv stand,furniture_rooms,4534,none (Qwen: head-noun sense only),not in WordNet; approximate: stand.n.04 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+ukulele,toys,692,Qwen-chosen sense,,1,1,15,0,0,0,0,0,0,False
+umbrella,household,2993,Qwen-chosen sense,,1,1,16,1,1,1777,1,1,1350,False
+underwear,clothing,415,Qwen-chosen sense,,2,1,24,1,1,13,0,0,0,False
+unicorn,animals,808,none (Qwen: no sense fits),Qwen: no sense fits (rule: unicorn.n.01),0,0,0,0,0,0,0,0,0,False
+utensil,household,3692,Qwen-chosen sense,,4,0,54,7,0,103,1,0,1237,False
+utensil holder,household,1912,none (Qwen: head-noun sense only),not in WordNet; approximate: holder.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+utility pole,other,2419,none (Qwen: head-noun sense only),not in WordNet; approximate: pole.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+vacuum cleaner,furniture_rooms,7871,Qwen-chosen sense,,1,1,13,1,1,13,1,1,1350,False
+van,vehicles,732,Qwen-chosen sense,Qwen and rule disagree (rule: van.n.03),1,1,14,0,0,0,2,0,2559,False
+vase,household,23261,Qwen-chosen sense,,2,1,34,2,1,1060,1,1,1350,False
+vegetable,food_drink,2982,Qwen-chosen sense,,13,1,177,6,0,747,5,0,6575,False
+vent,furniture_rooms,38433,Qwen-chosen sense,,1,1,14,1,1,583,0,0,0,False
+vest,clothing,921,none (Qwen: no sense fits),Qwen: no sense fits (rule: vest.n.01),0,0,0,0,0,0,0,0,0,False
+video game,toys,817,Qwen-chosen sense,,1,1,15,0,0,0,0,0,0,False
+waffle,other,440,Qwen-chosen sense,,1,1,18,1,1,22,0,0,0,False
+wagon,vehicles,465,Qwen-chosen sense,Qwen and rule disagree (rule: wagon.n.01),0,0,0,0,0,0,0,0,0,False
+walker,household,3484,Qwen-chosen sense,Qwen and rule disagree (rule: walker.n.04),0,0,0,0,0,0,0,0,0,False
+wall decal,other,1715,none (Qwen: head-noun sense only),not in WordNet; approximate: decal.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+wall hanging,household,2766,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+wallet,household,1160,Qwen-chosen sense,,1,1,14,1,1,29,1,1,1350,False
+wardrobe,furniture_rooms,1632,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+washing machine,furniture_rooms,2163,Qwen-chosen sense,,1,1,12,1,1,10,1,1,1350,False
+watch,household,25146,comparison-datasets (hand-checked),,2,1,31,2,1,551,1,0,939,True
+water,food_drink,1729,Qwen-chosen sense,Qwen and rule disagree (rule: water.n.06),0,0,0,0,0,0,0,0,0,False
+water dispenser,household,626,none (Qwen: head-noun sense only),not in WordNet; approximate: dispenser.n.01 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+water gun,other,456,Qwen-chosen sense,,1,1,15,1,1,0,0,0,0,False
+water table,other,811,none (Qwen: no sense fits),Qwen: no sense fits (rule: water_table.n.01),0,0,0,0,0,0,0,0,0,False
+watering can,household,635,Qwen-chosen sense,,1,1,14,1,1,5,0,0,0,False
+watermelon,food_drink,1492,Qwen-chosen sense,Qwen and rule disagree (rule: watermelon.n.01),1,1,13,1,1,99,0,0,0,False
+weed,other,373,Qwen-chosen sense,Qwen and rule disagree (rule: weed.n.02),2,1,27,0,0,0,0,0,0,False
+whale,animals,1038,none (Qwen: no sense fits),Qwen: no sense fits (rule: whale.n.02),1,1,15,0,0,0,0,0,0,False
+wheel,household,3110,Qwen-chosen sense,,2,1,25,2,1,2319,4,0,5217,False
+whisk,household,647,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+whiteboard,household,996,none (Qwen: no sense fits),not in WordNet,1,1,15,0,0,0,0,0,0,False
+window,furniture_rooms,355959,Qwen-chosen sense,,2,1,27,0,0,0,0,0,0,True
+window sill,furniture_rooms,988,Qwen-chosen sense,,1,1,13,0,0,0,0,0,0,False
+wine glass,other,2320,Qwen-chosen sense,,1,1,13,2,1,922,0,0,0,False
+wipe,household,468,none (Qwen: no sense fits),Qwen: no sense fits (rule: rub.n.02),0,0,0,0,0,0,0,0,0,False
+wire,household,2449,Qwen-chosen sense,Qwen and rule disagree (rule: wire.n.01),0,0,0,0,0,0,0,0,0,False
+woman,people,10847,Qwen-chosen sense,,1,1,12,0,0,0,0,0,0,False
+wood,other,734,Qwen-chosen sense,Qwen and rule disagree (rule: wood.n.08),1,1,14,0,0,0,0,0,0,False
+wood chip,outside,319,none (Qwen: head-noun sense only),not in WordNet; approximate: bit.n.02 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+wrapper,household,491,Qwen-chosen sense,Qwen and rule disagree (rule: negligee.n.01),2,0,26,0,0,0,1,0,1204,False
+wreath,household,1156,Qwen-chosen sense,,0,0,0,0,0,0,0,0,0,False
+wristband,clothing,520,none (Qwen: no sense fits),Qwen: no sense fits (rule: wristband.n.01),0,0,0,1,1,42,0,0,0,False
+xylophone,toys,2187,none (Qwen: no sense fits),Qwen: no sense fits (rule: marimba.n.01),1,1,12,0,0,0,0,0,0,False
+yoga mat,household,443,none (Qwen: head-noun sense only),not in WordNet; approximate: mat.n.03 (head noun; name matches only),0,0,0,0,0,0,0,0,0,False
+yogurt,food_drink,1517,comparison-datasets (hand-checked),,1,1,13,1,1,9,0,0,0,False
+zebra,animals,1569,comparison-datasets (hand-checked),,1,1,20,1,1,1037,1,1,1350,False

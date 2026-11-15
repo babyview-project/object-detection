@@ -1,0 +1,164 @@
+apple
+appliance
+apron
+backpack
+bag
+ball
+balloon
+banana
+basket
+basketball
+bathtub
+bear
+bed
+belt
+bench
+bicycle
+binder
+bird
+blanket
+board
+boat
+boot
+bottle
+box
+bread
+broom
+bubble
+bucket
+building
+cabinet
+camera
+can
+candle
+cap
+car
+cardigan
+cat
+chair
+chicken
+clip
+clock
+closet
+cloth
+coat
+coffee maker
+computer mouse
+container
+controller
+couch
+cracker
+crate
+cucumber
+cup
+curtain
+decoration
+desk
+dishwasher
+dog
+doormat
+dress
+drum
+duck
+dumbbell
+envelope
+eraser
+fan
+filing cabinet
+fish
+fruit
+garment
+glass
+glasses
+glove
+guitar
+hair dryer
+hammer
+hamper
+hat
+heater
+helmet
+ice cream
+jar
+jeans
+jug
+keyboard
+knife
+ladle
+laptop
+light
+measuring cup
+microphone
+microwave
+mirror
+mop
+necklace
+orange
+oven
+paintbrush
+pan
+paper towel
+pen
+phone
+piano
+pillow
+pitcher
+pizza
+plant
+plate
+pole
+post
+pot
+potato
+printer
+purse
+rabbit
+racket
+radio
+refrigerator
+remote control
+rug
+salt shaker
+sandal
+sandwich
+scale
+scarf
+screw
+screwdriver
+shirt
+shoe
+shopping cart
+shovel
+shower curtain
+sign
+sink
+skirt
+sock
+soup
+speaker
+spoon
+stick
+stove
+strainer
+table
+teapot
+teddy bear
+tent
+toaster
+toilet paper
+towel
+train
+trash can
+tray
+tripod
+truck
+turtle
+umbrella
+utensil
+vacuum cleaner
+vase
+vegetable
+wallet
+washing machine
+watch
+wheel
