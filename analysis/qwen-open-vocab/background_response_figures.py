@@ -32,7 +32,7 @@ FS.apply()
 REPO = HERE.parents[1]
 CD = REPO / "analysis" / "comparison-datasets" / "outputs"
 LVIS_IMG = Path("/ccn2a/dataset/babyview/related_data/lvis/outputs/image_embeddings/facebook_dinov3-vitb16-pretrain-lvd1689m")
-CACHE = CD / "background_amount" / "cache" / "lvis_whole_image_means_qwen_core_dinov3.npz"
+CACHE = HERE / "out" / "crossdataset" / "lvis_whole_image_means_qwen_core_dinov3.npz"
 TABLES = V.out_dir(HERE / "out" / "crossdataset")
 RES = HERE / "results" / ("background_response" + ("_things27" if V.DOMAINS == "things27" else ""))
 BGC = V.out_dir(HERE / "results" / "bv_vedb"); BGC = BGC.with_name(BGC.name + "_core")

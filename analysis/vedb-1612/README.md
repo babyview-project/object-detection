@@ -1,5 +1,10 @@
 # VEDB 1612 — world-camera subset
 
+> **2026-11-15:** the YOLOE + CLIP BabyView–VEDB analyses (`analyses/`, `figures/`, `run_analyses.py`,
+> `bv_vedb_comparison.py`, `plot_*.py`) moved to `analysis/archive/vedb-1612/`. Kept here: download and frame
+> extraction, the VEDB YOLOE / embedding scripts and `exemplar_set_embeddings/` (read by comparison-datasets
+> notebook 16), the adult-session list and adults-only store builder used by `qwen-open-vocab/`.
+
 Preprocess and analyze the **80-session** VEDB world-camera subset the same way
 the manuscript processes BabyView: 1 fps frames, YOLOE with the CDI noun list,
 CLIP filter at 0.27, then DINOv3 on the boxes that pass.
@@ -25,6 +30,43 @@ campus, and so on). Eye videos are not included.
 VEDB session folders are named `session_<id>_worldPrivate`. They are not
 BabyView subject IDs, so the manuscript subject exclusion (`00270001`) does
 not apply. Pass `--exclude-subjects` with an empty list.
+
+> **Scope update.** The pipeline was later run on all **717** sessions of
+> volume 1612 (the 80-session manifest above was the first batch), so the
+> stores hold 717 sessions from 56 participants.
+
+## Adults only (November 2026)
+
+Our analyses use **adult** VEDB observers only: 18 years or older at recording.
+That is 709 of 717 sessions and 50 of 56 participants, aged 18.7–46.4. The 8
+excluded sessions come from 6 participants aged 7.7–12.5. No one is between
+12.5 and 18, so any cutoff from 13 to 18 removes the same sessions.
+
+- Ages come from the participant record of each Databrary session.
+  `build_adult_stores.py --fetch` pulls them (after `python -m databrary login`)
+  into `/ccn2a/dataset/babyview/related_data/vedb_1612/participant_ages.csv`.
+  That file stays out of git, because the repo is public and ages are
+  authorized-user data.
+- [`vedb_adult_sessions.txt`](vedb_adult_sessions.txt) lists the included
+  session ids.
+- Every analysis reads an **`_adults` view** of each store: the same files,
+  with shards and session folders symlinked for adult sessions and index
+  tables filtered to them. The views are `vedb_full_adults`, `cdi_adults`,
+  `extracted_frames_1fps_adults`, and, on `/data2`,
+  `qwen3.8-27b_setupB_t1_pixbv_adults`. The original stores are unchanged; the
+  preprocessing scripts still write to them. To rebuild the views, run
+  `python build_adult_stores.py`.
+- The BabyView/VEDB embedding sample and its SAM 3 outputs are referenced by
+  row number, so they are filtered rather than redrawn
+  (`../qwen-open-vocab/filter_bv_vedb_sample_adults.py`; SAM 3 →
+  `sam3_crop_sample_bv_vedb_adults`). Do not rerun
+  `annotation/qwen_pilot/sam3_crop_sample.py` or `embed_masked_sample.py`
+  against the filtered sample, because their `idx` refers to the original rows.
+- [`rerun_adults_only.sh`](rerun_adults_only.sh) reruns every VEDB-dependent
+  analysis and figure: YOLOE (SI), Qwen (main text, CDI and THINGS-27
+  domains), the talk figures and the manuscript figures. The pre-exclusion
+  outputs are in
+  `/data2/j7yang/object-detection-offload/backups/pre_vedb_adults_20261115/`.
 
 ## Pipeline
 

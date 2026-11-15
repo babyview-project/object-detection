@@ -22,8 +22,9 @@ category bootstrap).
 
 Inputs: the Qwen box store and its embeddings (`/data2/dataset/babyview/2025.2/outputs/object_detections/qwen3.8-27b_setupB_t1/`,
 `annotation/qwen_pilot/embed_full_run.py`), the hierarchy table (`annotation/qwen_pilot/results/category_hierarchy_*.csv`),
-THINGS embeddings (`/data2/dataset/babyview/related_data/things/embeddings/`, `annotation/qwen_pilot/embed_things.py`),
-and the manuscript's 129-category runs `main_results_valid129s_2025.2_{5s,qwen,qwen_real}` (`manuscript-2026/scripts/run_qwen_analyses.sh`).
+and THINGS embeddings (`/data2/dataset/babyview/related_data/things/embeddings/`, `annotation/qwen_pilot/embed_things.py`).
+(`results/replication_129_qwen_vs_yoloe.csv` is a record of the earlier 129-category Qwen vs YOLOE replication; its inputs
+were removed on 2026-11-15.)
 
 ```bash
 cd analysis/qwen-open-vocab

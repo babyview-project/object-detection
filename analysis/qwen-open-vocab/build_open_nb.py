@@ -113,22 +113,6 @@ def boot_delta(Ds, cs, n_boot=1000, seed=0):
 print(f"{len(CATS)} categories, {len(SUBJ)} children, {int(S['clip']['n_all'].sum()):,} boxes "
       f"({int(S['clip']['n_real'].sum()):,} real); THINGS (WordNet mapping): {len(THW['clip'])} categories")"""),
 
-md("## 0. The 129-category replication: Qwen vs YOLOE + CLIP (same frames, one per 5 s)"),
-code("""rows = []
-for tag, name in (("2025.2_5s", "YOLOE+CLIP"), ("2025.2_qwen", "Qwen, all formats"), ("2025.2_qwen_real", "Qwen, real only")):
-    R = MS / f"main_results_valid129s_{tag}" / "results"
-    pl = pd.read_csv(R / "long_tailed_powerlaw_fits_filtered-0.27_valid129.csv").set_index("semantic_category")
-    rd = pd.read_csv(R / "bv_things_rdm_comparison_summary_v2_lowertri_filtered-0.27_valid129.csv").drop_duplicates("model").set_index("model")
-    cs = pd.read_csv(R / "bv_vs_things_cluster_strength_valid129.csv").set_index("model")
-    for m in ("clip", "dinov3"):
-        rows.append({"detector": name, "model": m, "alpha_long_tail": pl.loc["all", "alpha"],
-                     "bv_things_rdm_spearman": rd.loc[m, "spearman_r"], "bv_delta": cs.loc[m, "bv_delta_between_minus_within"],
-                     "things_delta": cs.loc[m, "things_delta_between_minus_within"],
-                     "bv_minus_things": cs.loc[m, "delta_diff_bv_minus_things"],
-                     "ci": f"[{cs.loc[m, 'boot_ci_low']:.3f}, {cs.loc[m, 'boot_ci_high']:.3f}]"})
-rep = pd.DataFrame(rows); rep.to_csv(RES / "replication_129_qwen_vs_yoloe.csv", index=False)
-display(rep.round(3))"""),
-
 md("## 1. The open category set"),
 code("""t = cats.groupby("domain").agg(categories=("boxes", "size"), boxes=("boxes", "sum"),
                                in_things=("boxes", lambda s: s.index.isin(THW["clip"].index).sum()))

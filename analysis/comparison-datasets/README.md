@@ -1,5 +1,10 @@
 # Comparison datasets: ImageNet-1k and LVIS v1
 
+> **2026-11-15:** notebooks 04 and 06–15 and their outputs moved to `analysis/archive/comparison-datasets/` (the
+> revision redoes those comparisons in `qwen-open-vocab/`). Kept here: data prep, notebooks 00–03 and 05 (the LVIS /
+> ImageNet category tables `qwen-open-vocab` reads from `outputs/mapping/`) and notebook 16 (`outputs/matched_controls/`,
+> Response Figure 1).
+
 ImageNet-1k and LVIS v1 as comparison datasets for BabyView (BV), alongside THINGS (the manuscript's
 comparison set) and VEDB (adult egocentric video, [`../vedb-1612/`](../vedb-1612/)). Each dataset's classes are
 mapped onto CDI words by WordNet hyponym pooling, category embeddings are built the way the manuscript

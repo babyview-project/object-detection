@@ -309,35 +309,7 @@ fig.suptitle("Room and activity held fixed: category means from one room / activ
              "brackets: same room / activity vs pooled and vs THINGS, * p < .05, ** < .01, *** < .001)", x=.01, ha="left", fontsize=10)
 fig.tight_layout(rect=(0, .06, 1, 1)); save_resp(fig, "R1c_same_room")
 
-# ---- R1d: background amount (LVIS crops vs whole images; ImageNet) ----------------------------------------------------
-BA = CMP / "background_amount" / "results"
-ls_ = pd.read_csv(BA / "lvis_whole_vs_crop_summary.csv"); ls_ = ls_[(ls_.model == M) & (ls_.category_set == "exclusive_ok")].set_index("matrix")
-ld = pd.read_csv(BA / "lvis_whole_vs_crop_differences.csv")
-ld = ld[(ld.model == M) & (ld.category_set == "exclusive_ok") & (ld.metric == "auc")].set_index("pair")
-im = pd.read_csv(BA / "imagenet_comparison_summary.csv"); im = im[im.model == M].set_index("matrix")
-idf = pd.read_csv(BA / "imagenet_comparison_differences.csv"); idf = idf[(idf.model == M) & (idf.metric == "auc")].set_index("pair")
-fig, axs = plt.subplots(1, 2, figsize=(12, 3.6), sharex=True)
-rows_l = [("bv", "BabyView", FS.DS_COLOR["bv"], "o", "vs whole", "bv_minus_lvis_whole"),
-          ("things", "THINGS", FS.DS_COLOR["things"], "o", "vs whole", "things_minus_lvis_whole"),
-          ("lvis_crop", "LVIS crops", "white", "o", None, None),
-          ("lvis_whole", "LVIS whole images", FS.DS_COLOR["lvis"], "o", "vs crop", "lvis_whole_minus_lvis_crop"),
-          ("lvis_whole_excl", "LVIS whole images (exclusive)", FS.DS_COLOR["lvis"], "s", "vs crop", "lvis_whole_excl_minus_lvis_crop")]
-rows_i = [("bv", "BabyView", FS.DS_COLOR["bv"], "o", "vs ImageNet", "bv_minus_imagenet"),
-          ("vedb", "VEDB", FS.DS_COLOR["vedb"], "o", "vs ImageNet", "vedb_minus_imagenet"),
-          ("things", "THINGS", FS.DS_COLOR["things"], "o", "vs ImageNet", "imagenet_minus_things"),
-          ("imagenet", "ImageNet", FS.DS_COLOR["imagenet"], "o", None, None)]
-for ax, rows, S_, D_, title in ((axs[0], rows_l, ls_, ld, "LVIS object crops vs whole images (92 categories)"),
-                                (axs[1], rows_i, im, idf, "ImageNet whole photographs (75 categories)")):
-    for k, (key, lab, col, mk, vs, pair) in enumerate(rows):
-        y = len(rows) - 1 - k; v = S_.loc[key]
-        ax.plot([v.auc_ci_lo, v.auc_ci_hi], [y, y], color="#52514e", lw=1.6)
-        ax.scatter([v.auc], [y], s=70, color=col, edgecolor="#333333", zorder=3, marker=mk)
-        txt = f"{v.auc:.3f}" + (f"   {vs}: {FS.stars(D_.loc[pair].p_boot)}" if pair else "")
-        ax.text(v.auc_ci_hi + .005, y, txt, va="center", fontsize=8.5, color="#333333")
-    ax.set_yticks(range(len(rows)), [r_[1] for r_ in rows][::-1])
-    ax.set_xlabel("AUC: P(between > within distance), DINOv3"); ax.set_title(title, loc="left", fontsize=10)
-axs[0].set_xlim(.6, .86)
-fig.tight_layout(); save_resp(fig, "R1d_background")
+# R1d (LVIS crops vs whole images, with BabyView) is drawn by background_response_figures.py.
 
 # ---- R1e: crop geometry matching --------------------------------------------------------------------------------------
 g = pd.read_csv(CTRL / "geom_summary.csv"); g = g[(g.analysis == "matching") & (g.model == M)]
