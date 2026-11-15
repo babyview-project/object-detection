@@ -32,7 +32,19 @@ both domain schemes, is `analysis/vedb-1612/rerun_adults_only.sh`.
 | Controls | `build_controls_data.py`, `controls_analysis.py`, `controls_figures.py`, `build_blur_control.py`, `analyze_background_control.py` | subject split, co-occurrence, room / activity, geometry, size floors, exemplar count, prevalence, blur, SAM 3 background removal |
 | Development | `build_child_month_means.py`, `development_within_child.py`, `development_size_by_domain.py` | within-child random-slope checks of the age trends (Supplementary Figure S14), object size by domain (CDI only) |
 | One child / early children | `build_subject_nb.py`, `build_children_cache.py`, `build_children_nb.py`, `make_subject_figures.py`, `make_depiction_figures.py`, `make_depiction_montages.py` | pilot analyses on S00320001 and the first children |
+| Numbers | `build_numbers_table.py` | every reported number in one table (see below) |
 | Figures | `make_manuscript_figures.py`, `make_dinov3_manuscript_figures.py`, `background_response_figures.py`, `make_background_examples.py`, `make_crossdataset_montages.py`, `make_overview_examples_figure.py`, `fig_style.py` | manuscript figures (`figures/manuscript[_things27]/`, copied to `manuscript-2026/revision_private/manuscript_revision/figures[_things27]/`) and response-letter figures (`revision_private/figures[_things27]/`); some panels reuse `analysis/talk-figures/unr-2026/` |
+
+## Numbers table
+
+`build_numbers_table.py` collects the reported numbers from the result tables into `results/numbers/`:
+`numbers_key.csv` (curated numbers with stable keys such as `clustering.diff.dsd.bv_minus_things`, one row per domain
+scheme where it matters, with CI, p, n, source file and row) and `numbers_all.csv.gz` (every numeric cell of every
+aggregate result table). Text should cite keys from `numbers_key.csv`; rerun the script after any analysis rerun.
+
+```bash
+QOV_LABELS=renamed /data/j7yang/anaconda3/bin/python build_numbers_table.py
+```
 
 ## Folders
 
