@@ -1,0 +1,131 @@
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --ink: #1b1b1a;
+  --ink-2: #57564f;
+  --line: #dddbd4;
+  --accent: #2a63c4;
+  --accent-ink: #ffffff;
+  --mark: #d1342f;
+  --mark-bg: #fbe9e8;
+  --tile-bg: #ecebe6;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161615;
+    --surface: #212120;
+    --ink: #f0efec;
+    --ink-2: #b9b8b0;
+    --line: #3a3a37;
+    --accent: #5c8fe6;
+    --accent-ink: #0d0d0c;
+    --mark: #ef6461;
+    --mark-bg: #3a1f1e;
+    --tile-bg: #2b2b29;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161615;
+  --surface: #212120;
+  --ink: #f0efec;
+  --ink-2: #b9b8b0;
+  --line: #3a3a37;
+  --accent: #5c8fe6;
+  --accent-ink: #0d0d0c;
+  --mark: #ef6461;
+  --mark-bg: #3a1f1e;
+  --tile-bg: #2b2b29;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+main { max-width: 1280px; margin: 0 auto; padding: 16px; }
+h1 { font-size: 1.6rem; margin: 0 0 12px; }
+h2 { font-size: 1.05rem; margin: 22px 0 6px; }
+.lead { font-size: 1.05rem; }
+.panel {
+  max-width: 760px; margin: 24px auto; padding: 24px 28px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+}
+code { background: var(--tile-bg); padding: 1px 5px; border-radius: 4px; }
+.msg { color: var(--mark); min-height: 1.5em; }
+.msg.ok { color: var(--ink-2); }
+details { margin-top: 18px; color: var(--ink-2); }
+
+button, .picker span {
+  font: inherit; font-weight: 600; cursor: pointer;
+  background: var(--accent); color: var(--accent-ink);
+  border: 0; border-radius: 8px; padding: 10px 18px;
+}
+button:disabled { opacity: .45; cursor: default; }
+button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); padding: 6px 12px; }
+button:focus-visible, .picker input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+.picker { display: inline-block; }
+.picker input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.picker.small span { padding: 6px 12px; font-weight: 500; }
+
+header#bar {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 16px; padding: 10px 16px;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+#where { font-weight: 600; white-space: nowrap; }
+#progress { flex: 1; height: 8px; background: var(--tile-bg); border-radius: 4px; overflow: hidden; }
+#progress-fill { height: 100%; width: 0; background: var(--accent); }
+#saved { color: var(--ink-2); font-size: .9rem; white-space: nowrap; }
+
+#prompt { font-size: 1.15rem; margin: 8px 0 14px; }
+#prompt .step { display: block; font-size: .9rem; color: var(--ink-2); margin-bottom: 2px; }
+#prompt b { font-size: 1.3rem; }
+
+#grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+#grid.scene { grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
+.card {
+  position: relative; background: var(--surface); border: 3px solid transparent;
+  border-radius: var(--radius); padding: 6px; cursor: pointer; user-select: none;
+  display: flex; gap: 6px; align-items: center; justify-content: center;
+}
+.card:hover { border-color: var(--line); }
+.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.card.marked { border-color: var(--mark); background: var(--mark-bg); }
+.card .crop { width: 168px; height: 168px; background: var(--tile-bg); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; overflow: hidden; }
+/* Small crops are scaled up to fill the tile (CLIP also sees them resized). */
+.card .crop img { width: 100%; height: 100%; object-fit: contain; }
+.scene .card .crop { width: 150px; height: 150px; }
+.card .frame { flex: none; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.card .frame img { height: 266px; border-radius: 6px; display: block; }
+/* Below the frame, never over it: the box can be anywhere in the frame. */
+.card .zoom-btn { padding: 2px 10px; font-size: .85rem; font-weight: 500;
+  background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.card .badge {
+  position: absolute; top: 6px; left: 6px; display: none;
+  background: var(--mark); color: #fff; font-weight: 700; font-size: .8rem;
+  padding: 2px 8px; border-radius: 6px;
+}
+.card.marked .badge { display: block; }
+
+.actions { display: flex; justify-content: flex-end; align-items: center; gap: 16px; margin: 20px 0 40px; }
+#count { color: var(--ink-2); }
+
+#zoom {
+  position: fixed; inset: 0; z-index: 10; background: rgba(0, 0, 0, .85);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: zoom-out;
+}
+#zoom[hidden] { display: none; }
+#zoom img { max-height: 88vh; max-width: 94vw; border-radius: 6px; }
+#zoom p { color: #ddd; margin: 10px; font-size: .9rem; }
+
+@media (max-width: 600px) {
+  header#bar { flex-wrap: wrap; gap: 8px; }
+  #grid { grid-template-columns: repeat(2, 1fr); }
+  #grid.scene { grid-template-columns: 1fr; }
+  .card .crop { width: 100%; height: 150px; }
+  .panel { padding: 18px 16px; }
+}
