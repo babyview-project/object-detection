@@ -268,7 +268,7 @@ def main():
     ax.spines[["top", "right"]].set_visible(False)
     fig.suptitle(f"Within-child development checks: child x {WIN}-month windows (lines: one child); thick: mixed-model "
                  "within-child slope (random intercept + age slope per child)", x=.01, ha="left", fontsize=10)
-    fig.tight_layout(rect=(0, 0, 1, .95)); fig.savefig(FIG / "dev_within_child.png", dpi=200, bbox_inches="tight")
+    fig.tight_layout(rect=(0, 0, 1, .95)); FS.text_overlaps(fig, "dev_within_child"); fig.savefig(FIG / "dev_within_child.png", dpi=200, bbox_inches="tight")
     print("saved", FIG / "dev_within_child.png")
 
 

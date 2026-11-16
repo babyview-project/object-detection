@@ -38,8 +38,8 @@ RES = HERE / "results" / ("background_response" + ("_things27" if V.DOMAINS == "
 BGC = V.out_dir(HERE / "results" / "bv_vedb"); BGC = BGC.with_name(BGC.name + "_core")
 FIGDIR = V.manuscript_figures_dir(REPO / "analysis" / "manuscript-2026" / "revision_private" / "figures")
 CORE = [l.strip() for l in open(REPO / "data" / "included_categories_qwen_core.txt") if l.strip()]
-MIN_IMG, N_BOOT = 10, 1000
-C_BV, C_VEDB, C_LVIS = FS.DS_COLOR.get("bv", "#0D47A1"), FS.DS_COLOR.get("vedb", "#E07B39"), FS.DS_COLOR.get("lvis", "#4DB38A")
+MIN_IMG, N_BOOT = 10, 10000          # p floor 2 / N_BOOT
+C_BV, C_VEDB, C_LVIS = FS.DS_COLOR["bv"], FS.DS_COLOR["vedb"], FS.DS_COLOR["lvis"]
 
 
 def domains():
@@ -107,11 +107,12 @@ def lvis_analysis(DOM):
     M = {"bv": tab["bv"].loc[cs].values, "lvis_crop": tab["lvis"].loc[cs].values,
          "lvis_whole": S1[ci] / n1[ci, None], "lvis_whole_one": S2[ci] / n2[ci, None]}
     R = {k: zrdm(v) for k, v in M.items()}
-    rng = np.random.default_rng(0); by = {s: np.flatnonzero(sem == s) for s in set(sem)}
+    rng = np.random.default_rng(0); by = {s: np.flatnonzero(sem == s) for s in sorted(set(sem))}
     B = [np.concatenate([rng.choice(v, len(v)) for v in by.values()]) for _ in range(N_BOOT)]
     boot = {k: np.array([delta_sd(D, sem, ix) for ix in B]) for k, D in R.items()}
     rows = [dict(version=k, categories=len(cs), domains=len(keep), delta_sd=delta_sd(D, sem),
-                 ci_low=np.percentile(boot[k], 2.5), ci_high=np.percentile(boot[k], 97.5)) for k, D in R.items()]
+                 ci_low=np.percentile(boot[k], 2.5), ci_high=np.percentile(boot[k], 97.5), se=boot[k].std(ddof=1))
+            for k, D in R.items()]
     obs = {r["version"]: r["delta_sd"] for r in rows}
     diffs = []
     for a, b in (("lvis_whole", "lvis_crop"), ("lvis_whole_one", "lvis_crop"), ("bv", "lvis_crop"), ("bv", "lvis_whole")):
@@ -119,6 +120,7 @@ def lvis_analysis(DOM):
         diffs.append(dict(comparison=f"{a} - {b}", diff=obs[a] - obs[b], ci_low=np.percentile(x, 2.5),
                           ci_high=np.percentile(x, 97.5), p_boot=p_two(x)))
     RES.mkdir(parents=True, exist_ok=True)
+    diffs = pd.DataFrame(diffs); diffs["q_bh"] = FS.bh(diffs.p_boot)             # BH across the four comparisons
     out = pd.DataFrame(rows); out.to_csv(RES / "lvis_whole_vs_crop.csv", index=False)
     dif = pd.DataFrame(diffs); dif.to_csv(RES / "lvis_whole_vs_crop_differences.csv", index=False)
     pd.Series(cs, name="category").to_frame().assign(domain=sem, n_whole=n1[ci], n_whole_one=n2[ci],
@@ -129,8 +131,7 @@ def lvis_analysis(DOM):
 
 
 def fmt_diff(r):
-    p = f"p = {r.p_boot:.3f}".replace("0.", ".") if r.p_boot >= .002 else "p < .002"
-    return f"{r['diff']:+.2f} [{r.ci_low:+.2f}, {r.ci_high:+.2f}], {p}".replace("-", "−")
+    return f"{r['diff']:+.2f} [{r.ci_low:+.2f}, {r.ci_high:+.2f}], {FS.ptext(r.q_bh, 'q')}".replace("-", "−")
 
 
 def style(ax, ylim):
@@ -149,17 +150,17 @@ def plot_lvis(L, Ld):
     ax.plot(xs, y, "-", color=C_LVIS, lw=2, zorder=2)
     for x, v in zip(xs, ver):
         r = L.loc[v]
-        ax.errorbar(x, r.delta_sd, yerr=[[r.delta_sd - r.ci_low], [r.ci_high - r.delta_sd]], fmt="o", color=C_LVIS,
+        ax.errorbar(x, r.delta_sd, yerr=r.se, fmt="o", color=C_LVIS,                    # ±1 bootstrap SE
                     ms=9, mec="white", capsize=3, lw=1.5, zorder=3)
     b = L.loc["bv"]
-    ax.errorbar(-0.12, b.delta_sd, yerr=[[b.delta_sd - b.ci_low], [b.ci_high - b.delta_sd]], fmt="o", color=C_BV, ms=9,
+    ax.errorbar(-0.12, b.delta_sd, yerr=b.se, fmt="o", color=C_BV, ms=9,
                 mec="white", capsize=3, lw=1.5, zorder=3)
     ax.axhline(b.delta_sd, color=C_BV, lw=1, ls=":", zorder=1)
     ax.text(2.15, b.delta_sd, "BabyView\n(object crops)", color=C_BV, va="center", fontsize=9, fontweight="bold")
     ax.text(2.15, L.loc["lvis_whole_one", "delta_sd"], "LVIS", color=C_LVIS, va="center", fontsize=9, fontweight="bold")
     ax.set_xticks(xs, ["object crop", "whole image", "whole image,\nonly this category"])
     ax.set_xlim(-.4, 2.7)
-    lo = min(L.ci_low.min(), 0); hi = L.ci_high.max()
+    lo = min((L.delta_sd - L.se).min(), 0); hi = (L.delta_sd + L.se).max()
     style(ax, (max(0, lo - .1), hi + .35))
     t = (f"whole image − crop: {fmt_diff(Ld.loc['lvis_whole - lvis_crop'])}\n"
          f"single-category image − crop: {fmt_diff(Ld.loc['lvis_whole_one - lvis_crop'])}\n"
@@ -174,16 +175,18 @@ def plot_sam():
     T = T[T.model == "dinov3"]; Df = Df[(Df.model == "dinov3") & (Df.measure == "delta_sd")].set_index(["subset", "comparison"])
     ver = ["original", "box", "masked"]; xs = [2, 1, 0]          # x: least background (left) to most (right)
     fig, axs = plt.subplots(1, 2, figsize=(10.5, 4.2), sharey=True)
-    ylim = (max(0, T.delta_sd.min() - .2), T.delta_sd.max() + .3)
+    ylim = (max(0, (T.delta_sd - T.delta_sd_se).min() - .2), (T.delta_sd + T.delta_sd_se).max() + .3)
     for ax, sub in zip(axs, ("all formats", "real objects")):
         s = T[T.subset == sub]
         n = int(s.categories.iloc[0])
         lines = []
         yb, yv = (s[(s.dataset == d) & (s.version == "original")].delta_sd.iloc[0] for d in ("bv", "vedb"))
-        gap = max(0, .05 - abs(yb - yv)) / 2
+        gap = max(0, .09 * (ylim[1] - ylim[0]) - abs(yb - yv)) / 2       # keep the two end labels apart
         for d, col, lab, off in (("bv", C_BV, "BabyView", gap), ("vedb", C_VEDB, "VEDB", -gap)):
             y = [s[(s.dataset == d) & (s.version == v)].delta_sd.iloc[0] for v in ver]
-            ax.plot(xs, y, "-o", color=col, lw=2, ms=9, mec="white", zorder=3)
+            se = [s[(s.dataset == d) & (s.version == v)].delta_sd_se.iloc[0] for v in ver]
+            dx = -.04 if d == "bv" else .04                                   # dodge so the two series' whiskers stay apart
+            ax.errorbar([x + dx for x in xs], y, yerr=se, fmt="-o", color=col, lw=2, ms=9, mec="white", capsize=3, zorder=3)   # ±1 SE
             ax.text(2.12, y[0] + off, lab, color=col, va="center", fontsize=9, fontweight="bold")
             r = Df.loc[(sub, f"{d}: masked - original")]
             lines.append(f"{lab}, background removed − Qwen box: {fmt_diff(r)}")
@@ -197,13 +200,15 @@ def plot_sam():
             ax.set_ylabel("")
         ax.text(.02, .98, "\n".join(lines), transform=ax.transAxes, va="top", fontsize=8.5)
         ax.set_title(f"{sub} ({n} categories)", loc="left")
-    fig.suptitle("Less background around BabyView and VEDB objects (ρ: BabyView–VEDB RDM correlation)", x=.01, ha="left")
+    fig.suptitle("Less background around BabyView and VEDB objects (± 1 SE; ρ: BabyView–VEDB RDM correlation;\n"
+                 "differences: 95% CI, BH q across datasets × versions × subsets)", x=.01, ha="left")
     return fig
 
 
 def save(fig, name):
     FIGDIR.mkdir(parents=True, exist_ok=True)
     fig.tight_layout()
+    FS.text_overlaps(fig, name)
     for e in ("png", "pdf"):
         fig.savefig(FIGDIR / f"{name}.{e}", dpi=200, bbox_inches="tight")
     print("saved", FIGDIR / f"{name}.png")

@@ -138,7 +138,7 @@ fig, axs = plt.subplots(1, 2, figsize=(13, 4.6))
 for p, col in (("all", FS.DS_COLOR["bv"]), ("real", FS.DS_COLOR["bv_real"])):
     v = np.sort(prev[p].values[prev[p].values > 0])[::-1]; r = np.arange(1, len(v) + 1)
     _, a, i, r2 = fit(v)
-    axs[0].loglog(r, v, "o", ms=2.5, color=col, label=f"{p}: alpha {a:.2f}, R² {r2:.2f}")
+    axs[0].loglog(r, v, "o", ms=2.5, color=col, mfc=col if p == "all" else "white", label=f"{p}: alpha {a:.2f}, R² {r2:.2f}")
     axs[0].loglog(r, np.exp(i) * r ** -a, color=col, lw=1, ls="--")
 axs[0].set_xlabel("rank"); axs[0].set_ylabel("frame prevalence"); axs[0].legend(frameon=False)
 axs[0].set_title(f"{len(CATS)} open categories, all children pooled", loc="left", fontsize=11)

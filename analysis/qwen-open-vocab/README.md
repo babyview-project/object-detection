@@ -25,15 +25,22 @@ both domain schemes, is `analysis/vedb-1612/rerun_adults_only.sh`.
 | Cross-dataset mapping | `sense_pick.py`, `build_crossdataset_mapping.py` | WordNet sense per category (Qwen picks), then each THINGS / LVIS / ImageNet item mapped to a category → `mapping/map_*.csv` |
 | Cross-dataset tables | `build_crossdataset_tables.py`, `embed_lvis_extra.py`, `build_format_tables.py`, `format_classifier.py` | category tables for BabyView, VEDB, THINGS, LVIS, ImageNet (`out/crossdataset_renamed/`); format shares |
 | Domains | `build_things27_domains.py`, `make_things27_inputs.py` | THINGS-27 domains (hand labels in `mapping/domain_handmap_things27.csv`, column `final`), and the `*_things27` input copies |
-| BabyView vs VEDB | `build_bv_vedb_data.py`, `build_bv_vedb_nb.py` → `bv_vedb_analysis.ipynb`, `scene_within_child_density.py`, `filter_bv_vedb_sample_adults.py` | scene statistics, category presence, embedding sample, age trends |
+| BabyView vs VEDB | `build_bv_vedb_data.py`, `build_bv_vedb_nb.py` → `bv_vedb_analysis.ipynb`, `scene_within_child_density.py`, `filter_bv_vedb_sample_adults.py`, `uncertainty_bv_vedb.py`, `build_unit_format_table.py`, `unit_shares.py` | scene statistics, category presence, embedding sample, age trends; `uncertainty_bv_vedb.py` adds the SEs the figures draw (children and sessions resampled); `build_unit_format_table.py` + `unit_shares.py`: per child / session format and truncation shares for Figs. 3A, 3C, 8A |
 | Cross-dataset analyses | `build_crossdataset_nb.py` → `crossdataset_analysis.ipynb`, `ego_vs_curated.py`, `things_readout_check.py` | RDMs, RDM agreement, domain clustering, egocentric vs curated, THINGS readout check |
 | Open categories | `build_open_nb.py` → `open_category_analysis.ipynb` | long tail, BabyView RDMs, per-child RDMs, BabyView vs THINGS |
 | Co-occurrence | `build_cooccurrence_data.py`, `build_cooccurrence_nb.py` → `cooccurrence_analysis.ipynb` | co-occurrence structure, BabyView vs VEDB |
-| Controls | `build_controls_data.py`, `controls_analysis.py`, `controls_figures.py`, `build_blur_control.py`, `analyze_background_control.py` | subject split, co-occurrence, room / activity, geometry, size floors, exemplar count, prevalence, blur, SAM 3 background removal |
+| Controls | `build_controls_data.py`, `controls_analysis.py`, `controls_figures.py`, `build_blur_control.py`, `analyze_background_control.py` | co-occurrence, geometry, size floors, exemplar count, prevalence, blur, SAM 3 background removal (the subject-split and room / activity controls were dropped on 2026-11-15; they are in git history) |
 | Development | `build_child_month_means.py`, `development_within_child.py`, `development_size_by_domain.py` | within-child random-slope checks of the age trends (Supplementary Figure S14), object size by domain (CDI only) |
 | One child / early children | `build_subject_nb.py`, `build_children_cache.py`, `build_children_nb.py`, `make_subject_figures.py`, `make_depiction_figures.py`, `make_depiction_montages.py` | pilot analyses on S00320001 and the first children |
 | Numbers | `build_numbers_table.py` | every reported number in one table (see below) |
 | Figures | `make_manuscript_figures.py`, `make_dinov3_manuscript_figures.py`, `background_response_figures.py`, `make_background_examples.py`, `make_crossdataset_montages.py`, `make_overview_examples_figure.py`, `fig_style.py` | manuscript figures (`figures/manuscript[_things27]/`, copied to `manuscript-2026/revision_private/manuscript_revision/figures[_things27]/`) and response-letter figures (`revision_private/figures[_things27]/`); some panels reuse `analysis/talk-figures/unr-2026/` |
+
+## Figure measures and error bars
+
+`FIGURE_MEASURES.md` describes every figure panel: what each data point is, how it was computed, and what its error bar
+is. All error bars are ±1 SE (95% CIs stay in the tables and in `numbers_key.csv`); no bare bars; one significance rule
+(10,000-draw bootstrap tests, BH within each figure); dataset colours (`fig_style.DS_COLOR`) never close to domain colours.
+The validation scorecard's SEs come from `annotation/gold_set/validation_uncertainty.py`.
 
 ## Numbers table
 
@@ -79,11 +86,14 @@ Controls (after the means, `build_crossdataset_tables.py` and `build_bv_vedb_dat
 
 ```bash
 QOV_LABELS=renamed nice -n 19 python build_controls_data.py --workers 16
-QOV_LABELS=renamed nice -n 19 python controls_analysis.py --sections split cooc geom size count perm prev
-for m in clip dinov3; do for k in room act; do                # room is slow: four slices in parallel, then merge
-  QOV_LABELS=renamed nice -n 10 python controls_analysis.py --sections room --room-only $m $k & done; done; wait
-QOV_LABELS=renamed python controls_analysis.py --sections room_merge
+QOV_LABELS=renamed QOV_CATS=core nice -n 19 python controls_analysis.py --sections cooc geom size count perm prev things
 QOV_LABELS=renamed python controls_figures.py
+```
+
+Figure SEs for the BabyView vs VEDB panels (after `bv_vedb_analysis.ipynb`; about 40 min, most of it the RDM resampling):
+
+```bash
+QOV_LABELS=renamed QOV_CATS=core python uncertainty_bv_vedb.py      # then QOV_DOMAINS=things27 (reuses the CDI RDM SEs)
 ```
 
 `build_child_month_means.py`, `development_within_child.py` and `background_response_figures.py` need an environment

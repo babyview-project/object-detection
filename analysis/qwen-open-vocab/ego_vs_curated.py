@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Egocentric vs curated domain clustering: every egocentric dataset (BabyView, VEDB) minus every curated one (THINGS,
-ImageNet, LVIS) on the same 1,000 within-domain category-bootstrap draws as crossdataset_analysis.ipynb section 4
+ImageNet, LVIS) on the same 10,000 within-domain category-bootstrap draws as crossdataset_analysis.ipynb section 4
 (core categories, renamed labels), for raw delta, delta / SD and AUC (AUC point estimate only). Two-sided bootstrap p
-(floor 2/1000), Benjamini-Hochberg across the six comparisons within each model and measure. Also the mean of the two
+(floor 2/10,000), Benjamini-Hochberg across the six comparisons within each model and measure. Also the mean of the two
 egocentric datasets minus the mean of the three curated ones.
 
 Output: results/crossdataset_renamed_core/ego_vs_curated.csv (overall), ego_vs_curated_by_domain.csv (per CDI domain:
@@ -28,7 +28,7 @@ def zrows(X): return (X - X.mean(0)) / (X.std(0) + 1e-10)
 def rdm(df, cs): return squareform(pdist(zrows(df.loc[cs].values.astype(float)), metric="cosine"))
 
 
-def draws(cs, n=1000, seed=2):
+def draws(cs, n=10000, seed=2):
     rng = np.random.default_rng(seed); sem = np.array([DOM.get(c, "other") for c in cs])
     by = {d: np.flatnonzero(sem == d) for d in sorted(set(sem))}
     return [np.concatenate([rng.choice(v, len(v)) for v in by.values()]) for _ in range(n)]
@@ -99,7 +99,7 @@ for m in ("dinov3", "clip"):
     CORE = sorted(set.intersection(*[set(T[k].index) for k in EGO + CUR]))
     sem0 = np.array([DOM.get(c, "other") for c in CORE]); vc = pd.Series(sem0).value_counts()
     DOMS = [d for d in ORDER if vc.get(d, 0) >= 3]
-    B = draws(CORE, 1000, seed=3)
+    B = draws(CORE, 10000, seed=3)
     PT, BSD = {}, {}
     for k in EGO + CUR:
         D = rdm(T[k], CORE); dl, sd = domain_deltas(D, sem0, DOMS); PT[k] = dl / sd

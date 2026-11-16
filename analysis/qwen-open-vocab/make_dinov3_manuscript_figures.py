@@ -25,20 +25,18 @@ XD = V.out_dir(HERE / "results" / "crossdataset"); XD = XD.with_name(XD.name + "
 BVV = V.out_dir(HERE / "results" / "bv_vedb"); BVV = BVV.with_name(BVV.name + "_core")
 OPEN = HERE / "results" / ("open" + V.SUFFIX)
 OUT = HERE / "figures" / ("manuscript_dinov3" + ("" if V.DOMAINS == "cdi" else "_" + V.DOMAINS)); OUT.mkdir(parents=True, exist_ok=True)
-DRAFT = V.manuscript_figures_dir(HERE.parents[0] / "manuscript-2026" / "revision_private" / "manuscript_revision" / "figures")
-DRAFT.mkdir(exist_ok=True)
+# Main-text panels are copied into manuscript_revision/figures/ by make_manuscript_figures.py (copy_in) under their
+# manuscript names; this script writes only to figures/manuscript_dinov3*/ and the response-letter folder.
 M = "dinov3"
 LABEL = FS.DS_LABEL
 ZERO = dict(color="#8a8984", lw=1, ls="--")
 
 
 def save(fig, name):
+    FS.text_overlaps(fig, name)
     fig.savefig(OUT / f"{name}.png", dpi=200, bbox_inches="tight")
     fig.savefig(OUT / f"{name}.pdf", bbox_inches="tight")
     plt.close(fig)
-    if DRAFT.exists():
-        for ext in ("png", "pdf"):
-            shutil.copy(OUT / f"{name}.{ext}", DRAFT / f"{name}.{ext}")
     print("wrote", name)
 
 
@@ -66,10 +64,10 @@ fig.tight_layout(); save(fig, "fig4a_rdm_agreement")
 cs = pd.read_csv(XD / "cluster_strength_core.csv"); cs = cs[cs.model == M].reset_index(drop=True)
 df = pd.read_csv(XD / "cluster_strength_differences_core.csv")
 df = df[(df.model == M) & (df.measure == "delta_sd")].set_index("pair")
-ci = cs.delta_sd_ci.map(lambda s: [float(x) for x in s.strip("[]").split(",")])
 fig, ax = plt.subplots(figsize=(5.6, 3.8))
-for k, (d, v, (lo, hi)) in enumerate(zip(cs.dataset, cs.delta_sd, ci)):
-    ax.errorbar([k], [v], yerr=[[v - lo], [hi - v]], fmt="o", color=FS.DS_COLOR[d], ms=8, mec="white", capsize=3, lw=1.6)
+for k, (d, v, se) in enumerate(zip(cs.dataset, cs.delta_sd, cs.delta_sd_se)):          # ±1 bootstrap SE
+    hi = v + se
+    ax.errorbar([k], [v], yerr=se, fmt="o", color=FS.DS_COLOR[d], ms=8, mec="white", capsize=3, lw=1.6)
     if d != "bv":
         q = df.loc[f"bv - {d}", "q_bh"]
         ax.text(k, hi + .02, FS.stars(q), ha="center", va="bottom", fontsize=9, fontweight="bold" if q < .05 else "normal")
@@ -92,13 +90,13 @@ def by_domain(dd, sig, show, star_pair, title, name, n_col="n_categories"):
         s = dd[dd.dataset == d].set_index("domain").reindex(doms)
         x = np.arange(len(doms)) - .4 + w * (j + .5)
         col = FS.DS_COLOR[d]
-        ax.errorbar(x, s.delta_sd, yerr=[s.delta_sd - s.ci_low_sd, s.ci_high_sd - s.delta_sd], fmt="o", color=col, ms=6,
+        ax.errorbar(x, s.delta_sd, yerr=s.se_sd, fmt="o", color=col, ms=6,                       # ±1 bootstrap SE
                     mfc="white" if (d == "bv" and "bv_real" in show) else col, mec=col if "bv_real" in show else "white",
                     capsize=2, lw=1.2, label=LABEL[d] + (" (all formats)" if d == "bv" and "bv_real" in show else ""))
         pair = star_pair(d)
         if pair:
             st = sig[sig.pair == pair].set_index("domain").reindex(doms).stars.fillna("")
-            for xi, hi, t in zip(x, s.ci_high_sd, st):
+            for xi, hi, t in zip(x, s.delta_sd + s.se_sd, st):
                 if t:
                     ax.text(xi, hi + .05, t, ha="center", va="bottom", fontsize=8, color=FS.INK)
     ax.axhline(0, **ZERO); ax.set_ylabel("Δ / SD")
@@ -106,20 +104,22 @@ def by_domain(dd, sig, show, star_pair, title, name, n_col="n_categories"):
     ax.legend(ncol=len(show), frameon=False, loc="upper right", fontsize=8.5)
     ax.set_xticks(range(len(doms)), [f"{FS.DOMAIN_LABEL.get(d, d)}\n({n[d]})" for d in doms], fontsize=9)
     FS.color_domain_ticks(ax.get_xticklabels(), doms)
-    ax.set_title(title, loc="left", fontsize=11)
+    ax.set_title(title.format(n=int(n.sum())), loc="left", fontsize=11)
     fig.tight_layout(); save(fig, name)
 
 
 by_domain(pd.read_csv(XD / "cluster_strength_by_domain_core.csv"),
           pd.read_csv(XD / "cluster_strength_by_domain_differences_core.csv"),
           ["bv", "vedb", "things", "lvis", "imagenet"], lambda d: None if d == "bv" else f"bv - {d}",
-          "Domain clustering by domain, 183 shared categories (DINOv3; n per domain in brackets)",
+          "Domain clustering by domain, {n} shared categories (DINOv3; n per domain in brackets; ± 1 SE)\n"
+          "stars: vs BabyView, BH across domains × datasets (* q < .05, ** < .01, *** < .001)",
           "fig5b_cluster_by_domain")
 by_domain(pd.read_csv(XD / "cluster_strength_by_domain_real.csv"),
           pd.read_csv(XD / "cluster_strength_by_domain_real_differences.csv"),
           ["bv", "bv_real", "vedb_real", "things", "lvis", "imagenet"],
           lambda d: None if d == "bv_real" else ("bv - bv_real" if d == "bv" else f"bv_real - {d}"),
-          "Domain clustering with real objects only, 164 categories (DINOv3; open circles: BabyView all formats)",
+          "Domain clustering with real objects only, {n} categories (DINOv3; open circles: BabyView all formats; ± 1 SE)\n"
+          "stars: vs BabyView real (on open circles: all formats vs real), BH across domains × comparisons (* q < .05, ** < .01, *** < .001)",
           "fig5c_cluster_by_domain_real")
 
 # ---- Fig. 6: individual children --------------------------------------------------------------------------------------
@@ -147,18 +147,22 @@ fig.tight_layout(); save(fig, "fig6_children")
 # ---- Fig. 7C: child vs adult divergence by age ------------------------------------------------------------------------
 BINS = ["<12 mo", "12-18 mo", "18-24 mo", "24+ mo"]
 C_BV, C_VEDB, C_BASE = FS.DS_COLOR["bv"], FS.DS_COLOR["vedb"], FS.BASELINE
-J = pd.read_csv(BVV / "js_divergence.csv")
-sc = pd.read_csv(BVV / "scene_statistics.csv")
-AG = pd.read_csv(BVV / "appearance_mmd_by_age.csv"); AG = AG[AG.model == M]
-RR = pd.read_csv(BVV / "rdm_split_half.csv"); RR = RR[(RR.model == M) & ~RR.real]
+# Every interval here is ±1 SE from resampling children and VEDB sessions (uncertainty_bv_vedb.py), except the MMD panel,
+# whose point is a median over categories (SE from resampling categories).
+J = pd.read_csv(BVV / "js_divergence_se.csv")
+sc = pd.read_csv(BVV / "scene_statistics_se.csv")
+UM = pd.read_csv(V.out_dir(HERE / "out" / "private" / "bv_vedb") / "scene_unit_means.csv")
+AG = pd.read_csv(BVV / "appearance_mmd_by_age_se.csv"); AG = AG[AG.model == M]
+RR = pd.read_csv(BVV / "rdm_split_half_se.csv"); RR = RR[(RR.model == M) & ~RR.real]
 xb = np.arange(len(BINS))
 
 
-def band(ax, t, col, ycol, label, ls="-", invert=False):
+def series(ax, t, col, ycol, label, ls="-", invert=False, dx=0.0, mfc=None):
+    """Point estimate per age bin with ±1 SE whiskers."""
     t = t.set_index("group").loc[BINS]
-    y, lo, hi = (1 - t[ycol], 1 - t.hi, 1 - t.lo) if invert else (t[ycol], t.lo, t.hi)
-    ax.plot(xb, y, ls, color=col, marker="o", ms=5, lw=1.5, label=label)
-    ax.fill_between(xb, lo, hi, color=col, alpha=.15, lw=0)
+    y = 1 - t[ycol] if invert else t[ycol]
+    ax.errorbar(xb + dx, y, yerr=t.se, fmt="o" + ls, color=col, ms=5, lw=1.5, capsize=2.5, elinewidth=1.1,
+                mfc=mfc or col, label=label)
 
 
 fig = plt.figure(figsize=(13, 7.5))
@@ -167,33 +171,42 @@ axs = [fig.add_subplot(gs[0, 0:2]), fig.add_subplot(gs[0, 2:4]), fig.add_subplot
        fig.add_subplot(gs[1, 0:3]), fig.add_subplot(gs[1, 3:6])]
 for ax, level in zip(axs[:2], ("category", "domain")):
     j = J[(J.level == level) & (J.scope == "all frames")]
-    band(ax, j[j.comparison == "BabyView vs VEDB"], C_VEDB, "js", "BabyView vs VEDB")
-    band(ax, j[j.comparison == "within BabyView"], C_BASE, "js", "within BabyView (baseline)")
+    series(ax, j[j.comparison == "BabyView vs VEDB"], C_VEDB, "js", "BabyView vs VEDB", dx=-.08)
     jh = J[(J.level == level) & (J.scope == "home-scene frames") & (J.comparison == "BabyView vs VEDB")]
-    band(ax, jh, C_VEDB, "js", "BabyView vs VEDB, home scenes", ls="--")
+    series(ax, jh, C_VEDB, "js", "BabyView vs VEDB, home scenes", ls="--", mfc="white")
+    series(ax, j[j.comparison == "within BabyView"], C_BASE, "js", "within BabyView (baseline)", dx=.08)
+    ax.set_ylim(bottom=0)
     ax.set_title(f"what is seen: JS divergence ({level})", loc="left", fontsize=10)
 ax = axs[2]
+u = UM[(UM.scope == "all frames") & UM.group.isin(BINS)]
+rng_ = np.random.default_rng(0)
+for k, g in enumerate(BINS):
+    v = u[u.group == g].dep_share
+    ax.scatter(k + rng_.uniform(-.13, .13, len(v)), v, s=11, color=C_BV, alpha=.35, lw=0, zorder=1)
 s = sc[(sc.scope == "all frames") & (sc.measure == "dep_share")].set_index("group")
-ax.errorbar(xb, s.loc[BINS, "mean"], yerr=[s.loc[BINS, "mean"] - s.loc[BINS, "lo"], s.loc[BINS, "hi"] - s.loc[BINS, "mean"]],
-            fmt="o-", color=C_BV, capsize=2, label="BabyView")
-ax.axhline(s.loc["VEDB", "mean"], color=C_VEDB, lw=1.5, label="VEDB")
+ax.errorbar(xb, s.loc[BINS, "mean"], yerr=s.loc[BINS, "se"], fmt="o-", color=C_BV, ms=6, capsize=3, lw=1.6, zorder=3,
+            label="BabyView: mean of children (dots: each child)")
+vm, vs = s.loc["VEDB", "mean"], s.loc["VEDB", "se"]
+ax.axhspan(vm - vs, vm + vs, color=C_VEDB, alpha=.25, lw=0)
+ax.axhline(vm, color=C_VEDB, lw=1.5, label="VEDB: mean of sessions")
 ax.set_ylim(bottom=0)
 ax.set_title("share of objects depicted (toy / picture / screen)", loc="left", fontsize=10)
 ax = axs[3]
-for r, ls in ((False, "-"), (True, "--")):
-    band(ax, AG[AG.real == r].rename(columns={"median_excess": "y"}), C_VEDB, "y",
-         "real objects only" if r else "all formats", ls)
+for r, ls, dx in ((False, "-", -.05), (True, "--", .05)):
+    series(ax, AG[AG.real == r].rename(columns={"median_excess": "y"}), C_VEDB, "y",
+           "real objects only" if r else "all formats", ls, dx=dx, mfc="white" if r else None)
 ax.axhline(0, color=C_BASE, lw=1, ls=":")
 ax.set_title("how things look: MMD² excess over within-dataset baseline (DINOv3)", loc="left", fontsize=10)
 ax = axs[4]
-band(ax, RR[RR.comparison == "BabyView vs VEDB"].rename(columns={"rho": "y"}), C_VEDB, "y", "BabyView vs VEDB", invert=True)
-band(ax, RR[RR.comparison == "within BabyView"].rename(columns={"rho": "y"}), C_BASE, "y", "within BabyView (baseline)",
-     invert=True)
+series(ax, RR[RR.comparison == "BabyView vs VEDB"].rename(columns={"rho": "y"}), C_VEDB, "y", "BabyView vs VEDB", invert=True)
+series(ax, RR[RR.comparison == "within BabyView"].rename(columns={"rho": "y"}), C_BASE, "y", "within BabyView (baseline)",
+       invert=True)
 ax.set_ylim(bottom=0)
 ax.set_title("between-category structure: 1 − RDM ρ (DINOv3)", loc="left", fontsize=10)
 for ax in axs:
     ax.set_xticks(xb, BINS, fontsize=8); ax.legend(fontsize=7.5, frameon=False)
-fig.suptitle("Does children's visual experience approach adults' with age?", x=.01, ha="left")
+axs[0].set_ylim(top=axs[0].get_ylim()[1] * 1.25); axs[0].legend(fontsize=7.5, frameon=False, loc="upper right", ncol=1)
+fig.suptitle("Does children's visual experience approach adults' with age?  (error bars: ±1 SE)", x=.01, ha="left")
 fig.tight_layout(); save(fig, "fig7c_age_trends")
 
 
@@ -207,6 +220,7 @@ CMP = HERE.parents[0] / "comparison-datasets" / "outputs"
 
 
 def save_resp(fig, name):
+    FS.text_overlaps(fig, name)
     fig.savefig(OUT / f"{name}.png", dpi=200, bbox_inches="tight")
     fig.savefig(OUT / f"{name}.pdf", bbox_inches="tight"); plt.close(fig)   # editable text (pdf.fonttype 42)
     if RESP.exists():
@@ -228,135 +242,65 @@ sdf = pd.read_csv(CMP / "matched_controls" / "results" / "size_clip_matching_dif
 VAR = [("none", "unmatched"), ("ge32", "≥32 px"), ("ge64", "≥64 px"), ("clipfilter", "CLIP filter\non LVIS"),
        ("ge32_clipfilter", "≥32 px +\nCLIP filter"), ("ge64_clipfilter", "≥64 px +\nCLIP filter")]
 DSA = [("bv", "BabyView"), ("vedb", "VEDB"), ("lvis", "LVIS crops"), ("things", "THINGS")]
+lo_, hi_ = (sm.delta_sd - sm.delta_sd_se).min(), (sm.delta_sd + sm.delta_sd_se).max()
+ylo, yhi = lo_ - .3 * (hi_ - lo_), hi_ + .3 * (hi_ - lo_)   # room for the LVIS notes below and the legend above
 fig, ax = plt.subplots(figsize=(10, 4.2))
 for i, (v, _) in enumerate(VAR):
     for k, (d, lab) in enumerate(DSA):
         r = sm[(sm.variant == v) & (sm.dataset == d)].iloc[0]
         x = i + (k - 1.5) * .17
-        ax.errorbar([x], [r.auc], yerr=[[r.auc - r.auc_ci_lo], [r.auc_ci_hi - r.auc]], fmt="o", color=FS.DS_COLOR[d], ms=7,
+        ax.errorbar([x], [r.delta_sd], yerr=[r.delta_sd_se], fmt="o", color=FS.DS_COLOR[d], ms=7,
                     mec=FS.INK, mew=.8, capsize=0, lw=2, label=lab if i == 0 else None)
         if d != "bv":
-            p = sdf[(sdf.variant == v) & (sdf.pair == (f"bv_minus_{d}" if d != "things" else "bv_minus_things"))].p_boot.iloc[0]
+            p = sdf[(sdf.variant == v) & (sdf.pair == f"bv_minus_{d}")].q_bh_sd.iloc[0]
             t = FS.stars(p, "")
             if t:
-                ax.text(x, r.auc_ci_hi + .004, t, ha="center", va="bottom", fontsize=8)
+                ax.text(x, r.delta_sd + r.delta_sd_se + .01, t, ha="center", va="bottom", fontsize=8)
     lv = sm[(sm.variant == v) & (sm.dataset == "lvis")].iloc[0]
     if v != "none":
-        ax.text(i, .62, f"LVIS {lv.change_vs_unmatched:+.3f}\np = {lv.change_p:.2f}", ha="center", fontsize=7.5, color=FS.MUTED)
+        ax.text(i, ylo + .02, f"LVIS {lv.delta_sd_change_vs_unmatched:+.2f}\n{FS.ptext(lv.delta_sd_change_q, 'q')}", ha="center", fontsize=7.5, color=FS.MUTED)
 ax.set_xticks(range(len(VAR)), [l for _, l in VAR], fontsize=9)
-ax.set_ylim(.6, .86); ax.set_ylabel("domain clustering, AUC (DINOv3)")
-ax.legend(frameon=False, fontsize=8.5, loc="upper right", ncol=4)
-ax.set_title("Crop-size floors on every dataset and the original pipeline's CLIP filter on LVIS (≈104 categories; 95% CIs)\n"
-             "stars: differs from BabyView (category bootstrap); grey: change in LVIS AUC vs unmatched",
+ax.set_ylim(ylo, yhi); ax.set_ylabel("domain clustering, Δ / SD (DINOv3)")
+ax.legend(frameon=False, fontsize=8.5, loc="lower left", ncol=2)
+ax.set_title("Crop-size floors on every dataset and the original pipeline's CLIP filter on LVIS (≈104 categories; ± SE)\n"
+             "stars: differs from BabyView (* q < .05, ** < .01, *** < .001; BH across the 18 comparisons); grey: change in LVIS Δ / SD vs unmatched (BH across 5)",
              loc="left", fontsize=10)
 fig.tight_layout(); save_resp(fig, "R1a_clip_filter_lvis")
 
-# ---- R1b: subject split -----------------------------------------------------------------------------------------------
 LABC = {"bv": "BabyView", "bv_real": "BabyView, real", "vedb": "VEDB", "vedb_real": "VEDB, real", "things": "THINGS"}
-w = pd.read_csv(CTRL / "split_within_vs_cross.csv"); s = pd.read_csv(CTRL / "split_summary.csv")
-w = w[(w.comparison == "bv_vedb_things") & (w.model == M)]; s = s[(s.comparison == "bv_vedb_things") & (s.model == M)]
-sd = pd.read_csv(CTRL / "split_differences.csv")
-sd = sd[(sd.comparison == "bv_vedb_things") & (sd.rdm == "cross-half") & (sd.metric == "auc") & (sd.model == M)]
-fig, ax = plt.subplots(figsize=(5.6, 3.9))
-dss = [d for d in LABC if d in set(w.dataset)]
-for i, d in enumerate(dss):
-    r = w[w.dataset == d].iloc[0]; c = s[s.dataset == d].iloc[0]
-    ax.plot([i - .12, i + .12], [r.auc_within, r.auc_cross], color=FS.DS_COLOR[d], lw=1.5)
-    ax.scatter([i - .12], [r.auc_within], s=40, color="white", edgecolor=FS.DS_COLOR[d], lw=1.5, zorder=3)
-    ax.errorbar([i + .12], [r.auc_cross], yerr=[[r.auc_cross - c.auc_ci_lo], [c.auc_ci_hi - r.auc_cross]], fmt="o", ms=6,
-                color=FS.DS_COLOR[d], capsize=2, zorder=3)
-ax.axhline(.5, color="#8a8984", lw=.8, ls=":")
-top = s.auc_ci_hi.max() + .015
-for k, (a, b) in enumerate([(a, b) for i_, a in enumerate(dss) for b in dss[i_ + 1:]]):
-    r_ = sd[sd.pair == f"{a} - {b}"]
-    if len(r_):
-        FS.bracket(ax, dss.index(a) + .12, dss.index(b) + .12, top + k * .025, FS.stars(r_.p.iloc[0]), h=.004)
-ax.set_xticks(range(len(dss)), [LABC[d] for d in dss], rotation=20, ha="right")
-ax.set_ylabel("domain clustering, AUC (DINOv3)")
-ax.scatter([], [], s=40, color="white", edgecolor="#52514e", label="within half")
-ax.scatter([], [], s=40, color="#52514e", label="across halves (95% CI)")
-ax.legend(frameon=False, fontsize=8, loc="lower left")
-ax.set_title(f"Subject split ({int(s.n_categories.iloc[0])} categories): categories compared across children\n"
-             "(BabyView), sessions (VEDB) or images (THINGS); brackets: across halves, bootstrap p", loc="left", fontsize=10)
-fig.tight_layout(); save_resp(fig, "R1b_subject_split")
-
-# ---- R1c: room and activity held fixed --------------------------------------------------------------------------------
-r = pd.read_csv(CTRL / "room_summary.csv"); r = r[(r.part == "all") & ~r.label.str.contains(" x ") & (r.model == M)]
-rd = pd.read_csv(CTRL / "room_differences.csv"); rd = rd[(rd.part == "all") & (rd.metric == "auc") & (rd.model == M)]
-fig, axs = plt.subplots(1, 2, figsize=(11, 3.9), sharey=True)
-for ax, kind in zip(axs, ("room", "act")):
-    d = r[r.kind == kind]; labels = list(dict.fromkeys(d.label))
-    for i, L in enumerate(labels):
-        g = d[d.label == L].set_index("dataset")
-        for j, (ds, c, mk, lab) in enumerate(((f"bv_all same {kind}", FS.DS_COLOR["bv"], "o", "BabyView, same room / activity"),
-                                              ("bv_all pooled", FS.BASELINE, "s", "BabyView, pooled (same categories)"),
-                                              ("things", FS.DS_COLOR["things"], "D", "THINGS"))):
-            if ds not in g.index: continue
-            v = g.loc[ds]
-            ax.errorbar([i + (j - 1) * .2], [v.auc], yerr=[[v.auc - v.auc_ci_lo], [v.auc_ci_hi - v.auc]], fmt=mk, color=c, ms=6,
-                        capsize=2, label=lab if (i == 0 and kind == "room") else None)
-        ax.text(i, .535, f"n={int(g.n_categories.iloc[0])}", ha="center", fontsize=7, color="#52514e")
-        top = g.auc_ci_hi.max() + .01
-        for k, (other, x2) in enumerate((("bv_all pooled", i), ("things", i + .2))):
-            r_ = rd[(rd.kind == kind) & (rd.label == L) & (rd.pair == f"bv_all same {kind} - {other}")]
-            if len(r_):
-                FS.bracket(ax, i - .2, x2, top + k * .022, FS.stars(r_.p.iloc[0]), h=.004, fontsize=7)
-    ax.set_xticks(range(len(labels)), labels, fontsize=9)
-    ax.set_title(f"by {'room' if kind == 'room' else 'activity'}", loc="left", fontsize=10)
-axs[0].set_ylabel("domain clustering, AUC (DINOv3)"); axs[0].set_ylim(bottom=.53)
-fig.legend(*axs[0].get_legend_handles_labels(), frameon=False, fontsize=8, loc="lower center", ncol=3)
-fig.suptitle("Room and activity held fixed: category means from one room / activity only (DINOv3; 95% CIs;\n"
-             "brackets: same room / activity vs pooled and vs THINGS, * p < .05, ** < .01, *** < .001)", x=.01, ha="left", fontsize=10)
-fig.tight_layout(rect=(0, .06, 1, 1)); save_resp(fig, "R1c_same_room")
-
-# R1d (LVIS crops vs whole images, with BabyView) is drawn by background_response_figures.py.
 
 # ---- R1e: crop geometry matching --------------------------------------------------------------------------------------
 g = pd.read_csv(CTRL / "geom_summary.csv"); g = g[(g.analysis == "matching") & (g.model == M)]
 gd = pd.read_csv(CTRL / "geom_differences.csv")
-gd = gd[(gd.analysis == "matching") & (gd.metric == "auc") & (gd.pair == "bv - vedb") & (gd.model == M)]
-fig, axs = plt.subplots(1, 2, figsize=(8, 3.6))
+gd = gd[(gd.analysis == "matching") & (gd.metric == "delta_sd") & (gd.model == M)
+        & ((gd.pair == "bv - vedb") | (gd.pair == "(bv - vedb): matched - unmatched"))].copy()
+gd["q"] = FS.bh(gd.p)
+fig, axs = plt.subplots(1, 2, figsize=(9.5, 4.2))
 for ax, part in zip(axs, ("all", "real")):
     d = g[g.part == part]
     for j, cond in enumerate(("unmatched", "matched")):
         for k, ds in enumerate(("bv", "vedb")):
             v = d[(d.level == cond) & (d.dataset == ds)].iloc[0]
-            ax.errorbar([j + (k - .5) * .3], [v.auc], yerr=[[v.auc - v.auc_ci_lo], [v.auc_ci_hi - v.auc]], fmt="o", color=FS.DS_COLOR[ds],
-                        mfc=FS.DS_COLOR[ds] if cond == "matched" else "white", ms=7, capsize=2,
+            ax.errorbar([j + (k - .5) * .3], [v.delta_sd], yerr=[v.delta_sd_se], fmt="o", color=FS.DS_COLOR[ds],
+                        mfc=FS.DS_COLOR[ds] if cond == "matched" else "white", ms=7, capsize=0, lw=2,
                         label=LABC[ds] if (j == 1 and part == "all") else None)
-        top = d[d.level == cond].auc_ci_hi.max() + .006
-        r_ = gd[(gd.part == part) & (gd.level == cond)]
+        top = (d[d.level == cond].delta_sd + d[d.level == cond].delta_sd_se).max() + .02
+        r_ = gd[(gd.part == part) & (gd.level == cond) & (gd.pair == "bv - vedb")]
         if len(r_):
-            FS.bracket(ax, j - .15, j + .15, top, FS.stars(r_.p.iloc[0]), h=.003, fontsize=8)
+            FS.bracket(ax, j - .15, j + .15, top, FS.stars(r_.q.iloc[0]), h=.01, fontsize=8)
+    ch = gd[(gd.part == part) & (gd.pair == "(bv - vedb): matched - unmatched")].iloc[0]
+    note = (f"change in BabyView − VEDB gap after matching:\n{ch['diff']:+.2f} [{ch.ci_lo:+.2f}, {ch.ci_hi:+.2f}], "
+            f"{FS.ptext(ch.q, 'q')}").replace("-", "−")
     rho = {c: d[d.level == c].bv_vedb_rho.iloc[0] for c in ("unmatched", "matched")}
     ax.set_xticks([0, 1], [f"{c}\nρ = {rho[c]:.2f}" for c in ("unmatched", "matched")], fontsize=9)
     ax.set_xlim(-.6, 1.6)
-    ax.set_title(f"{'All formats' if part == 'all' else 'Real objects only'} ({int(d.n_categories.iloc[0])} categories)", loc="left", fontsize=10)
-    ax.set_ylabel("domain clustering, AUC (DINOv3)")
+    ax.set_title(f"{'All formats' if part == 'all' else 'Real objects only'} ({int(d.n_categories.iloc[0])} categories)\n{note}",
+                 loc="left", fontsize=9)
+    ax.set_ylabel("domain clustering, Δ / SD (DINOv3)")
 axs[0].legend(frameon=False, fontsize=8, loc="lower right")
 fig.suptitle("Crop geometry: BabyView and VEDB before / after matching on size x vertical position x truncation\n"
-             "(ρ = BabyView-VEDB RDM correlation; brackets: BabyView vs VEDB, bootstrap p)", x=.01, ha="left", fontsize=10)
+             "(± SE; ρ = BabyView-VEDB RDM correlation; brackets: BabyView vs VEDB; all tests BH across the six shown)", x=.01, ha="left", fontsize=10)
 fig.tight_layout(); save_resp(fig, "R1e_geometry_matching")
 
-# ---- R1j: background removed (SAM 3) ----------------------------------------------------------------------------------
-T = pd.read_csv(BVV / "background_control.csv"); T = T[T.model == M]
-Df = pd.read_csv(BVV / "background_control_differences.csv"); Df = Df[Df.model == M]
-VERS = ["original", "box", "masked"]; VL = ["Qwen box", "SAM 3 box", "SAM 3 box,\nbackground removed"]
-fig, axs = plt.subplots(1, 2, figsize=(9.5, 4))
-for ax, sub in zip(axs, ("all formats", "real objects")):
-    for j, d in enumerate(("bv", "vedb")):
-        t = T[(T.subset == sub) & (T.dataset == d)].set_index("version").loc[VERS]
-        ax.bar(np.arange(3) + (j - .5) * .36, t.delta_sd, .34, color=FS.DS_COLOR[d], label=FS.label(d), edgecolor="white", linewidth=1.5)
-    rho = T[(T.subset == sub) & (T.dataset == "BabyView-VEDB RDM rho")].set_index("version").loc[VERS].rho
-    top = T[(T.subset == sub) & T.dataset.isin(["bv", "vedb"])].delta_sd.max()
-    for k, ver in enumerate(VERS):
-        r_ = Df[(Df.subset == sub) & (Df.measure == "delta_sd") & (Df.comparison == f"BabyView - VEDB, {ver}")]
-        FS.bracket(ax, k - .18, k + .18, top * 1.06, FS.stars(r_.p_boot.iloc[0]), h=top * .02)
-    ax.set_xticks(range(3), [f"{v}\nρ = {x:.2f}" for v, x in zip(VL, rho)], fontsize=8.5); ax.set_ylim(0, top * 1.2)
-    n = int(T[T.subset == sub].categories.iloc[0])
-    ax.set_title(f"{sub} ({n} categories)", loc="left", fontsize=10)
-axs[0].set_ylabel("domain clustering (Δ / SD, DINOv3)")
-fig.legend(*axs[0].get_legend_handles_labels(), frameon=False, fontsize=9, loc="upper right", ncol=2)
-fig.suptitle("Background control: Qwen's box, SAM 3's corrected box, and the background removed\n"
-             "brackets: BabyView vs VEDB (category bootstrap); ρ = BabyView-VEDB RDM correlation", x=.01, ha="left", fontsize=10)
-fig.tight_layout(rect=(0, 0, 1, .93)); save_resp(fig, "R1j_background_control")
+# R1j (background removed, SAM 3) is drawn by background_response_figures.py (plot_sam).
+

@@ -38,8 +38,8 @@ CORE = [l.strip() for l in open(ts.ANALYSIS.parent / "data" / "included_categori
 DOM = pd.read_csv(PRIV / f"open_renamed{_T}" / "categories.csv", index_col=0).domain.to_dict()
 DC = FS.DOMAIN_COLOR
 DL = FS.DOMAIN_LABEL
-C = {"bv": ts.DS_COLOR["bv"], "vedb": ts.DS_COLOR["vedb"], "things": ts.DS_COLOR["things"], "bv_real": "#6F9BD8",
-     "vedb_real": "#F2B48A"}
+C = {"bv": ts.DS_COLOR["bv"], "vedb": ts.DS_COLOR["vedb"], "things": ts.DS_COLOR["things"], "bv_real": ts.DS_COLOR["bv"],
+     "vedb_real": ts.DS_COLOR["vedb"]}
 L = {"bv": "BabyView (child)", "vedb": "VEDB (adult)", "things": "THINGS", "bv_real": "BabyView, real objects",
      "vedb_real": "VEDB, real objects"}
 
@@ -151,50 +151,72 @@ def q04_scatter():
 
 
 def q05_formats():
-    fp = pd.read_csv(Q / f"results/crossdataset_renamed{_T}/format_prevalence.csv")
-    fp = fp[fp.categories == "all"].set_index("dataset")
-    dd = pd.read_csv(Q / f"results/crossdataset_renamed{_T}/format_depicted_by_domain.csv").set_index("domain")
-    fig, (a, b) = plt.subplots(1, 2, figsize=(ts.SLIDE_W, ts.SLIDE_H), gridspec_kw={"width_ratios": [1, 2.3]})
-    fmt = [("toy", "#7E57C2"), ("picture", "#26A69A"), ("screen", "#F9A825")]
-    for j, k in enumerate(("bv", "vedb")):
-        bottom = 0
-        for f, col in fmt:
-            v = fp.loc[k, f] * 100; a.bar(j, v, bottom=bottom, color=col, width=0.62, label=f if j == 0 else None); bottom += v
-        a.text(j, bottom + 0.4, f"{bottom:.1f}%", ha="center", fontsize=13, fontweight="bold")
-    a.set_xticks([0, 1], ["BabyView", "VEDB"]); a.set_ylabel("% depicted, all objects")
-    a.legend(loc="upper right", fontsize=11); a.set_ylim(0, 17)
+    """Depicted objects, every child and session: left, share of each format over all Tier 1 objects; right, share
+    depicted per domain (categories that are depictions by definition left out). Dots = children / sessions with
+    >= 20 boxes; line = mean, whisker = ±1 SE (unit_shares.py)."""
+    import unit_shares as US
+    allu = US.per_unit()
+    domu = US.per_unit(DOM, exclude_intrinsic=True)
+    fig, (a, b) = plt.subplots(1, 2, figsize=(ts.SLIDE_W, ts.SLIDE_H), gridspec_kw={"width_ratios": [1.5, 2.3]})
+    F = [("depicted", "all\ndepicted"), ("toy", "toy"), ("picture", "pic-\nture"), ("screen", "screen")]
+    for i, (f, lab) in enumerate(F):
+        for j, k in enumerate(("bv", "vedb")):
+            u = allu[allu.dataset == k]; x = i + (j - .5) * .38
+            FS.units(a, x, u[f] * 100, C[k], width=.3, s=9 if k == "bv" else 4, seed=i * 2 + j)
+            FS.mean_se(a, x, u[f].mean() * 100, u[f].std() / np.sqrt(len(u)) * 100, width=.3)
+    a.set_xticks(range(len(F)), [l for _, l in F]); a.set_ylabel("% of objects")
+    a.set_ylim(bottom=0)
+    n = allu.groupby("dataset").unit.nunique()
+    a.legend(handles=[plt.Line2D([], [], marker="o", ls="", color=C[k], label=f"{L[k]}, n = {n[k]}") for k in ("bv", "vedb")],
+             loc="upper right", fontsize=10)
     doms = _doms(["animals", "vehicles", "toys", "food_drink", "outside", "household", "clothing", "furniture_rooms", "body_parts"])
-    x = np.arange(len(doms)); w = 0.38
-    for j, k in enumerate(("bv", "vedb")):
-        b.bar(x + (j - 0.5) * w, dd.loc[doms, k] * 100, w, color=C[k], label=L[k])
-    b.set_xticks(x, [DL[d] for d in doms], rotation=40, ha="right")
+    for i, d in enumerate(doms):
+        for j, k in enumerate(("bv", "vedb")):
+            u = domu[(domu.dataset == k) & (domu.domain == d)]; x = i + (j - .5) * .38
+            FS.units(b, x, u.depicted * 100, C[k], width=.3, s=7 if k == "bv" else 3, seed=10 + i * 2 + j)
+            if len(u) > 1:
+                FS.mean_se(b, x, u.depicted.mean() * 100, u.depicted.std() / np.sqrt(len(u)) * 100, width=.3)
+    b.set_xticks(range(len(doms)), [DL[d] for d in doms], rotation=40, ha="right")
     for t, d in zip(b.get_xticklabels(), doms):
         t.set_color(DC[d])
-    b.set_ylabel("% depicted, by domain"); b.legend(loc="upper right"); b.set_ylim(0, 100)
+    b.set_ylabel("% depicted, by domain"); b.set_ylim(0, 100)
+    b.set_title("dots: children / sessions (≥ 20 objects); line: mean ± 1 SE", loc="left", fontsize=10, color=ts.MUTED)
     fig.tight_layout(); ts.save(fig, "q05_depictions_bv_vedb")
 
 
 def q06_size():
-    s = pd.read_csv(Q / f"results/bv_vedb_renamed{_T}_core/scene_statistics.csv")
+    s = pd.read_csv(Q / f"results/bv_vedb_renamed{_T}_core/scene_statistics_se.csv")   # uncertainty_bv_vedb.py
     s = s[s.scope == "all frames"].set_index(["group", "measure"])
+    um = pd.read_csv(Q / f"out/private/bv_vedb_renamed{_T}/scene_unit_means.csv")
+    um = um[um.scope == "all frames"]
+    rng = np.random.default_rng(0)
     g = pd.read_csv(Q / f"results/controls_renamed{_T}_core/geom_describe.csv")
     g = g[(g.model == "dinov3") & (g.part == "all")]
     fig, (a, b) = plt.subplots(1, 2, figsize=(ts.SLIDE_W, ts.SLIDE_H), gridspec_kw={"width_ratios": [1, 2.3]})
     for j, (grp, k) in enumerate((("all ages", "bv"), ("VEDB", "vedb"))):
         r = s.loc[(grp, "median_area")]
-        a.bar(j, r["mean"] * 100, color=C[k], width=0.62)
-        a.errorbar(j, r["mean"] * 100, yerr=[[(r["mean"] - r.lo) * 100], [(r.hi - r["mean"]) * 100]], color=ts.INK, capsize=4)
-        a.text(j, r.hi * 100 + 0.3, f"{r['mean'] * 100:.1f}%", ha="center", fontsize=13, fontweight="bold")
-    a.set_xticks([0, 1], ["BabyView", "VEDB"]); a.set_ylabel("median object size (% of frame)"); a.set_ylim(0, 11.5)
+        v = um[um.group == grp].median_area * 100                      # one dot per child / session
+        a.scatter(j * 1.4 + rng.uniform(-.22, .22, len(v)), v, s=9 if k == "bv" else 3, color=C[k], alpha=.45 if k == "bv" else .2,
+                  lw=0, zorder=1)
+        a.errorbar(j * 1.4, r["mean"] * 100, yerr=r.se * 100, fmt="_", ms=26, mew=2.5, color=ts.INK, capsize=5, lw=2, zorder=3)
+        a.text(j * 1.4 + .3, r["mean"] * 100, f"{r['mean'] * 100:.1f}%", ha="left", va="center", fontsize=13, fontweight="bold")
+    a.set_xticks([0, 1.4], ["BabyView\n(n = 35)", "VEDB\n(n = 709)"]); a.set_xlim(-.5, 2.15)
+    a.set_ylabel("median object size (% of frame)"); a.set_ylim(bottom=0)
+    import unit_shares as US                                          # every child / session, core categories
+    core = [l.strip() for l in open(ts.ANALYSIS.parent / "data" / "included_categories_qwen_core.txt") if l.strip()]
+    tu = US.per_unit(DOM, categories=core)
     doms = _doms(["animals", "clothing", "food_drink", "furniture_rooms", "household", "toys", "vehicles"])
-    t = g.pivot(index="domain", columns="dataset", values="share_truncated").loc[doms] * 100
-    x = np.arange(len(doms)); w = 0.38
-    for j, k in enumerate(("bv", "vedb")):
-        b.bar(x + (j - 0.5) * w, t[k], w, color=C[k], label=L[k])
-    b.set_xticks(x, [DL[d] for d in doms], rotation=40, ha="right")
+    for i, d in enumerate(doms):
+        for j, k in enumerate(("bv", "vedb")):
+            u = tu[(tu.dataset == k) & (tu.domain == d)]; x = i + (j - .5) * .38
+            FS.units(b, x, u.edge * 100, C[k], width=.3, s=7 if k == "bv" else 3, seed=20 + i * 2 + j)
+            FS.mean_se(b, x, u.edge.mean() * 100, u.edge.std() / np.sqrt(len(u)) * 100, width=.3)
+    b.set_xticks(range(len(doms)), [DL[d] for d in doms], rotation=40, ha="right")
     for tk, d in zip(b.get_xticklabels(), doms):
         tk.set_color(DC[d])
-    b.set_ylabel("% cut off by frame edge"); b.legend(loc="upper left")
+    b.set_ylabel("% cut off by frame edge"); b.set_ylim(0, 100)
+    b.legend(handles=[plt.Line2D([], [], marker="o", ls="", color=C[k], label=L[k]) for k in ("bv", "vedb")], loc="upper left")
+    b.set_title("dots: children / sessions (≥ 20 objects); line: mean ± 1 SE", loc="left", fontsize=10, color=ts.MUTED)
     fig.tight_layout(); ts.save(fig, "q06_size_truncation_bv_vedb")
 
 
@@ -209,7 +231,7 @@ def rdm(df, cs):
 
 
 C["imagenet"] = ts.DS_COLOR["imagenet"]; L["imagenet"] = "ImageNet"
-TITLE_C = {"things": "#3b7dc4", "imagenet": "#7d62b8", "vedb": C["vedb"], "bv": C["bv"]}
+TITLE_C = {"things": ts.DS_COLOR["things"], "imagenet": ts.DS_COLOR["imagenet"], "vedb": C["vedb"], "bv": C["bv"]}
 
 
 def q07_rdms(keys=("things", "imagenet", "bv"), name="q07_rdms_things_imagenet_bv_dinov3"):
@@ -316,7 +338,7 @@ def q09_cluster_by_domain():
                 for xi, hi, t in zip(x, s.ci_high_sd, st):
                     if t:
                         ax.text(xi, hi + .05, t, ha="center", fontsize=10, fontweight="bold")
-        ax.set_xticks(range(len(doms)), [DL[d].replace(" & ", "\n& ") for d in doms])
+        ax.set_xticks(range(len(doms)), [DL[d] for d in doms], rotation=30, ha="right", rotation_mode="anchor")
         for tk, d in zip(ax.get_xticklabels(), doms):
             tk.set_color(DC[d]); tk.set_fontweight("bold")
         ax.set_ylabel("domain clustering (Δ / SD)"); ax.set_ylim(0, 4.4); ax.legend(loc="upper right", ncol=2 if len(ks) > 3 else 1)
@@ -335,7 +357,7 @@ def q10_real_only():
         kw = dict(color="white", edgecolor=C["bv"], lw=1.5, hatch="//") if k == "bv" else dict(color=C[k])
         ax.bar(x, s.delta_sd, w * 0.92, label="BabyView, all formats (toys, pictures)" if k == "bv" else L[k], **kw)
         ax.errorbar(x, s.delta_sd, yerr=[s.delta_sd - s.ci_low_sd, s.ci_high_sd - s.delta_sd], fmt="none", color=ts.INK, capsize=2, lw=1)
-    ax.set_xticks(range(len(doms)), [DL[d].replace(" & ", "\n& ") for d in doms])
+    ax.set_xticks(range(len(doms)), [DL[d] for d in doms], rotation=30, ha="right", rotation_mode="anchor")
     for tk, d in zip(ax.get_xticklabels(), doms):
         tk.set_color(DC[d]); tk.set_fontweight("bold")
     ax.set_ylabel("domain clustering (Δ / SD)"); ax.legend(loc="upper right", fontsize=10, ncol=2); ax.set_ylim(0, 4.8)
@@ -615,7 +637,7 @@ def q11p_subject_rdms(k=8):
 
 
 def q08e_ego_vs_curated(model="dinov3"):
-    """Domain clustering (delta / SD, 95% CI) for the three curated and two egocentric datasets on the 183 core categories;
+    """Domain clustering (delta / SD, ±1 bootstrap SE) for the three curated and two egocentric datasets on the 183 core categories;
     bracket = mean egocentric minus mean curated on the same category-bootstrap draws (ego_vs_curated.py)."""
     cs = pd.read_csv(RES / "cluster_strength_core.csv"); cs = cs[cs.model == model].set_index("dataset")
     ev = pd.read_csv(RES / "ego_vs_curated.csv")
@@ -625,9 +647,9 @@ def q08e_ego_vs_curated(model="dinov3"):
     x = [0, 1, 2, 3.6, 4.6]
     fig, ax = plt.subplots(figsize=(ts.SLIDE_W * 0.8, ts.SLIDE_H))
     for xi, (k, _) in zip(x, order):
-        v = cs.loc[k, "delta_sd"]; lo, hi = ci(cs.loc[k, "delta_sd_ci"])
+        v = cs.loc[k, "delta_sd"]; se = cs.loc[k, "delta_sd_se"]; hi = v + se       # ±1 bootstrap SE
         ax.bar(xi, v, color=col[k], width=0.7)
-        ax.errorbar(xi, v, yerr=[[v - lo], [hi - v]], color=ts.INK, capsize=4)
+        ax.errorbar(xi, v, yerr=se, color=ts.INK, capsize=4)
         ax.text(xi, hi + 0.02, f"{v:.2f}", ha="center", fontsize=13, fontweight="bold")
     mc = np.mean([cs.loc[k, "delta_sd"] for k in ("things", "imagenet", "lvis")])
     me = np.mean([cs.loc[k, "delta_sd"] for k in ("vedb", "bv")])
@@ -637,15 +659,15 @@ def q08e_ego_vs_curated(model="dinov3"):
     ax.plot([1, 1, 4.1, 4.1], [y - .02, y, y, y - .02], color=ts.INK, lw=1.2)
     ax.text(2.55, y + .01, f"egocentric − curated: {r['diff']:+.2f} [{r.ci_low:.2f}, {r.ci_high:.2f}] {st}", ha="center",
             va="bottom", fontsize=12, fontweight="bold")
-    ax.text(1, -0.16, "curated photographs", ha="center", fontsize=12, color=ts.MUTED, transform=ax.get_xaxis_transform())
-    ax.text(4.1, -0.16, "first-person video", ha="center", fontsize=12, color=ts.MUTED, transform=ax.get_xaxis_transform())
+    ax.text(1, -0.25, "curated photographs", ha="center", fontsize=12, color=ts.MUTED, transform=ax.get_xaxis_transform())
+    ax.text(4.1, -0.25, "first-person video", ha="center", fontsize=12, color=ts.MUTED, transform=ax.get_xaxis_transform())
     ax.set_xticks(x, [l for _, l in order]); ax.set_xlim(-0.6, 5.2); ax.set_ylim(0, 1.12)
     ax.set_ylabel("domain clustering (Δ / SD)")
-    fig.tight_layout(); fig.subplots_adjust(bottom=0.24); ts.save(fig, f"q08e_ego_vs_curated_{model}")
+    fig.tight_layout(); fig.subplots_adjust(bottom=0.30); ts.save(fig, f"q08e_ego_vs_curated_{model}")
 
 
 def q09e_ego_vs_curated_by_domain(model="dinov3"):
-    """Per CDI domain: delta / SD (95% CI) for THINGS, ImageNet, LVIS (curated) and VEDB, BabyView (first-person); above
+    """Per CDI domain: delta / SD (±1 bootstrap SE) for THINGS, ImageNet, LVIS (curated) and VEDB, BabyView (first-person); above
     each domain the pooled egocentric - curated difference (ego_vs_curated.py, BH across domains). 'outside' (3 core
     categories) left out, as in q09."""
     dd = pd.read_csv(RES / "cluster_strength_by_domain_core.csv"); dd = dd[dd.model == model]
@@ -661,18 +683,17 @@ def q09e_ego_vs_curated_by_domain(model="dinov3"):
     for k in ks:
         s_ = dd[dd.dataset == k].set_index("domain").loc[doms]; x = np.arange(len(doms)) + off[k]
         ax.bar(x, s_.delta_sd, w * 0.92, color=col[k], label=lab[k])
-        ax.errorbar(x, s_.delta_sd, yerr=[s_.delta_sd - s_.ci_low_sd, s_.ci_high_sd - s_.delta_sd], fmt="none",
-                    color=ts.INK, capsize=1.5, lw=0.9)
-        top = np.maximum(top, s_.ci_high_sd.values)
+        ax.errorbar(x, s_.delta_sd, yerr=s_.se_sd, fmt="none", color=ts.INK, capsize=1.5, lw=0.9)   # ±1 bootstrap SE
+        top = np.maximum(top, (s_.delta_sd + s_.se_sd).values)
     for i, d in enumerate(doms):
         r = ev.loc[d]; q = r.q_bh; st = "***" if q < .001 else "**" if q < .01 else "*" if q < .05 else "n.s."
         ax.text(i + 0.02, top[i] + 0.12, f"{r['diff']:+.2f}\n{st}", ha="center", va="bottom", fontsize=10,
                 fontweight="bold" if st != "n.s." else "normal", color=ts.INK if st != "n.s." else ts.MUTED)
-    ax.set_xticks(range(len(doms)), [DL[d].replace(" & ", "\n& ") for d in doms])
+    ax.set_xticks(range(len(doms)), [DL[d] for d in doms], rotation=30, ha="right", rotation_mode="anchor")
     for tk, d in zip(ax.get_xticklabels(), doms):
         tk.set_color(DC[d]); tk.set_fontweight("bold")
     ax.set_ylabel("domain clustering (Δ / SD)"); ax.set_ylim(0, top.max() + 0.9)
-    ax.legend(loc="upper right", ncol=2, fontsize=10)
+    ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0), fontsize=10)
     ax.set_title("number above each domain: first-person − curated (mean of 2 vs mean of 3)", loc="left", fontsize=11,
                  color=ts.MUTED)
     fig.tight_layout(); ts.save(fig, f"q09e_ego_vs_curated_by_domain_{model}")

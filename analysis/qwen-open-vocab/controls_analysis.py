@@ -3,9 +3,7 @@
 11-16 controls, rerun for the open-vocabulary main analysis).
 
 Sections (each writes results/controls[_renamed]/<section>_*.csv):
-  split    subject split (nb 11): category means from different children / sessions / THINGS images
   cooc     co-occurrence control (nb 12): same-domain coefficient with Jaccard + shared-context covariates
-  room     room / activity held fixed (nb 13), BabyView vs THINGS
   geom     crop geometry BabyView vs VEDB (nb 15): AUC within levels, geometry matching, noise ceilings, equivalence
   size     short-side floors on BabyView and VEDB (nb 16 analysis 1); LVIS / THINGS / ImageNet unchanged
   count    K exemplars per category in every dataset (nb 16 analysis 2): BabyView, VEDB, THINGS
@@ -20,12 +18,11 @@ bootstrap with shared draws (self-pairs dropped). Domains: categories.csv (Qwen 
 Inputs: out/private/open*/ (build_open_means.py), out/crossdataset*/tables_*.npz (build_crossdataset_tables.py),
 out/private/controls*/ (build_controls_data.py), out/private/bv_vedb*/sample_*.npz (build_bv_vedb_data.py).
 
-  QOV_LABELS=renamed nice -n 19 python controls_analysis.py [--sections split cooc ...] [--quick]
+  QOV_LABELS=renamed nice -n 19 python controls_analysis.py [--sections cooc geom ...] [--quick]
 
 QOV_CATS=core: every embedding comparison uses the cross-dataset core (data/included_categories_qwen_core.txt: the 183
 categories present in all five datasets) or, for real-object comparisons, its 164 categories with real-object
-exemplars in BabyView and VEDB (included_categories_qwen_core_real.txt); sections with extra requirements (both halves,
-one room, a geometry cell) use the core categories that meet them. All-formats and real-only datasets are compared
+exemplars in BabyView and VEDB (included_categories_qwen_core_real.txt); sections with extra requirements (a geometry cell) use the core categories that meet them. All-formats and real-only datasets are compared
 separately so all-formats comparisons keep the full core. Frequency agreement (prev) is not restricted. Results go to
 results/controls[_renamed]_core/.
 """
@@ -79,6 +76,7 @@ CATS = pd.read_csv(OPEN / "categories.csv", index_col=0)
 DOM = CATS.domain.to_dict()
 CATLIST = CATS.index.tolist()
 N_BOOT = 1000
+N_BOOT_MATCH = 10000    # geometry matching (Response Figure R1e): its tests are drawn, so p can resolve below .001
 
 
 # ---------------------------------------------------------------- shared helpers
@@ -122,13 +120,14 @@ def draws(sem, n=N_BOOT, seed=0):
 
 
 def ci_p(x):
+    """95% percentile CI and two-sided bootstrap p, floored at the resolution of the draws (2 / n)."""
     x = np.asarray(x)
     lo, hi = np.percentile(x, [2.5, 97.5])
-    return lo, hi, float(min(1, 2 * min((x <= 0).mean(), (x >= 0).mean())))
+    return lo, hi, float(min(1, max(2 * min((x <= 0).mean(), (x >= 0).mean()), 2 / len(x))))
 
 
-def compare(R: dict, cs, tag: dict, n_boot=N_BOOT, seed=0):
-    """AUC / delta / delta-SD per dataset with bootstrap CIs, and every pairwise difference. R: name -> RDM on cs."""
+def compare(R: dict, cs, tag: dict, n_boot=N_BOOT, seed=0, return_boot=False):
+    """AUC / delta / delta-SD per dataset with bootstrap CIs and SEs, and every pairwise difference. R: name -> RDM on cs."""
     sem = sem_of(cs)
     names = list(R)
     obs = {k: measures(R[k], sem) for k in names}
@@ -137,13 +136,14 @@ def compare(R: dict, cs, tag: dict, n_boot=N_BOOT, seed=0):
     for i, k in enumerate(names):
         lo, hi = np.percentile(B[:, i, 0], [2.5, 97.5])
         rows.append({**tag, "dataset": k, "n_categories": len(cs), "auc": obs[k][0], "auc_ci_lo": lo, "auc_ci_hi": hi,
-                     "delta": obs[k][1], "delta_sd": obs[k][2]})
+                     "delta": obs[k][1], "delta_sd": obs[k][2], "auc_se": B[:, i, 0].std(ddof=1),
+                     "delta_se": B[:, i, 1].std(ddof=1), "delta_sd_se": B[:, i, 2].std(ddof=1)})
     for i, j in combinations(range(len(names)), 2):
         for q, metric in enumerate(("auc", "delta", "delta_sd")):
             lo, hi, p = ci_p(B[:, i, q] - B[:, j, q])
             diffs.append({**tag, "pair": f"{names[i]} - {names[j]}", "metric": metric, "n_categories": len(cs),
                           "diff": obs[names[i]][q] - obs[names[j]][q], "ci_lo": lo, "ci_hi": hi, "p": p})
-    return rows, diffs
+    return (rows, diffs, B, obs) if return_boot else (rows, diffs)
 
 
 def tables(m):
@@ -193,64 +193,6 @@ def save(rows, name):
     df = pd.DataFrame(rows)
     df.to_csv(RES / f"{name}.csv", index=False)
     return df
-
-
-# ---------------------------------------------------------------- split (nb 11)
-def sec_split(q):
-    K, MIN_N = (10, 5) if q else (50, 5)
-    rows, diffs, per_split = [], [], []
-    for m in MODELS:
-        T = tables(m)
-        src = {}
-        for ds, part, key in (("bv", "all", "bv"), ("bv", "real", "bv_real"), ("vedb", "all", "vedb"), ("vedb", "real", "vedb_real")):
-            u, S, N = unit_sums(m, ds, part)
-            src[key] = ("unit", u, S, N)
-        tc, tX = things_images(m)
-        src["things"] = ("image", tc, tX, None)
-
-        def halves(key, k):
-            kind, a, b, c = src[key]
-            rng = np.random.default_rng(1000 + k)
-            if kind == "unit":
-                A = rng.permutation(len(a))[: len(a) // 2]; inA = np.zeros(len(a), bool); inA[A] = True
-                SA, NA, SB, NB = b[inA].sum(0), c[inA].sum(0), b[~inA].sum(0), c[~inA].sum(0)
-                return SA / np.maximum(NA, 1)[:, None], NA, SB / np.maximum(NB, 1)[:, None], NB
-            sel = np.zeros(len(a), bool)
-            for ci in np.unique(a):
-                ix = rng.permutation(np.flatnonzero(a == ci)); sel[ix[: len(ix) // 2]] = True
-            MA, NA = means_from(dict(cat=a, n=np.ones(len(a)), X=b), sel)
-            MB, NB = means_from(dict(cat=a, n=np.ones(len(a)), X=b), ~sel)
-            return MA, NA, MB, NB
-
-        H = {key: [halves(key, k) for k in range(K)] for key in src}
-        ok = {key: np.logical_and.reduce([(h[1] >= MIN_N) & (h[3] >= MIN_N) for h in H[key]]) for key in H}
-        groups = ({"bv_things": ["bv", "bv_real", "things"], "bv_vedb_things": ["bv", "bv_real", "vedb", "vedb_real", "things"]}
-                  if CORE_MODE != "core" else
-                  {"bv_things": ["bv", "things"], "bv_things_real": ["bv_real", "things"],
-                   "bv_vedb_things": ["bv", "vedb", "things"], "bv_vedb_things_real": ["bv_real", "vedb_real", "things"]})
-        for name, dss in groups.items():
-            ci = restrict_idx(np.flatnonzero(np.logical_and.reduce([ok[d] for d in dss])), is_real(dss))
-            cs = [CATLIST[i] for i in ci]; sem = sem_of(cs)
-            R = {}
-            for d in dss:
-                rx_sum = 0
-                for k, (MA, _, MB, _) in enumerate(H[d]):
-                    a_, b_ = zrows(MA[ci]), zrows(MB[ci])
-                    rw = cosd(a_); rx = cosd(a_, b_); rx = (rx + rx.T) / 2
-                    w_, x_ = measures(rw, sem), measures(rx, sem)
-                    per_split.append({"model": m, "comparison": name, "dataset": d, "split": k,
-                                      "auc_within": w_[0], "auc_cross": x_[0], "delta_within": w_[1], "delta_cross": x_[1]})
-                    rx_sum = rx_sum + rx
-                R[d] = rx_sum / K
-            r, dd = compare(R, cs, {"model": m, "comparison": name, "rdm": "cross-half"})
-            rows += r; diffs += dd
-            print(f"split {m} {name}: {len(cs)} categories", flush=True)
-    ps = save(per_split, "split_per_split")
-    s = save(rows, "split_summary"); save(diffs, "split_differences")
-    w = ps.groupby(["model", "comparison", "dataset"])[["auc_within", "auc_cross", "delta_within", "delta_cross"]].mean()
-    w["cross_over_within_delta"] = w.delta_cross / w.delta_within
-    w.reset_index().to_csv(RES / "split_within_vs_cross.csv", index=False)
-    print(w.round(3).to_string())
 
 
 # ---------------------------------------------------------------- cooc (nb 12)
@@ -335,46 +277,6 @@ def sec_cooc(q):
     print(r.round(3).to_string()); print(d.round(3).to_string())
 
 
-# ---------------------------------------------------------------- room (nb 13)
-def sec_room(q, only=None):
-    """only: (model, kind) to run one slice (written to room_*__<model>_<kind>.csv; merge with --sections room_merge)."""
-    MIN_N = 20
-    meta = json.load(open(CTRL / "meta.json"))
-    rows, diffs = [], []
-    for m in MODELS if only is None else [only[0]]:
-        T = tables(m)
-        for kind, labels in (("room", meta["rooms"][:-1]), ("act", meta["activities"][:-1])):
-            if only is not None and kind != only[1]:
-                continue
-            d = keyed(CTRL / f"{kind}_bv.npz", m)
-            for part in ("all", "real"):
-                base = np.ones(len(d["n"]), bool) if part == "all" else d["real"] == 1
-                pooled, npool = means_from(d, base)
-                lab = {L: means_from(d, base & (d["code"] == i)) for i, L in enumerate(labels)}
-                for L, (M, n) in lab.items():                          # same label vs pooled vs THINGS
-                    cs = restrict([c for i, c in enumerate(CATLIST) if n[i] >= MIN_N and c in T["things"].index], part == "real")
-                    if len(cs) < 30: continue
-                    ci = [CATLIST.index(c) for c in cs]
-                    R = {f"bv_{part} same {kind}": cosd(zrows(M[ci])), f"bv_{part} pooled": cosd(zrows(pooled[ci])),
-                         "things": cosd(zrows(T["things"].loc[cs].values.astype(float)))}
-                    r, dd = compare(R, cs, {"model": m, "kind": kind, "label": L, "part": part}, n_boot=300 if q else N_BOOT)
-                    rows += r; diffs += dd
-                for L1, L2 in combinations(labels, 2):                  # cross label: no pair shares the room
-                    (M1, n1), (M2, n2) = lab[L1], lab[L2]
-                    cs = restrict([c for i, c in enumerate(CATLIST) if n1[i] >= MIN_N and n2[i] >= MIN_N and c in T["things"].index], part == "real")
-                    if len(cs) < 30: continue
-                    ci = [CATLIST.index(c) for c in cs]
-                    a_, b_ = zrows(M1[ci]), zrows(M2[ci]); rx = cosd(a_, b_); rx = (rx + rx.T) / 2
-                    R = {f"bv_{part} cross {kind}": rx, f"bv_{part} same {kind} (mean of two)": (cosd(a_) + cosd(b_)) / 2,
-                         "things": cosd(zrows(T["things"].loc[cs].values.astype(float)))}
-                    r, dd = compare(R, cs, {"model": m, "kind": kind, "label": f"{L1} x {L2}", "part": part}, n_boot=300 if q else N_BOOT)
-                    rows += r; diffs += dd
-            print(f"room {m} {kind} done", flush=True)
-    sfx = "" if only is None else f"__{only[0]}_{only[1]}"
-    r = save(rows, f"room_summary{sfx}"); save(diffs, f"room_differences{sfx}")
-    print(r[r.part == "all"].pivot_table(index=["model", "kind", "label"], columns="dataset", values="auc").round(3).to_string())
-
-
 # ---------------------------------------------------------------- geom (nb 15)
 def sec_geom(q):
     meta = json.load(open(CTRL / "meta.json"))
@@ -423,16 +325,29 @@ def sec_geom(q):
                 for ds in CS:
                     Mm[ds][k] = (w[:, None] * CS[ds][both, i] / CN[ds][both, i][:, None]).sum(0)
             cm_ = [cs[k] for k in np.flatnonzero(okm)]
+            BM = {}                                   # same seed and categories -> the two conditions share their draws
             for cond in ("unmatched", "matched"):
                 if cond == "unmatched":
                     R = {ds: cosd(zrows(CS[ds][:, ci[okm]].sum(0) / CN[ds][:, ci[okm]].sum(0)[:, None])) for ds in CS}
                 else:
                     R = {ds: cosd(zrows(Mm[ds][okm])) for ds in CS}
-                r, dd = compare(R, cm_, {"model": m, "part": part, "analysis": "matching", "level": cond}, n_boot=n_boot)
+                r, dd, BM[cond], obs = compare(R, cm_, {"model": m, "part": part, "analysis": "matching", "level": cond},
+                                               n_boot=N_BOOT_MATCH if not q else n_boot, return_boot=True)
+                BM[cond + "_obs"] = obs
                 a, b = pairs(len(cm_))
                 rho = stats.spearmanr(R["bv"][a, b], R["vedb"][a, b]).statistic
                 for x in r: x["bv_vedb_rho"] = rho
                 rows += r; diffs += dd
+            # does matching change clustering? matched - unmatched per dataset, and the change in the BabyView - VEDB gap
+            names = list(BM["matched_obs"])
+            for qi, metric in enumerate(("auc", "delta", "delta_sd")):
+                ch = {k: BM["matched"][:, i, qi] - BM["unmatched"][:, i, qi] for i, k in enumerate(names)}
+                och = {k: BM["matched_obs"][k][qi] - BM["unmatched_obs"][k][qi] for k in names}
+                for lab_, x, o in [(f"{k}: matched - unmatched", ch[k], och[k]) for k in names] + \
+                                  [("(bv - vedb): matched - unmatched", ch["bv"] - ch["vedb"], och["bv"] - och["vedb"])]:
+                    lo, hi, p = ci_p(x)
+                    diffs.append({"model": m, "part": part, "analysis": "matching", "level": "matched - unmatched", "pair": lab_,
+                                  "metric": metric, "n_categories": len(cm_), "diff": o, "ci_lo": lo, "ci_hi": hi, "p": p})
             print(f"geom {m} {part}: {len(ci)} categories, {len(cm_)} matched", flush=True)
         # 4. noise ceilings and 5. equivalence (all formats and real), on per-unit sums
         for part in ("all", "real"):
@@ -638,23 +553,14 @@ def sec_things(q):
     print(k.groupby("model")[["auc_lower_than_things", "delta_higher_than_things"]].agg(["sum", "size"]))
 
 
-def sec_room_merge(q):
-    for name in ("room_summary", "room_differences"):
-        parts = sorted(RES.glob(f"{name}__*.csv"))
-        pd.concat([pd.read_csv(f) for f in parts]).to_csv(RES / f"{name}.csv", index=False)
-        print(f"{name}: merged {len(parts)} slices")
-
-
-SECTIONS = {"split": sec_split, "cooc": sec_cooc, "room": sec_room, "geom": sec_geom, "size": sec_size,
-            "count": sec_count, "perm": sec_perm, "prev": sec_prev,
-            "room_merge": sec_room_merge, "things": sec_things}
+SECTIONS = {"cooc": sec_cooc, "geom": sec_geom, "size": sec_size, "count": sec_count, "perm": sec_perm, "prev": sec_prev,
+            "things": sec_things}
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--sections", nargs="*", default=list(SECTIONS))
     ap.add_argument("--quick", action="store_true", help="fewer splits / draws, for checking")
-    ap.add_argument("--room-only", nargs=2, metavar=("MODEL", "KIND"), help="room section: one model x (room | act) slice")
     a = ap.parse_args()
     print("labels:", V.LABELS, "->", RES, flush=True)
     for s in a.sections:
-        SECTIONS[s](a.quick, tuple(a.room_only)) if s == "room" and a.room_only else SECTIONS[s](a.quick)
+        SECTIONS[s](a.quick)

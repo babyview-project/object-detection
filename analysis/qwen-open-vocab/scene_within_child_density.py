@@ -186,7 +186,8 @@ def main():
     fig.suptitle("Within-child change with age, weighted by frames. Points: child-month means (area by frames); "
                  "thin: each child's frame-weighted trend;\nthick: frame-weighted mixed-model within-child slope "
                  "(random intercept + age slope per child); orange: VEDB adults", x=.01, ha="left", fontsize=10)
-    fig.tight_layout(rect=(0, 0, 1, .95))
+    fig.tight_layout(rect=(0, 0, 1, .95), w_pad=2.5, h_pad=2)
+    FS.text_overlaps(fig, "scene_statistics_within_child_density")
     fig.savefig(FIG / "scene_statistics_within_child_density.png", dpi=200, bbox_inches="tight")
     print("saved", FIG / "scene_statistics_within_child_density.png")
 

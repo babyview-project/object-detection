@@ -39,28 +39,38 @@ def summary():
 
 
 def a01_scorecard():
-    s, ir = summary(); a, nb, bp = s.loc["all"], s.loc["without body parts"], s.loc["body parts only"]
-    rows = [("Precision", a.precision, "Qwen boxes people kept"),
-            ("Recall", a.recall, "people's objects Qwen found"),
-            ("  without body parts", nb.recall, ""),
-            ("Name kept", a.name_kept_norm, "of kept boxes"),
-            ("Format kept", a.format_kept, "real / toy / picture / screen"),
-            ("Qwen vs people (F1)", a.f1, ""),
-            ("Person vs person (F1)", ir.box_agreement_f1, f"{int(ir.shared_frames_both_reviewed)} shared frames")]
+    """Validation scorecard: one dot per child (size = frames), pooled value with ±1 SE (10,000 resamples of the children;
+    annotation/gold_set/validation_uncertainty.py). No bars: every child is shown."""
+    s, ir = summary()
+    U = pd.read_csv(RS / "scorecard_uncertainty.csv").set_index(["set", "measure"])
+    K = pd.read_csv(RS / "scorecard_by_child.csv")
+    rows = [("Precision", "all", "precision", "Qwen boxes people kept"),
+            ("Recall", "all", "recall", "people's objects Qwen found"),
+            ("Recall, without body parts", "without body parts", "recall", ""),
+            ("Name kept", "all", "name_kept", "of kept boxes"),
+            ("Format kept", "all", "format_kept", "real / toy / picture / screen"),
+            ("Qwen vs people (F1)", "all", "f1", ""),
+            ("Person vs person (F1)", "shared frames", "interrater_f1", f"{int(ir.shared_frames_both_reviewed)} shared frames")]
     fig, ax = plt.subplots(figsize=(ts.SLIDE_W, ts.SLIDE_H * 0.92))
     y = np.arange(len(rows))[::-1]
-    col = [TEAL, TEAL, "#9ED8CF", NAVY, NAVY, "#8B6FC9", "#B8B8B8"]
-    ax.barh(y, [r[1] for r in rows], color=col, height=0.62)
-    for yi, (lab, v, sub) in zip(y, rows):
-        ax.text(v + 0.012, yi, f"{v:.2f}", va="center", fontsize=14, fontweight="bold")
-        if sub:
-            ax.text(0.015, yi, sub, va="center", fontsize=10.5, color="white", fontweight="bold")
-    ax.set_yticks(y, [r[0] for r in rows]); ax.set_xlim(0, 1.08); ax.set_xticks([0, .25, .5, .75, 1])
-    ax.set_xlabel("proportion"); ax.spines["left"].set_visible(False); ax.tick_params(axis="y", length=0)
+    rng = np.random.default_rng(0)
+    for yi, (lab, st, m, sub) in zip(y, rows):
+        k = K[(K.set == st)]
+        ax.scatter(k[m], yi + rng.uniform(-.18, .18, len(k)), s=8 + k.frames * 0.5, color=ts.MUTED, alpha=.45, lw=0, zorder=1)
+        u = U.loc[(st, m)]
+        ax.errorbar(u.value, yi, xerr=u.se, fmt="D", ms=7, color=ts.INK, capsize=4, lw=1.8, zorder=3)
+        ax.text(1.02, yi, f"{u.value:.2f} ± {u.se:.3f}", va="center", fontsize=12, fontweight="bold", transform=ax.get_yaxis_transform())
+    ax.set_yticks(y, [r[0] + (f"\n({r[3]})" if r[3] else "") for r in rows], fontsize=11)
+    ax.set_xlim(0.5, 1.005); ax.set_xlabel("proportion"); ax.tick_params(axis="y", length=0)
+    ax.set_ylim(-.7, len(rows) - .4)
     rv = pd.read_csv(RS / "reviewed_frames.csv")
     n_frames = int(rv.frames_reviewed.sum() - ir.shared_frames_both_reviewed)        # shared frames counted once
-    ax.set_title(f"{n_frames:,} BabyView frames · {int(a.qwen_boxes):,} Qwen boxes · {int(a.ra_boxes):,} after correction",
-                 fontsize=13, color=ts.MUTED, loc="left")
+    a = s.loc["all"]
+    ax.set_title(f"{n_frames:,} BabyView frames from {int(U.loc[('all', 'precision')].children)} children · "
+                 f"{int(a.qwen_boxes):,} Qwen boxes · {int(a.ra_boxes):,} after correction\n"
+                 "dots: children (size = frames); black: all frames pooled, ± 1 SE (children resampled)",
+                 fontsize=11, color=ts.MUTED, loc="left")
+    fig.tight_layout()
     ts.save(fig, "a01_scorecard")
 
 
@@ -74,7 +84,7 @@ def a02_category_pr(min_n=60):
     lab = set(b.nsmallest(6, "recall").index) | set(b.nsmallest(4, "precision").index) | set(b.nlargest(4, "qwen_boxes").index)
     for n in lab:
         r = b.loc[n]
-        dx, dy, ha = {"box": (-8, 6, "right"), "paper": (-8, -14, "right")}.get(n, (6, 4, "left"))
+        dx, dy, ha = {"box": (-8, 6, "right"), "paper": (-8, -14, "right"), "ball": (6, -12, "left"), "bottle": (-8, 6, "right")}.get(n, (6, 4, "left"))
         ax.annotate(n, (r.recall, r.precision), xytext=(dx, dy), textcoords="offset points", fontsize=11,
                     fontweight="bold", ha=ha)
     ax.set_xlabel("recall (found by Qwen / boxed by people)"); ax.set_ylabel("precision (kept by people)")

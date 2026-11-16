@@ -173,7 +173,7 @@ def figure(t, s, domains):
     a = ax[3]; a.axvline(0, color=FS.BASELINE, lw=1)
     h = 0.36
     a.barh(y + h / 2, t.mix_term, height=h, color=FS.DS_COLOR["bv"], label="more or fewer of the domain")
-    a.barh(y - h / 2, t.size_term, height=h, color=FS.DS_COLOR["bv_real"], label="the domain's objects smaller")
+    a.barh(y - h / 2, t.size_term, height=h, color="white", edgecolor=FS.DS_COLOR["bv"], hatch="///", lw=1, label="the domain's objects smaller")
     a.set_xlabel("contribution to change in size, % per year"); a.set_title("D  What drives the overall fall", loc="left")
     a.legend(loc="lower left", fontsize=8)
     r = s[s.format == "all"].iloc[0]

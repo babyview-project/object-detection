@@ -42,7 +42,7 @@ NAMES = {"a01_scorecard": "fig1b_validation", "a03_format_confusion": "fig1c_for
          "a02_category_pr": "figS_category_pr",
          "q15c_long_tail_ccn_bv": "fig2a_long_tail", "q03_rank_frequency_bv_vedb": "fig2b_rank_frequency_bv_vedb",
          "q16_frequency_bv_vs_imagenet": "fig2c_frequency_imagenet", "q04_bv_vs_vedb_frequency": "fig2d_frequency_vedb",
-         "q14_most_depicted_categories": "fig3b_most_depicted", "q05_depictions_bv_vedb": "fig3c_depictions_bv_vedb",
+         "q14_most_depicted_categories": "figS_most_depicted_categories", "q05_depictions_bv_vedb": "fig3c_depictions_bv_vedb",
          "q13_similarity_to_things_by_domain": "fig4a_similarity_to_things",
          "q08e_ego_vs_curated_dinov3": "fig6a_cluster_strength", "q09e_ego_vs_curated_by_domain_dinov3": "fig6b_cluster_by_domain",
          "q11p_subject_rdms": "fig7a_subject_rdms", "q06_size_truncation_bv_vedb": "fig8a_size_truncation"}
@@ -53,6 +53,7 @@ def save(fig, name, private=False, scale=ts.TEXT_SCALE):
     """Talk styling (Lato, bold), written to figures/manuscript/ under the manuscript name."""
     name = NAMES.get(name, name)
     ts.bolden(fig, scale)
+    FS.text_overlaps(fig, name)
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", pad_inches=0.08, dpi=200)
     plt.close(fig)
@@ -121,41 +122,50 @@ def long_tail(key="bv", n_top=60, per_domain=10):
     save(fig, "fig2a_long_tail" if key == "bv" else "figS_long_tail_vedb", scale=1.0)
 
 
+# ---- Fig. 2E: categories most over-represented for children and for adults -------------------------------------------
+def fig2e_frequency_ratio(n_side=15):
+    """log2(BabyView / VEDB frame prevalence) for the n_side most child-heavy and most adult-heavy categories (>= 50 frames
+    in each dataset); whiskers ±1 SE from resampling children and sessions (uncertainty_bv_vedb.py)."""
+    R = RES_ / f"bv_vedb_renamed{_T}_core"
+    fig, axs = plt.subplots(1, 2, figsize=(ts.SLIDE_W, ts.SLIDE_H * 1.15))
+    for ax, (f, title) in zip(axs, (("category_frequency_ratio_se.csv", "all frames"),
+                                    ("category_frequency_ratio_home_se.csv", "home-scene frames"))):
+        t = pd.read_csv(R / f, index_col=0).sort_values("log2_ratio")
+        s = pd.concat([t.head(n_side), t.tail(n_side)]); y = np.arange(len(s))
+        col = [C["bv"] if v > 0 else C["vedb"] for v in s.log2_ratio]
+        ax.errorbar(s.log2_ratio, y, xerr=s.se, fmt="none", ecolor=ts.MUTED, capsize=2, lw=1)
+        ax.scatter(s.log2_ratio, y, c=col, s=26, zorder=3)
+        ax.set_yticks(y, s.index, fontsize=8.5); ax.axvline(0, color=ts.FAINT, lw=1, ls="--")
+        ax.set_title(f"{title} ({len(t)} categories)", loc="left", fontsize=11)
+    fig.supxlabel("log2 frame prevalence ratio, BabyView / VEDB", fontsize=11)
+    fig.tight_layout(); save(fig, "fig2e_frequency_ratio")
+
+
 # ---- Fig. 3A: format by domain, all 35 children ---------------------------------------------------------------------
 def fig3a_formats_by_domain():
-    fb = pd.read_csv(HERE / f"out/crossdataset_renamed{_T}/format_by_category.csv")
-    fb = fb[fb.dataset == "bv"].copy()
-    tier1 = {l.strip() for l in open(ts.ANALYSIS.parent / "data" / "included_categories_qwen_open_tier1.txt") if l.strip()}
-    fb = fb[fb.category.isin(tier1)]
-    fb["domain"] = fb.category.map(DOM).fillna("other")
-    F = ["real", "toy", "picture", "screen"]
-    tot = fb[F].mul(fb.n, axis=0).sum()
-    # by domain, categories that are depictions by definition (toy, doll, teddy bear, picture, screen...) are left out,
-    # as in format_depicted_by_domain.csv and the text
-    INTRINSIC = {"picture", "photo", "drawing", "painting", "poster", "sticker", "screen", "television", "toy", "block",
-                 "puzzle", "puzzle piece", "doll", "teddy bear", "lego", "lego block", "stuffed animal", "figurine", "cartoon",
-                 "map", "calendar", "book", "picture book", "card", "tablet", "phone", "laptop", "computer monitor", "monitor"}
-    fb = fb[~fb.category.isin(INTRINSIC)]
-    cnt = fb[F].mul(fb.n, axis=0).groupby(fb.domain).sum()
-    doms = [d for d in FS.DOMAIN_ORDER if d in cnt.index]
-    sh = cnt.loc[doms].div(cnt.loc[doms].sum(1), axis=0)
-    fig, ax = plt.subplots(figsize=(ts.SLIDE_W, ts.SLIDE_H))
+    """Format by domain, every BabyView child: per domain and format (toy, picture, screen), each child's share of that
+    domain's objects (children with >= 20 objects in the domain; categories that are depictions by definition left
+    out), mean ± 1 SE across children. Pooled shares are in format_depicted_by_domain.csv."""
+    import unit_shares as US
+    u = US.per_unit(DOM, exclude_intrinsic=True); u = u[u.dataset == "bv"]
+    allu = US.per_unit(); allu = allu[allu.dataset == "bv"]
+    doms = [d for d in FS.DOMAIN_ORDER if d in set(u.domain) and (u.domain == d).sum() >= 10]
+    F = ["toy", "picture", "screen"]
+    fig, axs = plt.subplots(1, 3, figsize=(ts.SLIDE_W, ts.SLIDE_H), sharey=True)
     y = np.arange(len(doms))[::-1]
-    left = np.zeros(len(doms))
-    for f in F:
-        ax.barh(y, sh[f], left=left, color=FMT_COL[f], height=0.72, label=f)
-        left += sh[f].values
-    for yi, d in zip(y, doms):
-        n = cnt.loc[d].sum(); dep = 1 - sh.loc[d, "real"]
-        ax.text(1.01, yi, f"{dep:.0%} depicted  (n = {n / 1e6:.2f} M)" if n >= 1e6 else f"{dep:.0%} depicted  (n = {n / 1e3:.0f} k)",
-                va="center", fontsize=10, color=ts.MUTED)
-    ax.set_yticks(y, [DL.get(d, d) for d in doms])
-    for tk, d in zip(ax.get_yticklabels(), doms):
+    for ax, f in zip(axs, F):
+        for yi, d in zip(y, doms):
+            v = u[u.domain == d][f] * 100
+            FS.units(ax, yi, v, ts.MUTED, width=.5, s=10, horizontal=True, seed=int(yi))
+            FS.mean_se(ax, yi, v.mean(), v.std() / np.sqrt(len(v)), horizontal=True, width=.55)
+        ax.set_title(f"{f}  (all objects: {allu[f].mean() * 100:.1f}%)", loc="left", fontsize=11)
+        ax.set_xlim(left=0); ax.xaxis.set_major_locator(plt.MaxNLocator(3))
+    axs[0].set_yticks(y, [DL.get(d, d) for d in doms])
+    for tk, d in zip(axs[0].get_yticklabels(), doms):
         tk.set_color(DC.get(d, DC["other"])); tk.set_fontweight("bold")
-    ax.set_xlim(0, 1); ax.set_xlabel("share of objects")
-    ax.legend(ncol=4, loc="lower left", bbox_to_anchor=(0, 1.0), frameon=False)
-    ax.set_title(f"All 35 children, {tot.sum() / 1e6:.1f} M objects in 828 categories: "
-                 f"{1 - tot['real'] / tot.sum():.1%} depicted", loc="left", fontsize=12, pad=30)
+    fig.suptitle(f"{len(allu)} children: dots = children (≥ 20 objects in the domain); line = mean ± 1 SE", x=.01, ha="left",
+                 fontsize=11, color=ts.MUTED)
+    fig.supxlabel("% of the domain's objects", fontsize=12, fontweight="bold")
     fig.tight_layout(); save(fig, "fig3a_formats_by_domain")
 
 
@@ -176,7 +186,7 @@ def fig5a_rdms():
         im = ax.imshow(Q._pct(R[k]), cmap="viridis", vmin=0, vmax=1, interpolation="nearest")
         Q._blocks(ax, starts, lw=0.6)
         name = {"bv": "BabyView (child)", "vedb": "VEDB (adult)"}.get(k, L[k])
-        ax.set_title(name, fontsize=12, fontweight="bold", color=C[k] if k != "things" else "#3b7dc4", pad=18)
+        ax.set_title(name, fontsize=12, fontweight="bold", color=C[k], pad=18)
         if k != "bv":
             ax.text(0.5, 1.01, f"ρ with BabyView = {spearmanr(R[k][iu], R['bv'][iu]).statistic:.2f}", transform=ax.transAxes,
                     ha="center", va="bottom", fontsize=9.5, color=ts.MUTED)
@@ -213,32 +223,42 @@ def fig6c_real_only():
         s = dr[dr.dataset == k].set_index("domain").reindex(doms); x = np.arange(len(doms)) + off[k]
         kw = dict(color="white", edgecolor=C["bv"], lw=1.5, hatch="//") if k == "bv" else dict(color=C[k])
         ax.bar(x, s.delta_sd, w * 0.92, label="BabyView, all formats" if k == "bv" else lab[k], **kw)
-        ax.errorbar(x, s.delta_sd, yerr=[s.delta_sd - s.ci_low_sd, s.ci_high_sd - s.delta_sd], fmt="none", color=ts.INK,
-                    capsize=1.5, lw=0.9)
+        ax.errorbar(x, s.delta_sd, yerr=s.se_sd, fmt="none", color=ts.INK, capsize=1.5, lw=0.9)   # ±1 bootstrap SE
         pair = {"things": "bv_real - things", "imagenet": "bv_real - imagenet", "lvis": "bv_real - lvis",
                 "vedb_real": "bv_real - vedb_real", "bv": "bv - bv_real"}.get(k)
         if pair:
             st = sg[sg.pair == pair].set_index("domain").reindex(doms).stars.fillna("")
-            for xi, hi, t in zip(x, s.ci_high_sd, st):
+            for xi, hi, t in zip(x, s.delta_sd + s.se_sd, st):
                 if t and t != "n.s.":
-                    ax.text(xi, hi + .04, t, ha="center", va="bottom", fontsize=8, fontweight="bold", rotation=90)
-    ax.set_xticks(range(len(doms)), [DL[d].replace(" & ", "\n& ") for d in doms])
+                    ax.text(xi, hi + .04, t, ha="center", va="bottom", fontsize=7.5, fontweight="bold")
+    ax.set_xticks(range(len(doms)), [DL[d] for d in doms], rotation=30, ha="right", rotation_mode="anchor")
     for tk, d in zip(ax.get_xticklabels(), doms):
         tk.set_color(DC[d]); tk.set_fontweight("bold")
-    ax.set_ylabel("domain clustering (Δ / SD)"); ax.legend(loc="upper right", fontsize=10, ncol=2); ax.set_ylim(0, 5.2)
-    ax.set_title(f"Real objects only (164 categories); stars: BabyView real vs each dataset", loc="left", fontsize=12)
+    ax.set_ylabel("domain clustering (Δ / SD)"); ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0), fontsize=10); ax.set_ylim(0, 5.2)
+    ax.set_title(f"Real objects only (164 categories; ± 1 SE). Stars: BabyView real vs each dataset (on hatched bars: all formats\n"
+                 "vs real), BH across domains × comparisons (* q < .05, ** < .01, *** < .001)", loc="left", fontsize=10.5)
     fig.tight_layout(); save(fig, "fig6c_real_only_by_domain")
 
 
 # ---- Fig. 7B-C: all 35 children -------------------------------------------------------------------------------------
-def domain_stats(D, cs, raw=False):
-    sem = np.array([DOM.get(c, "other") for c in cs]); iu = np.triu_indices(len(cs), 1)
-    x = D[iu]; same = sem[iu[0]] == sem[iu[1]]
+def domain_stats(D, cs, raw=False, idx=None):
+    """Delta / SD (or raw delta) of RDM D over categories cs; idx = a bootstrap draw of category indices (pairs of a
+    category with its own copy left out, as in the dataset-level bootstrap)."""
+    sem = np.array([DOM.get(c, "other") for c in cs]); ix = np.arange(len(cs)) if idx is None else idx
+    i, j = np.triu_indices(len(ix), 1); a, b = ix[i], ix[j]; ok = a != b
+    x = D[a[ok], b[ok]]; same = sem[a][ok] == sem[b][ok]
     d = x[~same].mean() - x[same].mean()
     return d if raw else d / x.std()
 
 
-def fig7_children(min_n=20, n_boot=500, min_shared=20):
+def strat_draws(cs, n, rng):
+    """Category bootstrap within domains (each domain keeps its size), as in crossdataset_analysis draws()."""
+    sem = np.array([DOM.get(c, "other") for c in cs])
+    by = [np.flatnonzero(sem == d) for d in sorted(set(sem))]
+    return [np.concatenate([rng.choice(v, len(v)) for v in by]) for _ in range(n)]
+
+
+def fig7_children(min_n=20, n_boot=10000, min_shared=20):
     T = Q.tables(); TH = T["things"]; CORE = set(Q.CORE)
     z = np.load(PRIV / f"open_renamed{_T}/sums_dinov3.npz", allow_pickle=True)
     subj, cats = list(z["subjects"]), list(z["categories"]); S, N = z["sum_all"], z["n_all"]
@@ -248,19 +268,19 @@ def fig7_children(min_n=20, n_boot=500, min_shared=20):
     for i, sb in enumerate(subj):
         keep = N[i] >= min_n
         CM[sb] = pd.DataFrame(S[i][keep] / N[i][keep, None], index=np.array(cats)[keep])
-        sh = [c for c in CM[sb].index if c in TH.index and c in CORE]   # the 183 core categories, as in Figs. 5-6
+        sh = [c for c in CM[sb].index if c in TH.index and c in CORE]   # the core categories, as in Figs. 5-6
         Dc, Dt = Q.rdm(CM[sb], sh), Q.rdm(TH, sh)
         d = domain_stats(Dc, sh) - domain_stats(Dt, sh)
-        bs = []
-        for _ in range(n_boot):
-            b = rng.choice(len(sh), len(sh), replace=True); b = np.unique(b)          # unique to avoid zero distances
-            cs_ = [sh[j] for j in b]
-            if len({DOM.get(c) for c in cs_}) < 2: continue
-            bs.append(domain_stats(Dc[np.ix_(b, b)], cs_) - domain_stats(Dt[np.ix_(b, b)], cs_))
+        dr = strat_draws(sh, n_boot, rng)
+        bc = np.array([domain_stats(Dc, sh, idx=ix) for ix in dr])
+        bs = bc - np.array([domain_stats(Dt, sh, idx=ix) for ix in dr])
         rows.append(dict(subject=sb, frames=int(ft[sb]), categories=len(sh), child=domain_stats(Dc, sh),
                          delta_diff=domain_stats(Dc, sh, raw=True) - domain_stats(Dt, sh, raw=True),
-                         things=domain_stats(Dt, sh), diff=d, lo=np.percentile(bs, 2.5), hi=np.percentile(bs, 97.5)))
+                         things=domain_stats(Dt, sh), diff=d, se=bs.std(ddof=1), child_se=bc.std(ddof=1),
+                         lo=np.percentile(bs, 2.5), hi=np.percentile(bs, 97.5),
+                         p_boot=max(2 * min((bs <= 0).mean(), (bs >= 0).mean()), 2 / len(bs))))
     r = pd.DataFrame(rows).sort_values("frames").reset_index(drop=True)
+    r["q_bh"] = FS.bh(r.p_boot)                                   # BH across the children
     r.to_csv(RES_ / f"open_renamed{_T}" / "per_child_clustering_things_all35.csv", index=False)
     pairs = []
     for x in range(len(subj)):
@@ -272,20 +292,26 @@ def fig7_children(min_n=20, n_boot=500, min_shared=20):
                                                  Q.rdm(b, sh)[np.triu_indices(len(sh), 1)]).statistic))
     P = pd.DataFrame(pairs); P.to_csv(RES_ / f"open_renamed{_T}" / "individual_rdm_pairs_all35.csv", index=False)
 
-    fig, ax = plt.subplots(figsize=(ts.SLIDE_W, ts.SLIDE_H))
+    fig, ax = plt.subplots(figsize=(ts.SLIDE_W, ts.SLIDE_H * 1.5))       # 35 rows: room for every row label
     y = np.arange(len(r))
+    ym = len(r) + 0.9                                             # summary row: mean over children ± 1 SE across children
+    for col_, k in (("things", "things"), ("child", "bv")):
+        m_, se_ = r[col_].mean(), r[col_].std(ddof=1) / np.sqrt(len(r))
+        ax.errorbar(m_, ym, xerr=se_, fmt="D", ms=8, color=C[k], capsize=4, lw=2, zorder=4)
+    ax.axhline(len(r) + 0.2, color=ts.FAINT, lw=0.8)
     ax.hlines(y, r.things, r.child, color=ts.FAINT, lw=2)
+    sig = (r.q_bh < .05) & (r["diff"] > 0)
     ax.scatter(r.things, y, s=40, color=C["things"], label="THINGS, same categories", zorder=3)
-    ax.scatter(r.child, y, s=50, color=C["bv"], label="each child", zorder=3)
-    sig = r.lo > 0
-    ax.set_yticks(y, [f"{f / 1000:.1f}k · {n}" if f < 10_000 else f"{f / 1000:.0f}k · {n}" for f, n in zip(r.frames, r.categories)],
-                  fontsize=7.5)
-    for tk, s_ in zip(ax.get_yticklabels(), sig):
-        tk.set_color(ts.INK if s_ else ts.MUTED)
+    ax.errorbar(r.child, y, xerr=r.child_se, fmt="none", ecolor=C["bv"], elinewidth=1, alpha=.6, zorder=2)   # ±1 SE per child
+    ax.scatter(r.child[sig], y[sig], s=50, color=C["bv"], label="child > THINGS (BH q < .05)", zorder=3)
+    ax.scatter(r.child[~sig], y[~sig], s=50, color="white", edgecolor=C["bv"], lw=1.4, label="n.s.", zorder=3)
+    ax.set_yticks(list(y) + [ym], [f"{f / 1000:.1f}k · {n}" if f < 10_000 else f"{f / 1000:.0f}k · {n}" for f, n in zip(r.frames, r.categories)]
+                  + [f"mean of {len(r)} (± SE)"], fontsize=7.5)
+    ax.get_yticklabels()[-1].set_fontweight("bold"); ax.get_yticklabels()[-1].set_fontsize(9)
     ax.set_ylabel("children (frames · core categories)", fontsize=11)
-    ax.set_xlabel("domain clustering (Δ / SD)"); ax.legend(loc="lower right", fontsize=10)
+    ax.set_xlabel("domain clustering (Δ / SD)"); ax.legend(loc="upper left", bbox_to_anchor=(1.01, 1), fontsize=10)
     ax.set_title(f"All {len(r)} children: child > THINGS for {(r['diff'] > 0).sum()} of {len(r)} "
-                 f"({sig.sum()} with 95% CI above 0)", loc="left", fontsize=12)
+                 f"({sig.sum()} significant, BH across children)", loc="left", fontsize=12)
     fig.tight_layout(); save(fig, "fig7b_children_vs_things")
 
     fig, ax = plt.subplots(figsize=(ts.SLIDE_W * 0.75, ts.SLIDE_H * 0.85))
@@ -296,7 +322,7 @@ def fig7_children(min_n=20, n_boot=500, min_shared=20):
             transform=ax.transAxes, va="top", fontsize=11)
     ax.set_xlabel("Spearman ρ between two children's RDMs"); ax.set_ylabel("pairs of children")
     fig.tight_layout(); save(fig, "fig7c_children_pairs")
-    print(r[["frames", "categories", "child", "things", "diff", "lo", "hi", "delta_diff"]].round(3).to_string()); print("dsd>0", (r["diff"] > 0).sum(), "ci>0", (r.lo > 0).sum(), "delta>0", (r.delta_diff > 0).sum(), "big dsd>0", (r[r.frames >= 10000]["diff"] > 0).sum())
+    print(r[["frames", "categories", "child", "things", "diff", "lo", "hi", "delta_diff"]].round(3).to_string()); print("dsd>0", (r["diff"] > 0).sum(), "q<.05", (r.q_bh < .05).sum(), "delta>0", (r.delta_diff > 0).sum(), "big dsd>0", (r[r.frames >= 10000]["diff"] > 0).sum())
     print("pairs:", len(P), P.spearman.describe().round(3).to_dict(), "shared", P.n_categories.min(), P.n_categories.max())
     big = set(ft[ft >= 10_000].index)
     Pb = P[P.a.isin(big) & P.b.isin(big)]
@@ -346,24 +372,28 @@ def resp_blur():
     bvv = np.log10(sh.loc[sh.dataset == "bv", col].clip(lower=1e-3))
     for q in (50, 67):
         a.axvline(np.percentile(bvv, q), color=ts.MUTED, ls="--", lw=1.2)
-    a.set_xlabel("crop sharpness (log10 Laplacian variance)"); a.set_ylabel("density"); a.legend(loc="upper right", fontsize=10)
+    a.set_xlabel("crop sharpness (log10 Laplacian variance)"); a.set_ylabel("density")
+    a.set_ylim(0, a.get_ylim()[1] * 1.3); a.legend(loc="upper right", fontsize=10)     # headroom: legend above the curves
     a.set_title("dashed: BabyView 50th / 67th percentile", loc="left", fontsize=10, color=ts.MUTED)
     cuts = ["all crops", "> BV p50", "> BV p67"]; lab = ["all crops", "sharpest\nhalf", "sharpest\nthird"]
+    off = {"things": -0.08, "vedb": 0.0, "bv": 0.08}                 # small dodge so the ±SE whiskers do not overlap
     for j, d in enumerate(("things", "vedb", "bv")):
-        y = B[B.dataset == d].set_index("sharp_cut").loc[cuts].delta
-        b.plot(range(3), y, "-o", color=C[d], lw=2.2, ms=8)
-        b.text(2.12, y.iloc[-1], {"bv": "BabyView", "vedb": "VEDB", "things": "THINGS"}[d], color=C[d] if d != "things" else "#3b7dc4",
+        t = B[B.dataset == d].set_index("sharp_cut").loc[cuts]
+        b.errorbar(np.arange(3) + off[d], t.delta_sd, yerr=t.delta_sd_se, fmt="-o", color=C[d], lw=2.2, ms=8, capsize=0, elinewidth=1.6)
+        b.text(2.2, t.delta_sd.iloc[-1], {"bv": "BabyView", "vedb": "VEDB", "things": "THINGS"}[d], color=C[d],
                va="center", fontsize=10.5, fontweight="bold")
+    hi = (B.delta_sd + B.delta_sd_se).max()
     for k, c in enumerate(cuts):
         r = Dd[(Dd.sharp_cut == c) & (Dd.pair == "bv - things")].iloc[0]
-        b.text(k, 0.135, f"+{r['diff']:.3f}", ha="center", fontsize=9.5, color=ts.INK)
-    b.text(-0.3, 0.147, "BabyView − THINGS:", fontsize=9.5, color=ts.MUTED)
-    b.set_xticks(range(3), lab); b.set_ylim(0, 0.16); b.set_xlim(-0.35, 2.75)
-    b.set_ylabel("domain clustering (Δ, DINOv3)")
+        b.text(k, hi * 1.08, f"{r['diff_sd']:+.2f} {FS.stars(r['q_bh_sd'])}", ha="center", fontsize=9.5, color=ts.INK)
+    b.text(-0.3, hi * 1.17, "BabyView − THINGS (BH across the three cuts):", fontsize=9.5, color=ts.MUTED)
+    b.set_xticks(range(3), lab); b.set_ylim(0, hi * 1.27); b.set_xlim(-0.35, 2.85)
+    b.set_ylabel("domain clustering, Δ / SD")
     n = int(B.categories.iloc[0])
-    b.set_title(f"{n} categories", loc="left", fontsize=10, color=ts.MUTED)
-    fig.tight_layout()
+    b.set_title(f"DINOv3, {n} categories (± SE)", loc="left", fontsize=10, color=ts.MUTED)
+    fig.tight_layout(w_pad=3)
     ts.bolden(fig, ts.TEXT_SCALE)
+    FS.text_overlaps(fig, "R3a_blur_sharpness")
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"R3a_blur_sharpness.{ext}", bbox_inches="tight", pad_inches=0.08, dpi=200)
     plt.close(fig)
@@ -376,7 +406,7 @@ def resp_blur():
 MONT = TALK / "figures" / "private" / "montages"
 # talk montage -> manuscript panel. These show family homes (BabyView frames), so they are copied ONLY into the
 # git-ignored manuscript draft folder, never into figures/manuscript/. Made by talk-figures/unr-2026/make_talk_montages.py.
-MONTAGES = {"pipeline_crop_embed_average": "fig1a_pipeline_example",
+MONTAGES = {"pipeline_crop_embed_average": "fig1a_pipeline_example", "most_depicted": "fig3b_most_depicted",
             "var_format": "fig3d_animals_by_format", "grid_duck_bird": "fig3e_duck_bird_child_adult",
             "strategy_similar_dissimilar": "fig4b_similar_dissimilar_things",
             "strategy_similar_dissimilar_imagenet": "figS_similar_dissimilar_imagenet",
@@ -400,9 +430,9 @@ def montages():
 def copy_in():
     """Panels made elsewhere, already DINOv3-only and current."""
     for src, dst in ((HERE / f"figures/manuscript_dinov3{_T}/fig4a_rdm_agreement.png", "fig5b_rdm_agreement"),
-                     (HERE / f"figures/bv_vedb_renamed{_T}_core/category_frequency_ratio.png", "fig2e_frequency_ratio"),
                      (HERE / f"figures/bv_vedb_renamed{_T}/scene_statistics_within_child_density.png", "fig8b_within_child"),
-                     (HERE / f"figures/manuscript_dinov3{_T}/fig7c_age_trends.png", "fig8c_age_trends")):
+                     (HERE / f"figures/manuscript_dinov3{_T}/fig7c_age_trends.png", "fig8c_age_trends"),
+                     (HERE / f"figures/bv_vedb_renamed{_T}/dev_within_child.png", "figS_within_child_development")):
         for s in (src, src.with_suffix(".pdf")):
             if s.exists():
                 shutil.copy(s, OUT / f"{dst}{s.suffix}")
@@ -416,7 +446,7 @@ if __name__ == "__main__":
     only = sys.argv[1:]
     steps = {
         "validation": lambda: (A.a01_scorecard(), A.a02_category_pr(), A.a03_format_confusion()),
-        "long_tail": lambda: (long_tail("bv"), long_tail("vedb"), Q.q03_rank_frequency(), Q.q16_frequency_imagenet(), Q.q04_scatter()),
+        "long_tail": lambda: (long_tail("bv"), long_tail("vedb"), Q.q03_rank_frequency(), Q.q16_frequency_imagenet(), Q.q04_scatter(), fig2e_frequency_ratio()),
         "formats": lambda: (fig3a_formats_by_domain(), Q.q14_depicted_categories(), Q.q05_formats()),
         "similarity": Q.q13_similarity,
         "rdms": fig5a_rdms,

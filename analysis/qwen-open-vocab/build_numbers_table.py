@@ -3,7 +3,8 @@
 
 Outputs (results/numbers/):
   numbers_key.csv   curated numbers with stable keys (cite the key in the text): key, section, description, variant,
-                    value, ci_low, ci_high, p, q, n, unit, source (file), selector (row filter / column)
+                    value, se (bootstrap or across-unit SE, where the figures show it), ci_low, ci_high (95%), p, q, n, unit,
+                    source (file), selector (row filter / column)
   numbers_all.csv.gz every numeric cell of every aggregate result table: source, row (its text columns joined), column,
                     value. For numbers that are not in numbers_key.csv.
 Domain-dependent numbers appear once per domain scheme (variant = cdi / things27); the rest have variant = all.
@@ -59,13 +60,13 @@ def slug(*parts) -> str:
 
 
 def add(key, section, desc, value, variant="all", lo=np.nan, hi=np.nan, p=np.nan, q=np.nan, n=np.nan, unit="",
-        source="", selector=""):
-    ROWS.append(dict(key=key, section=section, description=desc, variant=variant, value=num(value), ci_low=num(lo),
+        source="", selector="", se=np.nan):
+    ROWS.append(dict(key=key, section=section, description=desc, variant=variant, value=num(value), se=num(se), ci_low=num(lo),
                      ci_high=num(hi), p=num(p), q=num(q), n=num(n), unit=unit, source=source, selector=selector))
 
 
 def rows(path, section, base, desc, label, val, *, where=None, lo=None, hi=None, ci_col=None, p=None, q=None, n=None,
-         unit="", variant="all", index_col=None):
+         unit="", variant="all", index_col=None, se=None):
     """One key per row of `path` passing `where` (dict col -> value); key = base + the row's `label` columns."""
     path = Path(path)
     if not path.exists():
@@ -82,7 +83,8 @@ def rows(path, section, base, desc, label, val, *, where=None, lo=None, hi=None,
         a, b = ci(r[ci_col]) if ci_col else (r[lo] if lo else np.nan, r[hi] if hi else np.nan)
         add(slug(base, *tag), section, desc.format(**{str(c).lstrip("_"): r[c] for c in r.index}), r[val], variant, a, b,
             r[p] if p else np.nan, r[q] if q else np.nan, r[n] if n else np.nan, unit, rel(path),
-            "; ".join(f"{c}={v}" for c, v in list((where or {}).items()) + list(zip(label, tag))) + f"; column={val}")
+            "; ".join(f"{c}={v}" for c, v in list((where or {}).items()) + list(zip(label, tag))) + f"; column={val}",
+            r[se] if se and se in r.index else np.nan)
 
 
 def counts():
@@ -118,6 +120,9 @@ def key_numbers():
         add("validation.interrater.box_f1", "validation", "inter-rater box agreement (F1)", r.box_agreement_f1, n=r.shared_frames_both_reviewed,
             source=rel(ir), selector="box_agreement_f1")
         add("validation.interrater.name_same", "validation", "inter-rater: same name", r.name_same, source=rel(ir), selector="name_same")
+    su = GOLD / "scorecard_uncertainty.csv"                    # Fig. 1 scorecard: ±1 SE, children resampled
+    rows(su, "validation", "validation.scorecard", "scorecard ({set}): {measure}, SE from resampling children", ["set", "measure"],
+         "value", se="se", lo="ci_low", hi="ci_high", n="children")
     fc = GOLD / "format_confusion.csv"
     if fc.exists():
         c = pd.read_csv(fc, index_col=0).drop(index="All", columns="All")
@@ -143,11 +148,28 @@ def key_numbers():
 
     # ---- category geometry: RDM correlations (domain-independent) ------------------------------------------------
     rows(RES / "crossdataset_renamed_core" / "pairwise_rdm_correlations.csv", "rdm", "rdm.rho", "RDM Spearman ρ, {a} vs {b}",
-         ["a", "b"], "spearman", where={"model": M}, lo="ci_low", hi="ci_high", n="n_categories")
+         ["a", "b"], "spearman", where={"model": M}, lo="ci_low", hi="ci_high", n="n_categories", se="se")
     rows(RES / "controls_renamed_core" / "perm_rdm_null.csv", "rdm", "rdm.perm_null", "RDM ρ with BabyView vs {versus}, null = {null}",
          ["versus", "null"], "rho", where={"model": M}, p="p", n="n_categories")
     rows(RES / "crossdataset_renamed_core" / "things_readout_check.csv", "rdm", "rdm.things_readout.rho_bv",
          "THINGS readout {variant}: RDM ρ with BabyView", "variant", "rho_bv", where={"model": M})
+
+    # ---- per-unit format and truncation shares (Figs. 3A, 3C, 8A right: mean ± SE over children / sessions) ------
+    sys.path.insert(0, str(HERE)); import unit_shares as US
+    src = "out/private/bv_vedb_renamed/unit_category_format.csv.gz (unit_shares.py)"
+    u = US.per_unit()
+    for (ds, f), g in u.melt(id_vars=["dataset", "unit"], value_vars=["depicted", "toy", "picture", "screen"]).groupby(["dataset", "variable"]):
+        add(f"formats.unit_mean.{ds}.{f}", "formats", f"{ds}: share {f}, mean over units (≥ {US.MIN_BOXES} objects)", g.value.mean(),
+            n=len(g), se=g.value.std(ddof=1) / np.sqrt(len(g)), source=src, selector=f"{f}, all Tier 1")
+    core = [l.strip() for l in open(REPO / "data" / "included_categories_qwen_core.txt") if l.strip()]
+    for v, s in VARIANTS.items():
+        dom = pd.read_csv(HERE / "out" / "private" / f"open_renamed{s}" / "categories.csv", index_col=0).domain.to_dict()
+        for col, uu, what in (("depicted", US.per_unit(dom, exclude_intrinsic=True), "share depicted (intrinsic depictions left out)"),
+                              ("edge", US.per_unit(dom, categories=core), "share cut off by the frame edge (core categories)")):
+            for (ds, d), g in uu.groupby(["dataset", "domain"]):
+                if len(g) > 1:
+                    add(slug(f"formats.unit_mean.{col}_by_domain", ds, d), "formats", f"{ds}, {d}: {what}, mean over units",
+                        g[col].mean(), v, n=len(g), se=g[col].std(ddof=1) / np.sqrt(len(g)), source=src, selector=f"{col} by domain")
 
     # ---- domain clustering and controls, per domain scheme -------------------------------------------------------
     for v, s in VARIANTS.items():
@@ -155,7 +177,7 @@ def key_numbers():
         C = RES / f"controls_renamed{s}_core"
         B = RES / f"bv_vedb_renamed{s}_core"
         rows(X / "cluster_strength_core.csv", "clustering", "clustering.dsd", "domain clustering Δ/SD, {dataset}", "dataset", "delta_sd",
-             where={"model": M}, ci_col="delta_sd_ci", n="n", variant=v)
+             where={"model": M}, ci_col="delta_sd_ci", n="n", variant=v, se="delta_sd_se")
         rows(X / "cluster_strength_core.csv", "clustering", "clustering.auc", "domain clustering AUC, {dataset}", "dataset", "auc",
              where={"model": M}, n="n", variant=v)
         rows(X / "cluster_strength_differences_core.csv", "clustering", "clustering.diff.dsd", "domain clustering Δ/SD difference, {pair}",
@@ -163,9 +185,11 @@ def key_numbers():
         rows(X / "ego_vs_curated.csv", "clustering", "clustering.ego_vs_curated.dsd", "egocentric − curated Δ/SD, {pair}", "pair", "diff",
              where={"model": M, "measure": "delta_sd"}, lo="ci_low", hi="ci_high", p="p_boot", q="q_bh", n="n_categories", variant=v)
         rows(X / "cluster_strength_by_domain_core.csv", "clustering", "clustering.by_domain.dsd", "Δ/SD within {domain}, {dataset}",
-             ["dataset", "domain"], "delta_sd", where={"model": M}, lo="ci_low_sd", hi="ci_high_sd", n="n_categories", variant=v)
+             ["dataset", "domain"], "delta_sd", where={"model": M}, lo="ci_low_sd", hi="ci_high_sd", n="n_categories", variant=v,
+             se="se_sd")
         rows(X / "cluster_strength_by_domain_real.csv", "clustering", "clustering.real_only.dsd", "real objects only: Δ/SD, {domain}, {dataset}",
-             ["dataset", "domain"], "delta_sd", where={"model": M}, lo="ci_low_sd", hi="ci_high_sd", n="n_categories", variant=v)
+             ["dataset", "domain"], "delta_sd", where={"model": M}, lo="ci_low_sd", hi="ci_high_sd", n="n_categories", variant=v,
+             se="se_sd")
         rows(X / "cluster_strength_by_domain_real_differences.csv", "clustering", "clustering.real_only.diff",
              "real objects only: difference, {domain}, {pair}", ["domain", "pair"], "diff", where={"model": M, "measure": "delta_sd"},
              lo="ci_low", hi="ci_high", p="p_boot", variant=v) if (X / "cluster_strength_by_domain_real_differences.csv").exists() else None
@@ -179,21 +203,26 @@ def key_numbers():
             d = pd.read_csv(pc)
             add("children.clustering.n_above_things", "children", "children whose clustering exceeds THINGS (point estimate)",
                 (d["diff"] > 0).sum(), v, n=len(d), source=rel(pc), selector="diff > 0")
-            add("children.clustering.n_sig_above_things", "children", "children whose clustering exceeds THINGS (CI above 0)",
-                (d["lo"] > 0).sum(), v, n=len(d), source=rel(pc), selector="lo > 0")
+            add("children.clustering.n_sig_above_things", "children", "children whose clustering exceeds THINGS (BH q < .05 across children)",
+                ((d["q_bh"] < .05) & (d["diff"] > 0)).sum(), v, n=len(d), source=rel(pc), selector="q_bh < .05 & diff > 0")
+            for c_, lab_ in (("child", "children"), ("things", "THINGS on each child's categories"), ("diff", "child − THINGS")):
+                add(f"children.clustering.mean_{c_}", "children", f"mean Δ/SD over children: {lab_} (SE across children)",
+                    d[c_].mean(), v, n=len(d), se=d[c_].std(ddof=1) / np.sqrt(len(d)), source=rel(pc), selector=f"mean of {c_}")
+        # figure SEs, resampling children and sessions (uncertainty_bv_vedb.py)
+        rows(B / "scene_statistics_se.csv", "scene", "scene.mean", "scene statistic ({scope}), {measure}, {group}: mean over units",
+             ["scope", "measure", "group"], "mean", n="units", se="se", variant=v)
+        rows(B / "js_divergence_se.csv", "age", "age.js", "JS divergence ({scope}, {level}), {comparison}, {group}",
+             ["scope", "level", "comparison", "group"], "js", lo="lo", hi="hi", se="se", variant=v)
+        rows(B / "rdm_split_half_se.csv", "age", "age.rdm_rho", "split-half RDM ρ, {comparison}, {group}", ["comparison", "group"], "rho",
+             where={"model": M, "real": False}, lo="lo", hi="hi", n="categories", se="se", variant=v)
+        rows(B / "appearance_mmd_by_age_se.csv", "age", "age.mmd_excess", "median MMD² excess ({real}), {group}", ["real", "group"],
+             "median_excess", where={"model": M}, lo="lo", hi="hi", n="categories", se="se", variant=v)
         tp = C / "things_per_child.csv"
         if tp.exists():
             d = pd.read_csv(tp); d = d[d.model == M]
             add("children.clustering.n_raw_delta_above_things", "children", "children whose raw Δ exceeds THINGS",
                 (d.delta_child > d.delta_things).sum(), v, n=len(d), source=rel(tp), selector=f"model={M}; delta_child > delta_things")
         # controls
-        rows(C / "split_summary.csv", "controls", "controls.split.auc", "subject split ({comparison}), {rdm}: AUC {dataset}",
-             ["comparison", "rdm", "dataset"], "auc", where={"model": M}, lo="auc_ci_lo", hi="auc_ci_hi", n="n_categories", variant=v)
-        rows(C / "split_differences.csv", "controls", "controls.split.diff", "subject split ({comparison}), {rdm}: {pair}",
-             ["comparison", "rdm", "pair"], "diff", where={"model": M, "metric": "auc"}, lo="ci_lo", hi="ci_hi", p="p", variant=v)
-        rows(C / "room_differences.csv", "controls", "controls.room.diff", "{kind} held fixed ({label}): {pair}, AUC",
-             ["kind", "label", "pair"], "diff", where={"model": M, "metric": "auc", "part": "all"}, lo="ci_lo", hi="ci_hi", p="p",
-             n="n_categories", variant=v)
         rows(C / "cooc_coefficients.csv", "controls", "controls.cooc.retained", "co-occurrence control ({comparison}, covariates {covariates_from}): share retained, {dataset}",
              ["comparison", "covariates_from", "dataset"], "retained", where={"model": M}, p="p_perm", n="n_categories", variant=v)
         rows(C / "geom_summary.csv", "controls", "controls.geom.auc", "crop geometry ({analysis}, {level}): AUC {dataset}",
@@ -201,25 +230,34 @@ def key_numbers():
              lo="auc_ci_lo", hi="auc_ci_hi", n="n_categories", variant=v)
         rows(C / "geom_differences.csv", "controls", "controls.geom.diff", "crop geometry ({analysis}, {level}): {pair}, AUC",
              ["analysis", "level", "pair"], "diff", where={"model": M, "part": "all", "metric": "auc"}, lo="ci_lo", hi="ci_hi", p="p", variant=v)
+        for part in ("all", "real"):                                          # Response Figure R1e draws Δ/SD ± SE
+            rows(C / "geom_summary.csv", "controls", f"controls.geom.dsd.{part}", "crop geometry ({analysis}, {level}, " + part + "): Δ/SD {dataset}",
+                 ["analysis", "level", "dataset"], "delta_sd", where={"model": M, "part": part, "analysis": "matching"},
+                 n="n_categories", se="delta_sd_se", variant=v)
+            rows(C / "geom_differences.csv", "controls", f"controls.geom.diff_dsd.{part}", "crop geometry ({analysis}, {level}, " + part + "): {pair}, Δ/SD",
+                 ["analysis", "level", "pair"], "diff", where={"model": M, "part": part, "analysis": "matching", "metric": "delta_sd"},
+                 lo="ci_lo", hi="ci_hi", p="p", variant=v)
         rows(C / "size_summary.csv", "controls", "controls.size.auc", "size floor {floor} (vs {versus}, {part}): AUC {dataset}",
              ["versus", "floor", "part", "dataset"], "auc", where={"model": M}, lo="auc_ci_lo", hi="auc_ci_hi", n="n_categories", variant=v)
         rows(C / "size_differences.csv", "controls", "controls.size.diff", "size floor {floor} (vs {versus}, {part}): {pair}, AUC",
              ["versus", "floor", "part", "pair"], "diff", where={"model": M, "metric": "auc"}, lo="ci_lo", hi="ci_hi", p="p", variant=v)
         rows(B / "blur_control.csv", "controls", "controls.blur.dsd", "blur ({sharp_cut}): Δ/SD {dataset}", ["sharp_cut", "dataset"], "delta_sd",
-             where={"model": M}, n="categories", variant=v)
+             where={"model": M}, n="categories", se="delta_sd_se", variant=v)
+        rows(B / "blur_control_differences.csv", "controls", "controls.blur.diff_dsd", "blur ({sharp_cut}): {pair}, Δ/SD", ["sharp_cut", "pair"],
+             "diff_sd", where={"model": M}, lo="ci_low_sd", hi="ci_high_sd", p="p_boot_sd", q="q_bh_sd", variant=v)
         rows(B / "blur_control_differences.csv", "controls", "controls.blur.diff", "blur ({sharp_cut}): {pair}", ["sharp_cut", "pair"], "diff",
-             where={"model": M}, lo="ci_low", hi="ci_high", p="p_boot", variant=v)
+             where={"model": M}, lo="ci_low", hi="ci_high", p="p_boot", q="q_bh", variant=v)
         rows(B / "background_control.csv", "controls", "controls.sam3.dsd", "SAM 3 background ({subset}, {version}): Δ/SD {dataset}",
-             ["subset", "version", "dataset"], "delta_sd", where={"model": M, "dataset": ["bv", "vedb"]}, n="categories", variant=v)
+             ["subset", "version", "dataset"], "delta_sd", where={"model": M, "dataset": ["bv", "vedb"]}, n="categories", se="delta_sd_se", variant=v)
         rows(B / "background_control.csv", "controls", "controls.sam3.rho", "SAM 3 background ({subset}, {version}): BabyView–VEDB RDM ρ",
              ["subset", "version"], "rho", where={"model": M, "dataset": "BabyView-VEDB RDM rho"}, n="categories", variant=v)
         rows(B / "background_control_differences.csv", "controls", "controls.sam3.diff", "SAM 3 background ({subset}): {comparison}",
-             ["subset", "comparison"], "diff", where={"model": M, "measure": "delta_sd"}, lo="ci_low", hi="ci_high", p="p_boot", variant=v)
+             ["subset", "comparison"], "diff", where={"model": M, "measure": "delta_sd"}, lo="ci_low", hi="ci_high", p="p_boot", q="q_bh", variant=v)
         L = RES / ("background_response" + s)
-        rows(L / "lvis_whole_vs_crop.csv", "controls", "controls.lvis_whole.dsd", "LVIS background test: Δ/SD {version}", "version", "delta_sd",
+        rows(L / "lvis_whole_vs_crop.csv", "controls", "controls.lvis_whole.dsd", "LVIS background test: Δ/SD {version}", "version", "delta_sd", se="se",
              lo="ci_low", hi="ci_high", n="categories", variant=v)
         rows(L / "lvis_whole_vs_crop_differences.csv", "controls", "controls.lvis_whole.diff", "LVIS background test: {comparison}",
-             "comparison", "diff", lo="ci_low", hi="ci_high", p="p_boot", variant=v)
+             "comparison", "diff", lo="ci_low", hi="ci_high", p="p_boot", q="q_bh", variant=v)
         rows(X / "things_readout_check.csv", "rdm", "rdm.things_readout.dsd", "THINGS readout {variant}: Δ/SD", "variant", "delta_sd",
              where={"model": M}, variant=v)
         D = RES / f"bv_vedb_renamed{s}"
@@ -253,6 +291,14 @@ def key_numbers():
          ["variant", "floor_px", "lvis_clip_filter", "dataset"], "auc", where={"model": M}, lo="auc_ci_lo", hi="auc_ci_hi", n="n_categories")
     rows(mc / "size_clip_matching_differences.csv", "controls", "controls.lvis_clip_filter.diff", "LVIS controls ({variant}): {pair}",
          ["variant", "pair"], "diff", where={"model": M}, lo="ci_lo", hi="ci_hi", p="p_boot", n="n_categories")
+    rows(mc / "size_clip_matching_summary.csv", "controls", "controls.lvis_clip_filter.dsd",              # Response Figure R1a
+         "LVIS controls ({variant}, floor {floor_px}, CLIP filter {lvis_clip_filter}): Δ/SD {dataset}",
+         ["variant", "floor_px", "lvis_clip_filter", "dataset"], "delta_sd", where={"model": M}, se="delta_sd_se", n="n_categories")
+    rows(mc / "size_clip_matching_summary.csv", "controls", "controls.lvis_clip_filter.dsd_change",
+         "LVIS controls ({variant}): Δ/SD change vs unmatched, {dataset}", ["variant", "dataset"], "delta_sd_change_vs_unmatched",
+         where={"model": M}, p="delta_sd_change_p", q="delta_sd_change_q", n="n_categories")
+    rows(mc / "size_clip_matching_differences.csv", "controls", "controls.lvis_clip_filter.diff_dsd", "LVIS controls ({variant}): {pair}, Δ/SD",
+         ["variant", "pair"], "diff_sd", where={"model": M}, lo="ci_lo_sd", hi="ci_hi_sd", p="p_boot_sd", q="q_bh_sd", n="n_categories")
 
     # ---- SI 1: original YOLOE + CLIP pipeline on 2025.2 (1 fps and one frame per 5 s) ----------------------------
     for tag in ("2025.2", "2025.2_5s"):

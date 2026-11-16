@@ -106,10 +106,7 @@ domain_chain() {   # CDI or THINGS-27 analyses after the builds; $1 = cdi | thin
                                          # replaced by the 7,384-image re-embedding in things_readout_renamed_things27
     nbx bv_vedb_analysis bv_vedb_analysis_executed_renamed${T}_core.ipynb ${D}_cross ) &
   ( export QOV_CATS=core
-    run ${D}_controls python -u controls_analysis.py --sections split cooc geom size count perm prev things ) &
-  for mk in "dinov3 room" "dinov3 act" "clip room" "clip act"; do
-    ( export QOV_CATS=core; set -- $mk; run ${D}_room_$1_$2 python -u controls_analysis.py --sections room --room-only $1 $2 ) &
-  done
+    run ${D}_controls python -u controls_analysis.py --sections cooc geom size count perm prev things ) &
   ( nbx crossdataset_analysis crossdataset_analysis_executed_renamed${T}.ipynb ${D}_tier1
     nbx bv_vedb_analysis bv_vedb_analysis_executed_renamed${T}.ipynb ${D}_tier1
     if [ $D = cdi ]; then
@@ -122,7 +119,6 @@ domain_chain() {   # CDI or THINGS-27 analyses after the builds; $1 = cdi | thin
     [ $D = cdi ] && run ${D}_dev $BASEPY -u development_size_by_domain.py ) &   # CDI-only analysis; reads parquet
   wait
   export QOV_CATS=core
-  run ${D}_controls python -u controls_analysis.py --sections room_merge
   run ${D}_controls python -u controls_figures.py
   unset QOV_CATS
   step "== B $D chain done"

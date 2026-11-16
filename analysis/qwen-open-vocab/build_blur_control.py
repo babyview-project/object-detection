@@ -6,7 +6,7 @@ re-cut from its frame, resized to 224 x 224 (the models' input size, so sharpnes
 see) and scored by the variance of the Laplacian of the grey image (higher = sharper; Pech-Pacheco et al., 2000).
 analyze: category means from the sharpest crops only (sharpness above the BabyView 50th / 67th percentile, the same
 absolute threshold for VEDB), z-scored within the categories compared, cosine RDMs, domain clustering (raw delta,
-delta / SD, AUC) against all crops of the same sample and against THINGS; BabyView - VEDB / THINGS differences with a
+delta / SD, AUC; SE per dataset) against all crops of the same sample and against THINGS; BabyView - VEDB / THINGS differences (raw and / SD) with a
 within-domain category bootstrap. Categories with >= 10 sharp crops in BabyView and VEDB and present in THINGS.
 
 Outputs: out/private/bv_vedb/sharpness.csv.gz (per sampled box); results/bv_vedb/blur_control.csv,
@@ -83,6 +83,14 @@ def measure(workers: int):
     print(f"done: {np.isfinite(sharp).sum():,} of {len(sharp):,} boxes scored")
 
 
+N_BOOT = 10000          # within-domain category bootstrap; p floor 2 / N_BOOT
+
+
+def bh(p):
+    p = np.asarray(p, float); o = np.argsort(p); q = p[o] * len(p) / np.arange(1, len(p) + 1)
+    q = np.minimum.accumulate(q[::-1])[::-1]; out = np.empty_like(q); out[o] = np.minimum(q, 1); return out
+
+
 def analyze():
     from scipy import stats
     from scipy.spatial.distance import pdist, squareform
@@ -117,25 +125,36 @@ def analyze():
                 d = Dm[i, j]; w, bt = d[same], d[~same]
                 return bt.mean() - w.mean(), (bt.mean() - w.mean()) / d.std(), stats.mannwhitneyu(bt, w).statistic / (len(bt) * len(w))
             R = {d: squareform(pdist(zr(means[d].loc[cs].values.astype(float)), "cosine")) for d in means}
+            # within-domain category bootstrap, one set of draws shared by every dataset: SE per dataset, CI / p per pair
+            rng = np.random.default_rng(0); by = [np.flatnonzero(sem == s) for s in sorted(set(sem))]
+            B = {d: [] for d in R}
+            for _ in range(N_BOOT):
+                ix = np.concatenate([rng.choice(v, len(v)) for v in by])
+                ii, jj = np.triu_indices(len(ix), 1); ok = ix[ii] != ix[jj]; sm = sem[ix][ii][ok] == sem[ix][jj][ok]
+                for d, Dm in R.items():
+                    v = Dm[ix[ii][ok], ix[jj][ok]]; dl = v[~sm].mean() - v[sm].mean()
+                    B[d].append((dl, dl / v.std()))
+            B = {d: np.array(x) for d, x in B.items()}
+            tag = f"> BV p{cut}" if cut else "all crops"
             for d, Dm in R.items():
                 dl, sd, auc = measures(Dm)
-                rows.append(dict(model=m, sharp_cut=f"> BV p{cut}" if cut else "all crops", dataset=d, categories=len(cs),
-                                 delta=dl, delta_sd=sd, auc=auc, median_sharpness=float(np.median(sh[keep & (ds == d)])) if d != "things" else np.nan))
-            rng = np.random.default_rng(0); by = {s: np.flatnonzero(sem == s) for s in set(sem)}
+                rows.append(dict(model=m, sharp_cut=tag, dataset=d, categories=len(cs),
+                                 delta=dl, delta_sd=sd, auc=auc, delta_se=B[d][:, 0].std(ddof=1), delta_sd_se=B[d][:, 1].std(ddof=1),
+                                 median_sharpness=float(np.median(sh[keep & (ds == d)])) if d != "things" else np.nan))
+            pb = lambda x: max(2 * min((x <= 0).mean(), (x >= 0).mean()), 2 / len(x))
             for a, b in (("bv", "vedb"), ("bv", "things"), ("vedb", "things")):
-                bs = []
-                for _ in range(1000):
-                    ix = np.concatenate([rng.choice(v, len(v)) for v in by.values()])
-                    ii, jj = np.triu_indices(len(ix), 1); ok = ix[ii] != ix[jj]; sm = sem[ix][ii][ok] == sem[ix][jj][ok]
-                    def dd(Dm):
-                        d = Dm[ix[ii][ok], ix[jj][ok]]; return d[~sm].mean() - d[sm].mean()
-                    bs.append(dd(R[a]) - dd(R[b]))
-                bs = np.array(bs)
-                diffs.append(dict(model=m, sharp_cut=f"> BV p{cut}" if cut else "all crops", pair=f"{a} - {b}",
+                bs, bsd = B[a][:, 0] - B[b][:, 0], B[a][:, 1] - B[b][:, 1]
+                diffs.append(dict(model=m, sharp_cut=tag, pair=f"{a} - {b}",
                                   diff=measures(R[a])[0] - measures(R[b])[0], ci_low=np.percentile(bs, 2.5), ci_high=np.percentile(bs, 97.5),
-                                  p_boot=max(2 * min((bs <= 0).mean(), (bs >= 0).mean()), 2 / len(bs))))
+                                  p_boot=pb(bs),
+                                  diff_sd=measures(R[a])[1] - measures(R[b])[1], ci_low_sd=np.percentile(bsd, 2.5),
+                                  ci_high_sd=np.percentile(bsd, 97.5), p_boot_sd=pb(bsd)))
     out = pd.DataFrame(rows); out.to_csv(RES / "blur_control.csv", index=False)
-    dif = pd.DataFrame(diffs); dif.to_csv(RES / "blur_control_differences.csv", index=False)
+    dif = pd.DataFrame(diffs)
+    # BH across the three sharpness cuts, per model and pair (the family Response Figure R3a shows)
+    for c in ("p_boot", "p_boot_sd"):
+        dif[c.replace("p_boot", "q_bh")] = dif.groupby(["model", "pair"])[c].transform(bh)
+    dif.to_csv(RES / "blur_control_differences.csv", index=False)
     print(out.round(3).to_string()); print(dif.round(3).to_string())
     z = np.load(D / "sample_dinov3.npz", allow_pickle=True); ds = z["dataset"]
     fig, ax = plt.subplots(figsize=(6.4, 3.6))

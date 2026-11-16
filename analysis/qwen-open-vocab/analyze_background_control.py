@@ -8,7 +8,7 @@ embed_masked_sample.py), compared on the same boxes and the same categories:
   masked    SAM 3's corrected box with everything outside the object mask set to grey
 Category means = mean of L2-normalized vectors, per dataset (BabyView all ages, VEDB), categories with >= MIN_N (20) boxes in
 both; z-scored within the categories compared; cosine RDMs. Domain clustering: raw delta (between - within), delta / SD
-and AUC; BabyView - VEDB differences with a within-domain category bootstrap (1,000 draws, shared across versions);
+and AUC; BabyView - VEDB differences with a within-domain category bootstrap (10,000 draws, shared across versions; ±1 SE per dataset; BH within each figure family);
 BabyView-VEDB RDM Spearman; per domain. For all formats and real objects only. THINGS / LVIS / ImageNet are not
 included (their images are not masked).
 
@@ -36,12 +36,17 @@ def in_core(c, real=False):
     return CORE_MODE != "core" or c in (CORE_REAL if real else CORE)
 RES = V.out_dir(HERE / "results" / "bv_vedb"); RES = RES.with_name(RES.name + SFX)
 FIG = V.out_dir(HERE / "figures" / "bv_vedb"); FIG = FIG.with_name(FIG.name + SFX)
-MIN_N, N_BOOT = 20, 1000
+MIN_N, N_BOOT = 20, 10000          # p floor 2 / N_BOOT
 VERSIONS = ["original", "box", "masked"]
 
 
 def l2(X):
     X = X.astype(np.float32); return X / np.maximum(np.linalg.norm(X, axis=1, keepdims=True), 1e-12)
+
+
+def bh(p):
+    p = np.asarray(p, float); o = np.argsort(p); q = p[o] * len(p) / np.arange(1, len(p) + 1)
+    q = np.minimum.accumulate(q[::-1])[::-1]; out = np.empty_like(q); out[o] = np.minimum(q, 1); return out
 
 
 def main():
@@ -64,7 +69,7 @@ def main():
             vc = pd.Series(sem).value_counts(); keepd = [d for d in vc.index if vc[d] >= 3]
             cs = [c for c, s in zip(cats, sem) if s in keepd]; sem = np.array([DOM[c] for c in cs])
             iu = np.triu_indices(len(cs), 1); same = sem[iu[0]] == sem[iu[1]]
-            rng = np.random.default_rng(0); by = {s: np.flatnonzero(sem == s) for s in set(sem)}
+            rng = np.random.default_rng(0); by = {s: np.flatnonzero(sem == s) for s in sorted(set(sem))}
             B = [np.concatenate([rng.choice(v, len(v)) for v in by.values()]) for _ in range(N_BOOT)]
             R = {}
             for ver in VERSIONS:
@@ -88,6 +93,9 @@ def main():
                 sm = sem[ix][ii][okp] == sem[ix][jj][okp]; x = D[ix[ii][okp], ix[jj][okp]]
                 return x[~sm].mean() - x[sm].mean(), (x[~sm].mean() - x[sm].mean()) / x.std()   # raw delta, delta / SD
             boot = {(ver, d): np.array([delta_draw(R[ver, d], ix) for ix in B]) for ver in VERSIONS for d in ("bv", "vedb")}
+            for r in rows:                                   # ±1 SE of each dataset's delta and delta / SD (same draws)
+                if r["model"] == m and r["subset"] == subset and r["dataset"] in ("bv", "vedb"):
+                    r["delta_se"], r["delta_sd_se"] = boot[r["version"], r["dataset"]].std(0, ddof=1)
             for k_, meas in enumerate(("delta", "delta_sd")):
                 for ver in VERSIONS:
                     x = boot[ver, "bv"][:, k_] - boot[ver, "vedb"][:, k_]
@@ -98,12 +106,18 @@ def main():
                 for d in ("bv", "vedb"):
                     for ver in ("box", "masked"):
                         x = boot[ver, d][:, k_] - boot["original", d][:, k_]
-                        diffs.append(dict(model=m, subset=subset, measure=meas, comparison=f"{d}: {ver} - original", diff=np.mean(x),
+                        o = {r["version"]: r[meas] for r in rows if r["model"] == m and r["subset"] == subset and r["dataset"] == d}
+                        diffs.append(dict(model=m, subset=subset, measure=meas, comparison=f"{d}: {ver} - original", diff=o[ver] - o["original"],
                                           ci_low=np.percentile(x, 2.5), ci_high=np.percentile(x, 97.5),
                                           p_boot=max(2 * min((x <= 0).mean(), (x >= 0).mean()), 2 / N_BOOT)))
             print(f"{m}, {subset}: {len(cs)} categories, {sel.sum():,} boxes", flush=True)
     T = pd.DataFrame(rows); T.to_csv(RES / "background_control.csv", index=False)
-    Df = pd.DataFrame(diffs); Df.to_csv(RES / "background_control_differences.csv", index=False)
+    Df = pd.DataFrame(diffs)
+    # BH per model and measure within each family: BabyView - VEDB (versions x subsets, the brackets of Response Figure
+    # R1j) and the version changes (datasets x versions x subsets)
+    Df["family"] = np.where(Df.comparison.str.startswith("BabyView - VEDB"), "bv - vedb", "version change")
+    Df["q_bh"] = Df.groupby(["model", "measure", "family"]).p_boot.transform(bh)
+    Df.to_csv(RES / "background_control_differences.csv", index=False)
     Dm = pd.DataFrame(doms); Dm.to_csv(RES / "background_control_by_domain.csv", index=False)
     pd.set_option("display.width", 200)
     print(T[T.dataset != "BabyView-VEDB RDM rho"].pivot_table(index=["model", "subset", "dataset"], columns="version", values=["delta", "auc"])

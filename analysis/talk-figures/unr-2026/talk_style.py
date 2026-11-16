@@ -15,14 +15,14 @@ for f in (HERE / "fonts").glob("*.ttf"):
 
 INK, MUTED, FAINT = "#222222", "#6a6a6a", "#d9d9d9"
 
-# Curated sets in light tints, egocentric sets saturated; BabyView keeps the deck's navy
-# and THINGS the deck's light blue.
+# Same dataset colours as qwen-open-vocab/fig_style.py (2026-11-15): first-person datasets saturated and dark, curated
+# datasets in slate neutrals, so no dataset colour is close to a domain colour.
 DS_COLOR = {
-    "things": "#90CAF9",
-    "imagenet": "#B9A6E0",
-    "lvis": "#4DB38A",
-    "vedb": "#E07B39",
-    "bv": "#0D47A1",
+    "things": "#29343F",
+    "imagenet": "#4E5966",
+    "lvis": "#75828F",
+    "vedb": "#C2511F",
+    "bv": "#1F5CA8",
 }
 DS_LABEL = {"things": "THINGS", "imagenet": "ImageNet-1k", "lvis": "LVIS",
             "vedb": "VEDB (adult)", "bv": "BabyView (child)"}
@@ -32,7 +32,7 @@ DOMAIN_ORDER = ["animals", "body_parts", "clothing", "food_drink", "furniture_ro
 DOMAIN_COLOR = {
     "animals": "#4DB8A8", "body_parts": "#E87A5F", "clothing": "#9B7EC8",
     "food_drink": "#E8A54C", "furniture_rooms": "#6BAB7A", "household": "#D97B9E",
-    "outside": "#5B9BD5", "toys": "#B07CC8", "vehicles": "#6BA3D5", "other": "#8B9A9E",
+    "outside": "#5B9BD5", "toys": "#B07CC8", "vehicles": "#6BA3D5", "other": "#D8C7A0",
 }
 DOMAIN_LABEL = {"animals": "animals", "body_parts": "body parts", "clothing": "clothing",
                 "food_drink": "food & drink", "furniture_rooms": "furniture",
@@ -82,6 +82,11 @@ def bolden(fig, scale=TEXT_SCALE):
 
 def save(fig, name, private=False, scale=TEXT_SCALE):
     bolden(fig, scale)
+    try:                                                  # text-overlap check (qwen-open-vocab/fig_style.py)
+        import fig_style
+        fig_style.text_overlaps(fig, name)
+    except ImportError:
+        pass
     d = PRIVATE if private else OUT
     d.mkdir(parents=True, exist_ok=True)
     for ext in ("png", "pdf"):

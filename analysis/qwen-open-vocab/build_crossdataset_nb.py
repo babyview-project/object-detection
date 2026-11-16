@@ -74,7 +74,7 @@ def shared(*ds, m="clip"):
     return sorted(s)
 def draws(cs, n=1000, seed=0):
     rng = np.random.default_rng(seed); sem = np.array([DOM.get(c, "other") for c in cs])
-    by = {d: np.flatnonzero(sem == d) for d in set(sem)}
+    by = {d: np.flatnonzero(sem == d) for d in sorted(set(sem))}       # sorted: draws do not depend on the hash seed
     return [np.concatenate([rng.choice(v, len(v)) for v in by.values()]) for _ in range(n)]
 def cluster(D, cs, idx=None):
     sem = np.array([DOM.get(c, "other") for c in cs]); ix = np.arange(len(cs)) if idx is None else idx
@@ -115,7 +115,7 @@ for m in ("clip", "dinov3"):
             i, j = np.triu_indices(len(ix), 1); ok = ix[i] != ix[j]
             bs.append(stats.spearmanr(Da[ix[i][ok], ix[j][ok]], Db[ix[i][ok], ix[j][ok]]).statistic)
         rows.append({"model": m, "a": a, "b": b, "n_categories": len(cs), "spearman": rho,
-                     "ci_low": np.percentile(bs, 2.5), "ci_high": np.percentile(bs, 97.5)})
+                     "ci_low": np.percentile(bs, 2.5), "ci_high": np.percentile(bs, 97.5), "se": np.std(bs, ddof=1)})
 pr = pd.DataFrame(rows); pr.to_csv(RES / "pairwise_rdm_correlations.csv", index=False)
 for m in ("clip", "dinov3"):
     P = pr[pr.model == m]; mat = pd.DataFrame(np.eye(len(DS)), index=DS, columns=DS)
@@ -164,12 +164,13 @@ AUC; 95% CIs from shared category-bootstrap draws; BabyView minus each dataset."
 code("""rows, diffs = [], []
 for m in ("clip", "dinov3"):
     Ds = {d: rdm(T[m, d], CORE) for d in DS if set(CORE) <= set(T[m, d].index)}
-    B = draws(CORE, 1000, seed=2)
+    B = draws(CORE, 10000, seed=2)
     boot = {d: np.array([cluster(D, CORE, ix)[:2] for ix in B]) for d, D in Ds.items()}
     for d, D in Ds.items():
         dl, sd, auc = cluster(D, CORE)
         rows.append({"model": m, "dataset": d, "n": len(CORE), "delta": dl, "delta_ci": np.percentile(boot[d][:, 0], [2.5, 97.5]).round(3).tolist(),
-                     "delta_sd": sd, "delta_sd_ci": np.percentile(boot[d][:, 1], [2.5, 97.5]).round(3).tolist(), "auc": auc})
+                     "delta_sd": sd, "delta_sd_ci": np.percentile(boot[d][:, 1], [2.5, 97.5]).round(3).tolist(), "auc": auc,
+                     "delta_se": boot[d][:, 0].std(ddof=1), "delta_sd_se": boot[d][:, 1].std(ddof=1)})
     for d in Ds:
         if d == "bv": continue
         for k_, meas in enumerate(("delta", "delta_sd")):
@@ -204,7 +205,7 @@ Per domain on the core set: mean distance from the domain's categories to every 
 among the domain's own categories (delta; > 0 = the domain forms a cluster), and delta / SD of all pair distances. 95% CIs
 from the shared within-domain category-bootstrap draws (pairs of a category with its own copy left out). Domains with at
 least 3 core categories. Significance: BabyView minus each dataset on the same draws, two-sided bootstrap p (floor 0.002
-with 1,000 draws), Benjamini-Hochberg across domains x datasets within each model and measure; stars on the figure (raw
+with 10,000 draws), Benjamini-Hochberg across domains x datasets within each model and measure; stars on the figure (raw
 delta), both measures in results/crossdataset/cluster_strength_by_domain_differences_core.csv."""),
 code("""def domain_deltas(D, sem, doms, orig=None):
     n = len(D); valid = np.triu(np.ones((n, n), bool), 1)
@@ -217,7 +218,7 @@ code("""def domain_deltas(D, sem, doms, orig=None):
 sem0 = np.array([DOM.get(c, "other") for c in CORE])
 vc = pd.Series(sem0).value_counts()
 DOMS = [d for d in ORDER if vc.get(d, 0) >= 3] + sorted(d for d in vc.index if d not in ORDER and vc[d] >= 3)
-B = draws(CORE, 1000, seed=3)
+B = draws(CORE, 10000, seed=3)
 rows, BS, BSD, PT = [], {}, {}, {}
 for m in ("clip", "dinov3"):
     for d in core:
@@ -228,7 +229,8 @@ for m in ("clip", "dinov3"):
         for k, dm in enumerate(DOMS):
             rows.append({"model": m, "dataset": d, "domain": dm, "n_categories": int(vc[dm]), "delta": dl[k], "delta_sd": dl[k] / sd,
                          "ci_low": np.nanpercentile(bs[:, k], 2.5), "ci_high": np.nanpercentile(bs[:, k], 97.5),
-                         "ci_low_sd": np.nanpercentile(BSD[m, d][:, k], 2.5), "ci_high_sd": np.nanpercentile(BSD[m, d][:, k], 97.5)})
+                         "ci_low_sd": np.nanpercentile(BSD[m, d][:, k], 2.5), "ci_high_sd": np.nanpercentile(BSD[m, d][:, k], 97.5),
+                         "se": np.nanstd(bs[:, k], ddof=1), "se_sd": np.nanstd(BSD[m, d][:, k], ddof=1)})
 dd = pd.DataFrame(rows); dd.to_csv(RES / "cluster_strength_by_domain_core.csv", index=False)
 def bh(p):                                              # Benjamini-Hochberg q-values
     p = np.asarray(p, float); o = np.argsort(p); q = p[o] * len(p) / np.arange(1, len(p) + 1)
@@ -241,7 +243,7 @@ for m in ("clip", "dinov3"):
             x = A[m, "bv"] - A[m, d]
             for k, dm in enumerate(DOMS):
                 xk = x[:, k][~np.isnan(x[:, k])]
-                p_ = max(2 * min((xk <= 0).mean(), (xk >= 0).mean()), 2 / len(xk))   # floor: resolution of 1000 draws
+                p_ = max(2 * min((xk <= 0).mean(), (xk >= 0).mean()), 2 / len(xk))   # floor: resolution of the draws
                 sig.append({"model": m, "measure": meas, "domain": dm, "pair": f"bv - {d}", "dataset": d,
                             "diff": PT[m, "bv"][k_][k] - PT[m, d][k_][k], "ci_low": np.percentile(xk, 2.5),
                             "ci_high": np.percentile(xk, 97.5), "p_boot": p_})
@@ -284,14 +286,14 @@ fig.tight_layout(); fig.savefig(FIG / "cluster_strength_by_domain_core.png", dpi
 md("""## 4c. Real objects only: does the domain clustering survive without toys and pictures?
 Section 4b again with BabyView and VEDB restricted to boxes Qwen labelled `real` (THINGS, LVIS and ImageNet as before),
 on the categories all five share. Also BabyView all formats vs BabyView real on the same categories: the part of each
-domain's clustering that comes from depictions. Same bootstrap (1,000 within-domain draws), BH across domains x
+domain's clustering that comes from depictions. Same bootstrap (10,000 within-domain draws), BH across domains x
 comparisons within each model and measure."""),
 code("""CORE_R = shared("bv_real", "vedb_real", "things", "lvis", "imagenet")
 CORE_R = [c for c in CORE_R if c in set(T["clip", "bv"].index)]
 semR = np.array([DOM.get(c, "other") for c in CORE_R]); vcR = pd.Series(semR).value_counts()
 DOMS_R = [d for d in ORDER if vcR.get(d, 0) >= 3]
 SETS = ["bv", "bv_real", "vedb_real", "things", "lvis", "imagenet"]
-BR = draws(CORE_R, 1000, seed=5)
+BR = draws(CORE_R, 10000, seed=5)
 rowsR, BSR, BSDR, PTR = [], {}, {}, {}
 for m in ("clip", "dinov3"):
     for d in SETS:
@@ -304,7 +306,8 @@ for m in ("clip", "dinov3"):
         for k, dm in enumerate(DOMS_R):
             rowsR.append({"model": m, "dataset": d, "domain": dm, "n_categories": int(vcR[dm]), "delta": dl[k], "delta_sd": dl[k] / sd,
                           "ci_low": np.nanpercentile(bs[:, k], 2.5), "ci_high": np.nanpercentile(bs[:, k], 97.5),
-                          "ci_low_sd": np.nanpercentile(BSDR[m, d][:, k], 2.5), "ci_high_sd": np.nanpercentile(BSDR[m, d][:, k], 97.5)})
+                          "ci_low_sd": np.nanpercentile(BSDR[m, d][:, k], 2.5), "ci_high_sd": np.nanpercentile(BSDR[m, d][:, k], 97.5),
+                          "se": np.nanstd(bs[:, k], ddof=1), "se_sd": np.nanstd(BSDR[m, d][:, k], ddof=1)})
 DR = pd.DataFrame(rowsR); DR.to_csv(RES / "cluster_strength_by_domain_real.csv", index=False)
 print(f"{len(CORE_R)} categories shared by all five (BabyView and VEDB real only)")
 for m in ("clip", "dinov3"):

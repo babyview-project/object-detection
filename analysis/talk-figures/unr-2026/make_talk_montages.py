@@ -35,7 +35,7 @@ STORE = {"bv": Path("/data2/dataset/babyview/2025.2/outputs/object_detections/qw
 FRAMES = {"bv": lambda v, f: Path("/ccn2a/dataset/babyview/2025.2/extracted_frames_1fps") / v / f"{int(f):05d}.jpg",
           "vedb": lambda v, f: Path("/ccn2a/dataset/babyview/related_data/vedb_1612/extracted_frames_1fps_adults") / v / f"{int(f):08d}.jpg"}
 NAME = {"bv": "BabyView (child)", "vedb": "VEDB (adult)"}
-DSC = {"bv": (13, 71, 161), "vedb": (224, 123, 57)}
+DSC = {"bv": (31, 92, 168), "vedb": (194, 81, 31)}   # fig_style.DS_COLOR (slate scheme)
 FMT = {"real": (150, 150, 150), "toy": (126, 87, 194), "picture": (38, 166, 154), "screen": (249, 168, 37)}
 PAIRS = [("dog", "cat"), ("bird", "duck"), ("bear", "fish"), ("car", "bus"), ("train", "truck"), ("airplane", "bicycle"),
          ("cup", "ball"), ("book", "bottle")]
@@ -627,6 +627,77 @@ def format_grids(data, rng, key="bv", n=10, t=92, formats=("real", "toy", "drawi
         img.save(OUT / f"format10_{key}_{f}.jpg", quality=90)
 
 
+
+def _maxmin_hash(cand, n):
+    """Greedy max-min over difference hashes (no model needed): each pick is the candidate whose closest kept tile is
+    farthest in Hamming distance, so near-duplicate prints and toys are not shown twice. Starts from the first draw."""
+    H = np.stack([_dhash(c[0]) for c in cand]); keep = [0]
+    d = (H != H[0]).sum(1).astype(float)
+    while len(keep) < n:
+        d[keep] = -1; i = int(np.argmax(d)); keep.append(i); d = np.minimum(d, (H != H[i]).sum(1))
+    return sorted(keep)
+
+
+def most_depicted(data, rng, n_cat=8, n_bv=6, n_vedb=3, t=150, min_bv=1000, min_vedb=50, min_dep=.95):
+    """Manuscript Fig. 3B: categories BabyView sees almost only as depictions while adults see them real. One row per
+    category: among categories >= min_dep depicted in BabyView with >= min_bv BabyView and >= min_vedb VEDB boxes
+    (people left out), the n_cat with the largest BabyView - VEDB gap in % depicted; name in its domain colour, %
+    depicted in each dataset, then n_bv BabyView crops of depicted boxes and n_vedb VEDB crops of any format. Tile
+    border = Qwen's format. Crops are random draws spread over children and videos (one box per child, then per video,
+    before any repeats) and pass the same privacy filters as the
+    other pages (no frame with a person or face; manual exclusion list)."""
+    global PAGE
+    PAGE = "most_depicted"
+    g = pd.read_csv(Q / "results/crossdataset_renamed/depiction_gap_bv_vs_vedb.csv")
+    g = g[(g.bv_n >= min_bv) & (g.vedb_n >= min_vedb) & (g.domain != "people") & (g.bv_depicted >= min_dep)]
+    g = g.sort_values("gap", ascending=False).head(n_cat)
+
+    def strip(key, cat, n, depicted_only):
+        d = data[key]; d = d[(d.category == cat) & (d.side >= MIN_SIDE)]
+        if depicted_only:
+            d = d[d.fmt != "real"]
+        cand = []
+        for r in pick(d, n * 5, rng).itertuples():
+            if (str(r.video_id), str(r.frame_number)) in EXCLUDE:
+                continue
+            try:
+                tl = tile(key, r, size=t)
+            except Exception:
+                continue
+            L_ = np.asarray(tl.convert("L"), dtype=float)
+            if L_.std() < 10 or L_.mean() < 55:                          # blank or dark (night, camera covered)
+                continue
+            u = r.video_id[:9] if re.match(r"S\d{8}_", r.video_id) else r.video_id
+            cand.append((tl, u, r.video_id, r.frame_number, r.category))
+        keep = range(min(n, len(cand)))                                  # draw order: spread over children / videos
+        for j, i in enumerate(keep):
+            MANIFEST.append((PAGE, key, cat, j, cand[i][2], cand[i][3]))
+        return [cand[i][0] for i in keep]
+
+    LEFT_W, GAP, G, ROW, HEAD = 330, 34, 4, t + 16, 92
+    W = LEFT_W + n_bv * (t + G) + GAP + n_vedb * (t + G) + 20
+    H = HEAD + len(g) * ROW + 70
+    img = Image.new("RGB", (W, H), "white"); d = ImageDraw.Draw(img)
+    x_bv, x_v = LEFT_W, LEFT_W + n_bv * (t + G) + GAP
+    d.text((x_bv, 20), "BabyView (child): depicted examples", fill=DSC["bv"], font=font(30))
+    d.text((x_v, 20), "VEDB (adult)", fill=DSC["vedb"], font=font(30))
+    for k, r in enumerate(g.itertuples()):
+        y = HEAD + k * ROW
+        d.text((16, y + 18), r.category, fill=_dom_rgb(r.category), font=font(38))
+        d.text((16, y + 70), f"child: {r.bv_depicted:.0%} depicted", fill=DSC["bv"], font=font(24))
+        d.text((16, y + 100), f"adult: {r.vedb_depicted:.0%} depicted", fill=DSC["vedb"], font=font(24))
+        for j, tl in enumerate(strip("bv", r.category, n_bv, True)):
+            img.paste(tl, (x_bv + j * (t + G), y))
+        for j, tl in enumerate(strip("vedb", r.category, n_vedb, False)):
+            img.paste(tl, (x_v + j * (t + G), y))
+    x = 16; yl = H - 50                                              # format legend (tile border colours)
+    d.text((x, yl), "tile border = format:", fill=(80, 80, 80), font=font(26)); x += 270
+    for f in ("toy", "picture", "screen", "real"):
+        d.rectangle((x, yl + 4, x + 26, yl + 30), fill=FMT[f]); d.text((x + 36, yl), f, fill=(60, 60, 60), font=font(26)); x += 160
+    img.save(OUT / "most_depicted.jpg", quality=92)
+    pd.DataFrame([m for m in MANIFEST if m[0] == PAGE], columns=["page", "dataset", "category", "tile", "video_id", "frame_number"]) \
+        .to_csv(OUT / "manifest_most_depicted.csv", index=False)
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("--seed", type=int, default=0); ap.add_argument("--only", nargs="*")
     a = ap.parse_args()
@@ -649,3 +720,5 @@ if __name__ == "__main__":
             grid5_page(p_, data, rng); print("grid", p_, flush=True)
     if not a.only or "size" in a.only:
         size_pairs(data, rng); print("size", flush=True)
+    if a.only and "most_depicted" in a.only:
+        most_depicted(data, rng); print("most_depicted", flush=True)

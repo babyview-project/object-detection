@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Figures for controls_analysis.py (results/controls[_renamed]/ -> figures/controls[_renamed]/).
 
-  split_within_vs_cross.png   domain-clustering AUC within half vs across halves (subject split), per dataset
-  same_room_auc.png           AUC from exemplars of one room / activity: BabyView same label, pooled, THINGS
   geometry_matching.png       BabyView and VEDB AUC before / after geometry matching, and their RDM correlation
 
   QOV_LABELS=renamed python controls_figures.py
@@ -25,73 +23,6 @@ FS.apply()
 COLOR = dict(FS.DS_COLOR)
 LABEL = {"bv": "BabyView", "bv_real": "BabyView, real", "vedb": "VEDB", "vedb_real": "VEDB, real", "things": "THINGS"}
 MLABEL = {"clip": "CLIP", "dinov3": "DINOv3"}
-
-
-def split_fig():
-    w = pd.read_csv(RES / "split_within_vs_cross.csv")
-    s = pd.read_csv(RES / "split_summary.csv")
-    w = w[w.comparison == "bv_vedb_things"]; s = s[s.comparison == "bv_vedb_things"]
-    sd = pd.read_csv(RES / "split_differences.csv")
-    sd = sd[(sd.comparison == "bv_vedb_things") & (sd.rdm == "cross-half") & (sd.metric == "auc")]
-    fig, axs = plt.subplots(1, 2, figsize=(10, 3.8), sharey=True)
-    for ax, m in zip(axs, ("clip", "dinov3")):
-        dss = [d for d in LABEL if d in set(w[w.model == m].dataset)]
-        for i, d in enumerate(dss):
-            r = w[(w.model == m) & (w.dataset == d)].iloc[0]
-            c = s[(s.model == m) & (s.dataset == d)].iloc[0]
-            ax.plot([i - .12, i + .12], [r.auc_within, r.auc_cross], color=COLOR[d], lw=1.5)
-            ax.scatter([i - .12], [r.auc_within], s=40, color="white", edgecolor=COLOR[d], lw=1.5, zorder=3)
-            ax.errorbar([i + .12], [r.auc_cross], yerr=[[r.auc_cross - c.auc_ci_lo], [c.auc_ci_hi - r.auc_cross]],
-                        fmt="o", ms=6, color=COLOR[d], capsize=2, zorder=3)
-        ax.axhline(.5, color="#8a8984", lw=.8, ls=":")
-        top = s[s.model == m].auc_ci_hi.max() + .015
-        for k, (a, b) in enumerate([(a, b) for i_, a in enumerate(dss) for b in dss[i_ + 1:]]):   # across-halves AUC, bootstrap p
-            r_ = sd[(sd.model == m) & (sd.pair == f"{a} - {b}")]
-            if len(r_): FS.bracket(ax, dss.index(a) + .12, dss.index(b) + .12, top + k * .025, FS.stars(r_.p.iloc[0]), h=.004)
-        ax.set_xticks(range(len(dss)), [LABEL[d] for d in dss], rotation=20, ha="right")
-        ax.set_title(f"{MLABEL[m]} ({int(s[s.model == m].n_categories.iloc[0])} categories)", loc="left")
-    axs[0].set_ylabel("domain clustering, AUC")
-    axs[0].scatter([], [], s=40, color="white", edgecolor="#52514e", label="within half")
-    axs[0].scatter([], [], s=40, color="#52514e", label="across halves (95% CI)")
-    axs[0].legend(frameon=False, fontsize=8, loc="lower left")
-    fig.suptitle("Subject split: categories compared from different children (BabyView), sessions (VEDB) or images (THINGS)\n"
-                 "brackets: across-halves AUC, bootstrap p (* < .05, ** < .01, *** < .001)",
-                 x=.01, ha="left", fontsize=10)
-    fig.tight_layout(); fig.savefig(FIG / "split_within_vs_cross.png", dpi=200, bbox_inches="tight"); plt.close(fig)
-
-
-def room_fig():
-    r = pd.read_csv(RES / "room_summary.csv")
-    r = r[(r.part == "all") & ~r.label.str.contains(" x ")]
-    rd = pd.read_csv(RES / "room_differences.csv"); rd = rd[(rd.part == "all") & (rd.metric == "auc")]
-    fig, axs = plt.subplots(2, 2, figsize=(11, 6.5), sharey=True)
-    for row, kind in enumerate(("room", "act")):
-        for col, m in enumerate(("clip", "dinov3")):
-            ax = axs[row, col]; d = r[(r.model == m) & (r.kind == kind)]
-            labels = list(dict.fromkeys(d.label))
-            for i, L in enumerate(labels):
-                g = d[d.label == L].set_index("dataset")
-                for j, (ds, c, mk) in enumerate(((f"bv_all same {kind}", COLOR["bv"], "o"), ("bv_all pooled", FS.BASELINE, "s"),
-                                                 ("things", COLOR["things"], "D"))):
-                    if ds not in g.index: continue
-                    x = i + (j - 1) * .2; v = g.loc[ds]
-                    ax.errorbar([x], [v.auc], yerr=[[v.auc - v.auc_ci_lo], [v.auc_ci_hi - v.auc]], fmt=mk, color=c, ms=6, capsize=2)
-                ax.text(i, .505, f"n={int(g.n_categories.iloc[0])}", ha="center", fontsize=7, color="#52514e")
-                top = g.auc_ci_hi.max() + .01                  # same room vs pooled, same room vs THINGS (bootstrap p)
-                for k, (other, x2) in enumerate(((f"bv_all pooled", i), ("things", i + .2))):
-                    r_ = rd[(rd.model == m) & (rd.kind == kind) & (rd.label == L) & (rd.pair == f"bv_all same {kind} - {other}")]
-                    if len(r_): FS.bracket(ax, i - .2, x2, top + k * .022, FS.stars(r_.p.iloc[0]), h=.004, fontsize=7)
-            ax.set_xticks(range(len(labels)), labels, fontsize=8)
-            ax.axhline(.5, color="#8a8984", lw=.8, ls=":")
-            ax.set_title(f"{MLABEL[m]}, by {'room' if kind == 'room' else 'activity'}", loc="left", fontsize=10)
-    for c, mk, l in ((COLOR["bv"], "o", "BabyView, same room / activity"), (FS.BASELINE, "s", "BabyView, pooled (same categories)"),
-                     (COLOR["things"], "D", "THINGS")):
-        axs[0, 0].errorbar([], [], fmt=mk, color=c, label=l)
-    fig.legend(*axs[0, 0].get_legend_handles_labels(), frameon=False, fontsize=8, loc="lower center", ncol=3)
-    for ax in axs[:, 0]: ax.set_ylabel("domain clustering, AUC")
-    fig.suptitle("Room and activity held fixed: category means from one room / activity only (95% CIs; brackets: same room / activity "
-                 "vs pooled and vs THINGS, * p < .05, ** < .01, *** < .001)", x=.01, ha="left", fontsize=10)
-    fig.tight_layout(rect=(0, .04, 1, 1)); fig.savefig(FIG / "same_room_auc.png", dpi=200, bbox_inches="tight"); plt.close(fig)
 
 
 def geom_fig():
@@ -158,7 +89,7 @@ def prevalence_fig():
 
 if __name__ == "__main__":
     prevalence_fig(); print("wrote prevalence_fig")
-    for f, need in ((split_fig, "split_summary.csv"), (room_fig, "room_summary.csv"), (geom_fig, "geom_summary.csv")):
+    for f, need in ((geom_fig, "geom_summary.csv"),):
         if (RES / need).exists():
             f(); print("wrote", f.__name__)
         else:
