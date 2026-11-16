@@ -58,7 +58,8 @@ subject-split (R1b) and room / activity (R1c) controls were dropped on 2026-11-1
 | Figure | Test | Family for BH |
 |---|---|---|
 | 6A | first-person mean − curated mean, Δ/SD | single test |
-| 6B | first-person − curated per domain | across domains |
+| 6B | BabyView − each dataset per domain | domains × datasets |
+| S ego vs curated by domain | first-person − curated per domain | across domains |
 | 6C / R1f | BabyView real vs each dataset per domain; BabyView all vs real | domains × comparisons |
 | E3 | BabyView vs each dataset per domain | domains × datasets |
 | 7B | each child vs THINGS on the child's categories | across the 35 children |
@@ -140,13 +141,14 @@ and THINGS-27). Every figure save also runs `fig_style.text_overlaps`, which pri
   (300 draws) are in `pairwise_rdm_correlations.csv`, **not drawn**.
 
 ### Fig. 6 (domain clustering)
-- **6A** (`q08e_ego_vs_curated`): each bar is one dataset's Δ/SD on the 182 core categories. Whisker = ±1 SE, **type A**
-  (1,000 draws). Dashed lines = mean of the three curated and of the two first-person datasets (no interval). Bracket =
-  (mean of first-person) − (mean of curated) on the same draws, with its 95% CI and two-sided bootstrap p (as text)
-  (`ego_vs_curated.py`).
-- **6B** (`q09e_ego_vs_curated_by_domain`): per-domain Δ/SD, five datasets × seven domains. Whiskers = ±1 SE, **type A**
-  (1,000 draws). Number above each domain = first-person − curated, BH-corrected across domains. Whiskers stay widest for the
-  small domains (vehicles 10, toys 9 categories).
+- **6A** (`q08e_ego_vs_curated`): dot plot; each point is one dataset's Δ/SD on the 182 core categories, whisker = ±1 SE,
+  **type A** (10,000 draws); value printed beside it. Short dashed lines = mean of the three curated and of the two
+  first-person datasets (no interval). Bracket = (mean of first-person) − (mean of curated) on the same draws, with its
+  95% CI and two-sided bootstrap p as stars (`ego_vs_curated.py`). The y-axis is zoomed to the data (dot plot).
+- **6B** (`q09b_bv_vs_each_by_domain`): BabyView as the anchor. Per domain, four points: BabyView's Δ/SD minus THINGS,
+  ImageNet, LVIS and VEDB (colour = the comparison dataset); whisker = ±1 SE of the difference (the shared 10,000
+  within-domain category-bootstrap draws); stars = BH across domains × datasets. Above 0 = BabyView clusters the domain
+  more. The earlier first-person − curated by-domain panel is **S ego vs curated by domain** (`q09e_ego_vs_curated_by_domain`).
 - **6C** (`fig6c_real_only`): the same on the 164 real-object categories; BabyView and VEDB from `real` boxes only;
   hatched bar = BabyView all formats. Whiskers = ±1 SE, **type A**. Stars: BabyView-real vs each dataset, and BabyView-all vs
   BabyView-real, BH across domains × comparisons.

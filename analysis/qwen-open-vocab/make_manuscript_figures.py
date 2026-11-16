@@ -44,7 +44,7 @@ NAMES = {"a01_scorecard": "fig1b_validation", "a03_format_confusion": "fig1c_for
          "q16_frequency_bv_vs_imagenet": "fig2c_frequency_imagenet", "q04_bv_vs_vedb_frequency": "fig2d_frequency_vedb",
          "q14_most_depicted_categories": "figS_most_depicted_categories", "q05_depictions_bv_vedb": "fig3c_depictions_bv_vedb",
          "q13_similarity_to_things_by_domain": "fig4a_similarity_to_things",
-         "q08e_ego_vs_curated_dinov3": "fig6a_cluster_strength", "q09e_ego_vs_curated_by_domain_dinov3": "fig6b_cluster_by_domain",
+         "q08e_ego_vs_curated_dinov3": "fig6a_cluster_strength", "q09b_bv_vs_each_by_domain_dinov3": "fig6b_cluster_by_domain", "q09e_ego_vs_curated_by_domain_dinov3": "figS_ego_vs_curated_by_domain",
          "q11p_subject_rdms": "fig7a_subject_rdms", "q06_size_truncation_bv_vedb": "fig8a_size_truncation"}
 _orig_save = ts.save
 
@@ -450,7 +450,7 @@ if __name__ == "__main__":
         "formats": lambda: (fig3a_formats_by_domain(), Q.q14_depicted_categories(), Q.q05_formats()),
         "similarity": Q.q13_similarity,
         "rdms": fig5a_rdms,
-        "clustering": lambda: (Q.q08e_ego_vs_curated("dinov3"), Q.q09e_ego_vs_curated_by_domain("dinov3"), fig6c_real_only()),
+        "clustering": lambda: (Q.q08e_ego_vs_curated("dinov3"), Q.q09b_bv_vs_each_by_domain("dinov3"), Q.q09e_ego_vs_curated_by_domain("dinov3"), fig6c_real_only()),
         "children": lambda: (fig7a_all_children(), fig7_children()),
         "age": Q.q06_size,
         "copy": copy_in,

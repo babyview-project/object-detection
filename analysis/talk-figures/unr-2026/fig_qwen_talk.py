@@ -637,33 +637,76 @@ def q11p_subject_rdms(k=8):
 
 
 def q08e_ego_vs_curated(model="dinov3"):
-    """Domain clustering (delta / SD, ±1 bootstrap SE) for the three curated and two egocentric datasets on the 183 core categories;
-    bracket = mean egocentric minus mean curated on the same category-bootstrap draws (ego_vs_curated.py)."""
+    """Domain clustering (Δ / SD) per dataset on the core categories: point ± 1 SE (within-domain category bootstrap,
+    10,000 draws); short dashed lines = mean of the three curated and of the two first-person datasets; bracket = mean
+    first-person minus mean curated on the same draws, 95% CI and two-sided bootstrap p (ego_vs_curated.py)."""
     cs = pd.read_csv(RES / "cluster_strength_core.csv"); cs = cs[cs.model == model].set_index("dataset")
     ev = pd.read_csv(RES / "ego_vs_curated.csv")
     ev = ev[(ev.model == model) & (ev.measure == "delta_sd")].set_index("pair")
     order = [("things", "THINGS"), ("imagenet", "ImageNet"), ("lvis", "LVIS"), ("vedb", "VEDB\n(adult)"), ("bv", "BabyView\n(child)")]
-    col = {"things": C["things"], "imagenet": ts.DS_COLOR["imagenet"], "lvis": ts.DS_COLOR["lvis"], "vedb": C["vedb"], "bv": C["bv"]}
-    x = [0, 1, 2, 3.6, 4.6]
+    col = {k: ts.DS_COLOR[k] for k, _ in order}
+    x = [0, 1, 2, 3.5, 4.5]
     fig, ax = plt.subplots(figsize=(ts.SLIDE_W * 0.8, ts.SLIDE_H))
+    hi, lo = 0, np.inf
     for xi, (k, _) in zip(x, order):
-        v = cs.loc[k, "delta_sd"]; se = cs.loc[k, "delta_sd_se"]; hi = v + se       # ±1 bootstrap SE
-        ax.bar(xi, v, color=col[k], width=0.7)
-        ax.errorbar(xi, v, yerr=se, color=ts.INK, capsize=4)
-        ax.text(xi, hi + 0.02, f"{v:.2f}", ha="center", fontsize=13, fontweight="bold")
+        v, se = cs.loc[k, "delta_sd"], cs.loc[k, "delta_sd_se"]
+        ax.errorbar(xi, v, yerr=se, fmt="o", ms=11, color=col[k], mec="white", mew=1.2, capsize=5, lw=2, zorder=3)
+        ax.text(xi + 0.17, v, f"{v:.2f}", va="center", ha="left", fontsize=12, color=ts.INK, zorder=4,
+                bbox=dict(facecolor="white", edgecolor="none", pad=1.5))
+        hi = max(hi, v + se); lo = min(lo, v - se)
     mc = np.mean([cs.loc[k, "delta_sd"] for k in ("things", "imagenet", "lvis")])
     me = np.mean([cs.loc[k, "delta_sd"] for k in ("vedb", "bv")])
-    ax.hlines(mc, -0.4, 2.4, color=ts.MUTED, lw=1.5, ls="--"); ax.hlines(me, 3.2, 5.0, color=ts.MUTED, lw=1.5, ls="--")
-    r = ev.loc["ego - curated"]; q = r.q_bh; st = "***" if q < .001 else "**" if q < .01 else "*" if q < .05 else "n.s."
-    y = 1.02
-    ax.plot([1, 1, 4.1, 4.1], [y - .02, y, y, y - .02], color=ts.INK, lw=1.2)
-    ax.text(2.55, y + .01, f"egocentric − curated: {r['diff']:+.2f} [{r.ci_low:.2f}, {r.ci_high:.2f}] {st}", ha="center",
-            va="bottom", fontsize=12, fontweight="bold")
-    ax.text(1, -0.25, "curated photographs", ha="center", fontsize=12, color=ts.MUTED, transform=ax.get_xaxis_transform())
-    ax.text(4.1, -0.25, "first-person video", ha="center", fontsize=12, color=ts.MUTED, transform=ax.get_xaxis_transform())
-    ax.set_xticks(x, [l for _, l in order]); ax.set_xlim(-0.6, 5.2); ax.set_ylim(0, 1.12)
+    ax.hlines(mc, -0.35, 2.35, color=ts.MUTED, lw=1.2, ls="--", zorder=1)
+    ax.hlines(me, 3.15, 4.85, color=ts.MUTED, lw=1.2, ls="--", zorder=1)
+    r = ev.loc["ego - curated"]; st = FS.stars(r.q_bh)
+    y = hi + (hi - lo) * .12; tk = (hi - lo) * .04
+    ax.plot([1, 1, 4, 4], [y - tk, y, y, y - tk], color=ts.INK, lw=1.2)
+    ax.text(2.5, y + tk / 2, f"first-person − curated: {r['diff']:+.2f} [{r.ci_low:.2f}, {r.ci_high:.2f}] {st}",
+            ha="center", va="bottom", fontsize=12, fontweight="bold")
+    ax.set_xticks(x, [l for _, l in order]); ax.set_xlim(-0.6, 5.1)
+    ax.set_ylim(max(0, lo - (y - lo) * .25), y + (y - lo) * .22)                  # dot plot: zoom to the data
     ax.set_ylabel("domain clustering (Δ / SD)")
-    fig.tight_layout(); fig.subplots_adjust(bottom=0.30); ts.save(fig, f"q08e_ego_vs_curated_{model}")
+    for xc, lab in ((1, "curated photographs"), (4, "first-person video")):
+        ax.annotate(lab, (xc, 0), xycoords=("data", "axes fraction"), xytext=(0, -58), textcoords="offset points",
+                    ha="center", va="top", fontsize=11, color=ts.MUTED)
+    fig.tight_layout(); fig.subplots_adjust(bottom=0.25); ts.save(fig, f"q08e_ego_vs_curated_{model}")
+
+
+def q09b_bv_vs_each_by_domain(model="dinov3"):
+    """BabyView as the anchor: per domain, BabyView's domain clustering (Δ / SD) minus each other dataset's (THINGS,
+    ImageNet, LVIS, VEDB), on the core categories. Point = difference, whisker = ±1 SE of the difference (within-domain
+    category bootstrap, 10,000 draws shared by all datasets); stars = two-sided bootstrap test, BH across
+    domains x datasets (crossdataset_analysis.ipynb section 4b). Above 0: BabyView clusters the domain more."""
+    sg = pd.read_csv(RES / "cluster_strength_by_domain_differences_core.csv")
+    sg = sg[(sg.model == model) & (sg.measure == "delta_sd")]
+    doms = _doms(["animals", "vehicles", "food_drink", "furniture_rooms", "household", "clothing", "toys"])
+    doms = [d for d in doms if d in set(sg.domain)]
+    ks = ["things", "imagenet", "lvis", "vedb"]
+    lab = {"things": "THINGS", "imagenet": "ImageNet", "lvis": "LVIS", "vedb": "VEDB (adult)"}
+    fig, ax = plt.subplots(figsize=(ts.SLIDE_W, ts.SLIDE_H))
+    w = 0.21
+    ax.axhline(0, color=ts.MUTED, lw=1.2, ls="--", zorder=1)
+    shown = sg[sg.domain.isin(doms) & sg.dataset.isin(ks)]
+    top = (shown["diff"] + shown.se).max(); bot = min(0, (shown["diff"] - shown.se).min()); rng_ = top - bot
+    row = top + rng_ * .07                                               # one row of stars above the data
+    for j, k in enumerate(ks):
+        s_ = sg[sg.dataset == k].set_index("domain").reindex(doms); x = np.arange(len(doms)) + (j - 1.5) * w
+        ax.errorbar(x, s_["diff"], yerr=s_.se, fmt="o", ms=8, color=ts.DS_COLOR[k], mec="white", mew=1, capsize=3, lw=1.6,
+                    label=f"BabyView − {lab[k]}", zorder=3)
+        for xi, q_ in zip(x, s_.q_bh):
+            st = FS.stars(q_, "")
+            if st:
+                ax.text(xi, row + (j % 2) * rng_ * .05, st, ha="center", va="center", fontsize=8, fontweight="bold",
+                        color=ts.DS_COLOR[k])                                 # two staggered rows: neighbours never touch
+    ax.set_xticks(range(len(doms)), [DL[d] for d in doms], rotation=30, ha="right", rotation_mode="anchor")
+    for tk, d in zip(ax.get_xticklabels(), doms):
+        tk.set_color(DC[d]); tk.set_fontweight("bold")
+    ax.set_xlim(-0.6, len(doms) - 0.4); ax.set_ylim(bot - rng_ * .05, row + rng_ * .10)
+    ax.set_ylabel("BabyView − dataset\ndomain clustering (Δ / SD)")
+    ax.set_title("above 0: BabyView clusters the domain more; stars (top row): BH q across domains × datasets",
+                 loc="left", fontsize=10, color=ts.MUTED)
+    ax.legend(loc="upper left", bbox_to_anchor=(1.0, 1.0), fontsize=10)
+    fig.tight_layout(); ts.save(fig, f"q09b_bv_vs_each_by_domain_{model}")
 
 
 def q09e_ego_vs_curated_by_domain(model="dinov3"):

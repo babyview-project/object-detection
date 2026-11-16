@@ -246,7 +246,7 @@ for m in ("clip", "dinov3"):
                 p_ = max(2 * min((xk <= 0).mean(), (xk >= 0).mean()), 2 / len(xk))   # floor: resolution of the draws
                 sig.append({"model": m, "measure": meas, "domain": dm, "pair": f"bv - {d}", "dataset": d,
                             "diff": PT[m, "bv"][k_][k] - PT[m, d][k_][k], "ci_low": np.percentile(xk, 2.5),
-                            "ci_high": np.percentile(xk, 97.5), "p_boot": p_})
+                            "ci_high": np.percentile(xk, 97.5), "se": xk.std(ddof=1), "p_boot": p_})
 sig = pd.DataFrame(sig)
 sig["q_bh"] = sig.groupby(["model", "measure"]).p_boot.transform(bh)    # across domains x datasets, per model and measure
 sig["stars"] = [FS.stars(q, "") for q in sig.q_bh]
@@ -323,7 +323,7 @@ for m in ("clip", "dinov3"):
             for k, dm in enumerate(DOMS_R):
                 xk = x[:, k][~np.isnan(x[:, k])]
                 sigR.append({"model": m, "measure": meas, "domain": dm, "pair": f"{a} - {b}", "diff": PTR[m, a][k_][k] - PTR[m, b][k_][k],
-                             "ci_low": np.percentile(xk, 2.5), "ci_high": np.percentile(xk, 97.5),
+                             "ci_low": np.percentile(xk, 2.5), "ci_high": np.percentile(xk, 97.5), "se": xk.std(ddof=1),
                              "p_boot": max(2 * min((xk <= 0).mean(), (xk >= 0).mean()), 2 / len(xk))})
 sigR = pd.DataFrame(sigR); sigR["q_bh"] = sigR.groupby(["model", "measure"]).p_boot.transform(bh)
 sigR["stars"] = [FS.stars(q, "") for q in sigR.q_bh]
